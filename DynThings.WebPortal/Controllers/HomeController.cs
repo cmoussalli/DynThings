@@ -8,7 +8,7 @@ namespace DynThings.WebPortal.Controllers
 {
     public class HomeController : Controller
     {
-        //TODO: Design a Main Page with review 3
+        //TODO: Design a Main Page with review 4
         public ActionResult Index()
         {
             return View();
