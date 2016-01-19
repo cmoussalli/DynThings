@@ -70,7 +70,7 @@
         $("#frame_Main").html(loadingpart);
         $.ajax({
             //url: '../GetDetailsPV?id=' + id,
-            url: '@Url.Content("~")/EndPoints/GetDetailsPV?id=' + id,
+            url: '@Url.Content("~/")' + 'EndPoints/GetDetailsPV?id=' + id,
             //page=" + $("#DynConfigCurrentPage").html,
             type: "GET",
         })
@@ -83,7 +83,7 @@
         var loadingpart = LoadDivLoading();
         $("#dialogDiv").html(loadingpart);
         $.ajax({
-            url: '@Url.Content("~")/EndPoints/geteditpv?id=' + id,
+            url: '@Url.Content("~/")' + 'EndPoints/geteditpv?id=' + id,
             //page=" + $("#DynConfigCurrentPage").html,
             type: "GET",
         })

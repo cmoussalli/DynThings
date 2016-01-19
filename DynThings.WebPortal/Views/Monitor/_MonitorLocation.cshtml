@@ -20,7 +20,7 @@
         <li class=""><a href="#frame_EndPointHistory">History</a></li>
         <li class=""><a href="#frame_EndPointCommands">Commands</a></li>
     </ul>
-    <div class="frames bg-white" style="height:450px">
+    <div class="frames bg-white" @*style="height:450px"*@>
         <div class="frame" id="frame_EndPointMain" style="display: block;">
             <div id="divMonitorEndPointMain">
             </div>
@@ -46,14 +46,14 @@
         $("#SelectedEndPointID").val(Guid);
         $("#divMonitorEndPointHistory").html(loadingpart);
         $.ajax({
-            url: '@Url.Content("~")Monitor/GetPVMonitorEndPointHistory?guid=' + Guid,
+            url: '@Url.Content("~/")' + 'Monitor/GetPVMonitorEndPointHistory?guid=' + Guid,
             type: "GET",
         })
         .done(function (partialViewResult) {
             $("#divMonitorEndPointHistory").html(partialViewResult);
 
         });
-        
+
     }
 
 

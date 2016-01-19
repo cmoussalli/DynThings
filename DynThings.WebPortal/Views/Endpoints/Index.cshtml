@@ -30,7 +30,7 @@
         var loadingpart = LoadDivLoading();
         $("#divEndPointsList").html(loadingpart);
         $.ajax({
-            url: '@Url.Content("~")/EndPoints/GetListPV?searchfor=' + $(txtEndPointSearch).val() + '&recordsperpage=2',
+            url: '@Url.Content("~/")' + 'EndPoints/GetListPV?searchfor=' + $(txtEndPointSearch).val() + '&recordsperpage=2',
             //page=" + $("#DynConfigCurrentPage").html,
             type: "GET",
         })

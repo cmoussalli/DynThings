@@ -416,6 +416,8 @@
     <Content Include="Models\DynThingsModel.edmx.diagram">
       <DependentUpon>DynThingsModel.edmx</DependentUpon>
     </Content>
+    <None Include="Properties\PublishProfiles\DynThingsDemo - Web Deploy %282%29.pubxml" />
+    <None Include="Properties\PublishProfiles\DynThingsDemo - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\DataTables\autoFill.bootstrap.js" />
     <Content Include="Scripts\DataTables\autoFill.bootstrap.min.js" />

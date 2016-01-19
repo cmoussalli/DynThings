@@ -86,6 +86,7 @@ namespace DynThings.WebPortal.Controllers
 
 
 
+
         #region Helpers: Models to ViewModels 
         private Monitor GetMonitor(LocationView locationView)
         {
@@ -113,7 +114,7 @@ namespace DynThings.WebPortal.Controllers
 
             return monit;
         }
-
+         
         private MonitorLocation GetMonitorLocation(Location location)
         {
             MonitorLocation monitLocation = new MonitorLocation();
@@ -162,7 +163,7 @@ namespace DynThings.WebPortal.Controllers
             //    ids.Add((long)lnk.EndpointID);
             //}
 
-            monitEndPoint.endPointIOs = db.EndPointIOs.Where(e => e.EndPointID == endPoint.ID).OrderByDescending(e => e.TimeStamp).ToList();
+            monitEndPoint.endPointIOs = db.EndPointIOs.Where(e => e.EndPointID == endPoint.ID).OrderByDescending(e => e.TimeStamp).Take(4).ToList();
 
             return monitEndPoint;
         }

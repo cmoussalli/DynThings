@@ -51,7 +51,7 @@
         var loadingpart = LoadDivLoading();
         $("#divMonitorLocation").html(loadingpart);
         $.ajax({
-            url: '@Url.Content("~")/Monitor/GetPVMonitorLocation?id=' + id,
+            url: '@Url.Content("~/")Monitor/GetPVMonitorLocation?id=' + id,
             //page=" + $("#DynConfigCurrentPage").html,
             type: "GET",
 
@@ -66,7 +66,7 @@
         var loadingpart = LoadDivLoading();
         $("#divMonitorAlerts").html(loadingpart);
         $.ajax({
-            url: '@Url.Content("~")/Alerts/GetListPV?searchfor=' + '&recordsperpage=2',
+            url: '@Url.Content("~/")Alerts/GetListPV?searchfor=' + '&recordsperpage=2',
             //page=" + $("#DynConfigCurrentPage").html,
             type: "GET",
 
