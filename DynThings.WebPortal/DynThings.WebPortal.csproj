@@ -548,7 +548,6 @@
     <Content Include="Views\Monitor\_MonitorEndPointActions.cshtml" />
     <Content Include="Views\UsersManagement\Index.cshtml" />
     <Content Include="Views\Monitor\MonitorViewsList.cshtml" />
-    <Content Include="Views\Monitor\_MonitorEndPointIOs.cshtml" />
     <Content Include="Views\Endpoints\_List.cshtml" />
     <Content Include="Views\Endpoints\_Edit.cshtml" />
     <Content Include="Views\Endpoints\_Details.cshtml" />
@@ -558,6 +557,8 @@
     <Content Include="Views\Alerts\Edit.cshtml" />
     <Content Include="Views\Alerts\Index.cshtml" />
     <Content Include="Views\Alerts\_List.cshtml" />
+    <Content Include="Views\Monitor\_MonitorEndPointMain.cshtml" />
+    <Content Include="Views\Monitor\_MonitorEndPointHistory.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

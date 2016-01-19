@@ -17,19 +17,18 @@
 <div class="tabcontrol2" data-role="tabcontrol">
     <ul class="tabs">
         <li class="active"><a href="#frame_EndPointMain">Main</a></li>
-        <li class=""><a href="#frame_EndPointHistory">Triggers</a></li>
+        <li class=""><a href="#frame_EndPointHistory">History</a></li>
         <li class=""><a href="#frame_EndPointCommands">Commands</a></li>
     </ul>
     <div class="frames bg-white" style="height:450px">
         <div class="frame" id="frame_EndPointMain" style="display: block;">
-
-
-
-
+            <div id="divMonitorEndPointMain">
+            </div>
         </div>
 
         <div class="frame" id="frame_EndPointHistory" style="display: none;">
-
+            <div id="divMonitorEndPointHistory">
+            </div>
         </div>
 
         <div class="frame" id="frame_EndPointCommands" style="display: none;">
@@ -40,31 +39,18 @@
 
 
 
-
-
-
-
-</br>
-<div id="divMonitorEndPointIOs">
-</div>
-
-</br>
-<div id="divMonitorEndPointActions">
-</div>
-
-
 <script>
 
     function LoadPart_MonitorEndPoint(Guid) {
         var loadingpart = LoadDivLoading();
         $("#SelectedEndPointID").val(Guid);
-        //$("#divMonitorEndPointActions").html(loadingpart);
+        $("#divMonitorEndPointHistory").html(loadingpart);
         $.ajax({
-            url: '@Url.Content("~")Monitor/GetPVMonitorEndPointActions?guid=' + Guid,
+            url: '@Url.Content("~")Monitor/GetPVMonitorEndPointHistory?guid=' + Guid,
             type: "GET",
         })
         .done(function (partialViewResult) {
-            $("#divMonitorEndPointActions").html(partialViewResult);
+            $("#divMonitorEndPointHistory").html(partialViewResult);
 
         });
         

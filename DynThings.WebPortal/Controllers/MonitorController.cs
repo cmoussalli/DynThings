@@ -76,12 +76,12 @@ namespace DynThings.WebPortal.Controllers
         }
 
         [HttpGet]
-        public PartialViewResult GetPVMonitorEndPointActions(Guid guid)
+        public PartialViewResult GetPVMonitorEndPointHistory(Guid guid)
         {
             Endpoint endPoint = db.Endpoints.First(e=> e.GUID == guid);
             MonitorEndPoint monitorEndPoint = GetMonitorEndPoint(endPoint);
 
-            return PartialView("_MonitorEndPointActions", monitorEndPoint);
+            return PartialView("_MonitorEndPointHistory", monitorEndPoint);
         }
 
 
