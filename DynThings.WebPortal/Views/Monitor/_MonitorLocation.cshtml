@@ -1,0 +1,75 @@
+﻿@model DynThings.WebPortal.Models.ViewModels.MonitorLocation
+
+@foreach (var ePoint in Model.endPoints)
+{
+    <Text>
+
+    <button id="btnEndPoint_@ePoint.GUID" class="shortcut-button @ePoint.CssColor.Css   fg-white" onclick="LoadPart_MonitorEndPoint('@ePoint.GUID')" style="border:solid;border-bottom-width:thick;">
+        <span class="@ePoint.CssIcon.Css"></span>
+        <span class="title">@ePoint.Title</span>
+        <span class="badge">@ePoint.EndPointType.Title  @ePoint.EndPointType.measurement</span>
+        <span>@ePoint.ID</span>
+    </button>
+
+    </text>
+}
+
+<div class="tabcontrol2" data-role="tabcontrol">
+    <ul class="tabs">
+        <li class="active"><a href="#frame_EndPointMain">Main</a></li>
+        <li class=""><a href="#frame_EndPointHistory">Triggers</a></li>
+        <li class=""><a href="#frame_EndPointCommands">Commands</a></li>
+    </ul>
+    <div class="frames bg-white" style="height:450px">
+        <div class="frame" id="frame_EndPointMain" style="display: block;">
+
+
+
+
+        </div>
+
+        <div class="frame" id="frame_EndPointHistory" style="display: none;">
+
+        </div>
+
+        <div class="frame" id="frame_EndPointCommands" style="display: none;">
+
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+</br>
+<div id="divMonitorEndPointIOs">
+</div>
+
+</br>
+<div id="divMonitorEndPointActions">
+</div>
+
+
+<script>
+
+    function LoadPart_MonitorEndPoint(Guid) {
+        var loadingpart = LoadDivLoading();
+        $("#SelectedEndPointID").val(Guid);
+        //$("#divMonitorEndPointActions").html(loadingpart);
+        $.ajax({
+            url: '@Url.Content("~")Monitor/GetPVMonitorEndPointActions?guid=' + Guid,
+            type: "GET",
+        })
+        .done(function (partialViewResult) {
+            $("#divMonitorEndPointActions").html(partialViewResult);
+
+        });
+        
+    }
+
+
+</script>
+

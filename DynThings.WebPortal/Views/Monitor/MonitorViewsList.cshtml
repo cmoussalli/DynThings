@@ -1,0 +1,31 @@
+﻿@model IEnumerable<DynThings.WebPortal.Models.ViewModels.Monitor>
+
+@{
+    ViewBag.Title = "Monitor Views";
+}
+
+<h2>MonitorViewsList</h2>
+
+
+
+
+@foreach (var item in Model)
+{
+
+    <div class="example" data-text="">
+        <div class="margin10">
+            <h2>@item.Title</h2>
+            <h5>View type:  @item.locationViewType.Title</h5>
+            <a class="command-button warning" href="monitorview?id=@item.ID">
+                <span class="icon mif-share"></span>
+                Monitor
+                <small>Navigate to the monitor screen</small>
+            </a>
+          
+        </div>
+    </div>
+
+   
+}
+
+

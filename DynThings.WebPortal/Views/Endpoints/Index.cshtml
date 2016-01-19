@@ -1,0 +1,59 @@
+﻿@model IEnumerable<DynThings.WebPortal.Models.Endpoint>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+
+<form method="get">
+    <input type="search" id="txtEndPointSearch" />
+    <button type="button" class="button"  onclick="LoadPart_EndPointListDiv()">Search</button>
+</form>
+
+<div id="divEndPointsList">
+
+</div>
+
+
+<script>
+    $(document).ready(function () {
+        LoadPart_EndPointListDiv();
+    });
+
+
+    function LoadPart_EndPointListDiv() {
+        var loadingpart = LoadDivLoading();
+        $("#divEndPointsList").html(loadingpart);
+        $.ajax({
+            url: '@Url.Content("~")/EndPoints/GetListPV?searchfor=' + $(txtEndPointSearch).val() + '&recordsperpage=2',
+            //page=" + $("#DynConfigCurrentPage").html,
+            type: "GET",
+        })
+            .done(function (partialViewResult) {
+                $("#divEndPointsList").html(partialViewResult);
+            });
+    };
+
+
+    $(document).ready(function () {
+        $(document).on("click", "#EndPointsListPager a[href]", function () {
+            var loadingpart = LoadDivLoading();
+            $("#divEndPointsList").html(loadingpart);
+            $.ajax({
+                url: $(this).attr("href") + "&searchfor=" + $(txtEndPointSearch).val() + '&recordsperpage=2',
+                type: 'GET',
+                cache: false,
+                success: function (result) {
+                    $("#divEndPointsList").html(result);
+                    return false;
+                }
+            });
+            return false;
+        });
+    });
+</script>

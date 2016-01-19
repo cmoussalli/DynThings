@@ -1,0 +1,95 @@
+﻿@model DynThings.WebPortal.Models.Endpoint
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>EndPoint : @Model.Title</h2>
+<br>
+
+<div class="row">
+    <div class="cell colspan6" data-text="EndPoint">
+
+        <div class="tabcontrol2" data-role="tabcontrol">
+            <ul class="tabs">
+                <li class="active"><a href="#frame_Main">Main</a></li>
+                <li class=""><a href="#frame_Triggers">Triggers</a></li>
+                <li class=""><a href="#frame_Commands">Commands</a></li>
+            </ul>
+            <div class="frames bg-white" style="height:450px">
+                <div class="frame" id="frame_Main" style="display: block;">
+
+                    
+
+
+                </div>
+
+                <div class="frame" id="frame_Triggers" style="display: none;">
+
+                </div>
+
+                <div class="frame" id="frame_Commands" style="display: none;">
+
+                </div>
+            </div>
+        </div>
+
+
+
+    </div>
+</div>
+
+<div data-role="dialog" id="dialogDiv" class="padding20 dialog" data-close-button="true" data-overlay="true" data-overlay-color="op-dark" data-overlay-click-close="true" style="width: auto; height: auto; visibility: hidden; left: auto; top: 0px;">
+    <div class="form-horizontal" style="min-width:600px;top:0px">
+    </div>
+</div>
+<script>
+    function showDialog(id){
+        var dialog = $(id).data('dialog');
+        dialog.open();
+    }
+
+    function closeDialog(id) {
+        var dialog = $(id).data('dialog');
+        dialog.close();
+    }
+
+
+    $(document).ready(function () {
+        LoadPart_EndPointDetailsDiv('@Model.ID');
+    });
+
+    function LoadEndpointEditor(id) {
+        showDialog('#dialogDiv');
+        LoadPart_DialogEndPointEdit(id);
+        LoadPart_EndPointDetailsDiv(id);
+    }
+
+    function LoadPart_EndPointDetailsDiv(id) {
+        var loadingpart = LoadDivLoading();
+        $("#frame_Main").html(loadingpart);
+        $.ajax({
+            //url: '../GetDetailsPV?id=' + id,
+            url: '@Url.Content("~")/EndPoints/GetDetailsPV?id=' + id,
+            //page=" + $("#DynConfigCurrentPage").html,
+            type: "GET",
+        })
+        .done(function (partialViewResult) {
+            $("#frame_Main").html(partialViewResult);
+        });
+    }
+
+    function LoadPart_DialogEndPointEdit(id) {
+        var loadingpart = LoadDivLoading();
+        $("#dialogDiv").html(loadingpart);
+        $.ajax({
+            url: '@Url.Content("~")/EndPoints/geteditpv?id=' + id,
+            //page=" + $("#DynConfigCurrentPage").html,
+            type: "GET",
+        })
+        .done(function (partialViewResult) {
+            $("#dialogDiv").html(partialViewResult);
+        });
+
+    }
+</script>

@@ -1,0 +1,98 @@
+﻿@model DynThings.WebPortal.Models.ViewModels.Monitor
+@{
+    ViewBag.Title = "Monitor";
+}
+
+<div hidden="hidden">
+    <input id="SelectedLocationID" type="text" />
+    <input id="SelectedEndPointID" type="text" />
+
+</div>
+
+
+<div class="grid" style="height:50%">
+    <div class="row cells12">
+        <div class="cell colspan6 example" data-text="Map">
+            <div id="divMonitorView">
+                @Html.Partial("_MonitorViewMap", Model)
+            </div>
+            
+        </div>
+        <div class="cell colspan6 example" data-text="EndPoints">
+            <div id="divMonitorLocation"></div>
+
+        </div>
+    </div>
+
+    <div class="row cells12">
+        <div class="cell colspan6 example" data-text="">
+           
+        </div>
+        <div class="cell colspan6 example" data-text="Alerts">
+            <div id="divMonitorAlerts"></div>
+        </div>
+
+
+    </div>
+</div>
+
+
+
+
+<script>
+    $(document).ready(function () {
+        LoadPart_MonitorAlerts();
+    });
+
+;
+
+    function LoadPart_MonitorLocation(id) {
+        $("#SelectedLocationID").val(id);
+        var loadingpart = LoadDivLoading();
+        $("#divMonitorLocation").html(loadingpart);
+        $.ajax({
+            url: '@Url.Content("~")/Monitor/GetPVMonitorLocation?id=' + id,
+            //page=" + $("#DynConfigCurrentPage").html,
+            type: "GET",
+
+        })
+        .done(function (partialViewResult) {
+
+            $("#divMonitorLocation").html(partialViewResult);
+        });
+    }
+
+    function LoadPart_MonitorAlerts() {
+        var loadingpart = LoadDivLoading();
+        $("#divMonitorAlerts").html(loadingpart);
+        $.ajax({
+            url: '@Url.Content("~")/Alerts/GetListPV?searchfor=' + '&recordsperpage=2',
+            //page=" + $("#DynConfigCurrentPage").html,
+            type: "GET",
+
+        })
+        .done(function (partialViewResult) {
+            $("#divMonitorAlerts").html(partialViewResult);
+        });
+    }
+
+    $(document).ready(function () {
+        $(document).on("click", "#AlertsListPager a[href]", function () {
+            var loadingpart = LoadDivLoading();
+            $("#divMonitorAlerts").html(loadingpart);
+            $.ajax({
+                url: $(this).attr("href") + "&searchfor=" + '&recordsperpage=2',
+                type: 'GET',
+                cache: false,
+                success: function (result) {
+                    $("#divMonitorAlerts").html(result);
+                    return false;
+                }
+            });
+            return false;
+        });
+    });
+</script>
+
+
+

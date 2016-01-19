@@ -1,0 +1,833 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="DynThingsModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Alerts">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Text" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="EndPointID" Type="bigint" Nullable="false" />
+          <Property Name="TimeStamp" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CssColors">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" MaxLength="50" />
+          <Property Name="Css" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="CssIcons">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" MaxLength="50" />
+          <Property Name="Css" Type="nvarchar" MaxLength="24" />
+        </EntityType>
+        <EntityType Name="EndPointIOs">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="EndPointID" Type="bigint" Nullable="false" />
+          <Property Name="IO" Type="nvarchar" MaxLength="6" Nullable="false" />
+          <Property Name="Valu" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="TimeStamp" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Endpoints">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="GUID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="KeyPass" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="PinCode" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="TypeID" Type="bigint" Nullable="false" />
+          <Property Name="ColorID" Type="bigint" Nullable="false" />
+          <Property Name="IconID" Type="bigint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="EndPointTypeCategorys">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="EndPointTypes">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" MaxLength="50" />
+          <Property Name="measurement" Type="nvarchar" MaxLength="50" />
+          <Property Name="TypeCategoryID" Type="bigint" />
+        </EntityType>
+        <EntityType Name="LinkEndpointsLocations">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="LocationID" Type="bigint" />
+          <Property Name="EndpointID" Type="bigint" />
+        </EntityType>
+        <EntityType Name="LinkLocationsLocationViews">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="LocationID" Type="bigint" Nullable="false" />
+          <Property Name="LocationViewID" Type="bigint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Locations">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="GUID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="LongitudeY" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="LatitudeX" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="isActive" Type="bit" Nullable="false" />
+          <Property Name="Status" Type="bigint" Nullable="false" />
+          <Property Name="IconID" Type="bigint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="LocationViews">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="OwnerID" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="LocationViewTypeID" Type="bigint" Nullable="false" />
+          <Property Name="X" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Y" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Z" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="LocationViewTypes">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Notifications">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserID" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Text" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="IsNew" Type="bit" Nullable="false" />
+          <Property Name="TimeStamp" Type="datetime" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__Alerts__EndPoint__37A5467C">
+          <End Role="Endpoints" Type="Self.Endpoints" Multiplicity="1" />
+          <End Role="Alerts" Type="Self.Alerts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Endpoints">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Alerts">
+              <PropertyRef Name="EndPointID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__EndPointI__EndPo__29572725">
+          <End Role="Endpoints" Type="Self.Endpoints" Multiplicity="1" />
+          <End Role="EndPointIOs" Type="Self.EndPointIOs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Endpoints">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="EndPointIOs">
+              <PropertyRef Name="EndPointID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Endpoints__Color__3864608B">
+          <End Role="CssColors" Type="Self.CssColors" Multiplicity="1" />
+          <End Role="Endpoints" Type="Self.Endpoints" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CssColors">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Endpoints">
+              <PropertyRef Name="ColorID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Endpoints__IconI__160F4887">
+          <End Role="CssIcons" Type="Self.CssIcons" Multiplicity="1" />
+          <End Role="Endpoints" Type="Self.Endpoints" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CssIcons">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Endpoints">
+              <PropertyRef Name="IconID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__EndPoints__TypeI__21B6055D">
+          <End Role="EndPointTypes" Type="Self.EndPointTypes" Multiplicity="1" />
+          <End Role="Endpoints" Type="Self.Endpoints" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EndPointTypes">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Endpoints">
+              <PropertyRef Name="TypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__EndPointT__TypeC__05D8E0BE">
+          <End Role="EndPointTypeCategorys" Type="Self.EndPointTypeCategorys" Multiplicity="0..1" />
+          <End Role="EndPointTypes" Type="Self.EndPointTypes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EndPointTypeCategorys">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="EndPointTypes">
+              <PropertyRef Name="TypeCategoryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__LinkEndpo__Endpo__32E0915F">
+          <End Role="Endpoints" Type="Self.Endpoints" Multiplicity="0..1" />
+          <End Role="LinkEndpointsLocations" Type="Self.LinkEndpointsLocations" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Endpoints">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="LinkEndpointsLocations">
+              <PropertyRef Name="EndpointID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__LinkEndpo__Locat__04E4BC85">
+          <End Role="Locations" Type="Self.Locations" Multiplicity="0..1" />
+          <End Role="LinkEndpointsLocations" Type="Self.LinkEndpointsLocations" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Locations">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="LinkEndpointsLocations">
+              <PropertyRef Name="LocationID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__LinkLocat__Locat__35BCFE0A">
+          <End Role="Locations" Type="Self.Locations" Multiplicity="1" />
+          <End Role="LinkLocationsLocationViews" Type="Self.LinkLocationsLocationViews" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Locations">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="LinkLocationsLocationViews">
+              <PropertyRef Name="LocationID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__LinkLocat__Locat__36B12243">
+          <End Role="LocationViews" Type="Self.LocationViews" Multiplicity="1" />
+          <End Role="LinkLocationsLocationViews" Type="Self.LinkLocationsLocationViews" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LocationViews">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="LinkLocationsLocationViews">
+              <PropertyRef Name="LocationViewID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__LocationV__Locat__286302EC">
+          <End Role="LocationViewTypes" Type="Self.LocationViewTypes" Multiplicity="1" />
+          <End Role="LocationViews" Type="Self.LocationViews" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LocationViewTypes">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="LocationViews">
+              <PropertyRef Name="LocationViewTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DynThingsModelStoreContainer">
+          <EntitySet Name="Alerts" EntityType="Self.Alerts" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CssColors" EntityType="Self.CssColors" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CssIcons" EntityType="Self.CssIcons" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EndPointIOs" EntityType="Self.EndPointIOs" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Endpoints" EntityType="Self.Endpoints" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EndPointTypeCategorys" EntityType="Self.EndPointTypeCategorys" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EndPointTypes" EntityType="Self.EndPointTypes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LinkEndpointsLocations" EntityType="Self.LinkEndpointsLocations" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LinkLocationsLocationViews" EntityType="Self.LinkLocationsLocationViews" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Locations" EntityType="Self.Locations" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LocationViews" EntityType="Self.LocationViews" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LocationViewTypes" EntityType="Self.LocationViewTypes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Notifications" EntityType="Self.Notifications" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Alerts__EndPoint__37A5467C" Association="Self.FK__Alerts__EndPoint__37A5467C">
+            <End Role="Endpoints" EntitySet="Endpoints" />
+            <End Role="Alerts" EntitySet="Alerts" />
+          </AssociationSet>
+          <AssociationSet Name="FK__EndPointI__EndPo__29572725" Association="Self.FK__EndPointI__EndPo__29572725">
+            <End Role="Endpoints" EntitySet="Endpoints" />
+            <End Role="EndPointIOs" EntitySet="EndPointIOs" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Endpoints__Color__3864608B" Association="Self.FK__Endpoints__Color__3864608B">
+            <End Role="CssColors" EntitySet="CssColors" />
+            <End Role="Endpoints" EntitySet="Endpoints" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Endpoints__IconI__160F4887" Association="Self.FK__Endpoints__IconI__160F4887">
+            <End Role="CssIcons" EntitySet="CssIcons" />
+            <End Role="Endpoints" EntitySet="Endpoints" />
+          </AssociationSet>
+          <AssociationSet Name="FK__EndPoints__TypeI__21B6055D" Association="Self.FK__EndPoints__TypeI__21B6055D">
+            <End Role="EndPointTypes" EntitySet="EndPointTypes" />
+            <End Role="Endpoints" EntitySet="Endpoints" />
+          </AssociationSet>
+          <AssociationSet Name="FK__EndPointT__TypeC__05D8E0BE" Association="Self.FK__EndPointT__TypeC__05D8E0BE">
+            <End Role="EndPointTypeCategorys" EntitySet="EndPointTypeCategorys" />
+            <End Role="EndPointTypes" EntitySet="EndPointTypes" />
+          </AssociationSet>
+          <AssociationSet Name="FK__LinkEndpo__Endpo__32E0915F" Association="Self.FK__LinkEndpo__Endpo__32E0915F">
+            <End Role="Endpoints" EntitySet="Endpoints" />
+            <End Role="LinkEndpointsLocations" EntitySet="LinkEndpointsLocations" />
+          </AssociationSet>
+          <AssociationSet Name="FK__LinkEndpo__Locat__04E4BC85" Association="Self.FK__LinkEndpo__Locat__04E4BC85">
+            <End Role="Locations" EntitySet="Locations" />
+            <End Role="LinkEndpointsLocations" EntitySet="LinkEndpointsLocations" />
+          </AssociationSet>
+          <AssociationSet Name="FK__LinkLocat__Locat__35BCFE0A" Association="Self.FK__LinkLocat__Locat__35BCFE0A">
+            <End Role="Locations" EntitySet="Locations" />
+            <End Role="LinkLocationsLocationViews" EntitySet="LinkLocationsLocationViews" />
+          </AssociationSet>
+          <AssociationSet Name="FK__LinkLocat__Locat__36B12243" Association="Self.FK__LinkLocat__Locat__36B12243">
+            <End Role="LocationViews" EntitySet="LocationViews" />
+            <End Role="LinkLocationsLocationViews" EntitySet="LinkLocationsLocationViews" />
+          </AssociationSet>
+          <AssociationSet Name="FK__LocationV__Locat__286302EC" Association="Self.FK__LocationV__Locat__286302EC">
+            <End Role="LocationViewTypes" EntitySet="LocationViewTypes" />
+            <End Role="LocationViews" EntitySet="LocationViews" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="DynThingsModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Alert">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Text" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="EndPointID" Type="Int64" Nullable="false" />
+          <Property Name="TimeStamp" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Endpoint" Relationship="DynThingsModel.FK__Alerts__EndPoint__37A5467C" FromRole="Alert" ToRole="Endpoint" />
+        </EntityType>
+        <EntityType Name="EndPointIO">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EndPointID" Type="Int64" Nullable="false" />
+          <Property Name="IO" Type="String" MaxLength="6" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Valu" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="TimeStamp" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Endpoint" Relationship="DynThingsModel.FK__EndPointI__EndPo__29572725" FromRole="EndPointIO" ToRole="Endpoint" />
+        </EntityType>
+        <EntityType Name="EndPointTypeCategory">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="EndPointTypes" Relationship="DynThingsModel.FK__EndPointT__TypeC__05D8E0BE" FromRole="EndPointTypeCategory" ToRole="EndPointType" />
+        </EntityType>
+        <EntityType Name="EndPointType">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="measurement" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TypeCategoryID" Type="Int64" />
+          <NavigationProperty Name="EndPointTypeCategory" Relationship="DynThingsModel.FK__EndPointT__TypeC__05D8E0BE" FromRole="EndPointType" ToRole="EndPointTypeCategory" />
+          <NavigationProperty Name="Endpoints" Relationship="DynThingsModel.FK__EndPoints__TypeI__21B6055D" FromRole="EndPointType" ToRole="Endpoint" />
+        </EntityType>
+        <EntityType Name="LinkEndpointsLocation">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LocationID" Type="Int64" />
+          <Property Name="EndpointID" Type="Int64" />
+          <NavigationProperty Name="Location" Relationship="DynThingsModel.FK__LinkEndpo__Locat__04E4BC85" FromRole="LinkEndpointsLocation" ToRole="Location" />
+          <NavigationProperty Name="Endpoint" Relationship="DynThingsModel.FK__LinkEndpo__Endpo__32E0915F" FromRole="LinkEndpointsLocation" ToRole="Endpoint" />
+        </EntityType>
+        <EntityType Name="LinkLocationsLocationView">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LocationID" Type="Int64" Nullable="false" />
+          <Property Name="LocationViewID" Type="Int64" Nullable="false" />
+          <NavigationProperty Name="Location" Relationship="Self.FK__LinkLocat__Locat__35BCFE0A" FromRole="LinkLocationsLocationViews" ToRole="Locations" />
+          <NavigationProperty Name="LocationView" Relationship="Self.FK__LinkLocat__Locat__36B12243" FromRole="LinkLocationsLocationViews" ToRole="LocationViews" />
+        </EntityType>
+        <EntityType Name="Location">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="GUID" Type="Guid" Nullable="false" />
+          <Property Name="Title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="LongitudeY" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="LatitudeX" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="isActive" Type="Boolean" Nullable="false" />
+          <Property Name="Status" Type="Int64" Nullable="false" />
+          <Property Name="IconID" Type="Int64" Nullable="false" />
+          <NavigationProperty Name="LinkLocationsLocationViews" Relationship="Self.FK__LinkLocat__Locat__35BCFE0A" FromRole="Locations" ToRole="LinkLocationsLocationViews" />
+          <NavigationProperty Name="LinkEndpointsLocations" Relationship="DynThingsModel.FK__LinkEndpo__Locat__04E4BC85" FromRole="Location" ToRole="LinkEndpointsLocation" />
+        </EntityType>
+        <EntityType Name="LocationView">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="OwnerID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="LocationViewTypeID" Type="Int64" Nullable="false" />
+          <Property Name="X" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Y" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Z" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="LinkLocationsLocationViews" Relationship="Self.FK__LinkLocat__Locat__36B12243" FromRole="LocationViews" ToRole="LinkLocationsLocationViews" />
+          <NavigationProperty Name="LocationViewType" Relationship="Self.FK__LocationV__Locat__286302EC" FromRole="LocationViews" ToRole="LocationViewTypes" />
+        </EntityType>
+        <EntityType Name="LocationViewType">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="LocationViews" Relationship="Self.FK__LocationV__Locat__286302EC" FromRole="LocationViewTypes" ToRole="LocationViews" />
+        </EntityType>
+        <EntityType Name="Notification">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Text" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="IsNew" Type="Boolean" Nullable="false" />
+          <Property Name="TimeStamp" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+        <Association Name="FK__LinkLocat__Locat__35BCFE0A">
+          <End Role="Locations" Type="Self.Location" Multiplicity="1" />
+          <End Role="LinkLocationsLocationViews" Type="Self.LinkLocationsLocationView" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Locations">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="LinkLocationsLocationViews">
+              <PropertyRef Name="LocationID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__LinkLocat__Locat__36B12243">
+          <End Role="LocationViews" Type="Self.LocationView" Multiplicity="1" />
+          <End Role="LinkLocationsLocationViews" Type="Self.LinkLocationsLocationView" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LocationViews">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="LinkLocationsLocationViews">
+              <PropertyRef Name="LocationViewID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__LocationV__Locat__286302EC">
+          <End Role="LocationViewTypes" Type="Self.LocationViewType" Multiplicity="1" />
+          <End Role="LocationViews" Type="Self.LocationView" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LocationViewTypes">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="LocationViews">
+              <PropertyRef Name="LocationViewTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DynThingsEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Alerts" EntityType="Self.Alert" />
+          <EntitySet Name="EndPointIOs" EntityType="Self.EndPointIO" />
+          <EntitySet Name="EndPointTypeCategorys" EntityType="Self.EndPointTypeCategory" />
+          <EntitySet Name="EndPointTypes" EntityType="Self.EndPointType" />
+          <EntitySet Name="LinkEndpointsLocations" EntityType="Self.LinkEndpointsLocation" />
+          <EntitySet Name="LinkLocationsLocationViews" EntityType="Self.LinkLocationsLocationView" />
+          <EntitySet Name="Locations" EntityType="Self.Location" />
+          <EntitySet Name="LocationViews" EntityType="Self.LocationView" />
+          <EntitySet Name="LocationViewTypes" EntityType="Self.LocationViewType" />
+          <EntitySet Name="Notifications" EntityType="Self.Notification" />
+          <AssociationSet Name="FK__LinkLocat__Locat__35BCFE0A" Association="Self.FK__LinkLocat__Locat__35BCFE0A">
+            <End Role="Locations" EntitySet="Locations" />
+            <End Role="LinkLocationsLocationViews" EntitySet="LinkLocationsLocationViews" />
+          </AssociationSet>
+          <AssociationSet Name="FK__LinkLocat__Locat__36B12243" Association="Self.FK__LinkLocat__Locat__36B12243">
+            <End Role="LocationViews" EntitySet="LocationViews" />
+            <End Role="LinkLocationsLocationViews" EntitySet="LinkLocationsLocationViews" />
+          </AssociationSet>
+          <AssociationSet Name="FK__LocationV__Locat__286302EC" Association="Self.FK__LocationV__Locat__286302EC">
+            <End Role="LocationViewTypes" EntitySet="LocationViewTypes" />
+            <End Role="LocationViews" EntitySet="LocationViews" />
+          </AssociationSet>
+          <AssociationSet Name="FK__EndPointT__TypeC__05D8E0BE" Association="DynThingsModel.FK__EndPointT__TypeC__05D8E0BE">
+            <End Role="EndPointTypeCategory" EntitySet="EndPointTypeCategorys" />
+            <End Role="EndPointType" EntitySet="EndPointTypes" />
+          </AssociationSet>
+          <AssociationSet Name="FK__LinkEndpo__Locat__04E4BC85" Association="DynThingsModel.FK__LinkEndpo__Locat__04E4BC85">
+            <End Role="Location" EntitySet="Locations" />
+            <End Role="LinkEndpointsLocation" EntitySet="LinkEndpointsLocations" />
+          </AssociationSet>
+          <EntitySet Name="CssIcons" EntityType="DynThingsModel.CssIcon" />
+          <EntitySet Name="CssColors" EntityType="DynThingsModel.CssColor" />
+          <EntitySet Name="Endpoints" EntityType="DynThingsModel.Endpoint" />
+          <AssociationSet Name="FK__Alerts__EndPoint__37A5467C" Association="DynThingsModel.FK__Alerts__EndPoint__37A5467C">
+            <End Role="Endpoint" EntitySet="Endpoints" />
+            <End Role="Alert" EntitySet="Alerts" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Endpoints__Color__3864608B" Association="DynThingsModel.FK__Endpoints__Color__3864608B">
+            <End Role="CssColor" EntitySet="CssColors" />
+            <End Role="Endpoint" EntitySet="Endpoints" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Endpoints__IconI__160F4887" Association="DynThingsModel.FK__Endpoints__IconI__160F4887">
+            <End Role="CssIcon" EntitySet="CssIcons" />
+            <End Role="Endpoint" EntitySet="Endpoints" />
+          </AssociationSet>
+          <AssociationSet Name="FK__EndPointI__EndPo__29572725" Association="DynThingsModel.FK__EndPointI__EndPo__29572725">
+            <End Role="Endpoint" EntitySet="Endpoints" />
+            <End Role="EndPointIO" EntitySet="EndPointIOs" />
+          </AssociationSet>
+          <AssociationSet Name="FK__EndPoints__TypeI__21B6055D" Association="DynThingsModel.FK__EndPoints__TypeI__21B6055D">
+            <End Role="EndPointType" EntitySet="EndPointTypes" />
+            <End Role="Endpoint" EntitySet="Endpoints" />
+          </AssociationSet>
+          <AssociationSet Name="FK__LinkEndpo__Endpo__32E0915F" Association="DynThingsModel.FK__LinkEndpo__Endpo__32E0915F">
+            <End Role="Endpoint" EntitySet="Endpoints" />
+            <End Role="LinkEndpointsLocation" EntitySet="LinkEndpointsLocations" />
+          </AssociationSet>
+        </EntityContainer>
+        <Association Name="FK__EndPointT__TypeC__05D8E0BE">
+          <End Type="DynThingsModel.EndPointTypeCategory" Role="EndPointTypeCategory" Multiplicity="0..1" />
+          <End Type="DynThingsModel.EndPointType" Role="EndPointType" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EndPointTypeCategory">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="EndPointType">
+              <PropertyRef Name="TypeCategoryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__LinkEndpo__Locat__04E4BC85">
+          <End Type="DynThingsModel.Location" Role="Location" Multiplicity="0..1" />
+          <End Type="DynThingsModel.LinkEndpointsLocation" Role="LinkEndpointsLocation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Location">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="LinkEndpointsLocation">
+              <PropertyRef Name="LocationID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="CssIcon">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Css" Type="String" MaxLength="24" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Endpoints" Relationship="DynThingsModel.FK__Endpoints__IconI__160F4887" FromRole="CssIcon" ToRole="Endpoint" />
+        </EntityType>
+        <EntityType Name="CssColor">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Css" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Endpoints" Relationship="DynThingsModel.FK__Endpoints__Color__3864608B" FromRole="CssColor" ToRole="Endpoint" />
+        </EntityType>
+        <EntityType Name="Endpoint">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="GUID" Type="Guid" Nullable="false" />
+          <Property Name="KeyPass" Type="Guid" Nullable="false" />
+          <Property Name="PinCode" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Title" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TypeID" Type="Int64" Nullable="false" />
+          <Property Name="ColorID" Type="Int64" Nullable="false" />
+          <Property Name="IconID" Type="Int64" Nullable="false" />
+          <NavigationProperty Name="Alerts" Relationship="DynThingsModel.FK__Alerts__EndPoint__37A5467C" FromRole="Endpoint" ToRole="Alert" />
+          <NavigationProperty Name="CssColor" Relationship="DynThingsModel.FK__Endpoints__Color__3864608B" FromRole="Endpoint" ToRole="CssColor" />
+          <NavigationProperty Name="CssIcon" Relationship="DynThingsModel.FK__Endpoints__IconI__160F4887" FromRole="Endpoint" ToRole="CssIcon" />
+          <NavigationProperty Name="EndPointIOs" Relationship="DynThingsModel.FK__EndPointI__EndPo__29572725" FromRole="Endpoint" ToRole="EndPointIO" />
+          <NavigationProperty Name="EndPointType" Relationship="DynThingsModel.FK__EndPoints__TypeI__21B6055D" FromRole="Endpoint" ToRole="EndPointType" />
+          <NavigationProperty Name="LinkEndpointsLocations" Relationship="DynThingsModel.FK__LinkEndpo__Endpo__32E0915F" FromRole="Endpoint" ToRole="LinkEndpointsLocation" />
+        </EntityType>
+        <Association Name="FK__Alerts__EndPoint__37A5467C">
+          <End Type="DynThingsModel.Endpoint" Role="Endpoint" Multiplicity="1" />
+          <End Type="DynThingsModel.Alert" Role="Alert" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Endpoint">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Alert">
+              <PropertyRef Name="EndPointID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Endpoints__Color__3864608B">
+          <End Type="DynThingsModel.CssColor" Role="CssColor" Multiplicity="1" />
+          <End Type="DynThingsModel.Endpoint" Role="Endpoint" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CssColor">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Endpoint">
+              <PropertyRef Name="ColorID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Endpoints__IconI__160F4887">
+          <End Type="DynThingsModel.CssIcon" Role="CssIcon" Multiplicity="1" />
+          <End Type="DynThingsModel.Endpoint" Role="Endpoint" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CssIcon">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Endpoint">
+              <PropertyRef Name="IconID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__EndPointI__EndPo__29572725">
+          <End Type="DynThingsModel.Endpoint" Role="Endpoint" Multiplicity="1" />
+          <End Type="DynThingsModel.EndPointIO" Role="EndPointIO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Endpoint">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="EndPointIO">
+              <PropertyRef Name="EndPointID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__EndPoints__TypeI__21B6055D">
+          <End Type="DynThingsModel.EndPointType" Role="EndPointType" Multiplicity="1" />
+          <End Type="DynThingsModel.Endpoint" Role="Endpoint" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EndPointType">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Endpoint">
+              <PropertyRef Name="TypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__LinkEndpo__Endpo__32E0915F">
+          <End Type="DynThingsModel.Endpoint" Role="Endpoint" Multiplicity="0..1" />
+          <End Type="DynThingsModel.LinkEndpointsLocation" Role="LinkEndpointsLocation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Endpoint">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="LinkEndpointsLocation">
+              <PropertyRef Name="EndpointID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="DynThingsModelStoreContainer" CdmEntityContainer="DynThingsEntities">
+          <EntitySetMapping Name="Alerts">
+            <EntityTypeMapping TypeName="DynThingsModel.Alert">
+              <MappingFragment StoreEntitySet="Alerts">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Text" ColumnName="Text" />
+                <ScalarProperty Name="EndPointID" ColumnName="EndPointID" />
+                <ScalarProperty Name="TimeStamp" ColumnName="TimeStamp" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EndPointIOs">
+            <EntityTypeMapping TypeName="DynThingsModel.EndPointIO">
+              <MappingFragment StoreEntitySet="EndPointIOs">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="EndPointID" ColumnName="EndPointID" />
+                <ScalarProperty Name="IO" ColumnName="IO" />
+                <ScalarProperty Name="Valu" ColumnName="Valu" />
+                <ScalarProperty Name="TimeStamp" ColumnName="TimeStamp" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EndPointTypeCategorys">
+            <EntityTypeMapping TypeName="DynThingsModel.EndPointTypeCategory">
+              <MappingFragment StoreEntitySet="EndPointTypeCategorys">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EndPointTypes">
+            <EntityTypeMapping TypeName="DynThingsModel.EndPointType">
+              <MappingFragment StoreEntitySet="EndPointTypes">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="measurement" ColumnName="measurement" />
+                <ScalarProperty Name="TypeCategoryID" ColumnName="TypeCategoryID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LinkEndpointsLocations">
+            <EntityTypeMapping TypeName="DynThingsModel.LinkEndpointsLocation">
+              <MappingFragment StoreEntitySet="LinkEndpointsLocations">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="LocationID" ColumnName="LocationID" />
+                <ScalarProperty Name="EndpointID" ColumnName="EndpointID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LinkLocationsLocationViews">
+            <EntityTypeMapping TypeName="DynThingsModel.LinkLocationsLocationView">
+              <MappingFragment StoreEntitySet="LinkLocationsLocationViews">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="LocationID" ColumnName="LocationID" />
+                <ScalarProperty Name="LocationViewID" ColumnName="LocationViewID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Locations">
+            <EntityTypeMapping TypeName="DynThingsModel.Location">
+              <MappingFragment StoreEntitySet="Locations">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="GUID" ColumnName="GUID" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="LongitudeY" ColumnName="LongitudeY" />
+                <ScalarProperty Name="LatitudeX" ColumnName="LatitudeX" />
+                <ScalarProperty Name="isActive" ColumnName="isActive" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="IconID" ColumnName="IconID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LocationViews">
+            <EntityTypeMapping TypeName="DynThingsModel.LocationView">
+              <MappingFragment StoreEntitySet="LocationViews">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="OwnerID" ColumnName="OwnerID" />
+                <ScalarProperty Name="LocationViewTypeID" ColumnName="LocationViewTypeID" />
+                <ScalarProperty Name="X" ColumnName="X" />
+                <ScalarProperty Name="Y" ColumnName="Y" />
+                <ScalarProperty Name="Z" ColumnName="Z" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LocationViewTypes">
+            <EntityTypeMapping TypeName="DynThingsModel.LocationViewType">
+              <MappingFragment StoreEntitySet="LocationViewTypes">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Notifications">
+            <EntityTypeMapping TypeName="DynThingsModel.Notification">
+              <MappingFragment StoreEntitySet="Notifications">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Text" ColumnName="Text" />
+                <ScalarProperty Name="IsNew" ColumnName="IsNew" />
+                <ScalarProperty Name="TimeStamp" ColumnName="TimeStamp" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CssIcons">
+            <EntityTypeMapping TypeName="DynThingsModel.CssIcon">
+              <MappingFragment StoreEntitySet="CssIcons">
+                <ScalarProperty Name="Css" ColumnName="Css" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CssColors">
+            <EntityTypeMapping TypeName="DynThingsModel.CssColor">
+              <MappingFragment StoreEntitySet="CssColors">
+                <ScalarProperty Name="Css" ColumnName="Css" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Endpoints">
+            <EntityTypeMapping TypeName="DynThingsModel.Endpoint">
+              <MappingFragment StoreEntitySet="Endpoints">
+                <ScalarProperty Name="IconID" ColumnName="IconID" />
+                <ScalarProperty Name="ColorID" ColumnName="ColorID" />
+                <ScalarProperty Name="TypeID" ColumnName="TypeID" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="PinCode" ColumnName="PinCode" />
+                <ScalarProperty Name="KeyPass" ColumnName="KeyPass" />
+                <ScalarProperty Name="GUID" ColumnName="GUID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -1,0 +1,39 @@
+﻿@model IPagedList<DynThings.WebPortal.Models.Alert>
+
+
+<table class="table striped hovered border bordered">
+    <thead>
+        <tr>
+            <th>EndPoint</th>
+            <th>Alert</th>
+            <th>Details</th>
+            <th>Time</th>
+        </tr>
+    <thead>
+    <tbody>
+        @foreach (var item in Model)
+            {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Endpoint.Title)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Title)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Text)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TimeStamp)
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<div id="AlertsListPager">
+    <input id="AlertCurrentPage" value="@Model.PageNumber.ToString()" hidden />
+
+
+    @Html.PagedListPager(Model, page => Url.Action("GetListPV", new { page }))
+</div>
