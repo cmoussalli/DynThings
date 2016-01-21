@@ -14,7 +14,8 @@ namespace DynThings.WebPortal.Models.ViewModels
         public string PinCode { get; set; }
         public string Title { get; set; }
         public long TypeID { get; set; }
-
+        public string TypeTitle { get; set; }
+        public string Measurement { get; set; }
 
         public CssColor cssColor { get; set; }
 
@@ -22,10 +23,11 @@ namespace DynThings.WebPortal.Models.ViewModels
         public List<EndPointIO> endPointIOs { get; set; }
 
 
+
         //public string TileIcon { get; set; }
         //public string TitleColor { get; set; }
 
         public string LastIOValue { get; set; }
-        public string LastIOTimeStamp { get; set; }
+        public DateTime LastIOTimeStamp { get; set; }
     }
 }

@@ -84,6 +84,15 @@ namespace DynThings.WebPortal.Controllers
             return PartialView("_MonitorEndPointHistory", monitorEndPoint);
         }
 
+        [HttpGet]
+        public PartialViewResult GetPVMonitorEndPointMain(Guid guid)
+        {
+            Endpoint endPoint = db.Endpoints.First(e => e.GUID == guid);
+            MonitorEndPoint monitorEndPoint = GetMonitorEndPoint(endPoint);
+
+            return PartialView("_MonitorEndPointMain", monitorEndPoint);
+        }
+
 
 
 
@@ -145,16 +154,17 @@ namespace DynThings.WebPortal.Controllers
         private MonitorEndPoint GetMonitorEndPoint(Endpoint endPoint)
         {
             MonitorEndPoint monitEndPoint= new MonitorEndPoint();
-
             //Fill MonitorEndPoint values
             monitEndPoint.ID = endPoint.ID;
             monitEndPoint.GUID = endPoint.GUID;
             monitEndPoint.Title = endPoint.Title;
             monitEndPoint.KeyPass = endPoint.KeyPass;
             monitEndPoint.PinCode = endPoint.PinCode;
-            monitEndPoint.TypeID = endPoint.TypeID;
             monitEndPoint.cssColor = endPoint.CssColor;
 
+            monitEndPoint.TypeID = endPoint.TypeID;
+            monitEndPoint.TypeTitle = endPoint.EndPointType.Title;
+            monitEndPoint.Measurement = endPoint.EndPointType.measurement;
 
             //List<LinkEndpointsLocation> linksEndPoints = db.LinkEndpointsLocations.Where(l => l.LocationID == location.ID).ToList();
             //List<long> ids = new List<long>();
@@ -164,6 +174,11 @@ namespace DynThings.WebPortal.Controllers
             //}
 
             monitEndPoint.endPointIOs = db.EndPointIOs.Where(e => e.EndPointID == endPoint.ID).OrderByDescending(e => e.TimeStamp).Take(4).ToList();
+
+
+            monitEndPoint.LastIOValue = monitEndPoint.endPointIOs[0].Valu;
+            monitEndPoint.LastIOTimeStamp = monitEndPoint.endPointIOs[0].TimeStamp;
+
 
             return monitEndPoint;
         }
