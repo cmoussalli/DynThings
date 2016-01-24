@@ -2,29 +2,28 @@
 @model DynThings.WebPortal.Models.ViewModels.MonitorEndPoint
 
 
-            <table class="table striped hovered bordered" id="main_table_demo">
-                <thead>
-                    <tr>
-                        <th>Value</th>
-                        <th>I/O</th>
-                        <th>Date</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach (var loc in Model.endPointIOs)
-                    {
-                        <Text>
-                        <tr>
-                            <td>@loc.Valu</td>
-                            <td>@loc.IO</td>
-                            <td>@loc.TimeStamp</td>
-                        </tr>
+<table class="table striped hovered bordered" id="main_table_demo">
+    <thead>
+        <tr>
+            <th>Value</th>
+            <th>I/O</th>
+            <th>Date</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var loc in Model.endPointIOs)
+        {
+            <Text>
+            <tr>
+                <td>@loc.Valu</td>
+                <td>@loc.IO</td>
+                <td>@loc.TimeStamp</td>
+            </tr>
 
-                        </text>
-                    }
-                </tbody>
-            </table>
-       
+            </text>
+        }
+    </tbody>
+</table>
 
 <script>
     //$(document).ready(function () {
