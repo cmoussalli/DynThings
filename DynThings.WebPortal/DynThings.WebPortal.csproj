@@ -469,7 +469,6 @@
     <Content Include="Scripts\DataTables\jquery.dataTables.js" />
     <Content Include="Scripts\DataTables\jquery.dataTables.min.js" />
     <Content Include="Scripts\docs.js" />
-    <Content Include="Scripts\ga.js" />
     <Content Include="Scripts\Gauges\justgage.js" />
     <Content Include="Scripts\Gauges\raphael-2.1.4.min.js" />
     <Content Include="Scripts\jquery-2.1.4.js" />
