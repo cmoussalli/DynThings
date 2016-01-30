@@ -1535,7 +1535,7 @@ function preCode(selector) {
 	var els = Array.prototype.slice.call(document.querySelectorAll(selector), 0);
 
 	els.forEach(function(el, idx, arr){
-		var txt = el.textContent
+	     var txt = el.textContent
 			.replace(/^[\r\n]+/, "")	// strip leading newline
 			.replace(/\s+$/g, "");
 
