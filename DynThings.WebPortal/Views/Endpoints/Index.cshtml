@@ -10,10 +10,8 @@
     @Html.ActionLink("Create New", "Create")
 </p>
 
-<form method="get">
-    <input type="search" id="txtEndPointSearch" />
+    <input type="search" id="txtEndPointSearch" onkeydown="if (event.keyCode == 13) { LoadPart_EndPointListDiv(); return false; }" />
     <button type="button" class="button"  onclick="LoadPart_EndPointListDiv()">Search</button>
-</form>
 
 <div id="divEndPointsList">
 
@@ -37,6 +35,7 @@
             .done(function (partialViewResult) {
                 $("#divEndPointsList").html(partialViewResult);
             });
+        return false;
     };
 
 
