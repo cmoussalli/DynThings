@@ -6,7 +6,9 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
-using DynThings.WebPortal.Models;
+//using DynThings.WebPortal.Models;
+using DynThings.Data.Models;
+using DynThings.Data.Repositories;
 
 namespace DynThings.WebPortal.Controllers
 {
@@ -128,5 +130,27 @@ namespace DynThings.WebPortal.Controllers
             }
             base.Dispose(disposing);
         }
+
+
+
+
+
+
+
+        //public PartialViewResult GetPVMonitorMap(int id)
+        //{
+        //    LocationView locView = LocationViews.Find(id);
+
+        //    return PartialView("_MonitorViewMap", locView);
+        //}
+
+
+
+
+
+
+
+
+
     }
 }

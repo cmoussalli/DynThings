@@ -1,4 +1,4 @@
-﻿@model IEnumerable<DynThings.WebPortal.Models.ViewModels.Monitor>
+﻿@model IEnumerable<DynThings.Data.Models.LocationView>
 
 @{
     ViewBag.Title = "Monitor Views";
@@ -15,7 +15,7 @@
     <div class="example" data-text="">
         <div class="margin10">
             <h2>@item.Title</h2>
-            <h5>View type:  @item.locationViewType.Title</h5>
+            <h5>View type:  @item.LocationViewType.Title</h5>
             <a class="command-button warning" href="monitorview?id=@item.ID">
                 <span class="icon mif-share"></span>
                 Monitor

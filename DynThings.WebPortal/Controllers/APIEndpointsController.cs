@@ -4,8 +4,8 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
-using DynThings.WebPortal.Models;
-using DynThings.WebPortal.Models.ViewModels;
+using DynThings.Data.Models;
+
 
 namespace DynThings.WebPortal.Controllers
 {
@@ -27,7 +27,7 @@ namespace DynThings.WebPortal.Controllers
             {
                 eio.EndPointID = eps[0].ID;
                 //Todo: Validate io value before save
-                eio.IO = io;
+                
                 eio.TimeStamp = DateTime.Now;
                 eio.Valu = newValue;
                 db.EndPointIOs.Add(eio);

@@ -7,6 +7,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DynThings.WebPortal", "DynT
 EndProject
 Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "DynThingsDB", "DynThingsDB\DynThingsDB.sqlproj", "{BA2E3C37-7F28-407B-AFF3-A366E17984F2}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DynThings.Data.Models", "DynThings.Data.Models\DynThings.Data.Models.csproj", "{946862BE-8456-4882-9A11-09ED0AFD407B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DynThings.Data.Repositories", "DynThings.Data.Repositories\DynThings.Data.Repositories.csproj", "{3EB80EA4-99D5-4DB4-BD84-2370DCE356D0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -23,6 +27,14 @@ Global
 		{BA2E3C37-7F28-407B-AFF3-A366E17984F2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BA2E3C37-7F28-407B-AFF3-A366E17984F2}.Release|Any CPU.Build.0 = Release|Any CPU
 		{BA2E3C37-7F28-407B-AFF3-A366E17984F2}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{946862BE-8456-4882-9A11-09ED0AFD407B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{946862BE-8456-4882-9A11-09ED0AFD407B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{946862BE-8456-4882-9A11-09ED0AFD407B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{946862BE-8456-4882-9A11-09ED0AFD407B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3EB80EA4-99D5-4DB4-BD84-2370DCE356D0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3EB80EA4-99D5-4DB4-BD84-2370DCE356D0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3EB80EA4-99D5-4DB4-BD84-2370DCE356D0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3EB80EA4-99D5-4DB4-BD84-2370DCE356D0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

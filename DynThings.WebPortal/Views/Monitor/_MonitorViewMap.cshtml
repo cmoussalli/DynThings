@@ -1,4 +1,4 @@
-﻿@model DynThings.WebPortal.Models.ViewModels.Monitor
+﻿@model DynThings.Data.Models.LocationView
 
 <div id='myMap' style="position: relative; width: 100%; height: 100%; height: 400px"></div>
 
@@ -27,7 +27,7 @@
 
 
 
-        @foreach (var loc in Model.MLocations)
+        @foreach (var loc in @Model.Locations)
         {
         <Text>
         var offset = new Microsoft.Maps.Point(0, 5);

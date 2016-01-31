@@ -6,7 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
-using DynThings.WebPortal.Models;
+using DynThings.Data.Models;
 using PagedList;
 
 namespace DynThings.WebPortal.Controllers

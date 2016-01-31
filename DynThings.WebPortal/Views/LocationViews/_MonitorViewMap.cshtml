@@ -1,0 +1,65 @@
+﻿@model DynThings.Data.Models.LocationView
+
+<div id='myMap' style="position: relative; width: 100%; height: 100%; height: 400px"></div>
+
+
+<script type="text/javascript" src="http://ecn.dev.virtualearth.net/mapcontrol/mapcontrol.ashx?v=7.0"></script>
+<script>
+
+
+    var map = null;
+
+    function getMap() {
+        map = new Microsoft.Maps.Map(document.getElementById('myMap')
+            , {
+                credentials: 'Aq96lGpMhTmC6x18TL2-qS4ccUYLNnc9IW6FSN5E1MW5O1td3LMyiYzEBi3w6S7f'
+                , enableClickableLogo: false
+                , enableSearchLogo: false
+                , showDashboard: true
+                , showMapTypeSelector: true
+                , useInertia: true
+               // ,disablePanning: true
+               //, disableZooming: true
+                ,mapTypeId: Microsoft.Maps.MapTypeId.birdseye
+                , center: new Microsoft.Maps.Location( @Model.X , @Model.Y),  zoom: @Model.Z });
+                
+    
+
+
+
+        @foreach (var loc in Model.MLocations)
+        {
+        <Text>
+        var offset = new Microsoft.Maps.Point(0, 5);
+        var pushpinOptions_@loc.ID = { text: '@loc.ID', visible: true, textOffset: offset };
+        var pushpin_@loc.ID = new Microsoft.Maps.Pushpin(new Microsoft.Maps.Location(@loc.LatitudeX, @loc.LongitudeY), pushpinOptions_@loc.ID);
+       
+        pushpinClick_@loc.ID = Microsoft.Maps.Events.addHandler(pushpin_@loc.ID, 'click', displayEventInfo);
+
+        map.entities.push(pushpin_@loc.ID);
+
+        </text>
+        }
+
+        // Create the infobox for the pushpin
+
+
+        //var pushpinOptions3 = { text: '3', visible: true, textOffset: offset };
+        //var pushpin3 = new Microsoft.Maps.Pushpin(new Microsoft.Maps.Location(23.592151, 58.382559), pushpinOptions3);
+        //pushpinClick3 = Microsoft.Maps.Events.addHandler(pushpin3, 'click', displayEventInfo);
+        //map.entities.push(pushpin3);
+    }
+
+
+    displayEventInfo = function (e) {
+        var obj = e.target;
+
+        LoadPart_MonitorLocation(e.target.getText());
+        
+    }
+
+    $(document).ready(function () {
+        getMap();
+    });
+
+</script>
