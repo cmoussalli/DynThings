@@ -14,28 +14,25 @@ namespace DynThings.WebPortal.Controllers
 {
     public class MonitorController : Controller
     {
-        private DynThingsEntities db = new DynThingsEntities();
-        public LocationViewsRepository repoLocationViews = new LocationViewsRepository();
-        public LocationsRepository repoLocations = new LocationsRepository();
 
         [HttpGet]
         public ActionResult MonitorViewsList()
         {
-            List<LocationView> monitors = repoLocationViews.GetAll();
+            List<LocationView> monitors = UnitOfWork.repoLocationViews.GetAll();
             return View(monitors);
         }
 
         // GET: Monitor
         public ActionResult MonitorView(long id)
         {
-            LocationView monitor = repoLocationViews.Find(id);
+            LocationView monitor = UnitOfWork.repoLocationViews.Find(id);
             return View(monitor);
         }
 
         [HttpGet]
         public PartialViewResult GetPVMonitorMap(int id)
         {
-            LocationView monitor = repoLocationViews.Find(id);
+            LocationView monitor = UnitOfWork.repoLocationViews.Find(id);
             return PartialView("_MonitorViewMap", monitor);
         }
 
@@ -43,29 +40,27 @@ namespace DynThings.WebPortal.Controllers
         [HttpGet]
         public PartialViewResult GetPVMonitorLocation(int id)
         {
-            Location location = repoLocations.Find(id);
+            Location location = UnitOfWork.repoLocations.Find(id);
             return PartialView("_MonitorLocation", location);
+        }
+
+       
+
+        [HttpGet]
+        public PartialViewResult GetPVMonitorEndPointMain(Guid guid)
+        {
+            Endpoint endPoint = UnitOfWork.repoEndpoints.Find(guid);
+            return PartialView("_MonitorEndPointMain", endPoint);
         }
 
         //[HttpGet]
         //public PartialViewResult GetPVMonitorEndPointHistory(Guid guid)
         //{
-        //    Endpoint endPoint = db.Endpoints.First(e=> e.GUID == guid);
+        //    Endpoint endPoint = db.Endpoints.First(e => e.GUID == guid);
         //    MonitorEndPoint monitorEndPoint = GetMonitorEndPoint(endPoint);
 
         //    return PartialView("_MonitorEndPointHistory", monitorEndPoint);
         //}
-
-        //[HttpGet]
-        //public PartialViewResult GetPVMonitorEndPointMain(Guid guid)
-        //{
-        //    Endpoint endPoint = db.Endpoints.First(e => e.GUID == guid);
-        //    MonitorEndPoint monitorEndPoint = GetMonitorEndPoint(endPoint);
-
-        //    return PartialView("_MonitorEndPointMain", monitorEndPoint);
-        //}
-
-
 
 
 

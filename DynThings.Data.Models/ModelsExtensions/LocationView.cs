@@ -10,7 +10,6 @@ namespace DynThings.Data.Models
     {
         private DynThingsEntities db = new DynThingsEntities();
  
-
         public List<Location> Locations
         {
             get

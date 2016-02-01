@@ -9,7 +9,11 @@ namespace DynThings.Data.Repositories
 {
     public class LocationsRepository
     {
-        private DynThingsEntities db = new DynThingsEntities();
+        private DynThingsEntities db;
+        public  LocationsRepository( DynThingsEntities dbContext)
+        {
+            db = dbContext;
+        }
 
         public Location Find(int id)
         {

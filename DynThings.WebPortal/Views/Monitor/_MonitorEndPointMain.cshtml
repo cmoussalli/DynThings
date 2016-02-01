@@ -1,4 +1,4 @@
-﻿@model DynThings.WebPortal.Models.ViewModels.MonitorEndPoint
+﻿@model DynThings.Data.Models.Endpoint
 
 <div id="gauge" class="200x160px"></div>
 
@@ -10,7 +10,7 @@
         min: 0,
         max: 60,
         title: "@Model.Title",
-        label:"@Model.Measurement"
+        label:"@Model.EndPointType.measurement"
 
     });
 </script>
