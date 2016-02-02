@@ -49,6 +49,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="EndpointIOsRepository.cs" />
     <Compile Include="EndpointsRepository.cs" />
     <Compile Include="LocationsRepository.cs" />
     <Compile Include="LocationViewsRepository.cs" />

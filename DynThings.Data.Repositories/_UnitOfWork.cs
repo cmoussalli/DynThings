@@ -24,6 +24,7 @@ namespace DynThings.Data.Repositories
         public static LocationViewsRepository repoLocationViews = new LocationViewsRepository(db);
         public static LocationsRepository repoLocations = new LocationsRepository(db);
         public static EndpointsRepository repoEndpoints = new EndpointsRepository(db);
+        public static EndpointIOsRepository repoEndpointIOs = new EndpointIOsRepository(db);
 
         #endregion
     }
