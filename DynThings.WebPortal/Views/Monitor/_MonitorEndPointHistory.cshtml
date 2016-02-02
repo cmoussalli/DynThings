@@ -1,5 +1,5 @@
 ﻿
-@model DynThings.WebPortal.Models.ViewModels.MonitorEndPoint
+@model IEnumerable<DynThings.Data.Models.EndPointIO>
 
 
 <table class="table striped hovered bordered" id="main_table_demo">
@@ -11,12 +11,13 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (var loc in Model.endPointIOs)
+        
+        @foreach (var loc in Model)
         {
             <Text>
             <tr>
                 <td>@loc.Valu</td>
-                <td>@loc.IOTypeID</td>
+                <td>@loc.IOType.Title</td>
                 <td>@loc.TimeStamp</td>
             </tr>
 
@@ -32,7 +33,7 @@
     //    setInterval(reRead, 3000)
     //})
 
-    function reRead() {
+    @*function reRead() {
         LoadPart_MonitorEndPoint('@Model.GUID');
-    }
+    }*@
 </script>

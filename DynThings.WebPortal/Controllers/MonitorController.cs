@@ -60,14 +60,12 @@ namespace DynThings.WebPortal.Controllers
             return PartialView("_MonitorEndPointMain", endPoint);
         }
 
-        //[HttpGet]
-        //public PartialViewResult GetPVMonitorEndPointHistory(Guid guid)
-        //{
-        //    Endpoint endPoint = db.Endpoints.First(e => e.GUID == guid);
-        //    MonitorEndPoint monitorEndPoint = GetMonitorEndPoint(endPoint);
-
-        //    return PartialView("_MonitorEndPointHistory", monitorEndPoint);
-        //}
+        [HttpGet]
+        public PartialViewResult GetPVMonitorEndPointHistory(Guid guid)
+        {
+            List<EndPointIO> IOs = UnitOfWork.repoEndpointIOs.GetEndpointIOs(guid, 4);
+            return PartialView("_MonitorEndPointHistory", IOs);
+        }
 
 
 
