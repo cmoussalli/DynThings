@@ -1,4 +1,10 @@
-﻿using System;
+﻿/////////////////////////////////////////////////////////////////
+// Created by : Caesar Moussalli                               //
+// TimeStamp  : 31-1-2016                                      //
+// Content    : Handle Endpoint CRUD                           //
+// Notes      :                                                //
+/////////////////////////////////////////////////////////////////
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,23 +16,29 @@ namespace DynThings.Data.Repositories
     public class LocationViewsRepository
     {
         private DynThingsEntities db;
+        #region Constructor
         public LocationViewsRepository(DynThingsEntities dbContext)
         {
             db = dbContext;
         }
+        #endregion
 
-        public void Create()
-        {
-
-        }
-
+        /// <summary>
+        /// Get All Location Views
+        /// </summary>
+        /// <returns>List of LocationViews</returns>
         public List<LocationView> GetAll()
         {
             List<LocationView> locViews = db.LocationViews.ToList();
             return locViews;
         }
 
-        public  LocationView Find(long ID)
+        /// <summary>
+        /// Find LocationView by LocationView ID
+        /// </summary>
+        /// <param name="ID">LocationView ID</param>
+        /// <returns>LocationView object</returns>
+        public LocationView Find(long ID)
         {
             LocationView locView = new LocationView();
             List<LocationView> locViews = db.LocationViews.Where(v => v.ID == ID).ToList();

@@ -1,4 +1,10 @@
-﻿using System;
+﻿/////////////////////////////////////////////////////////////////
+// Created by : Caesar Moussalli                               //
+// TimeStamp  : 31-1-2016                                      //
+// Content    : Handle Locations CRUD                          //
+// Notes      :                                                //
+/////////////////////////////////////////////////////////////////
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,11 +16,20 @@ namespace DynThings.Data.Repositories
     public class LocationsRepository
     {
         private DynThingsEntities db;
-        public  LocationsRepository( DynThingsEntities dbContext)
+
+        #region Constructor
+        public LocationsRepository( DynThingsEntities dbContext)
         {
             db = dbContext;
         }
+        #endregion
 
+
+        /// <summary>
+        /// Find Location by Location ID
+        /// </summary>
+        /// <param name="id">Location ID</param>
+        /// <returns>Location object</returns>
         public Location Find(int id)
         {
             Location loc = new Location();

@@ -1,4 +1,10 @@
-﻿using System;
+﻿/////////////////////////////////////////////////////////////////
+// Created by : Caesar Moussalli                               //
+// TimeStamp  : 31-1-2016                                      //
+// Content    : Extend the properties of LocationView Model    //
+// Notes      : Don't add Behavior in this class               //
+/////////////////////////////////////////////////////////////////
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,6 +16,9 @@ namespace DynThings.Data.Models
     {
         private DynThingsEntities db = new DynThingsEntities();
  
+        /// <summary>
+        /// Get List of associated Locations
+        /// </summary>
         public List<Location> Locations
         {
             get
