@@ -1,4 +1,11 @@
-﻿using System;
+﻿/////////////////////////////////////////////////////////////////
+// Created by : Caesar Moussalli                               //
+// TimeStamp  : 31-1-2016                                      //
+// Content    : Handel the User Accounts Actions               //
+// Notes      :                                                //
+//                                                             //
+/////////////////////////////////////////////////////////////////
+using System;
 using System.Globalization;
 using System.Linq;
 using System.Security.Claims;

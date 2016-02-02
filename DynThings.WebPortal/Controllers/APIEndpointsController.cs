@@ -1,4 +1,11 @@
-﻿using System;
+﻿/////////////////////////////////////////////////////////////////
+// Created by : Caesar Moussalli                               //
+// TimeStamp  : 31-1-2016                                      //
+// Content    : Handel the API Endpoints Actions               //
+// Notes      :                                                //
+//                                                             //
+/////////////////////////////////////////////////////////////////
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
