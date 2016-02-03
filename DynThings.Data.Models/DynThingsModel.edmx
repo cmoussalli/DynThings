@@ -65,6 +65,9 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="GUID" Type="uniqueidentifier" />
+          <Property Name="KeyPass" Type="uniqueidentifier" />
+          <Property Name="PinCode" Type="nvarchar" MaxLength="50" />
           <Property Name="Title" Type="nvarchar" MaxLength="50" />
           <Property Name="StatusID" Type="bigint" />
         </EntityType>
@@ -591,6 +594,9 @@
           <NavigationProperty Name="DeviceIOs" Relationship="Self.FK__DeviceIOs__Devic__19AACF41" FromRole="Devices" ToRole="DeviceIOs" />
           <NavigationProperty Name="DeviceStatu" Relationship="Self.FK__Devices__StatusI__01D345B0" FromRole="Devices" ToRole="DeviceStatus" />
           <NavigationProperty Name="Endpoints" Relationship="Self.FK__Endpoints__Devic__00DF2177" FromRole="Devices" ToRole="Endpoints" />
+          <Property Name="GUID" Type="Guid" />
+          <Property Name="KeyPass" Type="Guid" />
+          <Property Name="PinCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="DeviceStatu">
           <Key>
@@ -1135,6 +1141,9 @@
           <EntitySetMapping Name="Devices">
             <EntityTypeMapping TypeName="DynThingsModel.Device">
               <MappingFragment StoreEntitySet="Devices">
+                <ScalarProperty Name="PinCode" ColumnName="PinCode" />
+                <ScalarProperty Name="KeyPass" ColumnName="KeyPass" />
+                <ScalarProperty Name="GUID" ColumnName="GUID" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="Title" ColumnName="Title" />
                 <ScalarProperty Name="StatusID" ColumnName="StatusID" />
