@@ -27,5 +27,15 @@ namespace DynThings.Data.Repositories
         public static EndpointIOsRepository repoEndpointIOs = new EndpointIOsRepository(db);
 
         #endregion
+
+
+
+        #region Enums
+        public enum RepositoryMethodResultType
+        {
+            Ok = 1,
+            Failed = 2
+        }
+
     }
 }
