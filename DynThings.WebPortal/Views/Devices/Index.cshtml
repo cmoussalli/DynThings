@@ -1,0 +1,58 @@
+﻿@model IEnumerable<DynThings.Data.Models.Device>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Devices</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+
+<input type="search" id="txtDeviceSearch" onkeydown="if (event.keyCode == 13) { LoadPart_DeviceListDiv(); return false; }" />
+<button type="button" class="button" onclick="LoadPart_DeviceListDiv()">Search</button>
+
+<div id="divDevicesList">
+
+</div>
+
+
+<script>
+    $(document).ready(function () {
+        LoadPart_DeviceListDiv();
+    });
+
+
+    function LoadPart_DeviceListDiv() {
+        var loadingpart = LoadDivLoading();
+        $("#divDevicesList").html(loadingpart);
+        $.ajax({
+            url: '@Url.Content("~/")' + 'Devices/GetListPV?searchfor=' + $(txtDeviceSearch).val() + '&recordsperpage=2',
+            //page=" + $("#DynConfigCurrentPage").html,
+            type: "GET",
+        })
+            .done(function (partialViewResult) {
+                $("#divDevicesList").html(partialViewResult);
+            });
+        return false;
+    };
+
+
+    $(document).ready(function () {
+        $(document).on("click", "#DevicesListPager a[href]", function () {
+            var loadingpart = LoadDivLoading();
+            $("#divDevicesList").html(loadingpart);
+            $.ajax({
+                url: $(this).attr("href") + "&searchfor=" + $(txtDeviceSearch).val() + '&recordsperpage=2',
+                type: 'GET',
+                cache: false,
+                success: function (result) {
+                    $("#divDevicesList").html(result);
+                    return false;
+                }
+            });
+            return false;
+        });
+    });
+</script>
