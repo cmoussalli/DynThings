@@ -28,6 +28,7 @@ namespace DynThings.Data.Models
         public Nullable<System.Guid> GUID { get; set; }
         public Nullable<System.Guid> KeyPass { get; set; }
         public string PinCode { get; set; }
+        public Nullable<System.DateTime> LastConnection { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<DeviceCommand> DeviceCommands { get; set; }

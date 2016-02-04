@@ -70,6 +70,7 @@
           <Property Name="PinCode" Type="nvarchar" MaxLength="50" />
           <Property Name="Title" Type="nvarchar" MaxLength="50" />
           <Property Name="StatusID" Type="bigint" />
+          <Property Name="LastConnection" Type="datetime" />
         </EntityType>
         <EntityType Name="DeviceStatus">
           <Key>
@@ -597,6 +598,7 @@
           <Property Name="GUID" Type="Guid" />
           <Property Name="KeyPass" Type="Guid" />
           <Property Name="PinCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LastConnection" Type="DateTime" Precision="3" />
         </EntityType>
         <EntityType Name="DeviceStatu">
           <Key>
@@ -1141,6 +1143,7 @@
           <EntitySetMapping Name="Devices">
             <EntityTypeMapping TypeName="DynThingsModel.Device">
               <MappingFragment StoreEntitySet="Devices">
+                <ScalarProperty Name="LastConnection" ColumnName="LastConnection" />
                 <ScalarProperty Name="PinCode" ColumnName="PinCode" />
                 <ScalarProperty Name="KeyPass" ColumnName="KeyPass" />
                 <ScalarProperty Name="GUID" ColumnName="GUID" />
