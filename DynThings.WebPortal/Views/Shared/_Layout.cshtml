@@ -11,60 +11,8 @@
     <link rel="shortcut icon" type="image/x-icon" href="../favicon.ico">
 
     <title>@ViewBag.Title - DynThings</title>
-
+    
     <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
-    <link href="~/Content/bootstrap-theme.min.css" rel="stylesheet" />
-
-
-    @*<link href="~/Content/metro.css" rel="stylesheet">
-        <link href="~/Content/metro-icons.css" rel="stylesheet">
-        <link href="~/Content/metro-responsive.css" rel="stylesheet">
-        <link href="~/Content/metro-schemes.css" rel="stylesheet" />
-        <link href="~/Content/docs.css" rel="stylesheet" />
-
-        <link href="~/Assets/Portal/Style.css" rel="stylesheet" />
-        <link href="~/Content/PagedList.css" rel="stylesheet" />
-        <script src="~/Scripts/bootstraps.js"></script>
-        <script src="~/Scripts/jquery-2.1.4.js"></script>
-        <script src="~/scripts/metro.js"></script>
-        <script src="~/Scripts/run_prettify.js"></script>
-        <script src="~/Scripts/DataTables/jquery.dataTables.min.js"></script>*@
-
-
-
-    @*<script>
-            function pushMessage(t) {
-                var mes = 'Info|Implement independently';
-                $.Notify({
-                    caption: mes.split("|")[0],
-                    content: mes.split("|")[1],
-                    type: t
-                });
-            }
-
-            $(function () {
-                $('.sidebar').on('click', 'li', function () {
-                    if (!$(this).hasClass('active')) {
-                        $('.sidebar li').removeClass('active');
-                        $(this).addClass('active');
-                    }
-                })
-            })
-        </script>
-
-
-        <script>
-            function showDialog(id){
-                var dialog = $("#"+id).data('dialog');
-                if (!dialog.element.data('opened')) {
-                    dialog.open();
-                } else {
-                    dialog.close();
-                }
-            }
-        </script>*@
-
-
 
 
     @*@Styles.Render("~/Content/css")
@@ -92,7 +40,7 @@
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dev<span class="caret"></span></a>
                         <ul class="dropdown-menu">
                             <li><a href="~/monitor/MonitorViewsList">Monitors</a></li>
-                            <li><a href="#">Another action</a></li>
+                            <li><a href="~/devices">Devices</a></li>
                             <li><a href="#">Something else here</a></li>
                             <li role="separator" class="divider"></li>
                             <li class="dropdown-header">Nav header</li>
@@ -103,7 +51,7 @@
                 </ul>
             
 
-                <ul class="nav navbar-nav">
+                <ul class="nav navbar-nav navbar-right">
                     <li class="active">
                         @Html.Partial("_LoginPartial")
                     </li>

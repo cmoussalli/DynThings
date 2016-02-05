@@ -316,25 +316,12 @@
     <Content Include="Content\DataTables\swf\flashExport.swf" />
     <Content Include="Assets\Portal\docs.js" />
     <Content Include="Content\docs.css" />
-    <Content Include="Content\metro-icons.css" />
-    <Content Include="Content\metro-icons.min.css" />
-    <Content Include="Content\metro-responsive.css" />
-    <Content Include="Content\metro-responsive.min.css" />
-    <Content Include="Content\metro-rtl.css" />
-    <Content Include="Content\metro-rtl.min.css" />
-    <Content Include="Content\metro-schemes.css" />
-    <Content Include="Content\metro-schemes.min.css" />
-    <Content Include="Content\metro.css" />
-    <Content Include="Content\metro.min.css" />
-    <Content Include="Content\PagedList - Copy.css" />
     <Content Include="Content\PagedList.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="fonts\metro.svg" />
     <Content Include="Global.asax" />
-    <Content Include="Content\Site.css" />
     <Content Include="HtmlPage1.html" />
-    <Content Include="Content\bootstrap-modal.css" />
     <Content Include="Scripts\bootstrap-modal.js" />
     <Content Include="fonts\selection.json" />
     <Content Include="fonts\metro.woff" />
@@ -425,6 +412,8 @@
     <Content Include="Scripts\run_prettify.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="test.html" />
+    <Content Include="Themes\SuperHero\bootstrap.min.css" />
+    <Content Include="Themes\SandStone\bootstrap.min.css" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
