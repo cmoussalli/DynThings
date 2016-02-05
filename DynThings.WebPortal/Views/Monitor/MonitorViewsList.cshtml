@@ -6,26 +6,27 @@
 
 <h2>MonitorViewsList</h2>
 
+<div class="page-header">
+    <h1>Location Views</h1>
+</div>
 
-
-
-@foreach (var item in Model)
-{
-
-    <div class="example" data-text="">
-        <div class="margin10">
-            <h2>@item.Title</h2>
-            <h5>View type:  @item.LocationViewType.Title</h5>
-            <a class="command-button warning" href="monitorview?id=@item.ID">
-                <span class="icon mif-share"></span>
-                Monitor
-                <small>Navigate to the monitor screen</small>
-            </a>
-          
+<div class="row">
+    @foreach (var item in Model)
+    {
+        <div class="col-sm-6 col-md-4">
+            <div class="thumbnail">
+                <img src="..." alt="...">
+                <div class="caption">
+                    <h3>View type:  @item.Title</h3>
+                    <p>@item.LocationViewType.Title</p>
+                <p>
+                    <a href="monitorview?id=@item.ID" class="btn btn-primary" role="button">Go to Monitor</a>
+                    <a href="#" class="btn btn-default" role="button">Customize</a>
+                </p>
+            </div>
         </div>
     </div>
-
-   
-}
+    }
+</div>
 
 
