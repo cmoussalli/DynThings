@@ -54,7 +54,31 @@ namespace DynThings.Data.Configurations
         }
 
 
-       
+        /// <summary>
+        /// Return Platform Key
+        /// </summary>
+        public Guid PlatformKey
+        {
+            get
+            {
+                Guid result = new Guid();
+                DBSetting dbset = db.DBSettings.Find(5);
+                result = Guid.Parse(dbset.valu);
+                return result;
+            }
+        }
+
+
+        /// <summary>
+        /// Generate a new Platform Key.
+        /// </summary>
+        public void RegeneratePlatformKey()
+        {
+            DBSetting dbset = db.DBSettings.Find(5);
+            dbset.valu = Guid.NewGuid().ToString();
+            db.SaveChanges();
+        }
+
     }
 
 
