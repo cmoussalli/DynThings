@@ -26,7 +26,7 @@ namespace DynThings.WebPortal.Controllers
         // GET: Endpoints
         public ActionResult Index()
         {
-            var endpoints = db.Endpoints.Include(e => e.CssColor).Include(e => e.CssIcon).Include(e => e.EndPointType);
+            var endpoints = db.Endpoints;
             return View(endpoints.ToList());
         }
 
@@ -48,8 +48,6 @@ namespace DynThings.WebPortal.Controllers
         // GET: Endpoints/Create
         public ActionResult Create()
         {
-            ViewBag.ColorID = new SelectList(db.CssColors, "ID", "Title");
-            ViewBag.IconID = new SelectList(db.CssIcons, "ID", "Title");
             ViewBag.TypeID = new SelectList(db.EndPointTypes, "ID", "Title");
             return View();
         }
@@ -59,7 +57,7 @@ namespace DynThings.WebPortal.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,GUID,KeyPass,PinCode,Title,TypeID,ColorID,IconID")] Endpoint endpoint)
+        public ActionResult Create([Bind(Include = "ID,GUID,KeyPass,PinCode,Title,TypeID")] Endpoint endpoint)
         {
             if (ModelState.IsValid)
             {
@@ -68,8 +66,6 @@ namespace DynThings.WebPortal.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.ColorID = new SelectList(db.CssColors, "ID", "Title", endpoint.ColorID);
-            ViewBag.IconID = new SelectList(db.CssIcons, "ID", "Title", endpoint.IconID);
             ViewBag.TypeID = new SelectList(db.EndPointTypes, "ID", "Title", endpoint.TypeID);
             return View(endpoint);
         }
@@ -86,8 +82,6 @@ namespace DynThings.WebPortal.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.ColorID = new SelectList(db.CssColors, "ID", "Title", endpoint.ColorID);
-            ViewBag.IconID = new SelectList(db.CssIcons, "ID", "Title", endpoint.IconID);
             ViewBag.TypeID = new SelectList(db.EndPointTypes, "ID", "Title", endpoint.TypeID);
             return View(endpoint);
         }
@@ -97,7 +91,7 @@ namespace DynThings.WebPortal.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,GUID,KeyPass,PinCode,Title,TypeID,ColorID,IconID")] Endpoint endpoint)
+        public ActionResult Edit([Bind(Include = "ID,GUID,KeyPass,PinCode,Title,TypeID")] Endpoint endpoint)
         {
             if (ModelState.IsValid)
             {
@@ -105,8 +99,6 @@ namespace DynThings.WebPortal.Controllers
                 db.SaveChanges();
                 return View("Details",endpoint);
             }
-            ViewBag.ColorID = new SelectList(db.CssColors, "ID", "Title", endpoint.ColorID);
-            ViewBag.IconID = new SelectList(db.CssIcons, "ID", "Title", endpoint.IconID);
             ViewBag.TypeID = new SelectList(db.EndPointTypes, "ID", "Title", endpoint.TypeID);
             return View("Details", endpoint);
         }
@@ -170,16 +162,13 @@ namespace DynThings.WebPortal.Controllers
         {
             Endpoint endpoint = db.Endpoints.Find(id);
 
-
-            ViewBag.ColorID = new SelectList(db.CssColors, "ID", "Title", endpoint.ColorID);
-            ViewBag.IconID = new SelectList(db.CssIcons, "ID", "Title", endpoint.IconID);
             ViewBag.TypeID = new SelectList(db.EndPointTypes, "ID", "Title", endpoint.TypeID);
             return PartialView("_Edit", endpoint);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult GetEditPV([Bind(Include = "ID,GUID,KeyPass,PinCode,Title,TypeID,ColorID,IconID")] Endpoint endpoint)
+        public ActionResult GetEditPV([Bind(Include = "ID,GUID,KeyPass,PinCode,Title,TypeID")] Endpoint endpoint)
         {
             if (ModelState.IsValid)
             {
@@ -187,8 +176,6 @@ namespace DynThings.WebPortal.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.ColorID = new SelectList(db.CssColors, "ID", "Title", endpoint.ColorID);
-            ViewBag.IconID = new SelectList(db.CssIcons, "ID", "Title", endpoint.IconID);
             ViewBag.TypeID = new SelectList(db.EndPointTypes, "ID", "Title", endpoint.TypeID);
             return View(endpoint);
         }
