@@ -21,7 +21,7 @@ namespace DynThings.Data.Models
         public System.DateTime TimeStamp { get; set; }
         public Nullable<System.DateTime> ExecTimeStamp { get; set; }
     
-        public virtual Endpoint Endpoint { get; set; }
         public virtual IOType IOType { get; set; }
+        public virtual Endpoint Endpoint { get; set; }
     }
 }

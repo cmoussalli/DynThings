@@ -17,7 +17,6 @@ namespace DynThings.Data.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Endpoint()
         {
-            this.Alerts = new HashSet<Alert>();
             this.EndPointCommands = new HashSet<EndPointCommand>();
             this.EndPointIOs = new HashSet<EndPointIO>();
             this.LinkEndpointsLocations = new HashSet<LinkEndpointsLocation>();
@@ -30,13 +29,7 @@ namespace DynThings.Data.Models
         public string Title { get; set; }
         public Nullable<long> DeviceID { get; set; }
         public long TypeID { get; set; }
-        public long ColorID { get; set; }
-        public long IconID { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Alert> Alerts { get; set; }
-        public virtual CssColor CssColor { get; set; }
-        public virtual CssIcon CssIcon { get; set; }
         public virtual Device Device { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<EndPointCommand> EndPointCommands { get; set; }

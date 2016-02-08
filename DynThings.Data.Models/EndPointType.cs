@@ -24,9 +24,11 @@ namespace DynThings.Data.Models
         public string Title { get; set; }
         public string measurement { get; set; }
         public Nullable<long> TypeCategoryID { get; set; }
+        public Nullable<long> IconID { get; set; }
     
+        public virtual EndPointTypeCategory EndPointTypeCategory { get; set; }
+        public virtual CssIcon CssIcon { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Endpoint> Endpoints { get; set; }
-        public virtual EndPointTypeCategory EndPointTypeCategory { get; set; }
     }
 }

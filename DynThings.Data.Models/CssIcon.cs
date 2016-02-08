@@ -17,7 +17,7 @@ namespace DynThings.Data.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public CssIcon()
         {
-            this.Endpoints = new HashSet<Endpoint>();
+            this.EndPointTypes = new HashSet<EndPointType>();
         }
     
         public long ID { get; set; }
@@ -25,6 +25,6 @@ namespace DynThings.Data.Models
         public string Css { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Endpoint> Endpoints { get; set; }
+        public virtual ICollection<EndPointType> EndPointTypes { get; set; }
     }
 }

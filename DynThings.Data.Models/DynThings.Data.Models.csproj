@@ -51,12 +51,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Alert.cs">
-      <DependentUpon>DynThingsModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="CssColor.cs">
-      <DependentUpon>DynThingsModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="CssIcon.cs">
       <DependentUpon>DynThingsModel.tt</DependentUpon>
     </Compile>
@@ -99,9 +93,6 @@
     <Compile Include="EndPointIO.cs">
       <DependentUpon>DynThingsModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="EndPointTrigger.cs">
-      <DependentUpon>DynThingsModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="EndPointType.cs">
       <DependentUpon>DynThingsModel.tt</DependentUpon>
     </Compile>
@@ -130,9 +121,6 @@
     <Compile Include="ModelsExtensions\EndPoint.cs" />
     <Compile Include="ModelsExtensions\Location.cs" />
     <Compile Include="ModelsExtensions\LocationView.cs" />
-    <Compile Include="Notification.cs">
-      <DependentUpon>DynThingsModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -151,6 +139,7 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="DynThingsDB.sql" />
     <Content Include="DynThingsModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>DynThingsModel.edmx</DependentUpon>

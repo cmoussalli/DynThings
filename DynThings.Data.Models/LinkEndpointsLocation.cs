@@ -18,7 +18,7 @@ namespace DynThings.Data.Models
         public Nullable<long> LocationID { get; set; }
         public Nullable<long> EndpointID { get; set; }
     
-        public virtual Endpoint Endpoint { get; set; }
         public virtual Location Location { get; set; }
+        public virtual Endpoint Endpoint { get; set; }
     }
 }
