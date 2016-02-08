@@ -1,6 +1,49 @@
 ﻿@model DynThings.Data.Models.Location
 
+
 @foreach (var ePoint in Model.EndPoints)
+{
+    <Text>
+
+    <button id="btnEndPoint_@ePoint.GUID" class="btn btn-default" onclick="LoadEndPointParts('@ePoint.GUID')" style="height:120px;min-width:120px">
+        @*<span class="glyphicon glyphicon-star" aria-hidden="true"></span>*@
+         @*<span class="@ePoint.CssIcon.Css"></span>*@
+        <span class="title" >@ePoint.Title</span>
+        <br />
+        <span class="badge">@ePoint.EndPointType.Title</span>
+        <br />
+        <span style="font-size:larger">@ePoint.LastInput.Valu</span>
+
+    </button>
+
+    </text>
+}
+
+<br />
+<br />
+<ul class="nav nav-tabs">
+    <li class="active"><a data-toggle="tab" href="#main">Main</a></li>
+    <li><a data-toggle="tab" href="#history">History</a></li>
+    <li><a data-toggle="tab" href="#commands">Commands</a></li>
+</ul>
+
+<div class="tab-content">
+    <div id="main" class="tab-pane fade in active">
+        <div id="divMonitorEndPointMain">
+        </div>
+    </div>
+    <div id="history" class="tab-pane fade">
+        <div id="divMonitorEndPointHistory">
+        </div>
+    </div>
+    <div id="commands" class="tab-pane fade">
+        <h3>Menu 2</h3>
+        <p>Some content in menu 2.</p>
+    </div>
+</div>
+
+
+@*@foreach (var ePoint in Model.EndPoints)
 {
     <Text>
 
@@ -12,30 +55,8 @@
     </button>
 
     </text>
-}
+}*@
 
-<div class="tabcontrol2" data-role="tabcontrol">
-    <ul class="tabs">
-        <li class="active"><a href="#frame_EndPointMain">Main</a></li>
-        <li class=""><a href="#frame_EndPointHistory">History</a></li>
-        <li class=""><a href="#frame_EndPointCommands">Commands</a></li>
-    </ul>
-    <div class="frames bg-white" @*style="height:450px"*@>
-        <div class="frame" id="frame_EndPointMain" style="display: block;">
-            <div id="divMonitorEndPointMain">
-            </div>
-        </div>
-
-        <div class="frame" id="frame_EndPointHistory" style="display: none;">
-            <div id="divMonitorEndPointHistory">
-            </div>
-        </div>
-
-        <div class="frame" id="frame_EndPointCommands" style="display: none;">
-
-        </div>
-    </div>
-</div>
 
 
 

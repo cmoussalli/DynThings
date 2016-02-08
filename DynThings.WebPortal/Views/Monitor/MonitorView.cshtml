@@ -9,32 +9,35 @@
 
 </div>
 
+<div class="container-fluid">
+    <div class="page-header">
+        <h1>Location View: @Model.Title</h1>
+    </div>
 
-<div class="grid" style="height:50%">
-    <div class="row cells12">
-        <div class="cell colspan6 example" data-text="Map">
-            <div id="divMonitorView">
-                @Html.Partial("_MonitorViewMap", Model)
-            </div>
-            
+
+
+    <div class="row">
+        <div class="col-md-6">
+            @Html.Partial("_MonitorViewMap", Model)
         </div>
-        <div class="cell colspan6 example" data-text="EndPoints">
+
+        <div class="col-md-6">
             <div id="divMonitorLocation"></div>
+        </div>
 
+    </div>
+
+    <div class="row">
+        <div class="col-md-6">
+        </div>
+
+        <div class="col-md-6">
+          
         </div>
     </div>
 
-    <div class="row cells12">
-        <div class="cell colspan6 example" data-text="">
-           
-        </div>
-        <div class="cell colspan6 example" data-text="Alerts">
-            <div id="divMonitorAlerts"></div>
-        </div>
-
-
-    </div>
 </div>
+
 
 <script src="~/Scripts/Gauges/justgage.js"></script>
 <script src="~/Scripts/Gauges/raphael-2.1.4.min.js"></script>
@@ -44,7 +47,6 @@
         //LoadPart_MonitorAlerts();
     });
 
-;
 
     function LoadPart_MonitorLocation(id) {
         $("#SelectedLocationID").val(id);
@@ -59,20 +61,6 @@
         .done(function (partialViewResult) {
 
             $("#divMonitorLocation").html(partialViewResult);
-        });
-    }
-
-    function LoadPart_MonitorAlerts() {
-        var loadingpart = LoadDivLoading();
-        $("#divMonitorAlerts").html(loadingpart);
-        $.ajax({
-            url: '@Url.Content("~/")Alerts/GetListPV?searchfor=' + '&recordsperpage=2',
-            //page=" + $("#DynConfigCurrentPage").html,
-            type: "GET",
-
-        })
-        .done(function (partialViewResult) {
-            $("#divMonitorAlerts").html(partialViewResult);
         });
     }
 
@@ -93,6 +81,4 @@
         });
     });
 </script>
-
-
 
