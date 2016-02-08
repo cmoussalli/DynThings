@@ -188,7 +188,6 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
-    <Compile Include="Controllers\AlertsController.cs" />
     <Compile Include="Controllers\APIEndPointIOsController.cs" />
     <Compile Include="Controllers\APIEndpointsController.cs" />
     <Compile Include="Controllers\DevicesController.cs" />
@@ -412,8 +411,21 @@
     <Content Include="Scripts\run_prettify.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="test.html" />
+    <Content Include="Themes\Cerulean\bootstrap.min.css" />
+    <Content Include="Themes\Cosmo\bootstrap.min.css" />
+    <Content Include="Themes\Cyborg\bootstrap.min.css" />
+    <Content Include="Themes\Darkly\bootstrap.min.css" />
+    <Content Include="Themes\Flatly\bootstrap.min.css" />
+    <Content Include="Themes\Journal\bootstrap.min.css" />
+    <Content Include="Themes\Paper\bootstrap.min.css" />
+    <Content Include="Themes\Readable\bootstrap.min.css" />
+    <Content Include="Themes\Simplex\bootstrap.min.css" />
+    <Content Include="Themes\Slate\bootstrap.min.css" />
+    <Content Include="Themes\SpaceLab\bootstrap.min.css" />
     <Content Include="Themes\SuperHero\bootstrap.min.css" />
     <Content Include="Themes\SandStone\bootstrap.min.css" />
+    <Content Include="Themes\United\bootstrap.min.css" />
+    <Content Include="Themes\Yeti\bootstrap.min.css" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
