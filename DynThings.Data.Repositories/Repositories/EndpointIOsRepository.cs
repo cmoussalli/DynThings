@@ -15,14 +15,7 @@ namespace DynThings.Data.Repositories
 {
     public class EndpointIOsRepository
     {
-        private DynThingsEntities db;
-
-        #region Constructor
-        public EndpointIOsRepository(DynThingsEntities dbContext)
-        {
-            db = dbContext;
-        }
-        #endregion
+        private DynThingsEntities db = new DynThingsEntities();
 
         /// <summary>
         /// Get list of Endpoint IOs based on Endpoint GUID

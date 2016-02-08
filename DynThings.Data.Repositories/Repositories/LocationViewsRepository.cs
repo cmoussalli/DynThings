@@ -15,13 +15,8 @@ namespace DynThings.Data.Repositories
 {
     public class LocationViewsRepository
     {
-        private DynThingsEntities db;
-        #region Constructor
-        public LocationViewsRepository(DynThingsEntities dbContext)
-        {
-            db = dbContext;
-        }
-        #endregion
+        private DynThingsEntities db = new DynThingsEntities();
+       
 
         /// <summary>
         /// Get All Location Views

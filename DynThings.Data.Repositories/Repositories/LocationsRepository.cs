@@ -15,14 +15,7 @@ namespace DynThings.Data.Repositories
 {
     public class LocationsRepository
     {
-        private DynThingsEntities db;
-
-        #region Constructor
-        public LocationsRepository( DynThingsEntities dbContext)
-        {
-            db = dbContext;
-        }
-        #endregion
+        private DynThingsEntities db = new DynThingsEntities();
 
 
         /// <summary>
