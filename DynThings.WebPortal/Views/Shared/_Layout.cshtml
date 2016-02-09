@@ -21,6 +21,8 @@
     @*@Styles.Render("~/Content/css")
         @Scripts.Render("~/bundles/modernizr")*@
 
+  
+
 </head>
 <body >
     <nav class="navbar navbar-default navbar-fixed-top">
@@ -73,20 +75,22 @@
         @RenderBody()
        
 
-
-
-
-   
-
     
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/highcharts")
+
+
     @RenderSection("scripts", required: false)
+    
+
 
     <div hidden="hidden">
-
         @Html.Partial("_PVLoading")
     </div>
+
+
+   
 </body>
 </html>

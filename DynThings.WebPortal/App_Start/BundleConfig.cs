@@ -23,9 +23,16 @@ namespace DynThings.WebPortal
                       "~/Scripts/bootstrap.js",
                       "~/Scripts/respond.js"));
 
+            //HighCharts JS
+            bundles.Add(new ScriptBundle("~/bundles/highcharts").Include(
+                    "~/Scripts/Highcharts/highcharts.js",
+                    "~/Scripts/Highcharts/exporting.js"));
+
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
                       "~/Content/site.css"));
+
+         
         }
     }
 }
