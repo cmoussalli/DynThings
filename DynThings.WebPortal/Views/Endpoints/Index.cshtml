@@ -1,22 +1,27 @@
 ﻿@model IEnumerable<DynThings.Data.Models.Endpoint>
-
 @{
     ViewBag.Title = "Index";
 }
 
-<h2>EndPoints</h2>
+<div class="container">
+    <div class="page-header">
+        <h1>Location Views</h1>
+    </div>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-
-    <input type="search" id="txtEndPointSearch" onkeydown="if (event.keyCode == 13) { LoadPart_EndPointListDiv(); return false; }" />
-    <button type="button" class="button"  onclick="LoadPart_EndPointListDiv()">Search</button>
-
-<div id="divEndPointsList">
-
+    <p>
+        <button type="button" class="btn btn-info" onclick="LoadPart_DialogEndPointAdd()" data-toggle="modal" data-target="#mdl">Add</button>
+    </p>
+    <div class="input-group">
+        <input type="search" id="txtEndPointSearch" class="form-control" onkeydown="if (event.keyCode == 13) { LoadPart_EndPointListDiv(); return false; }" />
+        <div class="input-group-btn">
+            <button type="button" class="btn btn-primary" onclick="LoadPart_EndPointListDiv()">Search</button>
+        </div>
+    </div>
+    <div class="well well-lg">
+        <div id="divEndPointsList">
+        </div>
+    </div>
 </div>
-
 
 <script>
     $(document).ready(function () {
@@ -28,7 +33,7 @@
         var loadingpart = LoadDivLoading();
         $("#divEndPointsList").html(loadingpart);
         $.ajax({
-            url: '@Url.Content("~/")' + 'EndPoints/GetListPV?searchfor=' + $(txtEndPointSearch).val() + '&recordsperpage=2',
+            url: '@Url.Content("~/")' + 'EndPoints/ListPV?searchfor=' + $(txtEndPointSearch).val() + '&recordsperpage=2',
             //page=" + $("#DynConfigCurrentPage").html,
             type: "GET",
         })
@@ -37,7 +42,6 @@
             });
         return false;
     };
-
 
     $(document).ready(function () {
         $(document).on("click", "#EndPointsListPager a[href]", function () {
@@ -55,4 +59,19 @@
             return false;
         });
     });
+
+    function LoadPart_DialogEndPointAdd() {
+        var loadingpart = LoadDivLoading();
+        $("#modal").html(loadingpart);
+        $.ajax({
+            url: '@Url.Content("~/")' + 'EndPoints/addpv',
+            //page=" + $("#DynConfigCurrentPage").html,
+            type: "GET",
+        })
+        .done(function (partialViewResult) {
+            $("#modal").html(partialViewResult);
+        });
+    }
 </script>
+
+

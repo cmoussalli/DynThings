@@ -38,6 +38,6 @@
     <input id="EndPointCurrentPage" value="@Model.PageNumber.ToString()" hidden />
    
 
-    @Html.PagedListPager(Model, page => Url.Action("GetListPV", new { page }))
+    @Html.PagedListPager(Model, page => Url.Action("ListPV", new { page }))
 </div>
 
