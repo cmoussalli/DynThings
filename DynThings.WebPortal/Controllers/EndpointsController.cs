@@ -14,7 +14,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using DynThings.Data.Models;
-
+using DynThings.Data.Repositories;
 using PagedList;
 
 namespace DynThings.WebPortal.Controllers
@@ -23,131 +23,34 @@ namespace DynThings.WebPortal.Controllers
     {
         private DynThingsEntities db = new DynThingsEntities();
 
-        // GET: Endpoints
+        #region ActionResult: Views
         public ActionResult Index()
         {
-            var endpoints = db.Endpoints;
-            return View(endpoints.ToList());
-        }
-
-        // GET: Endpoints/Details/5
-        public ActionResult Details(long? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Endpoint endpoint = db.Endpoints.Find(id);
-            if (endpoint == null)
-            {
-                return HttpNotFound();
-            }
-            return View(endpoint);
-        }
-
-        // GET: Endpoints/Create
-        public ActionResult Create()
-        {
-            ViewBag.TypeID = new SelectList(db.EndPointTypes, "ID", "Title");
             return View();
         }
 
-        // POST: Endpoints/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,GUID,KeyPass,PinCode,Title,TypeID")] Endpoint endpoint)
+        public ActionResult Details(long id)
         {
-            if (ModelState.IsValid)
-            {
-                db.Endpoints.Add(endpoint);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-
-            ViewBag.TypeID = new SelectList(db.EndPointTypes, "ID", "Title", endpoint.TypeID);
+            Endpoint endpoint = UnitOfWork.repoEndpoints.Find(id);
             return View(endpoint);
         }
 
-        // GET: Endpoints/Edit/5
-        public ActionResult Edit(long? id)
+        #endregion
+
+        #region PartialViewResult: Partial Views
+
+        #region Get Details
+        public PartialViewResult DetailsPV(long id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Endpoint endpoint = db.Endpoints.Find(id);
-            if (endpoint == null)
-            {
-                return HttpNotFound();
-            }
-            ViewBag.TypeID = new SelectList(db.EndPointTypes, "ID", "Title", endpoint.TypeID);
-            return View(endpoint);
+            Endpoint endpoint = UnitOfWork.repoEndpoints.Find(id);
+            return PartialView("_Details_Main", endpoint);
         }
 
-        // POST: Endpoints/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,GUID,KeyPass,PinCode,Title,TypeID")] Endpoint endpoint)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Entry(endpoint).State = EntityState.Modified;
-                db.SaveChanges();
-                return View("Details",endpoint);
-            }
-            ViewBag.TypeID = new SelectList(db.EndPointTypes, "ID", "Title", endpoint.TypeID);
-            return View("Details", endpoint);
-        }
+        #endregion
 
-        // GET: Endpoints/Delete/5
-        public ActionResult Delete(long? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Endpoint endpoint = db.Endpoints.Find(id);
-            if (endpoint == null)
-            {
-                return HttpNotFound();
-            }
-            return View(endpoint);
-        }
-
-        // POST: Endpoints/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(long id)
-        {
-            Endpoint endpoint = db.Endpoints.Find(id);
-            db.Endpoints.Remove(endpoint);
-            db.SaveChanges();
-            return RedirectToAction("Index");
-        }
-
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
-        }
-
-
-
-        public PartialViewResult GetDetailsPV(long? id)
-        {
-            Endpoint endpoint = db.Endpoints.Find(id);
-            return PartialView("_Details",endpoint);
-        }
-
+        #region Get List
         [HttpGet]
-        public PartialViewResult GetListPV(string searchfor = null, int page = 1, int recordsperpage = 2)
+        public PartialViewResult ListPV(string searchfor = null, int page = 1, int recordsperpage = 2)
         {
             PagedList.IPagedList ends = db.Endpoints
                 .Where(e => searchfor == null || e.Title.Contains(searchfor))
@@ -158,27 +61,54 @@ namespace DynThings.WebPortal.Controllers
             return PartialView("_List", ends);
         }
 
-        public PartialViewResult GetEditPV(long? id)
-        {
-            Endpoint endpoint = db.Endpoints.Find(id);
+        #endregion
 
-            ViewBag.TypeID = new SelectList(db.EndPointTypes, "ID", "Title", endpoint.TypeID);
+        #region EditPV
+        [HttpGet]
+        public PartialViewResult EditPV(long id)
+        {
+            Endpoint endpoint = UnitOfWork.repoEndpoints.Find(id);
+            ViewBag.TypeID = new SelectList(UnitOfWork.repoEndpointTypes.GetList(), "ID", "Title", endpoint.TypeID);
+            ViewBag.DeviceID = new SelectList(UnitOfWork.repoDevices.GetList(), "ID", "Title", endpoint.DeviceID);
             return PartialView("_Edit", endpoint);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult GetEditPV([Bind(Include = "ID,GUID,KeyPass,PinCode,Title,TypeID")] Endpoint endpoint)
+        public ActionResult EditPV([Bind(Include = "ID,Title,TypeID,DeviceID")] Endpoint endpoint)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(endpoint).State = EntityState.Modified;
-                db.SaveChanges();
+                UnitOfWork.repoEndpoints.Update(endpoint.ID, endpoint.Title, endpoint.TypeID);
                 return RedirectToAction("Index");
             }
-            ViewBag.TypeID = new SelectList(db.EndPointTypes, "ID", "Title", endpoint.TypeID);
+            ViewBag.TypeID = new SelectList(UnitOfWork.repoEndpointTypes.GetList(), "ID", "Title", endpoint.TypeID);
+            ViewBag.DeviceID = new SelectList(UnitOfWork.repoDevices.GetList(), "ID", "Title", endpoint.DeviceID);
             return View(endpoint);
         }
+        #endregion
 
+        #region AddPV
+        [HttpGet]
+        public PartialViewResult AddPV()
+        {
+
+            ViewBag.TypeID = new SelectList(UnitOfWork.repoEndpointTypes.GetList(), "ID", "Title", 1);
+            ViewBag.DeviceID = new SelectList(UnitOfWork.repoDevices.GetList(), "ID", "Title", 1);
+            return PartialView("_Add");
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult AddPV([Bind(Include = "Title,TypeID,DeviceID")] Endpoint endpoint)
+        {
+            UnitOfWork.repoEndpoints.Add(endpoint.Title, endpoint.TypeID, endpoint.DeviceID);
+            return Content("Ok");
+        }
+        #endregion
+
+
+
+        #endregion
     }
 }
