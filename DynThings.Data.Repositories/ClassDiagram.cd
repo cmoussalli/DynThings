@@ -1,0 +1,60 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="DynThings.Data.Repositories.DevicesRepositories">
+    <Position X="0.5" Y="6.25" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAQAAAAAAAAAAAAAAAIQEAAAAAAAAAAAAA=</HashCode>
+      <FileName>Repositories\DevicesRepositories.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DynThings.Data.Repositories.EndpointIOsRepository">
+    <Position X="8" Y="3.25" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAQEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Repositories\EndpointIOsRepository.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DynThings.Data.Repositories.EndpointsRepository">
+    <Position X="5.5" Y="3.25" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAQAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Repositories\EndpointsRepository.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DynThings.Data.Repositories.LocationsRepository">
+    <Position X="3" Y="3.25" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAQAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Repositories\LocationsRepository.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DynThings.Data.Repositories.LocationViewsRepository">
+    <Position X="0.5" Y="3.25" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAQAAAAAAAAAAAAAAAIAAAAAgAAAAAAAAA=</HashCode>
+      <FileName>Repositories\LocationViewsRepository.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DynThings.Data.Repositories.Repositories.EndPointTypesRepository">
+    <Position X="5.5" Y="1" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAQAAAAAAAAAAAAAAAIAEAAAAAAAAAAAAI=</HashCode>
+      <FileName>Repositories\EndPointTypesRepository.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DynThings.Data.Repositories.UnitOfWork" Collapsed="true">
+    <Position X="0.5" Y="1" Width="1.5" />
+    <NestedTypes>
+      <Enum Name="DynThings.Data.Repositories.UnitOfWork.RepositoryMethodResultType" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Core\UnitOfWork.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAIAAAAAAAAAgAAAAAAAAAIAAAAQAAAAAAAAA=</HashCode>
+      <FileName>Core\UnitOfWork.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

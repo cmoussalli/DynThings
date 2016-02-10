@@ -53,6 +53,7 @@
     <Compile Include="Repositories\DevicesRepositories.cs" />
     <Compile Include="Repositories\EndpointIOsRepository.cs" />
     <Compile Include="Repositories\EndpointsRepository.cs" />
+    <Compile Include="Repositories\EndPointTypesRepository.cs" />
     <Compile Include="Repositories\LocationsRepository.cs" />
     <Compile Include="Repositories\LocationViewsRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -68,6 +69,7 @@
     <None Include="App.config">
       <SubType>Designer</SubType>
     </None>
+    <None Include="ClassDiagram.cd" />
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

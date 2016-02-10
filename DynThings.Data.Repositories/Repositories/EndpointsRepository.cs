@@ -17,13 +17,13 @@ namespace DynThings.Data.Repositories
     {
         private DynThingsEntities db = new DynThingsEntities();
 
-
+        #region Find
         /// <summary>
         /// Find Endpoint by EndPoint ID
         /// </summary>
         /// <param name="id">Endpoint ID</param>
         /// <returns>Endpoint object</returns>
-        public Endpoint Find(int id)
+        public Endpoint Find(long id)
         {
             Endpoint end = new Endpoint();
             List<Endpoint> ends = db.Endpoints.Where(l => l.ID == id).ToList();
@@ -57,5 +57,42 @@ namespace DynThings.Data.Repositories
             }
             return end;
         }
+
+        #endregion
+
+        #region Update
+        public UnitOfWork.RepositoryMethodResultType Update (long id, string title,long typeID )
+        {
+            UnitOfWork.RepositoryMethodResultType result = UnitOfWork.RepositoryMethodResultType.Failed;
+            Endpoint end = db.Endpoints.Find(id);
+            end.Title = title;
+            end.TypeID = typeID;
+            db.SaveChanges();
+            result = UnitOfWork.RepositoryMethodResultType.Ok;
+            return result;
+        }
+
+        #endregion
+
+        #region Add
+        public UnitOfWork.RepositoryMethodResultType Add(string title, long typeID,long deviceID)
+        {
+            UnitOfWork.RepositoryMethodResultType result = UnitOfWork.RepositoryMethodResultType.Failed;
+            Endpoint end = new Endpoint();
+           
+            end.GUID = Guid.NewGuid();
+            end.KeyPass = Guid.NewGuid();
+            end.PinCode = "0000";
+            end.Title = title;
+            end.DeviceID = deviceID;
+            end.TypeID = typeID;
+            db.Endpoints.Add(end);
+            db.SaveChanges();
+            result = UnitOfWork.RepositoryMethodResultType.Ok;
+          
+            return result;
+        }
+
+        #endregion
     }
 }
