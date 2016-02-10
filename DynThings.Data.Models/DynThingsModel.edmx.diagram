@@ -31,14 +31,14 @@
         <AssociationConnector Association="DynThingsModel.FK__LinkLocat__Locat__36B12243" ManuallyRouted="false" />
         <AssociationConnector Association="DynThingsModel.FK__LocationV__Locat__286302EC" ManuallyRouted="false" />
         <EntityTypeShape EntityType="DynThingsModel.CssIcon" Width="1.5" PointX="13.375" PointY="1.625" />
-        <EntityTypeShape EntityType="DynThingsModel.Endpoint" Width="1.5" PointX="12.25" PointY="7.75" />
         <AssociationConnector Association="DynThingsModel.FK__EndPointT__IconI__3FD07829" />
+        <EntityTypeShape EntityType="DynThingsModel.Endpoint" Width="1.5" PointX="12.375" PointY="7.25" />
         <AssociationConnector Association="DynThingsModel.FK__Endpoints__Devic__00DF2177" />
         <AssociationConnector Association="DynThingsModel.FK__EndPointC__EndPo__5CA1C101" />
         <AssociationConnector Association="DynThingsModel.FK__EndPointI__EndPo__29572725" />
         <AssociationConnector Association="DynThingsModel.FK__EndPoints__TypeI__21B6055D" />
         <AssociationConnector Association="DynThingsModel.FK__LinkEndpo__Endpo__32E0915F" />
-      </Diagram>
+        </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
 </edmx:Edmx>

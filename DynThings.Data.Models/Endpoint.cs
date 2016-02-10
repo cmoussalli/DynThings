@@ -27,7 +27,7 @@ namespace DynThings.Data.Models
         public System.Guid KeyPass { get; set; }
         public string PinCode { get; set; }
         public string Title { get; set; }
-        public Nullable<long> DeviceID { get; set; }
+        public long DeviceID { get; set; }
         public long TypeID { get; set; }
     
         public virtual Device Device { get; set; }
