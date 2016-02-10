@@ -63,7 +63,7 @@ namespace DynThings.WebPortal.Controllers
         [HttpGet]
         public PartialViewResult GetPVMonitorEndPointHistory(Guid guid)
         {
-            List<EndPointIO> IOs = UnitOfWork.repoEndpointIOs.GetEndpointIOs(guid, 4);
+            List<EndPointIO> IOs = UnitOfWork.repoEndpointIOs.GetEndpointIOs(guid, 5);
             return PartialView("_MonitorEndPointHistory", IOs);
         }
 
