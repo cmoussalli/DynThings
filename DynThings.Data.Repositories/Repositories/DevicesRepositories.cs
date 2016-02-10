@@ -15,16 +15,18 @@ namespace DynThings.Data.Repositories
 {
     public class DevicesRepositories
     {
-        private DynThingsEntities db;
+        #region GetList
+        private DynThingsEntities db = new DynThingsEntities();
 
-        #region Constructor
-        public DevicesRepositories(DynThingsEntities dbContext)
+        public List<Device> GetList()
         {
-            db = dbContext;
+            List<Device> devices = db.Devices.ToList();
+            return devices;
         }
+
         #endregion
 
-
+        #region Find
         /// <summary>
         /// Find Device by Device ID
         /// </summary>
@@ -65,8 +67,10 @@ namespace DynThings.Data.Repositories
             return dev;
         }
 
+        #endregion
 
-        public UnitOfWork.RepositoryMethodResultType Create(string title,string pinCode)
+        #region Add
+        public UnitOfWork.RepositoryMethodResultType Add(string title,string pinCode)
         {
             Device dev = new Device();
             try {
@@ -83,6 +87,8 @@ namespace DynThings.Data.Repositories
             }
             return UnitOfWork.RepositoryMethodResultType.Ok ;
         }
+
+        #endregion
 
         public UnitOfWork.RepositoryMethodResultType RegenerateKeyPass(Guid deviceGUID)
         {

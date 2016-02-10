@@ -16,15 +16,13 @@ namespace DynThings.Data.Repositories
 {
     public static class UnitOfWork
     {
-        #region DB Context
-        private static DynThingsEntities db = new DynThingsEntities();
-        #endregion
-
         #region Repositories
         public static LocationViewsRepository repoLocationViews = new LocationViewsRepository();
         public static LocationsRepository repoLocations = new LocationsRepository();
         public static EndpointsRepository repoEndpoints = new EndpointsRepository();
         public static EndpointIOsRepository repoEndpointIOs = new EndpointIOsRepository();
+        public static EndPointTypesRepository repoEndpointTypes = new EndPointTypesRepository();
+        public static DevicesRepositories repoDevices = new DevicesRepositories();
 
         #endregion
 
