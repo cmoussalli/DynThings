@@ -22,7 +22,7 @@ namespace DynThings.Data.Repositories
         /// Get All Location Views
         /// </summary>
         /// <returns>List of LocationViews</returns>
-        public List<LocationView> GetAll()
+        public List<LocationView> GetList()
         {
             List<LocationView> locViews = db.LocationViews.ToList();
             return locViews;

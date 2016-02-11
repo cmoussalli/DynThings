@@ -55,7 +55,7 @@ namespace DynThings.Data.Repositories
         #endregion
 
         #region Create
-        public UnitOfWork.RepositoryMethodResultType Create(string Title,string measurment,long TypeCategoryID,long IconID)
+        public UnitOfWork.RepositoryMethodResultType Add(string Title,string measurment,long TypeCategoryID,long IconID)
         {
             UnitOfWork.RepositoryMethodResultType result = UnitOfWork.RepositoryMethodResultType.Failed;
             EndPointType epType = new EndPointType();

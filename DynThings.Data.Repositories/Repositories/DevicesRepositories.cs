@@ -70,10 +70,11 @@ namespace DynThings.Data.Repositories
         #endregion
 
         #region Add
-        public UnitOfWork.RepositoryMethodResultType Add(string title,string pinCode)
+        public UnitOfWork.RepositoryMethodResultType Add(string title, string pinCode)
         {
             Device dev = new Device();
-            try {
+            try
+            {
                 dev.GUID = Guid.NewGuid();
                 dev.KeyPass = Guid.NewGuid();
                 dev.StatusID = 1;
@@ -82,26 +83,22 @@ namespace DynThings.Data.Repositories
                 db.Devices.Add(dev);
                 db.SaveChanges();
             }
-            catch {
-                return UnitOfWork.RepositoryMethodResultType.Failed;
-            }
-            return UnitOfWork.RepositoryMethodResultType.Ok ;
-        }
-
-        #endregion
-
-        public UnitOfWork.RepositoryMethodResultType RegenerateKeyPass(Guid deviceGUID)
-        {
-            Device dev = db.Devices.Find(deviceGUID);
-            try
-            {
-                dev.GUID = Guid.NewGuid();
-                db.SaveChanges();
-            }
             catch
             {
                 return UnitOfWork.RepositoryMethodResultType.Failed;
             }
+            return UnitOfWork.RepositoryMethodResultType.Ok;
+        }
+
+        #endregion
+
+        public UnitOfWork.RepositoryMethodResultType RenewKeyPass(long deviceID)
+        {
+            Device dev = db.Devices.Find(deviceID);
+
+            dev.GUID = Guid.NewGuid();
+            db.SaveChanges();
+
             return UnitOfWork.RepositoryMethodResultType.Ok;
         }
 

@@ -23,7 +23,7 @@ namespace DynThings.Data.Repositories
         /// <param name="endpointGuid">Endpoint GUID</param>
         /// <param name="recordsCount">Requested records count</param>
         /// <returns>List of Endpoint IOs</returns>
-        public List<EndPointIO> GetEndpointIOs(Guid endpointGuid,int recordsCount)
+        public List<EndPointIO> GetList(Guid endpointGuid,int recordsCount)
         {
             List<EndPointIO> IOs = db.EndPointIOs.Where(i => i.Endpoint.GUID == endpointGuid).Take(recordsCount).OrderByDescending(i => i.TimeStamp).ToList();
             return IOs;

@@ -60,8 +60,8 @@ namespace DynThings.Data.Repositories
 
         #endregion
 
-        #region Update
-        public UnitOfWork.RepositoryMethodResultType Update (long id, string title,long typeID )
+        #region Edit
+        public UnitOfWork.RepositoryMethodResultType Edit (long id, string title,long typeID )
         {
             UnitOfWork.RepositoryMethodResultType result = UnitOfWork.RepositoryMethodResultType.Failed;
             Endpoint end = db.Endpoints.Find(id);

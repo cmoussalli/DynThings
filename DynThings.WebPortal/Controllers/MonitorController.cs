@@ -25,7 +25,7 @@ namespace DynThings.WebPortal.Controllers
         [HttpGet]
         public ActionResult MonitorViewsList()
         {
-            List<LocationView> monitors = UnitOfWork.repoLocationViews.GetAll();
+            List<LocationView> monitors = UnitOfWork.repoLocationViews.GetList();
             return View(monitors);
         }
 
@@ -63,7 +63,7 @@ namespace DynThings.WebPortal.Controllers
         [HttpGet]
         public PartialViewResult GetPVMonitorEndPointHistory(Guid guid)
         {
-            List<EndPointIO> IOs = UnitOfWork.repoEndpointIOs.GetEndpointIOs(guid, 5);
+            List<EndPointIO> IOs = UnitOfWork.repoEndpointIOs.GetList(guid, 5);
             return PartialView("_MonitorEndPointHistory", IOs);
         }
 

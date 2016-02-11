@@ -79,7 +79,7 @@ namespace DynThings.WebPortal.Controllers
         {
             if (ModelState.IsValid)
             {
-                UnitOfWork.repoEndpoints.Update(endpoint.ID, endpoint.Title, endpoint.TypeID);
+                UnitOfWork.repoEndpoints.Edit(endpoint.ID, endpoint.Title, endpoint.TypeID);
                 return RedirectToAction("Index");
             }
             ViewBag.TypeID = new SelectList(UnitOfWork.repoEndpointTypes.GetList(), "ID", "Title", endpoint.TypeID);

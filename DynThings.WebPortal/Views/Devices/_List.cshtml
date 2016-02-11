@@ -1,0 +1,43 @@
+﻿@model PagedList.IPagedList<DynThings.Data.Models.Device>
+
+
+
+<table class="table striped hovered border bordered">
+    <thead>
+        <tr>
+            <th>Title</th>
+            <th>Status</th>
+            <th>Last Connection</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Title)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DeviceStatu.Title)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LastConnection)
+                </td>
+
+                <td>
+                    @Html.ActionLink("Details", "Details", new { id = item.ID })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+
+<div id="DevicesListPager">
+    <input id="DeviceCurrentPage" value="@Model.PageNumber.ToString()" hidden />
+
+
+    @Html.PagedListPager(Model, page => Url.Action("GetListPV", new { page }))
+</div>
+
