@@ -1,21 +1,17 @@
 ﻿@model DynThings.Data.Models.Location
 
-
 @foreach (var ePoint in Model.EndPoints)
 {
     <Text>
-
     <button id="btnEndPoint_@ePoint.GUID" class="btn btn-default" onclick="LoadEndPointParts('@ePoint.GUID')" style="height:120px;min-width:120px">
         @*<span class="glyphicon glyphicon-star" aria-hidden="true"></span>*@
-         @*<span class="@ePoint.CssIcon.Css"></span>*@
-        <span class="title" >@ePoint.Title</span>
+        @*<span class="@ePoint.CssIcon.Css"></span>*@
+        <span class="title">@ePoint.Title</span>
         <br />
         <span class="badge">@ePoint.EndPointType.Title</span>
         <br />
         <span style="font-size:larger">@ePoint.LastInput.Valu</span>
-
     </button>
-
     </text>
 }
 
@@ -26,47 +22,30 @@
     <li><a data-toggle="tab" href="#history">History</a></li>
     <li><a data-toggle="tab" href="#commands">Commands</a></li>
 </ul>
-
-<div class="tab-content">
-    <div id="main" class="tab-pane fade in active">
-        <div id="divMonitorEndPointMain">
+<div class="panel panel-default">
+    <div class="panel-body">
+        <div class="tab-content">
+            <div id="main" class="tab-pane fade in active">
+                <div id="divMonitorEndPointMain">
+                </div>
+            </div>
+            <div id="history" class="tab-pane fade">
+                <div id="divMonitorEndPointHistory">
+                </div>
+            </div>
+            <div id="commands" class="tab-pane fade">
+                <h3>Menu 2</h3>
+                <p>Some content in menu 2.</p>
+            </div>
         </div>
-    </div>
-    <div id="history" class="tab-pane fade">
-        <div id="divMonitorEndPointHistory">
-        </div>
-    </div>
-    <div id="commands" class="tab-pane fade">
-        <h3>Menu 2</h3>
-        <p>Some content in menu 2.</p>
     </div>
 </div>
 
-
-@*@foreach (var ePoint in Model.EndPoints)
-{
-    <Text>
-
-    <button id="btnEndPoint_@ePoint.GUID" class="shortcut-button @ePoint.CssColor.Css   fg-white" onclick="LoadEndPointParts('@ePoint.GUID')" style="border:solid;border-bottom-width:thick;">
-        <span class="@ePoint.CssIcon.Css"></span>
-        <span class="title">@ePoint.Title</span>
-        <span class="badge">@ePoint.EndPointType.Title</span>
-        
-    </button>
-
-    </text>
-}*@
-
-
-
-
 <script>
-
     function LoadEndPointParts(guid) {
         LoadPart_MonitorEndPointHistory(guid);
         LoadPart_MonitorEndPointMain(guid);
     }
-
 
     function LoadPart_MonitorEndPointMain(Guid) {
         var loadingpart = LoadDivLoading();
@@ -94,6 +73,4 @@
         });
     }
 
-
 </script>
-
