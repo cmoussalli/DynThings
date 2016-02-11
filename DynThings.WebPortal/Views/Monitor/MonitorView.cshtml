@@ -32,7 +32,7 @@
         </div>
 
         <div class="col-md-6">
-          
+
         </div>
     </div>
 
@@ -42,43 +42,44 @@
 <script src="~/Scripts/Gauges/justgage.js"></script>
 <script src="~/Scripts/Gauges/raphael-2.1.4.min.js"></script>
 
-<script>
-    $(document).ready(function () {
-        //LoadPart_MonitorAlerts();
-    });
-
-
-    function LoadPart_MonitorLocation(id) {
-        $("#SelectedLocationID").val(id);
-        var loadingpart = LoadDivLoading();
-        $("#divMonitorLocation").html(loadingpart);
-        $.ajax({
-            url: '@Url.Content("~/")Monitor/GetPVMonitorLocation?id=' + id,
-            //page=" + $("#DynConfigCurrentPage").html,
-            type: "GET",
-
-        })
-        .done(function (partialViewResult) {
-
-            $("#divMonitorLocation").html(partialViewResult);
+@section scripts{
+    <script>
+        $(document).ready(function () {
+            //LoadPart_MonitorAlerts();
         });
-    }
 
-    $(document).ready(function () {
-        $(document).on("click", "#AlertsListPager a[href]", function () {
+        function LoadPart_MonitorLocation(id) {
+            $("#SelectedLocationID").val(id);
             var loadingpart = LoadDivLoading();
-            $("#divMonitorAlerts").html(loadingpart);
+            $("#divMonitorLocation").html(loadingpart);
             $.ajax({
-                url: $(this).attr("href") + "&searchfor=" + '&recordsperpage=2',
-                type: 'GET',
-                cache: false,
-                success: function (result) {
-                    $("#divMonitorAlerts").html(result);
-                    return false;
-                }
-            });
-            return false;
-        });
-    });
-</script>
+                url: '@Url.Content("~/")Monitor/GetPVMonitorLocation?id=' + id,
+                //page=" + $("#DynConfigCurrentPage").html,
+                type: "GET",
 
+            })
+            .done(function (partialViewResult) {
+
+                $("#divMonitorLocation").html(partialViewResult);
+            });
+        }
+
+        $(document).ready(function () {
+            $(document).on("click", "#AlertsListPager a[href]", function () {
+                var loadingpart = LoadDivLoading();
+                $("#divMonitorAlerts").html(loadingpart);
+                $.ajax({
+                    url: $(this).attr("href") + "&searchfor=" + '&recordsperpage=2',
+                    type: 'GET',
+                    cache: false,
+                    success: function (result) {
+                        $("#divMonitorAlerts").html(result);
+                        return false;
+                    }
+                });
+                return false;
+            });
+        });
+    </script>
+
+}
