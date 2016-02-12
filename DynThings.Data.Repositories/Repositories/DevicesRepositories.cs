@@ -15,15 +15,18 @@ namespace DynThings.Data.Repositories
 {
     public class DevicesRepositories
     {
-        #region GetList
         private DynThingsEntities db = new DynThingsEntities();
 
+        #region GetList
+        /// <summary>
+        /// Get list of Devices
+        /// </summary>
+        /// <returns>List of Devices </returns>
         public List<Device> GetList()
         {
             List<Device> devices = db.Devices.ToList();
             return devices;
         }
-
         #endregion
 
         #region Find
@@ -66,11 +69,15 @@ namespace DynThings.Data.Repositories
             }
             return dev;
         }
-
         #endregion
 
         #region Add
-        public UnitOfWork.RepositoryMethodResultType Add(string title, string pinCode)
+        /// <summary>
+        /// Add new Device
+        /// </summary>
+        /// <param name="title">Device's Title</param>
+        /// <returns>Result : Ok or Failed</returns>
+        public UnitOfWork.RepositoryMethodResultType Add(string title)
         {
             Device dev = new Device();
             try
@@ -79,7 +86,7 @@ namespace DynThings.Data.Repositories
                 dev.KeyPass = Guid.NewGuid();
                 dev.StatusID = 1;
                 dev.Title = title;
-                dev.PinCode = pinCode;
+                dev.PinCode = "0000";
                 db.Devices.Add(dev);
                 db.SaveChanges();
             }
@@ -89,9 +96,33 @@ namespace DynThings.Data.Repositories
             }
             return UnitOfWork.RepositoryMethodResultType.Ok;
         }
+        #endregion
+
+        #region Edit
+        /// <summary>
+        /// Edit the Device Title
+        /// </summary>
+        /// <param name="id">Device ID for the editable Device</param>
+        /// <param name="title">New Title</param>
+        /// <returns>Result : Ok or Failed</returns>
+        public UnitOfWork.RepositoryMethodResultType Edit(long id, string title)
+        {
+            UnitOfWork.RepositoryMethodResultType result = UnitOfWork.RepositoryMethodResultType.Failed;
+            Device dev = db.Devices.Find(id);
+            dev.Title = title;
+            db.SaveChanges();
+            result = UnitOfWork.RepositoryMethodResultType.Ok;
+            return result;
+        }
 
         #endregion
 
+        #region RenewKeyPass
+        /// <summary>
+        /// Generate a new KeyPass for a specific device
+        /// </summary>
+        /// <param name="deviceID">Device ID for the editable Device</param>
+        /// <returns>Result : Ok or Failed</returns>
         public UnitOfWork.RepositoryMethodResultType RenewKeyPass(long deviceID)
         {
             Device dev = db.Devices.Find(deviceID);
@@ -102,5 +133,6 @@ namespace DynThings.Data.Repositories
             return UnitOfWork.RepositoryMethodResultType.Ok;
         }
 
+        #endregion
     }
 }
