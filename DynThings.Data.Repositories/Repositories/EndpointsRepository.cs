@@ -10,12 +10,24 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using DynThings.Data.Models;
+using PagedList;
 
 namespace DynThings.Data.Repositories
 {
    public class EndpointsRepository
     {
         private DynThingsEntities db = new DynThingsEntities();
+
+        #region Get PagedList
+        public IPagedList GetPagedList (string search,int pageNumber,int recordsPerPage)
+        {
+            PagedList.IPagedList ends = db.Endpoints
+              .Where(e => search == null || e.Title.Contains(search))
+              .OrderBy(e => e.Title).ToList()
+              .ToPagedList(pageNumber, recordsPerPage);
+            return ends;
+        }
+        #endregion
 
         #region Find
         /// <summary>
@@ -60,20 +72,6 @@ namespace DynThings.Data.Repositories
 
         #endregion
 
-        #region Edit
-        public UnitOfWork.RepositoryMethodResultType Edit (long id, string title,long typeID )
-        {
-            UnitOfWork.RepositoryMethodResultType result = UnitOfWork.RepositoryMethodResultType.Failed;
-            Endpoint end = db.Endpoints.Find(id);
-            end.Title = title;
-            end.TypeID = typeID;
-            db.SaveChanges();
-            result = UnitOfWork.RepositoryMethodResultType.Ok;
-            return result;
-        }
-
-        #endregion
-
         #region Add
         public UnitOfWork.RepositoryMethodResultType Add(string title, long typeID,long deviceID)
         {
@@ -94,5 +92,21 @@ namespace DynThings.Data.Repositories
         }
 
         #endregion
+
+        #region Edit
+        public UnitOfWork.RepositoryMethodResultType Edit(long id, string title, long typeID)
+        {
+            UnitOfWork.RepositoryMethodResultType result = UnitOfWork.RepositoryMethodResultType.Failed;
+            Endpoint end = db.Endpoints.Find(id);
+            end.Title = title;
+            end.TypeID = typeID;
+            db.SaveChanges();
+            result = UnitOfWork.RepositoryMethodResultType.Ok;
+            return result;
+        }
+
+        #endregion
+
+
     }
 }

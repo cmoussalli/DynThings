@@ -5,18 +5,25 @@
 
 <div class="container">
     <div class="page-header">
-        <h1>Location Views</h1>
+        <h1>EndPoints</h1>
     </div>
 
-    <p>
-        <button type="button" class="btn btn-info" onclick="LoadPart_DialogEndPointAdd()" data-toggle="modal" data-target="#mdl">Add</button>
-    </p>
-    <div class="input-group">
-        <input type="search" id="txtEndPointSearch" class="form-control" onkeydown="if (event.keyCode == 13) { LoadPart_EndPointListDiv(); return false; }" />
-        <div class="input-group-btn">
-            <button type="button" class="btn btn-primary" onclick="LoadPart_EndPointListDiv()">Search</button>
+    <div class="row">
+        <div class="col-md-6">
+            <button type="button" class="btn btn-info" onclick="LoadPart_DialogEndPointAdd()" data-toggle="modal" data-target="#mdl">Add</button>
+        </div>
+        <div class="col-md-6">
+            <div class="input-group">
+                <input type="search" id="txtEndPointSearch" class="form-control" onkeydown="if (event.keyCode == 13) { LoadPart_EndPointListDiv(); return false; }" />
+                <div class="input-group-btn">
+                    <button type="button" class="btn btn-primary" onclick="LoadPart_EndPointListDiv()">Search</button>
+                </div>
+            </div>
         </div>
     </div>
+
+    <br />
+
     <div class="well well-lg">
         <div id="divEndPointsList">
         </div>

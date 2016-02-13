@@ -48,16 +48,11 @@ namespace DynThings.WebPortal.Controllers
 
         #endregion
 
-        #region Get List
+        #region Get PagedList
         [HttpGet]
         public PartialViewResult ListPV(string searchfor = null, int page = 1, int recordsperpage = 2)
         {
-            PagedList.IPagedList ends = db.Endpoints
-                .Where(e => searchfor == null || e.Title.Contains(searchfor))
-                .OrderBy(e => e.Title).ToList()
-                .ToPagedList(page, recordsperpage);
-
-
+            PagedList.IPagedList ends = UnitOfWork.repoEndpoints.GetPagedList(searchfor, page, recordsperpage);
             return PartialView("_List", ends);
         }
 

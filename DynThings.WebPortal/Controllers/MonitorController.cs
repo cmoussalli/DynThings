@@ -16,6 +16,7 @@ using System.Web.Mvc;
 using DynThings.WebPortal;
 using DynThings.Data.Models;
 using DynThings.Data.Repositories;
+using PagedList;
 
 namespace DynThings.WebPortal.Controllers
 {
@@ -63,7 +64,7 @@ namespace DynThings.WebPortal.Controllers
         [HttpGet]
         public PartialViewResult GetPVMonitorEndPointHistory(Guid guid)
         {
-            List<EndPointIO> IOs = UnitOfWork.repoEndpointIOs.GetList(guid, 5);
+            IPagedList IOs = UnitOfWork.repoEndpointIOs.GetPagedList(guid,1,5);
             return PartialView("_MonitorEndPointHistory", IOs);
         }
 

@@ -10,6 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using DynThings.Data.Models;
+using PagedList;
 
 namespace DynThings.Data.Repositories
 {
@@ -17,17 +18,16 @@ namespace DynThings.Data.Repositories
     {
         private DynThingsEntities db = new DynThingsEntities();
 
-        /// <summary>
-        /// Get list of Endpoint IOs based on Endpoint GUID
-        /// </summary>
-        /// <param name="endpointGuid">Endpoint GUID</param>
-        /// <param name="recordsCount">Requested records count</param>
-        /// <returns>List of Endpoint IOs</returns>
-        public List<EndPointIO> GetList(Guid endpointGuid,int recordsCount)
+        #region Get PagedList
+        public IPagedList GetPagedList(Guid endPointGUID, int pageNumber, int recordsPerPage)
         {
-            List<EndPointIO> IOs = db.EndPointIOs.Where(i => i.Endpoint.GUID == endpointGuid).Take(recordsCount).OrderByDescending(i => i.TimeStamp).ToList();
-            return IOs;
+            PagedList.IPagedList ios = db.EndPointIOs
+              .Where(i => i.Endpoint.GUID == endPointGUID)
+              .OrderByDescending(i => i.TimeStamp).Take(100).ToList()
+              .ToPagedList(pageNumber, recordsPerPage);
+            return ios;
         }
+        #endregion
 
 
     }
