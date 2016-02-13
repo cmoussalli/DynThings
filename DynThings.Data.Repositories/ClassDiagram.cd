@@ -3,7 +3,7 @@
   <Class Name="DynThings.Data.Repositories.DevicesRepositories">
     <Position X="0.5" Y="6.25" Width="2" />
     <TypeIdentifier>
-      <HashCode>AAIAAAAAAACQAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAI=</HashCode>
+      <HashCode>AAIAAAAAAACQAAAAAAAAAAAAAAAIAAACAAAAAAAAAAI=</HashCode>
       <FileName>Repositories\DevicesRepositories.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -43,7 +43,7 @@
     </TypeIdentifier>
   </Class>
   <Class Name="DynThings.Data.Repositories.EndPointTypesRepository">
-    <Position X="5.25" Y="0.5" Width="3" />
+    <Position X="5.5" Y="0.5" Width="2" />
     <TypeIdentifier>
       <HashCode>AAIAAAAAAAAQAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAI=</HashCode>
       <FileName>Repositories\EndPointTypesRepository.cs</FileName>
