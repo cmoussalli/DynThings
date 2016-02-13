@@ -21,8 +21,6 @@ namespace DynThings.WebPortal.Controllers
 {
     public class EndpointsController : Controller
     {
-        private DynThingsEntities db = new DynThingsEntities();
-
         #region ActionResult: Views
         public ActionResult Index()
         {
@@ -55,7 +53,6 @@ namespace DynThings.WebPortal.Controllers
             PagedList.IPagedList ends = UnitOfWork.repoEndpoints.GetPagedList(searchfor, page, recordsperpage);
             return PartialView("_List", ends);
         }
-
         #endregion
 
         #region EditPV
@@ -101,9 +98,6 @@ namespace DynThings.WebPortal.Controllers
             return Content("Ok");
         }
         #endregion
-
-
-
         #endregion
     }
 }
