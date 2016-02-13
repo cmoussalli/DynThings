@@ -24,7 +24,7 @@ namespace DynThings.WebPortal.Controllers
     {
         #region Get Monitors List
         [HttpGet]
-        public ActionResult Index()
+        public ActionResult MonitorViewsList()
         {
             List<LocationView> monitors = UnitOfWork.repoLocationViews.GetList();
             return View(monitors);
