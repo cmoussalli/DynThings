@@ -25,7 +25,6 @@ namespace DynThings.Data.Models
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<DBSetting> DBSettings { get; set; }
         public virtual DbSet<DeviceCommand> DeviceCommands { get; set; }
         public virtual DbSet<DeviceIO> DeviceIOs { get; set; }
         public virtual DbSet<Device> Devices { get; set; }
@@ -42,5 +41,6 @@ namespace DynThings.Data.Models
         public virtual DbSet<LocationViewType> LocationViewTypes { get; set; }
         public virtual DbSet<CssIcon> CssIcons { get; set; }
         public virtual DbSet<Endpoint> Endpoints { get; set; }
+        public virtual DbSet<DynSetting> DynSettings { get; set; }
     }
 }

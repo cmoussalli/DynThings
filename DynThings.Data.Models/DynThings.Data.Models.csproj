@@ -55,9 +55,6 @@
     <Compile Include="CssIcon.cs">
       <DependentUpon>DynThingsModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="DBSetting.cs">
-      <DependentUpon>DynThingsModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="Device.cs">
       <DependentUpon>DynThingsModel.tt</DependentUpon>
     </Compile>
@@ -68,6 +65,9 @@
       <DependentUpon>DynThingsModel.tt</DependentUpon>
     </Compile>
     <Compile Include="DeviceStatu.cs">
+      <DependentUpon>DynThingsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DynSetting.cs">
       <DependentUpon>DynThingsModel.tt</DependentUpon>
     </Compile>
     <Compile Include="DynThingsModel.Context.cs">

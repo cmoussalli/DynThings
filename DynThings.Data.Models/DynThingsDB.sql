@@ -1,4 +1,4 @@
---DB Version 0.04
+--DB Version 0.05
 USE [master]
 GO
 /****** Object:  Database [DynThings]    Script Date: 2/8/2016 12:47:48 PM ******/
@@ -9,7 +9,7 @@ GO
 
 USE [DynThings]
 GO
-/****** Object:  Table [dbo].[AspNetRoles]    Script Date: 2/8/2016 12:47:48 PM ******/
+/****** Object:  Table [dbo].[AspNetRoles]    Script Date: 2/14/2016 12:56:52 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -24,7 +24,7 @@ CREATE TABLE [dbo].[AspNetRoles](
 ) ON [PRIMARY]
 
 GO
-/****** Object:  Table [dbo].[AspNetUserClaims]    Script Date: 2/8/2016 12:47:48 PM ******/
+/****** Object:  Table [dbo].[AspNetUserClaims]    Script Date: 2/14/2016 12:56:52 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -41,7 +41,7 @@ CREATE TABLE [dbo].[AspNetUserClaims](
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 
 GO
-/****** Object:  Table [dbo].[AspNetUserLogins]    Script Date: 2/8/2016 12:47:48 PM ******/
+/****** Object:  Table [dbo].[AspNetUserLogins]    Script Date: 2/14/2016 12:56:52 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -59,7 +59,7 @@ CREATE TABLE [dbo].[AspNetUserLogins](
 ) ON [PRIMARY]
 
 GO
-/****** Object:  Table [dbo].[AspNetUserRoles]    Script Date: 2/8/2016 12:47:48 PM ******/
+/****** Object:  Table [dbo].[AspNetUserRoles]    Script Date: 2/14/2016 12:56:52 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -75,7 +75,7 @@ CREATE TABLE [dbo].[AspNetUserRoles](
 ) ON [PRIMARY]
 
 GO
-/****** Object:  Table [dbo].[AspNetUsers]    Script Date: 2/8/2016 12:47:48 PM ******/
+/****** Object:  Table [dbo].[AspNetUsers]    Script Date: 2/14/2016 12:56:52 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -100,7 +100,7 @@ CREATE TABLE [dbo].[AspNetUsers](
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 
 GO
-/****** Object:  Table [dbo].[CssIcons]    Script Date: 2/8/2016 12:47:48 PM ******/
+/****** Object:  Table [dbo].[CssIcons]    Script Date: 2/14/2016 12:56:52 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -116,23 +116,7 @@ CREATE TABLE [dbo].[CssIcons](
 ) ON [PRIMARY]
 
 GO
-/****** Object:  Table [dbo].[DBSettings]    Script Date: 2/8/2016 12:47:48 PM ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-CREATE TABLE [dbo].[DBSettings](
-	[ID] [bigint] NOT NULL,
-	[Title] [nvarchar](50) NULL,
-	[valu] [nvarchar](50) NULL,
- CONSTRAINT [PK_DBSettings] PRIMARY KEY CLUSTERED 
-(
-	[ID] ASC
-)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
-) ON [PRIMARY]
-
-GO
-/****** Object:  Table [dbo].[DeviceCommands]    Script Date: 2/8/2016 12:47:48 PM ******/
+/****** Object:  Table [dbo].[DeviceCommands]    Script Date: 2/14/2016 12:56:52 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -150,7 +134,7 @@ CREATE TABLE [dbo].[DeviceCommands](
 ) ON [PRIMARY]
 
 GO
-/****** Object:  Table [dbo].[DeviceIOs]    Script Date: 2/8/2016 12:47:48 PM ******/
+/****** Object:  Table [dbo].[DeviceIOs]    Script Date: 2/14/2016 12:56:52 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -169,7 +153,7 @@ CREATE TABLE [dbo].[DeviceIOs](
 ) ON [PRIMARY]
 
 GO
-/****** Object:  Table [dbo].[Devices]    Script Date: 2/8/2016 12:47:48 PM ******/
+/****** Object:  Table [dbo].[Devices]    Script Date: 2/14/2016 12:56:52 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -188,7 +172,7 @@ CREATE TABLE [dbo].[Devices](
 ) ON [PRIMARY]
 
 GO
-/****** Object:  Table [dbo].[DeviceStatus]    Script Date: 2/8/2016 12:47:48 PM ******/
+/****** Object:  Table [dbo].[DeviceStatus]    Script Date: 2/14/2016 12:56:52 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -203,7 +187,28 @@ CREATE TABLE [dbo].[DeviceStatus](
 ) ON [PRIMARY]
 
 GO
-/****** Object:  Table [dbo].[EndPointCommands]    Script Date: 2/8/2016 12:47:48 PM ******/
+/****** Object:  Table [dbo].[DynSettings]    Script Date: 2/14/2016 12:56:52 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[DynSettings](
+	[ID] [bigint] IDENTITY(1,1) NOT NULL,
+	[DBVersion] [nvarchar](50) NULL,
+	[DevelopmentMode] [nvarchar](50) NULL,
+	[DefaultRecordsPerPage] [nvarchar](50) NULL,
+	[PlatformKey] [nvarchar](50) NULL,
+	[PublicAccess] [nvarchar](50) NULL,
+	[PublicSignUP] [nvarchar](50) NULL,
+	[EnableSystemLogger] [nvarchar](50) NULL,
+ CONSTRAINT [PK_DynSettings] PRIMARY KEY CLUSTERED 
+(
+	[ID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+/****** Object:  Table [dbo].[EndPointCommands]    Script Date: 2/14/2016 12:56:52 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -221,7 +226,7 @@ CREATE TABLE [dbo].[EndPointCommands](
 ) ON [PRIMARY]
 
 GO
-/****** Object:  Table [dbo].[EndPointIOs]    Script Date: 2/8/2016 12:47:48 PM ******/
+/****** Object:  Table [dbo].[EndPointIOs]    Script Date: 2/14/2016 12:56:52 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -240,7 +245,7 @@ CREATE TABLE [dbo].[EndPointIOs](
 ) ON [PRIMARY]
 
 GO
-/****** Object:  Table [dbo].[Endpoints]    Script Date: 2/8/2016 12:47:48 PM ******/
+/****** Object:  Table [dbo].[Endpoints]    Script Date: 2/14/2016 12:56:52 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -251,7 +256,7 @@ CREATE TABLE [dbo].[Endpoints](
 	[KeyPass] [uniqueidentifier] NOT NULL,
 	[PinCode] [nvarchar](50) NOT NULL,
 	[Title] [nvarchar](50) NOT NULL,
-	[DeviceID] [bigint] NULL,
+	[DeviceID] [bigint] NOT NULL,
 	[TypeID] [bigint] NOT NULL,
  CONSTRAINT [PK_Devices] PRIMARY KEY CLUSTERED 
 (
@@ -260,7 +265,7 @@ CREATE TABLE [dbo].[Endpoints](
 ) ON [PRIMARY]
 
 GO
-/****** Object:  Table [dbo].[EndPointTypeCategorys]    Script Date: 2/8/2016 12:47:48 PM ******/
+/****** Object:  Table [dbo].[EndPointTypeCategorys]    Script Date: 2/14/2016 12:56:52 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -275,7 +280,7 @@ CREATE TABLE [dbo].[EndPointTypeCategorys](
 ) ON [PRIMARY]
 
 GO
-/****** Object:  Table [dbo].[EndPointTypes]    Script Date: 2/8/2016 12:47:48 PM ******/
+/****** Object:  Table [dbo].[EndPointTypes]    Script Date: 2/14/2016 12:56:52 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -293,7 +298,7 @@ CREATE TABLE [dbo].[EndPointTypes](
 ) ON [PRIMARY]
 
 GO
-/****** Object:  Table [dbo].[IOTypes]    Script Date: 2/8/2016 12:47:48 PM ******/
+/****** Object:  Table [dbo].[IOTypes]    Script Date: 2/14/2016 12:56:52 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -309,7 +314,7 @@ CREATE TABLE [dbo].[IOTypes](
 ) ON [PRIMARY]
 
 GO
-/****** Object:  Table [dbo].[LinkEndpointsLocations]    Script Date: 2/8/2016 12:47:48 PM ******/
+/****** Object:  Table [dbo].[LinkEndpointsLocations]    Script Date: 2/14/2016 12:56:52 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -325,7 +330,7 @@ CREATE TABLE [dbo].[LinkEndpointsLocations](
 ) ON [PRIMARY]
 
 GO
-/****** Object:  Table [dbo].[LinkLocationsLocationViews]    Script Date: 2/8/2016 12:47:48 PM ******/
+/****** Object:  Table [dbo].[LinkLocationsLocationViews]    Script Date: 2/14/2016 12:56:52 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -341,7 +346,7 @@ CREATE TABLE [dbo].[LinkLocationsLocationViews](
 ) ON [PRIMARY]
 
 GO
-/****** Object:  Table [dbo].[Locations]    Script Date: 2/8/2016 12:47:48 PM ******/
+/****** Object:  Table [dbo].[Locations]    Script Date: 2/14/2016 12:56:52 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -362,7 +367,7 @@ CREATE TABLE [dbo].[Locations](
 ) ON [PRIMARY]
 
 GO
-/****** Object:  Table [dbo].[LocationViews]    Script Date: 2/8/2016 12:47:48 PM ******/
+/****** Object:  Table [dbo].[LocationViews]    Script Date: 2/14/2016 12:56:52 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -383,7 +388,7 @@ CREATE TABLE [dbo].[LocationViews](
 ) ON [PRIMARY]
 
 GO
-/****** Object:  Table [dbo].[LocationViewTypes]    Script Date: 2/8/2016 12:47:48 PM ******/
+/****** Object:  Table [dbo].[LocationViewTypes]    Script Date: 2/14/2016 12:56:52 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -411,24 +416,14 @@ INSERT [dbo].[CssIcons] ([ID], [Title], [Css]) VALUES (3, N'Power', N'glyphicon 
 GO
 SET IDENTITY_INSERT [dbo].[CssIcons] OFF
 GO
-INSERT [dbo].[DBSettings] ([ID], [Title], [valu]) VALUES (1, N'DB Version', N'0.04')
-GO
-INSERT [dbo].[DBSettings] ([ID], [Title], [valu]) VALUES (2, N'DevMode', N'1')
-GO
-INSERT [dbo].[DBSettings] ([ID], [Title], [valu]) VALUES (3, N'11', NULL)
-GO
-INSERT [dbo].[DBSettings] ([ID], [Title], [valu]) VALUES (4, N'Records per Page', N'2')
-GO
-INSERT [dbo].[DBSettings] ([ID], [Title], [valu]) VALUES (5, N'Platform Key', N'12345')
-GO
 SET IDENTITY_INSERT [dbo].[Devices] ON 
 
 GO
-INSERT [dbo].[Devices] ([ID], [GUID], [KeyPass], [PinCode], [Title], [StatusID]) VALUES (1, NULL, NULL, NULL, N'Raspberry 1', 2)
+INSERT [dbo].[Devices] ([ID], [GUID], [KeyPass], [PinCode], [Title], [StatusID]) VALUES (1, N'83683a8a-b0e5-4120-86f7-8e8d3e06a78b', N'b7a8b819-def8-4111-9263-699feb5e8198', N'111', N'Raspberry 1', 1)
 GO
-INSERT [dbo].[Devices] ([ID], [GUID], [KeyPass], [PinCode], [Title], [StatusID]) VALUES (2, NULL, NULL, NULL, N'Arduino 1', 1)
+INSERT [dbo].[Devices] ([ID], [GUID], [KeyPass], [PinCode], [Title], [StatusID]) VALUES (2, N'5ff35d59-f074-4de9-8ab4-c5035ebf0b9b', N'84cf15ef-2a9a-4fe8-b951-cb63b5dbf84a', N'222', N'Arduino 1', 1)
 GO
-INSERT [dbo].[Devices] ([ID], [GUID], [KeyPass], [PinCode], [Title], [StatusID]) VALUES (3, NULL, NULL, NULL, N'Raspberry 2', 2)
+INSERT [dbo].[Devices] ([ID], [GUID], [KeyPass], [PinCode], [Title], [StatusID]) VALUES (3, N'b640980f-2155-4ada-92c7-df9f0cd91081', N'55a7c513-ad7f-4ec5-953b-e813779a2dd5', N'333', N'Raspberry 2', 1)
 GO
 SET IDENTITY_INSERT [dbo].[Devices] OFF
 GO
@@ -444,6 +439,13 @@ GO
 INSERT [dbo].[DeviceStatus] ([ID], [Title]) VALUES (4, N'Deleted')
 GO
 SET IDENTITY_INSERT [dbo].[DeviceStatus] OFF
+GO
+SET IDENTITY_INSERT [dbo].[DynSettings] ON 
+
+GO
+INSERT [dbo].[DynSettings] ([ID], [DBVersion], [DevelopmentMode], [DefaultRecordsPerPage], [PlatformKey], [PublicAccess], [PublicSignUP], [EnableSystemLogger]) VALUES (1, N'0.05', N'True', N'2', N'a86bb826-988d-4f9a-9f43-169045506194', N'True', N'True', N'True')
+GO
+SET IDENTITY_INSERT [dbo].[DynSettings] OFF
 GO
 SET IDENTITY_INSERT [dbo].[EndPointCommands] ON 
 
@@ -484,7 +486,7 @@ GO
 SET IDENTITY_INSERT [dbo].[Endpoints] ON 
 
 GO
-INSERT [dbo].[Endpoints] ([ID], [GUID], [KeyPass], [PinCode], [Title], [DeviceID], [TypeID]) VALUES (1, N'76304ad7-a8a4-466c-9383-41adb276be4e', N'f8528184-5f09-4aa5-8d70-2e1fbd0e9968', N'12345', N'Ozaiba Temprature', 2, 1)
+INSERT [dbo].[Endpoints] ([ID], [GUID], [KeyPass], [PinCode], [Title], [DeviceID], [TypeID]) VALUES (1, N'76304ad7-a8a4-466c-9383-41adb276be4e', N'f8528184-5f09-4aa5-8d70-2e1fbd0e9968', N'1234', N'Ozaiba Temprature', 2, 2)
 GO
 INSERT [dbo].[Endpoints] ([ID], [GUID], [KeyPass], [PinCode], [Title], [DeviceID], [TypeID]) VALUES (2, N'76631207-2d3e-495d-a2a7-81930c9663be', N'5a85419e-3b31-4767-a043-c558cabd3506', N'1234', N'Sensor 2', 2, 1)
 GO
@@ -614,7 +616,7 @@ GO
 SET ANSI_PADDING ON
 
 GO
-/****** Object:  Index [RoleNameIndex]    Script Date: 2/8/2016 12:47:48 PM ******/
+/****** Object:  Index [RoleNameIndex]    Script Date: 2/14/2016 12:56:52 PM ******/
 CREATE UNIQUE NONCLUSTERED INDEX [RoleNameIndex] ON [dbo].[AspNetRoles]
 (
 	[Name] ASC
@@ -623,7 +625,7 @@ GO
 SET ANSI_PADDING ON
 
 GO
-/****** Object:  Index [IX_UserId]    Script Date: 2/8/2016 12:47:48 PM ******/
+/****** Object:  Index [IX_UserId]    Script Date: 2/14/2016 12:56:52 PM ******/
 CREATE NONCLUSTERED INDEX [IX_UserId] ON [dbo].[AspNetUserClaims]
 (
 	[UserId] ASC
@@ -632,7 +634,7 @@ GO
 SET ANSI_PADDING ON
 
 GO
-/****** Object:  Index [IX_UserId]    Script Date: 2/8/2016 12:47:48 PM ******/
+/****** Object:  Index [IX_UserId]    Script Date: 2/14/2016 12:56:52 PM ******/
 CREATE NONCLUSTERED INDEX [IX_UserId] ON [dbo].[AspNetUserLogins]
 (
 	[UserId] ASC
@@ -641,7 +643,7 @@ GO
 SET ANSI_PADDING ON
 
 GO
-/****** Object:  Index [IX_RoleId]    Script Date: 2/8/2016 12:47:48 PM ******/
+/****** Object:  Index [IX_RoleId]    Script Date: 2/14/2016 12:56:52 PM ******/
 CREATE NONCLUSTERED INDEX [IX_RoleId] ON [dbo].[AspNetUserRoles]
 (
 	[RoleId] ASC
@@ -650,7 +652,7 @@ GO
 SET ANSI_PADDING ON
 
 GO
-/****** Object:  Index [IX_UserId]    Script Date: 2/8/2016 12:47:48 PM ******/
+/****** Object:  Index [IX_UserId]    Script Date: 2/14/2016 12:56:52 PM ******/
 CREATE NONCLUSTERED INDEX [IX_UserId] ON [dbo].[AspNetUserRoles]
 (
 	[UserId] ASC
@@ -659,7 +661,7 @@ GO
 SET ANSI_PADDING ON
 
 GO
-/****** Object:  Index [UserNameIndex]    Script Date: 2/8/2016 12:47:48 PM ******/
+/****** Object:  Index [UserNameIndex]    Script Date: 2/14/2016 12:56:52 PM ******/
 CREATE UNIQUE NONCLUSTERED INDEX [UserNameIndex] ON [dbo].[AspNetUsers]
 (
 	[UserName] ASC

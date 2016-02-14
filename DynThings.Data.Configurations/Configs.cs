@@ -16,68 +16,89 @@ using DynThings.Data.Models;
 
 namespace DynThings.Data.Configurations
 {
-    public class Config
+    public static class Config
     {
         #region DB Context
         private static DynThingsEntities db = new DynThingsEntities();
         #endregion
 
-        /// <summary>
-        /// Return the develoment mode activation.
-        /// </summary>
-        public bool developementMode
-        {
-            get
+        public static float DBVersion { get
             {
-                bool result = false;
-                DBSetting dbset = db.DBSettings.Find(2);
-                if (dbset.valu == "1")
-                {
-                    result = true;
-                }
-                return result;
+                return float.Parse( db.DynSettings.First().DBVersion);
+            }
+        }
+        public static bool DevelopmentMode { get
+            {
+                return bool.Parse(db.DynSettings.First().DevelopmentMode);
+            }
+        }
+        public static int DefaultRecordsPerPage { get
+            {
+                return int.Parse(db.DynSettings.First().DefaultRecordsPerPage);
+            }
+        }
+        public static bool PublicAccess { get
+            {
+                return bool.Parse(db.DynSettings.First().PublicAccess);
+            }
+        }
+        public static bool PublicSignUP { get
+            {
+                return bool.Parse(db.DynSettings.First().PublicSignUP);
+            }
+        }
+        public static bool SystemLogger { get
+            {
+                return bool.Parse(db.DynSettings.First().EnableSystemLogger);
+            }
+        }
+        public static Guid PlatformKey { get
+            {
+                return Guid.Parse(db.DynSettings.First().PlatformKey);
             }
         }
 
-        /// <summary>
-        /// Return the Database version
-        /// </summary>
-        public float DBVersion
+        public static void SetDevelopmentMode(bool activation)
         {
-            get
-            {
-                float result = 0;
-                DBSetting dbset = db.DBSettings.Find(1);
-                result = float.Parse(dbset.valu);
-                return result;
-            }
-        }
-
-
-        /// <summary>
-        /// Return Platform Key
-        /// </summary>
-        public Guid PlatformKey
-        {
-            get
-            {
-                Guid result = new Guid();
-                DBSetting dbset = db.DBSettings.Find(5);
-                result = Guid.Parse(dbset.valu);
-                return result;
-            }
-        }
-
-
-        /// <summary>
-        /// Generate a new Platform Key.
-        /// </summary>
-        public void RegeneratePlatformKey()
-        {
-            DBSetting dbset = db.DBSettings.Find(5);
-            dbset.valu = Guid.NewGuid().ToString();
+            DynSetting dset = db.DynSettings.First();
+            dset.DevelopmentMode = activation.ToString();
             db.SaveChanges();
         }
+
+        public static void SetDefaultRecordsPerPage(int recordsCount)
+        {
+            DynSetting dset = db.DynSettings.First();
+            dset.DefaultRecordsPerPage = recordsCount.ToString();
+            db.SaveChanges();
+        }
+
+        public static void SetPublicAccess(bool activation)
+        {
+            DynSetting dset = db.DynSettings.First();
+            dset.PublicAccess = activation.ToString();
+            db.SaveChanges();
+        }
+
+        public static void SetPublicSignUP(bool activation)
+        {
+            DynSetting dset = db.DynSettings.First();
+            dset.PublicSignUP = activation.ToString();
+            db.SaveChanges();
+        }
+
+        public static void SetSystemLogger(bool activation)
+        {
+            DynSetting dset = db.DynSettings.First();
+            dset.EnableSystemLogger = activation.ToString();
+            db.SaveChanges();
+        }
+        public static void SetPlatformKey(Guid newKey)
+        {
+            DynSetting dset = db.DynSettings.First();
+            dset.PlatformKey = newKey.ToString();
+            db.SaveChanges();
+        }
+
 
     }
 

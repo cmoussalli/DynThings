@@ -12,10 +12,15 @@ namespace DynThings.Data.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class DBSetting
+    public partial class DynSetting
     {
         public long ID { get; set; }
-        public string Title { get; set; }
-        public string valu { get; set; }
+        public string DBVersion { get; set; }
+        public string DevelopmentMode { get; set; }
+        public string DefaultRecordsPerPage { get; set; }
+        public string PlatformKey { get; set; }
+        public string PublicAccess { get; set; }
+        public string PublicSignUP { get; set; }
+        public string EnableSystemLogger { get; set; }
     }
 }

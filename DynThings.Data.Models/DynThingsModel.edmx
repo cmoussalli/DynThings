@@ -13,14 +13,6 @@
           <Property Name="Title" Type="nvarchar" MaxLength="50" />
           <Property Name="Css" Type="nvarchar" MaxLength="50" />
         </EntityType>
-        <EntityType Name="DBSettings">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="bigint" Nullable="false" />
-          <Property Name="Title" Type="nvarchar" MaxLength="50" />
-          <Property Name="valu" Type="nvarchar" MaxLength="50" />
-        </EntityType>
         <EntityType Name="DeviceCommands">
           <Key>
             <PropertyRef Name="ID" />
@@ -59,6 +51,19 @@
           </Key>
           <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Title" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="DynSettings">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DBVersion" Type="nvarchar" MaxLength="50" />
+          <Property Name="DevelopmentMode" Type="nvarchar" MaxLength="50" />
+          <Property Name="DefaultRecordsPerPage" Type="nvarchar" MaxLength="50" />
+          <Property Name="PlatformKey" Type="nvarchar" MaxLength="50" />
+          <Property Name="PublicAccess" Type="nvarchar" MaxLength="50" />
+          <Property Name="PublicSignUP" Type="nvarchar" MaxLength="50" />
+          <Property Name="EnableSystemLogger" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="EndPointCommands">
           <Key>
@@ -361,11 +366,11 @@
         </Association>
         <EntityContainer Name="DynThingsModelStoreContainer">
           <EntitySet Name="CssIcons" EntityType="Self.CssIcons" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="DBSettings" EntityType="Self.DBSettings" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DeviceCommands" EntityType="Self.DeviceCommands" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DeviceIOs" EntityType="Self.DeviceIOs" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Devices" EntityType="Self.Devices" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DeviceStatus" EntityType="Self.DeviceStatus" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DynSettings" EntityType="Self.DynSettings" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="EndPointCommands" EntityType="Self.EndPointCommands" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="EndPointIOs" EntityType="Self.EndPointIOs" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Endpoints" EntityType="Self.Endpoints" Schema="dbo" store:Type="Tables" />
@@ -446,14 +451,6 @@
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="DynThingsModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityType Name="DBSetting">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int64" Nullable="false" />
-          <Property Name="Title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="valu" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-        </EntityType>
         <EntityType Name="DeviceCommand">
           <Key>
             <PropertyRef Name="ID" />
@@ -735,7 +732,6 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="DynThingsEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="DBSettings" EntityType="Self.DBSetting" />
           <EntitySet Name="DeviceCommands" EntityType="Self.DeviceCommand" />
           <EntitySet Name="DeviceIOs" EntityType="Self.DeviceIO" />
           <EntitySet Name="Devices" EntityType="Self.Device" />
@@ -816,6 +812,7 @@
             <End Role="Endpoint" EntitySet="Endpoints" />
             <End Role="LinkEndpointsLocation" EntitySet="LinkEndpointsLocations" />
           </AssociationSet>
+          <EntitySet Name="DynSettings" EntityType="DynThingsModel.DynSetting" />
           </EntityContainer>
         <EntityType Name="CssIcon">
           <Key>
@@ -915,21 +912,25 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="DynSetting">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DBVersion" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DevelopmentMode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DefaultRecordsPerPage" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PlatformKey" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PublicAccess" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PublicSignUP" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="EnableSystemLogger" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="DynThingsModelStoreContainer" CdmEntityContainer="DynThingsEntities">
-          <EntitySetMapping Name="DBSettings">
-            <EntityTypeMapping TypeName="DynThingsModel.DBSetting">
-              <MappingFragment StoreEntitySet="DBSettings">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="Title" ColumnName="Title" />
-                <ScalarProperty Name="valu" ColumnName="valu" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="DeviceCommands">
             <EntityTypeMapping TypeName="DynThingsModel.DeviceCommand">
               <MappingFragment StoreEntitySet="DeviceCommands">
@@ -1096,6 +1097,20 @@
                 <ScalarProperty Name="PinCode" ColumnName="PinCode" />
                 <ScalarProperty Name="KeyPass" ColumnName="KeyPass" />
                 <ScalarProperty Name="GUID" ColumnName="GUID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DynSettings">
+            <EntityTypeMapping TypeName="DynThingsModel.DynSetting">
+              <MappingFragment StoreEntitySet="DynSettings">
+                <ScalarProperty Name="EnableSystemLogger" ColumnName="EnableSystemLogger" />
+                <ScalarProperty Name="PublicSignUP" ColumnName="PublicSignUP" />
+                <ScalarProperty Name="PublicAccess" ColumnName="PublicAccess" />
+                <ScalarProperty Name="PlatformKey" ColumnName="PlatformKey" />
+                <ScalarProperty Name="DefaultRecordsPerPage" ColumnName="DefaultRecordsPerPage" />
+                <ScalarProperty Name="DevelopmentMode" ColumnName="DevelopmentMode" />
+                <ScalarProperty Name="DBVersion" ColumnName="DBVersion" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
