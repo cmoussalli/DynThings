@@ -1,51 +1,83 @@
-﻿@model IEnumerable<DynThings.WebPortal.Models.LocationView>
+﻿@model IPagedList<DynThings.Data.Models.LocationView>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Location Views";
 }
 
-<h2>Index</h2>
+<div class="container">
+    <div class="page-header">
+        <h1>Location Views</h1>
+    </div>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Title)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.IsActive)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.OwnerID)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.LocationViewType.Title)
-        </th>
-        <th></th>
-    </tr>
+    <div class="row">
+        <div class="col-md-6">
+            <button type="button" class="btn btn-info" onclick="LoadPart_DialogLocationViewAdd()" data-toggle="modal" data-target="#mdl">Add</button>
+        </div>
+        <div class="col-md-6">
+            <div class="input-group">
+                <input type="search" id="txtLocationViewSearch" class="form-control" onkeydown="if (event.keyCode == 13) { LoadPart_LocationViewListDiv(); return false; }" />
+                <div class="input-group-btn">
+                    <button type="button" class="btn btn-primary" onclick="LoadPart_LocationViewListDiv()">Search</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Title)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.IsActive)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.OwnerID)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.LocationViewType.Title)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
-        </td>
-    </tr>
-}
+    <br />
 
-</table>
+    <div class="well well-lg">
+        <div id="divLocationViewsList">
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        LoadPart_LocationViewListDiv();
+    });
+
+
+    function LoadPart_LocationViewListDiv() {
+        var loadingpart = LoadDivLoading();
+        $("#divLocationViewsList").html(loadingpart);
+        $.ajax({
+            url: '@Url.Content("~/")' + 'LocationViews/ListCardsPV?searchfor=' + $(txtLocationViewSearch).val() + '&recordsperpage=2',
+            //page=" + $("#DynConfigCurrentPage").html,
+            type: "GET",
+        })
+            .done(function (partialViewResult) {
+                $("#divLocationViewsList").html(partialViewResult);
+            });
+        return false;
+    };
+
+    $(document).ready(function () {
+        $(document).on("click", "#LocationViewsListPager a[href]", function () {
+            var loadingpart = LoadDivLoading();
+            $("#divLocationViewsList").html(loadingpart);
+            $.ajax({
+                url: $(this).attr("href") + "&searchfor=" + $(txtLocationViewSearch).val() + '&recordsperpage=2',
+                type: 'GET',
+                cache: false,
+                success: function (result) {
+                    $("#divLocationViewsList").html(result);
+                    return false;
+                }
+            });
+            return false;
+        });
+    });
+
+    function LoadPart_DialogLocationViewAdd() {
+        var loadingpart = LoadDivLoading();
+        $("#modal").html(loadingpart);
+        $.ajax({
+            url: '@Url.Content("~/")' + 'LocationViews/addpv',
+            //page=" + $("#DynConfigCurrentPage").html,
+            type: "GET",
+        })
+        .done(function (partialViewResult) {
+            $("#modal").html(partialViewResult);
+        });
+    }
+</script>

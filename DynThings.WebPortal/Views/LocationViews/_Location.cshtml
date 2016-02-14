@@ -52,7 +52,7 @@
         $("#SelectedEndPointID").val(Guid);
         $("#divMonitorEndPointMain").html(loadingpart);
         $.ajax({
-            url: '@Url.Content("~/")' + 'Monitor/GetPVMonitorEndPointMain?guid=' + Guid,
+            url: '@Url.Content("~/")' + 'locationviews/GetPVLocationViewEndPointMain?guid=' + Guid,
             type: "GET",
         })
         .done(function (partialViewResult) {
@@ -65,7 +65,7 @@
         $("#SelectedEndPointID").val(Guid);
         $("#divMonitorEndPointHistory").html(loadingpart);
         $.ajax({
-            url: '@Url.Content("~/")' + 'Monitor/GetPVMonitorEndPointHistory?guid=' + Guid,
+            url: '@Url.Content("~/")' + 'locationviews/GetPVLocationViewEndPointHistory?guid=' + Guid,
             type: "GET",
         })
         .done(function (partialViewResult) {

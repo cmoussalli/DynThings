@@ -10,6 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using DynThings.Data.Models;
+using PagedList;
 
 namespace DynThings.Data.Repositories
 {
@@ -17,15 +18,14 @@ namespace DynThings.Data.Repositories
     {
         private DynThingsEntities db = new DynThingsEntities();
 
-        #region Get List
-        /// <summary>
-        /// Get All Location Views
-        /// </summary>
-        /// <returns>List of LocationViews</returns>
-        public List<LocationView> GetList()
+        #region Get PagedList
+        public IPagedList GetPagedList(string search, int pageNumber, int recordsPerPage)
         {
-            List<LocationView> locViews = db.LocationViews.ToList();
-            return locViews;
+            IPagedList views = db.LocationViews.Where(
+                l => search == null || l.Title.Contains(search))
+                              .OrderBy(l => l.Title).ToList()
+              .ToPagedList(pageNumber, recordsPerPage);
+            return views;
         }
         #endregion
 
@@ -37,16 +37,7 @@ namespace DynThings.Data.Repositories
         /// <returns>LocationView object</returns>
         public LocationView Find(long ID)
         {
-            LocationView locView = new LocationView();
-            List<LocationView> locViews = db.LocationViews.Where(v => v.ID == ID).ToList();
-            if (locViews.Count == 1)
-            {
-                locView = locViews[0];
-            }
-            else
-            {
-                throw new Exception("Not Found");
-            }
+            LocationView locView = db.LocationViews.Find(ID);
             return locView;
         }
         #endregion

@@ -197,7 +197,6 @@
     <Compile Include="Controllers\LocationViewsController.cs" />
     <Compile Include="Controllers\LocationViewTypesController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
-    <Compile Include="Controllers\MonitorController.cs" />
     <Compile Include="Controllers\UsersManagementController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -467,11 +466,6 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
-    <Content Include="Views\LocationViews\Create.cshtml" />
-    <Content Include="Views\LocationViews\Delete.cshtml" />
-    <Content Include="Views\LocationViews\Details.cshtml" />
-    <Content Include="Views\LocationViews\Edit.cshtml" />
-    <Content Include="Views\LocationViews\Index.cshtml" />
     <Content Include="Views\LocationViewTypes\Create.cshtml" />
     <Content Include="Views\LocationViewTypes\Delete.cshtml" />
     <Content Include="Views\LocationViewTypes\Details.cshtml" />
@@ -485,14 +479,14 @@
     <Content Include="Views\Endpoints\Delete.cshtml" />
     <Content Include="Views\Endpoints\Details.cshtml" />
     <Content Include="Views\Endpoints\Index.cshtml" />
-    <Content Include="Views\Monitor\Edit.cshtml" />
-    <Content Include="Views\Monitor\MonitorView.cshtml" />
-    <Content Include="Views\Monitor\_MonitorViewMap.cshtml" />
-    <Content Include="Views\Monitor\_MonitorLocation.cshtml" />
+    <Content Include="Views\LocationViews\Edit.cshtml" />
+    <Content Include="Views\LocationViews\MonitorView.cshtml" />
+    <Content Include="Views\LocationViews\_LocationViewMap.cshtml" />
+    <Content Include="Views\LocationViews\_Location.cshtml" />
     <Content Include="Views\Shared\_PVLoading.cshtml" />
-    <Content Include="Views\Monitor\_MonitorEndPointActions.cshtml" />
+    <Content Include="Views\LocationViews\_EndPointActions.cshtml" />
     <Content Include="Views\UsersManagement\Index.cshtml" />
-    <Content Include="Views\Monitor\MonitorViewsList.cshtml" />
+    <Content Include="Views\LocationViews\Index.cshtml" />
     <Content Include="Views\Endpoints\_List.cshtml" />
     <Content Include="Views\Endpoints\_Edit.cshtml" />
     <Content Include="Views\Endpoints\_Details_Main.cshtml" />
@@ -502,9 +496,8 @@
     <Content Include="Views\Alerts\Edit.cshtml" />
     <Content Include="Views\Alerts\Index.cshtml" />
     <Content Include="Views\Alerts\_List.cshtml" />
-    <Content Include="Views\Monitor\_MonitorEndPointMain.cshtml" />
-    <Content Include="Views\Monitor\_MonitorEndPointHistory.cshtml" />
-    <Content Include="Views\LocationViews\_MonitorViewMap.cshtml" />
+    <Content Include="Views\LocationViews\_EndPointMain.cshtml" />
+    <Content Include="Views\LocationViews\_EndPointHistory.cshtml" />
     <Content Include="Views\Devices\Create.cshtml" />
     <Content Include="Views\Devices\Delete.cshtml" />
     <Content Include="Views\Devices\Details.cshtml" />
@@ -513,6 +506,8 @@
     <Content Include="Views\Devices\_List.cshtml" />
     <Content Include="Views\Shared\_Modal.cshtml" />
     <Content Include="Views\Endpoints\_Add.cshtml" />
+    <Content Include="Views\LocationViews\_ListCards.cshtml" />
+    <Content Include="Views\LocationViews\_ListGrid.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

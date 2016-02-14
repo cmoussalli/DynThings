@@ -13,145 +13,84 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
-//using DynThings.WebPortal.Models;
 using DynThings.Data.Models;
 using DynThings.Data.Repositories;
+using PagedList;
 
 namespace DynThings.WebPortal.Controllers
 {
     public class LocationViewsController : Controller
     {
-        private DynThingsEntities db = new DynThingsEntities();
+        #region ActionResult: Views
 
-        // GET: LocationViews
+        #region Get LocationViews List
+        [HttpGet]
         public ActionResult Index()
         {
-            var locationViews = db.LocationViews.Include(l => l.LocationViewType);
-            return View(locationViews.ToList());
-        }
-
-        // GET: LocationViews/Details/5
-        public ActionResult Details(long? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            LocationView locationView = db.LocationViews.Find(id);
-            if (locationView == null)
-            {
-                return HttpNotFound();
-            }
-            return View(locationView);
-        }
-
-        // GET: LocationViews/Create
-        public ActionResult Create()
-        {
-            ViewBag.LocationViewTypeID = new SelectList(db.LocationViewTypes, "ID", "Title");
+            IPagedList views = UnitOfWork.repoLocationViews.GetPagedList("",1,5);
             return View();
         }
+        #endregion
 
-        // POST: LocationViews/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,Title,IsActive,OwnerID,LocationViewTypeID")] LocationView locationView)
+        #region Find
+        public ActionResult Monitor(long id)
         {
-            if (ModelState.IsValid)
-            {
-                db.LocationViews.Add(locationView);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
+            LocationView locationView = UnitOfWork.repoLocationViews.Find(id);
+            return View("MonitorView", locationView);
+        }
+        #endregion
+        #endregion
 
-            ViewBag.LocationViewTypeID = new SelectList(db.LocationViewTypes, "ID", "Title", locationView.LocationViewTypeID);
-            return View(locationView);
+        #region Get Partial Views
+
+        #region ListPV
+        [HttpGet]
+        public PartialViewResult ListCardsPV(string searchfor = null, int page = 1, int recordsperpage = 2)
+        {
+            IPagedList views = UnitOfWork.repoLocationViews.GetPagedList(searchfor, page, recordsperpage);
+            return PartialView("_ListCards", views);
         }
 
-        // GET: LocationViews/Edit/5
-        public ActionResult Edit(long? id)
+        [HttpGet]
+        public PartialViewResult ListGridPV(string searchfor = null, int page = 1, int recordsperpage = 2)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            LocationView locationView = db.LocationViews.Find(id);
-            if (locationView == null)
-            {
-                return HttpNotFound();
-            }
-            ViewBag.LocationViewTypeID = new SelectList(db.LocationViewTypes, "ID", "Title", locationView.LocationViewTypeID);
-            return View(locationView);
+            IPagedList views = UnitOfWork.repoLocationViews.GetPagedList(searchfor, page, recordsperpage);
+            return PartialView("_ListGrid", views);
         }
+        #endregion
 
-        // POST: LocationViews/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,Title,IsActive,OwnerID,LocationViewTypeID")] LocationView locationView)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Entry(locationView).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            ViewBag.LocationViewTypeID = new SelectList(db.LocationViewTypes, "ID", "Title", locationView.LocationViewTypeID);
-            return View(locationView);
-        }
 
-        // GET: LocationViews/Delete/5
-        public ActionResult Delete(long? id)
+        [HttpGet]
+        public PartialViewResult GetPVLocationViewMap(int id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            LocationView locationView = db.LocationViews.Find(id);
-            if (locationView == null)
-            {
-                return HttpNotFound();
-            }
-            return View(locationView);
-        }
-
-        // POST: LocationViews/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(long id)
-        {
-            LocationView locationView = db.LocationViews.Find(id);
-            db.LocationViews.Remove(locationView);
-            db.SaveChanges();
-            return RedirectToAction("Index");
-        }
-
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
+            LocationView locationView = UnitOfWork.repoLocationViews.Find(id);
+            return PartialView("_LocationViewMap", locationView);
         }
 
 
+        [HttpGet]
+        public PartialViewResult GetPVLocationViewLocation(int id)
+        {
+            Location location = UnitOfWork.repoLocations.Find(id);
+            return PartialView("_Location", location);
+        }
 
 
+        [HttpGet]
+        public PartialViewResult GetPVLocationViewEndPointMain(Guid guid)
+        {
+            Endpoint endPoint = UnitOfWork.repoEndpoints.Find(guid);
+            return PartialView("_EndPointMain", endPoint);
+        }
 
+        [HttpGet]
+        public PartialViewResult GetPVLocationViewEndPointHistory(Guid guid)
+        {
+            IPagedList IOs = UnitOfWork.repoEndpointIOs.GetPagedList(guid, 1, 5);
+            return PartialView("_EndPointHistory", IOs);
+        }
 
-
-        //public PartialViewResult GetPVMonitorMap(int id)
-        //{
-        //    LocationView locView = LocationViews.Find(id);
-
-        //    return PartialView("_MonitorViewMap", locView);
-        //}
-
-
+        #endregion
 
 
 

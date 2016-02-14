@@ -37,7 +37,7 @@ namespace DynThings.WebPortal.Controllers
 
         #region PartialViewResult: Partial Views
 
-        #region Get Details
+        #region DetailsPV
         public PartialViewResult DetailsPV(long id)
         {
             Endpoint endpoint = UnitOfWork.repoEndpoints.Find(id);
@@ -46,7 +46,7 @@ namespace DynThings.WebPortal.Controllers
 
         #endregion
 
-        #region Get PagedList
+        #region ListPV
         [HttpGet]
         public PartialViewResult ListPV(string searchfor = null, int page = 1, int recordsperpage = 2)
         {

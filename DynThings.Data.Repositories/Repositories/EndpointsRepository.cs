@@ -14,14 +14,14 @@ using PagedList;
 
 namespace DynThings.Data.Repositories
 {
-   public class EndpointsRepository
+    public class EndpointsRepository
     {
         private DynThingsEntities db = new DynThingsEntities();
 
         #region Get PagedList
-        public IPagedList GetPagedList (string search,int pageNumber,int recordsPerPage)
+        public IPagedList GetPagedList(string search, int pageNumber, int recordsPerPage)
         {
-            PagedList.IPagedList ends = db.Endpoints
+            IPagedList ends = db.Endpoints
               .Where(e => search == null || e.Title.Contains(search))
               .OrderBy(e => e.Title).ToList()
               .ToPagedList(pageNumber, recordsPerPage);
@@ -73,11 +73,11 @@ namespace DynThings.Data.Repositories
         #endregion
 
         #region Add
-        public UnitOfWork.RepositoryMethodResultType Add(string title, long typeID,long deviceID)
+        public UnitOfWork.RepositoryMethodResultType Add(string title, long typeID, long deviceID)
         {
             UnitOfWork.RepositoryMethodResultType result = UnitOfWork.RepositoryMethodResultType.Failed;
             Endpoint end = new Endpoint();
-           
+
             end.GUID = Guid.NewGuid();
             end.KeyPass = Guid.NewGuid();
             end.PinCode = "0000";
@@ -87,7 +87,7 @@ namespace DynThings.Data.Repositories
             db.Endpoints.Add(end);
             db.SaveChanges();
             result = UnitOfWork.RepositoryMethodResultType.Ok;
-          
+
             return result;
         }
 
