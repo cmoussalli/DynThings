@@ -122,6 +122,7 @@
     <Compile Include="ModelsExtensions\EndPoint.cs" />
     <Compile Include="ModelsExtensions\Location.cs" />
     <Compile Include="ModelsExtensions\LocationView.cs" />
+    <Compile Include="ModelsExtensions\LocationViewTypes.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
