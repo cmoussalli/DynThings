@@ -201,6 +201,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\Configs.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
@@ -498,16 +499,17 @@
     <Content Include="Views\Alerts\_List.cshtml" />
     <Content Include="Views\LocationViews\_EndPointMain.cshtml" />
     <Content Include="Views\LocationViews\_EndPointHistory.cshtml" />
-    <Content Include="Views\Devices\Create.cshtml" />
-    <Content Include="Views\Devices\Delete.cshtml" />
     <Content Include="Views\Devices\Details.cshtml" />
-    <Content Include="Views\Devices\Edit.cshtml" />
     <Content Include="Views\Devices\Index.cshtml" />
     <Content Include="Views\Devices\_List.cshtml" />
     <Content Include="Views\Shared\_Modal.cshtml" />
     <Content Include="Views\Endpoints\_Add.cshtml" />
     <Content Include="Views\LocationViews\_ListCards.cshtml" />
     <Content Include="Views\LocationViews\_ListGrid.cshtml" />
+    <Content Include="Views\LocationViews\_Add.cshtml" />
+    <Content Include="Views\Devices\_Add.cshtml" />
+    <Content Include="Views\Devices\_Edit.cshtml" />
+    <Content Include="Views\LocationViews\_EditTitle.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -520,6 +522,10 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\DynThings.Data.Configurations\DynThings.Data.Configurations.csproj">
+      <Project>{ca4e274c-2541-4221-819e-441e7c20feee}</Project>
+      <Name>DynThings.Data.Configurations</Name>
+    </ProjectReference>
     <ProjectReference Include="..\DynThings.Data.Models\DynThings.Data.Models.csproj">
       <Project>{946862be-8456-4882-9a11-09ed0afd407b}</Project>
       <Name>DynThings.Data.Models</Name>

@@ -22,6 +22,12 @@ namespace DynThings.Data.Configurations
         private static DynThingsEntities db = new DynThingsEntities();
         #endregion
 
+        public static void Refresh()
+        {
+            db = new DynThingsEntities();
+
+        }
+
         public static float DBVersion { get
             {
                 return float.Parse( db.DynSettings.First().DBVersion);
@@ -99,7 +105,7 @@ namespace DynThings.Data.Configurations
             db.SaveChanges();
         }
 
-
+        
     }
 
 

@@ -11,6 +11,7 @@ using System.Text;
 using System.Threading.Tasks;
 using DynThings.Data.Models;
 using PagedList;
+using DynThings.Data.Configurations;
 
 namespace DynThings.Data.Repositories
 {
@@ -21,7 +22,8 @@ namespace DynThings.Data.Repositories
         #region Get PagedList
         public IPagedList GetPagedList(string search, int pageNumber, int recordsPerPage)
         {
-            IPagedList views = db.LocationViews.Where(
+            IPagedList views = db.LocationViews
+                .Where(
                 l => search == null || l.Title.Contains(search))
                               .OrderBy(l => l.Title).ToList()
               .ToPagedList(pageNumber, recordsPerPage);
@@ -69,7 +71,7 @@ namespace DynThings.Data.Repositories
         #endregion
 
         #region Edit : Title
-        public UnitOfWork.RepositoryMethodResultType Edit(long locationViewID ,string title, string ownerID)
+        public UnitOfWork.RepositoryMethodResultType Edit(long locationViewID ,string title, string userID)
         {
             UnitOfWork.RepositoryMethodResultType result = UnitOfWork.RepositoryMethodResultType.Failed;
             LocationView loc = db.LocationViews.Find(locationViewID);
@@ -113,7 +115,7 @@ namespace DynThings.Data.Repositories
         /// <param name="locationViewID">The selected LocationView ID.</param>
         /// <param name="isActive">Activation, True or False.</param>
         /// <returns>Result : Ok or Failed.</returns>
-        public UnitOfWork.RepositoryMethodResultType IsActive(long locationViewID, bool isActive)
+        public UnitOfWork.RepositoryMethodResultType IsActive(long locationViewID, bool isActive,string userID)
         {
             UnitOfWork.RepositoryMethodResultType result = UnitOfWork.RepositoryMethodResultType.Failed;
             LocationView loc = db.LocationViews.Find(locationViewID);
