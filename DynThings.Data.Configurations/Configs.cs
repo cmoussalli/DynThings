@@ -30,78 +30,92 @@ namespace DynThings.Data.Configurations
 
         public static float DBVersion { get
             {
-                return float.Parse( db.DynSettings.First().DBVersion);
+                return  db.DynSettings.First().DBVersion;
             }
         }
         public static bool DevelopmentMode { get
             {
-                return bool.Parse(db.DynSettings.First().DevelopmentMode);
+                return db.DynSettings.First().DevelopmentMode;
             }
         }
-        public static int DefaultRecordsPerPage { get
+        public static int DefaultRecordsPerMaster { get
             {
-                return int.Parse(db.DynSettings.First().DefaultRecordsPerPage);
+                return db.DynSettings.First().DefaultRecordsPerMaster;
+            }
+        }
+
+        public static int DefaultRecordsPerChild
+        {
+            get
+            {
+                return db.DynSettings.First().DefaultRecordsPerChild;
             }
         }
         public static bool PublicAccess { get
             {
-                return bool.Parse(db.DynSettings.First().PublicAccess);
+                return db.DynSettings.First().PublicAccess;
             }
         }
         public static bool PublicSignUP { get
             {
-                return bool.Parse(db.DynSettings.First().PublicSignUP);
+                return db.DynSettings.First().PublicSignUP;
             }
         }
         public static bool SystemLogger { get
             {
-                return bool.Parse(db.DynSettings.First().EnableSystemLogger);
+                return db.DynSettings.First().EnableSystemLogger;
             }
         }
         public static Guid PlatformKey { get
             {
-                return Guid.Parse(db.DynSettings.First().PlatformKey);
+                return db.DynSettings.First().PlatformKey;
             }
         }
 
         public static void SetDevelopmentMode(bool activation)
         {
             DynSetting dset = db.DynSettings.First();
-            dset.DevelopmentMode = activation.ToString();
+            dset.DevelopmentMode = activation;
             db.SaveChanges();
         }
 
         public static void SetDefaultRecordsPerPage(int recordsCount)
         {
             DynSetting dset = db.DynSettings.First();
-            dset.DefaultRecordsPerPage = recordsCount.ToString();
+            dset.DefaultRecordsPerMaster = recordsCount;
+            db.SaveChanges();
+        }
+        public static void SetDefaultRecordsPerChild(int recordsCount)
+        {
+            DynSetting dset = db.DynSettings.First();
+            dset.DefaultRecordsPerChild = recordsCount;
             db.SaveChanges();
         }
 
         public static void SetPublicAccess(bool activation)
         {
             DynSetting dset = db.DynSettings.First();
-            dset.PublicAccess = activation.ToString();
+            dset.PublicAccess = activation;
             db.SaveChanges();
         }
 
         public static void SetPublicSignUP(bool activation)
         {
             DynSetting dset = db.DynSettings.First();
-            dset.PublicSignUP = activation.ToString();
+            dset.PublicSignUP = activation;
             db.SaveChanges();
         }
 
         public static void SetSystemLogger(bool activation)
         {
             DynSetting dset = db.DynSettings.First();
-            dset.EnableSystemLogger = activation.ToString();
+            dset.EnableSystemLogger = activation;
             db.SaveChanges();
         }
         public static void SetPlatformKey(Guid newKey)
         {
             DynSetting dset = db.DynSettings.First();
-            dset.PlatformKey = newKey.ToString();
+            dset.PlatformKey = newKey;
             db.SaveChanges();
         }
 

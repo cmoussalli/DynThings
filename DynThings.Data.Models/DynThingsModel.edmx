@@ -57,13 +57,14 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="DBVersion" Type="nvarchar" MaxLength="50" />
-          <Property Name="DevelopmentMode" Type="nvarchar" MaxLength="50" />
-          <Property Name="DefaultRecordsPerPage" Type="nvarchar" MaxLength="50" />
-          <Property Name="PlatformKey" Type="nvarchar" MaxLength="50" />
-          <Property Name="PublicAccess" Type="nvarchar" MaxLength="50" />
-          <Property Name="PublicSignUP" Type="nvarchar" MaxLength="50" />
-          <Property Name="EnableSystemLogger" Type="nvarchar" MaxLength="50" />
+          <Property Name="DBVersion" Type="real" Nullable="false" />
+          <Property Name="DevelopmentMode" Type="bit" Nullable="false" />
+          <Property Name="DefaultRecordsPerMaster" Type="int" Nullable="false" />
+          <Property Name="DefaultRecordsPerChild" Type="int" Nullable="false" />
+          <Property Name="PlatformKey" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="PublicAccess" Type="bit" Nullable="false" />
+          <Property Name="PublicSignUP" Type="bit" Nullable="false" />
+          <Property Name="EnableSystemLogger" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="EndPointCommands">
           <Key>
@@ -917,13 +918,14 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="DBVersion" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="DevelopmentMode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="DefaultRecordsPerPage" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="PlatformKey" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="PublicAccess" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="PublicSignUP" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="EnableSystemLogger" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DBVersion" Type="Single" Nullable="false" />
+          <Property Name="DevelopmentMode" Type="Boolean" Nullable="false" />
+          <Property Name="DefaultRecordsPerMaster" Type="Int32" Nullable="false" />
+          <Property Name="DefaultRecordsPerChild" Type="Int32" Nullable="false" />
+          <Property Name="PlatformKey" Type="Guid" Nullable="false" />
+          <Property Name="PublicAccess" Type="Boolean" Nullable="false" />
+          <Property Name="PublicSignUP" Type="Boolean" Nullable="false" />
+          <Property Name="EnableSystemLogger" Type="Boolean" Nullable="false" />
         </EntityType>
         </Schema>
     </edmx:ConceptualModels>
@@ -1108,7 +1110,8 @@
                 <ScalarProperty Name="PublicSignUP" ColumnName="PublicSignUP" />
                 <ScalarProperty Name="PublicAccess" ColumnName="PublicAccess" />
                 <ScalarProperty Name="PlatformKey" ColumnName="PlatformKey" />
-                <ScalarProperty Name="DefaultRecordsPerPage" ColumnName="DefaultRecordsPerPage" />
+                <ScalarProperty Name="DefaultRecordsPerChild" ColumnName="DefaultRecordsPerChild" />
+                <ScalarProperty Name="DefaultRecordsPerMaster" ColumnName="DefaultRecordsPerMaster" />
                 <ScalarProperty Name="DevelopmentMode" ColumnName="DevelopmentMode" />
                 <ScalarProperty Name="DBVersion" ColumnName="DBVersion" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
