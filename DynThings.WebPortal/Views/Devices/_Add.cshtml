@@ -1,28 +1,18 @@
-﻿@model DynThings.Data.Models.Endpoint
+﻿@model DynThings.Data.Models.Device
 
 <div class="modal-header">
     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-    <h4 class="modal-title" id="myModalLabel">EndPoint Editor</h4>
+    <h4 class="modal-title" id="myModalLabel">Device Editor</h4>
     <div class="modal-body">
-        @using (Html.BeginForm("AddPV", "EndPoints", FormMethod.Post, new { id = "EndPointAddForm" }))
+        @using (Html.BeginForm("AddPV", "Devices", FormMethod.Post, new { id = "DeviceAddForm" }))
         {
             @Html.AntiForgeryToken()
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
             @Html.HiddenFor(model => model.ID)
 
-
             @Html.LabelFor(model => model.Title, htmlAttributes: new { @class = "" })
             @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control" } })
             @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
-
-
-            @Html.LabelFor(model => model.TypeID, "TypeID", htmlAttributes: new { @class = "" })
-            @Html.DropDownList("TypeID", null, htmlAttributes: new { @class = "form-control" })
-            @Html.ValidationMessageFor(model => model.TypeID, "", new { @class = "text-danger" })
-
-            @Html.LabelFor(model => model.TypeID, "DeviceID", htmlAttributes: new { @class = "" })
-            @Html.DropDownList("DeviceID", null, htmlAttributes: new { @class = "form-control" })
-            @Html.ValidationMessageFor(model => model.Device, "", new { @class = "text-danger" })
 
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -33,7 +23,7 @@
 </div>
 <script>
     $(document).ready(function () {
-        $("#EndPointAddForm").on("submit", function (event) {
+        $("#DeviceAddForm").on("submit", function (event) {
             event.preventDefault();
             var url = $(this).attr("action");
             var formData = $(this).serialize();
@@ -46,7 +36,7 @@
                 }
             })
 
-            LoadPart_EndPointListDiv();
+            LoadPart_DeviceListDiv();
             $('#mdl').modal('hide');
         });
 

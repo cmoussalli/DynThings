@@ -9,12 +9,22 @@ namespace DynThings.WebPortal.Helpers
 {
     public static class Configs
     {
-        public static int validateRecordsPerPage(int pageInput)
+        public static int validateRecordsPerMaster(int pageInput)
         {
             int result = pageInput;
-            if (pageInput == 0)
+            if (result < 1)
             {
-                result = Config.DefaultRecordsPerPage;
+                result = Config.DefaultRecordsPerMaster;
+            }
+            return result;
+        }
+
+        public static int validateRecordsPerChild(int pageInput)
+        {
+            int result = pageInput;
+            if (result < 1)
+            {
+                result = Config.DefaultRecordsPerChild;
             }
             return result;
         }

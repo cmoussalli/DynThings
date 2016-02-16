@@ -48,14 +48,14 @@ namespace DynThings.WebPortal.Controllers
         [HttpGet]
         public PartialViewResult ListCardsPV(string searchfor = null, int page = 1, int recordsperpage = 0)
         {
-            IPagedList views = UnitOfWork.repoLocationViews.GetPagedList(searchfor, page, Helpers.Configs.validateRecordsPerPage(recordsperpage));
+            IPagedList views = UnitOfWork.repoLocationViews.GetPagedList(searchfor, page, Helpers.Configs.validateRecordsPerMaster(recordsperpage));
             return PartialView("_ListCards", views);
         }
 
         [HttpGet]
         public PartialViewResult ListGridPV(string searchfor = null, int page = 1, int recordsperpage = 0)
         {
-            IPagedList views = UnitOfWork.repoLocationViews.GetPagedList(searchfor, page, Helpers.Configs.validateRecordsPerPage(recordsperpage));
+            IPagedList views = UnitOfWork.repoLocationViews.GetPagedList(searchfor, page, Helpers.Configs.validateRecordsPerMaster(recordsperpage));
             return PartialView("_ListGrid", views);
         }
         #endregion
@@ -125,7 +125,7 @@ namespace DynThings.WebPortal.Controllers
         [HttpGet]
         public PartialViewResult GetPVLocationViewEndPointHistory(Guid guid)
         {
-            IPagedList IOs = UnitOfWork.repoEndpointIOs.GetPagedList(guid, 1, 5);
+            IPagedList IOs = UnitOfWork.repoEndpointIOs.GetPagedList(guid, 1, 3);
             return PartialView("_EndPointHistory", IOs);
         }
         #endregion

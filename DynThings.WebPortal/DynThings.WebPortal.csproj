@@ -510,6 +510,8 @@
     <Content Include="Views\Devices\_Add.cshtml" />
     <Content Include="Views\Devices\_Edit.cshtml" />
     <Content Include="Views\LocationViews\_EditTitle.cshtml" />
+    <Content Include="Views\Endpoints\_Details_History.cshtml" />
+    <Content Include="Views\Endpoints\_EndPointHistory.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

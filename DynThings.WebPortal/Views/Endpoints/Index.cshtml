@@ -40,7 +40,7 @@
         var loadingpart = LoadDivLoading();
         $("#divEndPointsList").html(loadingpart);
         $.ajax({
-            url: '@Url.Content("~/")' + 'EndPoints/ListPV?searchfor=' + $(txtEndPointSearch).val() + '&recordsperpage=2',
+            url: '@Url.Content("~/")' + 'EndPoints/ListPV?searchfor=' + $(txtEndPointSearch).val() + '&recordsperpage=0',
             //page=" + $("#DynConfigCurrentPage").html,
             type: "GET",
         })
@@ -55,7 +55,7 @@
             var loadingpart = LoadDivLoading();
             $("#divEndPointsList").html(loadingpart);
             $.ajax({
-                url: $(this).attr("href") + "&searchfor=" + $(txtEndPointSearch).val() + '&recordsperpage=2',
+                url: $(this).attr("href") + "&searchfor=" + $(txtEndPointSearch).val() + '&recordsperpage=0',
                 type: 'GET',
                 cache: false,
                 success: function (result) {

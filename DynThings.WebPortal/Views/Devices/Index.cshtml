@@ -1,22 +1,34 @@
-﻿@model IEnumerable<DynThings.Data.Models.Device>
-
+﻿
 @{
     ViewBag.Title = "Index";
 }
 
-<h2>Devices</h2>
+<div class="container">
+    <div class="page-header">
+        <h1>Devices</h1>
+    </div>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
+    <div class="row">
+        <div class="col-md-6">
+            <button type="button" class="btn btn-info" onclick="LoadPart_DialogDeviceAdd()" data-toggle="modal" data-target="#mdl">Add</button>
+        </div>
+        <div class="col-md-6">
+            <div class="input-group">
+                <input type="search" id="txtDeviceSearch" class="form-control" onkeydown="if (event.keyCode == 13) { LoadPart_DeviceListDiv(); return false; }" />
+                <div class="input-group-btn">
+                    <button type="button" class="btn btn-primary" onclick="LoadPart_DeviceListDiv()">Search</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
-<input type="search" id="txtDeviceSearch" onkeydown="if (event.keyCode == 13) { LoadPart_DeviceListDiv(); return false; }" />
-<button type="button" class="button" onclick="LoadPart_DeviceListDiv()">Search</button>
+    <br />
 
-<div id="divDevicesList">
-
+    <div class="well well-lg">
+        <div id="divDevicesList">
+        </div>
+    </div>
 </div>
-
 
 <script>
     $(document).ready(function () {
@@ -55,4 +67,17 @@
             return false;
         });
     });
+
+    function LoadPart_DialogDeviceAdd() {
+        var loadingpart = LoadDivLoading();
+        $("#modal").html(loadingpart);
+        $.ajax({
+            url: '@Url.Content("~/")' + 'Devices/addpv',
+            //page=" + $("#DynConfigCurrentPage").html,
+            type: "GET",
+        })
+        .done(function (partialViewResult) {
+            $("#modal").html(partialViewResult);
+        });
+    }
 </script>

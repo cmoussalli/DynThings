@@ -15,6 +15,7 @@ using System.Web;
 using System.Web.Mvc;
 using DynThings.Data.Models;
 using PagedList;
+using DynThings.Data.Repositories;
 
 namespace DynThings.WebPortal.Controllers
 {
@@ -22,126 +23,31 @@ namespace DynThings.WebPortal.Controllers
     {
         private DynThingsEntities db = new DynThingsEntities();
 
-        // GET: Devices
+        #region ActionResult: Views
         public ActionResult Index()
         {
-            var devices = db.Devices.Include(d => d.DeviceStatu);
-            return View(devices.ToList());
-        }
-
-        // GET: Devices/Details/5
-        public ActionResult Details(long? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Device device = db.Devices.Find(id);
-            if (device == null)
-            {
-                return HttpNotFound();
-            }
-            return View(device);
-        }
-
-        // GET: Devices/Create
-        public ActionResult Create()
-        {
-            ViewBag.StatusID = new SelectList(db.DeviceStatus, "ID", "Title");
             return View();
         }
 
-        // POST: Devices/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,Title,StatusID,GUID,KeyPass,PinCode")] Device device)
+        public ActionResult Details(int id)
         {
-            if (ModelState.IsValid)
-            {
-                db.Devices.Add(device);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-
-            ViewBag.StatusID = new SelectList(db.DeviceStatus, "ID", "Title", device.StatusID);
+            Device device = UnitOfWork.repoDevices.Find(id);
             return View(device);
         }
 
-        // GET: Devices/Edit/5
-        public ActionResult Edit(long? id)
+        #endregion
+
+        #region PartialViewResult: Partial Views
+
+        #region DetailsPV
+        public PartialViewResult DetailsPV(Guid guid)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Device device = db.Devices.Find(id);
-            if (device == null)
-            {
-                return HttpNotFound();
-            }
-            ViewBag.StatusID = new SelectList(db.DeviceStatus, "ID", "Title", device.StatusID);
-            return View(device);
+            Device device = UnitOfWork.repoDevices.Find(guid);
+            return PartialView("_Details_Main", device);
         }
+        #endregion
 
-        // POST: Devices/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,Title,StatusID,GUID,KeyPass,PinCode")] Device device)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Entry(device).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            ViewBag.StatusID = new SelectList(db.DeviceStatus, "ID", "Title", device.StatusID);
-            return View(device);
-        }
-
-        // GET: Devices/Delete/5
-        public ActionResult Delete(long? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Device device = db.Devices.Find(id);
-            if (device == null)
-            {
-                return HttpNotFound();
-            }
-            return View(device);
-        }
-
-        // POST: Devices/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(long id)
-        {
-            Device device = db.Devices.Find(id);
-            db.Devices.Remove(device);
-            db.SaveChanges();
-            return RedirectToAction("Index");
-        }
-
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
-        }
-
-
-
-
-
-
+        #region ListPV
         [HttpGet]
         public PartialViewResult GetListPV(string searchfor = null, int page = 1, int recordsperpage = 2)
         {
@@ -153,5 +59,47 @@ namespace DynThings.WebPortal.Controllers
 
             return PartialView("_List", devs);
         }
+        #endregion
+
+        #region AddPV
+        [HttpGet]
+        public PartialViewResult AddPV()
+        {
+            return PartialView("_Add");
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult AddPV([Bind(Include = "Title")] Device device)
+        {
+            UnitOfWork.repoDevices.Add(device.Title);
+            return Content("Ok");
+        }
+        #endregion
+
+        #region EditPV : Title
+        [HttpGet]
+        public PartialViewResult EditPV(Guid guid)
+        {
+            Device device = UnitOfWork.repoDevices.Find(guid);
+            return PartialView("_Edit", device);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult EditPV([Bind(Include = "ID,Title")] Device device)
+        {
+            if (ModelState.IsValid)
+            {
+                UnitOfWork.repoDevices.Edit(device.ID, device.Title);
+                return RedirectToAction("Ok");
+            }
+            return View(device);
+        }
+        #endregion
+
+
+
+        #endregion
     }
 }

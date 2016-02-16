@@ -4,55 +4,58 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
-
-<div>
-    <h4>Device</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Title)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Title)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.GUID)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.GUID)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.KeyPass)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.KeyPass)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.PinCode)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.PinCode)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.DeviceStatu.Title)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.DeviceStatu.Title)
-        </dd>
-
-    </dl>
+<div class="container">
+    <div class="page-header">
+        <h1>Device Details</h1>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <select id="drpDeviceHighchartsView" class="form-control">
+                <option value="1">Inputs: Monthly\Year (Average)</option>
+                <option value="2">Inputs: Daily\Month (Average)</option>
+                <option value="3">Inputs: Hourly\Day (Average)</option>
+                <option value="4">Inputs: Minutes\Hour (Average)</option>
+                <option value="5">Network: Connection drops\Months  (Count)</option>
+                <option value="6">Network: Connection drops\Days  (Count)</option>
+            </select>
+            <div id="HCDevice" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <ul class="nav nav-tabs">
+                <li class="active"><a data-toggle="tab" href="#tabDevicemain">Main</a></li>
+                <li><a data-toggle="tab" href="#tabDevicehistory">History</a></li>
+                <li><a data-toggle="tab" href="#tabDevicecommands">Commands</a></li>
+                <li><a data-toggle="tab" href="#tabDeviceEndPoints">EndPoints</a></li>
+                <li><a data-toggle="tab" href="#tabDeviceDevkeys">Dev Keys</a></li>
+            </ul>
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="tab-content">
+                        <div id="tabDevicemain" class="tab-pane fade in active">
+                            <div id="divDeviceMain">
+                            </div>
+                        </div>
+                        <div id="tabDevicehistory" class="tab-pane fade">
+                            <div id="divDeviceHistory">
+                            </div>
+                        </div>
+                        <div id="tabDevicecommands" class="tab-pane fade">
+                            <div id="divDevicecommands">
+                            </div>
+                        </div>
+                        <div id="tabDeviceEndPoints" class="tab-pane fade">
+                            <div id="divDeviceEndPoints">
+                            </div>
+                        </div>
+                        <div id="tabDeviceDevkeys" class="tab-pane fade">
+                            <div id="divDeviceDevkeys">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>

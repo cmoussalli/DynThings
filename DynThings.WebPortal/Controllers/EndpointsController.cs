@@ -16,6 +16,7 @@ using System.Web.Mvc;
 using DynThings.Data.Models;
 using DynThings.Data.Repositories;
 using PagedList;
+using DynThings.Data.Configurations;
 
 namespace DynThings.WebPortal.Controllers
 {
@@ -48,10 +49,29 @@ namespace DynThings.WebPortal.Controllers
 
         #region ListPV
         [HttpGet]
-        public PartialViewResult ListPV(string searchfor = null, int page = 1, int recordsperpage = 2)
+        public PartialViewResult ListPV(string searchfor = null, int page = 1, int recordsperpage = 0)
         {
-            PagedList.IPagedList ends = UnitOfWork.repoEndpoints.GetPagedList(searchfor, page, recordsperpage);
+            PagedList.IPagedList ends = UnitOfWork.repoEndpoints.GetPagedList(searchfor, page, Helpers.Configs.validateRecordsPerMaster(recordsperpage) );
             return PartialView("_List", ends);
+        }
+        #endregion
+
+        #region AddPV
+        [HttpGet]
+        public PartialViewResult AddPV()
+        {
+
+            ViewBag.TypeID = new SelectList(UnitOfWork.repoEndpointTypes.GetList(), "ID", "Title", 1);
+            ViewBag.DeviceID = new SelectList(UnitOfWork.repoDevices.GetList(), "ID", "Title", 1);
+            return PartialView("_Add");
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult AddPV([Bind(Include = "Title,TypeID,DeviceID")] Endpoint endpoint)
+        {
+            UnitOfWork.repoEndpoints.Add(endpoint.Title, endpoint.TypeID, endpoint.DeviceID);
+            return Content("Ok");
         }
         #endregion
 
@@ -80,24 +100,18 @@ namespace DynThings.WebPortal.Controllers
         }
         #endregion
 
-        #region AddPV
+
+        #region EndPoint History
         [HttpGet]
-        public PartialViewResult AddPV()
+        public PartialViewResult GetPVEndPointHistory(Guid guid,int page= 1,int recordsperpage = 0)
         {
-
-            ViewBag.TypeID = new SelectList(UnitOfWork.repoEndpointTypes.GetList(), "ID", "Title", 1);
-            ViewBag.DeviceID = new SelectList(UnitOfWork.repoDevices.GetList(), "ID", "Title", 1);
-            return PartialView("_Add");
-        }
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult AddPV([Bind(Include = "Title,TypeID,DeviceID")] Endpoint endpoint)
-        {
-            UnitOfWork.repoEndpoints.Add(endpoint.Title, endpoint.TypeID, endpoint.DeviceID);
-            return Content("Ok");
+            IPagedList IOs = UnitOfWork.repoEndpointIOs.GetPagedList(guid, page, Helpers.Configs.validateRecordsPerChild(Config.DefaultRecordsPerChild));
+            return PartialView("_EndPointHistory", IOs);
         }
         #endregion
+        
         #endregion
+
+
     }
 }
