@@ -120,6 +120,7 @@
     </Compile>
     <Compile Include="ModelsExtensions\Device.cs" />
     <Compile Include="ModelsExtensions\EndPoint.cs" />
+    <Compile Include="ModelsExtensions\EndPointCommand.cs" />
     <Compile Include="ModelsExtensions\Location.cs" />
     <Compile Include="ModelsExtensions\LocationView.cs" />
     <Compile Include="ModelsExtensions\LocationViewTypes.cs" />
