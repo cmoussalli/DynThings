@@ -40,7 +40,7 @@
         var loadingpart = LoadDivLoading();
         $("#divDevicesList").html(loadingpart);
         $.ajax({
-            url: '@Url.Content("~/")' + 'Devices/GetListPV?searchfor=' + $(txtDeviceSearch).val() + '&recordsperpage=2',
+            url: '@Url.Content("~/")' + 'Devices/GetListPV?searchfor=' + $(txtDeviceSearch).val() + '&recordsperpage=0',
             //page=" + $("#DynConfigCurrentPage").html,
             type: "GET",
         })
@@ -56,7 +56,7 @@
             var loadingpart = LoadDivLoading();
             $("#divDevicesList").html(loadingpart);
             $.ajax({
-                url: $(this).attr("href") + "&searchfor=" + $(txtDeviceSearch).val() + '&recordsperpage=2',
+                url: $(this).attr("href") + "&searchfor=" + $(txtDeviceSearch).val() + '&recordsperpage=0',
                 type: 'GET',
                 cache: false,
                 success: function (result) {

@@ -54,9 +54,7 @@ namespace DynThings.WebPortal.Controllers
             PagedList.IPagedList devs = db.Devices
                 .Where(e => searchfor == null || e.Title.Contains(searchfor))
                 .OrderBy(e => e.Title).ToList()
-                .ToPagedList(page, recordsperpage);
-
-
+                .ToPagedList(page, Helpers.Configs.validateRecordsPerMaster(recordsperpage));
             return PartialView("_List", devs);
         }
         #endregion
