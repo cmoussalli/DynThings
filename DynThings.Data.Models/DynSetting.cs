@@ -15,12 +15,13 @@ namespace DynThings.Data.Models
     public partial class DynSetting
     {
         public long ID { get; set; }
-        public string DBVersion { get; set; }
-        public string DevelopmentMode { get; set; }
-        public string DefaultRecordsPerPage { get; set; }
-        public string PlatformKey { get; set; }
-        public string PublicAccess { get; set; }
-        public string PublicSignUP { get; set; }
-        public string EnableSystemLogger { get; set; }
+        public float DBVersion { get; set; }
+        public bool DevelopmentMode { get; set; }
+        public int DefaultRecordsPerMaster { get; set; }
+        public int DefaultRecordsPerChild { get; set; }
+        public System.Guid PlatformKey { get; set; }
+        public bool PublicAccess { get; set; }
+        public bool PublicSignUP { get; set; }
+        public bool EnableSystemLogger { get; set; }
     }
 }
