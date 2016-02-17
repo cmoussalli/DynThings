@@ -5,6 +5,16 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="DynThingsModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Commands">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DeviceID" Type="bigint" />
+          <Property Name="Description" Type="nvarchar" MaxLength="500" />
+          <Property Name="Command" Type="nvarchar" MaxLength="50" />
+          <Property Name="OwnerID" Type="nvarchar" MaxLength="50" />
+        </EntityType>
         <EntityType Name="CssIcons">
           <Key>
             <PropertyRef Name="ID" />
@@ -12,16 +22,6 @@
           <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Title" Type="nvarchar" MaxLength="50" />
           <Property Name="Css" Type="nvarchar" MaxLength="50" />
-        </EntityType>
-        <EntityType Name="DeviceCommands">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Title" Type="nvarchar" MaxLength="50" />
-          <Property Name="Descr" Type="nvarchar" MaxLength="250" />
-          <Property Name="Command" Type="nvarchar" MaxLength="50" />
-          <Property Name="DeviceID" Type="bigint" />
         </EntityType>
         <EntityType Name="DeviceIOs">
           <Key>
@@ -65,16 +65,6 @@
           <Property Name="PublicAccess" Type="bit" Nullable="false" />
           <Property Name="PublicSignUP" Type="bit" Nullable="false" />
           <Property Name="EnableSystemLogger" Type="bit" Nullable="false" />
-        </EntityType>
-        <EntityType Name="EndPointCommands">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Title" Type="nvarchar" MaxLength="50" />
-          <Property Name="Descr" Type="nvarchar" MaxLength="500" />
-          <Property Name="EndPointID" Type="bigint" />
-          <Property Name="Command" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="EndPointIOs">
           <Key>
@@ -173,14 +163,14 @@
           <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Title" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
-        <Association Name="FK__DeviceCom__Devic__05A3D694">
+        <Association Name="FK__Commands__Device__4D94879B">
           <End Role="Devices" Type="Self.Devices" Multiplicity="0..1" />
-          <End Role="DeviceCommands" Type="Self.DeviceCommands" Multiplicity="*" />
+          <End Role="Commands" Type="Self.Commands" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Devices">
               <PropertyRef Name="ID" />
             </Principal>
-            <Dependent Role="DeviceCommands">
+            <Dependent Role="Commands">
               <PropertyRef Name="DeviceID" />
             </Dependent>
           </ReferentialConstraint>
@@ -218,18 +208,6 @@
             </Principal>
             <Dependent Role="Devices">
               <PropertyRef Name="StatusID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__EndPointC__EndPo__5CA1C101">
-          <End Role="Endpoints" Type="Self.Endpoints" Multiplicity="0..1" />
-          <End Role="EndPointCommands" Type="Self.EndPointCommands" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Endpoints">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="EndPointCommands">
-              <PropertyRef Name="EndPointID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -366,13 +344,12 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="DynThingsModelStoreContainer">
+          <EntitySet Name="Commands" EntityType="Self.Commands" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CssIcons" EntityType="Self.CssIcons" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="DeviceCommands" EntityType="Self.DeviceCommands" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DeviceIOs" EntityType="Self.DeviceIOs" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Devices" EntityType="Self.Devices" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DeviceStatus" EntityType="Self.DeviceStatus" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DynSettings" EntityType="Self.DynSettings" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="EndPointCommands" EntityType="Self.EndPointCommands" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="EndPointIOs" EntityType="Self.EndPointIOs" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Endpoints" EntityType="Self.Endpoints" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="EndPointTypeCategorys" EntityType="Self.EndPointTypeCategorys" Schema="dbo" store:Type="Tables" />
@@ -383,9 +360,9 @@
           <EntitySet Name="Locations" EntityType="Self.Locations" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="LocationViews" EntityType="Self.LocationViews" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="LocationViewTypes" EntityType="Self.LocationViewTypes" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK__DeviceCom__Devic__05A3D694" Association="Self.FK__DeviceCom__Devic__05A3D694">
+          <AssociationSet Name="FK__Commands__Device__4D94879B" Association="Self.FK__Commands__Device__4D94879B">
             <End Role="Devices" EntitySet="Devices" />
-            <End Role="DeviceCommands" EntitySet="DeviceCommands" />
+            <End Role="Commands" EntitySet="Commands" />
           </AssociationSet>
           <AssociationSet Name="FK__DeviceIOs__Devic__19AACF41" Association="Self.FK__DeviceIOs__Devic__19AACF41">
             <End Role="Devices" EntitySet="Devices" />
@@ -398,10 +375,6 @@
           <AssociationSet Name="FK__Devices__StatusI__01D345B0" Association="Self.FK__Devices__StatusI__01D345B0">
             <End Role="DeviceStatus" EntitySet="DeviceStatus" />
             <End Role="Devices" EntitySet="Devices" />
-          </AssociationSet>
-          <AssociationSet Name="FK__EndPointC__EndPo__5CA1C101" Association="Self.FK__EndPointC__EndPo__5CA1C101">
-            <End Role="Endpoints" EntitySet="Endpoints" />
-            <End Role="EndPointCommands" EntitySet="EndPointCommands" />
           </AssociationSet>
           <AssociationSet Name="FK__EndPointI__EndPo__29572725" Association="Self.FK__EndPointI__EndPo__29572725">
             <End Role="Endpoints" EntitySet="Endpoints" />
@@ -452,17 +425,6 @@
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="DynThingsModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityType Name="DeviceCommand">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Descr" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
-          <Property Name="Command" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="DeviceID" Type="Int64" />
-          <NavigationProperty Name="Device" Relationship="Self.FK__DeviceCom__Devic__05A3D694" FromRole="DeviceCommands" ToRole="Devices" />
-        </EntityType>
         <EntityType Name="DeviceIO">
           <Key>
             <PropertyRef Name="ID" />
@@ -483,13 +445,13 @@
           <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="StatusID" Type="Int64" />
-          <NavigationProperty Name="DeviceCommands" Relationship="Self.FK__DeviceCom__Devic__05A3D694" FromRole="Devices" ToRole="DeviceCommands" />
           <NavigationProperty Name="DeviceIOs" Relationship="Self.FK__DeviceIOs__Devic__19AACF41" FromRole="Devices" ToRole="DeviceIOs" />
           <NavigationProperty Name="DeviceStatu" Relationship="Self.FK__Devices__StatusI__01D345B0" FromRole="Devices" ToRole="DeviceStatus" />
           <Property Name="GUID" Type="Guid" />
           <Property Name="KeyPass" Type="Guid" />
           <Property Name="PinCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Endpoints" Relationship="DynThingsModel.FK__Endpoints__Devic__00DF2177" FromRole="Device" ToRole="Endpoint" />
+          <NavigationProperty Name="Commands" Relationship="DynThingsModel.FK__Commands__Device__4D94879B" FromRole="Device" ToRole="Command" />
         </EntityType>
         <EntityType Name="DeviceStatu">
           <Key>
@@ -498,17 +460,6 @@
           <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Devices" Relationship="Self.FK__Devices__StatusI__01D345B0" FromRole="DeviceStatus" ToRole="Devices" />
-        </EntityType>
-        <EntityType Name="EndPointCommand">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Descr" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-          <Property Name="EndPointID" Type="Int64" />
-          <Property Name="Command" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Endpoint" Relationship="DynThingsModel.FK__EndPointC__EndPo__5CA1C101" FromRole="EndPointCommand" ToRole="Endpoint" />
         </EntityType>
         <EntityType Name="EndPointIO">
           <Key>
@@ -612,18 +563,6 @@
           <Property Name="Title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="LocationViews" Relationship="Self.FK__LocationV__Locat__286302EC" FromRole="LocationViewTypes" ToRole="LocationViews" />
         </EntityType>
-        <Association Name="FK__DeviceCom__Devic__05A3D694">
-          <End Role="Devices" Type="Self.Device" Multiplicity="0..1" />
-          <End Role="DeviceCommands" Type="Self.DeviceCommand" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Devices">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="DeviceCommands">
-              <PropertyRef Name="DeviceID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK__DeviceIOs__Devic__19AACF41">
           <End Role="Devices" Type="Self.Device" Multiplicity="0..1" />
           <End Role="DeviceIOs" Type="Self.DeviceIO" Multiplicity="*" />
@@ -733,11 +672,9 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="DynThingsEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="DeviceCommands" EntityType="Self.DeviceCommand" />
           <EntitySet Name="DeviceIOs" EntityType="Self.DeviceIO" />
           <EntitySet Name="Devices" EntityType="Self.Device" />
           <EntitySet Name="DeviceStatus" EntityType="Self.DeviceStatu" />
-          <EntitySet Name="EndPointCommands" EntityType="Self.EndPointCommand" />
           <EntitySet Name="EndPointIOs" EntityType="Self.EndPointIO" />
           <EntitySet Name="EndPointTypeCategorys" EntityType="Self.EndPointTypeCategory" />
           <EntitySet Name="EndPointTypes" EntityType="Self.EndPointType" />
@@ -747,10 +684,6 @@
           <EntitySet Name="Locations" EntityType="Self.Location" />
           <EntitySet Name="LocationViews" EntityType="Self.LocationView" />
           <EntitySet Name="LocationViewTypes" EntityType="Self.LocationViewType" />
-          <AssociationSet Name="FK__DeviceCom__Devic__05A3D694" Association="Self.FK__DeviceCom__Devic__05A3D694">
-            <End Role="Devices" EntitySet="Devices" />
-            <End Role="DeviceCommands" EntitySet="DeviceCommands" />
-          </AssociationSet>
           <AssociationSet Name="FK__DeviceIOs__Devic__19AACF41" Association="Self.FK__DeviceIOs__Devic__19AACF41">
             <End Role="Devices" EntitySet="Devices" />
             <End Role="DeviceIOs" EntitySet="DeviceIOs" />
@@ -797,10 +730,6 @@
             <End Role="Device" EntitySet="Devices" />
             <End Role="Endpoint" EntitySet="Endpoints" />
           </AssociationSet>
-          <AssociationSet Name="FK__EndPointC__EndPo__5CA1C101" Association="DynThingsModel.FK__EndPointC__EndPo__5CA1C101">
-            <End Role="Endpoint" EntitySet="Endpoints" />
-            <End Role="EndPointCommand" EntitySet="EndPointCommands" />
-          </AssociationSet>
           <AssociationSet Name="FK__EndPointI__EndPo__29572725" Association="DynThingsModel.FK__EndPointI__EndPo__29572725">
             <End Role="Endpoint" EntitySet="Endpoints" />
             <End Role="EndPointIO" EntitySet="EndPointIOs" />
@@ -814,6 +743,11 @@
             <End Role="LinkEndpointsLocation" EntitySet="LinkEndpointsLocations" />
           </AssociationSet>
           <EntitySet Name="DynSettings" EntityType="DynThingsModel.DynSetting" />
+          <EntitySet Name="Commands" EntityType="DynThingsModel.Command" />
+          <AssociationSet Name="FK__Commands__Device__4D94879B" Association="DynThingsModel.FK__Commands__Device__4D94879B">
+            <End Role="Device" EntitySet="Devices" />
+            <End Role="Command" EntitySet="Commands" />
+          </AssociationSet>
           </EntityContainer>
         <EntityType Name="CssIcon">
           <Key>
@@ -848,7 +782,6 @@
           <Property Name="DeviceID" Type="Int64" Nullable="false" />
           <Property Name="TypeID" Type="Int64" Nullable="false" />
           <NavigationProperty Name="Device" Relationship="DynThingsModel.FK__Endpoints__Devic__00DF2177" FromRole="Endpoint" ToRole="Device" />
-          <NavigationProperty Name="EndPointCommands" Relationship="DynThingsModel.FK__EndPointC__EndPo__5CA1C101" FromRole="Endpoint" ToRole="EndPointCommand" />
           <NavigationProperty Name="EndPointIOs" Relationship="DynThingsModel.FK__EndPointI__EndPo__29572725" FromRole="Endpoint" ToRole="EndPointIO" />
           <NavigationProperty Name="EndPointType" Relationship="DynThingsModel.FK__EndPoints__TypeI__21B6055D" FromRole="Endpoint" ToRole="EndPointType" />
           <NavigationProperty Name="LinkEndpointsLocations" Relationship="DynThingsModel.FK__LinkEndpo__Endpo__32E0915F" FromRole="Endpoint" ToRole="LinkEndpointsLocation" />
@@ -862,18 +795,6 @@
             </Principal>
             <Dependent Role="Endpoint">
               <PropertyRef Name="DeviceID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__EndPointC__EndPo__5CA1C101">
-          <End Type="DynThingsModel.Endpoint" Role="Endpoint" Multiplicity="0..1" />
-          <End Type="DynThingsModel.EndPointCommand" Role="EndPointCommand" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Endpoint">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="EndPointCommand">
-              <PropertyRef Name="EndPointID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -927,23 +848,35 @@
           <Property Name="PublicSignUP" Type="Boolean" Nullable="false" />
           <Property Name="EnableSystemLogger" Type="Boolean" Nullable="false" />
         </EntityType>
+        <EntityType Name="Command">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DeviceID" Type="Int64" />
+          <Property Name="Description" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Command1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="OwnerID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Device" Relationship="DynThingsModel.FK__Commands__Device__4D94879B" FromRole="Command" ToRole="Device" />
+        </EntityType>
+        <Association Name="FK__Commands__Device__4D94879B">
+          <End Type="DynThingsModel.Device" Role="Device" Multiplicity="0..1" />
+          <End Type="DynThingsModel.Command" Role="Command" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Device">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Command">
+              <PropertyRef Name="DeviceID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="DynThingsModelStoreContainer" CdmEntityContainer="DynThingsEntities">
-          <EntitySetMapping Name="DeviceCommands">
-            <EntityTypeMapping TypeName="DynThingsModel.DeviceCommand">
-              <MappingFragment StoreEntitySet="DeviceCommands">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="Title" ColumnName="Title" />
-                <ScalarProperty Name="Descr" ColumnName="Descr" />
-                <ScalarProperty Name="Command" ColumnName="Command" />
-                <ScalarProperty Name="DeviceID" ColumnName="DeviceID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="DeviceIOs">
             <EntityTypeMapping TypeName="DynThingsModel.DeviceIO">
               <MappingFragment StoreEntitySet="DeviceIOs">
@@ -973,17 +906,6 @@
               <MappingFragment StoreEntitySet="DeviceStatus">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="Title" ColumnName="Title" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="EndPointCommands">
-            <EntityTypeMapping TypeName="DynThingsModel.EndPointCommand">
-              <MappingFragment StoreEntitySet="EndPointCommands">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="Title" ColumnName="Title" />
-                <ScalarProperty Name="Descr" ColumnName="Descr" />
-                <ScalarProperty Name="EndPointID" ColumnName="EndPointID" />
-                <ScalarProperty Name="Command" ColumnName="Command" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1114,6 +1036,17 @@
                 <ScalarProperty Name="DefaultRecordsPerMaster" ColumnName="DefaultRecordsPerMaster" />
                 <ScalarProperty Name="DevelopmentMode" ColumnName="DevelopmentMode" />
                 <ScalarProperty Name="DBVersion" ColumnName="DBVersion" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Commands">
+            <EntityTypeMapping TypeName="DynThingsModel.Command">
+              <MappingFragment StoreEntitySet="Commands">
+                <ScalarProperty Name="OwnerID" ColumnName="OwnerID" />
+                <ScalarProperty Name="Command1" ColumnName="Command" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="DeviceID" ColumnName="DeviceID" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>

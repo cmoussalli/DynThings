@@ -17,9 +17,9 @@ namespace DynThings.Data.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Device()
         {
-            this.DeviceCommands = new HashSet<DeviceCommand>();
             this.DeviceIOs = new HashSet<DeviceIO>();
             this.Endpoints = new HashSet<Endpoint>();
+            this.Commands = new HashSet<Command>();
         }
     
         public long ID { get; set; }
@@ -30,11 +30,11 @@ namespace DynThings.Data.Models
         public string PinCode { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<DeviceCommand> DeviceCommands { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<DeviceIO> DeviceIOs { get; set; }
         public virtual DeviceStatu DeviceStatu { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Endpoint> Endpoints { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Command> Commands { get; set; }
     }
 }

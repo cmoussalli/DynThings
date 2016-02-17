@@ -5,11 +5,9 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="153eea3d35a046aa8fab5470a9c25b99" Name="Diagram1" ZoomLevel="82">
-        <EntityTypeShape EntityType="DynThingsModel.DeviceCommand" Width="1.75" PointX="6.25" PointY="17" IsExpanded="true" />
         <EntityTypeShape EntityType="DynThingsModel.DeviceIO" Width="1.5" PointX="6.375" PointY="13.75" IsExpanded="true" />
         <EntityTypeShape EntityType="DynThingsModel.Device" Width="1.5" PointX="3.75" PointY="13.75" IsExpanded="true" />
         <EntityTypeShape EntityType="DynThingsModel.DeviceStatu" Width="1.5" PointX="3.5" PointY="11.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="DynThingsModel.EndPointCommand" Width="1.875" PointX="16.625" PointY="13.25" IsExpanded="true" />
         <EntityTypeShape EntityType="DynThingsModel.EndPointIO" Width="1.5" PointX="16.5" PointY="8" IsExpanded="true" />
         <EntityTypeShape EntityType="DynThingsModel.EndPointTypeCategory" Width="1.5" PointX="8.75" PointY="2.875" IsExpanded="true" />
         <EntityTypeShape EntityType="DynThingsModel.EndPointType" Width="1.5" PointX="10.875" PointY="2.875" IsExpanded="true" />
@@ -19,7 +17,6 @@
         <EntityTypeShape EntityType="DynThingsModel.Location" Width="1.5" PointX="6.125" PointY="7.625" IsExpanded="true" />
         <EntityTypeShape EntityType="DynThingsModel.LocationView" Width="2.125" PointX="3.5" PointY="7.5" IsExpanded="true" />
         <EntityTypeShape EntityType="DynThingsModel.LocationViewType" Width="1.875" PointX="3.125" PointY="3" IsExpanded="true" />
-        <AssociationConnector Association="DynThingsModel.FK__DeviceCom__Devic__05A3D694" ManuallyRouted="false" />
         <AssociationConnector Association="DynThingsModel.FK__DeviceIOs__Devic__19AACF41" ManuallyRouted="false" />
         <AssociationConnector Association="DynThingsModel.FK__DeviceIOs__IOTyp__1C873BEC" ManuallyRouted="false" />
         <AssociationConnector Association="DynThingsModel.FK__Devices__StatusI__01D345B0" ManuallyRouted="false" />
@@ -33,11 +30,12 @@
         <AssociationConnector Association="DynThingsModel.FK__EndPointT__IconI__3FD07829" />
         <EntityTypeShape EntityType="DynThingsModel.Endpoint" Width="1.5" PointX="12.375" PointY="7.25" />
         <AssociationConnector Association="DynThingsModel.FK__Endpoints__Devic__00DF2177" />
-        <AssociationConnector Association="DynThingsModel.FK__EndPointC__EndPo__5CA1C101" />
         <AssociationConnector Association="DynThingsModel.FK__EndPointI__EndPo__29572725" />
         <AssociationConnector Association="DynThingsModel.FK__EndPoints__TypeI__21B6055D" />
         <AssociationConnector Association="DynThingsModel.FK__LinkEndpo__Endpo__32E0915F" />
         <EntityTypeShape EntityType="DynThingsModel.DynSetting" Width="1.5" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="DynThingsModel.Command" Width="1.5" PointX="1.625" PointY="14.5" />
+        <AssociationConnector Association="DynThingsModel.FK__Commands__Device__4D94879B" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

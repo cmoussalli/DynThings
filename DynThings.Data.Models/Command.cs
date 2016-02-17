@@ -12,14 +12,14 @@ namespace DynThings.Data.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class EndPointCommand
+    public partial class Command
     {
         public long ID { get; set; }
-        public string Title { get; set; }
-        public string Descr { get; set; }
-        public Nullable<long> EndPointID { get; set; }
-        public string Command { get; set; }
+        public Nullable<long> DeviceID { get; set; }
+        public string Description { get; set; }
+        public string Command1 { get; set; }
+        public string OwnerID { get; set; }
     
-        public virtual Endpoint Endpoint { get; set; }
+        public virtual Device Device { get; set; }
     }
 }
