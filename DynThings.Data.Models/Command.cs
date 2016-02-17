@@ -15,10 +15,11 @@ namespace DynThings.Data.Models
     public partial class Command
     {
         public long ID { get; set; }
-        public Nullable<long> DeviceID { get; set; }
+        public string Title { get; set; }
         public string Description { get; set; }
-        public string Command1 { get; set; }
+        public Nullable<long> DeviceID { get; set; }
         public string OwnerID { get; set; }
+        public string CommandCode { get; set; }
     
         public virtual Device Device { get; set; }
     }

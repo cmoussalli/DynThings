@@ -115,7 +115,7 @@
     <Compile Include="LocationViewType.cs">
       <DependentUpon>DynThingsModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="ModelsExtensions\Commands.cs" />
+    <Compile Include="ModelsExtensions\Command.cs" />
     <Compile Include="ModelsExtensions\Device.cs" />
     <Compile Include="ModelsExtensions\DeviceCommands.cs" />
     <Compile Include="ModelsExtensions\EndPoint.cs" />

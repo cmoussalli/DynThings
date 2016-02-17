@@ -1,7 +1,7 @@
 ﻿/////////////////////////////////////////////////////////////////
 // Created by : Caesar Moussalli                               //
 // TimeStamp  : 16-2-2016                                      //
-// Content    : Handle EndPoint Commands CRUD                  //
+// Content    : Handle Commands CRUD                           //
 // Notes      :                                                //
 /////////////////////////////////////////////////////////////////
 using System;
@@ -14,14 +14,14 @@ using PagedList;
 
 namespace DynThings.Data.Repositories
 {
-    public class EndPointCommandsRepository
+    public class CommandsRepository
     {
         private DynThingsEntities db = new DynThingsEntities();
 
         #region Get PagedList
         public IPagedList GetPagedList(string search, int pageNumber, int recordsPerPage)
         {
-            IPagedList cmds = db.EndPointCommands
+            IPagedList cmds = db.Commands
               .Where(e => search == null || e.Title.Contains(search))
               .OrderBy(e => e.Title).ToList()
               .ToPagedList(pageNumber, recordsPerPage);
@@ -31,14 +31,14 @@ namespace DynThings.Data.Repositories
 
         #region Find
         /// <summary>
-        /// Find EndPointCommand Command by ID
+        /// Find Command by ID
         /// </summary>
-        /// <param name="id">EndPointCommand Command ID</param>
-        /// <returns>EndPointCommand Command object</returns>
-        public EndPointCommand Find(long id)
+        /// <param name="id">Command ID</param>
+        /// <returns>Command object</returns>
+        public Command Find(long id)
         {
-            EndPointCommand cmd = new EndPointCommand();
-            List<EndPointCommand> cmds = db.EndPointCommands.Where(l => l.ID == id).ToList();
+            Command cmd = new Command();
+            List<Command> cmds = db.Commands.Where(l => l.ID == id).ToList();
             if (cmds.Count == 1)
             {
                 cmd = cmds[0];
@@ -51,14 +51,14 @@ namespace DynThings.Data.Repositories
         }
 
         /// <summary>
-        /// Find EndPointCommand by EndPointCommand GUID
+        /// Find Command by Command GUID
         /// </summary>
-        /// <param name="guid">EndPointCommand GUID</param>
-        /// <returns>EndPointCommand object</returns>
-        public EndPointCommand Find(int id)
+        /// <param name="guid">Command GUID</param>
+        /// <returns>Command object</returns>
+        public Command Find(int id)
         {
-            EndPointCommand cmd = new EndPointCommand();
-            List<EndPointCommand> cmds = db.EndPointCommands.Where(l => l.ID == id).ToList();
+            Command cmd = new Command();
+            List<Command> cmds = db.Commands.Where(l => l.ID == id).ToList();
             if (cmds.Count == 1)
             {
                 cmd = cmds[0];
@@ -73,15 +73,16 @@ namespace DynThings.Data.Repositories
         #endregion
 
         #region Add
-        public UnitOfWork.RepositoryMethodResultType Add(string title, long endpointID, string description,string command)
+        public UnitOfWork.RepositoryMethodResultType Add(string title, long deviceID, string description, string commandCode, string ownerID)
         {
             UnitOfWork.RepositoryMethodResultType result = UnitOfWork.RepositoryMethodResultType.Failed;
-            EndPointCommand cmd = new EndPointCommand();
+            Command cmd = new Command();
             cmd.Title = title;
-            cmd.EndPointID = endpointID;
-            cmd.Descr = description;
-            cmd.Command = command;
-            db.EndPointCommands.Add(cmd);
+            cmd.DeviceID = deviceID;
+            cmd.Description = description;
+            cmd.CommandCode = commandCode;
+            cmd.OwnerID = ownerID;
+            db.Commands.Add(cmd);
             db.SaveChanges();
             result = UnitOfWork.RepositoryMethodResultType.Ok;
 
@@ -91,13 +92,13 @@ namespace DynThings.Data.Repositories
         #endregion
 
         #region Edit
-        public UnitOfWork.RepositoryMethodResultType Edit(long id, string title, string description, string command)
+        public UnitOfWork.RepositoryMethodResultType Edit(long id, string title, string description, string commandCode)
         {
             UnitOfWork.RepositoryMethodResultType result = UnitOfWork.RepositoryMethodResultType.Failed;
-            EndPointCommand cmd = db.EndPointCommands.Find(id);
+            Command cmd = db.Commands.Find(id);
             cmd.Title = title;
-            cmd.Descr = description;
-            cmd.Command = command;
+            cmd.Description = description;
+            cmd.CommandCode = commandCode;
             db.SaveChanges();
             result = UnitOfWork.RepositoryMethodResultType.Ok;
             return result;

@@ -34,7 +34,7 @@
         <AssociationConnector Association="DynThingsModel.FK__EndPoints__TypeI__21B6055D" />
         <AssociationConnector Association="DynThingsModel.FK__LinkEndpo__Endpo__32E0915F" />
         <EntityTypeShape EntityType="DynThingsModel.DynSetting" Width="1.5" PointX="0.75" PointY="0.75" />
-        <EntityTypeShape EntityType="DynThingsModel.Command" Width="1.5" PointX="1.625" PointY="14.5" />
+        <EntityTypeShape EntityType="DynThingsModel.Command" Width="1.5" PointX="6" PointY="18" />
         <AssociationConnector Association="DynThingsModel.FK__Commands__Device__4D94879B" />
         </Diagram>
     </edmx:Diagrams>

@@ -59,7 +59,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Repositories\DevicesRepositories.cs" />
-    <Compile Include="Repositories\EndPointCommandsRepository.cs" />
+    <Compile Include="Repositories\CommandsRepository.cs" />
     <Compile Include="Repositories\EndpointIOsRepository.cs" />
     <Compile Include="Repositories\EndpointsRepository.cs" />
     <Compile Include="Repositories\EndPointTypesRepository.cs" />

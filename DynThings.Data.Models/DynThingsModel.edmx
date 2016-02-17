@@ -10,9 +10,10 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="DeviceID" Type="bigint" />
+          <Property Name="Title" Type="nvarchar" MaxLength="50" />
           <Property Name="Description" Type="nvarchar" MaxLength="500" />
-          <Property Name="Command" Type="nvarchar" MaxLength="50" />
+          <Property Name="DeviceID" Type="bigint" />
+          <Property Name="CommandCode" Type="nvarchar" MaxLength="50" />
           <Property Name="OwnerID" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="CssIcons">
@@ -853,11 +854,12 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="DeviceID" Type="Int64" />
+          <Property Name="Title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Description" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-          <Property Name="Command1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DeviceID" Type="Int64" />
           <Property Name="OwnerID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Device" Relationship="DynThingsModel.FK__Commands__Device__4D94879B" FromRole="Command" ToRole="Device" />
+          <Property Name="CommandCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <Association Name="FK__Commands__Device__4D94879B">
           <End Type="DynThingsModel.Device" Role="Device" Multiplicity="0..1" />
@@ -1043,10 +1045,11 @@
           <EntitySetMapping Name="Commands">
             <EntityTypeMapping TypeName="DynThingsModel.Command">
               <MappingFragment StoreEntitySet="Commands">
+                <ScalarProperty Name="CommandCode" ColumnName="CommandCode" />
                 <ScalarProperty Name="OwnerID" ColumnName="OwnerID" />
-                <ScalarProperty Name="Command1" ColumnName="Command" />
-                <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="DeviceID" ColumnName="DeviceID" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
