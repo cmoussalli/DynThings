@@ -15,7 +15,7 @@
     <AssemblyName>DynThings.WebPortal</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
-    <UseIISExpress>true</UseIISExpress>
+    <UseIISExpress>false</UseIISExpress>
     <IISExpressSSLPort />
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
@@ -515,6 +515,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\EndPointCommands\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
@@ -555,7 +556,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>23130</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:34524/</IISUrl>
+          <IISUrl>http://localhost/DynThings.WebPortal</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>
