@@ -52,9 +52,8 @@ namespace DynThings.Data.Repositories
         /// <param name="locationTypeID">LocationView type ID</param>
         /// <param name="ownerID">Owner ID</param>
         /// <returns>Result : Ok or Failed</returns>
-        public UnitOfWork.RepositoryMethodResultType Add(string title, long locationTypeID, string userID)
+        public ResultInfo.Result Add(string title, long locationTypeID, string userID)
         {
-            UnitOfWork.RepositoryMethodResultType result = UnitOfWork.RepositoryMethodResultType.Failed;
             LocationView loc = new LocationView();
             loc.Title = title;
             loc.IsActive = false;
@@ -65,21 +64,18 @@ namespace DynThings.Data.Repositories
             loc.Z = "";
             db.LocationViews.Add(loc);
             db.SaveChanges();
-            result = UnitOfWork.RepositoryMethodResultType.Ok;
-            return result;
+            return ResultInfo.GenerateOKResult();
         }
         #endregion
 
         #region Edit : Title
-        public UnitOfWork.RepositoryMethodResultType Edit(long locationViewID ,string title, string userID)
+        public ResultInfo.Result Edit(long locationViewID ,string title, string userID)
         {
-            UnitOfWork.RepositoryMethodResultType result = UnitOfWork.RepositoryMethodResultType.Failed;
             LocationView loc = db.LocationViews.Find(locationViewID);
             loc.Title = title;
             loc.IsActive = false;
             db.SaveChanges();
-            result = UnitOfWork.RepositoryMethodResultType.Ok;
-            return result;
+            return ResultInfo.GenerateOKResult();
         }
         #endregion
 
@@ -94,17 +90,15 @@ namespace DynThings.Data.Repositories
         /// <param name="z">Map Zoom</param>
         /// <param name="userID">Edited by User ID</param>
         /// <returns></returns>
-        public UnitOfWork.RepositoryMethodResultType Edit(long locationViewID, long locationViewTypeID, string x, string y, string z,string userID)
+        public ResultInfo.Result Edit(long locationViewID, long locationViewTypeID, string x, string y, string z,string userID)
         {
-            UnitOfWork.RepositoryMethodResultType result = UnitOfWork.RepositoryMethodResultType.Failed;
             LocationView loc = db.LocationViews.Find(locationViewID);
             loc.LocationViewTypeID = locationViewID;
             loc.X = x;
             loc.Y = y;
             loc.Z = z;
             db.SaveChanges();
-            result = UnitOfWork.RepositoryMethodResultType.Ok;
-            return result;
+            return ResultInfo.GenerateOKResult();
         }
         #endregion
 
@@ -115,14 +109,12 @@ namespace DynThings.Data.Repositories
         /// <param name="locationViewID">The selected LocationView ID.</param>
         /// <param name="isActive">Activation, True or False.</param>
         /// <returns>Result : Ok or Failed.</returns>
-        public UnitOfWork.RepositoryMethodResultType IsActive(long locationViewID, bool isActive,string userID)
+        public ResultInfo.Result IsActive(long locationViewID, bool isActive,string userID)
         {
-            UnitOfWork.RepositoryMethodResultType result = UnitOfWork.RepositoryMethodResultType.Failed;
             LocationView loc = db.LocationViews.Find(locationViewID);
             loc.IsActive = isActive;
             db.SaveChanges();
-            result = UnitOfWork.RepositoryMethodResultType.Ok;
-            return result;
+            return ResultInfo.GenerateOKResult();
         }
         #endregion
     }

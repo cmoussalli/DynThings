@@ -77,7 +77,7 @@ namespace DynThings.Data.Repositories
         /// </summary>
         /// <param name="title">Device's Title</param>
         /// <returns>Result : Ok or Failed</returns>
-        public UnitOfWork.RepositoryMethodResultType Add(string title)
+        public ResultInfo.Result Add(string title)
         {
             Device dev = new Device();
             try
@@ -92,9 +92,10 @@ namespace DynThings.Data.Repositories
             }
             catch
             {
-                return UnitOfWork.RepositoryMethodResultType.Failed;
+                
+                return ResultInfo.GenerateFailedResult("");
             }
-            return UnitOfWork.RepositoryMethodResultType.Ok;
+            return ResultInfo.GenerateOKResult();
         }
         #endregion
 
@@ -105,14 +106,12 @@ namespace DynThings.Data.Repositories
         /// <param name="id">Device ID for the editable Device</param>
         /// <param name="title">New Title</param>
         /// <returns>Result : Ok or Failed</returns>
-        public UnitOfWork.RepositoryMethodResultType Edit(long id, string title)
+        public ResultInfo.Result Edit(long id, string title)
         {
-            UnitOfWork.RepositoryMethodResultType result = UnitOfWork.RepositoryMethodResultType.Failed;
             Device dev = db.Devices.Find(id);
             dev.Title = title;
             db.SaveChanges();
-            result = UnitOfWork.RepositoryMethodResultType.Ok;
-            return result;
+            return ResultInfo.GenerateOKResult();
         }
 
         #endregion
@@ -123,14 +122,14 @@ namespace DynThings.Data.Repositories
         /// </summary>
         /// <param name="deviceID">Device ID for the editable Device</param>
         /// <returns>Result : Ok or Failed</returns>
-        public UnitOfWork.RepositoryMethodResultType RenewKeyPass(long deviceID)
+        public ResultInfo.Result RenewKeyPass(long deviceID)
         {
             Device dev = db.Devices.Find(deviceID);
 
             dev.GUID = Guid.NewGuid();
             db.SaveChanges();
 
-            return UnitOfWork.RepositoryMethodResultType.Ok;
+            return ResultInfo.GenerateOKResult();
         }
 
         #endregion

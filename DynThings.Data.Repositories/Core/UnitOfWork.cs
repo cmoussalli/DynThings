@@ -31,13 +31,6 @@ namespace DynThings.Data.Repositories
 
 
 
-        #region Enums
-        public enum RepositoryMethodResultType
-        {
-            Ok = 1,
-            Failed = 2
-        }
-
-        #endregion
+       
     }
 }

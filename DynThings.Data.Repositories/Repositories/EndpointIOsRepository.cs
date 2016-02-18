@@ -18,6 +18,15 @@ namespace DynThings.Data.Repositories
     {
         private DynThingsEntities db = new DynThingsEntities();
 
+        #region Enums
+        public enum EndPointIOType
+        {
+            Input = 1,
+            Command = 2,
+            Log = 3
+        }
+        #endregion
+
         #region Get PagedList
         public IPagedList GetPagedList(Guid endPointGUID, int pageNumber, int recordsPerPage)
         {
@@ -29,6 +38,22 @@ namespace DynThings.Data.Repositories
         }
         #endregion
 
+        #region Submit IO
+        private ResultInfo.Result SubmitIO(Guid endPointKeyPass, EndPointIOType endPointIOType , string Valu, DateTime executionTimeStamp)
+        {
+            List<Endpoint> ends = db.Endpoints.Where(e => e.GUID == endPointKeyPass).ToList();
+            if (ends.Count == 1)
+            {
 
+            }
+            else
+            {
+
+            }
+
+            return ResultInfo.GenerateOKResult();
+        }
+
+        #endregion
     }
 }

@@ -73,9 +73,8 @@ namespace DynThings.Data.Repositories
         #endregion
 
         #region Add
-        public UnitOfWork.RepositoryMethodResultType Add(string title, long typeID, long deviceID)
+        public ResultInfo.Result Add(string title, long typeID, long deviceID)
         {
-            UnitOfWork.RepositoryMethodResultType result = UnitOfWork.RepositoryMethodResultType.Failed;
             Endpoint end = new Endpoint();
 
             end.GUID = Guid.NewGuid();
@@ -86,23 +85,19 @@ namespace DynThings.Data.Repositories
             end.TypeID = typeID;
             db.Endpoints.Add(end);
             db.SaveChanges();
-            result = UnitOfWork.RepositoryMethodResultType.Ok;
-
-            return result;
+            return ResultInfo.GenerateOKResult();
         }
 
         #endregion
 
         #region Edit
-        public UnitOfWork.RepositoryMethodResultType Edit(long id, string title, long typeID)
+        public ResultInfo.Result Edit(long id, string title, long typeID)
         {
-            UnitOfWork.RepositoryMethodResultType result = UnitOfWork.RepositoryMethodResultType.Failed;
             Endpoint end = db.Endpoints.Find(id);
             end.Title = title;
             end.TypeID = typeID;
             db.SaveChanges();
-            result = UnitOfWork.RepositoryMethodResultType.Ok;
-            return result;
+            return ResultInfo.GenerateOKResult();
         }
 
         #endregion

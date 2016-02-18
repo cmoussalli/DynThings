@@ -73,9 +73,8 @@ namespace DynThings.Data.Repositories
         #endregion
 
         #region Add
-        public UnitOfWork.RepositoryMethodResultType Add(string title, long deviceID, string description, string commandCode, string ownerID)
+        public ResultInfo.Result Add(string title, long deviceID, string description, string commandCode, string ownerID)
         {
-            UnitOfWork.RepositoryMethodResultType result = UnitOfWork.RepositoryMethodResultType.Failed;
             Command cmd = new Command();
             cmd.Title = title;
             cmd.DeviceID = deviceID;
@@ -84,7 +83,7 @@ namespace DynThings.Data.Repositories
             cmd.OwnerID = ownerID;
             db.Commands.Add(cmd);
             db.SaveChanges();
-            result = UnitOfWork.RepositoryMethodResultType.Ok;
+            ResultInfo.Result result = ResultInfo.GenerateOKResult();
 
             return result;
         }
@@ -92,15 +91,14 @@ namespace DynThings.Data.Repositories
         #endregion
 
         #region Edit
-        public UnitOfWork.RepositoryMethodResultType Edit(long id, string title, string description, string commandCode)
+        public ResultInfo.Result Edit(long id, string title, string description, string commandCode)
         {
-            UnitOfWork.RepositoryMethodResultType result = UnitOfWork.RepositoryMethodResultType.Failed;
             Command cmd = db.Commands.Find(id);
             cmd.Title = title;
             cmd.Description = description;
             cmd.CommandCode = commandCode;
             db.SaveChanges();
-            result = UnitOfWork.RepositoryMethodResultType.Ok;
+            ResultInfo.Result result = ResultInfo.GenerateOKResult();
             return result;
         }
 
