@@ -27,6 +27,15 @@ namespace DynThings.Data.Repositories
               .ToPagedList(pageNumber, recordsPerPage);
             return cmds;
         }
+
+        public IPagedList GetPagedListByDeviceID(string search,long deviceID, int pageNumber, int recordsPerPage)
+        {
+            IPagedList cmds = db.Commands
+              .Where(e => search == null || e.Title.Contains(search) && e.DeviceID == deviceID)
+              .OrderBy(e => e.Title).ToList()
+              .ToPagedList(pageNumber, recordsPerPage);
+            return cmds;
+        }
         #endregion
 
         #region Find
@@ -36,26 +45,6 @@ namespace DynThings.Data.Repositories
         /// <param name="id">Command ID</param>
         /// <returns>Command object</returns>
         public Command Find(long id)
-        {
-            Command cmd = new Command();
-            List<Command> cmds = db.Commands.Where(l => l.ID == id).ToList();
-            if (cmds.Count == 1)
-            {
-                cmd = cmds[0];
-            }
-            else
-            {
-                throw new Exception("Not Found");
-            }
-            return cmd;
-        }
-
-        /// <summary>
-        /// Find Command by Command GUID
-        /// </summary>
-        /// <param name="guid">Command GUID</param>
-        /// <returns>Command object</returns>
-        public Command Find(int id)
         {
             Command cmd = new Command();
             List<Command> cmds = db.Commands.Where(l => l.ID == id).ToList();
