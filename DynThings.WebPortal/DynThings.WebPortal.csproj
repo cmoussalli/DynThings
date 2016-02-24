@@ -190,6 +190,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\APIEndPointIOsController.cs" />
     <Compile Include="Controllers\APIEndpointsController.cs" />
+    <Compile Include="Controllers\CommandsController.cs" />
     <Compile Include="Controllers\DevicesController.cs" />
     <Compile Include="Controllers\EndpointsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -513,6 +514,7 @@
     <Content Include="Views\LocationViews\_EditTitle.cshtml" />
     <Content Include="Views\Endpoints\_Details_History.cshtml" />
     <Content Include="Views\Endpoints\_EndPointHistory.cshtml" />
+    <Content Include="Views\Commands\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
