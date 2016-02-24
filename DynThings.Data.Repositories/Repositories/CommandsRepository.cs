@@ -80,12 +80,13 @@ namespace DynThings.Data.Repositories
         #endregion
 
         #region Edit
-        public ResultInfo.Result Edit(long id, string title, string description, string commandCode)
+        public ResultInfo.Result Edit(long id, string title, string description,long deviceID, string commandCode)
         {
             Command cmd = db.Commands.Find(id);
             cmd.Title = title;
             cmd.Description = description;
             cmd.CommandCode = commandCode;
+            cmd.DeviceID = deviceID;
             db.SaveChanges();
             ResultInfo.Result result = ResultInfo.GenerateOKResult();
             return result;

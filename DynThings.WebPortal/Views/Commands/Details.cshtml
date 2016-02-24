@@ -1,0 +1,102 @@
+﻿@model DynThings.Data.Models.Command
+@{
+    ViewBag.Title = "Command Details";
+}
+
+<div class="container">
+    <div class="page-header">
+        <h1>Command Details</h1>
+    </div>
+    
+    <div class="row">
+        <div class="col-md-12">
+            <ul class="nav nav-tabs">
+                <li class="active"><a data-toggle="tab" href="#tabCommandmain">Main</a></li>
+                <li><a data-toggle="tab" href="#tabCommandhistory">History</a></li>
+                <li><a data-toggle="tab" href="#tabCommandDevkeys">Dev Keys</a></li>
+            </ul>
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="tab-content">
+                        <div id="tabCommandmain" class="tab-pane fade in active">
+                            <div id="divCommandMain">
+                            </div>
+                        </div>
+                        <div id="tabCommandhistory" class="tab-pane fade">
+                            <div id="divCommandHistory">
+                            </div>
+                        </div>
+                        <div id="tabCommandcommands" class="tab-pane fade">
+                            <div id="divCommandcommands">
+                            </div>
+                        </div>
+                        <div id="tabCommandDevkeys" class="tab-pane fade">
+                            <div id="divCommandDevkeys">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Button trigger modal -->
+
+
+
+
+@section scripts{
+
+    <script>
+        function showDialog(id) {
+            var dialog = $(id).data('dialog');
+            dialog.open();
+        }
+
+        function closeDialog(id) {
+            var dialog = $(id).data('dialog');
+            dialog.close();
+        }
+
+
+        $(document).ready(function () {
+            LoadPart_CommandDetailsDiv('@Model.ID');
+
+        });
+
+        function LoadCommandEditor(id) {
+            //showDialog('#modal');
+            LoadPart_DialogCommandEdit(id);
+            LoadPart_CommandDetailsDiv(id);
+        }
+
+        function LoadPart_CommandDetailsDiv(id) {
+            var loadingpart = LoadDivLoading();
+            $("#divCommandMain").html(loadingpart);
+            $.ajax({
+                url: '@Url.Content("~/")' + 'Commands/DetailsPV?id=' + id,
+                type: "GET",
+            })
+            .done(function (partialViewResult) {
+                $("#divCommandMain").html(partialViewResult);
+            });
+        }
+
+        function LoadPart_DialogCommandEdit(id) {
+            var loadingpart = LoadDivLoading();
+            $("#modal").html(loadingpart);
+            $.ajax({
+                url: '@Url.Content("~/")' + 'Commands/editpv?id=' + id,
+                type: "GET",
+            })
+            .done(function (partialViewResult) {
+                $("#modal").html(partialViewResult);
+            });
+        }
+
+  
+    </script>
+   
+    
+}

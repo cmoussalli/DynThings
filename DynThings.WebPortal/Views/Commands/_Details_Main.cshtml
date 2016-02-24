@@ -1,0 +1,13 @@
+﻿@model DynThings.Data.Models.Command
+<div class="right">
+    <button type="button" class="btn btn-info pull-right" onclick="LoadCommandEditor(@Model.ID)" data-toggle="modal" data-target="#mdl">Edit</button>
+</div>
+
+<strong>Title</strong><br>
+@Model.Title<br><br>
+
+<strong>Description</strong><br>
+@Model.Description<br><br>
+
+<strong>Device</strong><br>
+@Model.Device.Title<br><br>

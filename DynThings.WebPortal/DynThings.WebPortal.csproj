@@ -433,6 +433,7 @@
     <Content Include="Themes\SandStone\bootstrap.min.css" />
     <Content Include="Themes\United\bootstrap.min.css" />
     <Content Include="Themes\Yeti\bootstrap.min.css" />
+    <Content Include="Views\Commands\Index.cshtml" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -514,7 +515,10 @@
     <Content Include="Views\LocationViews\_EditTitle.cshtml" />
     <Content Include="Views\Endpoints\_Details_History.cshtml" />
     <Content Include="Views\Endpoints\_EndPointHistory.cshtml" />
-    <Content Include="Views\Commands\Index.cshtml" />
+    <Content Include="Views\Commands\_List.cshtml" />
+    <Content Include="Views\Commands\Details.cshtml" />
+    <Content Include="Views\Commands\_Details_Main.cshtml" />
+    <Content Include="Views\Commands\_Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

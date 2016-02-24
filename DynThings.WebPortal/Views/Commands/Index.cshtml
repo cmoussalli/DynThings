@@ -1,0 +1,78 @@
+﻿@model IEnumerable<DynThings.Data.Models.Command>
+@{
+    ViewBag.Title = "Commands";
+}
+<div class="container">
+    <div class="page-header">
+        <h1>Commands</h1>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <button type="button" class="btn btn-info" onclick="LoadPart_DialogCommandAdd()" data-toggle="modal" data-target="#mdl">Add</button>
+        </div>
+        <div class="col-md-6">
+            <div class="input-group">
+                <input type="search" id="txtCommandSearch" class="form-control" onkeydown="if (event.keyCode == 13) { LoadPart_CommandListDiv(); return false; }" />
+                <div class="input-group-btn">
+                    <button type="button" class="btn btn-primary" onclick="LoadPart_CommandListDiv()">Search</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br />
+    <div class="well well-lg">
+        <div id="divCommandsList">
+        </div>
+    </div>
+</div>
+<script>
+    $(document).ready(function () {
+        LoadPart_CommandListDiv();
+    });
+
+
+    function LoadPart_CommandListDiv() {
+        var loadingpart = LoadDivLoading();
+        $("#divCommandsList").html(loadingpart);
+        $.ajax({
+            url: '@Url.Content("~/")' + 'Commands/ListPV?searchfor=' + $(txtCommandSearch).val() + '&recordsperpage=0',
+            //page=" + $("#DynConfigCurrentPage").html,
+            type: "GET",
+        })
+            .done(function (partialViewResult) {
+                $("#divCommandsList").html(partialViewResult);
+            });
+        return false;
+    };
+
+    $(document).ready(function () {
+        $(document).on("click", "#CommandsListPager a[href]", function () {
+            var loadingpart = LoadDivLoading();
+            $("#divCommandsList").html(loadingpart);
+            $.ajax({
+                url: $(this).attr("href") + "&searchfor=" + $(txtCommandSearch).val() + '&recordsperpage=0',
+                type: 'GET',
+                cache: false,
+                success: function (result) {
+                    $("#divCommandsList").html(result);
+                    return false;
+                }
+            });
+            return false;
+        });
+    });
+
+    function LoadPart_DialogCommandAdd() {
+        var loadingpart = LoadDivLoading();
+        $("#modal").html(loadingpart);
+        $.ajax({
+            url: '@Url.Content("~/")' + 'Commands/addpv',
+            //page=" + $("#DynConfigCurrentPage").html,
+            type: "GET",
+        })
+        .done(function (partialViewResult) {
+            $("#modal").html(partialViewResult);
+        });
+    }
+</script>
+

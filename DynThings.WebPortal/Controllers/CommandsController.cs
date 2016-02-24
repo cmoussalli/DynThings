@@ -25,6 +25,7 @@ namespace DynThings.WebPortal.Controllers
         #endregion
 
         #region PartialViewResult: Partial Views
+
         #region DetailsPV
         public PartialViewResult DetailsPV(long id)
         {
@@ -51,7 +52,7 @@ namespace DynThings.WebPortal.Controllers
             return PartialView("_List", cmds);
         }
         #endregion
-
+        
         #region AddPV
         [HttpGet]
         public PartialViewResult AddPV()
@@ -81,11 +82,11 @@ namespace DynThings.WebPortal.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult EditPV([Bind(Include = "ID,Title,Description,CommandCode")] Command Command)
+        public ActionResult EditPV([Bind(Include = "ID,Title,Description,DeviceID,CommandCode")] Command Command)
         {
             if (ModelState.IsValid)
             {
-                UnitOfWork.repoCommands.Edit(Command.ID, Command.Title, Command.Description,Command.CommandCode);
+                UnitOfWork.repoCommands.Edit(Command.ID, Command.Title, Command.Description,long.Parse(Command.DeviceID.ToString()),Command.CommandCode);
                 return Content("Ok");
             }
             return Content("Failed");
