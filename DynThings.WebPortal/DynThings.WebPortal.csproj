@@ -519,6 +519,7 @@
     <Content Include="Views\DeviceCommands\Details.cshtml" />
     <Content Include="Views\DeviceCommands\_Details_Main.cshtml" />
     <Content Include="Views\DeviceCommands\_Edit.cshtml" />
+    <Content Include="Views\DeviceCommands\_Add.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

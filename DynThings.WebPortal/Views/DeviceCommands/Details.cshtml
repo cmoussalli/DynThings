@@ -75,7 +75,7 @@
             var loadingpart = LoadDivLoading();
             $("#divCommandMain").html(loadingpart);
             $.ajax({
-                url: '@Url.Content("~/")' + 'Commands/DetailsPV?id=' + id,
+                url: '@Url.Content("~/")' + 'DeviceCommands/DetailsPV?id=' + id,
                 type: "GET",
             })
             .done(function (partialViewResult) {
@@ -87,7 +87,7 @@
             var loadingpart = LoadDivLoading();
             $("#modal").html(loadingpart);
             $.ajax({
-                url: '@Url.Content("~/")' + 'Commands/editpv?id=' + id,
+                url: '@Url.Content("~/")' + 'DeviceCommands/editpv?id=' + id,
                 type: "GET",
             })
             .done(function (partialViewResult) {
