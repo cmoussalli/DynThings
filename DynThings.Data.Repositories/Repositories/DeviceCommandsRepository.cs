@@ -1,7 +1,7 @@
 ﻿/////////////////////////////////////////////////////////////////
 // Created by : Caesar Moussalli                               //
 // TimeStamp  : 16-2-2016                                      //
-// Content    : Handle Commands CRUD                           //
+// Content    : Handle DeviceCommands CRUD                           //
 // Notes      :                                                //
 /////////////////////////////////////////////////////////////////
 using System;
@@ -14,14 +14,14 @@ using PagedList;
 
 namespace DynThings.Data.Repositories
 {
-    public class CommandsRepository
+    public class DeviceCommandsRepository
     {
         private DynThingsEntities db = new DynThingsEntities();
 
         #region Get PagedList
         public IPagedList GetPagedList(string search, int pageNumber, int recordsPerPage)
         {
-            IPagedList cmds = db.Commands
+            IPagedList cmds = db.DeviceCommands
               .Where(e => search == null || e.Title.Contains(search))
               .OrderBy(e => e.Title).ToList()
               .ToPagedList(pageNumber, recordsPerPage);
@@ -30,7 +30,7 @@ namespace DynThings.Data.Repositories
 
         public IPagedList GetPagedListByDeviceID(string search,long deviceID, int pageNumber, int recordsPerPage)
         {
-            IPagedList cmds = db.Commands
+            IPagedList cmds = db.DeviceCommands
               .Where(e => search == null || e.Title.Contains(search) && e.DeviceID == deviceID)
               .OrderBy(e => e.Title).ToList()
               .ToPagedList(pageNumber, recordsPerPage);
@@ -44,10 +44,10 @@ namespace DynThings.Data.Repositories
         /// </summary>
         /// <param name="id">Command ID</param>
         /// <returns>Command object</returns>
-        public Command Find(long id)
+        public DeviceCommand Find(long id)
         {
-            Command cmd = new Command();
-            List<Command> cmds = db.Commands.Where(l => l.ID == id).ToList();
+            DeviceCommand cmd = new DeviceCommand();
+            List<DeviceCommand> cmds = db.DeviceCommands.Where(l => l.ID == id).ToList();
             if (cmds.Count == 1)
             {
                 cmd = cmds[0];
@@ -64,13 +64,13 @@ namespace DynThings.Data.Repositories
         #region Add
         public ResultInfo.Result Add(string title, long deviceID, string description, string commandCode, string ownerID)
         {
-            Command cmd = new Command();
+            DeviceCommand cmd = new DeviceCommand();
             cmd.Title = title;
             cmd.DeviceID = deviceID;
             cmd.Description = description;
             cmd.CommandCode = commandCode;
             cmd.OwnerID = ownerID;
-            db.Commands.Add(cmd);
+            db.DeviceCommands.Add(cmd);
             db.SaveChanges();
             ResultInfo.Result result = ResultInfo.GenerateOKResult();
 
@@ -82,7 +82,7 @@ namespace DynThings.Data.Repositories
         #region Edit
         public ResultInfo.Result Edit(long id, string title, string description,long deviceID, string commandCode)
         {
-            Command cmd = db.Commands.Find(id);
+            DeviceCommand cmd = db.DeviceCommands.Find(id);
             cmd.Title = title;
             cmd.Description = description;
             cmd.CommandCode = commandCode;

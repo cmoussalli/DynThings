@@ -9,7 +9,7 @@ using DynThings.Data.Configurations;
 
 namespace DynThings.WebPortal.Controllers
 {
-    public class CommandsController : Controller
+    public class DeviceCommandsController : Controller
     {
         #region ActionResult: Views
         public ActionResult Index()
@@ -19,7 +19,7 @@ namespace DynThings.WebPortal.Controllers
 
         public ActionResult Details(long id)
         {
-            Command cmd = UnitOfWork.repoCommands.Find(id);
+            DeviceCommand cmd = UnitOfWork.repoDeviceCommands.Find(id);
             return View(cmd);
         }
         #endregion
@@ -29,7 +29,7 @@ namespace DynThings.WebPortal.Controllers
         #region DetailsPV
         public PartialViewResult DetailsPV(long id)
         {
-            Command command = UnitOfWork.repoCommands.Find(id);
+            DeviceCommand command = UnitOfWork.repoDeviceCommands.Find(id);
             return PartialView("_Details_Main", command);
         }
 
@@ -40,7 +40,7 @@ namespace DynThings.WebPortal.Controllers
         [HttpGet]
         public PartialViewResult ListPV(string searchfor = null, int page = 1, int recordsperpage = 0)
         {
-            PagedList.IPagedList cmds = UnitOfWork.repoCommands.GetPagedList(searchfor, page, Helpers.Configs.validateRecordsPerMaster(recordsperpage));
+            PagedList.IPagedList cmds = UnitOfWork.repoDeviceCommands.GetPagedList(searchfor, page, Helpers.Configs.validateRecordsPerMaster(recordsperpage));
             return PartialView("_List", cmds);
         }
 
@@ -48,7 +48,7 @@ namespace DynThings.WebPortal.Controllers
         [HttpGet]
         public PartialViewResult ListByDeviceIDPV(string searchfor = null,long deviceID = 0, int page = 1, int recordsperpage = 0)
         {
-            PagedList.IPagedList cmds = UnitOfWork.repoCommands.GetPagedListByDeviceID(searchfor,deviceID, page, Helpers.Configs.validateRecordsPerMaster(recordsperpage));
+            PagedList.IPagedList cmds = UnitOfWork.repoDeviceCommands.GetPagedListByDeviceID(searchfor,deviceID, page, Helpers.Configs.validateRecordsPerMaster(recordsperpage));
             return PartialView("_List", cmds);
         }
         #endregion
@@ -63,10 +63,10 @@ namespace DynThings.WebPortal.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult AddPV([Bind(Include = "Title,DeviceID,Description,CommandCode")] Command command)
+        public ActionResult AddPV([Bind(Include = "Title,DeviceID,Description,CommandCode")] DeviceCommand command)
         {
             long cmd = long.Parse (command.DeviceID.ToString());
-            UnitOfWork.repoCommands.Add(command.Title,long.Parse(command.DeviceID.ToString()),command.Description,command.CommandCode,"1");
+            UnitOfWork.repoDeviceCommands.Add(command.Title,long.Parse(command.DeviceID.ToString()),command.Description,command.CommandCode,"1");
             return Content("Ok");
         }
         #endregion
@@ -75,18 +75,18 @@ namespace DynThings.WebPortal.Controllers
         [HttpGet]
         public PartialViewResult EditPV(long id)
         {
-            Command Command = UnitOfWork.repoCommands.Find(id);
+            DeviceCommand Command = UnitOfWork.repoDeviceCommands.Find(id);
             ViewBag.DeviceID = new SelectList(UnitOfWork.repoDevices.GetList(), "ID", "Title", Command.DeviceID);
             return PartialView("_Edit", Command);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult EditPV([Bind(Include = "ID,Title,Description,DeviceID,CommandCode")] Command Command)
+        public ActionResult EditPV([Bind(Include = "ID,Title,Description,DeviceID,CommandCode")] DeviceCommand Command)
         {
             if (ModelState.IsValid)
             {
-                UnitOfWork.repoCommands.Edit(Command.ID, Command.Title, Command.Description,long.Parse(Command.DeviceID.ToString()),Command.CommandCode);
+                UnitOfWork.repoDeviceCommands.Edit(Command.ID, Command.Title, Command.Description,long.Parse(Command.DeviceID.ToString()),Command.CommandCode);
                 return Content("Ok");
             }
             return Content("Failed");

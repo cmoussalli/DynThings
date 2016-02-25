@@ -38,20 +38,34 @@ namespace DynThings.Data.Repositories
         }
         #endregion
 
+        #region Add
+        public ResultInfo.Result Add(long endPointID,string value, long ioTypeID, DateTime executionTime)
+        {
+            EndPointIO endIO = new EndPointIO();
+            endIO.EndPointID = endPointID;
+            endIO.Valu = value;
+            endIO.IOTypeID = ioTypeID;
+            endIO.TimeStamp = DateTime.Now;
+            endIO.ExecTimeStamp = executionTime;
+            db.EndPointIOs.Add(endIO);
+            db.SaveChanges();
+            return ResultInfo.GenerateOKResult();
+        }
+        #endregion
+
         #region Submit IO
-        private ResultInfo.Result SubmitIO(Guid endPointKeyPass, EndPointIOType endPointIOType , string Valu, DateTime executionTimeStamp)
+        private ResultInfo.Result SubmitIO(Guid endPointKeyPass, long IOTypeID , string Valu, DateTime executionTimeStamp)
         {
             List<Endpoint> ends = db.Endpoints.Where(e => e.GUID == endPointKeyPass).ToList();
             if (ends.Count == 1)
             {
-
+                Add(ends[0].ID, Valu, IOTypeID, executionTimeStamp);
+                return ResultInfo.GenerateFailedResult("Ok");
             }
             else
             {
-
+               return ResultInfo.GenerateFailedResult("Keypass is not valid");
             }
-
-            return ResultInfo.GenerateOKResult();
         }
 
         #endregion

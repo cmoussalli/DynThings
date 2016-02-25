@@ -15,20 +15,24 @@ namespace DynThings.Data.Models
 using System;
     using System.Collections.Generic;
     
-public partial class LinkLocationsLocationView
+public partial class EndPointCommand
 {
 
     public long ID { get; set; }
 
-    public long LocationID { get; set; }
+    public string Title { get; set; }
 
-    public long LocationViewID { get; set; }
+    public string Description { get; set; }
+
+    public Nullable<long> EndPointID { get; set; }
+
+    public string CommandCode { get; set; }
+
+    public string OwnerID { get; set; }
 
 
 
-    public virtual Location Location { get; set; }
-
-    public virtual LocationView LocationView { get; set; }
+    public virtual Endpoint Endpoint { get; set; }
 
 }
 
