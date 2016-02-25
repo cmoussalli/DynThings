@@ -59,6 +59,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Core\ResultInfo.cs" />
+    <Compile Include="Repositories\EndPointCommandsRepository.cs" />
     <Compile Include="Repositories\DevicesRepositories.cs" />
     <Compile Include="Repositories\DeviceCommandsRepository.cs" />
     <Compile Include="Repositories\EndpointIOsRepository.cs" />

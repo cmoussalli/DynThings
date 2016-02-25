@@ -25,12 +25,12 @@ namespace DynThings.Data.Repositories
         public static EndPointTypesRepository repoEndpointTypes = new EndPointTypesRepository();
         public static DevicesRepositories repoDevices = new DevicesRepositories();
         public static DeviceCommandsRepository repoDeviceCommands = new DeviceCommandsRepository();
-
+        public static EndPointCommandsRepository repoEndPointCommands = new EndPointCommandsRepository();
 
         #endregion
 
 
 
-       
+
     }
 }

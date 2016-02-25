@@ -1,0 +1,43 @@
+﻿@model PagedList.IPagedList<DynThings.Data.Models.EndPointCommand>
+
+
+
+<table class="table striped hovered border bordered">
+    <thead>
+        <tr>
+            <th>Title</th>
+            <th>Description</th>
+            <th>EndPoint</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Endpoint.Title)
+            </td>
+
+            <td>
+                @Html.ActionLink("Details", "Details", new { id = item.ID })
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>
+
+
+<div id="CommandsListPager">
+    <input id="CommandCurrentPage" value="@Model.PageNumber.ToString()" hidden />
+   
+
+    @Html.PagedListPager(Model, page => Url.Action("ListPV", new { page }))
+</div>
+

@@ -18,6 +18,18 @@ namespace DynThings.Data.Repositories
     {
         private DynThingsEntities db = new DynThingsEntities();
 
+        #region GetList
+        /// <summary>
+        /// Get list of EndPoints
+        /// </summary>
+        /// <returns>List of EndPoints </returns>
+        public List<Endpoint> GetList()
+        {
+            List<Endpoint> ends = db.Endpoints.ToList();
+            return ends;
+        }
+        #endregion
+
         #region Get PagedList
         public IPagedList GetPagedList(string search, int pageNumber, int recordsPerPage)
         {
