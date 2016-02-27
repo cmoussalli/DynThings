@@ -527,6 +527,7 @@
     <Content Include="Views\EndPointCommands\_List.cshtml" />
     <Content Include="Views\EndPointCommands\Details.cshtml" />
     <Content Include="Views\EndPointCommands\Index.cshtml" />
+    <Content Include="Views\DeviceCommands\_Execute.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

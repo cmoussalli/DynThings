@@ -26,6 +26,7 @@ namespace DynThings.Data.Repositories
         public static DevicesRepositories repoDevices = new DevicesRepositories();
         public static DeviceCommandsRepository repoDeviceCommands = new DeviceCommandsRepository();
         public static EndPointCommandsRepository repoEndPointCommands = new EndPointCommandsRepository();
+        public static DeviceIOsRepository repoDeviceIOs = new DeviceIOsRepository();
 
         #endregion
 

@@ -1,0 +1,54 @@
+﻿
+@model DynThings.Data.Models.DeviceCommand
+
+<div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+    <h4 class="modal-title" id="myModalLabel">Execute Device Command</h4>
+    <div class="modal-body">
+        @using (Html.BeginForm("ExecutePV", "DeviceCommands", FormMethod.Post, new { id = "DeviceCommandExecuteForm" }))
+        {
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @Html.HiddenFor(model => model.ID)
+
+
+            @Html.LabelFor(model => model.Title, htmlAttributes: new { @class = "" })
+            @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
+
+            @Html.LabelFor(model => model.DeviceID, htmlAttributes: new { @class = "" })
+            @Html.EditorFor(model => model.DeviceID, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.DeviceID, "", new { @class = "text-danger" })
+
+            @Html.LabelFor(model => model.CommandCode, htmlAttributes: new { @class = "" })
+            @Html.EditorFor(model => model.CommandCode, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.CommandCode, "", new { @class = "text-danger" })
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary">Execute</button>
+            </div>
+        }
+    </div>
+</div>
+<script>
+    $(document).ready(function () {
+        $("#DeviceCommandExecuteForm").on("submit", function (event) {
+            event.preventDefault();
+            //$("#DynConfigEditSavingDiv").show();
+
+            var url = $(this).attr("action");
+            var formData = $(this).serialize();
+            $.ajax({
+                url: url,
+                type: "POST",
+                data: formData,
+                dataType: "json",
+                success: function (resp) {
+                    alert('ok');
+                }
+            })
+            $('#mdl').modal('hide');
+        });
+    });
+</script>

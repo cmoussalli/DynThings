@@ -46,13 +46,13 @@ namespace DynThings.WebPortal.Controllers
 
         //Get List by DeviceID
         [HttpGet]
-        public PartialViewResult ListByDeviceIDPV(string searchfor = null,long deviceID = 0, int page = 1, int recordsperpage = 0)
+        public PartialViewResult ListByDeviceIDPV(string searchfor = null, long deviceID = 0, int page = 1, int recordsperpage = 0)
         {
-            PagedList.IPagedList cmds = UnitOfWork.repoDeviceCommands.GetPagedListByDeviceID(searchfor,deviceID, page, Helpers.Configs.validateRecordsPerMaster(recordsperpage));
+            PagedList.IPagedList cmds = UnitOfWork.repoDeviceCommands.GetPagedListByDeviceID(searchfor, deviceID, page, Helpers.Configs.validateRecordsPerMaster(recordsperpage));
             return PartialView("_List", cmds);
         }
         #endregion
-        
+
         #region AddPV
         [HttpGet]
         public PartialViewResult AddPV()
@@ -65,8 +65,8 @@ namespace DynThings.WebPortal.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult AddPV([Bind(Include = "Title,DeviceID,Description,CommandCode")] DeviceCommand command)
         {
-            long cmd = long.Parse (command.DeviceID.ToString());
-            UnitOfWork.repoDeviceCommands.Add(command.Title,long.Parse(command.DeviceID.ToString()),command.Description,command.CommandCode,"1");
+            long cmd = long.Parse(command.DeviceID.ToString());
+            UnitOfWork.repoDeviceCommands.Add(command.Title, long.Parse(command.DeviceID.ToString()), command.Description, command.CommandCode, "1");
             return Content("Ok");
         }
         #endregion
@@ -86,13 +86,35 @@ namespace DynThings.WebPortal.Controllers
         {
             if (ModelState.IsValid)
             {
-                UnitOfWork.repoDeviceCommands.Edit(Command.ID, Command.Title, Command.Description,long.Parse(Command.DeviceID.ToString()),Command.CommandCode);
+                UnitOfWork.repoDeviceCommands.Edit(Command.ID, Command.Title, Command.Description, long.Parse(Command.DeviceID.ToString()), Command.CommandCode);
                 return Content("Ok");
             }
             return Content("Failed");
         }
         #endregion
 
+        #region ExecutePV
+
+        #endregion
+        [HttpGet]
+        public PartialViewResult ExecutePV(long id)
+        {
+            DeviceCommand Command = UnitOfWork.repoDeviceCommands.Find(id);
+            return PartialView("_Execute", Command);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult ExecutePV([Bind(Include = "ID,DeviceID,CommandCode")] DeviceCommand Command)
+        {
+            if (ModelState.IsValid)
+            {
+                Device dev = UnitOfWork.repoDevices.Find((long) Command.DeviceID);
+                UnitOfWork.repoDeviceCommands.Execute(Command.ID,Guid.Parse(dev.KeyPass.ToString()),User.Identity.ToString());
+                return Content("Ok");
+            }
+            return Content("Failed");
+        }
         #endregion
 
 

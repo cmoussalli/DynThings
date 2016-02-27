@@ -27,6 +27,7 @@
 
             <td>
                 @Html.ActionLink("Details", "Details", new { id = item.ID })
+                <button type="button" class="btn btn-info pull-right" data-toggle="modal" onclick="LoadPart_DialogCommandExecute(@item.ID)" data-target="#mdl">Execute</button>
             </td>
         </tr>
     }
@@ -34,8 +35,8 @@
 </table>
 
 
-<div id="CommandsListPager">
-    <input id="CommandCurrentPage" value="@Model.PageNumber.ToString()" hidden />
+<div id="DeviceCommandsListPager">
+    <input id="DeviceCommandCurrentPage" value="@Model.PageNumber.ToString()" hidden />
    
 
     @Html.PagedListPager(Model, page => Url.Action("ListPV", new { page }))

@@ -35,7 +35,7 @@ namespace DynThings.Data.Repositories
         /// </summary>
         /// <param name="id">Device ID</param>
         /// <returns>Device object</returns>
-        public Device Find(int id)
+        public Device Find(long id)
         {
             Device dev = new Device();
             List<Device> devs = db.Devices.Where(l => l.ID == id).ToList();

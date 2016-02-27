@@ -74,5 +74,18 @@
             $("#modal").html(partialViewResult);
         });
     }
+
+    function LoadPart_DialogCommandExecute(id) {
+        var loadingpart = LoadDivLoading();
+        $("#modal").html(loadingpart);
+        $.ajax({
+            url: '@Url.Content("~/")' + 'DeviceCommands/executepv?id=' + id,
+            type: "GET",
+        })
+        .done(function (partialViewResult) {
+            $("#modal").html(partialViewResult);
+        });
+    }
+
 </script>
 

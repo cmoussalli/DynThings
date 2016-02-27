@@ -94,6 +94,19 @@ namespace DynThings.Data.Repositories
 
         #endregion
 
+        #region Execute
+        public ResultInfo.Result Execute(long commandID, Guid deviceKeyPass, string ownerID)
+        {
+            DeviceCommand cmd = Find(commandID);
+            if (cmd.Device.KeyPass == deviceKeyPass)
+            {
+                UnitOfWork.repoDeviceIOs.Add(cmd.Device.ID, cmd.CommandCode, DeviceIOsRepository.deviceIOType.Command);
+            }
+
+            ResultInfo.Result result = ResultInfo.GenerateOKResult();
+            return result;
+        }
+        #endregion
 
     }
 }
