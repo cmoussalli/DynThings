@@ -4,33 +4,38 @@
 <div class="modal-header">
     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
     <h4 class="modal-title" id="myModalLabel">Execute Device Command</h4>
-    <div class="modal-body">
-        @using (Html.BeginForm("ExecutePV", "DeviceCommands", FormMethod.Post, new { id = "DeviceCommandExecuteForm" }))
-        {
-            @Html.AntiForgeryToken()
-            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-            @Html.HiddenFor(model => model.ID)
-
-
-            @Html.LabelFor(model => model.Title, htmlAttributes: new { @class = "" })
-            @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
-
-            @Html.LabelFor(model => model.DeviceID, htmlAttributes: new { @class = "" })
-            @Html.EditorFor(model => model.DeviceID, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.DeviceID, "", new { @class = "text-danger" })
-
-            @Html.LabelFor(model => model.CommandCode, htmlAttributes: new { @class = "" })
-            @Html.EditorFor(model => model.CommandCode, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.CommandCode, "", new { @class = "text-danger" })
-
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <button type="submit" class="btn btn-primary">Execute</button>
-            </div>
-        }
-    </div>
 </div>
+<div class="modal-body">
+    @using (Html.BeginForm("ExecutePV", "DeviceCommands", FormMethod.Post, new { id = "DeviceCommandExecuteForm" }))
+        {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.ID)
+        @Html.HiddenFor(model => model.DeviceID)
+
+
+        <div class="row">
+            <div class="col-md-3">Title</div>
+            <div class="col-md-9">@Model.Title</div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-3">Description</div>
+            <div class="col-md-9">@Model.Description</div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-3">Device</div>
+            <div class="col-md-9">@Model.Device.Title</div>
+        </div>
+        }
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+    <button type="submit" class="btn btn-primary">Execute</button>
+</div>
+
+
 <script>
     $(document).ready(function () {
         $("#DeviceCommandExecuteForm").on("submit", function (event) {

@@ -105,7 +105,7 @@ namespace DynThings.WebPortal.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult ExecutePV([Bind(Include = "ID,DeviceID,CommandCode")] DeviceCommand Command)
+        public ActionResult ExecutePV([Bind(Include = "ID,DeviceID")] DeviceCommand Command)
         {
             if (ModelState.IsValid)
             {

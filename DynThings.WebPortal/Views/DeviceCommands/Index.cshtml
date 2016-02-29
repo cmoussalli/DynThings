@@ -25,67 +25,17 @@
         </div>
     </div>
 </div>
-<script>
-    $(document).ready(function () {
-        LoadPart_DeviceCommandListDiv();
-    });
 
 
-    function LoadPart_DeviceCommandListDiv() {
-        var loadingpart = LoadDivLoading();
-        $("#divDeviceCommandsList").html(loadingpart);
-        $.ajax({
-            url: '@Url.Content("~/")' + 'DeviceCommands/ListPV?searchfor=' + $(txtDeviceCommandSearch).val() + '&recordsperpage=0',
-            //page=" + $("#DynConfigCurrentPage").html,
-            type: "GET",
-        })
-            .done(function (partialViewResult) {
-                $("#divDeviceCommandsList").html(partialViewResult);
-            });
-        return false;
-    };
+@section scriptfiles{
+    <script src="~/DynScripts/DeviceCommands.js"></script>
+}
 
-    $(document).ready(function () {
-        $(document).on("click", "#DeviceCommandsListPager a[href]", function () {
-            var loadingpart = LoadDivLoading();
-            $("#divDeviceCommandsList").html(loadingpart);
-            $.ajax({
-                url: $(this).attr("href") + "&searchfor=" + $(txtDeviceCommandSearch).val() + '&recordsperpage=0',
-                type: 'GET',
-                cache: false,
-                success: function (result) {
-                    $("#divDeviceCommandsList").html(result);
-                    return false;
-                }
-            });
-            return false;
+    <script>
+        $(document).ready(function () {
+            LoadPart_DeviceCommandListDiv();
+            AttachEventDeviceCommandsListPager();
         });
-    });
+    </script>
 
-    function LoadPart_DialogDeviceCommandAdd() {
-        var loadingpart = LoadDivLoading();
-        $("#modal").html(loadingpart);
-        $.ajax({
-            url: '@Url.Content("~/")' + 'DeviceCommands/addpv',
-            //page=" + $("#DynConfigCurrentPage").html,
-            type: "GET",
-        })
-        .done(function (partialViewResult) {
-            $("#modal").html(partialViewResult);
-        });
-    }
-
-    function LoadPart_DialogCommandExecute(id) {
-        var loadingpart = LoadDivLoading();
-        $("#modal").html(loadingpart);
-        $.ajax({
-            url: '@Url.Content("~/")' + 'DeviceCommands/executepv?id=' + id,
-            type: "GET",
-        })
-        .done(function (partialViewResult) {
-            $("#modal").html(partialViewResult);
-        });
-    }
-
-</script>
 

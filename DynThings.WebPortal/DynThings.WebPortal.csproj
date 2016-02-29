@@ -318,6 +318,7 @@
     <Content Include="Assets\Portal\docs.js" />
     <Content Include="Content\docs.css" />
     <Content Include="Content\PagedList.css" />
+    <Content Include="DynScripts\DeviceCommands.js" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="fonts\metro.svg" />
