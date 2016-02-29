@@ -94,6 +94,19 @@ namespace DynThings.Data.Repositories
 
         #endregion
 
+        #region Execute
+        public ResultInfo.Result Execute(long commandID, Guid endPointKeyPass, string ownerID)
+        {
+            EndPointCommand cmd = Find(commandID);
+            if (cmd.Endpoint.KeyPass == endPointKeyPass)
+            {
+                UnitOfWork.repoEndpointIOs.Add(cmd.Endpoint.ID, cmd.CommandCode, EndpointIOsRepository.EndPointIOType.Command);
+            }
+
+            ResultInfo.Result result = ResultInfo.GenerateOKResult();
+            return result;
+        }
+        #endregion
 
     }
 }

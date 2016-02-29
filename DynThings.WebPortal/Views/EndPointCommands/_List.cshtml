@@ -27,6 +27,7 @@
 
             <td>
                 @Html.ActionLink("Details", "Details", new { id = item.ID })
+                <button type="button" class="btn btn-info pull-right" data-toggle="modal" onclick="LoadPart_DialogEndPointCommandExecute(@item.ID)" data-target="#mdl">Execute</button>
             </td>
         </tr>
     }

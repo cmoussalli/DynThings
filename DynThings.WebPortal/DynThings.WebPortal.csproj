@@ -318,6 +318,7 @@
     <Content Include="Assets\Portal\docs.js" />
     <Content Include="Content\docs.css" />
     <Content Include="Content\PagedList.css" />
+    <Content Include="DynScripts\EndPointCommands.js" />
     <Content Include="DynScripts\DeviceCommands.js" />
     <Content Include="DynScripts\EndPoints.js" />
     <Content Include="favicon.ico" />
@@ -530,6 +531,7 @@
     <Content Include="Views\EndPointCommands\Details.cshtml" />
     <Content Include="Views\EndPointCommands\Index.cshtml" />
     <Content Include="Views\DeviceCommands\_Execute.cshtml" />
+    <Content Include="Views\EndPointCommands\_Execute.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

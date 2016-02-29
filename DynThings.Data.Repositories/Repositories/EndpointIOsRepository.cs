@@ -39,14 +39,26 @@ namespace DynThings.Data.Repositories
         #endregion
 
         #region Add
-        public ResultInfo.Result Add(long endPointID,string value, long ioTypeID, DateTime executionTime)
+        public ResultInfo.Result Add(long endPointID, string value, EndPointIOType ioType, DateTime executionTime)
+        {
+            EndPointIO cmdIO = new EndPointIO();
+            cmdIO.EndPointID = endPointID;
+            cmdIO.Valu = value;
+            cmdIO.IOTypeID = long.Parse(ioType.GetHashCode().ToString());
+            cmdIO.TimeStamp = DateTime.Now;
+            cmdIO.ExecTimeStamp = executionTime;
+            db.EndPointIOs.Add(cmdIO);
+            db.SaveChanges();
+            return ResultInfo.GenerateOKResult();
+        }
+
+        public ResultInfo.Result Add(long endPointID, string value, EndPointIOType ioType)
         {
             EndPointIO endIO = new EndPointIO();
             endIO.EndPointID = endPointID;
             endIO.Valu = value;
-            endIO.IOTypeID = ioTypeID;
+            endIO.IOTypeID = long.Parse(ioType.GetHashCode().ToString());
             endIO.TimeStamp = DateTime.Now;
-            endIO.ExecTimeStamp = executionTime;
             db.EndPointIOs.Add(endIO);
             db.SaveChanges();
             return ResultInfo.GenerateOKResult();
@@ -54,7 +66,7 @@ namespace DynThings.Data.Repositories
         #endregion
 
         #region Submit IO
-        private ResultInfo.Result SubmitIO(Guid endPointKeyPass, long IOTypeID , string Valu, DateTime executionTimeStamp)
+        private ResultInfo.Result SubmitIO(Guid endPointKeyPass, EndPointIOType IOTypeID , string Valu, DateTime executionTimeStamp)
         {
             List<Endpoint> ends = db.Endpoints.Where(e => e.GUID == endPointKeyPass).ToList();
             if (ends.Count == 1)

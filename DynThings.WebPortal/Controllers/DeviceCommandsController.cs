@@ -95,7 +95,7 @@ namespace DynThings.WebPortal.Controllers
 
         #region ExecutePV
 
-        #endregion
+
         [HttpGet]
         public PartialViewResult ExecutePV(long id)
         {
@@ -109,12 +109,14 @@ namespace DynThings.WebPortal.Controllers
         {
             if (ModelState.IsValid)
             {
-                Device dev = UnitOfWork.repoDevices.Find((long) Command.DeviceID);
-                UnitOfWork.repoDeviceCommands.Execute(Command.ID,Guid.Parse(dev.KeyPass.ToString()),User.Identity.ToString());
+                Device dev = UnitOfWork.repoDevices.Find((long)Command.DeviceID);
+                UnitOfWork.repoDeviceCommands.Execute(Command.ID, Guid.Parse(dev.KeyPass.ToString()), User.Identity.ToString());
                 return Content("Ok");
             }
             return Content("Failed");
         }
+        #endregion
+
         #endregion
 
 

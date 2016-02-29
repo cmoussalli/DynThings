@@ -2,12 +2,11 @@
 @{
     ViewBag.Title = "Command Details";
 }
-
 <div class="container">
     <div class="page-header">
         <h1>Command Details</h1>
     </div>
-    
+
     <div class="row">
         <div class="col-md-12">
             <ul class="nav nav-tabs">
@@ -40,63 +39,17 @@
         </div>
     </div>
 </div>
-
 <!-- Button trigger modal -->
 
 
-
-
-@section scripts{
-
-    <script>
-        function showDialog(id) {
-            var dialog = $(id).data('dialog');
-            dialog.open();
-        }
-
-        function closeDialog(id) {
-            var dialog = $(id).data('dialog');
-            dialog.close();
-        }
-
-
-        $(document).ready(function () {
-            LoadPart_CommandDetailsDiv('@Model.ID');
-
-        });
-
-        function LoadCommandEditor(id) {
-            //showDialog('#modal');
-            LoadPart_DialogCommandEdit(id);
-            LoadPart_CommandDetailsDiv(id);
-        }
-
-        function LoadPart_CommandDetailsDiv(id) {
-            var loadingpart = LoadDivLoading();
-            $("#divCommandMain").html(loadingpart);
-            $.ajax({
-                url: '@Url.Content("~/")' + 'EndPointCommands/DetailsPV?id=' + id,
-                type: "GET",
-            })
-            .done(function (partialViewResult) {
-                $("#divCommandMain").html(partialViewResult);
-            });
-        }
-
-        function LoadPart_DialogCommandEdit(id) {
-            var loadingpart = LoadDivLoading();
-            $("#modal").html(loadingpart);
-            $.ajax({
-                url: '@Url.Content("~/")' + 'EndPointCommands/editpv?id=' + id,
-                type: "GET",
-            })
-            .done(function (partialViewResult) {
-                $("#modal").html(partialViewResult);
-            });
-        }
-
-  
-    </script>
-   
-    
+@section scriptfiles{
+    <script src="~/DynScripts/EndPointCommands.js"></script>
 }
+
+<script>
+    $(document).ready(function () {
+        LoadPart_EndPointCommandDetailsDiv('@Model.ID');
+    });
+
+
+</script>

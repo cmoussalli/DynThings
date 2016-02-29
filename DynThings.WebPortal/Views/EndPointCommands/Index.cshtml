@@ -25,54 +25,11 @@
         </div>
     </div>
 </div>
+
+<script src="~/DynScripts/EndPointCommands.js"></script>
 <script>
     $(document).ready(function () {
         LoadPart_EndPointCommandListDiv();
     });
 
-
-    function LoadPart_EndPointCommandListDiv() {
-        var loadingpart = LoadDivLoading();
-        $("#divEndPointCommandsList").html(loadingpart);
-        $.ajax({
-            url: '@Url.Content("~/")' + 'EndPointCommands/ListPV?searchfor=' + $(txtEndPointCommandSearch).val() + '&recordsperpage=0',
-            //page=" + $("#DynConfigCurrentPage").html,
-            type: "GET",
-        })
-            .done(function (partialViewResult) {
-                $("#divEndPointCommandsList").html(partialViewResult);
-            });
-        return false;
-    };
-
-    $(document).ready(function () {
-        $(document).on("click", "#EndPointCommandsListPager a[href]", function () {
-            var loadingpart = LoadDivLoading();
-            $("#divEndPointCommandsList").html(loadingpart);
-            $.ajax({
-                url: $(this).attr("href") + "&searchfor=" + $(txtEndPointCommandSearch).val() + '&recordsperpage=0',
-                type: 'GET',
-                cache: false,
-                success: function (result) {
-                    $("#divEndPointCommandsList").html(result);
-                    return false;
-                }
-            });
-            return false;
-        });
-    });
-
-    function LoadPart_DialogEndPointCommandAdd() {
-        var loadingpart = LoadDivLoading();
-        $("#modal").html(loadingpart);
-        $.ajax({
-            url: '@Url.Content("~/")' + 'EndPointCommands/addpv',
-            //page=" + $("#DynConfigCurrentPage").html,
-            type: "GET",
-        })
-        .done(function (partialViewResult) {
-            $("#modal").html(partialViewResult);
-        });
-    }
 </script>
-

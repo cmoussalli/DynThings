@@ -73,7 +73,6 @@ namespace DynThings.Data.Repositories
             db.DeviceCommands.Add(cmd);
             db.SaveChanges();
             ResultInfo.Result result = ResultInfo.GenerateOKResult();
-
             return result;
         }
 
