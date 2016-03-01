@@ -24,23 +24,7 @@
 
 <script>
     $(document).ready(function () {
-        $("#DeviceEditForm").on("submit", function (event) {
-            event.preventDefault();
-            var url = $(this).attr("action");
-            var formData = $(this).serialize();
-            $.ajax({
-                url: url,
-                type: "POST",
-                data: formData,
-                dataType: "json",
-                success: function (resp) {
-                }
-            })
-
-            LoadPart_DeviceDetailsDiv('@Model.ID');
-            LoadPart_DeviceDetailsDiv('@Model.ID');
-            $('#mdl').modal('hide');
-        });
+        AttachEventDeviceEditForm(@Model.ID);
 
     });
 

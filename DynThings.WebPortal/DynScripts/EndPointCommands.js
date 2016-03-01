@@ -1,4 +1,5 @@
-﻿function AttachEventEndPointCommandsListPager() {
+﻿//Attach : Pager
+function AttachEventEndPointCommandsListPager() {
     $(document).on("click", "#EndPointCommandsListPager a[href]", function () {
         var loadingpart = LoadDivLoading();
         $("#divEndPointCommandsList").html(loadingpart);
@@ -15,7 +16,10 @@
     });
 };
 
+//Attach : Add Form Submit
+//TODO
 
+//Attach : Edit Form Submit
 function AttachEventEndPointCommandEditForm(EndPointCommandID) {
     $("#EndPointCommandEditForm").on("submit", function (event) {
         event.preventDefault();
@@ -35,7 +39,7 @@ function AttachEventEndPointCommandEditForm(EndPointCommandID) {
     });
 }
 
-
+//Get List
 function LoadPart_EndPointCommandListDiv() {
     var loadingpart = LoadDivLoading();
     $("#divEndPointCommandsList").html(loadingpart);
@@ -49,7 +53,7 @@ function LoadPart_EndPointCommandListDiv() {
     return false;
 };
 
-
+//Get Details
 function LoadPart_EndPointCommandDetailsDiv(id) {
     var loadingpart = LoadDivLoading();
     $("#divCommandMain").html(loadingpart);
@@ -62,7 +66,7 @@ function LoadPart_EndPointCommandDetailsDiv(id) {
     });
 }
 
-
+//Get Add
 function LoadPart_DialogEndPointCommandAdd() {
     var loadingpart = LoadDivLoading();
     $("#modal").html(loadingpart);
@@ -75,7 +79,7 @@ function LoadPart_DialogEndPointCommandAdd() {
     });
 }
 
-
+//Get Edit
 function LoadPart_DialogEndPointCommandEdit(id) {
     var loadingpart = LoadDivLoading();
     $("#modal").html(loadingpart);
@@ -88,7 +92,7 @@ function LoadPart_DialogEndPointCommandEdit(id) {
     });
 }
 
-
+//Get Execute
 function LoadPart_DialogEndPointCommandExecute(id) {
     var loadingpart = LoadDivLoading();
     $("#modal").html(loadingpart);
@@ -101,7 +105,7 @@ function LoadPart_DialogEndPointCommandExecute(id) {
     });
 }
 
-
+//Button: Edit
 function LoadEndPointCommandEditor(id) {
     LoadPart_DialogEndPointCommandEdit(id);
     LoadPart_EndPointCommandDetailsDiv(id);

@@ -1,4 +1,5 @@
-﻿function AttachEventDeviceCommandsListPager() {
+﻿//Attach : Pager
+function AttachEventDeviceCommandsListPager() {
     $(document).on("click", "#DeviceCommandsListPager a[href]", function () {
         var loadingpart = LoadDivLoading();
         $("#divDeviceCommandsList").html(loadingpart);
@@ -15,7 +16,10 @@
     });
 };
 
+//Attach : Add Form Submit
+//TODO
 
+//Attach : Edit Form Submit
 function AttachEventDeviceCommandEditForm(deviceCommandID) {
     $("#DeviceCommandEditForm").on("submit", function (event) {
         event.preventDefault();
@@ -35,7 +39,7 @@ function AttachEventDeviceCommandEditForm(deviceCommandID) {
     });
 }
 
-
+//Get List
 function LoadPart_DeviceCommandListDiv() {
     var loadingpart = LoadDivLoading();
     $("#divDeviceCommandsList").html(loadingpart);
@@ -49,7 +53,7 @@ function LoadPart_DeviceCommandListDiv() {
     return false;
 };
 
-
+//Get Details
 function LoadPart_DeviceCommandDetailsDiv(id) {
     var loadingpart = LoadDivLoading();
     $("#divCommandMain").html(loadingpart);
@@ -62,7 +66,7 @@ function LoadPart_DeviceCommandDetailsDiv(id) {
     });
 }
 
-
+//Get Add
 function LoadPart_DialogDeviceCommandAdd() {
     var loadingpart = LoadDivLoading();
     $("#modal").html(loadingpart);
@@ -75,7 +79,7 @@ function LoadPart_DialogDeviceCommandAdd() {
     });
 }
 
-
+//Get Edit
 function LoadPart_DialogDeviceCommandEdit(id) {
     var loadingpart = LoadDivLoading();
     $("#modal").html(loadingpart);
@@ -88,7 +92,7 @@ function LoadPart_DialogDeviceCommandEdit(id) {
     });
 }
 
-
+//Get Execute
 function LoadPart_DialogDeviceCommandExecute(id) {
     var loadingpart = LoadDivLoading();
     $("#modal").html(loadingpart);
@@ -101,7 +105,7 @@ function LoadPart_DialogDeviceCommandExecute(id) {
     });
 }
 
-
+//Button: Edit
 function LoadDeviceCommandEditor(id) {
     LoadPart_DialogDeviceCommandEdit(id);
     LoadPart_DeviceCommandDetailsDiv(id);

@@ -28,10 +28,20 @@ namespace DynThings.Data.Repositories
             return cmds;
         }
 
-        public IPagedList GetPagedListByEndPointID(string search,long EndPointID, int pageNumber, int recordsPerPage)
+        public IPagedList GetPagedListByEndPointID(string search, long EndPointID, int pageNumber, int recordsPerPage)
         {
             IPagedList cmds = db.EndPointCommands
               .Where(e => search == null || e.Title.Contains(search) && e.EndPointID == EndPointID)
+              .OrderBy(e => e.Title).ToList()
+              .ToPagedList(pageNumber, recordsPerPage);
+            return cmds;
+        }
+
+
+        public IPagedList GetPagedListByEndPointGUID(string search, Guid EndPointGUID, int pageNumber, int recordsPerPage)
+        {
+            IPagedList cmds = db.EndPointCommands
+              .Where(e => search == null || e.Title.Contains(search) && e.Endpoint.GUID == EndPointGUID)
               .OrderBy(e => e.Title).ToList()
               .ToPagedList(pageNumber, recordsPerPage);
             return cmds;
@@ -80,7 +90,7 @@ namespace DynThings.Data.Repositories
         #endregion
 
         #region Edit
-        public ResultInfo.Result Edit(long id, string title, string description,long EndPointID, string commandCode)
+        public ResultInfo.Result Edit(long id, string title, string description, long EndPointID, string commandCode)
         {
             EndPointCommand cmd = db.EndPointCommands.Find(id);
             cmd.Title = title;

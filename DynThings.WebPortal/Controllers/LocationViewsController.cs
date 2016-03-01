@@ -128,11 +128,19 @@ namespace DynThings.WebPortal.Controllers
             IPagedList IOs = UnitOfWork.repoEndpointIOs.GetPagedList(guid, 1, 3);
             return PartialView("_EndPointHistory", IOs);
         }
+        
+
+        [HttpGet]
+        public PartialViewResult GetPVLocationViewEndPointCommands(Guid guid)
+        {
+            IPagedList endCmds = UnitOfWork.repoEndPointCommands.GetPagedListByEndPointGUID("",guid,1,0);
+            return PartialView("_EndPointCommands", endCmds);
+        }
         #endregion
 
 
 
-        #endregion
+#endregion
 
 
 
