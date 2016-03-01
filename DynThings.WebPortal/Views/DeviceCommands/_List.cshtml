@@ -1,0 +1,44 @@
+﻿@model IPagedList<DynThings.Data.Models.DeviceCommand>
+
+
+
+<table class="table striped hovered border bordered">
+    <thead>
+        <tr>
+            <th>Title</th>
+            <th>Description</th>
+            <th>Device</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Device.Title)
+            </td>
+
+            <td>
+                @Html.ActionLink("Details", "Details", new { id = item.ID })
+                <button type="button" class="btn btn-info pull-right" data-toggle="modal" onclick="LoadPart_DialogDeviceCommandExecute(@item.ID)" data-target="#mdl">Execute</button>
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>
+
+
+<div id="DeviceCommandsListPager">
+    <input id="DeviceCommandCurrentPage" value="@Model.PageNumber.ToString()" hidden />
+   
+
+    @Html.PagedListPager(Model, page => Url.Action("ListPV", new { page }))
+</div>
+

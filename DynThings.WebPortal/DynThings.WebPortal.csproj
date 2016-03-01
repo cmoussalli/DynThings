@@ -190,7 +190,9 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\APIEndPointIOsController.cs" />
     <Compile Include="Controllers\APIEndpointsController.cs" />
+    <Compile Include="Controllers\DeviceCommandsController.cs" />
     <Compile Include="Controllers\DevicesController.cs" />
+    <Compile Include="Controllers\EndPointCommandsController.cs" />
     <Compile Include="Controllers\EndpointsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LocationsController.cs" />
@@ -316,6 +318,9 @@
     <Content Include="Assets\Portal\docs.js" />
     <Content Include="Content\docs.css" />
     <Content Include="Content\PagedList.css" />
+    <Content Include="DynScripts\EndPointCommands.js" />
+    <Content Include="DynScripts\DeviceCommands.js" />
+    <Content Include="DynScripts\EndPoints.js" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="fonts\metro.svg" />
@@ -432,6 +437,7 @@
     <Content Include="Themes\SandStone\bootstrap.min.css" />
     <Content Include="Themes\United\bootstrap.min.css" />
     <Content Include="Themes\Yeti\bootstrap.min.css" />
+    <Content Include="Views\DeviceCommands\Index.cshtml" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -513,10 +519,22 @@
     <Content Include="Views\LocationViews\_EditTitle.cshtml" />
     <Content Include="Views\Endpoints\_Details_History.cshtml" />
     <Content Include="Views\Endpoints\_EndPointHistory.cshtml" />
+    <Content Include="Views\DeviceCommands\_List.cshtml" />
+    <Content Include="Views\DeviceCommands\Details.cshtml" />
+    <Content Include="Views\DeviceCommands\_Details_Main.cshtml" />
+    <Content Include="Views\DeviceCommands\_Edit.cshtml" />
+    <Content Include="Views\DeviceCommands\_Add.cshtml" />
+    <Content Include="Views\EndPointCommands\_Add.cshtml" />
+    <Content Include="Views\EndPointCommands\_Details_Main.cshtml" />
+    <Content Include="Views\EndPointCommands\_Edit.cshtml" />
+    <Content Include="Views\EndPointCommands\_List.cshtml" />
+    <Content Include="Views\EndPointCommands\Details.cshtml" />
+    <Content Include="Views\EndPointCommands\Index.cshtml" />
+    <Content Include="Views\DeviceCommands\_Execute.cshtml" />
+    <Content Include="Views\EndPointCommands\_Execute.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\EndPointCommands\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

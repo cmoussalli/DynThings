@@ -2,12 +2,10 @@
 @{
     ViewBag.Title = "EndPoints";
 }
-
 <div class="container">
     <div class="page-header">
         <h1>EndPoints</h1>
     </div>
-
     <div class="row">
         <div class="col-md-6">
             <button type="button" class="btn btn-info" onclick="LoadPart_DialogEndPointAdd()" data-toggle="modal" data-target="#mdl">Add</button>
@@ -21,64 +19,20 @@
             </div>
         </div>
     </div>
-
     <br />
-
     <div class="well well-lg">
         <div id="divEndPointsList">
         </div>
     </div>
 </div>
-
+<script src="~/DynScripts/EndPoints.js"></script>
 <script>
+
     $(document).ready(function () {
         LoadPart_EndPointListDiv();
     });
 
 
-    function LoadPart_EndPointListDiv() {
-        var loadingpart = LoadDivLoading();
-        $("#divEndPointsList").html(loadingpart);
-        $.ajax({
-            url: '@Url.Content("~/")' + 'EndPoints/ListPV?searchfor=' + $(txtEndPointSearch).val() + '&recordsperpage=0',
-            //page=" + $("#DynConfigCurrentPage").html,
-            type: "GET",
-        })
-            .done(function (partialViewResult) {
-                $("#divEndPointsList").html(partialViewResult);
-            });
-        return false;
-    };
 
-    $(document).ready(function () {
-        $(document).on("click", "#EndPointsListPager a[href]", function () {
-            var loadingpart = LoadDivLoading();
-            $("#divEndPointsList").html(loadingpart);
-            $.ajax({
-                url: $(this).attr("href") + "&searchfor=" + $(txtEndPointSearch).val() + '&recordsperpage=0',
-                type: 'GET',
-                cache: false,
-                success: function (result) {
-                    $("#divEndPointsList").html(result);
-                    return false;
-                }
-            });
-            return false;
-        });
-    });
-
-    function LoadPart_DialogEndPointAdd() {
-        var loadingpart = LoadDivLoading();
-        $("#modal").html(loadingpart);
-        $.ajax({
-            url: '@Url.Content("~/")' + 'EndPoints/addpv',
-            //page=" + $("#DynConfigCurrentPage").html,
-            type: "GET",
-        })
-        .done(function (partialViewResult) {
-            $("#modal").html(partialViewResult);
-        });
-    }
 </script>
-
 

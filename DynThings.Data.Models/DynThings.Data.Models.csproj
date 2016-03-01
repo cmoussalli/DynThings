@@ -52,13 +52,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Command.cs">
-      <DependentUpon>DynThingsModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="CssIcon.cs">
       <DependentUpon>DynThingsModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Device.cs">
+      <DependentUpon>DynThingsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DeviceCommand.cs">
       <DependentUpon>DynThingsModel.tt</DependentUpon>
     </Compile>
     <Compile Include="DeviceIO.cs">
@@ -88,6 +88,9 @@
     <Compile Include="Endpoint.cs">
       <DependentUpon>DynThingsModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="EndPointCommand.cs">
+      <DependentUpon>DynThingsModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="EndPointIO.cs">
       <DependentUpon>DynThingsModel.tt</DependentUpon>
     </Compile>
@@ -115,9 +118,8 @@
     <Compile Include="LocationViewType.cs">
       <DependentUpon>DynThingsModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="ModelsExtensions\Command.cs" />
+    <Compile Include="ModelsExtensions\DeviceCommand.cs" />
     <Compile Include="ModelsExtensions\Device.cs" />
-    <Compile Include="ModelsExtensions\DeviceCommands.cs" />
     <Compile Include="ModelsExtensions\EndPoint.cs" />
     <Compile Include="ModelsExtensions\EndPointCommand.cs" />
     <Compile Include="ModelsExtensions\Location.cs" />

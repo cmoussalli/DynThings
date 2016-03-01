@@ -1,7 +1,7 @@
 ﻿/////////////////////////////////////////////////////////////////
 // Created by : Caesar Moussalli                               //
-// TimeStamp  : 31-1-2016                                      //
-// Content    : Handle EndpointIOs CRUD                        //
+// TimeStamp  : 28-2-2016                                      //
+// Content    : Handle DeviceIOs CRUD                          //
 // Notes      :                                                //
 /////////////////////////////////////////////////////////////////
 using System;
@@ -14,12 +14,12 @@ using PagedList;
 
 namespace DynThings.Data.Repositories
 {
-    public class EndpointIOsRepository
+    public class DeviceIOsRepository
     {
         private DynThingsEntities db = new DynThingsEntities();
 
         #region Enums
-        public enum EndPointIOType
+        public enum deviceIOType
         {
             Input = 1,
             Command = 2,
@@ -28,10 +28,10 @@ namespace DynThings.Data.Repositories
         #endregion
 
         #region Get PagedList
-        public IPagedList GetPagedList(Guid endPointGUID, int pageNumber, int recordsPerPage)
+        public IPagedList GetPagedList(Guid deviceGUID, int pageNumber, int recordsPerPage)
         {
-            PagedList.IPagedList ios = db.EndPointIOs
-              .Where(i => i.Endpoint.GUID == endPointGUID)
+            PagedList.IPagedList ios = db.DeviceIOs
+              .Where(i => i.Device.GUID == deviceGUID)
               .OrderByDescending(i => i.TimeStamp).Take(100).ToList()
               .ToPagedList(pageNumber, recordsPerPage);
             return ios;
@@ -39,39 +39,39 @@ namespace DynThings.Data.Repositories
         #endregion
 
         #region Add
-        public ResultInfo.Result Add(long endPointID, string value, EndPointIOType ioType, DateTime executionTime)
+        public ResultInfo.Result Add(long deviceID,string value, deviceIOType ioType, DateTime executionTime)
         {
-            EndPointIO cmdIO = new EndPointIO();
-            cmdIO.EndPointID = endPointID;
-            cmdIO.Valu = value;
-            cmdIO.IOTypeID = long.Parse(ioType.GetHashCode().ToString());
-            cmdIO.TimeStamp = DateTime.Now;
-            cmdIO.ExecTimeStamp = executionTime;
-            db.EndPointIOs.Add(cmdIO);
+            DeviceIO endIO = new DeviceIO();
+            endIO.DeviceID = deviceID;
+            endIO.Valu = value;
+            endIO.IOTypeID = long.Parse(ioType.GetHashCode().ToString());
+            endIO.TimeStamp = DateTime.Now;
+            endIO.ExecTimeStamp = executionTime;
+            db.DeviceIOs.Add(endIO);
             db.SaveChanges();
             return ResultInfo.GenerateOKResult();
         }
 
-        public ResultInfo.Result Add(long endPointID, string value, EndPointIOType ioType)
+        public ResultInfo.Result Add(long deviceID, string value, deviceIOType ioType)
         {
-            EndPointIO endIO = new EndPointIO();
-            endIO.EndPointID = endPointID;
+            DeviceIO endIO = new DeviceIO();
+            endIO.DeviceID = deviceID;
             endIO.Valu = value;
             endIO.IOTypeID = long.Parse(ioType.GetHashCode().ToString());
             endIO.TimeStamp = DateTime.Now;
-            db.EndPointIOs.Add(endIO);
+            db.DeviceIOs.Add(endIO);
             db.SaveChanges();
             return ResultInfo.GenerateOKResult();
         }
         #endregion
 
         #region Submit IO
-        private ResultInfo.Result SubmitIO(Guid endPointKeyPass, EndPointIOType IOTypeID , string Valu, DateTime executionTimeStamp)
+        internal ResultInfo.Result SubmitIO(Guid deviceKeyPass, deviceIOType ioType, string Valu)
         {
-            List<Endpoint> ends = db.Endpoints.Where(e => e.GUID == endPointKeyPass).ToList();
-            if (ends.Count == 1)
+            List<Device> devs = db.Devices.Where(e => e.KeyPass == deviceKeyPass).ToList();
+            if (devs.Count == 1)
             {
-                Add(ends[0].ID, Valu, IOTypeID, executionTimeStamp);
+                Add(devs[0].ID, Valu, ioType);
                 return ResultInfo.GenerateFailedResult("Ok");
             }
             else

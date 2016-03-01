@@ -47,6 +47,8 @@
                             <li><a href="~/locationviews/">Views</a></li>
                             <li><a href="~/devices">Devices</a></li>
                             <li><a href="~/endpoints">EndPoints</a></li>
+                            <li><a href="~/devicecommands">Commands (Devices)</a></li>
+                            <li><a href="~/endpointcommands">Commands (EndPoints)</a></li>
                             <li role="separator" class="divider"></li>
                             <li class="dropdown-header">Nav header</li>
                             <li><a href="#">Separated link</a></li>
@@ -82,6 +84,7 @@
     @Scripts.Render("~/bundles/highcharts")
 
 
+    @RenderSection("scriptfiles", required: false)
     @RenderSection("scripts", required: false)
     
 
@@ -90,7 +93,18 @@
         @Html.Partial("_PVLoading")
     </div>
     @Html.Partial("_Modal")
+    <script>
+       
+        function getRootURL() {
+            var _location = document.location.toString();
+            var applicationNameIndex = _location.indexOf('/', _location.indexOf('://') + 3);
+            var applicationName = _location.substring(0, applicationNameIndex) + '/';
+            var webFolderIndex = _location.indexOf('/', _location.indexOf(applicationName) + applicationName.length);
+            var webFolderFullPath = _location.substring(0, webFolderIndex);
 
+            return webFolderFullPath;
+        }
+    </script>
    
 </body>
 </html>

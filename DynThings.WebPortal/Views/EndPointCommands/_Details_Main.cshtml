@@ -1,0 +1,16 @@
+﻿@model DynThings.Data.Models.EndPointCommand
+<div class="right">
+    <button type="button" class="btn btn-info pull-right" onclick="LoadEndPointCommandEditor(@Model.ID)" data-toggle="modal" data-target="#mdl">Edit</button>
+</div>
+
+<strong>Title</strong><br>
+@Model.Title<br><br>
+
+<strong>Description</strong><br>
+@Model.Description<br><br>
+
+<strong>EndPoint</strong><br>
+@Model.Endpoint.Title<br><br>
+
+<strong>Command Code</strong><br>
+@Model.CommandCode<br><br>
