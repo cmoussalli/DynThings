@@ -14,6 +14,7 @@ namespace DynThings.Data.Configurations
 {
     public static class Config
     {
+
         #region DB Context
         private static DynThingsEntities db = new DynThingsEntities();
         #endregion
