@@ -7,11 +7,7 @@
 /////////////////////////////////////////////////////////////////
 
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using DynThings.Data;
 using DynThings.Data.Models;
 
 namespace DynThings.Data.Configurations
