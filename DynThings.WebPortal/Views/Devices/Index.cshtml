@@ -30,54 +30,13 @@
     </div>
 </div>
 
+<script src="~/DynScripts/Devices.js"></script>
 <script>
     $(document).ready(function () {
         LoadPart_DeviceListDiv();
+        AttachEventDevicesListPager();
     });
 
 
-    function LoadPart_DeviceListDiv() {
-        var loadingpart = LoadDivLoading();
-        $("#divDevicesList").html(loadingpart);
-        $.ajax({
-            url: '@Url.Content("~/")' + 'Devices/GetListPV?searchfor=' + $(txtDeviceSearch).val() + '&recordsperpage=0',
-            //page=" + $("#DynConfigCurrentPage").html,
-            type: "GET",
-        })
-            .done(function (partialViewResult) {
-                $("#divDevicesList").html(partialViewResult);
-            });
-        return false;
-    };
 
-
-    $(document).ready(function () {
-        $(document).on("click", "#DevicesListPager a[href]", function () {
-            var loadingpart = LoadDivLoading();
-            $("#divDevicesList").html(loadingpart);
-            $.ajax({
-                url: $(this).attr("href") + "&searchfor=" + $(txtDeviceSearch).val() + '&recordsperpage=0',
-                type: 'GET',
-                cache: false,
-                success: function (result) {
-                    $("#divDevicesList").html(result);
-                    return false;
-                }
-            });
-            return false;
-        });
-    });
-
-    function LoadPart_DialogDeviceAdd() {
-        var loadingpart = LoadDivLoading();
-        $("#modal").html(loadingpart);
-        $.ajax({
-            url: '@Url.Content("~/")' + 'Devices/addpv',
-            //page=" + $("#DynConfigCurrentPage").html,
-            type: "GET",
-        })
-        .done(function (partialViewResult) {
-            $("#modal").html(partialViewResult);
-        });
-    }
 </script>

@@ -29,22 +29,7 @@
 </div>
 <script>
     $(document).ready(function () {
-        $("#LocationViewAddForm").on("submit", function (event) {
-            event.preventDefault();
-            var url = $(this).attr("action");
-            var formData = $(this).serialize();
-            $.ajax({
-                url: url,
-                type: "POST",
-                data: formData,
-                dataType: "json",
-                success: function (resp) {
-                }
-            })
-
-            LoadPart_LocationViewListDiv();
-            $('#mdl').modal('hide');
-        });
+        AttachEventLocationViewAddForm(@Model.ID);
 
     });
 

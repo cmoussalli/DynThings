@@ -34,8 +34,8 @@
                 </div>
             </div>
             <div id="commands" class="tab-pane fade">
-                <h3>Menu 2</h3>
-                <p>Some content in menu 2.</p>
+                <div id="divMonitorEndPointCommands">
+                </div>
             </div>
         </div>
     </div>
@@ -45,32 +45,6 @@
     function LoadEndPointParts(guid) {
         LoadPart_MonitorEndPointHistory(guid);
         LoadPart_MonitorEndPointMain(guid);
-    }
-
-    function LoadPart_MonitorEndPointMain(Guid) {
-        var loadingpart = LoadDivLoading();
-        $("#SelectedEndPointID").val(Guid);
-        $("#divMonitorEndPointMain").html(loadingpart);
-        $.ajax({
-            url: '@Url.Content("~/")' + 'locationviews/GetPVLocationViewEndPointMain?guid=' + Guid,
-            type: "GET",
-        })
-        .done(function (partialViewResult) {
-            $("#divMonitorEndPointMain").html(partialViewResult);
-        });
-    }
-
-    function LoadPart_MonitorEndPointHistory(Guid) {
-        var loadingpart = LoadDivLoading();
-        $("#SelectedEndPointID").val(Guid);
-        $("#divMonitorEndPointHistory").html(loadingpart);
-        $.ajax({
-            url: '@Url.Content("~/")' + 'locationviews/GetPVLocationViewEndPointHistory?guid=' + Guid,
-            type: "GET",
-        })
-        .done(function (partialViewResult) {
-            $("#divMonitorEndPointHistory").html(partialViewResult);
-        });
     }
 
 </script>

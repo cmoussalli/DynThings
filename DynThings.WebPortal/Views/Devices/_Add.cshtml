@@ -23,23 +23,7 @@
 </div>
 <script>
     $(document).ready(function () {
-        $("#DeviceAddForm").on("submit", function (event) {
-            event.preventDefault();
-            var url = $(this).attr("action");
-            var formData = $(this).serialize();
-            $.ajax({
-                url: url,
-                type: "POST",
-                data: formData,
-                dataType: "json",
-                success: function (resp) {
-                }
-            })
-
-            LoadPart_DeviceListDiv();
-            $('#mdl').modal('hide');
-        });
-
+        AttachEventDeviceAddForm();
     });
 
 </script>
