@@ -71,6 +71,39 @@ namespace DynThings.Data.Repositories
         }
         #endregion
 
+        #region FindByKeyPass
+        /// <summary>
+        /// Find Device by Device ID
+        /// </summary>
+        /// <param name="id">Device ID</param>
+        /// <returns>Device object</returns>
+        public Device FindByKeyPass(Guid deviceKeyPass)
+        {
+            Device devs = db.Devices.Where(l => l.KeyPass == deviceKeyPass).FirstOrDefault();
+            return devs;
+        }
+
+        /// <summary>
+        /// Find Device by Device GUID
+        /// </summary>
+        /// <param name="guid">Device GUID</param>
+        /// <returns>Device object</returns>
+        public Device Find(Guid guid)
+        {
+            Device dev = new Device();
+            List<Device> devs = db.Devices.Where(l => l.GUID == guid).ToList();
+            if (devs.Count == 1)
+            {
+                dev = devs[0];
+            }
+            else
+            {
+                throw new Exception("Not Found");
+            }
+            return dev;
+        }
+        #endregion
+
         #region Add
         /// <summary>
         /// Add new Device
