@@ -11,7 +11,7 @@ using System.Web;
 
 namespace DynThings.WebAPI.Models
 {
-    public class DeviceEntitiy
+    public class DeviceInput
     {
         #region :: Public Properties ::
 
@@ -21,17 +21,14 @@ namespace DynThings.WebAPI.Models
 
         public string ExectionTimeStamp { get; set; }
 
-        List<CommandEnitity> DeviceCommands { get; set; }
-
         #endregion
 
         #region :: Constructor ::
-        public DeviceEntitiy()
+        public DeviceInput()
         {
             this.KeyPass = string.Empty;
             this.ExectionTimeStamp = string.Empty;
             this.Value = -99;
-            this.DeviceCommands = new List<CommandEnitity>();
         } 
         #endregion
     }

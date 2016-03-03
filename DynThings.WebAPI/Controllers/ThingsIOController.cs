@@ -15,20 +15,20 @@ using System.Web.Mvc;
 
 namespace DynThings.WebAPI.Controllers
 {
-    public class DeviceController : Controller
+    public class ThingsIOController : Controller
     {
         [HttpPut]
-        #region :: SendInputToDevice ::
+        #region :: Submit input from device ::
         
-        public ApiResponse SendInputToDevice(DeviceEntitiy deviceEntity)
+        public ApiResponse SubmitDeviceInput(DeviceInput deviceInput)
         {
             ApiResponse oApiResponse = new ApiResponse();
 
             try
             {
-                if (string.IsNullOrEmpty(deviceEntity.KeyPass))
+                if (string.IsNullOrEmpty(deviceInput.KeyPass))
                 {
-                    if (string.IsNullOrEmpty(deviceEntity.KeyPass))
+                    if (string.IsNullOrEmpty(deviceInput.KeyPass))
                     {
                         oApiResponse.ErrorMessage = "KeyPass value cannot be blank";
                         return oApiResponse;
@@ -38,20 +38,23 @@ namespace DynThings.WebAPI.Controllers
                 DevicesRepositories oDevicesRepositories = new DevicesRepositories();
                 Guid deviceGuid;
 
-                if (Guid.TryParse(deviceEntity.KeyPass, out deviceGuid))
+                if (Guid.TryParse(deviceInput.KeyPass, out deviceGuid))
                 {
                     //Device keyPass Validation
                     DynThings.Data.Models.Device device = oDevicesRepositories.FindByKeyPass(deviceGuid);
                     if (device != null)
                     {
                         DeviceIOsRepository oDeviceIOsRepository = new DeviceIOsRepository();
-                        ResultInfo.Result repoResult = oDeviceIOsRepository.Add(device.ID, deviceEntity.Value.ToString(), DeviceIOsRepository.deviceIOType.Input);
+                        ResultInfo.Result repoResult = oDeviceIOsRepository.Add(device.ID, deviceInput.Value.ToString(), DeviceIOsRepository.deviceIOType.Input);
+
+
                         if (repoResult.ResultType == ResultInfo.ResultType.Ok)
                         {
                             //Created!
                             oApiResponse.Success = true;
                             oApiResponse.ErrorMessage = "Input processed successfully.";
                             return oApiResponse;
+
                         }
                         else
                         {

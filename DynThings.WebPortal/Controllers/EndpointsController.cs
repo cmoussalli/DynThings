@@ -107,11 +107,12 @@ namespace DynThings.WebPortal.Controllers
         {
             IPagedList IOs = UnitOfWork.repoEndpointIOs.GetPagedList(guid, page, Helpers.Configs.validateRecordsPerChild(Config.DefaultRecordsPerChild));
             return PartialView("_EndPointHistory", IOs);
+            
         }
         #endregion
         
         #endregion
-
+        
 
     }
 }
