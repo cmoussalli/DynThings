@@ -66,6 +66,8 @@ public partial class DynThingsEntities : DbContext
 
     public virtual DbSet<EndPointCommand> EndPointCommands { get; set; }
 
+    public virtual DbSet<ResultMessage> ResultMessages { get; set; }
+
 }
 
 }

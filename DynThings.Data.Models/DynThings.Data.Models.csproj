@@ -126,6 +126,9 @@
     <Compile Include="ModelsExtensions\LocationView.cs" />
     <Compile Include="ModelsExtensions\LocationViewTypes.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ResultMessage.cs">
+      <DependentUpon>DynThingsModel.tt</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <EntityDeploy Include="DynThingsModel.edmx">

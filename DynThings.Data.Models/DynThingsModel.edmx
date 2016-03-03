@@ -175,6 +175,14 @@
           <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Title" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
+        <EntityType Name="ResultMessages">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Message" Type="nvarchar" MaxLength="500" />
+          <Property Name="IsError" Type="bit" />
+        </EntityType>
         <Association Name="FK__Commands__Device__4D94879B">
           <End Role="Devices" Type="Self.Devices" Multiplicity="0..1" />
           <End Role="DeviceCommands" Type="Self.DeviceCommands" Multiplicity="*" />
@@ -385,6 +393,7 @@
           <EntitySet Name="Locations" EntityType="Self.Locations" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="LocationViews" EntityType="Self.LocationViews" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="LocationViewTypes" EntityType="Self.LocationViewTypes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ResultMessages" EntityType="Self.ResultMessages" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK__Commands__Device__4D94879B" Association="Self.FK__Commands__Device__4D94879B">
             <End Role="Devices" EntitySet="Devices" />
             <End Role="DeviceCommands" EntitySet="DeviceCommands" />
@@ -782,6 +791,7 @@
             <End Role="Endpoint" EntitySet="Endpoints" />
             <End Role="EndPointCommand" EntitySet="EndPointCommands" />
           </AssociationSet>
+          <EntitySet Name="ResultMessages" EntityType="DynThingsModel.ResultMessage" />
           </EntityContainer>
         <EntityType Name="CssIcon">
           <Key>
@@ -931,6 +941,14 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="ResultMessage">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Message" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="IsError" Type="Boolean" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1120,6 +1138,15 @@
                 <ScalarProperty Name="EndPointID" ColumnName="EndPointID" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ResultMessages">
+            <EntityTypeMapping TypeName="DynThingsModel.ResultMessage">
+              <MappingFragment StoreEntitySet="ResultMessages">
+                <ScalarProperty Name="IsError" ColumnName="IsError" />
+                <ScalarProperty Name="Message" ColumnName="Message" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
