@@ -9,7 +9,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DynThings.Data.Models", "Dy
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DynThings.Data.Repositories", "DynThings.Data.Repositories\DynThings.Data.Repositories.csproj", "{3EB80EA4-99D5-4DB4-BD84-2370DCE356D0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DynThings.Data.Configurations", "DynThings.Data.Configurations\DynThings.Data.Configurations.csproj", "{CA4E274C-2541-4221-819E-441E7C20FEEE}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DynThings.Data.Core", "DynThings.Data.Configurations\DynThings.Data.Core.csproj", "{CA4E274C-2541-4221-819E-441E7C20FEEE}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DynThings.WebAPI", "DynThings.WebAPI\DynThings.WebAPI.csproj", "{93C59073-594D-45A5-A042-3AB07A27C556}"
 EndProject
