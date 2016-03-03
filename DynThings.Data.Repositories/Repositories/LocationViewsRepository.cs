@@ -64,7 +64,7 @@ namespace DynThings.Data.Repositories
             loc.Z = "";
             db.LocationViews.Add(loc);
             db.SaveChanges();
-            return ResultInfo.GenerateOKResult();
+            return UnitOfWork.resultInfo.GenerateOKResult();
         }
         #endregion
 
@@ -75,7 +75,7 @@ namespace DynThings.Data.Repositories
             loc.Title = title;
             loc.IsActive = false;
             db.SaveChanges();
-            return ResultInfo.GenerateOKResult();
+            return UnitOfWork.resultInfo.GenerateOKResult();
         }
         #endregion
 
@@ -98,7 +98,7 @@ namespace DynThings.Data.Repositories
             loc.Y = y;
             loc.Z = z;
             db.SaveChanges();
-            return ResultInfo.GenerateOKResult();
+            return UnitOfWork.resultInfo.GenerateOKResult();
         }
         #endregion
 
@@ -114,7 +114,7 @@ namespace DynThings.Data.Repositories
             LocationView loc = db.LocationViews.Find(locationViewID);
             loc.IsActive = isActive;
             db.SaveChanges();
-            return ResultInfo.GenerateOKResult();
+            return UnitOfWork.resultInfo.GenerateOKResult();
         }
         #endregion
     }

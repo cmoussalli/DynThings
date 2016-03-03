@@ -58,7 +58,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Core\ResultInfo.cs" />
+    <Compile Include="Repositories\ResultInfo.cs" />
     <Compile Include="Repositories\EndPointCommandsRepository.cs" />
     <Compile Include="Repositories\DevicesRepositories.cs" />
     <Compile Include="Repositories\DeviceCommandsRepository.cs" />
@@ -69,13 +69,13 @@
     <Compile Include="Repositories\LocationsRepository.cs" />
     <Compile Include="Repositories\LocationViewsRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Core\UnitOfWork.cs" />
+    <Compile Include="UnitOfWork.cs" />
     <Compile Include="Repositories\LocationViewTypesRepository.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\DynThings.Data.Configurations\DynThings.Data.Configurations.csproj">
+    <ProjectReference Include="..\DynThings.Data.Configurations\DynThings.Data.Core.csproj">
       <Project>{ca4e274c-2541-4221-819e-441e7c20feee}</Project>
-      <Name>DynThings.Data.Configurations</Name>
+      <Name>DynThings.Data.Core</Name>
     </ProjectReference>
     <ProjectReference Include="..\DynThings.Data.Models\DynThings.Data.Models.csproj">
       <Project>{946862be-8456-4882-9a11-09ed0afd407b}</Project>

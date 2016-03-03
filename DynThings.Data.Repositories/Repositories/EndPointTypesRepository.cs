@@ -64,7 +64,7 @@ namespace DynThings.Data.Repositories
             epType.IconID = IconID;
             db.EndPointTypes.Add(epType);
             db.SaveChanges();
-            return ResultInfo.GenerateOKResult();
+            return UnitOfWork.resultInfo.GenerateOKResult();
         }
 
         #endregion

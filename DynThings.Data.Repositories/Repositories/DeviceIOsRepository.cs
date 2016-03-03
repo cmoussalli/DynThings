@@ -49,7 +49,7 @@ namespace DynThings.Data.Repositories
             endIO.ExecTimeStamp = executionTime;
             db.DeviceIOs.Add(endIO);
             db.SaveChanges();
-            return ResultInfo.GenerateOKResult();
+            return UnitOfWork.resultInfo.GenerateOKResult();
         }
 
         public ResultInfo.Result Add(long deviceID, string value, deviceIOType ioType)
@@ -61,7 +61,7 @@ namespace DynThings.Data.Repositories
             endIO.TimeStamp = DateTime.Now;
             db.DeviceIOs.Add(endIO);
             db.SaveChanges();
-            return ResultInfo.GenerateOKResult();
+            return UnitOfWork.resultInfo.GenerateOKResult();
         }
         #endregion
 
@@ -72,11 +72,11 @@ namespace DynThings.Data.Repositories
             if (devs.Count == 1)
             {
                 Add(devs[0].ID, Valu, ioType);
-                return ResultInfo.GenerateFailedResult("Ok");
+                return UnitOfWork.resultInfo.GenerateOKResult();
             }
             else
             {
-               return ResultInfo.GenerateFailedResult("Keypass is not valid");
+                return UnitOfWork.resultInfo.GenerateOKResult();
             }
         }
 

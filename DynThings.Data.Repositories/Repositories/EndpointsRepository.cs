@@ -97,7 +97,7 @@ namespace DynThings.Data.Repositories
             end.TypeID = typeID;
             db.Endpoints.Add(end);
             db.SaveChanges();
-            return ResultInfo.GenerateOKResult();
+            return UnitOfWork.resultInfo.GenerateOKResult();
         }
 
         #endregion
@@ -109,7 +109,7 @@ namespace DynThings.Data.Repositories
             end.Title = title;
             end.TypeID = typeID;
             db.SaveChanges();
-            return ResultInfo.GenerateOKResult();
+            return UnitOfWork.resultInfo.GenerateOKResult();
         }
 
         #endregion

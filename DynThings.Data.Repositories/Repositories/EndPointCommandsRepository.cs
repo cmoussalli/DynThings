@@ -82,9 +82,7 @@ namespace DynThings.Data.Repositories
             cmd.OwnerID = ownerID;
             db.EndPointCommands.Add(cmd);
             db.SaveChanges();
-            ResultInfo.Result result = ResultInfo.GenerateOKResult();
-
-            return result;
+            return UnitOfWork.resultInfo.GenerateOKResult() ;
         }
 
         #endregion
@@ -98,8 +96,7 @@ namespace DynThings.Data.Repositories
             cmd.CommandCode = commandCode;
             cmd.EndPointID = EndPointID;
             db.SaveChanges();
-            ResultInfo.Result result = ResultInfo.GenerateOKResult();
-            return result;
+            return UnitOfWork.resultInfo.GenerateOKResult();
         }
 
         #endregion
@@ -112,9 +109,7 @@ namespace DynThings.Data.Repositories
             {
                 UnitOfWork.repoEndpointIOs.Add(cmd.Endpoint.ID, cmd.CommandCode, EndpointIOsRepository.EndPointIOType.Command);
             }
-
-            ResultInfo.Result result = ResultInfo.GenerateOKResult();
-            return result;
+            return UnitOfWork.resultInfo.GenerateOKResult();
         }
         #endregion
 

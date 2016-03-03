@@ -72,8 +72,7 @@ namespace DynThings.Data.Repositories
             cmd.OwnerID = ownerID;
             db.DeviceCommands.Add(cmd);
             db.SaveChanges();
-            ResultInfo.Result result = ResultInfo.GenerateOKResult();
-            return result;
+            return UnitOfWork.resultInfo.GenerateOKResult();
         }
 
         #endregion
@@ -87,8 +86,7 @@ namespace DynThings.Data.Repositories
             cmd.CommandCode = commandCode;
             cmd.DeviceID = deviceID;
             db.SaveChanges();
-            ResultInfo.Result result = ResultInfo.GenerateOKResult();
-            return result;
+            return UnitOfWork.resultInfo.GenerateOKResult();
         }
 
         #endregion
@@ -101,9 +99,7 @@ namespace DynThings.Data.Repositories
             {
                 UnitOfWork.repoDeviceIOs.Add(cmd.Device.ID, cmd.CommandCode, DeviceIOsRepository.deviceIOType.Command);
             }
-
-            ResultInfo.Result result = ResultInfo.GenerateOKResult();
-            return result;
+            return UnitOfWork.resultInfo.GenerateOKResult();
         }
         #endregion
 

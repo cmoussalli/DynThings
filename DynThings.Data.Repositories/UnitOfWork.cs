@@ -16,6 +16,8 @@ namespace DynThings.Data.Repositories
 {
     public static class UnitOfWork
     {
+        public static ResultInfo resultInfo = new ResultInfo();
+
         #region Repositories
         public static LocationViewsRepository repoLocationViews = new LocationViewsRepository();
         public static LocationViewTypesRepository repoLocationViewTypes = new LocationViewTypesRepository();

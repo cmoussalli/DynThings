@@ -82,26 +82,6 @@ namespace DynThings.Data.Repositories
             Device devs = db.Devices.Where(l => l.KeyPass == deviceKeyPass).FirstOrDefault();
             return devs;
         }
-
-        /// <summary>
-        /// Find Device by Device GUID
-        /// </summary>
-        /// <param name="guid">Device GUID</param>
-        /// <returns>Device object</returns>
-        public Device Find(Guid guid)
-        {
-            Device dev = new Device();
-            List<Device> devs = db.Devices.Where(l => l.GUID == guid).ToList();
-            if (devs.Count == 1)
-            {
-                dev = devs[0];
-            }
-            else
-            {
-                throw new Exception("Not Found");
-            }
-            return dev;
-        }
         #endregion
 
         #region Add
@@ -125,10 +105,10 @@ namespace DynThings.Data.Repositories
             }
             catch
             {
-                
-                return ResultInfo.GenerateFailedResult("");
+
+                return UnitOfWork.resultInfo.GetResultByID(1);
             }
-            return ResultInfo.GenerateOKResult();
+            return UnitOfWork.resultInfo.GenerateOKResult();
         }
         #endregion
 
@@ -144,7 +124,7 @@ namespace DynThings.Data.Repositories
             Device dev = db.Devices.Find(id);
             dev.Title = title;
             db.SaveChanges();
-            return ResultInfo.GenerateOKResult();
+            return UnitOfWork.resultInfo.GenerateOKResult();
         }
 
         #endregion
@@ -162,7 +142,7 @@ namespace DynThings.Data.Repositories
             dev.GUID = Guid.NewGuid();
             db.SaveChanges();
 
-            return ResultInfo.GenerateOKResult();
+            return UnitOfWork.resultInfo.GenerateOKResult();
         }
 
         #endregion
