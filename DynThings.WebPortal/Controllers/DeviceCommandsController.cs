@@ -5,7 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using DynThings.Data.Models;
 using DynThings.Data.Repositories;
-using DynThings.Data.Configurations;
+using DynThings.Core;
 
 namespace DynThings.WebPortal.Controllers
 {

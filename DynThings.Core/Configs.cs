@@ -10,7 +10,7 @@ using System;
 using System.Linq;
 using DynThings.Data.Models;
 
-namespace DynThings.Data.Configurations
+namespace DynThings.Core
 {
     public static class Config
     {

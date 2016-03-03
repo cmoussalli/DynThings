@@ -11,7 +11,7 @@ using System.Text;
 using System.Threading.Tasks;
 using DynThings.Data.Models;
 using PagedList;
-using DynThings.Data.Configurations;
+using DynThings.Core;
 
 namespace DynThings.Data.Repositories
 {

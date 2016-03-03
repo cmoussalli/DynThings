@@ -16,7 +16,7 @@ using System.Web.Mvc;
 using DynThings.Data.Models;
 using DynThings.Data.Repositories;
 using PagedList;
-using DynThings.Data.Configurations;
+using DynThings.Core;
 
 namespace DynThings.WebPortal.Controllers
 {

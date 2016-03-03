@@ -547,9 +547,9 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\DynThings.Data.Configurations\DynThings.Data.Core.csproj">
+    <ProjectReference Include="..\DynThings.Core\DynThings.Core.csproj">
       <Project>{ca4e274c-2541-4221-819e-441e7c20feee}</Project>
-      <Name>DynThings.Data.Core</Name>
+      <Name>DynThings.Core</Name>
     </ProjectReference>
     <ProjectReference Include="..\DynThings.Data.Models\DynThings.Data.Models.csproj">
       <Project>{946862be-8456-4882-9a11-09ed0afd407b}</Project>

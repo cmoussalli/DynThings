@@ -7,8 +7,8 @@
     <ProjectGuid>{CA4E274C-2541-4221-819E-441E7C20FEEE}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>DynThings.Data.Core</RootNamespace>
-    <AssemblyName>DynThings.Data.Core</AssemblyName>
+    <RootNamespace>DynThings.Core</RootNamespace>
+    <AssemblyName>DynThings.Core</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
