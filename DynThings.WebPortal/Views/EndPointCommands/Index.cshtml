@@ -12,7 +12,7 @@
         </div>
         <div class="col-md-6">
             <div class="input-group">
-                <input type="search" id="txtEndPointCommandSearch" class="form-control" onkeydown="if (event.keyCode == 13) { LoadPart_EndPointCommandListDiv(); return false; }" />
+                <input type="search" id="txtEndPointCommandSearch" class="form-control" onkeydown="if (event.keyCode == 13) { LoadPart_EndPointCommandListDiv($(txtEndPointCommandSearch).val()); return false; }" />
                 <div class="input-group-btn">
                     <button type="button" class="btn btn-primary" onclick="LoadPart_EndPointCommandListDiv()">Search</button>
                 </div>
@@ -29,7 +29,7 @@
 <script src="~/DynScripts/EndPointCommands.js"></script>
 <script>
     $(document).ready(function () {
-        LoadPart_EndPointCommandListDiv();
+        LoadPart_EndPointCommandListDiv($(txtEndPointCommandSearch).val());
     });
 
 </script>

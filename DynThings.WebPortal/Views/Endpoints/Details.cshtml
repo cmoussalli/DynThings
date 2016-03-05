@@ -39,7 +39,7 @@
                             </div>
                         </div>
                         <div id="tabEndPointcommands" class="tab-pane fade">
-                            <div id="divEndPointcommands">
+                            <div id="divEndPointCommandsList">
                             </div>
                         </div>
                         <div id="tabEndPointDevkeys" class="tab-pane fade">
@@ -59,6 +59,8 @@
 
 
 @section scripts{
+<script src="~/DynScripts/EndPoints.js"></script>
+<script src="~/DynScripts/EndPointCommands.js"></script>
 
     <script>
         function showDialog(id) {
@@ -75,7 +77,8 @@
         $(document).ready(function () {
             LoadPart_EndPointDetailsDiv('@Model.ID');
             LoadPart_EndPointHistoryDiv('@Model.GUID');
-
+            LoadPart_EndPointCommandListByEndPointIDDiv('@Model.ID','');
+            
         });
 
         function LoadEndpointEditor(id) {
@@ -84,29 +87,20 @@
             LoadPart_EndPointDetailsDiv(id);
         }
 
-        function LoadPart_EndPointDetailsDiv(id) {
+        function LoadPart_EndPointCommandListByEndPointIDDiv(endPointID, search) {
             var loadingpart = LoadDivLoading();
-            $("#divEndPointMain").html(loadingpart);
+            $("#divEndPointCommandsList").html(loadingpart);
             $.ajax({
-                url: '@Url.Content("~/")' + 'EndPoints/DetailsPV?id=' + id,
+                url: getRootURL() + '/EndPoints/EndPointCommandsListByEndPointIDPV?searchfor=' + search + '&EndPointID=' + endPointID + '&recordsperpage=0',
                 type: "GET",
             })
-            .done(function (partialViewResult) {
-                $("#divEndPointMain").html(partialViewResult);
-            });
+                .done(function (partialViewResult) {
+                    $("#divEndPointCommandsList").html(partialViewResult);
+                });
+            return false;
         }
 
-        function LoadPart_DialogEndPointEdit(id) {
-            var loadingpart = LoadDivLoading();
-            $("#modal").html(loadingpart);
-            $.ajax({
-                url: '@Url.Content("~/")' + 'EndPoints/editpv?id=' + id,
-                type: "GET",
-            })
-            .done(function (partialViewResult) {
-                $("#modal").html(partialViewResult);
-            });
-        }
+
 
         function LoadPart_EndPointHistoryDiv(Guid) {
             var loadingpart = LoadDivLoading();

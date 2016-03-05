@@ -40,11 +40,11 @@ function AttachEventEndPointCommandEditForm(EndPointCommandID) {
 }
 
 //Get List
-function LoadPart_EndPointCommandListDiv() {
+function LoadPart_EndPointCommandListDiv(search) {
     var loadingpart = LoadDivLoading();
     $("#divEndPointCommandsList").html(loadingpart);
     $.ajax({
-        url: getRootURL() + '/EndPointCommands/ListPV?searchfor=' + $(txtEndPointCommandSearch).val() + '&recordsperpage=0',
+        url: getRootURL() + '/EndPointCommands/ListPV?searchfor=' + search + '&recordsperpage=0',
         type: "GET",
     })
         .done(function (partialViewResult) {
@@ -52,6 +52,8 @@ function LoadPart_EndPointCommandListDiv() {
         });
     return false;
 };
+//Get List By EndPointID
+
 
 //Get Details
 function LoadPart_EndPointCommandDetailsDiv(id) {

@@ -190,6 +190,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\APIEndPointIOsController.cs" />
     <Compile Include="Controllers\APIEndpointsController.cs" />
+    <Compile Include="Controllers\ConfigController.cs" />
     <Compile Include="Controllers\DeviceCommandsController.cs" />
     <Compile Include="Controllers\DevicesController.cs" />
     <Compile Include="Controllers\EndPointCommandsController.cs" />
@@ -535,6 +536,8 @@
     <Content Include="Views\DeviceCommands\_Execute.cshtml" />
     <Content Include="Views\EndPointCommands\_Execute.cshtml" />
     <Content Include="Scripts\MsMaps\mapcontrol.js" />
+    <Content Include="Views\Config\Index.cshtml" />
+    <Content Include="Views\Endpoints\_Details_Commands.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

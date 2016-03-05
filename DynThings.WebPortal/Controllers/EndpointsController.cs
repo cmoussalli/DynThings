@@ -1,7 +1,7 @@
 ﻿/////////////////////////////////////////////////////////////////
 // Created by : Caesar Moussalli                               //
 // TimeStamp  : 31-1-2016                                      //
-// Content    : Handel the Endpopints Actions                  //
+// Content    : Handel the Endpoints Actions                  //
 // Notes      :                                                //
 //                                                             //
 /////////////////////////////////////////////////////////////////
@@ -110,9 +110,18 @@ namespace DynThings.WebPortal.Controllers
             
         }
         #endregion
-        
+
+        #region EndPoint Commands
+        [HttpGet]
+        public PartialViewResult EndPointCommandsListByEndPointIDPV(string searchfor = null, long EndPointID = 0, int page = 1, int recordsperpage = 0)
+        {
+            PagedList.IPagedList cmds = UnitOfWork.repoEndPointCommands.GetPagedListByEndPointID(searchfor, EndPointID, page, Helpers.Configs.validateRecordsPerMaster(recordsperpage));
+            return PartialView("_Details_Commands", cmds);
+        }
         #endregion
-        
+
+        #endregion
+
 
     }
 }

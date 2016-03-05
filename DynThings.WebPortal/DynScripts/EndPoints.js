@@ -38,7 +38,17 @@ function LoadPart_EndPointListDiv() {
 };
 
 //Get Details
-//TODO
+function LoadPart_EndPointDetailsDiv(id) {
+    var loadingpart = LoadDivLoading();
+    $("#divEndPointMain").html(loadingpart);
+    $.ajax({
+        url: getRootURL() + '/EndPoints/DetailsPV?id=' + id,
+        type: "GET",
+    })
+    .done(function (partialViewResult) {
+        $("#divEndPointMain").html(partialViewResult);
+    });
+}
 
 //Get Add
 function LoadPart_DialogEndPointAdd() {
@@ -55,7 +65,17 @@ function LoadPart_DialogEndPointAdd() {
 }
 
 //Get Edit
-//TODO
+function LoadPart_DialogEndPointEdit(id) {
+    var loadingpart = LoadDivLoading();
+    $("#modal").html(loadingpart);
+    $.ajax({
+        url: getRootURL() + '/EndPoints/editpv?id=' + id,
+        type: "GET",
+    })
+    .done(function (partialViewResult) {
+        $("#modal").html(partialViewResult);
+    });
+}
 
 //Button: Edit
 //TODO
