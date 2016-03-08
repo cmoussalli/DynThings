@@ -63,26 +63,16 @@
 <script src="~/DynScripts/EndPointCommands.js"></script>
 
     <script>
-        function showDialog(id) {
-            var dialog = $(id).data('dialog');
-            dialog.open();
-        }
-
-        function closeDialog(id) {
-            var dialog = $(id).data('dialog');
-            dialog.close();
-        }
-
 
         $(document).ready(function () {
             LoadPart_EndPointDetailsDiv('@Model.ID');
             LoadPart_EndPointHistoryDiv('@Model.GUID');
             LoadPart_EndPointCommandListByEndPointIDDiv('@Model.ID','');
-            
+
         });
 
         function LoadEndpointEditor(id) {
-            //showDialog('#modal');
+
             LoadPart_DialogEndPointEdit(id);
             LoadPart_EndPointDetailsDiv(id);
         }
@@ -107,7 +97,7 @@
             $("#SelectedEndPointID").val(Guid);
             $("#divEndPointHistory").html(loadingpart);
             $.ajax({
-                url: '@Url.Content("~/")' + 'EndPoints/GetPVEndPointHistory?guid=' + Guid + '&pageNumber=1&recordsPerPage=0',
+                url:  getRootURL() + '/EndPoints/GetPVEndPointHistory?guid=' + Guid + '&pageNumber=1&recordsPerPage=0',
                 type: "GET",
             })
             .done(function (partialViewResult) {
