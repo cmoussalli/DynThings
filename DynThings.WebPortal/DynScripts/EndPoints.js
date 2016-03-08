@@ -79,3 +79,23 @@ function LoadPart_DialogEndPointEdit(id) {
 
 //Button: Edit
 //TODO
+
+
+
+
+
+
+
+
+function LoadPart_EndPointHistoryDiv(Guid) {
+    var loadingpart = LoadDivLoading();
+    $("#SelectedEndPointID").val(Guid);
+    $("#divEndPointHistory").html(loadingpart);
+    $.ajax({
+        url: getRootURL() + '/EndPoints/GetPVEndPointHistory?guid=' + Guid + '&pageNumber=1&recordsPerPage=0',
+        type: "GET",
+    })
+    .done(function (partialViewResult) {
+        $("#divEndPointHistory").html(partialViewResult);
+    });
+}

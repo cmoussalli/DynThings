@@ -53,7 +53,18 @@ function LoadPart_EndPointCommandListDiv(search) {
     return false;
 };
 //Get List By EndPointID
-
+function LoadPart_EndPointCommandListByEndPointIDDiv(endPointID, search) {
+    var loadingpart = LoadDivLoading();
+    $("#divEndPointCommandsList").html(loadingpart);
+    $.ajax({
+        url: getRootURL() + '/EndPoints/EndPointCommandsListByEndPointIDPV?searchfor=' + search + '&EndPointID=' + endPointID + '&recordsperpage=0',
+        type: "GET",
+    })
+        .done(function (partialViewResult) {
+            $("#divEndPointCommandsList").html(partialViewResult);
+        });
+    return false;
+}
 
 //Get Details
 function LoadPart_EndPointCommandDetailsDiv(id) {
@@ -112,3 +123,9 @@ function LoadEndPointCommandEditor(id) {
     LoadPart_DialogEndPointCommandEdit(id);
     LoadPart_EndPointCommandDetailsDiv(id);
 }
+
+
+
+
+
+
