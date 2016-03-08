@@ -34,7 +34,7 @@
                 </div>
             </div>
             <div id="commands" class="tab-pane fade">
-                <div id="divMonitorEndPointCommands">
+                <div id="divEndPointCommandsList">
                 </div>
             </div>
         </div>
@@ -43,8 +43,9 @@
 
 <script>
     function LoadEndPointParts(guid) {
-        LoadPart_MonitorEndPointHistory(guid);
         LoadPart_MonitorEndPointMain(guid);
+        LoadPart_MonitorEndPointHistory(guid);
+        LoadPart_MonitorEndPointCommands(guid);
     }
 
 </script>

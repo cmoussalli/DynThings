@@ -40,6 +40,16 @@ namespace DynThings.WebPortal.Controllers
             return View("MonitorView", locationView);
         }
         #endregion
+
+
+        #region Details
+        public ActionResult Details(long id)
+        {
+            LocationView locationView = UnitOfWork.repoLocationViews.Find(id);
+            return View("Details", locationView);
+        }
+        #endregion
+
         #endregion
 
         #region Get Partial Views
@@ -131,9 +141,9 @@ namespace DynThings.WebPortal.Controllers
         
 
         [HttpGet]
-        public PartialViewResult GetPVLocationViewEndPointCommands(Guid guid)
+        public PartialViewResult GetEndPointCommandsByEndPointGUIDPV(Guid guid)
         {
-            IPagedList endCmds = UnitOfWork.repoEndPointCommands.GetPagedListByEndPointGUID("",guid,1,0);
+            IPagedList endCmds = UnitOfWork.repoEndPointCommands.GetPagedListByEndPointGUID("", guid, 1,3);
             return PartialView("_EndPointCommands", endCmds);
         }
         #endregion

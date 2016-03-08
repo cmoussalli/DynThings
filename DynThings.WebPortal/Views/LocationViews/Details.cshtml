@@ -1,0 +1,57 @@
+﻿@model DynThings.Data.Models.LocationView
+@{
+    ViewBag.Title = "LocationView Details";
+}
+
+<div class="container">
+    <div class="page-header">
+        <h1>LocationView Details</h1>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            
+            <div id="HCEndPoint" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <ul class="nav nav-tabs">
+                <li class="active"><a data-toggle="tab" href="#tabEndPointmain">Main</a></li>
+                <li><a data-toggle="tab" href="#tabEndPointhistory">History</a></li>
+                <li><a data-toggle="tab" href="#tabEndPointcommands">Commands</a></li>
+                <li><a data-toggle="tab" href="#tabEndPointDevkeys">Dev Keys</a></li>
+            </ul>
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="tab-content">
+                        <div id="tabEndPointmain" class="tab-pane fade in active">
+                            <div id="divEndPointMain">
+                            </div>
+                        </div>
+                        <div id="tabEndPointhistory" class="tab-pane fade">
+                            <div id="divEndPointHistory">
+                            </div>
+                        </div>
+                        <div id="tabEndPointcommands" class="tab-pane fade">
+                            <div id="divEndPointCommandsList">
+                            </div>
+                        </div>
+                        <div id="tabEndPointDevkeys" class="tab-pane fade">
+                            <div id="divEndPointDevkeys">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Button trigger modal -->
+
+
+
+
+@section scripts{
+
+}

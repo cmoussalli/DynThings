@@ -137,15 +137,15 @@ function LoadPart_MonitorEndPointHistory(Guid) {
 }
 
 //Get EndPointCommands
-function LoadPart_MonitorEndPointCommands(EndPointGuid) {
+function LoadPart_MonitorEndPointCommands(guid) {
     var loadingpart = LoadDivLoading();
-    $("#SelectedEndPointID").val(Guid);
-    $("#divMonitorEndPointCommands").html(loadingpart);
+    $("#SelectedEndPointID").val(guid);
+    $("#divEndPointCommandsList").html(loadingpart);
     $.ajax({
-        url: getRootURL() + '/locationviews/GetPVLocationViewEndPointActions?guid=' + EndPointGuid,
+        url: getRootURL() + '/locationviews/GetEndPointCommandsByEndPointGUIDPV?guid=' + guid,
         type: "GET",
     })
     .done(function (partialViewResult) {
-        $("#divMonitorEndPointCommands").html(partialViewResult);
+        $("#divEndPointCommandsList").html(partialViewResult);
     });
 }

@@ -490,12 +490,11 @@
     <Content Include="Views\Endpoints\Delete.cshtml" />
     <Content Include="Views\Endpoints\Details.cshtml" />
     <Content Include="Views\Endpoints\Index.cshtml" />
-    <Content Include="Views\LocationViews\Edit.cshtml" />
     <Content Include="Views\LocationViews\MonitorView.cshtml" />
     <Content Include="Views\LocationViews\_LocationViewMap.cshtml" />
     <Content Include="Views\LocationViews\_Location.cshtml" />
     <Content Include="Views\Shared\_PVLoading.cshtml" />
-    <Content Include="Views\LocationViews\_EndPointActions.cshtml" />
+    <Content Include="Views\LocationViews\_EndPointCommands.cshtml" />
     <Content Include="Views\UsersManagement\Index.cshtml" />
     <Content Include="Views\LocationViews\Index.cshtml" />
     <Content Include="Views\Endpoints\_List.cshtml" />
@@ -538,6 +537,7 @@
     <Content Include="Scripts\MsMaps\mapcontrol.js" />
     <Content Include="Views\Config\Index.cshtml" />
     <Content Include="Views\Endpoints\_Details_Commands.cshtml" />
+    <Content Include="Views\LocationViews\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
