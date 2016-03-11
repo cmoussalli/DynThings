@@ -32,5 +32,22 @@ namespace DynThings.Data.Models
                 return ends;
             }
         }
+
+
+
+        public List<LocationView> locationViews
+        {
+            get
+            {
+                List<LocationView> locs = new List<LocationView>();
+                List<LinkLocationsLocationView> lnks = db.LinkLocationsLocationViews.Where(l => l.LocationID == this.ID).ToList();
+                foreach (LinkLocationsLocationView lnk in lnks)
+                {
+                    locs.Add(lnk.LocationView);
+                }
+                return locs;
+            }
+        }
+
     }
 }
