@@ -36,7 +36,9 @@ namespace DynThings.Data.Repositories
                 .ToList();
             return locs;
         }
+        #endregion
 
+        #region Get PagedList
         public IPagedList GetPagedList(string search, int pageNumber, int recordsPerPage)
         {
             IPagedList locs = db.Locations
@@ -78,6 +80,38 @@ namespace DynThings.Data.Repositories
             }
             return loc;
         }
+        #endregion
+
+        #region Add
+        public ResultInfo.Result Add(string title)
+        {
+            Location loc = new Location();
+            loc.GUID = Guid.NewGuid();
+            loc.Title = title;
+            loc.isActive = false;
+            loc.Status = 1;
+            loc.IconID = 1;
+            db.Locations.Add(loc);
+            db.SaveChanges();
+            return UnitOfWork.resultInfo.GenerateOKResult(loc.ID);
+        }
+
+        #endregion
+
+        #region Edit
+        public ResultInfo.Result Edit(long id, string title, string longitudeY, string latitudeX,bool isActive,long status, long iconID)
+        {
+            Location loc = db.Locations.Find(id);
+            loc.Title = title;
+            loc.LongitudeY = longitudeY;
+            loc.LatitudeX = latitudeX;
+            loc.isActive = isActive;
+            loc.Status = status;
+            loc.IconID = iconID;
+            db.SaveChanges();
+            return UnitOfWork.resultInfo.GenerateOKResult();
+        }
+
         #endregion
 
     }
