@@ -19,25 +19,45 @@ namespace DynThings.Data.Repositories
         }
         #endregion
 
+        #region Result Model
         public class Result
         {
-            internal Result(long resultID, ResultType resultType, string message)
+            internal Result(long resultID, ResultType resultType, string message,long reference)
             {
                 ResultID = resultID;
                 ResultType = resultType;
                 Message = message;
+                Reference = reference;
             }
             public long ResultID { get; set; }
             public ResultType ResultType { get; set; }
             public string Message { get; set; }
+            public long Reference { get; set; }
         }
+        #endregion
 
-        public  Result GenerateOKResult()
+        #region Method: Generate Ok Result
+        public Result GenerateOKResult()
         {
-            return new Result(0,ResultType.Ok, "");
+            return new Result(0,ResultType.Ok, "",0);
+        }
+        public Result GenerateOKResult(string message, long referenceID)
+        {
+            return new Result(0, ResultType.Ok, message,referenceID);
+        }
+        public Result GenerateOKResult(string message)
+        {
+            return new Result(0, ResultType.Ok, message, 0);
+        }
+        public Result GenerateOKResult(long referenceID)
+        {
+            return new Result(0, ResultType.Ok, "", referenceID);
         }
 
-        public  Result GetResultByID(long resultID)
+        #endregion
+
+        #region Method: Generate Error Result based on Database
+        public Result GetResultByID(long resultID)
         {
             ResultMessage msg = db.ResultMessages.Find(resultID);
             ResultType rt = new ResultType();
@@ -45,11 +65,11 @@ namespace DynThings.Data.Repositories
             { rt = ResultType.Ok;}
             else
             { rt = ResultType.Failed; }
-            Result res = new Result(msg.ID, rt, msg.Message);
+            Result res = new Result(msg.ID, rt, msg.Message,0);
             return res;
         }
 
-        
+        #endregion
 
 
 
