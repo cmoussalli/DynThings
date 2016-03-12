@@ -14,7 +14,7 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-md-6">
+        <div class="col-md-12">
             <ul class="nav nav-tabs">
                 <li class="active"><a data-toggle="tab" href="#tabLocationmain">Main</a></li>
                 <li><a data-toggle="tab" href="#tabLocationGeoLocation">Geo Location</a></li>
@@ -47,19 +47,17 @@
     </div>
 </div>
 
-
+@section scriptfiles{
+    <script src="~/Scripts/MsMaps/mapcontrol.js"></script>
+    <script src="~/DynScripts/Locations.js"></script>
+}
 
 @section scripts{
-    <script src="~/DynScripts/Locations.js"></script>
-
     <script>
-
         $(document).ready(function () {
             LoadPart_LocationDetailsMainDiv('@Model.ID');
             LoadPart_LocationDetailsGeoLocationDiv('@Model.ID');
 
         });
-
     </script>
-
 }

@@ -1,10 +1,35 @@
 ﻿@model DynThings.Data.Models.Location
 <div class="right">
-    <button type="button" class="btn btn-info pull-right" onclick="LoadPart_DialogLocationMainEdit(@Model.ID)" data-toggle="modal" data-target="#mdl">Edit</button>
+    <button type="button" class="btn btn-info pull-right" onclick="LoadPart_DialogLocationGeoLocationEdit(@Model.ID)" data-toggle="modal" data-target="#mdl">Edit</button>
 </div>
 
-<strong>Title</strong><br>
-@Model.Title<br><br>
+<div id='locationGeoLocationMap' style="position: relative; width: 100%; height: 100%; height: 400px"></div>
 
-<strong>Is Active</strong><br>
-@Model.isActive<br><br>
+<script>
+    var map = null;
+    function LocationGeoLocationMap() {
+        map = new Microsoft.Maps.Map(document.getElementById('locationGeoLocationMap')
+            , {
+                credentials: 'Aq96lGpMhTmC6x18TL2-qS4ccUYLNnc9IW6FSN5E1MW5O1td3LMyiYzEBi3w6S7f'
+                , enableClickableLogo: false
+                , enableSearchLogo: false
+                , showDashboard: true
+                , showMapTypeSelector: true
+                , useInertia: true
+               // ,disablePanning: true
+               //, disableZooming: true
+                ,mapTypeId: Microsoft.Maps.MapTypeId.birdseye
+                , center: new Microsoft.Maps.Location( @Model.LatitudeX , @Model.LongitudeY),
+                zoom: 17 });
+
+        var offset = new Microsoft.Maps.Point(0, 5);
+        var pushpinOptions = { text: '', visible: true, textOffset: offset };
+        var pushpin0 = new Microsoft.Maps.Pushpin(new Microsoft.Maps.Location(@Model.LatitudeX, @Model.LongitudeY), pushpinOptions);
+        map.entities.push(pushpin0);
+    }
+
+    $(document).ready(function () {
+        LocationGeoLocationMap();
+    });
+
+</script>
