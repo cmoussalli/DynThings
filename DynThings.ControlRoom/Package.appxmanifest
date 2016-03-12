@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Package xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10" xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest" xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10" IgnorableNamespaces="uap mp">
   <Identity
-    Name="240547a5-cd94-4444-9f2a-1ad3830e3656"
+    Name="86755490-1a1f-4cfb-a08f-5ad59be924c3"
     Publisher = "CN=cesar"
     Version = "1.0.0.0" /> 
-  <mp:PhoneIdentity PhoneProductId="240547a5-cd94-4444-9f2a-1ad3830e3656" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
+  <mp:PhoneIdentity PhoneProductId="86755490-1a1f-4cfb-a08f-5ad59be924c3" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
   <Properties>
     <DisplayName>DynThings.ControlRoom</DisplayName>
     <PublisherDisplayName>cesar</PublisherDisplayName>
