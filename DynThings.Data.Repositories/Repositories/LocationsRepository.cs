@@ -91,6 +91,8 @@ namespace DynThings.Data.Repositories
             loc.isActive = false;
             loc.Status = 1;
             loc.IconID = 1;
+            loc.LatitudeX = "";
+            loc.LongitudeY = "";
             db.Locations.Add(loc);
             db.SaveChanges();
             return UnitOfWork.resultInfo.GenerateOKResult(loc.ID);
