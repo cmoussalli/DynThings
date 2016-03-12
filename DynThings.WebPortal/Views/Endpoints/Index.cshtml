@@ -25,15 +25,14 @@
         </div>
     </div>
 </div>
-<script src="~/DynScripts/EndPoints.js"></script>
-<script>
-
-    $(document).ready(function () {
-        LoadPart_EndPointListDiv();
-        AttachEventEndPointsListPager();
-    });
-
-
-
-</script>
-
+@section scriptfiles{
+    <script src="~/DynScripts/EndPoints.js"></script>
+}
+@section scripts{
+    <script>
+        $(document).ready(function () {
+            LoadPart_EndPointListDiv();
+            AttachEventEndPointsListPager();
+        });
+    </script>
+}
