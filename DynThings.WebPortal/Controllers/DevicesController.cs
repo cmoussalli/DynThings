@@ -90,7 +90,10 @@ namespace DynThings.WebPortal.Controllers
             if (ModelState.IsValid)
             {
                 UnitOfWork.repoDevices.Edit(device.ID, device.Title);
-                return RedirectToAction("Ok");
+            }
+            else
+            {
+                return Content("Error");
             }
             return View(device);
         }
