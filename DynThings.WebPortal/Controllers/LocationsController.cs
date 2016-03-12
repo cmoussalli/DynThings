@@ -14,6 +14,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using DynThings.Data.Models;
+using DynThings.Data.Repositories;
 
 namespace DynThings.WebPortal.Controllers
 {
@@ -21,106 +22,116 @@ namespace DynThings.WebPortal.Controllers
     {
         private DynThingsEntities db = new DynThingsEntities();
 
-        // GET: Locations
+        #region ActionResult: Views
         public ActionResult Index()
-        {
-            return View(db.Locations.ToList());
-        }
-
-        // GET: Locations/Details/5
-        public ActionResult Details(long? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Location location = db.Locations.Find(id);
-            if (location == null)
-            {
-                return HttpNotFound();
-            }
-            return View(location);
-        }
-
-        // GET: Locations/Create
-        public ActionResult Create()
         {
             return View();
         }
 
-        // POST: Locations/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        public ActionResult Details(int id)
+        {
+            Location loc = UnitOfWork.repoLocations.Find(id);
+            return View(loc);
+        }
+
+        #endregion
+
+        #region PartialViewResult: Partial Views
+
+        #region DetailsPV : Main
+        public PartialViewResult DetailsMainPV(int id)
+        {
+            Location locs = UnitOfWork.repoLocations.Find(id);
+            return PartialView("_Details_Main", locs);
+        }
+        #endregion
+
+        #region DetailsPV : GeoLocation
+        public PartialViewResult DetailsGeoLocationPV(int id)
+        {
+            Location locs = UnitOfWork.repoLocations.Find(id);
+            return PartialView("_Details_GeoLocation", locs);
+        }
+
+        #endregion
+
+        #region ListPV
+        [HttpGet]
+        public PartialViewResult ListPV(string searchfor = null, int page = 1, int recordsperpage = 0)
+        {
+            PagedList.IPagedList locs = UnitOfWork.repoLocations.GetPagedList(searchfor, page, Helpers.Configs.validateRecordsPerMaster(recordsperpage));
+            return PartialView("_List", locs);
+        }
+        #endregion
+
+        #region AddPV
+        [HttpGet]
+        public PartialViewResult AddPV()
+        {
+            return PartialView("_Add");
+        }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,GUID,Title,LongitudeY,LatitudeX,isActive,Status,IconID")] Location location)
+        public ActionResult AddPV([Bind(Include = "Title")] Location location)
+        {
+            UnitOfWork.repoLocations.Add(location.Title);
+            return Content("Ok");
+        }
+        #endregion
+
+        #region EditPV
+        #region Edit : Main
+        [HttpGet]
+        public PartialViewResult EditMainPV(int id)
+        {
+            Location location = UnitOfWork.repoLocations.Find(id);
+            return PartialView("_EditMain", location);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult EditMainPV([Bind(Include = "ID,Title,IsActive")] Location location)
         {
             if (ModelState.IsValid)
             {
-                db.Locations.Add(location);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                UnitOfWork.repoLocations.EditMain(location.ID, location.Title,location.isActive);
             }
-
-            return View(location);
+            else
+            {
+                return Content("Error");
+            }
+            return Content("Ok");
         }
+        #endregion
 
-        // GET: Locations/Edit/5
-        public ActionResult Edit(long? id)
+        #region Edit : GeoLocation
+        [HttpGet]
+        public PartialViewResult EditGeoLocationPV(int id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Location location = db.Locations.Find(id);
-            if (location == null)
-            {
-                return HttpNotFound();
-            }
-            return View(location);
+            Location location = UnitOfWork.repoLocations.Find(id);
+            return PartialView("_EditGeoLocation", location);
         }
 
-        // POST: Locations/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,GUID,Title,LongitudeY,LatitudeX,isActive,Status,IconID")] Location location)
+        public ActionResult EditGeoLocationPV([Bind(Include = "ID,LongitudeY,LatitudeX")] Location location)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(location).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                UnitOfWork.repoLocations.EditGeoLocation(location.ID,location.LongitudeY,location.LatitudeX);
             }
-            return View(location);
-        }
-
-        // GET: Locations/Delete/5
-        public ActionResult Delete(long? id)
-        {
-            if (id == null)
+            else
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return Content("Error");
             }
-            Location location = db.Locations.Find(id);
-            if (location == null)
-            {
-                return HttpNotFound();
-            }
-            return View(location);
+            return Content("Ok");
         }
+        #endregion
 
-        // POST: Locations/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(long id)
-        {
-            Location location = db.Locations.Find(id);
-            db.Locations.Remove(location);
-            db.SaveChanges();
-            return RedirectToAction("Index");
-        }
+        #endregion
+
+        #endregion
 
         protected override void Dispose(bool disposing)
         {
