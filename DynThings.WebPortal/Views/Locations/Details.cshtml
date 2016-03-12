@@ -1,74 +1,65 @@
-﻿@model DynThings.WebPortal.Models.Location
+﻿@model DynThings.Data.Models.Location
 
 @{
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
+<div class="container">
+    <div class="page-header">
+        <h1>Location Details</h1>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
 
-<div>
-    <h4>Location</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.GUID)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.GUID)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Title)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Title)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.LongitudeY)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.LongitudeY)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.LatitudeX)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.LatitudeX)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.isActive)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.isActive)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Status)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Status)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.IconID)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.IconID)
-        </dd>
-
-    </dl>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <ul class="nav nav-tabs">
+                <li class="active"><a data-toggle="tab" href="#tabLocationmain">Main</a></li>
+                <li><a data-toggle="tab" href="#tabLocationGeoLocation">Geo Location</a></li>
+                <li><a data-toggle="tab" href="#tabLocationDevices">Devices</a></li>
+                <li><a data-toggle="tab" href="#tabLocationViews">Dev Keys</a></li>
+            </ul>
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="tab-content">
+                        <div id="tabLocationmain" class="tab-pane fade in active">
+                            <div id="divLocationMain">
+                            </div>
+                        </div>
+                        <div id="tabLocationGeoLocation" class="tab-pane fade">
+                            <div id="divLocationGeoLocation">
+                            </div>
+                        </div>
+                        <div id="tabLocationDevices" class="tab-pane fade">
+                            <div id="divLocationDevicesList">
+                            </div>
+                        </div>
+                        <div id="tabLocationDevkeys" class="tab-pane fade">
+                            <div id="divLocationDevkeys">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+
+
+
+@section scripts{
+    <script src="~/DynScripts/Locations.js"></script>
+
+    <script>
+
+        $(document).ready(function () {
+            LoadPart_LocationDetailsMainDiv('@Model.ID');
+            LoadPart_LocationDetailsGeoLocationDiv('@Model.ID');
+
+        });
+
+    </script>
+
+}

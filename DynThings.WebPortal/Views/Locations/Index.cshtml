@@ -1,69 +1,38 @@
-﻿@model IEnumerable<DynThings.WebPortal.Models.Location>
-
+﻿@model IEnumerable<DynThings.Data.Models.Location>
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Locations";
 }
-
-<h2>Index</h2>
-
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.GUID)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Title)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.LongitudeY)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.LatitudeX)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.isActive)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Status)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.IconID)
-        </th>
-        <th></th>
-    </tr>
-
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.GUID)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Title)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.LongitudeY)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.LatitudeX)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.isActive)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Status)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.IconID)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
-        </td>
-    </tr>
+<div class="container">
+    <div class="page-header">
+        <h1>Locations</h1>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <button type="button" class="btn btn-info" onclick="LoadPart_DialogLocationAdd()" data-toggle="modal" data-target="#mdl">Add</button>
+        </div>
+        <div class="col-md-6">
+            <div class="input-group">
+                <input type="search" id="txtLocationSearch" class="form-control" onkeydown="if (event.keyCode == 13) { LoadPart_LocationListDiv(); return false; }" />
+                <div class="input-group-btn">
+                    <button type="button" class="btn btn-primary" onclick="LoadPart_LocationListDiv()">Search</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br />
+    <div class="well well-lg">
+        <div id="divLocationsList">
+        </div>
+    </div>
+</div>
+@section scriptfiles{
+    <script src="~/DynScripts/Locations.js"></script>
 }
-
-</table>
+@section scripts{
+    <script>
+        $(document).ready(function () {
+            LoadPart_LocationListDiv();
+            AttachEventLocationsListPager();
+        });
+    </script>
+}

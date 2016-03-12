@@ -323,6 +323,7 @@
     <Content Include="DynScripts\EndPointCommands.js" />
     <Content Include="DynScripts\DeviceCommands.js" />
     <Content Include="DynScripts\EndPoints.js" />
+    <Content Include="DynScripts\Locations.js" />
     <Content Include="DynScripts\LocationViews.js" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -485,7 +486,7 @@
     <Content Include="Views\Locations\Create.cshtml" />
     <Content Include="Views\Locations\Delete.cshtml" />
     <Content Include="Views\Locations\Details.cshtml" />
-    <Content Include="Views\Locations\Edit.cshtml" />
+    <Content Include="Views\Locations\_EditMain.cshtml" />
     <Content Include="Views\Locations\Index.cshtml" />
     <Content Include="Views\Endpoints\Delete.cshtml" />
     <Content Include="Views\Endpoints\Details.cshtml" />
@@ -538,6 +539,13 @@
     <Content Include="Views\Config\Index.cshtml" />
     <Content Include="Views\Endpoints\_Details_Commands.cshtml" />
     <Content Include="Views\LocationViews\Details.cshtml" />
+    <Content Include="Views\LocationViews\Edit.cshtml" />
+    <Content Include="Views\LocationViews\_EditMap.cshtml" />
+    <Content Include="Views\LocationViews\_LocationsList.cshtml" />
+    <Content Include="Views\Locations\_List.cshtml" />
+    <Content Include="Views\Locations\_Add.cshtml" />
+    <Content Include="Views\Locations\_Details_Main.cshtml" />
+    <Content Include="Views\Locations\_Details_GeoLocation.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
