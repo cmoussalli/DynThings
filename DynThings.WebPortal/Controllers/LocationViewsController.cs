@@ -87,7 +87,7 @@ namespace DynThings.WebPortal.Controllers
         }
         #endregion
 
-        #region EditPV
+        #region EditPV : Title
         [HttpGet]
         public PartialViewResult EditTitlePV(long id)
         {
@@ -97,7 +97,7 @@ namespace DynThings.WebPortal.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult EditTitlePV([Bind(Include = "ID,Title,TypeID,DeviceID")] LocationView locationView)
+        public ActionResult EditTitlePV([Bind(Include = "ID,Title")] LocationView locationView)
         {
             if (ModelState.IsValid)
             {
@@ -106,6 +106,41 @@ namespace DynThings.WebPortal.Controllers
             }
             return Content("Failed");
         }
+        #endregion
+
+        #region EditPV : MapInfo
+        [HttpGet]
+        public PartialViewResult EditMapPV(long id)
+        {
+            LocationView locationView = UnitOfWork.repoLocationViews.Find(id);
+            return PartialView("_EditMap", locationView);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult EditMapPV([Bind(Include = "ID,X,Y,Z")] LocationView locationView)
+        {
+            if (ModelState.IsValid)
+            {
+                UnitOfWork.repoLocationViews.Edit(locationView.ID, 3, locationView.X, locationView.Y, locationView.Z, "1");
+                return Content("Ok");
+            }
+            return Content("Failed");
+        }
+        #endregion
+
+        #region EditComponents
+
+        #region LocationsListPV
+        [HttpGet]
+        public PartialViewResult LocationsByLocationViewIDListGridPV(string searchfor = null,long locationViewID = 0, int page = 1, int recordsperpage = 0)
+        {
+            IPagedList views = UnitOfWork.repoLocations.GetPagedList(searchfor,locationViewID, page, Helpers.Configs.validateRecordsPerMaster(recordsperpage));
+            return PartialView("_LocationsList", views);
+        }
+        #endregion
+
+
         #endregion
 
         #region Monitor Components
