@@ -7,37 +7,55 @@
     <div class="page-header">
         <h1>LocationView Details</h1>
     </div>
+
     <div class="row">
-        <div class="col-lg-12">
-            
-            <div id="HCEndPoint" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-6">
+        <div class="col-md-12">
             <ul class="nav nav-tabs">
-                <li class="active"><a data-toggle="tab" href="#tabEndPointmain">Main</a></li>
-                <li><a data-toggle="tab" href="#tabEndPointhistory">History</a></li>
-                <li><a data-toggle="tab" href="#tabEndPointcommands">Commands</a></li>
-                <li><a data-toggle="tab" href="#tabEndPointDevkeys">Dev Keys</a></li>
+                <li class="active"><a data-toggle="tab" href="#tabLocationViewmain">Main</a></li>
+                <li><a data-toggle="tab" href="#tabLocationViewmap">Map</a></li>
+                <li><a data-toggle="tab" href="#tabLocationViewlocations">Location</a></li>
+                <li><a data-toggle="tab" href="#tabLocationViewDevkeys">Dev Keys</a></li>
             </ul>
             <div class="panel panel-default">
                 <div class="panel-body">
                     <div class="tab-content">
-                        <div id="tabEndPointmain" class="tab-pane fade in active">
-                            <div id="divEndPointMain">
+                        <div id="tabLocationViewmain" class="tab-pane fade in active">
+                            <div id="divLocationViewMain">
+
                             </div>
                         </div>
-                        <div id="tabEndPointhistory" class="tab-pane fade">
-                            <div id="divEndPointHistory">
+                        <div id="tabLocationViewmap" class="tab-pane fade">
+                            <div id="divLocationViewMap">
+                                @Html.Partial("_EditMap", Model)
                             </div>
                         </div>
-                        <div id="tabEndPointcommands" class="tab-pane fade">
-                            <div id="divEndPointCommandsList">
+                        <div id="tabLocationViewlocations" class="tab-pane fade">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <button type="button" class="btn btn-info" onclick="LoadPart_LocationsListByLocationViewIDDiv(@Model.ID)" data-toggle="modal" data-target="#mdl">Add</button>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="input-group">
+                                        <input type="search" id="txtLocationsSearch" class="form-control" onkeydown="if (event.keyCode == 13) { LoadPart_EndPointListDiv(); return false; }" />
+                                        <div class="input-group-btn">
+                                            <button type="button" class="btn btn-primary" onclick="LoadPart_LocationsListByLocationViewIDDiv(@Model.ID)">Search</button>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
+                            <br />
+                            <div class="well well-lg">
+                                <div id="divLocationViewLocationsList">
+
+                                </div>
+                            </div>
+                            
                         </div>
-                        <div id="tabEndPointDevkeys" class="tab-pane fade">
-                            <div id="divEndPointDevkeys">
+                        <div id="tabLocationViewDevkeys" class="tab-pane fade">
+
+
+
+                            <div id="divLocationViewDevkeys">
                             </div>
                         </div>
                     </div>
@@ -49,9 +67,20 @@
 
 <!-- Button trigger modal -->
 
-
-
+@section scriptfiles{
+    <script src="~/Scripts/MsMaps/mapcontrol.js"></script>
+    <script src="~/DynScripts/LocationViews.js"></script>
+}
 
 @section scripts{
+    <script>
 
+        $(document).ready(function () {
+            getEditMap(@Model.X,@Model.Y,@Model.Z);
+            LoadPart_LocationsListByLocationViewIDDiv(@Model.ID);
+        });
+
+
+      
+    </script>
 }

@@ -33,13 +33,15 @@
 
 </div>
 
-
+@section scriptfiles{
 <script src="~/Scripts/Gauges/justgage.js"></script>
 <script src="~/Scripts/Gauges/raphael-2.1.4.min.js"></script>
-
-@section scripts{
+<script src="~/Scripts/MsMaps/mapcontrol.js"></script>
 <script src="~/DynScripts/EndPointCommands.js"></script>
 <script src="~/DynScripts/LocationViews.js"></script>
+}
+
+@section scripts{
     <script>
         $(document).ready(function () {
             //LoadPart_MonitorAlerts();
