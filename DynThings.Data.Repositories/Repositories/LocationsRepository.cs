@@ -114,6 +114,24 @@ namespace DynThings.Data.Repositories
             return UnitOfWork.resultInfo.GenerateOKResult();
         }
 
+        public ResultInfo.Result EditMain(long id, string title, bool isActive)
+        {
+            Location loc = db.Locations.Find(id);
+            loc.Title = title;
+            loc.isActive = isActive;
+            db.SaveChanges();
+            return UnitOfWork.resultInfo.GenerateOKResult();
+        }
+
+        public ResultInfo.Result EditGeoLocation(long id, string longitudeY, string latitudeX)
+        {
+            Location loc = db.Locations.Find(id);
+            loc.LongitudeY = longitudeY;
+            loc.LatitudeX = latitudeX;
+            db.SaveChanges();
+            return UnitOfWork.resultInfo.GenerateOKResult();
+        }
+
         #endregion
 
     }
