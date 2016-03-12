@@ -1,5 +1,5 @@
 ﻿//Attach : Pager
-function AttachEventDevicesListPager() {
+function AttachEventLocationViewsListPager() {
     $(document).on("click", "#LocationViewsListPager a[href]", function () {
         var loadingpart = LoadDivLoading();
         $("#divLocationViewsList").html(loadingpart);
@@ -17,7 +17,7 @@ function AttachEventDevicesListPager() {
 }
 
 //Attach : Add Form Submit
-function AttachEventLocationViewAddForm(locationViewID) {
+function AttachEventLocationViewAddForm() {
     $("#LocationViewAddForm").on("submit", function (event) {
         event.preventDefault();
         var url = $(this).attr("action");
@@ -36,9 +36,9 @@ function AttachEventLocationViewAddForm(locationViewID) {
     });
 }
 
-//Attach : Edit Form Submit
-function AttachEventLocationViewEditForm(locationViewID) {
-    $("#LocationViewEditForm").on("submit", function (event) {
+//Attach : Edit Form Submit : Map
+function AttachEventLocationViewMapEditForm(locationViewID) {
+    $("#LocationViewMapEditForm").on("submit", function (event) {
         event.preventDefault();
         var url = $(this).attr("action");
         var formData = $(this).serialize();
@@ -51,8 +51,6 @@ function AttachEventLocationViewEditForm(locationViewID) {
             }
         })
 
-        LoadPart_LocationViewDetailsDiv(locationViewID);
-        $('#mdl').modal('hide');
     });
 }
 
@@ -149,3 +147,50 @@ function LoadPart_MonitorEndPointCommands(guid) {
         $("#divEndPointCommandsList").html(partialViewResult);
     });
 }
+
+//Get Locations List
+function LoadPart_LocationsListByLocationViewIDDiv(locationViewID) {
+    var loadingpart = LoadDivLoading();
+    $("#divLocationViewLocationsList").html(loadingpart);
+    $.ajax({
+        url: getRootURL() + '/locationviews/LocationsByLocationViewIDListGridPV?searchfor=' + $(txtLocationsSearch).val() + '&locationViewID=' + locationViewID + '&recordsperpage=0',
+        //page=" + $("#DynConfigCurrentPage").html,
+        type: "GET",
+    })
+        .done(function (partialViewResult) {
+            $("#divLocationViewLocationsList").html(partialViewResult);
+        });
+    return false;
+};
+
+var map = null;
+var viewchangeend;
+function getEditMap(x,y,z) {
+    map = new Microsoft.Maps.Map(document.getElementById('myMap')
+       , {
+           credentials: 'Aq96lGpMhTmC6x18TL2-qS4ccUYLNnc9IW6FSN5E1MW5O1td3LMyiYzEBi3w6S7f'
+            , enableClickableLogo: false
+            , enableSearchLogo: false
+            , showDashboard: true
+            , showMapTypeSelector: true
+            , useInertia: true
+           // ,disablePanning: true
+           //, disableZooming: true
+            ,mapTypeId: Microsoft.Maps.MapTypeId.birdseye
+            , center: new Microsoft.Maps.Location(x,y),  zoom: z });
+
+    var viewchangeend = Microsoft.Maps.Events.addHandler(map, 'viewchangeend', function (e) {
+        onViewChangeEnd(e);
+    });
+}
+
+function onViewChangeEnd(e) {
+    var latlon = map.getCenter();
+    $("#X").val(latlon.latitude);
+    $("#Y").val(latlon.longitude);
+    $("#Z").val(map.getZoom());
+}
+
+
+
+
