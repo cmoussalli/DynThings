@@ -81,12 +81,6 @@ function LoadPart_DialogEndPointEdit(id) {
 //TODO
 
 
-
-
-
-
-
-
 function LoadPart_EndPointHistoryDiv(Guid) {
     var loadingpart = LoadDivLoading();
     $("#SelectedEndPointID").val(Guid);
