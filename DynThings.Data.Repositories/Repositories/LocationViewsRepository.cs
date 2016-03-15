@@ -117,5 +117,22 @@ namespace DynThings.Data.Repositories
             return UnitOfWork.resultInfo.GenerateOKResult();
         }
         #endregion
+
+        #region AttachLocation
+        public ResultInfo.Result AttachLocation(long locationViewID,long locationID, string userID)
+        {
+            LinkLocationsLocationView lnk = new LinkLocationsLocationView();
+            List<LinkLocationsLocationView> lnks = db.LinkLocationsLocationViews.Where(l => l.LocationID == locationID && l.LocationViewID == locationViewID).ToList();
+            if (lnks.Count > 0)
+            {
+                return UnitOfWork.resultInfo.GetResultByID(5);
+            }
+            lnk.LocationID = locationID;
+            lnk.LocationViewID = locationViewID;
+            db.LinkLocationsLocationViews.Add(lnk);
+            db.SaveChanges();
+            return UnitOfWork.resultInfo.GenerateOKResult();
+        }
+        #endregion
     }
 }

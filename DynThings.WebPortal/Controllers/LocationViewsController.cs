@@ -140,6 +140,15 @@ namespace DynThings.WebPortal.Controllers
         }
         #endregion
 
+        #region AttachLocation
+        [HttpPost]
+        public ActionResult AttachLocation(long locationViewID, long locationID, string userID)
+        {
+            ResultInfo.Result res = UnitOfWork.repoLocationViews.AttachLocation(locationViewID, locationID, userID);
+            return Content(res.Message);
+        }
+        #endregion
+
 
         #endregion
 
