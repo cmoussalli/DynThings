@@ -2,8 +2,9 @@
 <table class="table striped hovered border bordered">
     <thead>
         <tr>
+            <th>ID</th>
             <th>Title</th>
-            <th>GUID</th>
+            <th>Is Active</th>
         </tr>
     </thead>
     <tbody>
@@ -11,10 +12,13 @@
         {
             <tr>
                 <td>
+                    @Html.DisplayFor(modelItem => item.ID)
+                </td>
+                <td>
                     <a href="#" onclick="SelectLocationFromLookUp('@item.ID')">@item.Title</a>
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.GUID)
+                    @Html.DisplayFor(modelItem => item.isActive)
                 </td>
             </tr>
         }

@@ -32,11 +32,11 @@
                         <div id="tabLocationViewlocations" class="tab-pane fade">
                             <div class="row">
                                 <div class="col-md-6">
-                                    <button type="button" class="btn btn-info" onclick="LoadPart_DialogLocationLookup()" data-toggle="modal" data-target="#mdl">Import</button>
+                                    <button type="button" class="btn btn-info" onclick="LoadPart_LocationLookup('#modal')" data-toggle="modal" data-target="#mdl">Import</button>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="input-group">
-                                        <input type="search" id="txtLocationsSearch" class="form-control" onkeydown="if (event.keyCode == 13) { LoadPart_EndPointListDiv(); return false; }" />
+                                        <input type="search" id="txtLocationsSearch" class="form-control" onkeydown="if (event.keyCode == 13) { LoadPart_LocationsListByLocationViewIDDiv(@Model.ID); return false; }" />
                                         <div class="input-group-btn">
                                             <button type="button" class="btn btn-primary" onclick="LoadPart_LocationsListByLocationViewIDDiv(@Model.ID)">Search</button>
                                         </div>
@@ -45,7 +45,7 @@
                             </div>
                             <br />
                             <div class="well well-lg">
-                                <div id="divLocationViewLocationsList">
+                                <div id="divLocationsList">
 
                                 </div>
                             </div>
@@ -76,7 +76,9 @@
 @section scripts{
     <script>
         $(document).ready(function () {
+            selectedLocationView = @Model.ID
             LoadPart_LocationsListByLocationViewIDDiv(@Model.ID);
+
         });
 
     </script>

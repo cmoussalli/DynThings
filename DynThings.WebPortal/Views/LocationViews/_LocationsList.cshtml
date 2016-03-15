@@ -5,7 +5,6 @@
         <tr>
             <th>Title</th>
             <th>GUID</th>
-            <th>Is Active</th>
             <th></th>
         </tr>
     </thead>
@@ -19,9 +18,7 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.GUID)
                 </td>
-                <td>
-                    @*@Html.DisplayFor(modelItem => item.IsActive)*@
-                </td>
+
                 <td>
                     @Html.ActionLink("Details", "Details", new { id = item.ID })
                 </td>
@@ -32,5 +29,12 @@
 
 <div id="LocationsListPager">
     <input id="LocationCurrentPage" value="@Model.PageNumber.ToString()" hidden />
-    @Html.PagedListPager(Model, page => Url.Action("ListPV", new { page }))
+    @Html.PagedListPager(Model, page => Url.Action("ListPV","locations", new { page }))
 </div>
+
+<script>
+    $(document).ready(function () {
+        AttachEventLocationsListPager();
+
+    })
+</script>

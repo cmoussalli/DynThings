@@ -7,7 +7,7 @@ function AttachEventLocationsListPager() {
         var loadingpart = LoadDivLoading();
         $("#divLocationsList").html(loadingpart);
         $.ajax({
-            url: $(this).attr("href") + "&searchfor=" + $(txtLocationSearch).val() + '&recordsperpage=0',
+            url: $(this).attr("href") + "&searchfor=" + $(txtLocationsSearch).val() + '&recordsperpage=0',
             type: 'GET',
             cache: false,
             success: function (result) {
@@ -88,6 +88,18 @@ function LoadPart_DialogLocationMainEdit(id) {
 }
 
 //Lookup
+//LoadPart_Location Lookup
+function LoadPart_LocationLookup(placeHolder) {
+    var loadingpart = LoadDivLoading();
+    $(placeHolder).html(loadingpart);
+    $.ajax({
+        url: getRootURL() + '/Locations/LookupPV',
+        type: "GET",
+    })
+    .done(function (partialViewResult) {
+        $(placeHolder).html(partialViewResult);
+    });
+}
 //Get Lookup List PV
 function LoadPart_LocationListLookupDiv() {
     var loadingpart = LoadDivLoading();
