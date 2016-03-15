@@ -1,4 +1,7 @@
-﻿//Attach : Pager
+﻿//Vars
+var selectedLocation = 0;
+
+//Attach : Pager
 function AttachEventLocationsListPager() {
     $(document).on("click", "#LocationsListPager a[href]", function () {
         var loadingpart = LoadDivLoading();
@@ -82,4 +85,42 @@ function LoadPart_DialogLocationMainEdit(id) {
     .done(function (partialViewResult) {
         $("#modal").html(partialViewResult);
     });
+}
+
+//Lookup
+//Get Lookup List PV
+function LoadPart_LocationListLookupDiv() {
+    var loadingpart = LoadDivLoading();
+    $("#divLocationsLookupList").html(loadingpart);
+    $.ajax({
+        url: getRootURL() + '/Locations/LookupListPV?searchfor=' + $(txtLocationLookupSearch).val() + '&recordsperpage=0',
+        //page=" + $("#DynConfigCurrentPage").html,
+        type: "GET",
+    })
+        .done(function (partialViewResult) {
+            $("#divLocationsLookupList").html(partialViewResult);
+        });
+    return false;
+};
+//Attach : Pager
+function AttachEventLocationsLookupListPager() {
+    $(document).on("click", "#LocationsLookupListPager a[href]", function () {
+        var loadingpart = LoadDivLoading();
+        $("#divLocationsLookupList").html(loadingpart);
+        $.ajax({
+            url: $(this).attr("href") + "&searchfor=" + $(txtLocationLookupSearch).val() + '&recordsperpage=0',
+            type: 'GET',
+            cache: false,
+            success: function (result) {
+                $("#divLocationsLookupList").html(result);
+                return false;
+            }
+        });
+        return false;
+    });
+}
+//Select from Lookup
+function SelectLocationFromLookUp(value) {
+    selectedLocation = value;
+    EventSelectLocation();
 }

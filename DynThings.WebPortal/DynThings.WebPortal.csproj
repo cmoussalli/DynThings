@@ -546,6 +546,8 @@
     <Content Include="Views\Locations\_Add.cshtml" />
     <Content Include="Views\Locations\_Details_Main.cshtml" />
     <Content Include="Views\Locations\_Details_GeoLocation.cshtml" />
+    <Content Include="Views\Locations\Lookup\List.cshtml" />
+    <Content Include="Views\Locations\Lookup\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -1,4 +1,9 @@
-﻿//Attach : Pager
+﻿//Vars
+var map = null;
+var viewchangeend;
+
+
+//Attach : Pager
 function AttachEventLocationViewsListPager() {
     $(document).on("click", "#LocationViewsListPager a[href]", function () {
         var loadingpart = LoadDivLoading();
@@ -163,9 +168,8 @@ function LoadPart_LocationsListByLocationViewIDDiv(locationViewID) {
     return false;
 };
 
-var map = null;
-var viewchangeend;
-function getEditMap(x,y,z) {
+
+function getEditMap(x, y, z) {
     map = new Microsoft.Maps.Map(document.getElementById('myMap')
        , {
            credentials: 'Aq96lGpMhTmC6x18TL2-qS4ccUYLNnc9IW6FSN5E1MW5O1td3LMyiYzEBi3w6S7f'
@@ -176,8 +180,9 @@ function getEditMap(x,y,z) {
             , useInertia: true
            // ,disablePanning: true
            //, disableZooming: true
-            ,mapTypeId: Microsoft.Maps.MapTypeId.birdseye
-            , center: new Microsoft.Maps.Location(x,y),  zoom: z });
+            , mapTypeId: Microsoft.Maps.MapTypeId.birdseye
+            , center: new Microsoft.Maps.Location(x, y), zoom: z
+       });
 
     var viewchangeend = Microsoft.Maps.Events.addHandler(map, 'viewchangeend', function (e) {
         onViewChangeEnd(e);
@@ -191,6 +196,19 @@ function onViewChangeEnd(e) {
     $("#Z").val(map.getZoom());
 }
 
+function LoadPart_DialogLocationLookup() {
+    var loadingpart = LoadDivLoading();
+    $("#modal").html(loadingpart);
+    $.ajax({
+        url: getRootURL() + '/Locations/LookupPV',
+        type: "GET",
+    })
+    .done(function (partialViewResult) {
+        $("#modal").html(partialViewResult);
+    });
+}
 
 
-
+function EventSelectLocation() {
+    alert(selectedLocation);
+}

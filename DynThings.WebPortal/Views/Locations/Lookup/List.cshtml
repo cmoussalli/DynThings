@@ -1,12 +1,9 @@
 ﻿@model IPagedList<DynThings.Data.Models.Location>
-
 <table class="table striped hovered border bordered">
     <thead>
         <tr>
             <th>Title</th>
             <th>GUID</th>
-            <th>Is Active</th>
-            <th></th>
         </tr>
     </thead>
     <tbody>
@@ -14,23 +11,18 @@
         {
             <tr>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Title)
+                    <a href="#" onclick="SelectLocationFromLookUp('@item.ID')">@item.Title</a>
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.GUID)
-                </td>
-                <td>
-                    @*@Html.DisplayFor(modelItem => item.IsActive)*@
-                </td>
-                <td>
-                    @Html.ActionLink("Details", "Details", new { id = item.ID })
                 </td>
             </tr>
         }
     </tbody>
 </table>
 
-<div id="LocationsListPager">
+<div id="LocationsLookupListPager">
     <input id="LocationCurrentPage" value="@Model.PageNumber.ToString()" hidden />
-    @Html.PagedListPager(Model, page => Url.Action("ListPV", new { page }))
+    @Html.PagedListPager(Model, page => Url.Action("LookupListPV", new { page }))
 </div>
+

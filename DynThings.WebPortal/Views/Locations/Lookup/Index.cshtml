@@ -1,0 +1,21 @@
+﻿<div class="row">
+    <div class="col-md-12">
+        <div class="input-group">
+            <input type="search" id="txtLocationLookupSearch" class="form-control" onkeydown="if (event.keyCode == 13) { LoadPart_LocationListLookupDiv(); return false; }" />
+            <div class="input-group-btn">
+                <button type="button" class="btn btn-primary" onclick="LoadPart_LocationListLookupDiv()">Search</button>
+            </div>
+        </div>
+    </div>
+</div>
+<br />
+<div class="well well-lg">
+    <div id="divLocationsLookupList">
+    </div>
+</div>
+<script>
+        $(document).ready(function () {
+            //LoadPart_LocationListLookupDiv();
+            AttachEventLocationsLookupListPager();
+        });
+</script>
