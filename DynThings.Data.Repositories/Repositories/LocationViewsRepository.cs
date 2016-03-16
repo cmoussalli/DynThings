@@ -134,5 +134,20 @@ namespace DynThings.Data.Repositories
             return UnitOfWork.resultInfo.GenerateOKResult();
         }
         #endregion
+
+        #region DeAttachLocation
+        public ResultInfo.Result DeattachLocation(long locationViewID, long locationID, string userID)
+        {
+            List<LinkLocationsLocationView> lnks = db.LinkLocationsLocationViews.Where(l => l.LocationID == locationID && l.LocationViewID == locationViewID).ToList();
+          if (lnks.Count != 1)
+            {
+                return UnitOfWork.resultInfo.GetResultByID(6);
+            }
+            LinkLocationsLocationView lnk = lnks[0];
+            db.LinkLocationsLocationViews.Remove(lnk);
+            db.SaveChanges();
+            return UnitOfWork.resultInfo.GenerateOKResult();
+        }
+        #endregion
     }
 }

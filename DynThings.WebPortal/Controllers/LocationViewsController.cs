@@ -149,6 +149,15 @@ namespace DynThings.WebPortal.Controllers
         }
         #endregion
 
+        #region DeAttachLocation
+        [HttpPost]
+        public ActionResult DeAttachLocation(long locationViewID, long locationID, string userID)
+        {
+            ResultInfo.Result res = UnitOfWork.repoLocationViews.DeattachLocation(locationViewID, locationID, userID);
+            return Content(res.Message);
+        }
+        #endregion
+
 
         #endregion
 

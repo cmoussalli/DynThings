@@ -198,14 +198,19 @@ function onViewChangeEnd(e) {
 }
 
 
-
-
-function EventSelectLocation() {
+function AttachLocationToLocationView(locationViewID,LocationID) {
     $.ajax({
-        url: getRootURL() + '/LocationViews/AttachLocation?locationViewID=' + selectedLocationView + '&locationID=' + selectedLocation + '&userID=0',
-        //page=" + $("#DynConfigCurrentPage").html,
+        url: getRootURL() + '/LocationViews/AttachLocation?locationViewID=' + locationViewID + '&locationID=' + LocationID + '&userID=0',
         type: "POST",
     })
     HideModal();
-    LoadPart_LocationsListByLocationViewIDDiv(selectedLocationView);
+    LoadPart_LocationsListByLocationViewIDDiv(locationViewID);
+}
+
+function DeattachLocationFromLocationView(locationViewID, LocationID) {
+    $.ajax({
+        url: getRootURL() + '/LocationViews/DeAttachLocation?locationViewID=' + locationViewID + '&locationID=' + LocationID + '&userID=0',
+        type: "POST",
+    })
+    LoadPart_LocationsListByLocationViewIDDiv(locationViewID);
 }

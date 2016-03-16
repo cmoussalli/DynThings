@@ -20,7 +20,7 @@
                 </td>
 
                 <td>
-                    @Html.ActionLink("Details", "Details", new { id = item.ID })
+                    <button onclick="DeattachLocationFromLocationView(selectedLocationView, @item.ID)">Delete</button>
                 </td>
             </tr>
         }
@@ -35,6 +35,9 @@
 <script>
     $(document).ready(function () {
         AttachEventLocationsListPager();
-
     })
+
+    function EventSelectLocation() {
+        AttachLocationToLocationView(selectedLocationView, selectedLocation);
+    }
 </script>
