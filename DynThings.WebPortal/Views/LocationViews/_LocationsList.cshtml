@@ -29,14 +29,10 @@
 
 <div id="LocationsListPager">
     <input id="LocationCurrentPage" value="@Model.PageNumber.ToString()" hidden />
-    @Html.PagedListPager(Model, page => Url.Action("ListPV","locations", new { page }))
+    @Html.PagedListPager(Model, page => Url.Action("LocationsByLocationViewIDListGridPV", "locationViews", new { page })+"&locationviewID=1")
 </div>
 
 <script>
-    $(document).ready(function () {
-        AttachEventLocationsListPager();
-    })
-
     function EventSelectLocation() {
         AttachLocationToLocationView(selectedLocationView, selectedLocation);
     }

@@ -30,26 +30,7 @@
 </div>
 <script>
     $(document).ready(function () {
-        $("#EndPointEditForm").on("submit", function (event) {
-            event.preventDefault();
-            //$("#DynConfigEditSavingDiv").show();
-
-            var url = $(this).attr("action");
-            var formData = $(this).serialize();
-            $.ajax({
-                url: url,
-                type: "POST",
-                data: formData,
-                dataType: "json",
-                success: function (resp) {
-                }
-            })
-
-            LoadPart_EndPointDetailsDiv('@Model.ID');
-            LoadPart_EndPointDetailsDiv('@Model.ID');
-            $('#mdl').modal('hide');
-        });
-
+        AttachEventEndPointEditForm(@Model.ID);
     });
 
 </script>

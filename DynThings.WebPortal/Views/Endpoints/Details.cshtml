@@ -63,50 +63,14 @@
 <script src="~/DynScripts/EndPointCommands.js"></script>
 
     <script>
-
         $(document).ready(function () {
             LoadPart_EndPointDetailsDiv('@Model.ID');
             LoadPart_EndPointHistoryDiv('@Model.GUID');
             LoadPart_EndPointCommandListByEndPointIDDiv('@Model.ID','');
-
         });
-
-        function LoadEndpointEditor(id) {
-
-            LoadPart_DialogEndPointEdit(id);
-            LoadPart_EndPointDetailsDiv(id);
-        }
-
-        function LoadPart_EndPointCommandListByEndPointIDDiv(endPointID, search) {
-            var loadingpart = LoadDivLoading();
-            $("#divEndPointCommandsList").html(loadingpart);
-            $.ajax({
-                url: getRootURL() + '/EndPoints/EndPointCommandsListByEndPointIDPV?searchfor=' + search + '&EndPointID=' + endPointID + '&recordsperpage=0',
-                type: "GET",
-            })
-                .done(function (partialViewResult) {
-                    $("#divEndPointCommandsList").html(partialViewResult);
-                });
-            return false;
-        }
-
-
-
-        function LoadPart_EndPointHistoryDiv(Guid) {
-            var loadingpart = LoadDivLoading();
-            $("#SelectedEndPointID").val(Guid);
-            $("#divEndPointHistory").html(loadingpart);
-            $.ajax({
-                url:  getRootURL() + '/EndPoints/GetPVEndPointHistory?guid=' + Guid + '&pageNumber=1&recordsPerPage=0',
-                type: "GET",
-            })
-            .done(function (partialViewResult) {
-                $("#divEndPointHistory").html(partialViewResult);
-            });
-        }
     </script>
-    <script>
 
+    <script>
         $(document).ready(function () {
             $(document).on("click", "#EndPointIOsListPager a[href]", function () {
                 var loadingpart = LoadDivLoading();

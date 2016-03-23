@@ -17,10 +17,43 @@ function AttachEventEndPointsListPager() {
 }
 
 //Attach : Add Form Submit
-//TODO
+function AttachEventEndPointAddForm(){
+    $("#EndPointAddForm").on("submit", function (event) {
+        event.preventDefault();
+        var url = $(this).attr("action");
+        var formData = $(this).serialize();
+        $.ajax({
+            url: url,
+            type: "POST",
+            data: formData,
+            dataType: "json",
+            success: function (resp) {
+            }
+        })
+
+        LoadPart_EndPointListDiv();
+        $('#mdl').modal('hide');
+    });
+};
 
 //Attach : Edit Form Submit
-//TODO
+function AttachEventEndPointEditForm(endPointID){
+    $("#EndPointEditForm").on("submit", function (event) {
+        event.preventDefault();
+        var url = $(this).attr("action");
+        var formData = $(this).serialize();
+        $.ajax({
+            url: url,
+            type: "POST",
+            data: formData,
+            dataType: "json",
+            success: function (resp) {
+            }
+        })
+        $('#mdl').modal('hide');
+        LoadPart_EndPointDetailsDiv(endPointID);
+    });
+};
 
 //Get List
 function LoadPart_EndPointListDiv() {
@@ -77,10 +110,12 @@ function LoadPart_DialogEndPointEdit(id) {
     });
 }
 
-//Button: Edit
-//TODO
+function LoadEndpointEditor(id) {
+    LoadPart_DialogEndPointEdit(id);
+    LoadPart_EndPointDetailsDiv(id);
+}
 
-
+//Get History IOs
 function LoadPart_EndPointHistoryDiv(Guid) {
     var loadingpart = LoadDivLoading();
     $("#SelectedEndPointID").val(Guid);
@@ -92,4 +127,18 @@ function LoadPart_EndPointHistoryDiv(Guid) {
     .done(function (partialViewResult) {
         $("#divEndPointHistory").html(partialViewResult);
     });
+}
+
+//Get Commands
+function LoadPart_EndPointCommandListByEndPointIDDiv(endPointID, search) {
+    var loadingpart = LoadDivLoading();
+    $("#divEndPointCommandsList").html(loadingpart);
+    $.ajax({
+        url: getRootURL() + '/EndPoints/EndPointCommandsListByEndPointIDPV?searchfor=' + search + '&EndPointID=' + endPointID + '&recordsperpage=0',
+        type: "GET",
+    })
+        .done(function (partialViewResult) {
+            $("#divEndPointCommandsList").html(partialViewResult);
+        });
+    return false;
 }

@@ -1,7 +1,5 @@
 ﻿@model PagedList.IPagedList<DynThings.Data.Models.Device>
 
-
-
 <table class="table striped hovered border bordered">
     <thead>
         <tr>
@@ -21,8 +19,7 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.DeviceStatu.Title)
                 </td>
-              
-
+                <td></td>
                 <td>
                     @Html.ActionLink("Details", "Details", new { id = item.ID })
                 </td>
@@ -31,11 +28,8 @@
     </tbody>
 </table>
 
-
 <div id="DevicesListPager">
     <input id="DeviceCurrentPage" value="@Model.PageNumber.ToString()" hidden />
 
-
     @Html.PagedListPager(Model, page => Url.Action("GetListPV", new { page }))
 </div>
-

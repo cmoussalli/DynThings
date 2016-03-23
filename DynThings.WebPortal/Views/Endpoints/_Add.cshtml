@@ -28,23 +28,7 @@
 }
 <script>
     $(document).ready(function () {
-        $("#EndPointAddForm").on("submit", function (event) {
-            event.preventDefault();
-            var url = $(this).attr("action");
-            var formData = $(this).serialize();
-            $.ajax({
-                url: url,
-                type: "POST",
-                data: formData,
-                dataType: "json",
-                success: function (resp) {
-                }
-            })
-
-            LoadPart_EndPointListDiv();
-            $('#mdl').modal('hide');
-        });
-
+        AttachEventEndPointAddForm();
     });
 
 </script>

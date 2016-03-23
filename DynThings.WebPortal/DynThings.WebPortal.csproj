@@ -488,7 +488,6 @@
     <Content Include="Views\Locations\Details.cshtml" />
     <Content Include="Views\Locations\_EditMain.cshtml" />
     <Content Include="Views\Locations\Index.cshtml" />
-    <Content Include="Views\Endpoints\Delete.cshtml" />
     <Content Include="Views\Endpoints\Details.cshtml" />
     <Content Include="Views\Endpoints\Index.cshtml" />
     <Content Include="Views\LocationViews\MonitorView.cshtml" />
@@ -548,6 +547,7 @@
     <Content Include="Views\Locations\_Details_GeoLocation.cshtml" />
     <Content Include="Views\Locations\Lookup\List.cshtml" />
     <Content Include="Views\Locations\Lookup\Index.cshtml" />
+    <Content Include="Views\Devices\_Details_Main.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
