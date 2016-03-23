@@ -6,6 +6,7 @@ function AttachEventLocationsListPager() {
     $(document).on("click", "#LocationsListPager a[href]", function () {
         var loadingpart = LoadDivLoading();
         $("#divLocationsList").html(loadingpart);
+        
         $.ajax({
             url: $(this).attr("href") + "&searchfor=" + $(txtLocationsSearch).val() + '&recordsperpage=0',
             type: 'GET',
@@ -24,12 +25,13 @@ function LoadPart_LocationListDiv() {
     var loadingpart = LoadDivLoading();
     $("#divLocationsList").html(loadingpart);
     $.ajax({
-        url: getRootURL() + '/Locations/ListPV?searchfor=' + $(txtLocationSearch).val() + '&recordsperpage=0',
+        url: getRootURL() + '/Locations/ListPV?searchfor=' + $(txtLocationsSearch).val() + '&recordsperpage=0',
         //page=" + $("#DynConfigCurrentPage").html,
         type: "GET",
     })
         .done(function (partialViewResult) {
             $("#divLocationsList").html(partialViewResult);
+            AttachEventLocationsListPager();
         });
     return false;
 };

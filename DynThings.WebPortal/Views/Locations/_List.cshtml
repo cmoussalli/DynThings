@@ -36,8 +36,6 @@
 
 <div id="LocationsListPager">
     <input id="LocationCurrentPage" value="@Model.PageNumber.ToString()" hidden />
-   
-
     @Html.PagedListPager(Model, page => Url.Action("ListPV", new { page }))
 </div>
 

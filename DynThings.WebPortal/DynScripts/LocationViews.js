@@ -165,6 +165,7 @@ function LoadPart_LocationsListByLocationViewIDDiv(locationViewID) {
     })
         .done(function (partialViewResult) {
             $("#divLocationsList").html(partialViewResult);
+            AttachEventLocationsListPager();
         });
     return false;
 };

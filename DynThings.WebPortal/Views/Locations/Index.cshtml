@@ -12,7 +12,7 @@
         </div>
         <div class="col-md-6">
             <div class="input-group">
-                <input type="search" id="txtLocationSearch" class="form-control" onkeydown="if (event.keyCode == 13) { LoadPart_LocationListDiv(); return false; }" />
+                <input type="search" id="txtLocationsSearch" class="form-control" onkeydown="if (event.keyCode == 13) { LoadPart_LocationListDiv(); return false; }" />
                 <div class="input-group-btn">
                     <button type="button" class="btn btn-primary" onclick="LoadPart_LocationListDiv()">Search</button>
                 </div>
@@ -25,14 +25,13 @@
         </div>
     </div>
 </div>
-@section scriptfiles{
-    <script src="~/DynScripts/Locations.js"></script>
-}
+
 @section scripts{
+<script src="~/DynScripts/Locations.js"></script>
     <script>
         $(document).ready(function () {
             LoadPart_LocationListDiv();
-            AttachEventLocationsListPager();
+            
         });
     </script>
 }
