@@ -116,12 +116,12 @@ function LoadEndpointEditor(id) {
 }
 
 //Get History IOs
-function LoadPart_EndPointHistoryDiv(Guid) {
+function LoadPart_EndPointHistoryDiv(endPointID) {
     var loadingpart = LoadDivLoading();
-    $("#SelectedEndPointID").val(Guid);
+    $("#SelectedEndPointID").val(endPointID);
     $("#divEndPointHistory").html(loadingpart);
     $.ajax({
-        url: getRootURL() + '/EndPoints/GetPVEndPointHistory?guid=' + Guid + '&pageNumber=1&recordsPerPage=0',
+        url: getRootURL() + '/EndPoints/GetPVEndPointHistory?endPointID=' + endPointID + '&page=1&recordsPerPage=0',
         type: "GET",
     })
     .done(function (partialViewResult) {

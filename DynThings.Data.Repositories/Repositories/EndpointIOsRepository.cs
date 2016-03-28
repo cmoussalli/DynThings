@@ -27,15 +27,63 @@ namespace DynThings.Data.Repositories
         }
         #endregion
 
+
+        #region Find
+        public EndPointIO Find(long id)
+        {
+            EndPointIO io = new EndPointIO();
+            List<EndPointIO> ios = db.EndPointIOs.Where(l => l.ID == id).ToList();
+            if (ios.Count == 1)
+            {
+                io = ios[0];
+            }
+            else
+            {
+                throw new Exception("Not Found");
+            }
+            return io;
+        }
+        #endregion
+
+
         #region Get PagedList
-        public IPagedList GetPagedList(Guid endPointGUID, int pageNumber, int recordsPerPage)
+        public IPagedList GetPagedList(long endPointID, int pageNumber, int recordsPerPage)
         {
             PagedList.IPagedList ios = db.EndPointIOs
-              .Where(i => i.Endpoint.GUID == endPointGUID)
+              .Where(i => i.Endpoint.ID == endPointID)
               .OrderByDescending(i => i.TimeStamp).Take(100).ToList()
               .ToPagedList(pageNumber, recordsPerPage);
             return ios;
         }
+
+        public IPagedList GetPagedList(string search, Guid endPointGUID, DateTime fromDate, DateTime toDate, int pageNumber, int recordsPerPage)
+        {
+            PagedList.IPagedList ios = db.EndPointIOs
+              .Where(i => i.Endpoint.GUID == endPointGUID
+              && i.Valu.Contains(search)
+              && i.ExecTimeStamp > fromDate
+              && i.ExecTimeStamp < toDate
+              )
+              .OrderByDescending(i => i.TimeStamp).Take(1000).ToList()
+              .ToPagedList(pageNumber, recordsPerPage);
+            return ios;
+        }
+
+        public IPagedList GetPagedList(string search, long endPointID,long ioTypeID, int pageNumber, int recordsPerPage)
+        {
+            PagedList.IPagedList ios = db.EndPointIOs
+              .Where( i => i.Valu.Contains(search)
+                //i => i.Endpoint.ID == endPointID
+              && (i.EndPointID != null && i.EndPointID == endPointID)
+              && (i.IOTypeID != null && i.IOTypeID == ioTypeID)
+              //&& i.ExecTimeStamp > fromDate
+              //&& i.ExecTimeStamp < toDate
+              )
+              .OrderByDescending(i => i.TimeStamp).Take(1000).ToList()
+              .ToPagedList(pageNumber, recordsPerPage);
+            return ios;
+        }
+
         #endregion
 
         #region Add
@@ -66,7 +114,7 @@ namespace DynThings.Data.Repositories
         #endregion
 
         #region Submit IO
-        private ResultInfo.Result SubmitIO(Guid endPointKeyPass, EndPointIOType IOTypeID , string Valu, DateTime executionTimeStamp)
+        private ResultInfo.Result SubmitIO(Guid endPointKeyPass, EndPointIOType IOTypeID, string Valu, DateTime executionTimeStamp)
         {
             List<Endpoint> ends = db.Endpoints.Where(e => e.GUID == endPointKeyPass).ToList();
             if (ends.Count == 1)

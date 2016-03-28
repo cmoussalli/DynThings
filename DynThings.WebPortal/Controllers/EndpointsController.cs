@@ -103,12 +103,20 @@ namespace DynThings.WebPortal.Controllers
 
         #region EndPoint History
         [HttpGet]
-        public PartialViewResult GetPVEndPointHistory(Guid guid,int page= 1,int recordsperpage = 0)
+        public PartialViewResult GetPVEndPointHistory(long endPointID, int page = 1, int recordsperpage = 0)
         {
-            IPagedList IOs = UnitOfWork.repoEndpointIOs.GetPagedList(guid, page, Helpers.Configs.validateRecordsPerChild(Config.DefaultRecordsPerChild));
+            IPagedList IOs = UnitOfWork.repoEndpointIOs.GetPagedList(endPointID, page, Helpers.Configs.validateRecordsPerChild(Config.DefaultRecordsPerChild));
             return PartialView("_EndPointHistory", IOs);
-            
+
         }
+
+        //[HttpGet]
+        //public PartialViewResult GetPVEndPointHistory(long endPointID,int page= 1,int recordsperpage = 0)
+        //{
+        //    IPagedList IOs = UnitOfWork.repoEndpointIOs.GetPagedList("",endPointID,1, page, Helpers.Configs.validateRecordsPerChild(Config.DefaultRecordsPerChild));
+        //    return PartialView("_EndPointHistory", IOs);
+
+        //}
         #endregion
 
         #region EndPoint Commands

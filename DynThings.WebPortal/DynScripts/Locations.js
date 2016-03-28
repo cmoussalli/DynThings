@@ -20,6 +20,24 @@ function AttachEventLocationsListPager() {
     });
 }
 
+//Attach : Edit Form Submit : Map
+function AttachEventLocationMapEditForm(locationID) {
+    $("#LocationMapEditForm").on("submit", function (event) {
+        event.preventDefault();
+        var url = $(this).attr("action");
+        var formData = $(this).serialize();
+        $.ajax({
+            url: url,
+            type: "POST",
+            data: formData,
+            dataType: "json",
+            success: function (resp) {
+            }
+        })
+
+    });
+}
+
 //Get List
 function LoadPart_LocationListDiv() {
     var loadingpart = LoadDivLoading();

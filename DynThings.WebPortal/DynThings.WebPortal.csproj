@@ -194,6 +194,7 @@
     <Compile Include="Controllers\DeviceCommandsController.cs" />
     <Compile Include="Controllers\DevicesController.cs" />
     <Compile Include="Controllers\EndPointCommandsController.cs" />
+    <Compile Include="Controllers\EndPointIOsController.cs" />
     <Compile Include="Controllers\EndpointsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LocationsController.cs" />
@@ -322,6 +323,7 @@
     <Content Include="DynScripts\Devices.js" />
     <Content Include="DynScripts\EndPointCommands.js" />
     <Content Include="DynScripts\DeviceCommands.js" />
+    <Content Include="DynScripts\EndPointIOs.js" />
     <Content Include="DynScripts\EndPoints.js" />
     <Content Include="DynScripts\Locations.js" />
     <Content Include="DynScripts\LocationViews.js" />
@@ -548,6 +550,8 @@
     <Content Include="Views\Locations\Lookup\List.cshtml" />
     <Content Include="Views\Locations\Lookup\Index.cshtml" />
     <Content Include="Views\Devices\_Details_Main.cshtml" />
+    <Content Include="Views\EndPointIOs\Index.cshtml" />
+    <Content Include="Views\EndPointIOs\_List.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

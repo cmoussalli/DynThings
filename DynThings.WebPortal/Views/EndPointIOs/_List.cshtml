@@ -1,0 +1,34 @@
+﻿@model PagedList.IPagedList<DynThings.Data.Models.EndPointIO>
+
+<table class="table striped hovered border bordered">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Device\EndPoint</th>
+            <th>IO Type</th>
+            <th>Value</th>
+            <th>Execution TimeStamp</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@Html.DisplayFor(modelItem => item.ID)</td>
+                <td>
+                    <a href="~/devices/details?id=@item.Endpoint.DeviceID">@item.Endpoint.Device.Title</a>
+                    \<a href="~/endpoints/details?id=@item.EndPointID">@item.Endpoint.Title</a>
+                </td>
+                <td>@item.IOType.Title\@item.Endpoint.EndPointType.Title</td>
+                <td>@item.Valu @item.Endpoint.EndPointType.measurement</td>
+                <td>@item.ExecTimeStamp</td>
+        </tr>
+        }
+    </tbody>
+</table>
+
+<div id="EndPointsListPager">
+    <input id="EndPointCurrentPage" value="@Model.PageNumber.ToString()" hidden />
+
+    @Html.PagedListPager(Model, page => Url.Action("ListPV", new { page }))
+</div>

@@ -65,7 +65,7 @@
     <script>
         $(document).ready(function () {
             LoadPart_EndPointDetailsDiv('@Model.ID');
-            LoadPart_EndPointHistoryDiv('@Model.GUID');
+            LoadPart_EndPointHistoryDiv('@Model.ID');
             LoadPart_EndPointCommandListByEndPointIDDiv('@Model.ID','');
         });
     </script>
@@ -76,7 +76,7 @@
                 var loadingpart = LoadDivLoading();
                 $("#divEndPointHistory").html(loadingpart);
                 $.ajax({
-                    url: $(this).attr("href") + '&guid=@Model.GUID&recordsperpage=0',
+                    url: $(this).attr("href") + '&endpointid=@Model.ID&recordsperpage=0',
                     type: 'GET',
                     cache: false,
                     success: function (result) {

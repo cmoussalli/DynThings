@@ -113,12 +113,12 @@ function LoadPart_MonitorLocation(id) {
 }
 
 //Get EndPoint MainTab
-function LoadPart_MonitorEndPointMain(Guid) {
+function LoadPart_MonitorEndPointMain(endPointID) {
     var loadingpart = LoadDivLoading();
-    $("#SelectedEndPointID").val(Guid);
+    $("#SelectedEndPointID").val(endPointID);
     $("#divMonitorEndPointMain").html(loadingpart);
     $.ajax({
-        url: getRootURL() + '/locationviews/GetPVLocationViewEndPointMain?guid=' + Guid,
+        url: getRootURL() + '/locationviews/GetPVLocationViewEndPointMain?endPointID=' + endPointID,
         type: "GET",
     })
     .done(function (partialViewResult) {
@@ -127,12 +127,12 @@ function LoadPart_MonitorEndPointMain(Guid) {
 }
 
 //Get EndPointHistory
-function LoadPart_MonitorEndPointHistory(Guid) {
+function LoadPart_MonitorEndPointHistory(endPointID) {
     var loadingpart = LoadDivLoading();
-    $("#SelectedEndPointID").val(Guid);
+    $("#SelectedEndPointID").val(endPointID);
     $("#divMonitorEndPointHistory").html(loadingpart);
     $.ajax({
-        url: getRootURL() + '/locationviews/GetPVLocationViewEndPointHistory?guid=' + Guid,
+        url: getRootURL() + '/locationviews/GetPVLocationViewEndPointHistory?endPointID=' + endPointID,
         type: "GET",
     })
     .done(function (partialViewResult) {
@@ -141,12 +141,12 @@ function LoadPart_MonitorEndPointHistory(Guid) {
 }
 
 //Get EndPointCommands
-function LoadPart_MonitorEndPointCommands(guid) {
+function LoadPart_MonitorEndPointCommands(endPointID) {
     var loadingpart = LoadDivLoading();
-    $("#SelectedEndPointID").val(guid);
+    $("#SelectedEndPointID").val(endPointID);
     $("#divEndPointCommandsList").html(loadingpart);
     $.ajax({
-        url: getRootURL() + '/locationviews/GetEndPointCommandsByEndPointGUIDPV?guid=' + guid,
+        url: getRootURL() + '/locationviews/GetEndPointCommandsByEndPointGUIDPV?endPointID=' + endPointID,
         type: "GET",
     })
     .done(function (partialViewResult) {
@@ -171,7 +171,7 @@ function LoadPart_LocationsListByLocationViewIDDiv(locationViewID) {
 };
 
 
-function getEditMap(x, y, z) {
+function getEditLocationViewMap(x, y, z) {
     map = new Microsoft.Maps.Map(document.getElementById('myMap')
        , {
            credentials: 'Aq96lGpMhTmC6x18TL2-qS4ccUYLNnc9IW6FSN5E1MW5O1td3LMyiYzEBi3w6S7f'
