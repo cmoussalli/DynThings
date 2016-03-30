@@ -7,7 +7,7 @@ using DynThings.Data.Models;
 
 namespace DynThings.Data.Repositories
 {
-    public  class ResultInfo
+    public class ResultInfo
     {
         private DynThingsEntities db = new DynThingsEntities();
 
