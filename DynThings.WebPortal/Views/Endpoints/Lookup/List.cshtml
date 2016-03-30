@@ -1,0 +1,28 @@
+﻿@model IPagedList<DynThings.Data.Models.Endpoint>
+<table class="table striped hovered border bordered">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Title</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ID)
+                </td>
+                <td>
+                    <a href="#" onclick="SelectEndPointFromLookUp('@item.ID','@item.Title')">@item.Title</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<div id="EndPointsLookupListPager">
+    <input id="EndPointCurrentPage" value="@Model.PageNumber.ToString()" hidden />
+    @Html.PagedListPager(Model, page => Url.Action("LookupListPV", new { page }))
+</div>
+

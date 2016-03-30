@@ -58,6 +58,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Repositories\IOTypesRepository.cs" />
+    <Compile Include="Repositories\Lookups.cs" />
     <Compile Include="Repositories\ResultInfo.cs" />
     <Compile Include="Repositories\EndPointCommandsRepository.cs" />
     <Compile Include="Repositories\DevicesRepositories.cs" />

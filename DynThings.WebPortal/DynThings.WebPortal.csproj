@@ -552,6 +552,8 @@
     <Content Include="Views\Devices\_Details_Main.cshtml" />
     <Content Include="Views\EndPointIOs\Index.cshtml" />
     <Content Include="Views\EndPointIOs\_List.cshtml" />
+    <Content Include="Views\Endpoints\Lookup\Index.cshtml" />
+    <Content Include="Views\Endpoints\Lookup\List.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

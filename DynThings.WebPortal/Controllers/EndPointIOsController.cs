@@ -14,6 +14,7 @@ namespace DynThings.WebPortal.Controllers
         #region ActionResult: Views
         public ActionResult Index()
         {
+            ViewBag.IOTypeID = new SelectList(UnitOfWork.repoIOTypes.GetList(true), "ID", "Title",0);
             return View();
         }
 
@@ -31,6 +32,7 @@ namespace DynThings.WebPortal.Controllers
         [HttpGet]
         public PartialViewResult ListPV(string search, long endPointID, long ioTypeID, int page = 1, int recordsperpage = 0)
         {
+         
             PagedList.IPagedList ios = UnitOfWork.repoEndpointIOs.GetPagedList(search, endPointID, ioTypeID, page, Helpers.Configs.validateRecordsPerMaster(recordsperpage));
             return PartialView("_List", ios);
         }

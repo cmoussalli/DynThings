@@ -25,6 +25,7 @@ namespace DynThings.Data.Repositories
             Command = 2,
             Log = 3
         }
+        
         #endregion
 
 
@@ -71,16 +72,33 @@ namespace DynThings.Data.Repositories
 
         public IPagedList GetPagedList(string search, long endPointID,long ioTypeID, int pageNumber, int recordsPerPage)
         {
-            PagedList.IPagedList ios = db.EndPointIOs
-              .Where( i => i.Valu.Contains(search)
-                //i => i.Endpoint.ID == endPointID
-              && (i.EndPointID != null && i.EndPointID == endPointID)
-              && (i.IOTypeID != null && i.IOTypeID == ioTypeID)
-              //&& i.ExecTimeStamp > fromDate
-              //&& i.ExecTimeStamp < toDate
-              )
-              .OrderByDescending(i => i.TimeStamp).Take(1000).ToList()
-              .ToPagedList(pageNumber, recordsPerPage);
+            var query = from q in db.EndPointIOs
+                        where q.Valu.Contains(search)
+                        select q;
+
+            if (endPointID != 0)
+            {
+                query = query.Where(i => i.EndPointID == endPointID);
+            }
+
+            if (ioTypeID != 0)
+            {
+                query = query.Where(i => i.IOTypeID == ioTypeID);
+            }
+
+            PagedList.IPagedList ios = query.OrderByDescending(i => i.ExecTimeStamp)
+                .Take(1000).ToList().ToPagedList(pageNumber, recordsPerPage);
+
+            //PagedList.IPagedList ios = db.EndPointIOs
+            //  .Where( i => i.Valu.Contains(search)
+            //    //i => i.Endpoint.ID == endPointID
+            //  && (i.EndPointID != null && i.EndPointID == endPointID)
+            //  && (i.IOTypeID != null && i.IOTypeID == ioTypeID)
+            //  //&& i.ExecTimeStamp > fromDate
+            //  //&& i.ExecTimeStamp < toDate
+            //  )
+            //  .OrderByDescending(i => i.TimeStamp).Take(1000).ToList()
+            //  .ToPagedList(pageNumber, recordsPerPage);
             return ios;
         }
 

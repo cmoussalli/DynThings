@@ -4,8 +4,10 @@
 function LoadPart_EndPointIOsListDiv() {
     var loadingpart = LoadDivLoading();
     $("#divEndPointIOsList").html(loadingpart);
+    var drpdwnIOTypeID = document.getElementById("IOTypeID");
+    var selectedIOTypeID = drpdwnIOTypeID.options[drpdwnIOTypeID.selectedIndex].value;
     $.ajax({
-        url: getRootURL() + '/EndPointIOs/ListPV?search=' + $(txtEndPointIOsSearch).val() + '&recordsperpage=0' + '&endPointID=1&ioTypeID=1',
+        url: getRootURL() + '/EndPointIOs/ListPV?search=' + $(txtEndPointIOsSearch).val() + '&recordsperpage=0' + '&endPointID=' + $(txtEndPointIDSearch).val() + '&ioTypeID=' + selectedIOTypeID,
         //page=" + $("#DynConfigCurrentPage").html,
         type: "GET",
     })

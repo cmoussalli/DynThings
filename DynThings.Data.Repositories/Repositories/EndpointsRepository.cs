@@ -19,10 +19,19 @@ namespace DynThings.Data.Repositories
         private DynThingsEntities db = new DynThingsEntities();
 
         #region GetList
-        /// <summary>
-        /// Get list of EndPoints
-        /// </summary>
-        /// <returns>List of EndPoints </returns>
+        public List<Endpoint> GetList(bool EnableUnspecified)
+        {
+            List<Endpoint> ends = new List<Endpoint>();
+            if (EnableUnspecified == true)
+            {
+                Endpoint end0 = new Endpoint();
+                end0.ID = 0;
+                end0.Title = "-Select All-";
+                ends.Add(end0);
+                ends.AddRange(db.Endpoints.OrderBy(e => e.Title).ToList());
+            }
+            return ends;
+        }
         public List<Endpoint> GetList()
         {
             List<Endpoint> ends = db.Endpoints.ToList();

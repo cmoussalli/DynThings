@@ -131,5 +131,24 @@ namespace DynThings.WebPortal.Controllers
         #endregion
 
 
+        #region LookUP
+        #region Lookup Main Div
+        [HttpGet]
+        public PartialViewResult LookupPV(string searchfor = null, int page = 1, int recordsperpage = 0)
+        {
+            PagedList.IPagedList ends = UnitOfWork.repoEndpoints.GetPagedList("", 1, 10);
+            return PartialView("lookup/Index", ends);
+        }
+        #endregion
+        #region Lookup List Div
+        [HttpGet]
+        public PartialViewResult LookupListPV(string searchfor = null, int page = 1, int recordsperpage = 0)
+        {
+            PagedList.IPagedList ends = UnitOfWork.repoEndpoints.GetPagedList(searchfor, page, Config.DefaultRecordsPerChild);
+            return PartialView("lookup/List", ends);
+        }
+        #endregion
+        #endregion
+
     }
 }

@@ -1,4 +1,8 @@
-﻿//Attach : Pager
+﻿//Vars
+var selectedEndPointID = 0;
+var selectedEndPointTitle = 0;
+
+//Attach : Pager
 function AttachEventEndPointsListPager() {
     $(document).on("click", "#EndPointsListPager a[href]", function () {
         var loadingpart = LoadDivLoading();
@@ -141,4 +145,56 @@ function LoadPart_EndPointCommandListByEndPointIDDiv(endPointID, search) {
             $("#divEndPointCommandsList").html(partialViewResult);
         });
     return false;
+}
+
+
+//Lookup
+//LoadPart_EndPoint Lookup
+function LoadPart_EndPointLookup(placeHolder) {
+    var loadingpart = LoadDivLoading();
+    $(placeHolder).html(loadingpart);
+    $.ajax({
+        url: getRootURL() + '/EndPoints/LookupPV',
+        type: "GET",
+    })
+    .done(function (partialViewResult) {
+        $(placeHolder).html(partialViewResult);
+    });
+}
+//Get Lookup List PV
+function LoadPart_EndPointListLookupDiv() {
+    var loadingpart = LoadDivLoading();
+    $("#divEndPointsLookupList").html(loadingpart);
+    $.ajax({
+        url: getRootURL() + '/EndPoints/LookupListPV?searchfor=' + $(txtEndPointLookupSearch).val() + '&recordsperpage=0',
+        //page=" + $("#DynConfigCurrentPage").html,
+        type: "GET",
+    })
+        .done(function (partialViewResult) {
+            $("#divEndPointsLookupList").html(partialViewResult);
+        });
+    return false;
+};
+//Attach : Pager
+function AttachEventEndPointsLookupListPager() {
+    $(document).on("click", "#EndPointsLookupListPager a[href]", function () {
+        var loadingpart = LoadDivLoading();
+        $("#divEndPointsLookupList").html(loadingpart);
+        $.ajax({
+            url: $(this).attr("href") + "&searchfor=" + $(txtEndPointLookupSearch).val() + '&recordsperpage=0',
+            type: 'GET',
+            cache: false,
+            success: function (result) {
+                $("#divEndPointsLookupList").html(result);
+                return false;
+            }
+        });
+        return false;
+    });
+}
+//Select from Lookup
+function SelectEndPointFromLookUp(id,title) {
+    selectedEndPointID = id;
+    selectedEndPointTitle = title;
+    EventSelectEndPoint();
 }

@@ -96,7 +96,7 @@ namespace DynThings.WebPortal.Controllers
         {
             if (ModelState.IsValid)
             {
-                UnitOfWork.repoLocations.EditMain(location.ID, location.Title,location.isActive);
+                UnitOfWork.repoLocations.EditMain(location.ID, location.Title, location.isActive);
             }
             else
             {
@@ -120,7 +120,7 @@ namespace DynThings.WebPortal.Controllers
         {
             if (ModelState.IsValid)
             {
-                UnitOfWork.repoLocations.EditGeoLocation(location.ID,location.LongitudeY,location.LatitudeX);
+                UnitOfWork.repoLocations.EditGeoLocation(location.ID, location.LongitudeY, location.LatitudeX);
             }
             else
             {
@@ -139,7 +139,7 @@ namespace DynThings.WebPortal.Controllers
         [HttpGet]
         public PartialViewResult LookupPV(string searchfor = null, int page = 1, int recordsperpage = 0)
         {
-            PagedList.IPagedList locs = UnitOfWork.repoLocations.GetPagedList("",1,10);
+            PagedList.IPagedList locs = UnitOfWork.repoLocations.GetPagedList("", 1, 10);
             return PartialView("lookup/Index", locs);
         }
         #endregion
@@ -147,7 +147,7 @@ namespace DynThings.WebPortal.Controllers
         [HttpGet]
         public PartialViewResult LookupListPV(string searchfor = null, int page = 1, int recordsperpage = 0)
         {
-            PagedList.IPagedList locs = UnitOfWork.repoLocations.GetPagedList(searchfor,page,Config.DefaultRecordsPerChild);
+            PagedList.IPagedList locs = UnitOfWork.repoLocations.GetPagedList(searchfor, page, Config.DefaultRecordsPerChild);
             return PartialView("lookup/List", locs);
         }
         #endregion
