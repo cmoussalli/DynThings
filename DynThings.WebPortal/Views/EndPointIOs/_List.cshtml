@@ -27,8 +27,8 @@
     </tbody>
 </table>
 
-<div id="EndPointsListPager">
-    <input id="EndPointCurrentPage" value="@Model.PageNumber.ToString()" hidden />
+<div id="EndPointIOsListPager">
+    <input id="EndPointIOCurrentPage" value="@Model.PageNumber.ToString()" hidden />
 
     @Html.PagedListPager(Model, page => Url.Action("ListPV", new { page }))
 </div>
