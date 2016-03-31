@@ -193,6 +193,7 @@
     <Compile Include="Controllers\ConfigController.cs" />
     <Compile Include="Controllers\DeviceCommandsController.cs" />
     <Compile Include="Controllers\DevicesController.cs" />
+    <Compile Include="Controllers\DynSettingsController.cs" />
     <Compile Include="Controllers\EndPointCommandsController.cs" />
     <Compile Include="Controllers\EndPointIOsController.cs" />
     <Compile Include="Controllers\EndpointsController.cs" />
@@ -554,6 +555,7 @@
     <Content Include="Views\EndPointIOs\_List.cshtml" />
     <Content Include="Views\Endpoints\Lookup\Index.cshtml" />
     <Content Include="Views\Endpoints\Lookup\List.cshtml" />
+    <Content Include="Views\DynSettings\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
