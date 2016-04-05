@@ -65,7 +65,7 @@ function LoadPart_LocationViewListDiv() {
     var loadingpart = LoadDivLoading();
     $("#divLocationViewsList").html(loadingpart);
     $.ajax({
-        url: getRootURL() + '/LocationViews/ListCardsPV?searchfor=' + $(txtLocationViewSearch).val() + '&recordsperpage=0',
+        url: getRootURL() + 'LocationViews/ListCardsPV?searchfor=' + $(txtLocationViewSearch).val() + '&recordsperpage=0',
         //page=" + $("#DynConfigCurrentPage").html,
         type: "GET",
     })

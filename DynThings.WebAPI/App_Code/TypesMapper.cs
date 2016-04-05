@@ -12,7 +12,7 @@ using System.Web;
 
 namespace DynThings.WebAPI
 {
-    public  class TypesMapper
+    public class TypesMapper
     {
         //public class APIResponse
         //{

@@ -1,0 +1,77 @@
+﻿@model IEnumerable<DynThings.Data.Models.EndPointIO>
+@{
+    ViewBag.Title = "EndPoint IOs";
+}
+<div class="container">
+    <div class="page-header">
+        <h1>EndPoint IOs</h1>
+    </div>
+    <div class="row">
+        <div class="col-md-1">
+            <span class="input">Search</span>
+        </div>
+        <div class="col-md-5">
+            <div class="input-group" style="width:100%">
+                <input type="search" id="txtEndPointIOsSearch" class="form-control"  onkeydown="if (event.keyCode == 13) { LoadPart_EndPointIOsListDiv(); return false; }" />
+            </div>
+        </div>
+
+        <div class="col-md-1">
+            <span>IO Type</span>
+        </div>
+        <div class="col-md-5">
+            <div class="input-group" style="width:100%">
+                @Html.DropDownList("IOTypeID", null, htmlAttributes: new { @class = "form-control" })
+            </div>
+        </div>
+    </div>
+    <br />
+    <div class="row">
+        <div class="col-md-1">
+            <span>EndPoint</span>
+        </div>
+        <div class="col-md-5">
+            <div class="input-group" style="width:100%">
+                <div hidden="hidden">
+                        <input type="search" id="txtEndPointIDSearch" class="form-control" value="0" />
+                    </div>
+                <span></span>
+                <span id="txtEndPointTitleSearch" class="form-control"></span>
+                <div class="input-group-btn">
+                    <button type="button" class="btn btn-primary" onclick="LoadPart_EndPointLookup('#modal')" data-toggle="modal" data-target="#mdl">...</button>
+                </div>
+            </div>
+        </div>
+
+    
+    <div class="row">
+        <div class="col-md-12">
+            <div class="input-group-btn">
+                <button type="button" class="btn btn-primary" onclick="LoadPart_EndPointIOsListDiv()">Search</button>
+            </div>
+        </div>
+    </div>
+    <br />
+    <div class="well well-lg">
+        <div id="divEndPointIOsList">
+        </div>
+    </div>
+</div>
+@section scriptfiles{
+    <script src="~/DynScripts/EndPointIOs.js"></script>
+    <script src="~/DynScripts/EndPoints.js"></script>
+}
+@section scripts{
+    <script>
+        $(document).ready(function () {
+            //LoadPart_EndPointIOsLitDiv();
+            //AttachEventEndPointIOsListPager();
+        });
+
+        function EventSelectEndPoint() {
+            $('#txtEndPointIDSearch').val(selectedEndPointID);
+            $('#txtEndPointTitleSearch').text(selectedEndPointTitle);;
+            HideModal();
+        }
+    </script>
+}
