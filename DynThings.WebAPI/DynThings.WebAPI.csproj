@@ -174,7 +174,8 @@
     </Compile>
     <Compile Include="Models\ApiResponse.cs" />
     <Compile Include="Models\CommandEnitity.cs" />
-    <Compile Include="Models\DeviceInput.cs" />
+    <Compile Include="Models\EndPointIO.cs" />
+    <Compile Include="Models\DeviceIO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

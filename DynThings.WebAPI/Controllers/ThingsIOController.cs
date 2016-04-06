@@ -21,15 +21,21 @@ namespace DynThings.WebAPI.Controllers
     {
         public TypesMapper typesMapper = new TypesMapper();
 
+        #region Test
         [HttpGet]
         public string Get()
         {
             return "hai";
         }
+        #endregion
 
+
+
+
+        #region Devices
         #region :: Submit input from device ::
         [HttpPost]
-        public ApiResponse SubmitDeviceInput(DeviceInput deviceInput)
+        public ApiResponse SubmitDeviceInput(DeviceIO deviceInput)
         {
             ApiResponse oApiResponse = new ApiResponse();
             //Validate KeyPass
@@ -98,5 +104,82 @@ namespace DynThings.WebAPI.Controllers
         #endregion
 
 
+        #endregion
+
+
+        #region EndPoints
+        #region :: Submit input from endpoints ::
+        [HttpPost]
+        public ApiResponse SubmitEndPointInput(EndPointIO oEndPointIO)
+        {
+            ApiResponse oApiResponse = new ApiResponse();
+            //Validate KeyPass
+            try
+            {
+                if (string.IsNullOrEmpty(oEndPointIO.KeyPass))
+                {
+                    ResultInfo.Result result = UnitOfWork.resultInfo.GetResultByID(1);
+                    oApiResponse = typesMapper.fromResult(result);
+                    return oApiResponse;
+                }
+
+                //Parse KeyPass
+                EndpointsRepository oEndpointsRepository = new EndpointsRepository();
+                Guid endPointGuid;
+                if (Guid.TryParse(oEndPointIO.KeyPass, out endPointGuid))
+                {
+                    //endPoint keyPass Validation
+                    DynThings.Data.Models.Endpoint oEndpoint = oEndpointsRepository.Find(endPointGuid);
+                    if (oEndpoint != null)
+                    {
+                        //Try Parse ExecutionTimeStamp to DateTime
+                        DateTime execTime;
+                        if (DateTime.TryParse(oEndPointIO.ExectionTimeStamp, out execTime))
+                        { }
+                        else
+                        {//DateTime Parse Failed
+                            ResultInfo.Result result = UnitOfWork.resultInfo.GetResultByID(1);
+                            oApiResponse = typesMapper.fromResult(result);
+                            return oApiResponse;
+                        }
+
+                        //Submit Data to Database
+                        EndpointIOsRepository oEndpointIOsRepository = new EndpointIOsRepository();
+                        ResultInfo.Result repoResult = oEndpointIOsRepository.Add(oEndpoint.ID, oEndPointIO.Value.ToString(), EndpointIOsRepository.EndPointIOType.Input, execTime);
+
+                        //Validate Result
+                        if (repoResult.ResultType == ResultInfo.ResultType.Ok)
+                        {//Submited
+                            ResultInfo.Result result = UnitOfWork.resultInfo.GenerateOKResult();
+                            oApiResponse = typesMapper.fromResult(result);
+                            return oApiResponse;
+                        }
+                        else
+                        {//Submition Failed
+                            ResultInfo.Result result = UnitOfWork.resultInfo.GetResultByID(1);
+                            oApiResponse = typesMapper.fromResult(result);
+                            return oApiResponse;
+                        }
+                    }
+                }
+                else
+                {// KeyPass Parse Failed
+                    ResultInfo.Result result = UnitOfWork.resultInfo.GetResultByID(1);
+                    oApiResponse = typesMapper.fromResult(result);
+                    return oApiResponse;
+                }
+
+            }
+            catch (Exception)
+            {
+                ResultInfo.Result result = UnitOfWork.resultInfo.GetResultByID(1);
+                oApiResponse = typesMapper.fromResult(result);
+            }
+            return oApiResponse;
+        }
+        #endregion
+
+
+        #endregion
     }
 }
