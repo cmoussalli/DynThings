@@ -30,7 +30,8 @@ namespace DynThings.WebAPI.Controllers
         }
         #endregion
 
-        #region Devices
+
+        #region Devices IO
         #region :: Submit input from device ::
         [HttpPost]
         public ApiResponse SubmitDeviceInput(Models.DeviceIO deviceInput)
@@ -105,8 +106,7 @@ namespace DynThings.WebAPI.Controllers
 
         #endregion
 
-
-        #region EndPoints
+        #region EndPoints IO
         #region :: Submit input from endpoints ::
         [HttpPost]
         public ApiResponse SubmitEndPointInput(Models.EndPointIO oEndPointInput)
