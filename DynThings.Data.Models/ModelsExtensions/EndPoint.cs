@@ -15,7 +15,7 @@ namespace DynThings.Data.Models
 {
     public partial class Endpoint
     {
-        private DynThingsEntities db = new DynThingsEntities();
+
 
         /// <summary>
         /// Get the Latest Input from EndPoint
@@ -24,6 +24,7 @@ namespace DynThings.Data.Models
         {
             get
             {
+                DynThingsEntities db = new DynThingsEntities();
                 List<EndPointIO> io = this.EndPointIOs.Where(i => i.IOTypeID == 1).OrderByDescending(eio => eio.TimeStamp).Take(1).ToList();
                 EndPointIO result = io[0];
                 return result;

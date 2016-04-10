@@ -51,6 +51,7 @@
         var pushpin0 = new Microsoft.Maps.Pushpin(new Microsoft.Maps.Location(@Model.LatitudeX, @Model.LongitudeY), pushpinOptions);
         locationMap.entities.push(pushpin0);
         Microsoft.Maps.Events.addHandler(locationMap, 'click', displayLatLong);
+
     }
 
     function displayLatLong(e) {

@@ -93,6 +93,14 @@ namespace DynThings.Data.Repositories
 
         #endregion
 
+        #region FindByKeyPass
+        public Endpoint FindByKeyPass(Guid endPointKeyPass)
+        {
+            Endpoint end = db.Endpoints.Where(l => l.KeyPass == endPointKeyPass).FirstOrDefault();
+            return end;
+        }
+        #endregion
+
         #region Add
         public ResultInfo.Result Add(string title, long typeID, long deviceID)
         {

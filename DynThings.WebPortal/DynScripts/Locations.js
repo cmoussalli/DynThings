@@ -33,9 +33,10 @@ function AttachEventLocationMapEditForm(locationID) {
             dataType: "json",
             success: function (resp) {
             }
-        })
 
-    });
+    })
+        $.notify("Location Saved", "success");
+});
 }
 
 //Get List

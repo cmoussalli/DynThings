@@ -14,7 +14,7 @@ namespace DynThings.Data.Models
 {
     public partial class Location
     {
-        private DynThingsEntities db = new DynThingsEntities();
+
 
         /// <summary>
         /// Get List of associated Endpoints
@@ -23,6 +23,7 @@ namespace DynThings.Data.Models
         {
             get
             {
+                DynThingsEntities db = new DynThingsEntities();
                 List<Endpoint> ends = new List<Endpoint>();
                 List<LinkEndpointsLocation> lnks = db.LinkEndpointsLocations.Where(l => l.LocationID == this.ID).ToList();
                 foreach (LinkEndpointsLocation lnk in lnks)
@@ -39,6 +40,7 @@ namespace DynThings.Data.Models
         {
             get
             {
+                DynThingsEntities db = new DynThingsEntities();
                 List<LocationView> locs = new List<LocationView>();
                 List<LinkLocationsLocationView> lnks = db.LinkLocationsLocationViews.Where(l => l.LocationID == this.ID).ToList();
                 foreach (LinkLocationsLocationView lnk in lnks)

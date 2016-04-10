@@ -118,6 +118,20 @@ namespace DynThings.Data.Repositories
             return UnitOfWork.resultInfo.GenerateOKResult();
         }
 
+        public ResultInfo.Result Add(long endPointID, string value, EndPointIOType ioType, DateTime executionTime,DateTime scheduleTimeStamp)
+        {
+            EndPointIO cmdIO = new EndPointIO();
+            cmdIO.EndPointID = endPointID;
+            cmdIO.Valu = value;
+            cmdIO.IOTypeID = long.Parse(ioType.GetHashCode().ToString());
+            cmdIO.TimeStamp = DateTime.Now;
+            cmdIO.ExecTimeStamp = executionTime;
+            cmdIO.ScheduleTimeStamp = scheduleTimeStamp;
+            db.EndPointIOs.Add(cmdIO);
+            db.SaveChanges();
+            return UnitOfWork.resultInfo.GenerateOKResult();
+        }
+
         public ResultInfo.Result Add(long endPointID, string value, EndPointIOType ioType)
         {
             EndPointIO endIO = new EndPointIO();

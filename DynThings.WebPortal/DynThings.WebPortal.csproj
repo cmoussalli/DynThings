@@ -202,6 +202,8 @@
     <Compile Include="Controllers\LocationViewsController.cs" />
     <Compile Include="Controllers\LocationViewTypesController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\APISimulatorServicesController.cs" />
+    <Compile Include="Controllers\ThingsIOController.cs" />
     <Compile Include="Controllers\UsersManagementController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -427,6 +429,7 @@
     <Content Include="Scripts\metro.min.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\MsMaps\BingMaps.js" />
+    <Content Include="Scripts\notify.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\run_prettify.js" />
@@ -581,6 +584,10 @@
     <ProjectReference Include="..\DynThings.Data.Repositories\DynThings.Data.Repositories.csproj">
       <Project>{3eb80ea4-99d5-4db4-bd84-2370dce356d0}</Project>
       <Name>DynThings.Data.Repositories</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DynThings.WebAPI.Models\DynThings.WebAPI.Models.csproj">
+      <Project>{c5987efa-b632-406f-9934-0c6a924e05c7}</Project>
+      <Name>DynThings.WebAPI.Models</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

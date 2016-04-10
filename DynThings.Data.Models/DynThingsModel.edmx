@@ -88,6 +88,7 @@
           <Property Name="Valu" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="TimeStamp" Type="datetime" Nullable="false" />
           <Property Name="ExecTimeStamp" Type="datetime" />
+          <Property Name="ScheduleTimeStamp" Type="datetime" />
         </EntityType>
         <EntityType Name="Endpoints">
           <Key>
@@ -179,7 +180,7 @@
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ID" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="Message" Type="nvarchar" MaxLength="500" />
           <Property Name="IsError" Type="bit" />
         </EntityType>
@@ -207,7 +208,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__DeviceIOs__IOTyp__3C69FB99">
+        <Association Name="FK__DeviceIOs__IOTyp__403A8C7D">
           <End Role="IOTypes" Type="Self.IOTypes" Multiplicity="0..1" />
           <End Role="DeviceIOs" Type="Self.DeviceIOs" Multiplicity="*" />
           <ReferentialConstraint>
@@ -231,7 +232,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__EndPointC__EndPo__5CD6CB2B">
+        <Association Name="FK__EndPointC__EndPo__4222D4EF">
           <End Role="Endpoints" Type="Self.Endpoints" Multiplicity="0..1" />
           <End Role="EndPointCommands" Type="Self.EndPointCommands" Multiplicity="*" />
           <ReferentialConstraint>
@@ -255,7 +256,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__EndPointI__IOTyp__3F466844">
+        <Association Name="FK__EndPointI__IOTyp__440B1D61">
           <End Role="IOTypes" Type="Self.IOTypes" Multiplicity="1" />
           <End Role="EndPointIOs" Type="Self.EndPointIOs" Multiplicity="*" />
           <ReferentialConstraint>
@@ -303,7 +304,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__EndPointT__TypeC__4316F928">
+        <Association Name="FK__EndPointT__TypeC__47DBAE45">
           <End Role="EndPointTypeCategorys" Type="Self.EndPointTypeCategorys" Multiplicity="0..1" />
           <End Role="EndPointTypes" Type="Self.EndPointTypes" Multiplicity="*" />
           <ReferentialConstraint>
@@ -327,7 +328,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__LinkEndpo__Locat__44FF419A">
+        <Association Name="FK__LinkEndpo__Locat__49C3F6B7">
           <End Role="Locations" Type="Self.Locations" Multiplicity="0..1" />
           <End Role="LinkEndpointsLocations" Type="Self.LinkEndpointsLocations" Multiplicity="*" />
           <ReferentialConstraint>
@@ -402,7 +403,7 @@
             <End Role="Devices" EntitySet="Devices" />
             <End Role="DeviceIOs" EntitySet="DeviceIOs" />
           </AssociationSet>
-          <AssociationSet Name="FK__DeviceIOs__IOTyp__3C69FB99" Association="Self.FK__DeviceIOs__IOTyp__3C69FB99">
+          <AssociationSet Name="FK__DeviceIOs__IOTyp__403A8C7D" Association="Self.FK__DeviceIOs__IOTyp__403A8C7D">
             <End Role="IOTypes" EntitySet="IOTypes" />
             <End Role="DeviceIOs" EntitySet="DeviceIOs" />
           </AssociationSet>
@@ -410,7 +411,7 @@
             <End Role="DeviceStatus" EntitySet="DeviceStatus" />
             <End Role="Devices" EntitySet="Devices" />
           </AssociationSet>
-          <AssociationSet Name="FK__EndPointC__EndPo__5CD6CB2B" Association="Self.FK__EndPointC__EndPo__5CD6CB2B">
+          <AssociationSet Name="FK__EndPointC__EndPo__4222D4EF" Association="Self.FK__EndPointC__EndPo__4222D4EF">
             <End Role="Endpoints" EntitySet="Endpoints" />
             <End Role="EndPointCommands" EntitySet="EndPointCommands" />
           </AssociationSet>
@@ -418,7 +419,7 @@
             <End Role="Endpoints" EntitySet="Endpoints" />
             <End Role="EndPointIOs" EntitySet="EndPointIOs" />
           </AssociationSet>
-          <AssociationSet Name="FK__EndPointI__IOTyp__3F466844" Association="Self.FK__EndPointI__IOTyp__3F466844">
+          <AssociationSet Name="FK__EndPointI__IOTyp__440B1D61" Association="Self.FK__EndPointI__IOTyp__440B1D61">
             <End Role="IOTypes" EntitySet="IOTypes" />
             <End Role="EndPointIOs" EntitySet="EndPointIOs" />
           </AssociationSet>
@@ -434,7 +435,7 @@
             <End Role="CssIcons" EntitySet="CssIcons" />
             <End Role="EndPointTypes" EntitySet="EndPointTypes" />
           </AssociationSet>
-          <AssociationSet Name="FK__EndPointT__TypeC__4316F928" Association="Self.FK__EndPointT__TypeC__4316F928">
+          <AssociationSet Name="FK__EndPointT__TypeC__47DBAE45" Association="Self.FK__EndPointT__TypeC__47DBAE45">
             <End Role="EndPointTypeCategorys" EntitySet="EndPointTypeCategorys" />
             <End Role="EndPointTypes" EntitySet="EndPointTypes" />
           </AssociationSet>
@@ -442,7 +443,7 @@
             <End Role="Endpoints" EntitySet="Endpoints" />
             <End Role="LinkEndpointsLocations" EntitySet="LinkEndpointsLocations" />
           </AssociationSet>
-          <AssociationSet Name="FK__LinkEndpo__Locat__44FF419A" Association="Self.FK__LinkEndpo__Locat__44FF419A">
+          <AssociationSet Name="FK__LinkEndpo__Locat__49C3F6B7" Association="Self.FK__LinkEndpo__Locat__49C3F6B7">
             <End Role="Locations" EntitySet="Locations" />
             <End Role="LinkEndpointsLocations" EntitySet="LinkEndpointsLocations" />
           </AssociationSet>
@@ -511,6 +512,7 @@
           <Property Name="ExecTimeStamp" Type="DateTime" Precision="3" />
           <NavigationProperty Name="IOType" Relationship="Self.FK__EndPointI__IOTyp__1B9317B3" FromRole="EndPointIOs" ToRole="IOTypes" />
           <NavigationProperty Name="Endpoint" Relationship="DynThingsModel.FK__EndPointI__EndPo__29572725" FromRole="EndPointIO" ToRole="Endpoint" />
+          <Property Name="ScheduleTimeStamp" Type="DateTime" Precision="3" />
         </EntityType>
         <EntityType Name="EndPointTypeCategory">
           <Key>
@@ -990,6 +992,7 @@
           <EntitySetMapping Name="EndPointIOs">
             <EntityTypeMapping TypeName="DynThingsModel.EndPointIO">
               <MappingFragment StoreEntitySet="EndPointIOs">
+                <ScalarProperty Name="ScheduleTimeStamp" ColumnName="ScheduleTimeStamp" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="EndPointID" ColumnName="EndPointID" />
                 <ScalarProperty Name="IOTypeID" ColumnName="IOTypeID" />

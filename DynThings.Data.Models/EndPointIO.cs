@@ -30,6 +30,8 @@ public partial class EndPointIO
 
     public Nullable<System.DateTime> ExecTimeStamp { get; set; }
 
+    public Nullable<System.DateTime> ScheduleTimeStamp { get; set; }
+
 
 
     public virtual IOType IOType { get; set; }
