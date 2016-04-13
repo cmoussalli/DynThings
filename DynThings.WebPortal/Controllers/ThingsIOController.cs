@@ -34,7 +34,7 @@ namespace DynThings.WebAPI.Controllers
         #region Devices IO
         #region :: Submit input from device ::
         [HttpPost]
-        public ApiResponse SubmitDeviceInput(Models.DeviceIO deviceInput)
+        public ApiResponse SubmitDeviceInput(Models.SubmissionDeviceIO deviceInput)
         {
             ApiResponse oApiResponse = new ApiResponse();
             //Validate KeyPass
@@ -109,7 +109,7 @@ namespace DynThings.WebAPI.Controllers
         #region EndPoints IO
         #region :: Submit input from endpoints ::
         [HttpPost]
-        public ApiResponse SubmitEndPointInput(Models.EndPointIO oEndPointInput)
+        public ApiResponse SubmitEndPointInput(Models.SubmissionEndPointIO oEndPointInput)
         {
             ApiResponse oApiResponse = new ApiResponse();
             //Validate KeyPass
@@ -169,7 +169,7 @@ namespace DynThings.WebAPI.Controllers
                 }
 
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 ResultInfo.Result result = UnitOfWork.resultInfo.GetResultByID(1);
                 oApiResponse = ApiResponseAdapter.fromResult(result);
@@ -180,7 +180,7 @@ namespace DynThings.WebAPI.Controllers
 
         #region :: Submit Log from endpoints ::
         [HttpPost]
-        public ApiResponse SubmitEndPointLog(Models.EndPointIO oEndPointLog)
+        public ApiResponse SubmitEndPointLog(Models.SubmissionEndPointIO oEndPointLog)
         {
             ApiResponse oApiResponse = new ApiResponse();
             //Validate KeyPass

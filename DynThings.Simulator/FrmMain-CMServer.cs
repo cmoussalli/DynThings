@@ -44,17 +44,11 @@ namespace DynThings.Simulator
             else
             {
                 frmDevice.SelectedFormType = FrmDevice.Device_EndPoint.EndPoint;
-                frmDevice.SelectedAPIEndPoint = C.apiEndPoints.First(x => x.ID == selectedID);
             }
             frmDevice.lblSelectedFormType.Text = frmDevice.SelectedFormType.ToString();
 
             frmDevice.ShowDeviceInfo();
             frmDevice.Show();
-        }
-
-        private void treeView1_AfterSelect(object sender, TreeViewEventArgs e)
-        {
-
         }
     }
 }

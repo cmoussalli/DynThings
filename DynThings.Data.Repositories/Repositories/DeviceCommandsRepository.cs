@@ -18,6 +18,14 @@ namespace DynThings.Data.Repositories
     {
         private DynThingsEntities db = new DynThingsEntities();
 
+        #region Get List
+        public List<DeviceCommand> GetListByDeviceGUID(Guid deviceGUID)
+        {
+            List<DeviceCommand> cmds = db.DeviceCommands.Where(c => c.Device.GUID == deviceGUID).ToList();
+            return cmds;
+        }
+        #endregion
+
         #region Get PagedList
         public IPagedList GetPagedList(string search, int pageNumber, int recordsPerPage)
         {
@@ -28,7 +36,7 @@ namespace DynThings.Data.Repositories
             return cmds;
         }
 
-        public IPagedList GetPagedListByDeviceID(string search,long deviceID, int pageNumber, int recordsPerPage)
+        public IPagedList GetPagedListByDeviceID(string search, long deviceID, int pageNumber, int recordsPerPage)
         {
             IPagedList cmds = db.DeviceCommands
               .Where(e => search == null || e.Title.Contains(search) && e.DeviceID == deviceID)
@@ -78,7 +86,7 @@ namespace DynThings.Data.Repositories
         #endregion
 
         #region Edit
-        public ResultInfo.Result Edit(long id, string title, string description,long deviceID, string commandCode)
+        public ResultInfo.Result Edit(long id, string title, string description, long deviceID, string commandCode)
         {
             DeviceCommand cmd = db.DeviceCommands.Find(id);
             cmd.Title = title;

@@ -1,17 +1,18 @@
 ﻿/////////////////////////////////////////////////////////////////
-// Created by : Arshad Ashraf                                   //
-// TimeStamp  : 03-02-2016                                      //
-// Content    :  Device IO Properties                           //
+// Created by : Caesar Moussalli                                //
+// TimeStamp  : 05-04-2016                                      //
+// Content    :  EndPoint IO Properties                         //
 // Notes      :                                                 //
 /////////////////////////////////////////////////////////////////
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using DynThings.Data.Repositories;
 
 namespace DynThings.WebAPI.Models
 {
-    public class DeviceIO
+    public class SubmissionEndPointIO
     {
         #region :: Public Properties ::
 
@@ -24,7 +25,7 @@ namespace DynThings.WebAPI.Models
         #endregion
 
         #region :: Constructor ::
-        public DeviceIO()
+        public SubmissionEndPointIO()
         {
             this.KeyPass = string.Empty;
             this.ExectionTimeStamp = string.Empty;

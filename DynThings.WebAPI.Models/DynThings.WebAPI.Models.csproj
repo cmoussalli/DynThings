@@ -41,12 +41,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="APIDeviceCommand.cs" />
+    <Compile Include="APIEndPointIO.cs" />
+    <Compile Include="APIEndPoint.cs" />
     <Compile Include="APIDevice.cs" />
     <Compile Include="ApiResponse.cs" />
     <Compile Include="CommandEnitity.cs" />
-    <Compile Include="DeviceIO.cs" />
-    <Compile Include="EndPointIO.cs" />
+    <Compile Include="SubmissionDeviceIO.cs" />
+    <Compile Include="SubmissionEndPointIO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TypesMapper\APIDeviceCommandAdapter.cs" />
+    <Compile Include="TypesMapper\APIEndPointIOAdapter.cs" />
     <Compile Include="TypesMapper\APIDeviceAdapter.cs" />
     <Compile Include="TypesMapper\ApiResponseAdapter.cs" />
   </ItemGroup>

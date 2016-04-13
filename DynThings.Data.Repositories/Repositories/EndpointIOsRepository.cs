@@ -113,6 +113,7 @@ namespace DynThings.Data.Repositories
             cmdIO.IOTypeID = long.Parse(ioType.GetHashCode().ToString());
             cmdIO.TimeStamp = DateTime.Now;
             cmdIO.ExecTimeStamp = executionTime;
+            cmdIO.ScheduleTimeStamp = executionTime;
             db.EndPointIOs.Add(cmdIO);
             db.SaveChanges();
             return UnitOfWork.resultInfo.GenerateOKResult();

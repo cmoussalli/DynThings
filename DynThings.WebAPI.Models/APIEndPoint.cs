@@ -1,7 +1,7 @@
 ﻿/////////////////////////////////////////////////////////////////
 // Created by : Caesar Moussalli                                //
 // TimeStamp  : 07-04-2016                                      //
-// Content    :  APIDevice Properties                         //
+// Content    :  APIEndPoint Properties                         //
 // Notes      :                                                 //
 /////////////////////////////////////////////////////////////////
 using DynThings.Data.Repositories;
@@ -15,36 +15,31 @@ using DynThings.Data.Models;
 
 namespace DynThings.WebAPI.Models
 {
-    public class APIDevice
+    public class APIEndPoint
     {
         #region :: Public Properties ::
-
         public long ID { get; set; }
-        public Guid Guid { get; set; }
-        public Guid KeyPass { get; set; }
+        public System.Guid GUID { get; set; }
+        public System.Guid KeyPass { get; set; }
         public string PinCode { get; set; }
         public string Title { get; set; }
-        public long StatusID { get; set; }
-
-
-        public List<APIDeviceCommand> APIDeviceCommands { get; set; }
-        public List<APIEndPoint> APIEndPoints { get; set; }
-
-
+        public long DeviceID { get; set; }
+        public long TypeID { get; set; }
         #endregion
 
         #region :: Constructor ::
-        public APIDevice()
+        public APIEndPoint()
         {
             this.ID = 0;
-            this.Guid = Guid.Empty;
+            //this.Guid = Guid.Empty;
             this.KeyPass = Guid.Empty;
             this.PinCode = "";
             this.Title = "";
-            this.StatusID = 1;
-
+            this.DeviceID = 0;
+            this.TypeID = 0;
         }
         #endregion
     }
+   
 
 }
