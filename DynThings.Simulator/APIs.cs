@@ -81,6 +81,24 @@ namespace DynThings.Simulator
             
         }
 
+        public static async Task<APIDevice> GetDeviceInfo(Guid deviceKeyPass)
+        {
+            APIDevice dev = new APIDevice();
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(C.WebAppURL);
+                client.DefaultRequestHeaders.Accept.Clear();
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+                HttpResponseMessage response = await client.GetAsync("api/APISimulatorServices/GetDeviceInfo?" + C.PlatformGUIDParam + "&deviceKeyPass=" + deviceKeyPass);
+                if (response.IsSuccessStatusCode)
+                {
+                    dev = response.Content.ReadAsAsync<APIDevice>().Result;
+                    return dev;
+                }
+            }
+            return dev;
+        }
 
 
         public static async Task SubmitDeviceInput(Guid deviceKeyPass, string input,DateTime executionTimeStamp)
@@ -108,6 +126,7 @@ namespace DynThings.Simulator
 
         }
 
+       
 
         public static async Task SubmitEndPointInput(Guid deviceKeyPass, string input, DateTime executionTimeStamp)
         {

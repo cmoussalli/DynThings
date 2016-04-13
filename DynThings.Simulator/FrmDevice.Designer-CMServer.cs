@@ -33,14 +33,13 @@
             this.btnSendInput = new System.Windows.Forms.Button();
             this.txtInput = new System.Windows.Forms.TextBox();
             this.tabPage3 = new System.Windows.Forms.TabPage();
-            this.btnSendLog = new System.Windows.Forms.Button();
-            this.txtLog = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.lblSelectedFormType = new System.Windows.Forms.Label();
             this.lblTitle = new System.Windows.Forms.Label();
             this.lntInputs = new System.Windows.Forms.ListView();
-            this.button1 = new System.Windows.Forms.Button();
+            this.btnSendLog = new System.Windows.Forms.Button();
+            this.txtLog = new System.Windows.Forms.TextBox();
             this.tabControl1.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.tabPage3.SuspendLayout();
@@ -100,23 +99,6 @@
             this.tabPage3.Text = "Submit Log";
             this.tabPage3.UseVisualStyleBackColor = true;
             // 
-            // btnSendLog
-            // 
-            this.btnSendLog.Location = new System.Drawing.Point(461, 7);
-            this.btnSendLog.Name = "btnSendLog";
-            this.btnSendLog.Size = new System.Drawing.Size(75, 25);
-            this.btnSendLog.TabIndex = 3;
-            this.btnSendLog.Text = "Send";
-            this.btnSendLog.UseVisualStyleBackColor = true;
-            this.btnSendLog.Click += new System.EventHandler(this.btnSendLog_Click);
-            // 
-            // txtLog
-            // 
-            this.txtLog.Location = new System.Drawing.Point(6, 7);
-            this.txtLog.Name = "txtLog";
-            this.txtLog.Size = new System.Drawing.Size(449, 25);
-            this.txtLog.TabIndex = 2;
-            // 
             // label1
             // 
             this.label1.AutoSize = true;
@@ -162,15 +144,22 @@
             this.lntInputs.UseCompatibleStateImageBehavior = false;
             this.lntInputs.View = System.Windows.Forms.View.List;
             // 
-            // button1
+            // btnSendLog
             // 
-            this.button1.Location = new System.Drawing.Point(438, 170);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 5;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click_1);
+            this.btnSendLog.Location = new System.Drawing.Point(461, 7);
+            this.btnSendLog.Name = "btnSendLog";
+            this.btnSendLog.Size = new System.Drawing.Size(75, 25);
+            this.btnSendLog.TabIndex = 3;
+            this.btnSendLog.Text = "Send";
+            this.btnSendLog.UseVisualStyleBackColor = true;
+            this.btnSendLog.Click += new System.EventHandler(this.btnSendLog_Click);
+            // 
+            // txtLog
+            // 
+            this.txtLog.Location = new System.Drawing.Point(6, 7);
+            this.txtLog.Name = "txtLog";
+            this.txtLog.Size = new System.Drawing.Size(449, 25);
+            this.txtLog.TabIndex = 2;
             // 
             // FrmDevice
             // 
@@ -178,7 +167,6 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(554, 434);
-            this.Controls.Add(this.button1);
             this.Controls.Add(this.lblTitle);
             this.Controls.Add(this.lblSelectedFormType);
             this.Controls.Add(this.lntInputs);
@@ -216,6 +204,5 @@
         private System.Windows.Forms.ListView lntInputs;
         private System.Windows.Forms.Button btnSendLog;
         private System.Windows.Forms.TextBox txtLog;
-        private System.Windows.Forms.Button button1;
     }
 }

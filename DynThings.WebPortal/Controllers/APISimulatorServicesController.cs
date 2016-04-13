@@ -38,7 +38,22 @@ namespace DynThings.WebPortal.Controllers
         }
         #endregion
 
-      
+        #region Get Device Info
+        [HttpGet]
+        public APIDevice GetDeviceInfo(Guid platformKey, Guid deviceKeyPass)
+        {
+            Device dev = UnitOfWork.repoDevices.FindByKeyPass(deviceKeyPass);
+            APIDevice apiDev = APIDeviceAdapter.fromDevice(dev);
+            //List<APIDeviceCommand> apiCmds = new List<APIDeviceCommand>();
+            //foreach(DeviceCommand cmd in dev.DeviceCommands)
+            //{
+            //    APIDeviceCommand apiCmd = APIDeviceCommandAdapter.fromDeviceCommand(cmd);
+            //    apiCmds.Add(apiCmd);              
+            //}
+            //apiDev.APIDeviceCommands = apiCmds;
+            return apiDev;
+        }
+        #endregion
 
 
 

@@ -44,13 +44,11 @@ namespace DynThings.Simulator
             {
                 this.Text = SelectedFormType.ToString() + ": " + SelectedAPIEndPoint.Title;
                 this.lblTitle.Text = SelectedAPIEndPoint.Title;
-                
             }
             else
             {
                 this.Text = SelectedFormType.ToString() + ": " + SelectedApiDevice.Title;
                 this.lblTitle.Text = SelectedApiDevice.Title;
-                
             }
             
 
@@ -81,11 +79,6 @@ namespace DynThings.Simulator
         }
 
         private void btnSendLog_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button1_Click_1(object sender, EventArgs e)
         {
 
         }
