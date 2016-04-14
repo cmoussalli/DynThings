@@ -178,10 +178,10 @@ namespace DynThings.WebAPI.Controllers
 
         #region :: Get device pending Commands ::
         [HttpGet]
-        public List<APIDeviceIO> GetDevicePendingCommands(Guid deviceGuid)
+        public List<APIDeviceIO> GetDevicePendingCommands(Guid deviceKeyPass)
         {
             List<APIDeviceIO> apiCmds = new List<APIDeviceIO>();
-            List<DeviceIO> cmds = UnitOfWork.repoDeviceIOs.GetPendingCommandsList(deviceGuid);
+            List<DeviceIO> cmds = UnitOfWork.repoDeviceIOs.GetPendingCommandsList(deviceKeyPass);
             foreach (DeviceIO cmd in cmds)
             {
                 APIDeviceIO apiCmd = new APIDeviceIO();

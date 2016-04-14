@@ -160,7 +160,7 @@ namespace DynThings.Simulator
                 client.DefaultRequestHeaders.Accept.Clear();
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
-                HttpResponseMessage response = await client.GetAsync("api/thingsIO/GetEndPointPendingCommands?deviceGuid=" + deviceKeyPass.ToString());
+                HttpResponseMessage response = await client.GetAsync("api/thingsIO/GetDevicePendingCommands?deviceKeyPass=" + deviceKeyPass.ToString());
                 if (response.IsSuccessStatusCode)
                 {
                 }
@@ -173,7 +173,7 @@ namespace DynThings.Simulator
 
 
         #region Endpoint IO
-        public static async Task SubmitEndPointInput(Guid deviceKeyPass, string input, DateTime executionTimeStamp)
+        public static async Task SubmitEndPointInput(Guid endPointKeyPass, string input, DateTime executionTimeStamp)
         {
 
             using (var client = new HttpClient())
@@ -198,7 +198,7 @@ namespace DynThings.Simulator
 
         }
 
-        public static async Task SubmitEndPointLog(Guid deviceKeyPass, string input, DateTime executionTimeStamp)
+        public static async Task SubmitEndPointLog(Guid endPointKeyPass, string input, DateTime executionTimeStamp)
         {
 
             using (var client = new HttpClient())
@@ -223,7 +223,25 @@ namespace DynThings.Simulator
 
         }
 
+        public static async Task<List<APIEndPointIO>> GetEndPointPendingCommands(Guid endPointKeyPass)
+        {
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(C.WebAppURL);
+                client.DefaultRequestHeaders.Accept.Clear();
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+                HttpResponseMessage response = await client.GetAsync("api/thingsIO/GetEndPointPendingCommands?endPointKeyPass=" + endPointKeyPass.ToString());
+                if (response.IsSuccessStatusCode)
+                {
+                }
+                IEnumerable<APIEndPointIO> cmds = response.Content.ReadAsAsync<IEnumerable<APIEndPointIO>>().Result;
+
+                return cmds.ToList();
+            }
+        }
         #endregion
+#endregion
 
 
 
