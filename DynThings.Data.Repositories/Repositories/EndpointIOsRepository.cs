@@ -28,7 +28,6 @@ namespace DynThings.Data.Repositories
         
         #endregion
 
-
         #region Find
         public EndPointIO Find(long id)
         {
@@ -46,6 +45,7 @@ namespace DynThings.Data.Repositories
         }
         #endregion
 
+        
 
         #region Get PagedList
         public IPagedList GetPagedList(long endPointID, int pageNumber, int recordsPerPage)
@@ -161,6 +161,18 @@ namespace DynThings.Data.Repositories
             }
         }
 
+        #endregion
+
+        #region Get Pending Commands
+        public List<EndPointIO> GetPendingCommandsList(Guid endPointKeyPass)
+        {
+          List<EndPointIO> ios = db.EndPointIOs
+              .Where(i => i.Endpoint.KeyPass == endPointKeyPass
+                    && i.ExecTimeStamp == null)
+              .OrderByDescending(i => i.ScheduleTimeStamp).Take(100).ToList()
+              .ToList();
+            return ios;
+        }
         #endregion
     }
 }

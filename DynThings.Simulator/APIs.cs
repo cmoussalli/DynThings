@@ -20,7 +20,7 @@ namespace DynThings.Simulator
             RunAsync();
             //Task returnedTask = RunAsync();
             //await returnedTask;
-            
+
         }
 
         public static async Task RunAsync()
@@ -39,9 +39,9 @@ namespace DynThings.Simulator
                 }
 
                 List<APIEndPoint> ends = new List<APIEndPoint>();
-                foreach(APIDevice dev in C.apiDevices)
+                foreach (APIDevice dev in C.apiDevices)
                 {
-                    foreach(APIEndPoint end in dev.APIEndPoints)
+                    foreach (APIEndPoint end in dev.APIEndPoints)
                     {
                         ends.Add(end);
                     }
@@ -63,7 +63,7 @@ namespace DynThings.Simulator
                 TreeNode newNode0 = new TreeNode();
                 newNode0.Name = "Dev" + dev.ID.ToString();
                 newNode0.Text = dev.Title;
-                newNode0.ImageIndex =0;
+                newNode0.ImageIndex = 0;
                 newNode0.SelectedImageIndex = 0;
 
                 //Add Endpoints
@@ -78,7 +78,7 @@ namespace DynThings.Simulator
                 }
                 C.frmMain.treeView1.Nodes.Add(newNode0);
             }
-            
+
         }
 
         public static async Task<APIDevice> GetDeviceInfo(Guid deviceKeyPass)
@@ -101,9 +101,10 @@ namespace DynThings.Simulator
         }
 
 
-        public static async Task SubmitDeviceInput(Guid deviceKeyPass, string input,DateTime executionTimeStamp)
+        #region Device IO
+        public static async Task SubmitDeviceInput(Guid deviceKeyPass, string input, DateTime executionTimeStamp)
         {
-            
+
             using (var client = new HttpClient())
             {
                 client.BaseAddress = new Uri(C.WebAppURL);
@@ -114,8 +115,8 @@ namespace DynThings.Simulator
                 data.ExectionTimeStamp = executionTimeStamp.Month.ToString() + "-" + executionTimeStamp.Day.ToString() + "-" + executionTimeStamp.Year.ToString();
                 data.KeyPass = deviceKeyPass.ToString();
                 data.Value = input;
-                
-                HttpResponseMessage response = await client.PostAsJsonAsync("api/ThingsIO/SubmitDeviceInput",data);
+
+                HttpResponseMessage response = await client.PostAsJsonAsync("api/ThingsIO/SubmitDeviceInput", data);
                 if (response.IsSuccessStatusCode)
                 {
                     ApiResponse res = response.Content.ReadAsAsync<ApiResponse>().Result;
@@ -126,8 +127,52 @@ namespace DynThings.Simulator
 
         }
 
-       
+        public static async Task SubmitDeviceLog(Guid deviceKeyPass, string input, DateTime executionTimeStamp)
+        {
 
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(C.WebAppURL);
+                client.DefaultRequestHeaders.Accept.Clear();
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+                SubmissionDeviceIO data = new SubmissionDeviceIO();
+                data.ExectionTimeStamp = executionTimeStamp.Month.ToString() + "-" + executionTimeStamp.Day.ToString() + "-" + executionTimeStamp.Year.ToString();
+                data.KeyPass = deviceKeyPass.ToString();
+                data.Value = input;
+
+                HttpResponseMessage response = await client.PostAsJsonAsync("api/ThingsIO/SubmitDeviceLog", data);
+                if (response.IsSuccessStatusCode)
+                {
+                    ApiResponse res = response.Content.ReadAsAsync<ApiResponse>().Result;
+                    C.response = res;
+                }
+            }
+
+
+        }
+
+        public static async Task<List<APIDeviceIO>> GetDevicePendingCommands(Guid deviceKeyPass)
+        {
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(C.WebAppURL);
+                client.DefaultRequestHeaders.Accept.Clear();
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+                HttpResponseMessage response = await client.GetAsync("api/thingsIO/GetEndPointPendingCommands?deviceGuid=" + deviceKeyPass.ToString());
+                if (response.IsSuccessStatusCode)
+                {
+                }
+                IEnumerable<APIDeviceIO> cmds = response.Content.ReadAsAsync<IEnumerable<APIDeviceIO>>().Result;
+                
+                return cmds.ToList();
+            }
+        }
+        #endregion
+
+
+        #region Endpoint IO
         public static async Task SubmitEndPointInput(Guid deviceKeyPass, string input, DateTime executionTimeStamp)
         {
 
@@ -152,5 +197,36 @@ namespace DynThings.Simulator
 
 
         }
+
+        public static async Task SubmitEndPointLog(Guid deviceKeyPass, string input, DateTime executionTimeStamp)
+        {
+
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(C.WebAppURL);
+                client.DefaultRequestHeaders.Accept.Clear();
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+                SubmissionDeviceIO data = new SubmissionDeviceIO();
+                data.ExectionTimeStamp = executionTimeStamp.Month.ToString() + "-" + executionTimeStamp.Day.ToString() + "-" + executionTimeStamp.Year.ToString();
+                data.KeyPass = deviceKeyPass.ToString();
+                data.Value = input;
+
+                HttpResponseMessage response = await client.PostAsJsonAsync("api/ThingsIO/SubmitEndPointLog", data);
+                if (response.IsSuccessStatusCode)
+                {
+                    ApiResponse res = response.Content.ReadAsAsync<ApiResponse>().Result;
+                    C.response = res;
+                }
+            }
+
+
+        }
+
+        #endregion
+
+
+
     }
+
 }

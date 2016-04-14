@@ -23,6 +23,10 @@ namespace DynThings.Simulator
         public APIDevice SelectedApiDevice= new APIDevice();
         public APIEndPoint SelectedAPIEndPoint = new APIEndPoint();
 
+        public List<APIDeviceIO> SelectedApiDevicePendingCommands = new List<APIDeviceIO>();
+
+
+
         public FrmDevice()
         {
             InitializeComponent();
@@ -82,12 +86,29 @@ namespace DynThings.Simulator
 
         private void btnSendLog_Click(object sender, EventArgs e)
         {
+            if (SelectedFormType == Device_EndPoint.Device)
+            {
+                lntInputs.Items.Add("Send Log : *" + txtInput.Text + "*");
+                APIs.SubmitDeviceLog(SelectedApiDevice.KeyPass, txtInput.Text, DateTime.Now);
+                lntInputs.TopItem = lntInputs.Items[lntInputs.Items.Count - 1];
 
+            }
+
+            if (SelectedFormType == Device_EndPoint.EndPoint)
+            {
+                lntInputs.Items.Add("Send Log : *" + txtInput.Text + "*");
+                APIs.SubmitEndPointLog(SelectedAPIEndPoint.KeyPass, txtInput.Text, DateTime.Now);
+                lntInputs.TopItem = lntInputs.Items[lntInputs.Items.Count - 1];
+
+            }
         }
 
         private void button1_Click_1(object sender, EventArgs e)
         {
-
+            APIs.GetDevicePendingCommands(SelectedApiDevice.KeyPass);
+            MessageBox.Show(SelectedApiDevicePendingCommands.Count.ToString());
         }
+
+       
     }
 }

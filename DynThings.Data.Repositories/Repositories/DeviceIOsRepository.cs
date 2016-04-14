@@ -39,7 +39,7 @@ namespace DynThings.Data.Repositories
         #endregion
 
         #region Add
-        public ResultInfo.Result Add(long deviceID,string value, deviceIOType ioType, DateTime executionTime)
+        public ResultInfo.Result Add(long deviceID, string value, deviceIOType ioType, DateTime executionTime)
         {
             DeviceIO endIO = new DeviceIO();
             endIO.DeviceID = deviceID;
@@ -80,6 +80,18 @@ namespace DynThings.Data.Repositories
             }
         }
 
+        #endregion
+
+        #region Get Pending Commands
+        public List<DeviceIO> GetPendingCommandsList(Guid deviceKeyPass)
+        {
+            List<DeviceIO> ios = db.DeviceIOs
+                .Where(i => i.Device.KeyPass == deviceKeyPass
+                      && i.ExecTimeStamp == null)
+                .OrderByDescending(i => i.ScheduleTimeStamp).Take(100).ToList()
+                .ToList();
+            return ios;
+        }
         #endregion
     }
 }

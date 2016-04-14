@@ -8,21 +8,19 @@ using System.Threading.Tasks;
 
 namespace DynThings.WebAPI.Models.TypesMapper
 {
-
     public static class APIDeviceCommandAdapter
     {
-        public static APIDeviceCommand fromDeviceCommand(DeviceCommand sourceDeviceCommand)
-        {
-            APIDeviceCommand result = new APIDeviceCommand();
-            result.ID = sourceDeviceCommand.ID;
-            result.CommandCode = sourceDeviceCommand.CommandCode;
-            result.Description = sourceDeviceCommand.Description;
-            result.OwnerID = sourceDeviceCommand.OwnerID;
-            result.Title = sourceDeviceCommand.Title;
-            result.DeviceID = sourceDeviceCommand.DeviceID;
-
-            return result;
-        }
+        //public static APIDeviceIO fromDeviceCommand(DeviceCommand sourceDeviceCommand)
+        //{
+        //    APIDeviceIO result = new APIDeviceIO();
+        //    result.ID = sourceDeviceCommand.ID;
+        //    result. = sourceDeviceCommand.CommandCode;
+        //    result.Description = sourceDeviceCommand.Description;
+        //    result.OwnerID = sourceDeviceCommand.OwnerID;
+        //    result.Title = sourceDeviceCommand.Title;
+        //    result.DeviceID = sourceDeviceCommand.DeviceID;
+        //    return result;
+        //}
     }
 
    

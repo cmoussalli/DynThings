@@ -21,7 +21,7 @@ namespace DynThings.WebAPI.Controllers
 {
     public class ThingsIOController : ApiController
     {
-   
+
         #region Test
         [HttpGet]
         public string Get()
@@ -44,7 +44,7 @@ namespace DynThings.WebAPI.Controllers
                 {
                     ResultInfo.Result result = UnitOfWork.resultInfo.GetResultByID(1);
                     oApiResponse = ApiResponseAdapter.fromResult(result);
-                    
+
                     return oApiResponse;
                 }
 
@@ -60,7 +60,8 @@ namespace DynThings.WebAPI.Controllers
                         //Try Parse ExecutionTimeStamp to DateTime
                         DateTime execTime;
                         if (DateTime.TryParse(deviceInput.ExectionTimeStamp, out execTime))
-                        { }else
+                        { }
+                        else
                         {//DateTime Parse Failed
                             ResultInfo.Result result = UnitOfWork.resultInfo.GetResultByID(1);
                             oApiResponse = ApiResponseAdapter.fromResult(result);
@@ -100,6 +101,95 @@ namespace DynThings.WebAPI.Controllers
                 oApiResponse = ApiResponseAdapter.fromResult(result);
             }
             return oApiResponse;
+        }
+        #endregion
+
+        #region :: Submit input from device ::
+        [HttpPost]
+        public ApiResponse SubmitDeviceLog(Models.SubmissionDeviceIO deviceInput)
+        {
+            ApiResponse oApiResponse = new ApiResponse();
+            //Validate KeyPass
+            try
+            {
+                if (string.IsNullOrEmpty(deviceInput.KeyPass))
+                {
+                    ResultInfo.Result result = UnitOfWork.resultInfo.GetResultByID(1);
+                    oApiResponse = ApiResponseAdapter.fromResult(result);
+
+                    return oApiResponse;
+                }
+
+                //Parse KeyPass
+                DevicesRepositories oDevicesRepositories = new DevicesRepositories();
+                Guid deviceGuid;
+                if (Guid.TryParse(deviceInput.KeyPass, out deviceGuid))
+                {
+                    //Device keyPass Validation
+                    DynThings.Data.Models.Device device = oDevicesRepositories.FindByKeyPass(deviceGuid);
+                    if (device != null)
+                    {
+                        //Try Parse ExecutionTimeStamp to DateTime
+                        DateTime execTime;
+                        if (DateTime.TryParse(deviceInput.ExectionTimeStamp, out execTime))
+                        { }
+                        else
+                        {//DateTime Parse Failed
+                            ResultInfo.Result result = UnitOfWork.resultInfo.GetResultByID(1);
+                            oApiResponse = ApiResponseAdapter.fromResult(result);
+                            return oApiResponse;
+                        }
+
+                        //Submit Data to Database
+                        DeviceIOsRepository oDeviceIOsRepository = new DeviceIOsRepository();
+                        ResultInfo.Result repoResult = oDeviceIOsRepository.Add(device.ID, deviceInput.Value.ToString(), DeviceIOsRepository.deviceIOType.Log, execTime);
+
+                        //Validate Result
+                        if (repoResult.ResultType == ResultInfo.ResultType.Ok)
+                        {//Submited
+                            ResultInfo.Result result = UnitOfWork.resultInfo.GenerateOKResult();
+                            oApiResponse = ApiResponseAdapter.fromResult(result);
+                            return oApiResponse;
+                        }
+                        else
+                        {//Submition Failed
+                            ResultInfo.Result result = UnitOfWork.resultInfo.GetResultByID(1);
+                            oApiResponse = ApiResponseAdapter.fromResult(result);
+                            return oApiResponse;
+                        }
+                    }
+                }
+                else
+                {// KeyPass Parse Failed
+                    ResultInfo.Result result = UnitOfWork.resultInfo.GetResultByID(1);
+                    oApiResponse = ApiResponseAdapter.fromResult(result);
+                    return oApiResponse;
+                }
+
+            }
+            catch (Exception)
+            {
+                ResultInfo.Result result = UnitOfWork.resultInfo.GetResultByID(1);
+                oApiResponse = ApiResponseAdapter.fromResult(result);
+            }
+            return oApiResponse;
+        }
+        #endregion
+
+        #region :: Get device pending Commands ::
+        [HttpGet]
+        public List<APIDeviceIO> GetDevicePendingCommands(Guid deviceGuid)
+        {
+            List<APIDeviceIO> apiCmds = new List<APIDeviceIO>();
+            List<DeviceIO> cmds = UnitOfWork.repoDeviceIOs.GetPendingCommandsList(deviceGuid);
+            foreach (DeviceIO cmd in cmds)
+            {
+                APIDeviceIO apiCmd = new APIDeviceIO();
+                apiCmd = APIDeviceIOAdapter.FromDeviceIO(cmd);
+                apiCmds.Add(apiCmd);
+            }
+
+            return apiCmds;
         }
         #endregion
 
@@ -249,10 +339,26 @@ namespace DynThings.WebAPI.Controllers
         }
         #endregion
 
+        #region :: Get endpoint pending Commands ::
+        [HttpGet]
+        public List<APIEndPointIO> GetEndPointPendingCommands(Guid endPointGuid)
+        {
+            List<APIEndPointIO> apiCmds = new List<APIEndPointIO>();
+            List<EndPointIO> cmds = UnitOfWork.repoEndpointIOs.GetPendingCommandsList(endPointGuid);
+            foreach (EndPointIO cmd in cmds)
+            {
+                APIEndPointIO apiCmd = new APIEndPointIO();
+                apiCmd = APIEndPointIOAdapter.FromEndPointIO(cmd);
+                apiCmds.Add(apiCmd);
+            }
+
+            return apiCmds;
+        }
+        #endregion
         #endregion
 
 
 
-       
+
     }
 }
