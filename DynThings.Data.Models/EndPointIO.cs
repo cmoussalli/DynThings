@@ -34,9 +34,9 @@ public partial class EndPointIO
 
 
 
-    public virtual IOType IOType { get; set; }
-
     public virtual Endpoint Endpoint { get; set; }
+
+    public virtual IOType IOType { get; set; }
 
 }
 

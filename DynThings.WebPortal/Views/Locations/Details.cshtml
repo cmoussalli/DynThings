@@ -32,7 +32,23 @@
                             </div>
                         </div>
                         <div id="tabLocationDevices" class="tab-pane fade">
-                            <div id="divLocationDevicesList">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <button type="button" class="btn btn-info" onclick="LoadPart_DeviceLookup('#modal')" data-toggle="modal" data-target="#mdl">Import</button>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="input-group">
+                                        <input type="search" id="txtDevicesSearch" class="form-control" onkeydown="if (event.keyCode == 13) { alert(@Model.ID); return false; }" />
+                                        <div class="input-group-btn">
+                                            <button type="button" class="btn btn-primary" onclick="LoadPart_DevicesListByLocationIDDiv(@Model.ID)">Search</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <br />
+                            <div class="well well-lg">
+                                <div id="divDevicesList">
+                                </div>
                             </div>
                         </div>
                         <div id="tabLocationDevkeys" class="tab-pane fade">
@@ -49,11 +65,13 @@
 @section scriptfiles{
     <script src="~/Scripts/MsMaps/mapcontrol.js"></script>
     <script src="~/DynScripts/Locations.js"></script>
+    <script src="~/DynScripts/Devices.js"></script>
 }
 
 @section scripts{
     <script>
         $(document).ready(function () {
+            selectedLocation = @Model.ID
             LoadPart_LocationDetailsMainDiv('@Model.ID');
             LoadPart_LocationDetailsGeoLocationDiv('@Model.ID');
         });

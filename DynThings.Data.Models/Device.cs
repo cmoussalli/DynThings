@@ -22,20 +22,18 @@ public partial class Device
     public Device()
     {
 
+        this.DeviceCommands = new HashSet<DeviceCommand>();
+
         this.DeviceIOs = new HashSet<DeviceIO>();
 
         this.Endpoints = new HashSet<Endpoint>();
 
-        this.DeviceCommands = new HashSet<DeviceCommand>();
+        this.LinkDevicesLocations = new HashSet<LinkDevicesLocation>();
 
     }
 
 
     public long ID { get; set; }
-
-    public string Title { get; set; }
-
-    public Nullable<long> StatusID { get; set; }
 
     public Nullable<System.Guid> GUID { get; set; }
 
@@ -43,7 +41,15 @@ public partial class Device
 
     public string PinCode { get; set; }
 
+    public string Title { get; set; }
 
+    public Nullable<long> StatusID { get; set; }
+
+
+
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+
+    public virtual ICollection<DeviceCommand> DeviceCommands { get; set; }
 
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
 
@@ -57,7 +63,7 @@ public partial class Device
 
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
 
-    public virtual ICollection<DeviceCommand> DeviceCommands { get; set; }
+    public virtual ICollection<LinkDevicesLocation> LinkDevicesLocations { get; set; }
 
 }
 

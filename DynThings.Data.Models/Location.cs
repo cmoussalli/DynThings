@@ -22,7 +22,7 @@ public partial class Location
     public Location()
     {
 
-        this.LinkEndpointsLocations = new HashSet<LinkEndpointsLocation>();
+        this.LinkDevicesLocations = new HashSet<LinkDevicesLocation>();
 
         this.LinkLocationsLocationViews = new HashSet<LinkLocationsLocationView>();
 
@@ -49,7 +49,7 @@ public partial class Location
 
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
 
-    public virtual ICollection<LinkEndpointsLocation> LinkEndpointsLocations { get; set; }
+    public virtual ICollection<LinkDevicesLocation> LinkDevicesLocations { get; set; }
 
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
 

@@ -561,6 +561,9 @@
     <Content Include="Views\Endpoints\Lookup\Index.cshtml" />
     <Content Include="Views\Endpoints\Lookup\List.cshtml" />
     <Content Include="Views\DynSettings\Index.cshtml" />
+    <Content Include="Views\Devices\Lookup\Index.cshtml" />
+    <Content Include="Views\Devices\Lookup\List.cshtml" />
+    <Content Include="Views\Locations\_DevicesList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

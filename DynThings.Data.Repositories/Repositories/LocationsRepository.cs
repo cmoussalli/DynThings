@@ -134,5 +134,36 @@ namespace DynThings.Data.Repositories
 
         #endregion
 
+        #region AttachDevice
+        public ResultInfo.Result AttachDevice(long locationID, long deviceID, string userID)
+        {
+            LinkDevicesLocation lnk = new LinkDevicesLocation();
+            List<LinkDevicesLocation> lnks = db.LinkDevicesLocations.Where(l => l.LocationID == locationID && l.DeviceID == deviceID).ToList();
+            if (lnks.Count > 0)
+            {
+                return UnitOfWork.resultInfo.GetResultByID(1);
+            }
+            lnk.LocationID = locationID;
+            lnk.DeviceID = deviceID;
+            db.LinkDevicesLocations.Add(lnk);
+            db.SaveChanges();
+            return UnitOfWork.resultInfo.GenerateOKResult();
+        }
+        #endregion
+
+        #region DeAttachDevice
+        public ResultInfo.Result DeattachDevice(long locationID, long deviceID, string userID)
+        {
+            List<LinkDevicesLocation> lnks = db.LinkDevicesLocations.Where(l => l.LocationID == locationID && l.DeviceID == deviceID).ToList();
+            if (lnks.Count != 1)
+            {
+                return UnitOfWork.resultInfo.GetResultByID(1);
+            }
+            LinkDevicesLocation lnk = lnks[0];
+            db.LinkDevicesLocations.Remove(lnk);
+            db.SaveChanges();
+            return UnitOfWork.resultInfo.GenerateOKResult();
+        }
+        #endregion
     }
 }

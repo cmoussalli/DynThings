@@ -15,22 +15,36 @@ namespace DynThings.Data.Models
     public partial class Location
     {
 
-
-        /// <summary>
-        /// Get List of associated Endpoints
-        /// </summary>
         public List<Endpoint> EndPoints
         {
             get
             {
                 DynThingsEntities db = new DynThingsEntities();
                 List<Endpoint> ends = new List<Endpoint>();
-                List<LinkEndpointsLocation> lnks = db.LinkEndpointsLocations.Where(l => l.LocationID == this.ID).ToList();
-                foreach (LinkEndpointsLocation lnk in lnks)
+                List<LinkDevicesLocation> lnks = db.LinkDevicesLocations.Where(l => l.LocationID == this.ID).ToList();
+                foreach (LinkDevicesLocation lnk in lnks)
                 {
-                    ends.Add(lnk.Endpoint);
+                    Device dev = db.Devices.Find(lnk.DeviceID);
+                    List<Endpoint> devEnds = dev.Endpoints.ToList();
+                    ends.AddRange(devEnds);
                 }
                 return ends;
+            }
+        }
+
+        public List<Device> Devices
+        {
+            get
+            {
+                DynThingsEntities db = new DynThingsEntities();
+                List<Device> devs = new List<Device>();
+                List<LinkDevicesLocation> lnks = db.LinkDevicesLocations.Where(l => l.LocationID == this.ID).ToList();
+                foreach (LinkDevicesLocation lnk in lnks)
+                {
+                    Device dev = db.Devices.Find(lnk.DeviceID);
+                    devs.Add(dev);
+                }
+                return devs;
             }
         }
 

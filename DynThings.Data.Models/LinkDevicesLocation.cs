@@ -15,20 +15,20 @@ namespace DynThings.Data.Models
 using System;
     using System.Collections.Generic;
     
-public partial class LinkEndpointsLocation
+public partial class LinkDevicesLocation
 {
 
     public long ID { get; set; }
 
     public Nullable<long> LocationID { get; set; }
 
-    public Nullable<long> EndpointID { get; set; }
+    public Nullable<long> DeviceID { get; set; }
 
 
+
+    public virtual Device Device { get; set; }
 
     public virtual Location Location { get; set; }
-
-    public virtual Endpoint Endpoint { get; set; }
 
 }
 

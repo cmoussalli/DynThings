@@ -108,6 +108,24 @@ function LoadPart_DialogLocationMainEdit(id) {
     });
 }
 
+//Get Devices List
+function LoadPart_DevicesListByLocationIDDiv(locationID) {
+    var loadingpart = LoadDivLoading();
+    $("#divDevicesList").html(loadingpart);
+    $.ajax({
+        url: getRootURL() + '/locations/DevicesByLocationIDListGridPV?searchfor=' + $(txtDevicesSearch).val() + '&locationID=' + locationID + '&recordsperpage=0',
+        //page=" + $("#DynConfigCurrentPage").html,
+        type: "GET",
+    })
+        .done(function (partialViewResult) {
+            $("#divDevicesList").html(partialViewResult);
+            AttachEventDevicesListPager();
+        });
+    return false;
+};
+
+
+
 //Lookup
 //LoadPart_Location Lookup
 function LoadPart_LocationLookup(placeHolder) {
@@ -156,4 +174,21 @@ function AttachEventLocationsLookupListPager() {
 function SelectLocationFromLookUp(value) {
     selectedLocation = value;
     EventSelectLocation();
+}
+
+function AttachDeviceToLocation(locationID, DeviceID) {
+    $.ajax({
+        url: getRootURL() + '/Locations/AttachDevice?locationID=' + locationID + '&DeviceID=' + DeviceID + '&userID=0',
+        type: "POST",
+    })
+    HideModal();
+    LoadPart_DevicesListByLocationIDDiv(locationID);
+}
+
+function DeattachDeviceFromLocation(locationID, DeviceID) {
+    $.ajax({
+        url: getRootURL() + '/Locations/DeAttachDevice?locationID=' + locationID + '&DeviceID=' + DeviceID + '&userID=0',
+        type: "POST",
+    })
+    LoadPart_DevicesListByLocationIDDiv(locationID);
 }

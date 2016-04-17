@@ -16,6 +16,7 @@ using System.Web.Mvc;
 using DynThings.Core;
 using DynThings.Data.Models;
 using DynThings.Data.Repositories;
+using PagedList;
 
 namespace DynThings.WebPortal.Controllers
 {
@@ -129,6 +130,38 @@ namespace DynThings.WebPortal.Controllers
             return Content("Ok");
         }
         #endregion
+
+        #endregion
+
+        #region EditComponents
+
+        #region DevicesListPV
+        [HttpGet]
+        public PartialViewResult DevicesByLocationIDListGridPV(string searchfor = null, long LocationID = 0, int page = 1, int recordsperpage = 0)
+        {
+            IPagedList views = UnitOfWork.repoDevices.GetPagedList(searchfor, LocationID, page, Helpers.Configs.validateRecordsPerMaster(recordsperpage));
+            return PartialView("_DevicesList", views);
+        }
+        #endregion
+
+        #region AttachDevice
+        [HttpPost]
+        public ActionResult AttachDevice(long LocationID, long DeviceID, string userID)
+        {
+            ResultInfo.Result res = UnitOfWork.repoLocations.AttachDevice(LocationID, DeviceID, userID);
+            return Content(res.Message);
+        }
+        #endregion
+
+        #region DeAttachDevice
+        [HttpPost]
+        public ActionResult DeAttachDevice(long LocationID, long DeviceID, string userID)
+        {
+            ResultInfo.Result res = UnitOfWork.repoLocations.DeattachDevice(LocationID, DeviceID, userID);
+            return Content(res.Message);
+        }
+        #endregion
+
 
         #endregion
 

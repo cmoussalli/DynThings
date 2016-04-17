@@ -10,6 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using DynThings.Data.Models;
+using PagedList;
 
 namespace DynThings.Data.Repositories
 {
@@ -27,6 +28,29 @@ namespace DynThings.Data.Repositories
             List<Device> devices = db.Devices.ToList();
             return devices;
         }
+        #endregion
+
+        #region Get PagedList
+        public IPagedList GetPagedList(string search, int pageNumber, int recordsPerPage)
+        {
+            IPagedList devs = db.Devices
+              .Where(e => search == null || e.Title.Contains(search))
+              .OrderBy(e => e.Title).ToList()
+              .ToPagedList(pageNumber, recordsPerPage);
+            return devs;
+        }
+
+        public IPagedList GetPagedList(string search, long locationID, int pageNumber, int recordsPerPage)
+        {
+            IPagedList devs = db.Devices
+              .Where(e => search == null || e.Title.Contains(search)
+              && e.LinkDevicesLocations.Any(l => l.LocationID ==locationID)
+              )
+              .OrderBy(e => e.Title).ToList()
+              .ToPagedList(pageNumber, recordsPerPage);
+            return devs;
+        }
+
         #endregion
 
         #region Find

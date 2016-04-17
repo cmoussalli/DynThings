@@ -103,7 +103,7 @@
     <Compile Include="IOType.cs">
       <DependentUpon>DynThingsModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="LinkEndpointsLocation.cs">
+    <Compile Include="LinkDevicesLocation.cs">
       <DependentUpon>DynThingsModel.tt</DependentUpon>
     </Compile>
     <Compile Include="LinkLocationsLocationView.cs">

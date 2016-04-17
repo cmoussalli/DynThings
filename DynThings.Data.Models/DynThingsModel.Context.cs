@@ -32,13 +32,23 @@ public partial class DynThingsEntities : DbContext
     }
 
 
+    public virtual DbSet<CssIcon> CssIcons { get; set; }
+
+    public virtual DbSet<DeviceCommand> DeviceCommands { get; set; }
+
     public virtual DbSet<DeviceIO> DeviceIOs { get; set; }
 
     public virtual DbSet<Device> Devices { get; set; }
 
     public virtual DbSet<DeviceStatu> DeviceStatus { get; set; }
 
+    public virtual DbSet<DynSetting> DynSettings { get; set; }
+
+    public virtual DbSet<EndPointCommand> EndPointCommands { get; set; }
+
     public virtual DbSet<EndPointIO> EndPointIOs { get; set; }
+
+    public virtual DbSet<Endpoint> Endpoints { get; set; }
 
     public virtual DbSet<EndPointTypeCategory> EndPointTypeCategorys { get; set; }
 
@@ -46,7 +56,7 @@ public partial class DynThingsEntities : DbContext
 
     public virtual DbSet<IOType> IOTypes { get; set; }
 
-    public virtual DbSet<LinkEndpointsLocation> LinkEndpointsLocations { get; set; }
+    public virtual DbSet<LinkDevicesLocation> LinkDevicesLocations { get; set; }
 
     public virtual DbSet<LinkLocationsLocationView> LinkLocationsLocationViews { get; set; }
 
@@ -55,16 +65,6 @@ public partial class DynThingsEntities : DbContext
     public virtual DbSet<LocationView> LocationViews { get; set; }
 
     public virtual DbSet<LocationViewType> LocationViewTypes { get; set; }
-
-    public virtual DbSet<CssIcon> CssIcons { get; set; }
-
-    public virtual DbSet<Endpoint> Endpoints { get; set; }
-
-    public virtual DbSet<DynSetting> DynSettings { get; set; }
-
-    public virtual DbSet<DeviceCommand> DeviceCommands { get; set; }
-
-    public virtual DbSet<EndPointCommand> EndPointCommands { get; set; }
 
     public virtual DbSet<ResultMessage> ResultMessages { get; set; }
 

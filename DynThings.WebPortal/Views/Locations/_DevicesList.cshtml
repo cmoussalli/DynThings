@@ -1,0 +1,39 @@
+﻿@model IPagedList<DynThings.Data.Models.Device>
+
+<table class="table striped hovered border bordered">
+    <thead>
+        <tr>
+            <th>Title</th>
+            <th>GUID</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Title)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.GUID)
+                </td>
+
+                <td>
+                    <button onclick="DeattachDeviceFromLocation(selectedLocation, @item.ID)">Delete</button>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<div id="DevicesListPager">
+    <input id="DeviceCurrentPage" value="@Model.PageNumber.ToString()" hidden />
+    @Html.PagedListPager(Model, page => Url.Action("DevicesByLocationIDListGridPV", "Locations", new { page })+"&LocationID=1")
+</div>
+
+<script>
+    function EventSelectDevice() {
+        AttachDeviceToLocation(selectedLocation, selectedDevice);
+    }
+</script>

@@ -16,6 +16,7 @@ using System.Web.Mvc;
 using DynThings.Data.Models;
 using PagedList;
 using DynThings.Data.Repositories;
+using DynThings.Core;
 
 namespace DynThings.WebPortal.Controllers
 {
@@ -99,8 +100,27 @@ namespace DynThings.WebPortal.Controllers
         }
         #endregion
 
+        
 
+        #endregion
 
+        #region LookUP
+        #region Lookup Main Div
+        [HttpGet]
+        public PartialViewResult LookupPV(string searchfor = null, int page = 1, int recordsperpage = 0)
+        {
+            PagedList.IPagedList locs = UnitOfWork.repoDevices.GetPagedList("", 1, 10);
+            return PartialView("lookup/Index", locs);
+        }
+        #endregion
+        #region Lookup List Div
+        [HttpGet]
+        public PartialViewResult LookupListPV(string searchfor = null, int page = 1, int recordsperpage = 0)
+        {
+            PagedList.IPagedList locs = UnitOfWork.repoDevices.GetPagedList(searchfor, page, Config.DefaultRecordsPerChild);
+            return PartialView("lookup/List", locs);
+        }
+        #endregion
         #endregion
     }
 }

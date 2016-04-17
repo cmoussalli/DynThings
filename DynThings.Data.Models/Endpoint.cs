@@ -22,11 +22,9 @@ public partial class Endpoint
     public Endpoint()
     {
 
-        this.EndPointIOs = new HashSet<EndPointIO>();
-
-        this.LinkEndpointsLocations = new HashSet<LinkEndpointsLocation>();
-
         this.EndPointCommands = new HashSet<EndPointCommand>();
+
+        this.EndPointIOs = new HashSet<EndPointIO>();
 
     }
 
@@ -51,17 +49,13 @@ public partial class Endpoint
 
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
 
+    public virtual ICollection<EndPointCommand> EndPointCommands { get; set; }
+
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+
     public virtual ICollection<EndPointIO> EndPointIOs { get; set; }
 
     public virtual EndPointType EndPointType { get; set; }
-
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-
-    public virtual ICollection<LinkEndpointsLocation> LinkEndpointsLocations { get; set; }
-
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-
-    public virtual ICollection<EndPointCommand> EndPointCommands { get; set; }
 
 }
 

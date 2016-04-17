@@ -1,4 +1,7 @@
-﻿//Attach : Pager
+﻿//Vars
+var selectedDevice = 0;
+
+//Attach : Pager
 function AttachEventDevicesListPager() {
     $(document).on("click", "#DevicesListPager a[href]", function () {
         var loadingpart = LoadDivLoading();
@@ -92,3 +95,55 @@ function LoadPart_DialogDeviceAdd() {
 
 //Button: Edit
 //TODO
+
+
+
+//Lookup
+//LoadPart_Device Lookup
+function LoadPart_DeviceLookup(placeHolder) {
+    var loadingpart = LoadDivLoading();
+    $(placeHolder).html(loadingpart);
+    $.ajax({
+        url: getRootURL() + '/Devices/LookupPV',
+        type: "GET",
+    })
+    .done(function (partialViewResult) {
+        $(placeHolder).html(partialViewResult);
+    });
+}
+//Get Lookup List PV
+function LoadPart_DeviceListLookupDiv() {
+    var loadingpart = LoadDivLoading();
+    $("#divDevicesLookupList").html(loadingpart);
+    $.ajax({
+        url: getRootURL() + '/Devices/LookupListPV?searchfor=' + $(txtDeviceLookupSearch).val() + '&recordsperpage=0',
+        //page=" + $("#DynConfigCurrentPage").html,
+        type: "GET",
+    })
+        .done(function (partialViewResult) {
+            $("#divDevicesLookupList").html(partialViewResult);
+        });
+    return false;
+};
+//Attach : Pager
+function AttachEventDevicesLookupListPager() {
+    $(document).on("click", "#DevicesLookupListPager a[href]", function () {
+        var loadingpart = LoadDivLoading();
+        $("#divDevicesLookupList").html(loadingpart);
+        $.ajax({
+            url: $(this).attr("href") + "&searchfor=" + $(txtDeviceLookupSearch).val() + '&recordsperpage=0',
+            type: 'GET',
+            cache: false,
+            success: function (result) {
+                $("#divDevicesLookupList").html(result);
+                return false;
+            }
+        });
+        return false;
+    });
+}
+//Select from Lookup
+function SelectDeviceFromLookUp(value) {
+    selectedDevice = value;
+    EventSelectDevice();
+}
