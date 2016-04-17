@@ -160,7 +160,7 @@ namespace DynThings.Simulator
                 client.DefaultRequestHeaders.Accept.Clear();
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
-                HttpResponseMessage response = await client.GetAsync("api/thingsIO/GetDevicePendingCommands?deviceKeyPass=" + deviceKeyPass.ToString());
+                HttpResponseMessage response = await client.GetAsync("api/thingsIO/GetDevicePendingCommands?devicekeypass=" + deviceKeyPass.ToString());
                 if (response.IsSuccessStatusCode)
                 {
                 }
@@ -184,7 +184,7 @@ namespace DynThings.Simulator
 
                 SubmissionDeviceIO data = new SubmissionDeviceIO();
                 data.ExectionTimeStamp = executionTimeStamp.Month.ToString() + "-" + executionTimeStamp.Day.ToString() + "-" + executionTimeStamp.Year.ToString();
-                data.KeyPass = deviceKeyPass.ToString();
+                data.KeyPass = endPointKeyPass.ToString();
                 data.Value = input;
 
                 HttpResponseMessage response = await client.PostAsJsonAsync("api/ThingsIO/SubmitEndPointInput", data);
@@ -209,7 +209,7 @@ namespace DynThings.Simulator
 
                 SubmissionDeviceIO data = new SubmissionDeviceIO();
                 data.ExectionTimeStamp = executionTimeStamp.Month.ToString() + "-" + executionTimeStamp.Day.ToString() + "-" + executionTimeStamp.Year.ToString();
-                data.KeyPass = deviceKeyPass.ToString();
+                data.KeyPass = endPointKeyPass.ToString();
                 data.Value = input;
 
                 HttpResponseMessage response = await client.PostAsJsonAsync("api/ThingsIO/SubmitEndPointLog", data);
@@ -223,23 +223,7 @@ namespace DynThings.Simulator
 
         }
 
-        public static async Task<List<APIEndPointIO>> GetEndPointPendingCommands(Guid endPointKeyPass)
-        {
-            using (var client = new HttpClient())
-            {
-                client.BaseAddress = new Uri(C.WebAppURL);
-                client.DefaultRequestHeaders.Accept.Clear();
-                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-
-                HttpResponseMessage response = await client.GetAsync("api/thingsIO/GetEndPointPendingCommands?endPointKeyPass=" + endPointKeyPass.ToString());
-                if (response.IsSuccessStatusCode)
-                {
-                }
-                IEnumerable<APIEndPointIO> cmds = response.Content.ReadAsAsync<IEnumerable<APIEndPointIO>>().Result;
-
-                return cmds.ToList();
-            }
-        }
+        
         #endregion
 
 

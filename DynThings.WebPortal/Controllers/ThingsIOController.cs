@@ -341,10 +341,10 @@ namespace DynThings.WebAPI.Controllers
 
         #region :: Get endpoint pending Commands ::
         [HttpGet]
-        public List<APIEndPointIO> GetEndPointPendingCommands(Guid endPointGuid)
+        public List<APIEndPointIO> GetEndPointPendingCommands(Guid endPointKeyPass)
         {
             List<APIEndPointIO> apiCmds = new List<APIEndPointIO>();
-            List<EndPointIO> cmds = UnitOfWork.repoEndpointIOs.GetPendingCommandsList(endPointGuid);
+            List<EndPointIO> cmds = UnitOfWork.repoEndpointIOs.GetPendingCommandsList(endPointKeyPass);
             foreach (EndPointIO cmd in cmds)
             {
                 APIEndPointIO apiCmd = new APIEndPointIO();

@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.btnSendInput = new System.Windows.Forms.Button();
@@ -35,27 +36,33 @@
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.btnSendLog = new System.Windows.Forms.Button();
             this.txtLog = new System.Windows.Forms.TextBox();
+            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.lblSelectedFormType = new System.Windows.Forms.Label();
             this.lblTitle = new System.Windows.Forms.Label();
             this.lntInputs = new System.Windows.Forms.ListView();
-            this.button1 = new System.Windows.Forms.Button();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.tabControl1.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.tabPage3.SuspendLayout();
+            this.tabPage1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
             // 
             this.tabControl1.Controls.Add(this.tabPage2);
             this.tabControl1.Controls.Add(this.tabPage3);
-            this.tabControl1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.tabControl1.Location = new System.Drawing.Point(0, 366);
+            this.tabControl1.Controls.Add(this.tabPage1);
+            this.tabControl1.Location = new System.Drawing.Point(1, 81);
             this.tabControl1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(554, 68);
+            this.tabControl1.Size = new System.Drawing.Size(553, 260);
             this.tabControl1.TabIndex = 0;
             // 
             // tabPage2
@@ -66,7 +73,7 @@
             this.tabPage2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.tabPage2.Size = new System.Drawing.Size(546, 38);
+            this.tabPage2.Size = new System.Drawing.Size(545, 230);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Submit Input";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -95,7 +102,7 @@
             this.tabPage3.Location = new System.Drawing.Point(4, 26);
             this.tabPage3.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Size = new System.Drawing.Size(546, 38);
+            this.tabPage3.Size = new System.Drawing.Size(545, 230);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "Submit Log";
             this.tabPage3.UseVisualStyleBackColor = true;
@@ -116,6 +123,26 @@
             this.txtLog.Name = "txtLog";
             this.txtLog.Size = new System.Drawing.Size(449, 25);
             this.txtLog.TabIndex = 2;
+            // 
+            // tabPage1
+            // 
+            this.tabPage1.Controls.Add(this.dataGridView1);
+            this.tabPage1.Location = new System.Drawing.Point(4, 26);
+            this.tabPage1.Name = "tabPage1";
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage1.Size = new System.Drawing.Size(545, 230);
+            this.tabPage1.TabIndex = 3;
+            this.tabPage1.Text = "Pending Commands";
+            this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // dataGridView1
+            // 
+            this.dataGridView1.BackgroundColor = System.Drawing.Color.White;
+            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.Location = new System.Drawing.Point(7, 6);
+            this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.Size = new System.Drawing.Size(532, 221);
+            this.dataGridView1.TabIndex = 0;
             // 
             // label1
             // 
@@ -155,33 +182,38 @@
             // 
             // lntInputs
             // 
-            this.lntInputs.Location = new System.Drawing.Point(4, 97);
+            this.lntInputs.Location = new System.Drawing.Point(20, 32);
             this.lntInputs.Name = "lntInputs";
-            this.lntInputs.Size = new System.Drawing.Size(546, 262);
+            this.lntInputs.Size = new System.Drawing.Size(403, 284);
             this.lntInputs.TabIndex = 4;
             this.lntInputs.UseCompatibleStateImageBehavior = false;
             this.lntInputs.View = System.Windows.Forms.View.List;
             // 
-            // button1
+            // groupBox1
             // 
-            this.button1.Location = new System.Drawing.Point(413, 153);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 5;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click_1);
+            this.groupBox1.Controls.Add(this.lntInputs);
+            this.groupBox1.Location = new System.Drawing.Point(565, 20);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(439, 322);
+            this.groupBox1.TabIndex = 6;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Log";
+            // 
+            // timer1
+            // 
+            this.timer1.Enabled = true;
+            this.timer1.Interval = 1000;
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
             // FrmDevice
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(554, 434);
-            this.Controls.Add(this.button1);
+            this.ClientSize = new System.Drawing.Size(1006, 342);
+            this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.lblTitle);
             this.Controls.Add(this.lblSelectedFormType);
-            this.Controls.Add(this.lntInputs);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.tabControl1);
@@ -197,6 +229,9 @@
             this.tabPage2.PerformLayout();
             this.tabPage3.ResumeLayout(false);
             this.tabPage3.PerformLayout();
+            this.tabPage1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            this.groupBox1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -216,6 +251,9 @@
         private System.Windows.Forms.ListView lntInputs;
         private System.Windows.Forms.Button btnSendLog;
         private System.Windows.Forms.TextBox txtLog;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.TabPage tabPage1;
+        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.Timer timer1;
     }
 }
