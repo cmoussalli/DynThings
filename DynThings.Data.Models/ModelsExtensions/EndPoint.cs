@@ -24,9 +24,17 @@ namespace DynThings.Data.Models
         {
             get
             {
+                EndPointIO result = new EndPointIO() ;
                 DynThingsEntities db = new DynThingsEntities();
                 List<EndPointIO> io = this.EndPointIOs.Where(i => i.IOTypeID == 1).OrderByDescending(eio => eio.TimeStamp).Take(1).ToList();
-                EndPointIO result = io[0];
+                if(io.Count >0 )
+                {
+                result = io[0];
+                }
+                else
+                {
+
+                }
                 return result;
             }
         }
