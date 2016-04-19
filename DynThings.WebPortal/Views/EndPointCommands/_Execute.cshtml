@@ -50,9 +50,16 @@
                 data: formData,
                 dataType: "json",
                 success: function (resp) {
-                    alert('ok');
+                    $.notify({
+                        // options
+                        message: 'Hello World'
+                    }, {
+                        // settings
+                        type: 'danger'
+                    });
                 }
             })
+           
             $('#mdl').modal('hide');
         });
     });

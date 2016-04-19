@@ -13,8 +13,8 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
-using DynThings.Data.Models;
 using PagedList;
+using DynThings.Data.Models;
 using DynThings.Data.Repositories;
 using DynThings.Core;
 

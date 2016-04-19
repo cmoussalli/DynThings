@@ -19,6 +19,7 @@ namespace DynThings.Data.Repositories
         public static ResultInfo resultInfo = new ResultInfo();
 
         #region Repositories
+        public static DynSettingsRepository repoDynSettings = new DynSettingsRepository();
         public static LocationViewsRepository repoLocationViews = new LocationViewsRepository();
         public static LocationViewTypesRepository repoLocationViewTypes = new LocationViewTypesRepository();
         public static LocationsRepository repoLocations = new LocationsRepository();

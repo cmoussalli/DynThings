@@ -323,6 +323,8 @@
     <Content Include="Assets\Portal\docs.js" />
     <Content Include="Content\docs.css" />
     <Content Include="Content\PagedList.css" />
+    <Content Include="Content\style.css" />
+    <Content Include="DynScripts\Config.js" />
     <Content Include="DynScripts\Devices.js" />
     <Content Include="DynScripts\EndPointCommands.js" />
     <Content Include="DynScripts\DeviceCommands.js" />
@@ -430,6 +432,8 @@
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\MsMaps\BingMaps.js" />
     <Content Include="Scripts\notify.js" />
+    <Content Include="Scripts\bootstrap-notify\bootstrap-notify.js" />
+    <Content Include="Scripts\bootstrap-notify\bootstrap-notify.min.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\run_prettify.js" />
@@ -564,6 +568,9 @@
     <Content Include="Views\Devices\Lookup\Index.cshtml" />
     <Content Include="Views\Devices\Lookup\List.cshtml" />
     <Content Include="Views\Locations\_DevicesList.cshtml" />
+    <Content Include="Views\Config\_Main.cshtml" />
+    <Content Include="Views\Config\_Security.cshtml" />
+    <Content Include="Views\Config\_Grids.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -3,5 +3,70 @@
     ViewBag.Title = "Config";
 }
 
-<h2>Index</h2>
+<div class="container">
+    <div class="page-header">
+        <h1>Settings</h1>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <ul class="nav nav-tabs">
+                <li class="active"><a data-toggle="tab" href="#tabConfigmain">Info</a></li>
+                <li><a data-toggle="tab" href="#tabConfiggrids">Data Tables</a></li>
+                <li><a data-toggle="tab" href="#tabConfigbehavior">Users Behavior</a></li>
+                <li><a data-toggle="tab" href="#tabConfigsecurity">Security</a></li>
+                <li><a data-toggle="tab" href="#tabConfigDevkeys">Dev Keys</a></li>
+            </ul>
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="tab-content">
+                        <div id="tabConfigmain" class="tab-pane fade in active">
+                            <div id="divConfigMain">
 
+                            </div>
+                        </div>
+                        <div id="tabConfiggrids" class="tab-pane fade">
+                            <div id="divConfigGrids">
+
+                            </div>
+                        </div>
+                        <div id="tabConfigbehavior" class="tab-pane fade">
+                            <div id="divConfigBehavior">
+                            </div>
+                        </div>
+                        <div id="tabConfigsecurity" class="tab-pane fade">
+                            <div id="divConfigSecurity">
+                            </div>
+                        </div>
+                        <div id="tabConfigDevkeys" class="tab-pane fade">
+                            <div id="divConfigDevkeys">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    function noti() {
+        $.notify({
+            title: '<strong>Heads up!</strong>',
+            message: 'Test here'
+        });
+    }
+</script>
+
+@section scriptfiles{
+
+    <script src="~/DynScripts/Config.js"></script>
+}
+
+
+@section scripts{
+    <script>
+        $(document).ready(function () {
+            LoadPart_ConfigDetailsMainDiv();
+            LoadPart_ConfigDetailsGridsDiv();
+        });
+    </script>
+}
