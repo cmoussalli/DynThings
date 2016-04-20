@@ -12,17 +12,18 @@ namespace DynThings.WebPortal.Controllers
     [Authorize]
     public class ConfigController : Controller
     {
-        
+
         // GET: Config
         public ActionResult Index()
         {
+            DynSetting config = UnitOfWork.repoDynSettings.GetConfig();
             return View();
         }
 
-        
+
         public PartialViewResult MainPV()
         {
-            DynSetting config = UnitOfWork.repoDynSettings.GetConfig(); ;
+            DynSetting config = UnitOfWork.repoDynSettings.GetConfig();
             return PartialView("_Main", config);
         }
 
@@ -32,7 +33,8 @@ namespace DynThings.WebPortal.Controllers
         public PartialViewResult GridsPV()
         {
             DynSetting config = UnitOfWork.repoDynSettings.GetConfig();
-
+            ViewData["MasterGridRowsCountList"] = new SelectList(StaticMenus.GetGridRowsCount(), config.DefaultRecordsPerMaster.ToString());
+            ViewData["ChildGridRowsCountList"] = new SelectList(StaticMenus.GetGridRowsCount(), config.DefaultRecordsPerChild.ToString());
             return PartialView("_Grids", config);
         }
 
