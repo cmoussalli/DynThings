@@ -16,12 +16,13 @@
                 <li><a data-toggle="tab" href="#tabConfigsecurity">Security</a></li>
                 <li><a data-toggle="tab" href="#tabConfigDevkeys">Dev Keys</a></li>
             </ul>
+            <input id="Button1" type="button" value="button" onclick="noti();" />
             <div class="panel panel-default">
                 <div class="panel-body">
                     <div class="tab-content">
                         <div id="tabConfigmain" class="tab-pane fade in active">
                             <div id="divConfigMain">
-
+                                
                             </div>
                         </div>
                         <div id="tabConfiggrids" class="tab-pane fade">
@@ -48,17 +49,11 @@
     </div>
 </div>
 <script>
-    function noti() {
-        $.notify({
-            title: '<strong>Heads up!</strong>',
-            message: 'Test here'
-        });
-    }
+  
 </script>
 
 @section scriptfiles{
-
-    <script src="~/DynScripts/Config.js"></script>
+    <script src="~/Assets/Scripts/DynScripts/Config.js"></script>
 }
 
 
@@ -68,5 +63,9 @@
             LoadPart_ConfigDetailsMainDiv();
             LoadPart_ConfigDetailsGridsDiv();
         });
+
+        function noti() {
+            NotifyWithImage('123131231231231233', 'Assets/Imgs/spinner-md.gif');
+        };
     </script>
 }

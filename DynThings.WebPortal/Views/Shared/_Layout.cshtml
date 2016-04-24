@@ -82,8 +82,10 @@
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @Scripts.Render("~/bundles/highcharts")
+    @Scripts.Render("~/bundles/bootstrapnotify")
 
-    <script src="~/Scripts/bootstrap-notify/bootstrap-notify.min.js"></script>
+
+    <script src="~/Assets/Scripts/MidLayerScripts/Notify.js"></script>
 
 
     @RenderSection("scriptfiles", required: false)
@@ -95,6 +97,7 @@
         @Html.Partial("_PVLoading")
     </div>
     @Html.Partial("_Modal")
+
     <script>
         @{
             var baseurl = String.Format("{0}://{1}{2}", Request.Url.Scheme, Request.Url.Authority, Url.Content("~/"));

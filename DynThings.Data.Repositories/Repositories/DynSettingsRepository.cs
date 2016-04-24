@@ -36,5 +36,24 @@ namespace DynThings.Data.Repositories
         }
         #endregion
 
+
+        #region Update: Grids
+        public ResultInfo.Result SetGridRowsCount(int masterGridRowsCount, int childGridRowsCount)
+        {
+            
+            List<DynSetting> cons = db.DynSettings.Where(l => l.ID == 1).ToList();
+            if (cons.Count == 1)
+            {
+                cons[0].DefaultRecordsPerMaster = masterGridRowsCount;
+                cons[0].DefaultRecordsPerChild = childGridRowsCount;
+                db.SaveChanges();
+            }
+            else
+            {
+              return  UnitOfWork.resultInfo.GetResultByID(1);
+            }
+            return UnitOfWork.resultInfo.GenerateOKResult();
+        }
+        #endregion
     }
 }

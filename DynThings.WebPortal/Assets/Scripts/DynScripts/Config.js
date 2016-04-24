@@ -21,3 +21,21 @@ function LoadPart_ConfigDetailsGridsDiv() {
         $("#divConfigGrids").html(partialViewResult);
     });
 }
+
+//Attach : Edit Form Submit : Grids
+function AttachEventConfigGridsEditForm() {
+    $("#ConfigGridsEditForm").on("submit", function (event) {
+        event.preventDefault();
+        var url = $(this).attr("action");
+        var formData = $(this).serialize();
+        $.ajax({
+            url: url,
+            type: "POST",
+            data: formData,
+            dataType: "json",
+            success: function (resp) {
+            }
+        })
+        //LoadPart_EndPointDetailsDiv(endPointID);
+    });
+};

@@ -1,13 +1,29 @@
 ﻿@model DynThings.Data.Models.DynSetting
+@using (Html.BeginForm("GridsPV", "Config", FormMethod.Post, new { id = "ConfigGridsEditForm" }))
+{
+    @Html.AntiForgeryToken()
+    <div class="form-group">
+        <label class="col-sm-3 control-label" for="drpMainGrid">Main grid rows count</label>
+        <div class="col-sm-9">
+            @Html.DropDownList("DefaultRecordsPerMaster", null, htmlAttributes: new { @class = "form-control" })
+        </div>
+    </div>
+    <br />
+    <br />
 
-<div class="form-group">
-    <label class="control-label" for="drpMainGrid">Main grid rows count</label>
-@Html.DropDownList("MasterGridRowsCount", ViewData["MasterGridRowsCountList"] as SelectList)
-</div>
+    <div class="form-group">
+        <label class="col-sm-3 control-label" for="drpChildGrid">Child grid rows count</label>
+        <div class="col-sm-9">
+            @Html.DropDownList("DefaultRecordsPerChild", null, htmlAttributes: new { @class = "form-control" })
+        </div>
+    </div>
+    <br />
+    <br />
 
-<div class="form-group">
-    <label class="control-label" for="drpChildGrid">Child grid rows count</label>
-@Html.DropDownList("ChildGridRowsCount", ViewData["ChildGridRowsCountList"] as SelectList)
-</div>
-
-<br><br>
+    <button type="submit" class="btn btn-primary">Save changes</button>
+}
+<script>
+    $(document).ready(function () {
+        AttachEventConfigGridsEditForm();
+        });
+</script>

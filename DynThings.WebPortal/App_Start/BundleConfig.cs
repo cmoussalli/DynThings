@@ -23,6 +23,11 @@ namespace DynThings.WebPortal
                       "~/Scripts/bootstrap.js",
                       "~/Scripts/respond.js"));
 
+            //bootstrap-notify
+            bundles.Add(new ScriptBundle("~/bundles/bootstrapnotify").Include(
+                    "~/Scripts/bootstrap-notify/bootstrap-notify.min.js"));
+
+
             //HighCharts JS
             bundles.Add(new ScriptBundle("~/bundles/highcharts").Include(
                     "~/Scripts/Highcharts/highcharts.js",

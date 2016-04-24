@@ -33,23 +33,21 @@ namespace DynThings.WebPortal.Controllers
         public PartialViewResult GridsPV()
         {
             DynSetting config = UnitOfWork.repoDynSettings.GetConfig();
-            ViewData["MasterGridRowsCountList"] = new SelectList(StaticMenus.GetGridRowsCount(), config.DefaultRecordsPerMaster.ToString());
-            ViewData["ChildGridRowsCountList"] = new SelectList(StaticMenus.GetGridRowsCount(), config.DefaultRecordsPerChild.ToString());
+            ViewBag.DefaultRecordsPerMaster = new SelectList(StaticMenus.GetGridRowsCount(),config.DefaultRecordsPerMaster.ToString());
+            ViewBag.DefaultRecordsPerChild = new SelectList(StaticMenus.GetGridRowsCount(), config.DefaultRecordsPerChild.ToString());
             return PartialView("_Grids", config);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult EditPV([Bind(Include = "ID,Title,TypeID,DeviceID")] Endpoint endpoint)
+        public ActionResult GridsPV([Bind(Include = "DefaultRecordsPerMaster,DefaultRecordsPerChild")] DynSetting config)
         {
             if (ModelState.IsValid)
             {
-                UnitOfWork.repoEndpoints.Edit(endpoint.ID, endpoint.Title, endpoint.TypeID);
-                return RedirectToAction("Index");
+                UnitOfWork.repoDynSettings.SetGridRowsCount(config.DefaultRecordsPerMaster, config.DefaultRecordsPerChild);
+                return Content("Ok");
             }
-            ViewBag.TypeID = new SelectList(UnitOfWork.repoEndpointTypes.GetList(), "ID", "Title", endpoint.TypeID);
-            ViewBag.DeviceID = new SelectList(UnitOfWork.repoDevices.GetList(), "ID", "Title", endpoint.DeviceID);
-            return View(endpoint);
+            return Content("Failed");
         }
         #endregion
     }
