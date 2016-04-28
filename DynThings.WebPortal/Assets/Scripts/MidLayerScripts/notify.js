@@ -1,36 +1,56 @@
-﻿function Notify(notifyMessage) {
+﻿var notifyTypeStr = "";
+
+function GetNotifyTypeByCode(code) {
+    var notifyTypeStr = 'info';
+    switch (code) {
+        case 's':
+            notifyTypeStr = 'success';
+            break;
+        case 'w':
+            notifyTypeStr = 'warning';
+            break;
+        case 'd':
+            notifyTypeStr = 'danger';
+            break;
+        case 'i':
+            notifyTypeStr = 'info';
+            break;
+    }
+    return notifyTypeStr;
+}
+
+function Notify(notifyType, notifyMessage) {
     $.notify({
         message: notifyMessage
+    }, {
+        type: GetNotifyTypeByCode(notifyType)
     });
 }
 
-function NotifyWithTitle(notifyTitle, notifyMessage) {
+function NotifyWithTitle(notifyType, notifyTitle, notifyMessage) {
     $.notify({
         title: '<strong>' + notifyTitle + '</strong>',
         message: notifyMessage
+    }, {
+        type: GetNotifyTypeByCode(notifyType)
     });
 }
 
-function NotifyWithTitle(notifyTitle, notifyMessage) {
-    $.notify({
-        title: '<strong>' + notifyTitle + '</strong>',
-        message: notifyMessage
-    });
-}
 
-function NotifyWithImage(notifyMessage, notifyIcon) {
+function NotifyWithImage(notifyType, notifyMessage, notifyIcon) {
     $.notify({
         icon: notifyIcon,
         message: notifyMessage
     }, {
-        icon_type: 'image'
+        icon_type: 'image',
+        type: GetNotifyTypeByCode(notifyType)
     });
 }
 
 
 function NotifyReach() {
     var notify = $.notify('<strong>Saving</strong> Do not close this page...', {
-        type: 'success',
+        type: GetNotifyTypeByCode(notifyType),
         allow_dismiss: false,
         showProgressbar: true
     });

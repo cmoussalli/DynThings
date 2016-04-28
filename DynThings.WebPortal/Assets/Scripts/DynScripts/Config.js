@@ -32,8 +32,12 @@ function AttachEventConfigGridsEditForm() {
             url: url,
             type: "POST",
             data: formData,
-            dataType: "json",
+            dataType: "text",
             success: function (resp) {
+                Notify('s','Saved', 'Configuration has been saved');
+            },
+            error: function () {
+                NotifyWithTitle('d','Error','Configuration has not been saved');
             }
         })
         //LoadPart_EndPointDetailsDiv(endPointID);
