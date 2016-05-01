@@ -332,7 +332,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__EndPoints__TypeI__21B6055D">
+        <Association Name="FK__Endpoints__TypeI__45F365D3">
           <End Role="EndPointTypes" Type="Self.EndPointTypes" Multiplicity="1" />
           <End Role="Endpoints" Type="Self.Endpoints" Multiplicity="*" />
           <ReferentialConstraint>
@@ -540,7 +540,7 @@
             <End Role="Devices" EntitySet="Devices" />
             <End Role="Endpoints" EntitySet="Endpoints" />
           </AssociationSet>
-          <AssociationSet Name="FK__EndPoints__TypeI__21B6055D" Association="Self.FK__EndPoints__TypeI__21B6055D">
+          <AssociationSet Name="FK__Endpoints__TypeI__45F365D3" Association="Self.FK__Endpoints__TypeI__45F365D3">
             <End Role="EndPointTypes" EntitySet="EndPointTypes" />
             <End Role="Endpoints" EntitySet="Endpoints" />
           </AssociationSet>
