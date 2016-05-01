@@ -48,15 +48,9 @@
                 url: url,
                 type: "POST",
                 data: formData,
-                dataType: "json",
+                dataType: "text",
                 success: function (resp) {
-                    $.notify({
-                        // options
-                        message: 'Hello World'
-                    }, {
-                        // settings
-                        type: 'danger'
-                    });
+                    NotifyWithTitle('s', 'Success', 'Command has been sent');
                 }
             })
            

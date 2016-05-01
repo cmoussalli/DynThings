@@ -5,6 +5,57 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="DynThingsModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="AspNetRoles">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="256" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AspNetUserClaims">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="ClaimType" Type="nvarchar(max)" />
+          <Property Name="ClaimValue" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="AspNetUserLogins">
+          <Key>
+            <PropertyRef Name="LoginProvider" />
+            <PropertyRef Name="ProviderKey" />
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="LoginProvider" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="ProviderKey" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AspNetUserRoles">
+          <Key>
+            <PropertyRef Name="UserId" />
+            <PropertyRef Name="RoleId" />
+          </Key>
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="RoleId" Type="nvarchar" MaxLength="128" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AspNetUsers">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="256" />
+          <Property Name="EmailConfirmed" Type="bit" Nullable="false" />
+          <Property Name="PasswordHash" Type="nvarchar(max)" />
+          <Property Name="SecurityStamp" Type="nvarchar(max)" />
+          <Property Name="PhoneNumber" Type="nvarchar(max)" />
+          <Property Name="PhoneNumberConfirmed" Type="bit" Nullable="false" />
+          <Property Name="TwoFactorEnabled" Type="bit" Nullable="false" />
+          <Property Name="LockoutEndDateUtc" Type="datetime" />
+          <Property Name="LockoutEnabled" Type="bit" Nullable="false" />
+          <Property Name="AccessFailedCount" Type="int" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="256" Nullable="false" />
+        </EntityType>
         <EntityType Name="CssIcons">
           <Key>
             <PropertyRef Name="ID" />
@@ -209,7 +260,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__DeviceIOs__IOTyp__3C69FB99">
+        <Association Name="FK__DeviceIOs__IOTyp__403A8C7D">
           <End Role="IOTypes" Type="Self.IOTypes" Multiplicity="0..1" />
           <End Role="DeviceIOs" Type="Self.DeviceIOs" Multiplicity="*" />
           <ReferentialConstraint>
@@ -233,7 +284,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__EndPointC__EndPo__5CD6CB2B">
+        <Association Name="FK__EndPointC__EndPo__4222D4EF">
           <End Role="Endpoints" Type="Self.Endpoints" Multiplicity="0..1" />
           <End Role="EndPointCommands" Type="Self.EndPointCommands" Multiplicity="*" />
           <ReferentialConstraint>
@@ -257,7 +308,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__EndPointI__IOTyp__3F466844">
+        <Association Name="FK__EndPointI__IOTyp__440B1D61">
           <End Role="IOTypes" Type="Self.IOTypes" Multiplicity="1" />
           <End Role="EndPointIOs" Type="Self.EndPointIOs" Multiplicity="*" />
           <ReferentialConstraint>
@@ -305,7 +356,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__EndPointT__TypeC__4316F928">
+        <Association Name="FK__EndPointT__TypeC__47DBAE45">
           <End Role="EndPointTypeCategorys" Type="Self.EndPointTypeCategorys" Multiplicity="0..1" />
           <End Role="EndPointTypes" Type="Self.EndPointTypes" Multiplicity="*" />
           <ReferentialConstraint>
@@ -317,7 +368,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__LinkDevic__Devic__03F0984C">
+        <Association Name="FK__LinkDevic__Devic__48CFD27E">
           <End Role="Devices" Type="Self.Devices" Multiplicity="0..1" />
           <End Role="LinkDevicesLocations" Type="Self.LinkDevicesLocations" Multiplicity="*" />
           <ReferentialConstraint>
@@ -329,7 +380,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__LinkDevic__Locat__02FC7413">
+        <Association Name="FK__LinkDevic__Locat__49C3F6B7">
           <End Role="Locations" Type="Self.Locations" Multiplicity="0..1" />
           <End Role="LinkDevicesLocations" Type="Self.LinkDevicesLocations" Multiplicity="*" />
           <ReferentialConstraint>
@@ -377,7 +428,68 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserClaims" Type="Self.AspNetUserClaims" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserClaims">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserLogins" Type="Self.AspNetUserLogins" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserLogins">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId">
+          <End Role="AspNetRoles" Type="Self.AspNetRoles" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserRoles" Type="Self.AspNetUserRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetRoles">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserRoles">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserRoles" Type="Self.AspNetUserRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserRoles">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="DynThingsModelStoreContainer">
+          <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRoles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaims" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogins" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUserRoles" EntityType="Self.AspNetUserRoles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CssIcons" EntityType="Self.CssIcons" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DeviceCommands" EntityType="Self.DeviceCommands" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DeviceIOs" EntityType="Self.DeviceIOs" Schema="dbo" store:Type="Tables" />
@@ -404,7 +516,7 @@
             <End Role="Devices" EntitySet="Devices" />
             <End Role="DeviceIOs" EntitySet="DeviceIOs" />
           </AssociationSet>
-          <AssociationSet Name="FK__DeviceIOs__IOTyp__3C69FB99" Association="Self.FK__DeviceIOs__IOTyp__3C69FB99">
+          <AssociationSet Name="FK__DeviceIOs__IOTyp__403A8C7D" Association="Self.FK__DeviceIOs__IOTyp__403A8C7D">
             <End Role="IOTypes" EntitySet="IOTypes" />
             <End Role="DeviceIOs" EntitySet="DeviceIOs" />
           </AssociationSet>
@@ -412,7 +524,7 @@
             <End Role="DeviceStatus" EntitySet="DeviceStatus" />
             <End Role="Devices" EntitySet="Devices" />
           </AssociationSet>
-          <AssociationSet Name="FK__EndPointC__EndPo__5CD6CB2B" Association="Self.FK__EndPointC__EndPo__5CD6CB2B">
+          <AssociationSet Name="FK__EndPointC__EndPo__4222D4EF" Association="Self.FK__EndPointC__EndPo__4222D4EF">
             <End Role="Endpoints" EntitySet="Endpoints" />
             <End Role="EndPointCommands" EntitySet="EndPointCommands" />
           </AssociationSet>
@@ -420,7 +532,7 @@
             <End Role="Endpoints" EntitySet="Endpoints" />
             <End Role="EndPointIOs" EntitySet="EndPointIOs" />
           </AssociationSet>
-          <AssociationSet Name="FK__EndPointI__IOTyp__3F466844" Association="Self.FK__EndPointI__IOTyp__3F466844">
+          <AssociationSet Name="FK__EndPointI__IOTyp__440B1D61" Association="Self.FK__EndPointI__IOTyp__440B1D61">
             <End Role="IOTypes" EntitySet="IOTypes" />
             <End Role="EndPointIOs" EntitySet="EndPointIOs" />
           </AssociationSet>
@@ -436,15 +548,15 @@
             <End Role="CssIcons" EntitySet="CssIcons" />
             <End Role="EndPointTypes" EntitySet="EndPointTypes" />
           </AssociationSet>
-          <AssociationSet Name="FK__EndPointT__TypeC__4316F928" Association="Self.FK__EndPointT__TypeC__4316F928">
+          <AssociationSet Name="FK__EndPointT__TypeC__47DBAE45" Association="Self.FK__EndPointT__TypeC__47DBAE45">
             <End Role="EndPointTypeCategorys" EntitySet="EndPointTypeCategorys" />
             <End Role="EndPointTypes" EntitySet="EndPointTypes" />
           </AssociationSet>
-          <AssociationSet Name="FK__LinkDevic__Devic__03F0984C" Association="Self.FK__LinkDevic__Devic__03F0984C">
+          <AssociationSet Name="FK__LinkDevic__Devic__48CFD27E" Association="Self.FK__LinkDevic__Devic__48CFD27E">
             <End Role="Devices" EntitySet="Devices" />
             <End Role="LinkDevicesLocations" EntitySet="LinkDevicesLocations" />
           </AssociationSet>
-          <AssociationSet Name="FK__LinkDevic__Locat__02FC7413" Association="Self.FK__LinkDevic__Locat__02FC7413">
+          <AssociationSet Name="FK__LinkDevic__Locat__49C3F6B7" Association="Self.FK__LinkDevic__Locat__49C3F6B7">
             <End Role="Locations" EntitySet="Locations" />
             <End Role="LinkDevicesLocations" EntitySet="LinkDevicesLocations" />
           </AssociationSet>
@@ -460,12 +572,32 @@
             <End Role="LocationViewTypes" EntitySet="LocationViewTypes" />
             <End Role="LocationViews" EntitySet="LocationViews" />
           </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserLogins" EntitySet="AspNetUserLogins" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId" Association="Self.FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId">
+            <End Role="AspNetRoles" EntitySet="AspNetRoles" />
+            <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
+          </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="DynThingsModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityContainer Name="DynThingsEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="AspNetRoles" EntityType="DynThingsModel.AspNetRole" />
+          <EntitySet Name="AspNetUserClaims" EntityType="DynThingsModel.AspNetUserClaim" />
+          <EntitySet Name="AspNetUserLogins" EntityType="DynThingsModel.AspNetUserLogin" />
+          <EntitySet Name="AspNetUsers" EntityType="DynThingsModel.AspNetUser" />
           <EntitySet Name="CssIcons" EntityType="DynThingsModel.CssIcon" />
           <EntitySet Name="DeviceCommands" EntityType="DynThingsModel.DeviceCommand" />
           <EntitySet Name="DeviceIOs" EntityType="DynThingsModel.DeviceIO" />
@@ -484,6 +616,14 @@
           <EntitySet Name="LocationViews" EntityType="DynThingsModel.LocationView" />
           <EntitySet Name="LocationViewTypes" EntityType="DynThingsModel.LocationViewType" />
           <EntitySet Name="ResultMessages" EntityType="DynThingsModel.ResultMessage" />
+          <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="DynThingsModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUser" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserClaim" EntitySet="AspNetUserClaims" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" Association="DynThingsModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUser" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserLogin" EntitySet="AspNetUserLogins" />
+          </AssociationSet>
           <AssociationSet Name="FK__EndPointT__IconI__3FD07829" Association="DynThingsModel.FK__EndPointT__IconI__3FD07829">
             <End Role="CssIcon" EntitySet="CssIcons" />
             <End Role="EndPointType" EntitySet="EndPointTypes" />
@@ -496,7 +636,7 @@
             <End Role="Device" EntitySet="Devices" />
             <End Role="DeviceIO" EntitySet="DeviceIOs" />
           </AssociationSet>
-          <AssociationSet Name="FK__DeviceIOs__IOTyp__3C69FB99" Association="DynThingsModel.FK__DeviceIOs__IOTyp__3C69FB99">
+          <AssociationSet Name="FK__DeviceIOs__IOTyp__403A8C7D" Association="DynThingsModel.FK__DeviceIOs__IOTyp__403A8C7D">
             <End Role="IOType" EntitySet="IOTypes" />
             <End Role="DeviceIO" EntitySet="DeviceIOs" />
           </AssociationSet>
@@ -508,11 +648,11 @@
             <End Role="Device" EntitySet="Devices" />
             <End Role="Endpoint" EntitySet="Endpoints" />
           </AssociationSet>
-          <AssociationSet Name="FK__LinkDevic__Devic__03F0984C" Association="DynThingsModel.FK__LinkDevic__Devic__03F0984C">
+          <AssociationSet Name="FK__LinkDevic__Devic__48CFD27E" Association="DynThingsModel.FK__LinkDevic__Devic__48CFD27E">
             <End Role="Device" EntitySet="Devices" />
             <End Role="LinkDevicesLocation" EntitySet="LinkDevicesLocations" />
           </AssociationSet>
-          <AssociationSet Name="FK__EndPointC__EndPo__5CD6CB2B" Association="DynThingsModel.FK__EndPointC__EndPo__5CD6CB2B">
+          <AssociationSet Name="FK__EndPointC__EndPo__4222D4EF" Association="DynThingsModel.FK__EndPointC__EndPo__4222D4EF">
             <End Role="Endpoint" EntitySet="Endpoints" />
             <End Role="EndPointCommand" EntitySet="EndPointCommands" />
           </AssociationSet>
@@ -520,7 +660,7 @@
             <End Role="Endpoint" EntitySet="Endpoints" />
             <End Role="EndPointIO" EntitySet="EndPointIOs" />
           </AssociationSet>
-          <AssociationSet Name="FK__EndPointI__IOTyp__3F466844" Association="DynThingsModel.FK__EndPointI__IOTyp__3F466844">
+          <AssociationSet Name="FK__EndPointI__IOTyp__440B1D61" Association="DynThingsModel.FK__EndPointI__IOTyp__440B1D61">
             <End Role="IOType" EntitySet="IOTypes" />
             <End Role="EndPointIO" EntitySet="EndPointIOs" />
           </AssociationSet>
@@ -528,11 +668,11 @@
             <End Role="EndPointType" EntitySet="EndPointTypes" />
             <End Role="Endpoint" EntitySet="Endpoints" />
           </AssociationSet>
-          <AssociationSet Name="FK__EndPointT__TypeC__4316F928" Association="DynThingsModel.FK__EndPointT__TypeC__4316F928">
+          <AssociationSet Name="FK__EndPointT__TypeC__47DBAE45" Association="DynThingsModel.FK__EndPointT__TypeC__47DBAE45">
             <End Role="EndPointTypeCategory" EntitySet="EndPointTypeCategorys" />
             <End Role="EndPointType" EntitySet="EndPointTypes" />
           </AssociationSet>
-          <AssociationSet Name="FK__LinkDevic__Locat__02FC7413" Association="DynThingsModel.FK__LinkDevic__Locat__02FC7413">
+          <AssociationSet Name="FK__LinkDevic__Locat__49C3F6B7" Association="DynThingsModel.FK__LinkDevic__Locat__49C3F6B7">
             <End Role="Location" EntitySet="Locations" />
             <End Role="LinkDevicesLocation" EntitySet="LinkDevicesLocations" />
           </AssociationSet>
@@ -548,7 +688,60 @@
             <End Role="LocationViewType" EntitySet="LocationViewTypes" />
             <End Role="LocationView" EntitySet="LocationViews" />
           </AssociationSet>
+          <AssociationSet Name="AspNetUserRoles" Association="DynThingsModel.AspNetUserRoles">
+            <End Role="AspNetRole" EntitySet="AspNetRoles" />
+            <End Role="AspNetUser" EntitySet="AspNetUsers" />
+          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="AspNetRole">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AspNetUsers" Relationship="DynThingsModel.AspNetUserRoles" FromRole="AspNetRole" ToRole="AspNetUser" />
+        </EntityType>
+        <EntityType Name="AspNetUserClaim">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="ClaimType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ClaimValue" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AspNetUser" Relationship="DynThingsModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUserClaim" ToRole="AspNetUser" />
+        </EntityType>
+        <EntityType Name="AspNetUserLogin">
+          <Key>
+            <PropertyRef Name="LoginProvider" />
+            <PropertyRef Name="ProviderKey" />
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="LoginProvider" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="ProviderKey" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="UserId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AspNetUser" Relationship="DynThingsModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUserLogin" ToRole="AspNetUser" />
+        </EntityType>
+        <EntityType Name="AspNetUser">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="EmailConfirmed" Type="Boolean" Nullable="false" />
+          <Property Name="PasswordHash" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="SecurityStamp" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumberConfirmed" Type="Boolean" Nullable="false" />
+          <Property Name="TwoFactorEnabled" Type="Boolean" Nullable="false" />
+          <Property Name="LockoutEndDateUtc" Type="DateTime" Precision="3" />
+          <Property Name="LockoutEnabled" Type="Boolean" Nullable="false" />
+          <Property Name="AccessFailedCount" Type="Int32" Nullable="false" />
+          <Property Name="UserName" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AspNetUserClaims" Relationship="DynThingsModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUser" ToRole="AspNetUserClaim" />
+          <NavigationProperty Name="AspNetUserLogins" Relationship="DynThingsModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUser" ToRole="AspNetUserLogin" />
+          <NavigationProperty Name="AspNetRoles" Relationship="DynThingsModel.AspNetUserRoles" FromRole="AspNetUser" ToRole="AspNetRole" />
+        </EntityType>
         <EntityType Name="CssIcon">
           <Key>
             <PropertyRef Name="ID" />
@@ -582,7 +775,7 @@
           <Property Name="ExecTimeStamp" Type="DateTime" Precision="3" />
           <Property Name="ScheduleTimeStamp" Type="DateTime" Precision="3" />
           <NavigationProperty Name="Device" Relationship="DynThingsModel.FK__DeviceIOs__Devic__19AACF41" FromRole="DeviceIO" ToRole="Device" />
-          <NavigationProperty Name="IOType" Relationship="DynThingsModel.FK__DeviceIOs__IOTyp__3C69FB99" FromRole="DeviceIO" ToRole="IOType" />
+          <NavigationProperty Name="IOType" Relationship="DynThingsModel.FK__DeviceIOs__IOTyp__403A8C7D" FromRole="DeviceIO" ToRole="IOType" />
         </EntityType>
         <EntityType Name="Device">
           <Key>
@@ -598,7 +791,7 @@
           <NavigationProperty Name="DeviceIOs" Relationship="DynThingsModel.FK__DeviceIOs__Devic__19AACF41" FromRole="Device" ToRole="DeviceIO" />
           <NavigationProperty Name="DeviceStatu" Relationship="DynThingsModel.FK__Devices__StatusI__01D345B0" FromRole="Device" ToRole="DeviceStatu" />
           <NavigationProperty Name="Endpoints" Relationship="DynThingsModel.FK__Endpoints__Devic__00DF2177" FromRole="Device" ToRole="Endpoint" />
-          <NavigationProperty Name="LinkDevicesLocations" Relationship="DynThingsModel.FK__LinkDevic__Devic__03F0984C" FromRole="Device" ToRole="LinkDevicesLocation" />
+          <NavigationProperty Name="LinkDevicesLocations" Relationship="DynThingsModel.FK__LinkDevic__Devic__48CFD27E" FromRole="Device" ToRole="LinkDevicesLocation" />
         </EntityType>
         <EntityType Name="DeviceStatu">
           <Key>
@@ -632,7 +825,7 @@
           <Property Name="EndPointID" Type="Int64" />
           <Property Name="CommandCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="OwnerID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Endpoint" Relationship="DynThingsModel.FK__EndPointC__EndPo__5CD6CB2B" FromRole="EndPointCommand" ToRole="Endpoint" />
+          <NavigationProperty Name="Endpoint" Relationship="DynThingsModel.FK__EndPointC__EndPo__4222D4EF" FromRole="EndPointCommand" ToRole="Endpoint" />
         </EntityType>
         <EntityType Name="EndPointIO">
           <Key>
@@ -646,7 +839,7 @@
           <Property Name="ExecTimeStamp" Type="DateTime" Precision="3" />
           <Property Name="ScheduleTimeStamp" Type="DateTime" Precision="3" />
           <NavigationProperty Name="Endpoint" Relationship="DynThingsModel.FK__EndPointI__EndPo__29572725" FromRole="EndPointIO" ToRole="Endpoint" />
-          <NavigationProperty Name="IOType" Relationship="DynThingsModel.FK__EndPointI__IOTyp__3F466844" FromRole="EndPointIO" ToRole="IOType" />
+          <NavigationProperty Name="IOType" Relationship="DynThingsModel.FK__EndPointI__IOTyp__440B1D61" FromRole="EndPointIO" ToRole="IOType" />
         </EntityType>
         <EntityType Name="Endpoint">
           <Key>
@@ -660,7 +853,7 @@
           <Property Name="DeviceID" Type="Int64" Nullable="false" />
           <Property Name="TypeID" Type="Int64" Nullable="false" />
           <NavigationProperty Name="Device" Relationship="DynThingsModel.FK__Endpoints__Devic__00DF2177" FromRole="Endpoint" ToRole="Device" />
-          <NavigationProperty Name="EndPointCommands" Relationship="DynThingsModel.FK__EndPointC__EndPo__5CD6CB2B" FromRole="Endpoint" ToRole="EndPointCommand" />
+          <NavigationProperty Name="EndPointCommands" Relationship="DynThingsModel.FK__EndPointC__EndPo__4222D4EF" FromRole="Endpoint" ToRole="EndPointCommand" />
           <NavigationProperty Name="EndPointIOs" Relationship="DynThingsModel.FK__EndPointI__EndPo__29572725" FromRole="Endpoint" ToRole="EndPointIO" />
           <NavigationProperty Name="EndPointType" Relationship="DynThingsModel.FK__EndPoints__TypeI__21B6055D" FromRole="Endpoint" ToRole="EndPointType" />
         </EntityType>
@@ -670,7 +863,7 @@
           </Key>
           <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Title" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="EndPointTypes" Relationship="DynThingsModel.FK__EndPointT__TypeC__4316F928" FromRole="EndPointTypeCategory" ToRole="EndPointType" />
+          <NavigationProperty Name="EndPointTypes" Relationship="DynThingsModel.FK__EndPointT__TypeC__47DBAE45" FromRole="EndPointTypeCategory" ToRole="EndPointType" />
         </EntityType>
         <EntityType Name="EndPointType">
           <Key>
@@ -683,7 +876,7 @@
           <Property Name="IconID" Type="Int64" />
           <NavigationProperty Name="CssIcon" Relationship="DynThingsModel.FK__EndPointT__IconI__3FD07829" FromRole="EndPointType" ToRole="CssIcon" />
           <NavigationProperty Name="Endpoints" Relationship="DynThingsModel.FK__EndPoints__TypeI__21B6055D" FromRole="EndPointType" ToRole="Endpoint" />
-          <NavigationProperty Name="EndPointTypeCategory" Relationship="DynThingsModel.FK__EndPointT__TypeC__4316F928" FromRole="EndPointType" ToRole="EndPointTypeCategory" />
+          <NavigationProperty Name="EndPointTypeCategory" Relationship="DynThingsModel.FK__EndPointT__TypeC__47DBAE45" FromRole="EndPointType" ToRole="EndPointTypeCategory" />
         </EntityType>
         <EntityType Name="IOType">
           <Key>
@@ -692,8 +885,8 @@
           <Property Name="ID" Type="Int64" Nullable="false" />
           <Property Name="IO" Type="String" MaxLength="12" FixedLength="false" Unicode="true" />
           <Property Name="Title" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="DeviceIOs" Relationship="DynThingsModel.FK__DeviceIOs__IOTyp__3C69FB99" FromRole="IOType" ToRole="DeviceIO" />
-          <NavigationProperty Name="EndPointIOs" Relationship="DynThingsModel.FK__EndPointI__IOTyp__3F466844" FromRole="IOType" ToRole="EndPointIO" />
+          <NavigationProperty Name="DeviceIOs" Relationship="DynThingsModel.FK__DeviceIOs__IOTyp__403A8C7D" FromRole="IOType" ToRole="DeviceIO" />
+          <NavigationProperty Name="EndPointIOs" Relationship="DynThingsModel.FK__EndPointI__IOTyp__440B1D61" FromRole="IOType" ToRole="EndPointIO" />
         </EntityType>
         <EntityType Name="LinkDevicesLocation">
           <Key>
@@ -702,8 +895,8 @@
           <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="LocationID" Type="Int64" />
           <Property Name="DeviceID" Type="Int64" />
-          <NavigationProperty Name="Device" Relationship="DynThingsModel.FK__LinkDevic__Devic__03F0984C" FromRole="LinkDevicesLocation" ToRole="Device" />
-          <NavigationProperty Name="Location" Relationship="DynThingsModel.FK__LinkDevic__Locat__02FC7413" FromRole="LinkDevicesLocation" ToRole="Location" />
+          <NavigationProperty Name="Device" Relationship="DynThingsModel.FK__LinkDevic__Devic__48CFD27E" FromRole="LinkDevicesLocation" ToRole="Device" />
+          <NavigationProperty Name="Location" Relationship="DynThingsModel.FK__LinkDevic__Locat__49C3F6B7" FromRole="LinkDevicesLocation" ToRole="Location" />
         </EntityType>
         <EntityType Name="LinkLocationsLocationView">
           <Key>
@@ -727,7 +920,7 @@
           <Property Name="isActive" Type="Boolean" Nullable="false" />
           <Property Name="Status" Type="Int64" Nullable="false" />
           <Property Name="IconID" Type="Int64" Nullable="false" />
-          <NavigationProperty Name="LinkDevicesLocations" Relationship="DynThingsModel.FK__LinkDevic__Locat__02FC7413" FromRole="Location" ToRole="LinkDevicesLocation" />
+          <NavigationProperty Name="LinkDevicesLocations" Relationship="DynThingsModel.FK__LinkDevic__Locat__49C3F6B7" FromRole="Location" ToRole="LinkDevicesLocation" />
           <NavigationProperty Name="LinkLocationsLocationViews" Relationship="DynThingsModel.FK__LinkLocat__Locat__35BCFE0A" FromRole="Location" ToRole="LinkLocationsLocationView" />
         </EntityType>
         <EntityType Name="LocationView">
@@ -761,6 +954,34 @@
           <Property Name="Message" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="IsError" Type="Boolean" />
         </EntityType>
+        <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+          <End Type="DynThingsModel.AspNetUser" Role="AspNetUser" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="DynThingsModel.AspNetUserClaim" Role="AspNetUserClaim" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserClaim">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+          <End Type="DynThingsModel.AspNetUser" Role="AspNetUser" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="DynThingsModel.AspNetUserLogin" Role="AspNetUserLogin" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserLogin">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK__EndPointT__IconI__3FD07829">
           <End Type="DynThingsModel.CssIcon" Role="CssIcon" Multiplicity="0..1" />
           <End Type="DynThingsModel.EndPointType" Role="EndPointType" Multiplicity="*" />
@@ -797,7 +1018,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__DeviceIOs__IOTyp__3C69FB99">
+        <Association Name="FK__DeviceIOs__IOTyp__403A8C7D">
           <End Type="DynThingsModel.IOType" Role="IOType" Multiplicity="0..1" />
           <End Type="DynThingsModel.DeviceIO" Role="DeviceIO" Multiplicity="*" />
           <ReferentialConstraint>
@@ -833,7 +1054,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__LinkDevic__Devic__03F0984C">
+        <Association Name="FK__LinkDevic__Devic__48CFD27E">
           <End Type="DynThingsModel.Device" Role="Device" Multiplicity="0..1" />
           <End Type="DynThingsModel.LinkDevicesLocation" Role="LinkDevicesLocation" Multiplicity="*" />
           <ReferentialConstraint>
@@ -845,7 +1066,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__EndPointC__EndPo__5CD6CB2B">
+        <Association Name="FK__EndPointC__EndPo__4222D4EF">
           <End Type="DynThingsModel.Endpoint" Role="Endpoint" Multiplicity="0..1" />
           <End Type="DynThingsModel.EndPointCommand" Role="EndPointCommand" Multiplicity="*" />
           <ReferentialConstraint>
@@ -869,7 +1090,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__EndPointI__IOTyp__3F466844">
+        <Association Name="FK__EndPointI__IOTyp__440B1D61">
           <End Type="DynThingsModel.IOType" Role="IOType" Multiplicity="1" />
           <End Type="DynThingsModel.EndPointIO" Role="EndPointIO" Multiplicity="*" />
           <ReferentialConstraint>
@@ -893,7 +1114,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__EndPointT__TypeC__4316F928">
+        <Association Name="FK__EndPointT__TypeC__47DBAE45">
           <End Type="DynThingsModel.EndPointTypeCategory" Role="EndPointTypeCategory" Multiplicity="0..1" />
           <End Type="DynThingsModel.EndPointType" Role="EndPointType" Multiplicity="*" />
           <ReferentialConstraint>
@@ -905,7 +1126,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__LinkDevic__Locat__02FC7413">
+        <Association Name="FK__LinkDevic__Locat__49C3F6B7">
           <End Type="DynThingsModel.Location" Role="Location" Multiplicity="0..1" />
           <End Type="DynThingsModel.LinkDevicesLocation" Role="LinkDevicesLocation" Multiplicity="*" />
           <ReferentialConstraint>
@@ -953,12 +1174,61 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="AspNetUserRoles">
+          <End Type="DynThingsModel.AspNetRole" Role="AspNetRole" Multiplicity="*" />
+          <End Type="DynThingsModel.AspNetUser" Role="AspNetUser" Multiplicity="*" />
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="DynThingsModelStoreContainer" CdmEntityContainer="DynThingsEntities">
+          <EntitySetMapping Name="AspNetRoles">
+            <EntityTypeMapping TypeName="DynThingsModel.AspNetRole">
+              <MappingFragment StoreEntitySet="AspNetRoles">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetUserClaims">
+            <EntityTypeMapping TypeName="DynThingsModel.AspNetUserClaim">
+              <MappingFragment StoreEntitySet="AspNetUserClaims">
+                <ScalarProperty Name="ClaimValue" ColumnName="ClaimValue" />
+                <ScalarProperty Name="ClaimType" ColumnName="ClaimType" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetUserLogins">
+            <EntityTypeMapping TypeName="DynThingsModel.AspNetUserLogin">
+              <MappingFragment StoreEntitySet="AspNetUserLogins">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="ProviderKey" ColumnName="ProviderKey" />
+                <ScalarProperty Name="LoginProvider" ColumnName="LoginProvider" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetUsers">
+            <EntityTypeMapping TypeName="DynThingsModel.AspNetUser">
+              <MappingFragment StoreEntitySet="AspNetUsers">
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="AccessFailedCount" ColumnName="AccessFailedCount" />
+                <ScalarProperty Name="LockoutEnabled" ColumnName="LockoutEnabled" />
+                <ScalarProperty Name="LockoutEndDateUtc" ColumnName="LockoutEndDateUtc" />
+                <ScalarProperty Name="TwoFactorEnabled" ColumnName="TwoFactorEnabled" />
+                <ScalarProperty Name="PhoneNumberConfirmed" ColumnName="PhoneNumberConfirmed" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="SecurityStamp" ColumnName="SecurityStamp" />
+                <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
+                <ScalarProperty Name="EmailConfirmed" ColumnName="EmailConfirmed" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="CssIcons">
             <EntityTypeMapping TypeName="DynThingsModel.CssIcon">
               <MappingFragment StoreEntitySet="CssIcons">
@@ -1157,6 +1427,14 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <AssociationSetMapping Name="AspNetUserRoles" TypeName="DynThingsModel.AspNetUserRoles" StoreEntitySet="AspNetUserRoles">
+            <EndProperty Name="AspNetUser">
+              <ScalarProperty Name="Id" ColumnName="UserId" />
+            </EndProperty>
+            <EndProperty Name="AspNetRole">
+              <ScalarProperty Name="Id" ColumnName="RoleId" />
+            </EndProperty>
+          </AssociationSetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

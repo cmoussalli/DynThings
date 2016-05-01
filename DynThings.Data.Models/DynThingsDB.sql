@@ -1,4 +1,4 @@
---DB Version 0.103
+--DB Version 0.104
 USE [master]
 GO
 /****** Object:  Database [DynThings]    Script Date: 2/8/2016 12:47:48 PM ******/
@@ -8,11 +8,10 @@ CREATE DATABASE [DynThings]
 
 
 
-
- 
 USE [DynThings]
+
 GO
-/****** Object:  Table [dbo].[AspNetRoles]    Script Date: 4/13/2016 10:13:29 PM ******/
+/****** Object:  Table [dbo].[AspNetRoles]    Script Date: 5/1/2016 10:39:06 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -27,7 +26,7 @@ CREATE TABLE [dbo].[AspNetRoles](
 ) ON [PRIMARY]
 
 GO
-/****** Object:  Table [dbo].[AspNetUserClaims]    Script Date: 4/13/2016 10:13:29 PM ******/
+/****** Object:  Table [dbo].[AspNetUserClaims]    Script Date: 5/1/2016 10:39:06 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -44,7 +43,7 @@ CREATE TABLE [dbo].[AspNetUserClaims](
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 
 GO
-/****** Object:  Table [dbo].[AspNetUserLogins]    Script Date: 4/13/2016 10:13:29 PM ******/
+/****** Object:  Table [dbo].[AspNetUserLogins]    Script Date: 5/1/2016 10:39:06 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -62,7 +61,7 @@ CREATE TABLE [dbo].[AspNetUserLogins](
 ) ON [PRIMARY]
 
 GO
-/****** Object:  Table [dbo].[AspNetUserRoles]    Script Date: 4/13/2016 10:13:29 PM ******/
+/****** Object:  Table [dbo].[AspNetUserRoles]    Script Date: 5/1/2016 10:39:06 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -78,7 +77,7 @@ CREATE TABLE [dbo].[AspNetUserRoles](
 ) ON [PRIMARY]
 
 GO
-/****** Object:  Table [dbo].[AspNetUsers]    Script Date: 4/13/2016 10:13:29 PM ******/
+/****** Object:  Table [dbo].[AspNetUsers]    Script Date: 5/1/2016 10:39:06 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -103,7 +102,7 @@ CREATE TABLE [dbo].[AspNetUsers](
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 
 GO
-/****** Object:  Table [dbo].[CssIcons]    Script Date: 4/13/2016 10:13:29 PM ******/
+/****** Object:  Table [dbo].[CssIcons]    Script Date: 5/1/2016 10:39:06 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -119,7 +118,7 @@ CREATE TABLE [dbo].[CssIcons](
 ) ON [PRIMARY]
 
 GO
-/****** Object:  Table [dbo].[DeviceCommands]    Script Date: 4/13/2016 10:13:29 PM ******/
+/****** Object:  Table [dbo].[DeviceCommands]    Script Date: 5/1/2016 10:39:06 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -138,7 +137,7 @@ CREATE TABLE [dbo].[DeviceCommands](
 ) ON [PRIMARY]
 
 GO
-/****** Object:  Table [dbo].[DeviceIOs]    Script Date: 4/13/2016 10:13:29 PM ******/
+/****** Object:  Table [dbo].[DeviceIOs]    Script Date: 5/1/2016 10:39:06 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -158,7 +157,7 @@ CREATE TABLE [dbo].[DeviceIOs](
 ) ON [PRIMARY]
 
 GO
-/****** Object:  Table [dbo].[Devices]    Script Date: 4/13/2016 10:13:29 PM ******/
+/****** Object:  Table [dbo].[Devices]    Script Date: 5/1/2016 10:39:06 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -177,7 +176,7 @@ CREATE TABLE [dbo].[Devices](
 ) ON [PRIMARY]
 
 GO
-/****** Object:  Table [dbo].[DeviceStatus]    Script Date: 4/13/2016 10:13:29 PM ******/
+/****** Object:  Table [dbo].[DeviceStatus]    Script Date: 5/1/2016 10:39:06 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -192,7 +191,7 @@ CREATE TABLE [dbo].[DeviceStatus](
 ) ON [PRIMARY]
 
 GO
-/****** Object:  Table [dbo].[DynSettings]    Script Date: 4/13/2016 10:13:29 PM ******/
+/****** Object:  Table [dbo].[DynSettings]    Script Date: 5/1/2016 10:39:06 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -214,7 +213,7 @@ CREATE TABLE [dbo].[DynSettings](
 ) ON [PRIMARY]
 
 GO
-/****** Object:  Table [dbo].[EndPointCommands]    Script Date: 4/13/2016 10:13:29 PM ******/
+/****** Object:  Table [dbo].[EndPointCommands]    Script Date: 5/1/2016 10:39:06 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -233,7 +232,7 @@ CREATE TABLE [dbo].[EndPointCommands](
 ) ON [PRIMARY]
 
 GO
-/****** Object:  Table [dbo].[EndPointIOs]    Script Date: 4/13/2016 10:13:29 PM ******/
+/****** Object:  Table [dbo].[EndPointIOs]    Script Date: 5/1/2016 10:39:06 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -253,7 +252,7 @@ CREATE TABLE [dbo].[EndPointIOs](
 ) ON [PRIMARY]
 
 GO
-/****** Object:  Table [dbo].[Endpoints]    Script Date: 4/13/2016 10:13:29 PM ******/
+/****** Object:  Table [dbo].[Endpoints]    Script Date: 5/1/2016 10:39:06 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -273,7 +272,7 @@ CREATE TABLE [dbo].[Endpoints](
 ) ON [PRIMARY]
 
 GO
-/****** Object:  Table [dbo].[EndPointTypeCategorys]    Script Date: 4/13/2016 10:13:29 PM ******/
+/****** Object:  Table [dbo].[EndPointTypeCategorys]    Script Date: 5/1/2016 10:39:06 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -288,7 +287,7 @@ CREATE TABLE [dbo].[EndPointTypeCategorys](
 ) ON [PRIMARY]
 
 GO
-/****** Object:  Table [dbo].[EndPointTypes]    Script Date: 4/13/2016 10:13:29 PM ******/
+/****** Object:  Table [dbo].[EndPointTypes]    Script Date: 5/1/2016 10:39:06 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -306,7 +305,7 @@ CREATE TABLE [dbo].[EndPointTypes](
 ) ON [PRIMARY]
 
 GO
-/****** Object:  Table [dbo].[IOTypes]    Script Date: 4/13/2016 10:13:29 PM ******/
+/****** Object:  Table [dbo].[IOTypes]    Script Date: 5/1/2016 10:39:06 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -322,23 +321,23 @@ CREATE TABLE [dbo].[IOTypes](
 ) ON [PRIMARY]
 
 GO
-/****** Object:  Table [dbo].[LinkEndpointsLocations]    Script Date: 4/13/2016 10:13:29 PM ******/
+/****** Object:  Table [dbo].[LinkDevicesLocations]    Script Date: 5/1/2016 10:39:06 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE TABLE [dbo].[LinkEndpointsLocations](
+CREATE TABLE [dbo].[LinkDevicesLocations](
 	[ID] [bigint] IDENTITY(1,1) NOT NULL,
 	[LocationID] [bigint] NULL,
-	[EndpointID] [bigint] NULL,
- CONSTRAINT [PK_LinkEndpointsLocations] PRIMARY KEY CLUSTERED 
+	[DeviceID] [bigint] NULL,
+ CONSTRAINT [PK_LinkDevicesLocations] PRIMARY KEY CLUSTERED 
 (
 	[ID] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 
 GO
-/****** Object:  Table [dbo].[LinkLocationsLocationViews]    Script Date: 4/13/2016 10:13:29 PM ******/
+/****** Object:  Table [dbo].[LinkLocationsLocationViews]    Script Date: 5/1/2016 10:39:06 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -354,7 +353,7 @@ CREATE TABLE [dbo].[LinkLocationsLocationViews](
 ) ON [PRIMARY]
 
 GO
-/****** Object:  Table [dbo].[Locations]    Script Date: 4/13/2016 10:13:29 PM ******/
+/****** Object:  Table [dbo].[Locations]    Script Date: 5/1/2016 10:39:06 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -375,7 +374,7 @@ CREATE TABLE [dbo].[Locations](
 ) ON [PRIMARY]
 
 GO
-/****** Object:  Table [dbo].[LocationViews]    Script Date: 4/13/2016 10:13:29 PM ******/
+/****** Object:  Table [dbo].[LocationViews]    Script Date: 5/1/2016 10:39:06 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -396,7 +395,7 @@ CREATE TABLE [dbo].[LocationViews](
 ) ON [PRIMARY]
 
 GO
-/****** Object:  Table [dbo].[LocationViewTypes]    Script Date: 4/13/2016 10:13:29 PM ******/
+/****** Object:  Table [dbo].[LocationViewTypes]    Script Date: 5/1/2016 10:39:06 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -411,7 +410,7 @@ CREATE TABLE [dbo].[LocationViewTypes](
 ) ON [PRIMARY]
 
 GO
-/****** Object:  Table [dbo].[ResultMessages]    Script Date: 4/13/2016 10:13:29 PM ******/
+/****** Object:  Table [dbo].[ResultMessages]    Script Date: 5/1/2016 10:39:06 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -453,16 +452,33 @@ INSERT [dbo].[DeviceCommands] ([ID], [Title], [Description], [DeviceID], [Comman
 GO
 SET IDENTITY_INSERT [dbo].[DeviceCommands] OFF
 GO
+SET IDENTITY_INSERT [dbo].[DeviceIOs] ON 
+
+GO
+INSERT [dbo].[DeviceIOs] ([ID], [DeviceID], [IOTypeID], [Valu], [TimeStamp], [ExecTimeStamp], [ScheduleTimeStamp]) VALUES (1, 1, 1, N'35', CAST(N'2016-04-14 12:58:23.267' AS DateTime), CAST(N'2016-01-01 00:00:00.000' AS DateTime), NULL)
+GO
+INSERT [dbo].[DeviceIOs] ([ID], [DeviceID], [IOTypeID], [Valu], [TimeStamp], [ExecTimeStamp], [ScheduleTimeStamp]) VALUES (2, 1, 1, N'35', CAST(N'2016-04-14 12:58:51.790' AS DateTime), CAST(N'2016-01-01 00:00:00.000' AS DateTime), NULL)
+GO
+INSERT [dbo].[DeviceIOs] ([ID], [DeviceID], [IOTypeID], [Valu], [TimeStamp], [ExecTimeStamp], [ScheduleTimeStamp]) VALUES (3, 1, 1, N'35', CAST(N'2016-04-14 12:59:10.257' AS DateTime), CAST(N'2016-01-01 00:00:00.000' AS DateTime), NULL)
+GO
+INSERT [dbo].[DeviceIOs] ([ID], [DeviceID], [IOTypeID], [Valu], [TimeStamp], [ExecTimeStamp], [ScheduleTimeStamp]) VALUES (4, 1, 1, N'1', CAST(N'2016-04-14 15:00:23.267' AS DateTime), CAST(N'2016-04-14 00:00:00.000' AS DateTime), NULL)
+GO
+INSERT [dbo].[DeviceIOs] ([ID], [DeviceID], [IOTypeID], [Valu], [TimeStamp], [ExecTimeStamp], [ScheduleTimeStamp]) VALUES (5, 1, 3, N'Reset', CAST(N'2016-01-01 00:00:00.000' AS DateTime), NULL, NULL)
+GO
+INSERT [dbo].[DeviceIOs] ([ID], [DeviceID], [IOTypeID], [Valu], [TimeStamp], [ExecTimeStamp], [ScheduleTimeStamp]) VALUES (6, 1, 3, N'Reset', CAST(N'2016-01-01 00:00:00.000' AS DateTime), NULL, NULL)
+GO
+SET IDENTITY_INSERT [dbo].[DeviceIOs] OFF
+GO
 SET IDENTITY_INSERT [dbo].[Devices] ON 
 
 GO
-INSERT [dbo].[Devices] ([ID], [GUID], [KeyPass], [PinCode], [Title], [StatusID]) VALUES (1, N'83683a8a-b0e5-4120-86f7-8e8d3e06a78b', N'b7a8b819-def8-4111-9263-699feb5e8198', N'111', N'Raspberry 1', 1)
+INSERT [dbo].[Devices] ([ID], [GUID], [KeyPass], [PinCode], [Title], [StatusID]) VALUES (1, N'83683a8a-b0e5-4120-86f7-8e8d3e06a78b', N'b7a8b819-def8-4111-9263-699feb5e8198', N'111', N'Dev-Building 253', 1)
 GO
-INSERT [dbo].[Devices] ([ID], [GUID], [KeyPass], [PinCode], [Title], [StatusID]) VALUES (2, N'5ff35d59-f074-4de9-8ab4-c5035ebf0b9b', N'84cf15ef-2a9a-4fe8-b951-cb63b5dbf84a', N'222', N'Arduino 1', 1)
+INSERT [dbo].[Devices] ([ID], [GUID], [KeyPass], [PinCode], [Title], [StatusID]) VALUES (2, N'5ff35d59-f074-4de9-8ab4-c5035ebf0b9b', N'84cf15ef-2a9a-4fe8-b951-cb63b5dbf84a', N'222', N'Dev-Building 259', 1)
 GO
-INSERT [dbo].[Devices] ([ID], [GUID], [KeyPass], [PinCode], [Title], [StatusID]) VALUES (3, N'b640980f-2155-4ada-92c7-df9f0cd91081', N'55a7c513-ad7f-4ec5-953b-e813779a2dd5', N'333', N'Raspberry 2', 1)
+INSERT [dbo].[Devices] ([ID], [GUID], [KeyPass], [PinCode], [Title], [StatusID]) VALUES (3, N'b640980f-2155-4ada-92c7-df9f0cd91081', N'55a7c513-ad7f-4ec5-953b-e813779a2dd5', N'333', N'Test3', 1)
 GO
-INSERT [dbo].[Devices] ([ID], [GUID], [KeyPass], [PinCode], [Title], [StatusID]) VALUES (4, N'a7468b52-495e-43ce-92f3-b3904223ebd5', N'6487a005-3a1f-4bbb-9838-14f590529c30', N'0000', N'Arduino 2', 1)
+INSERT [dbo].[Devices] ([ID], [GUID], [KeyPass], [PinCode], [Title], [StatusID]) VALUES (4, N'a7468b52-495e-43ce-92f3-b3904223ebd5', N'6487a005-3a1f-4bbb-9838-14f590529c30', N'0000', N'Test4', 1)
 GO
 SET IDENTITY_INSERT [dbo].[Devices] OFF
 GO
@@ -482,35 +498,9 @@ GO
 SET IDENTITY_INSERT [dbo].[DynSettings] ON 
 
 GO
-INSERT [dbo].[DynSettings] ([ID], [DBVersion], [DevelopmentMode], [DefaultRecordsPerMaster], [DefaultRecordsPerChild], [PlatformKey], [PublicAccess], [PublicSignUP], [EnableSystemLogger]) VALUES (1, 0.103, 1, 4, 2, N'a86bb826-988d-4f9a-9f43-169045506194', 1, 1, 1)
+INSERT [dbo].[DynSettings] ([ID], [DBVersion], [DevelopmentMode], [DefaultRecordsPerMaster], [DefaultRecordsPerChild], [PlatformKey], [PublicAccess], [PublicSignUP], [EnableSystemLogger]) VALUES (1, 0.104, 1, 5, 10, N'a86bb826-988d-4f9a-9f43-169045506194', 1, 1, 1)
 GO
 SET IDENTITY_INSERT [dbo].[DynSettings] OFF
-GO
-SET IDENTITY_INSERT [dbo].[EndPointCommands] ON 
-
-GO
-INSERT [dbo].[EndPointCommands] ([ID], [Title], [Description], [EndPointID], [CommandCode], [OwnerID]) VALUES (1, N'END Command 11', N'EndPoint 1 Command1', 1, N'Turn ON', N'1')
-GO
-INSERT [dbo].[EndPointCommands] ([ID], [Title], [Description], [EndPointID], [CommandCode], [OwnerID]) VALUES (2, N'END Command 2', N'EndPoint 1 Command 2', 1, N'Turn Off', N'1')
-GO
-INSERT [dbo].[EndPointCommands] ([ID], [Title], [Description], [EndPointID], [CommandCode], [OwnerID]) VALUES (3, N'End Command 3', N'EndPoint 2  Coomand 1', 2, N'Turn ON', N'1')
-GO
-SET IDENTITY_INSERT [dbo].[EndPointCommands] OFF
-GO
-SET IDENTITY_INSERT [dbo].[Endpoints] ON 
-
-GO
-INSERT [dbo].[Endpoints] ([ID], [GUID], [KeyPass], [PinCode], [Title], [DeviceID], [TypeID]) VALUES (1, N'76304ad7-a8a4-466c-9383-41adb276be4e', N'f8528184-5f09-4aa5-8d70-2e1fbd0e9968', N'1234', N'Ozaiba Temprature', 2, 1)
-GO
-INSERT [dbo].[Endpoints] ([ID], [GUID], [KeyPass], [PinCode], [Title], [DeviceID], [TypeID]) VALUES (2, N'76631207-2d3e-495d-a2a7-81930c9663be', N'5a85419e-3b31-4767-a043-c558cabd3506', N'1234', N'Sensor 2', 2, 2)
-GO
-INSERT [dbo].[Endpoints] ([ID], [GUID], [KeyPass], [PinCode], [Title], [DeviceID], [TypeID]) VALUES (3, N'ec5ad01c-1662-4e6a-bd35-87fb765318c5', N'7c758c94-3f2b-4bed-8a8d-38325699b5b8', N'1232', N'Sensor 3', 2, 1)
-GO
-INSERT [dbo].[Endpoints] ([ID], [GUID], [KeyPass], [PinCode], [Title], [DeviceID], [TypeID]) VALUES (4, N'f5be9aa5-024d-4256-bc23-3641f36fc89a', N'1900f853-3a39-42c0-b217-78fcf4342dfe', N'1234', N'Sensor 42', 1, 1)
-GO
-INSERT [dbo].[Endpoints] ([ID], [GUID], [KeyPass], [PinCode], [Title], [DeviceID], [TypeID]) VALUES (5, N'882ca47e-1827-4fc4-a817-0d8a4550e149', N'7475e7bf-d258-4db3-8a10-1ba0380b6dde', N'0000', N'1112', 1, 1)
-GO
-SET IDENTITY_INSERT [dbo].[Endpoints] OFF
 GO
 SET IDENTITY_INSERT [dbo].[EndPointTypeCategorys] ON 
 
@@ -572,50 +562,32 @@ INSERT [dbo].[IOTypes] ([ID], [IO], [Title]) VALUES (2, N'C', N'Command')
 GO
 INSERT [dbo].[IOTypes] ([ID], [IO], [Title]) VALUES (3, N'L', N'Log')
 GO
-SET IDENTITY_INSERT [dbo].[LinkEndpointsLocations] ON 
+SET IDENTITY_INSERT [dbo].[LinkDevicesLocations] ON 
 
 GO
-INSERT [dbo].[LinkEndpointsLocations] ([ID], [LocationID], [EndpointID]) VALUES (1, 1, 1)
+INSERT [dbo].[LinkDevicesLocations] ([ID], [LocationID], [DeviceID]) VALUES (15, 1, 1)
 GO
-INSERT [dbo].[LinkEndpointsLocations] ([ID], [LocationID], [EndpointID]) VALUES (2, 1, 2)
+INSERT [dbo].[LinkDevicesLocations] ([ID], [LocationID], [DeviceID]) VALUES (16, 2, 2)
 GO
-INSERT [dbo].[LinkEndpointsLocations] ([ID], [LocationID], [EndpointID]) VALUES (3, 1, 3)
-GO
-INSERT [dbo].[LinkEndpointsLocations] ([ID], [LocationID], [EndpointID]) VALUES (4, 2, 4)
-GO
-SET IDENTITY_INSERT [dbo].[LinkEndpointsLocations] OFF
+SET IDENTITY_INSERT [dbo].[LinkDevicesLocations] OFF
 GO
 SET IDENTITY_INSERT [dbo].[LinkLocationsLocationViews] ON 
 
 GO
-INSERT [dbo].[LinkLocationsLocationViews] ([ID], [LocationID], [LocationViewID]) VALUES (3, 3, 2)
+INSERT [dbo].[LinkLocationsLocationViews] ([ID], [LocationID], [LocationViewID]) VALUES (59, 1, 1)
 GO
-INSERT [dbo].[LinkLocationsLocationViews] ([ID], [LocationID], [LocationViewID]) VALUES (16, 1, 2)
-GO
-INSERT [dbo].[LinkLocationsLocationViews] ([ID], [LocationID], [LocationViewID]) VALUES (17, 2, 2)
-GO
-INSERT [dbo].[LinkLocationsLocationViews] ([ID], [LocationID], [LocationViewID]) VALUES (51, 1, 1)
-GO
-INSERT [dbo].[LinkLocationsLocationViews] ([ID], [LocationID], [LocationViewID]) VALUES (52, 2, 1)
-GO
-INSERT [dbo].[LinkLocationsLocationViews] ([ID], [LocationID], [LocationViewID]) VALUES (53, 3, 1)
+INSERT [dbo].[LinkLocationsLocationViews] ([ID], [LocationID], [LocationViewID]) VALUES (60, 2, 1)
 GO
 SET IDENTITY_INSERT [dbo].[LinkLocationsLocationViews] OFF
 GO
 SET IDENTITY_INSERT [dbo].[Locations] ON 
 
 GO
-INSERT [dbo].[Locations] ([ID], [GUID], [Title], [LongitudeY], [LatitudeX], [isActive], [Status], [IconID]) VALUES (1, N'f3067e63-eb6b-45dc-9d63-0feb0daa61b3', N'Location 1', N'58.3591538389074', N'23.596558259530582', 1, 1, 1)
+INSERT [dbo].[Locations] ([ID], [GUID], [Title], [LongitudeY], [LatitudeX], [isActive], [Status], [IconID]) VALUES (1, N'f3067e63-eb6b-45dc-9d63-0feb0daa61b3', N'Building 253', N'58.3591538389074', N'23.596558259530582', 1, 1, 1)
 GO
-INSERT [dbo].[Locations] ([ID], [GUID], [Title], [LongitudeY], [LatitudeX], [isActive], [Status], [IconID]) VALUES (2, N'aab8efe9-43b7-41f2-a15b-757ae24211b5', N'Location 2', N'58.380393', N'23.593109', 1, 1, 1)
+INSERT [dbo].[Locations] ([ID], [GUID], [Title], [LongitudeY], [LatitudeX], [isActive], [Status], [IconID]) VALUES (2, N'aab8efe9-43b7-41f2-a15b-757ae24211b5', N'Building 259', N'58.380393', N'23.593109', 1, 1, 1)
 GO
-INSERT [dbo].[Locations] ([ID], [GUID], [Title], [LongitudeY], [LatitudeX], [isActive], [Status], [IconID]) VALUES (3, N'49790eb8-8409-4562-a5e1-3fb53a8e9e0f', N'Location 3', N'58.360393', N'23.595109', 1, 1, 1)
-GO
-INSERT [dbo].[Locations] ([ID], [GUID], [Title], [LongitudeY], [LatitudeX], [isActive], [Status], [IconID]) VALUES (4, N'c69e685c-6e45-4421-8d91-b8759a987688', N'Location 4', N'58.364609', N'23.595255', 0, 1, 1)
-GO
-INSERT [dbo].[Locations] ([ID], [GUID], [Title], [LongitudeY], [LatitudeX], [isActive], [Status], [IconID]) VALUES (5, N'e8c53fe9-6d8e-4b64-aa12-db3cbb476276', N'Location 5', N'58.364074', N'23.589220', 0, 1, 1)
-GO
-INSERT [dbo].[Locations] ([ID], [GUID], [Title], [LongitudeY], [LatitudeX], [isActive], [Status], [IconID]) VALUES (6, N'ee12a2da-1a2e-490f-8a33-4d3fb256c219', N'1', N'', N'', 0, 1, 1)
+INSERT [dbo].[Locations] ([ID], [GUID], [Title], [LongitudeY], [LatitudeX], [isActive], [Status], [IconID]) VALUES (3, N'49790eb8-8409-4562-a5e1-3fb53a8e9e0f', N'Building 262', N'58.360393', N'23.595109', 1, 1, 1)
 GO
 SET IDENTITY_INSERT [dbo].[Locations] OFF
 GO
@@ -656,7 +628,7 @@ GO
 SET ANSI_PADDING ON
 
 GO
-/****** Object:  Index [RoleNameIndex]    Script Date: 4/13/2016 10:13:30 PM ******/
+/****** Object:  Index [RoleNameIndex]    Script Date: 5/1/2016 10:39:06 AM ******/
 CREATE UNIQUE NONCLUSTERED INDEX [RoleNameIndex] ON [dbo].[AspNetRoles]
 (
 	[Name] ASC
@@ -665,7 +637,7 @@ GO
 SET ANSI_PADDING ON
 
 GO
-/****** Object:  Index [IX_UserId]    Script Date: 4/13/2016 10:13:30 PM ******/
+/****** Object:  Index [IX_UserId]    Script Date: 5/1/2016 10:39:06 AM ******/
 CREATE NONCLUSTERED INDEX [IX_UserId] ON [dbo].[AspNetUserClaims]
 (
 	[UserId] ASC
@@ -674,7 +646,7 @@ GO
 SET ANSI_PADDING ON
 
 GO
-/****** Object:  Index [IX_UserId]    Script Date: 4/13/2016 10:13:30 PM ******/
+/****** Object:  Index [IX_UserId]    Script Date: 5/1/2016 10:39:06 AM ******/
 CREATE NONCLUSTERED INDEX [IX_UserId] ON [dbo].[AspNetUserLogins]
 (
 	[UserId] ASC
@@ -683,7 +655,7 @@ GO
 SET ANSI_PADDING ON
 
 GO
-/****** Object:  Index [IX_RoleId]    Script Date: 4/13/2016 10:13:30 PM ******/
+/****** Object:  Index [IX_RoleId]    Script Date: 5/1/2016 10:39:06 AM ******/
 CREATE NONCLUSTERED INDEX [IX_RoleId] ON [dbo].[AspNetUserRoles]
 (
 	[RoleId] ASC
@@ -692,7 +664,7 @@ GO
 SET ANSI_PADDING ON
 
 GO
-/****** Object:  Index [IX_UserId]    Script Date: 4/13/2016 10:13:30 PM ******/
+/****** Object:  Index [IX_UserId]    Script Date: 5/1/2016 10:39:06 AM ******/
 CREATE NONCLUSTERED INDEX [IX_UserId] ON [dbo].[AspNetUserRoles]
 (
 	[UserId] ASC
@@ -701,7 +673,7 @@ GO
 SET ANSI_PADDING ON
 
 GO
-/****** Object:  Index [UserNameIndex]    Script Date: 4/13/2016 10:13:30 PM ******/
+/****** Object:  Index [UserNameIndex]    Script Date: 5/1/2016 10:39:06 AM ******/
 CREATE UNIQUE NONCLUSTERED INDEX [UserNameIndex] ON [dbo].[AspNetUsers]
 (
 	[UserName] ASC
@@ -778,12 +750,10 @@ GO
 ALTER TABLE [dbo].[EndPointTypes]  WITH CHECK ADD FOREIGN KEY([TypeCategoryID])
 REFERENCES [dbo].[EndPointTypeCategorys] ([ID])
 GO
-ALTER TABLE [dbo].[LinkEndpointsLocations]  WITH CHECK ADD  CONSTRAINT [FK__LinkEndpo__Endpo__32E0915F] FOREIGN KEY([EndpointID])
-REFERENCES [dbo].[Endpoints] ([ID])
+ALTER TABLE [dbo].[LinkDevicesLocations]  WITH CHECK ADD FOREIGN KEY([DeviceID])
+REFERENCES [dbo].[Devices] ([ID])
 GO
-ALTER TABLE [dbo].[LinkEndpointsLocations] CHECK CONSTRAINT [FK__LinkEndpo__Endpo__32E0915F]
-GO
-ALTER TABLE [dbo].[LinkEndpointsLocations]  WITH CHECK ADD FOREIGN KEY([LocationID])
+ALTER TABLE [dbo].[LinkDevicesLocations]  WITH CHECK ADD FOREIGN KEY([LocationID])
 REFERENCES [dbo].[Locations] ([ID])
 GO
 ALTER TABLE [dbo].[LinkLocationsLocationViews]  WITH CHECK ADD  CONSTRAINT [FK__LinkLocat__Locat__35BCFE0A] FOREIGN KEY([LocationID])
