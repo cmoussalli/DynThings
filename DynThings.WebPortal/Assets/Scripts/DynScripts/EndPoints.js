@@ -1,6 +1,21 @@
 ﻿//Vars
 var selectedEndPointID = 0;
 var selectedEndPointTitle = 0;
+//Server Response
+function ServerResponse(response) {
+    var Ntyp = '';
+    var Ntitle = ''
+    if (response.ResultType == '0') {
+        Ntyp = 's';
+        Ntitle = 'Success';
+    }
+    else {
+        Ntyp = 'd';
+        Ntitle = 'Error';
+    }
+    NotifyWithTitle(Ntyp, Ntitle, response.Message);
+};
+
 
 //Attach : Pager
 function AttachEventEndPointsListPager() {
@@ -21,7 +36,7 @@ function AttachEventEndPointsListPager() {
 }
 
 //Attach : Add Form Submit
-function AttachEventEndPointAddForm(){
+function AttachEventEndPointAddForm() {
     $("#EndPointAddForm").on("submit", function (event) {
         event.preventDefault();
         var url = $(this).attr("action");
@@ -32,7 +47,12 @@ function AttachEventEndPointAddForm(){
             data: formData,
             dataType: "json",
             success: function (resp) {
+                ServerResponse(resp);
+            },
+            error: function () {
+                ServerResponse(resp);
             }
+
         })
 
         LoadPart_EndPointListDiv();
@@ -40,8 +60,10 @@ function AttachEventEndPointAddForm(){
     });
 };
 
+
+
 //Attach : Edit Form Submit
-function AttachEventEndPointEditForm(endPointID){
+function AttachEventEndPointEditForm(endPointID) {
     $("#EndPointEditForm").on("submit", function (event) {
         event.preventDefault();
         var url = $(this).attr("action");
@@ -52,6 +74,10 @@ function AttachEventEndPointEditForm(endPointID){
             data: formData,
             dataType: "json",
             success: function (resp) {
+                ServerResponse(resp);
+            },
+            error: function () {
+                ServerResponse(resp);
             }
         })
         $('#mdl').modal('hide');
@@ -193,7 +219,7 @@ function AttachEventEndPointsLookupListPager() {
     });
 }
 //Select from Lookup
-function SelectEndPointFromLookUp(id,title) {
+function SelectEndPointFromLookUp(id, title) {
     selectedEndPointID = id;
     selectedEndPointTitle = title;
     EventSelectEndPoint();

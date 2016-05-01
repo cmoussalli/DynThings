@@ -51,7 +51,7 @@ namespace DynThings.WebPortal.Controllers
         [HttpGet]
         public PartialViewResult ListPV(string searchfor = null, int page = 1, int recordsperpage = 0)
         {
-            PagedList.IPagedList ends = UnitOfWork.repoEndpoints.GetPagedList(searchfor, page, Helpers.Configs.validateRecordsPerMaster(recordsperpage) );
+            PagedList.IPagedList ends = UnitOfWork.repoEndpoints.GetPagedList(searchfor, page, Helpers.Configs.validateRecordsPerMaster(recordsperpage));
             return PartialView("_List", ends);
         }
         #endregion
@@ -70,8 +70,8 @@ namespace DynThings.WebPortal.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult AddPV([Bind(Include = "Title,TypeID,DeviceID")] Endpoint endpoint)
         {
-            UnitOfWork.repoEndpoints.Add(endpoint.Title, endpoint.TypeID, endpoint.DeviceID);
-            return Content("Ok");
+            ResultInfo.Result res = UnitOfWork.repoEndpoints.Add(endpoint.Title, endpoint.TypeID, endpoint.DeviceID);
+            return Json(res);
         }
         #endregion
 
@@ -89,14 +89,8 @@ namespace DynThings.WebPortal.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult EditPV([Bind(Include = "ID,Title,TypeID,DeviceID")] Endpoint endpoint)
         {
-            if (ModelState.IsValid)
-            {
-                UnitOfWork.repoEndpoints.Edit(endpoint.ID, endpoint.Title, endpoint.TypeID);
-                return RedirectToAction("Index");
-            }
-            ViewBag.TypeID = new SelectList(UnitOfWork.repoEndpointTypes.GetList(), "ID", "Title", endpoint.TypeID);
-            ViewBag.DeviceID = new SelectList(UnitOfWork.repoDevices.GetList(), "ID", "Title", endpoint.DeviceID);
-            return View(endpoint);
+            ResultInfo.Result res = UnitOfWork.repoEndpoints.Edit(endpoint.ID, endpoint.Title, endpoint.TypeID);
+            return Json(res);
         }
         #endregion
 

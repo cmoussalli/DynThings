@@ -42,6 +42,7 @@ namespace DynThings.Data.Repositories
         #region Get PagedList
         public IPagedList GetPagedList(string search, int pageNumber, int recordsPerPage)
         {
+            db = new DynThingsEntities();
             IPagedList ends = db.Endpoints
               .Where(e => search == null || e.Title.Contains(search))
               .OrderBy(e => e.Title).ToList()
@@ -105,16 +106,22 @@ namespace DynThings.Data.Repositories
         public ResultInfo.Result Add(string title, long typeID, long deviceID)
         {
             Endpoint end = new Endpoint();
-
-            end.GUID = Guid.NewGuid();
-            end.KeyPass = Guid.NewGuid();
-            end.PinCode = "0000";
-            end.Title = title;
-            end.DeviceID = deviceID;
-            end.TypeID = typeID;
-            db.Endpoints.Add(end);
-            db.SaveChanges();
-            return UnitOfWork.resultInfo.GenerateOKResult();
+            try
+            {
+                end.GUID = Guid.NewGuid();
+                end.KeyPass = Guid.NewGuid();
+                end.PinCode = "0000";
+                end.Title = title;
+                end.DeviceID = deviceID;
+                end.TypeID = typeID;
+                db.Endpoints.Add(end);
+                db.SaveChanges();
+                return UnitOfWork.resultInfo.GenerateOKResult("EndPoint has been added", end.ID);
+            }
+            catch
+            {
+                return UnitOfWork.resultInfo.GetResultByID(1);
+            }
         }
 
         #endregion
@@ -122,11 +129,19 @@ namespace DynThings.Data.Repositories
         #region Edit
         public ResultInfo.Result Edit(long id, string title, long typeID)
         {
-            Endpoint end = db.Endpoints.Find(id);
-            end.Title = title;
-            end.TypeID = typeID;
-            db.SaveChanges();
-            return UnitOfWork.resultInfo.GenerateOKResult();
+            try
+            {
+                Endpoint end = db.Endpoints.Find(id);
+                end.Title = title;
+                end.TypeID = typeID;
+                db.SaveChanges();
+                return UnitOfWork.resultInfo.GenerateOKResult();
+            }
+            catch
+            {
+                return UnitOfWork.resultInfo.GetResultByID(1);
+            }
+
         }
 
         #endregion

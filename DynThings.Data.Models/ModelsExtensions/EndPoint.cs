@@ -15,8 +15,6 @@ namespace DynThings.Data.Models
 {
     public partial class Endpoint
     {
-
-
         /// <summary>
         /// Get the Latest Input from EndPoint
         /// </summary>
