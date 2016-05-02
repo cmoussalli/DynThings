@@ -16,7 +16,12 @@ namespace DynThings.Data.Repositories
 {
     public class EndpointsRepository
     {
-        private DynThingsEntities db = new DynThingsEntities();
+        public DynThingsEntities db{ get; set; }
+        public EndpointsRepository(DynThingsEntities dynThingsEntities)
+        {
+            this.db = dynThingsEntities;
+        }
+
 
         #region GetList
         public List<Endpoint> GetList(bool EnableUnspecified)
@@ -34,7 +39,7 @@ namespace DynThings.Data.Repositories
         }
         public List<Endpoint> GetList()
         {
-            List<Endpoint> ends = db.Endpoints.ToList();
+            List<Endpoint> ends = db.Endpoints.Include("EndPointCommands").ToList();
             return ends;
         }
         #endregion
@@ -42,7 +47,6 @@ namespace DynThings.Data.Repositories
         #region Get PagedList
         public IPagedList GetPagedList(string search, int pageNumber, int recordsPerPage)
         {
-            db = new DynThingsEntities();
             IPagedList ends = db.Endpoints
               .Where(e => search == null || e.Title.Contains(search))
               .OrderBy(e => e.Title).ToList()

@@ -212,13 +212,11 @@ namespace DynThings.WebAPI.Controllers
                     return oApiResponse;
                 }
 
-                //Parse KeyPass
-                EndpointsRepository oEndpointsRepository = new EndpointsRepository();
                 Guid endPointKeyPass;
                 if (Guid.TryParse(oEndPointInput.KeyPass, out endPointKeyPass))
                 {
                     //endPoint keyPass Validation
-                    DynThings.Data.Models.Endpoint oEndpoint = oEndpointsRepository.FindByKeyPass(endPointKeyPass);
+                    DynThings.Data.Models.Endpoint oEndpoint = UnitOfWork.repoEndpoints.FindByKeyPass(endPointKeyPass);
                     if (oEndpoint != null)
                     {
                         //Try Parse ExecutionTimeStamp to DateTime
@@ -284,12 +282,11 @@ namespace DynThings.WebAPI.Controllers
                 }
 
                 //Parse KeyPass
-                EndpointsRepository oEndpointsRepository = new EndpointsRepository();
                 Guid endPointKeyPass;
                 if (Guid.TryParse(oEndPointLog.KeyPass, out endPointKeyPass))
                 {
                     //endPoint keyPass Validation
-                    DynThings.Data.Models.Endpoint oEndpoint = oEndpointsRepository.FindByKeyPass(endPointKeyPass);
+                    DynThings.Data.Models.Endpoint oEndpoint = UnitOfWork.repoEndpoints.FindByKeyPass(endPointKeyPass);
                     if (oEndpoint != null)
                     {
                         //Try Parse ExecutionTimeStamp to DateTime

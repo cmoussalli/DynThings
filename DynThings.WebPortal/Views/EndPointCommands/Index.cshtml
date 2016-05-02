@@ -14,7 +14,7 @@
             <div class="input-group">
                 <input type="search" id="txtEndPointCommandSearch" class="form-control" onkeydown="if (event.keyCode == 13) { LoadPart_EndPointCommandListDiv($(txtEndPointCommandSearch).val()); return false; }" />
                 <div class="input-group-btn">
-                    <button type="button" class="btn btn-primary" onclick="LoadPart_EndPointCommandListDiv()">Search</button>
+                    <button type="button" class="btn btn-primary" onclick="LoadPart_EndPointCommandListDiv($(txtEndPointCommandSearch).val())">Search</button>
                 </div>
             </div>
         </div>

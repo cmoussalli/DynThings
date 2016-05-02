@@ -16,6 +16,8 @@ namespace DynThings.Data.Repositories
 {
     public static class UnitOfWork
     {
+        private static DynThingsEntities dynDB = new DynThingsEntities();
+
         public static ResultInfo resultInfo = new ResultInfo();
 
         #region Repositories
@@ -23,12 +25,12 @@ namespace DynThings.Data.Repositories
         public static LocationViewsRepository repoLocationViews = new LocationViewsRepository();
         public static LocationViewTypesRepository repoLocationViewTypes = new LocationViewTypesRepository();
         public static LocationsRepository repoLocations = new LocationsRepository();
-        public static EndpointsRepository repoEndpoints = new EndpointsRepository();
+        public static EndpointsRepository repoEndpoints = new EndpointsRepository(dynDB);
         public static EndpointIOsRepository repoEndpointIOs = new EndpointIOsRepository();
         public static EndPointTypesRepository repoEndpointTypes = new EndPointTypesRepository();
         public static DevicesRepositories repoDevices = new DevicesRepositories();
         public static DeviceCommandsRepository repoDeviceCommands = new DeviceCommandsRepository();
-        public static EndPointCommandsRepository repoEndPointCommands = new EndPointCommandsRepository();
+        public static EndPointCommandsRepository repoEndPointCommands = new EndPointCommandsRepository(dynDB);
         public static DeviceIOsRepository repoDeviceIOs = new DeviceIOsRepository();
         public static IOTypesRepository repoIOTypes = new IOTypesRepository();
 
