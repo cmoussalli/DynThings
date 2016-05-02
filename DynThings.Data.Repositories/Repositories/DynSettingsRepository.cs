@@ -16,11 +16,13 @@ namespace DynThings.Data.Repositories
 {
     public class DynSettingsRepository
     {
+        #region Constructor
         public DynThingsEntities db { get; set; }
         public DynSettingsRepository(DynThingsEntities dynThingsEntities)
         {
             db = dynThingsEntities;
         }
+        #endregion
 
 
         #region Get Configs
@@ -44,7 +46,6 @@ namespace DynThings.Data.Repositories
         #region Update: Grids
         public ResultInfo.Result SetGridRowsCount(int masterGridRowsCount, int childGridRowsCount)
         {
-            
             List<DynSetting> cons = db.DynSettings.Where(l => l.ID == 1).ToList();
             if (cons.Count == 1)
             {
@@ -56,7 +57,7 @@ namespace DynThings.Data.Repositories
             {
               return  UnitOfWork.resultInfo.GetResultByID(1);
             }
-            return UnitOfWork.resultInfo.GenerateOKResult();
+            return UnitOfWork.resultInfo.GenerateOKResult("Saved");
         }
         #endregion
     }

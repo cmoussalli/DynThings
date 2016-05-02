@@ -16,11 +16,14 @@ namespace DynThings.Data.Repositories
 {
     public class LocationsRepository
     {
+        #region Constructor
         public DynThingsEntities db { get; set; }
         public LocationsRepository(DynThingsEntities dynThingsEntities)
         {
             db = dynThingsEntities;
         }
+        #endregion
+
 
         #region GetList
         /// <summary>
@@ -52,7 +55,7 @@ namespace DynThings.Data.Repositories
             return locs;
         }
 
-        public IPagedList GetPagedList(string search,long locationViewID, int pageNumber, int recordsPerPage)
+        public IPagedList GetPagedList(string search, long locationViewID, int pageNumber, int recordsPerPage)
         {
             IPagedList locs = db.Locations
               .Where(e => search == null || e.Title.Contains(search)
@@ -73,7 +76,7 @@ namespace DynThings.Data.Repositories
         public Location Find(int id)
         {
             Location loc = new Location();
-            List<Location> locs =  db.Locations.Where(l => l.ID == id).ToList();
+            List<Location> locs = db.Locations.Where(l => l.ID == id).ToList();
             if (locs.Count == 1)
             {
                 loc = locs[0];
@@ -89,51 +92,79 @@ namespace DynThings.Data.Repositories
         #region Add
         public ResultInfo.Result Add(string title)
         {
-            Location loc = new Location();
-            loc.GUID = Guid.NewGuid();
-            loc.Title = title;
-            loc.isActive = false;
-            loc.Status = 1;
-            loc.IconID = 1;
-            loc.LatitudeX = "";
-            loc.LongitudeY = "";
-            db.Locations.Add(loc);
-            db.SaveChanges();
-            return UnitOfWork.resultInfo.GenerateOKResult(loc.ID);
+            try
+            {
+                Location loc = new Location();
+                loc.GUID = Guid.NewGuid();
+                loc.Title = title;
+                loc.isActive = false;
+                loc.Status = 1;
+                loc.IconID = 1;
+                loc.LatitudeX = "";
+                loc.LongitudeY = "";
+                db.Locations.Add(loc);
+                db.SaveChanges();
+                return UnitOfWork.resultInfo.GenerateOKResult("Saved", loc.ID);
+            }
+            catch
+            {
+                return UnitOfWork.resultInfo.GetResultByID(1);
+            }
         }
 
         #endregion
 
         #region Edit
-        public ResultInfo.Result Edit(long id, string title, string longitudeY, string latitudeX,bool isActive,long status, long iconID)
+        public ResultInfo.Result Edit(long id, string title, string longitudeY, string latitudeX, bool isActive, long status, long iconID)
         {
-            Location loc = db.Locations.Find(id);
-            loc.Title = title;
-            loc.LongitudeY = longitudeY;
-            loc.LatitudeX = latitudeX;
-            loc.isActive = isActive;
-            loc.Status = status;
-            loc.IconID = iconID;
-            db.SaveChanges();
-            return UnitOfWork.resultInfo.GenerateOKResult();
+            try
+            {
+                Location loc = db.Locations.Find(id);
+                loc.Title = title;
+                loc.LongitudeY = longitudeY;
+                loc.LatitudeX = latitudeX;
+                loc.isActive = isActive;
+                loc.Status = status;
+                loc.IconID = iconID;
+                db.SaveChanges();
+                return UnitOfWork.resultInfo.GenerateOKResult("Saved", loc.ID);
+            }
+            catch
+            {
+                return UnitOfWork.resultInfo.GetResultByID(1);
+            }
         }
 
         public ResultInfo.Result EditMain(long id, string title, bool isActive)
         {
-            Location loc = db.Locations.Find(id);
-            loc.Title = title;
-            loc.isActive = isActive;
-            db.SaveChanges();
-            return UnitOfWork.resultInfo.GenerateOKResult();
+            try
+            {
+                Location loc = db.Locations.Find(id);
+                loc.Title = title;
+                loc.isActive = isActive;
+                db.SaveChanges();
+                return UnitOfWork.resultInfo.GenerateOKResult("Saved", loc.ID);
+            }
+            catch
+            {
+                return UnitOfWork.resultInfo.GetResultByID(1);
+            }
         }
 
         public ResultInfo.Result EditGeoLocation(long id, string longitudeY, string latitudeX)
         {
-            Location loc = db.Locations.Find(id);
-            loc.LongitudeY = longitudeY;
-            loc.LatitudeX = latitudeX;
-            db.SaveChanges();
-            return UnitOfWork.resultInfo.GenerateOKResult();
+            try
+            {
+                Location loc = db.Locations.Find(id);
+                loc.LongitudeY = longitudeY;
+                loc.LatitudeX = latitudeX;
+                db.SaveChanges();
+                return UnitOfWork.resultInfo.GenerateOKResult("Saved", loc.ID);
+            }
+            catch
+            {
+                return UnitOfWork.resultInfo.GetResultByID(1);
+            }
         }
 
         #endregion
@@ -141,32 +172,46 @@ namespace DynThings.Data.Repositories
         #region AttachDevice
         public ResultInfo.Result AttachDevice(long locationID, long deviceID, string userID)
         {
-            LinkDevicesLocation lnk = new LinkDevicesLocation();
-            List<LinkDevicesLocation> lnks = db.LinkDevicesLocations.Where(l => l.LocationID == locationID && l.DeviceID == deviceID).ToList();
-            if (lnks.Count > 0)
+            try
+            {
+                LinkDevicesLocation lnk = new LinkDevicesLocation();
+                List<LinkDevicesLocation> lnks = db.LinkDevicesLocations.Where(l => l.LocationID == locationID && l.DeviceID == deviceID).ToList();
+                if (lnks.Count > 0)
+                {
+                    return UnitOfWork.resultInfo.GetResultByID(1);
+                }
+                lnk.LocationID = locationID;
+                lnk.DeviceID = deviceID;
+                db.LinkDevicesLocations.Add(lnk);
+                db.SaveChanges();
+                return UnitOfWork.resultInfo.GenerateOKResult("Saved");
+            }
+            catch
             {
                 return UnitOfWork.resultInfo.GetResultByID(1);
             }
-            lnk.LocationID = locationID;
-            lnk.DeviceID = deviceID;
-            db.LinkDevicesLocations.Add(lnk);
-            db.SaveChanges();
-            return UnitOfWork.resultInfo.GenerateOKResult();
         }
         #endregion
 
         #region DeAttachDevice
         public ResultInfo.Result DeattachDevice(long locationID, long deviceID, string userID)
         {
-            List<LinkDevicesLocation> lnks = db.LinkDevicesLocations.Where(l => l.LocationID == locationID && l.DeviceID == deviceID).ToList();
-            if (lnks.Count != 1)
+            try
+            {
+                List<LinkDevicesLocation> lnks = db.LinkDevicesLocations.Where(l => l.LocationID == locationID && l.DeviceID == deviceID).ToList();
+                if (lnks.Count != 1)
+                {
+                    return UnitOfWork.resultInfo.GetResultByID(1);
+                }
+                LinkDevicesLocation lnk = lnks[0];
+                db.LinkDevicesLocations.Remove(lnk);
+                db.SaveChanges();
+                return UnitOfWork.resultInfo.GenerateOKResult("Saved");
+            }
+            catch
             {
                 return UnitOfWork.resultInfo.GetResultByID(1);
             }
-            LinkDevicesLocation lnk = lnks[0];
-            db.LinkDevicesLocations.Remove(lnk);
-            db.SaveChanges();
-            return UnitOfWork.resultInfo.GenerateOKResult();
         }
         #endregion
     }

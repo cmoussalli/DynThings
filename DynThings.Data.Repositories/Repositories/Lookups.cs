@@ -10,11 +10,13 @@ namespace DynThings.Data.Repositories
 {
     public class Lookups
     {
+        #region Constructor
         public DynThingsEntities db { get; set; }
         public Lookups(DynThingsEntities dynThingsEntities)
         {
             db = dynThingsEntities;
         }
+        #endregion
 
 
         public void IOTypes()
@@ -33,11 +35,8 @@ namespace DynThings.Data.Repositories
                 endPoint0.ID = 0;
                 endPoint0.Title = "-Select All-";
                 endPoints.Add(endPoint0);
-
                 endPoints.AddRange(db.Endpoints.OrderBy(e => e.Title));
             }
-
-
             return endPoints;
         }
 

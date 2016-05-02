@@ -16,11 +16,13 @@ namespace DynThings.Data.Repositories
 {
     public class EndPointCommandsRepository
     {
+        #region Constructor
         public DynThingsEntities db { get; set; }
         public EndPointCommandsRepository(DynThingsEntities dynThingsEntities)
         {
             db = dynThingsEntities;
         }
+        #endregion
 
 
         #region Get PagedList
@@ -43,7 +45,6 @@ namespace DynThings.Data.Repositories
               .ToPagedList(pageNumber, recordsPerPage);
             return cmds;
         }
-
 
         public IPagedList GetPagedListByEndPointGUID(string search, Guid EndPointGUID, int pageNumber, int recordsPerPage)
         {
@@ -82,15 +83,22 @@ namespace DynThings.Data.Repositories
         #region Add
         public ResultInfo.Result Add(string title, long EndPointID, string description, string commandCode, string ownerID)
         {
-            EndPointCommand cmd = new EndPointCommand();
-            cmd.Title = title;
-            cmd.EndPointID = EndPointID;
-            cmd.Description = description;
-            cmd.CommandCode = commandCode;
-            cmd.OwnerID = ownerID;
-            db.EndPointCommands.Add(cmd);
-            db.SaveChanges();
-            return UnitOfWork.resultInfo.GenerateOKResult() ;
+            try
+            {
+                EndPointCommand cmd = new EndPointCommand();
+                cmd.Title = title;
+                cmd.EndPointID = EndPointID;
+                cmd.Description = description;
+                cmd.CommandCode = commandCode;
+                cmd.OwnerID = ownerID;
+                db.EndPointCommands.Add(cmd);
+                db.SaveChanges();
+                return UnitOfWork.resultInfo.GenerateOKResult("Saved", cmd.ID);
+            }
+            catch
+            {
+                return UnitOfWork.resultInfo.GetResultByID(1);
+            }
         }
 
         #endregion
@@ -98,13 +106,20 @@ namespace DynThings.Data.Repositories
         #region Edit
         public ResultInfo.Result Edit(long id, string title, string description, long EndPointID, string commandCode)
         {
-            EndPointCommand cmd = db.EndPointCommands.Find(id);
-            cmd.Title = title;
-            cmd.Description = description;
-            cmd.CommandCode = commandCode;
-            cmd.EndPointID = EndPointID;
-            db.SaveChanges();
-            return UnitOfWork.resultInfo.GenerateOKResult();
+            try
+            {
+                EndPointCommand cmd = db.EndPointCommands.Find(id);
+                cmd.Title = title;
+                cmd.Description = description;
+                cmd.CommandCode = commandCode;
+                cmd.EndPointID = EndPointID;
+                db.SaveChanges();
+                return UnitOfWork.resultInfo.GenerateOKResult("Saved", cmd.ID);
+            }
+            catch
+            {
+                return UnitOfWork.resultInfo.GetResultByID(1);
+            }
         }
 
         #endregion
@@ -112,12 +127,23 @@ namespace DynThings.Data.Repositories
         #region Execute
         public ResultInfo.Result Execute(long commandID, Guid endPointKeyPass, string ownerID)
         {
-            EndPointCommand cmd = Find(commandID);
-            if (cmd.Endpoint.KeyPass == endPointKeyPass)
+            try
             {
-                UnitOfWork.repoEndpointIOs.Add(cmd.Endpoint.ID, cmd.CommandCode, EndpointIOsRepository.EndPointIOType.Command);
+                EndPointCommand cmd = Find(commandID);
+                if (cmd.Endpoint.KeyPass == endPointKeyPass)
+                {
+                    return UnitOfWork.repoEndpointIOs.Add(cmd.Endpoint.ID, cmd.CommandCode, EndpointIOsRepository.EndPointIOType.Command);
+                }
+                else
+                {
+                    return UnitOfWork.resultInfo.GetResultByID(1);
+                }
             }
-            return UnitOfWork.resultInfo.GenerateOKResult();
+            catch
+            {
+                return UnitOfWork.resultInfo.GetResultByID(1);
+            }
+
         }
         #endregion
 

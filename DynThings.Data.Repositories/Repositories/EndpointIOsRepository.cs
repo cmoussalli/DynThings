@@ -16,11 +16,14 @@ namespace DynThings.Data.Repositories
 {
     public class EndpointIOsRepository
     {
+        #region Constructor
         public DynThingsEntities db { get; set; }
         public EndpointIOsRepository(DynThingsEntities dynThingsEntities)
         {
             db = dynThingsEntities;
         }
+        #endregion
+
 
         #region Enums
         public enum EndPointIOType
@@ -29,7 +32,7 @@ namespace DynThings.Data.Repositories
             Command = 2,
             Log = 3
         }
-        
+
         #endregion
 
         #region Find
@@ -49,7 +52,6 @@ namespace DynThings.Data.Repositories
         }
         #endregion
 
-        
 
         #region Get PagedList
         public IPagedList GetPagedList(long endPointID, int pageNumber, int recordsPerPage)
@@ -74,7 +76,7 @@ namespace DynThings.Data.Repositories
             return ios;
         }
 
-        public IPagedList GetPagedList(string search, long endPointID,long ioTypeID, int pageNumber, int recordsPerPage)
+        public IPagedList GetPagedList(string search, long endPointID, long ioTypeID, int pageNumber, int recordsPerPage)
         {
             var query = from q in db.EndPointIOs
                         where q.Valu.Contains(search)
@@ -111,55 +113,82 @@ namespace DynThings.Data.Repositories
         #region Add
         public ResultInfo.Result Add(long endPointID, string value, EndPointIOType ioType, DateTime executionTime)
         {
-            EndPointIO cmdIO = new EndPointIO();
-            cmdIO.EndPointID = endPointID;
-            cmdIO.Valu = value;
-            cmdIO.IOTypeID = long.Parse(ioType.GetHashCode().ToString());
-            cmdIO.TimeStamp = DateTime.Now;
-            cmdIO.ExecTimeStamp = executionTime;
-            cmdIO.ScheduleTimeStamp = executionTime;
-            db.EndPointIOs.Add(cmdIO);
-            db.SaveChanges();
-            return UnitOfWork.resultInfo.GenerateOKResult();
+            try
+            {
+                EndPointIO endIO = new EndPointIO();
+                endIO.EndPointID = endPointID;
+                endIO.Valu = value;
+                endIO.IOTypeID = long.Parse(ioType.GetHashCode().ToString());
+                endIO.TimeStamp = DateTime.Now;
+                endIO.ExecTimeStamp = executionTime;
+                endIO.ScheduleTimeStamp = executionTime;
+                db.EndPointIOs.Add(endIO);
+                db.SaveChanges();
+                return UnitOfWork.resultInfo.GenerateOKResult("Saved", endIO.ID);
+            }
+            catch
+            {
+                return UnitOfWork.resultInfo.GetResultByID(1);
+            }
         }
 
-        public ResultInfo.Result Add(long endPointID, string value, EndPointIOType ioType, DateTime executionTime,DateTime scheduleTimeStamp)
+        public ResultInfo.Result Add(long endPointID, string value, EndPointIOType ioType, DateTime executionTime, DateTime scheduleTimeStamp)
         {
-            EndPointIO cmdIO = new EndPointIO();
-            cmdIO.EndPointID = endPointID;
-            cmdIO.Valu = value;
-            cmdIO.IOTypeID = long.Parse(ioType.GetHashCode().ToString());
-            cmdIO.TimeStamp = DateTime.Now;
-            cmdIO.ExecTimeStamp = executionTime;
-            cmdIO.ScheduleTimeStamp = scheduleTimeStamp;
-            db.EndPointIOs.Add(cmdIO);
-            db.SaveChanges();
-            return UnitOfWork.resultInfo.GenerateOKResult();
+            try
+            {
+                EndPointIO endIO = new EndPointIO();
+                endIO.EndPointID = endPointID;
+                endIO.Valu = value;
+                endIO.IOTypeID = long.Parse(ioType.GetHashCode().ToString());
+                endIO.TimeStamp = DateTime.Now;
+                endIO.ExecTimeStamp = executionTime;
+                endIO.ScheduleTimeStamp = scheduleTimeStamp;
+                db.EndPointIOs.Add(endIO);
+                db.SaveChanges();
+                return UnitOfWork.resultInfo.GenerateOKResult("Saved", endIO.ID);
+            }
+            catch
+            {
+                return UnitOfWork.resultInfo.GetResultByID(1);
+            }
         }
 
         public ResultInfo.Result Add(long endPointID, string value, EndPointIOType ioType)
         {
-            EndPointIO endIO = new EndPointIO();
-            endIO.EndPointID = endPointID;
-            endIO.Valu = value;
-            endIO.IOTypeID = long.Parse(ioType.GetHashCode().ToString());
-            endIO.TimeStamp = DateTime.Now;
-            db.EndPointIOs.Add(endIO);
-            db.SaveChanges();
-            return UnitOfWork.resultInfo.GenerateOKResult();
+            try
+            {
+                EndPointIO endIO = new EndPointIO();
+                endIO.EndPointID = endPointID;
+                endIO.Valu = value;
+                endIO.IOTypeID = long.Parse(ioType.GetHashCode().ToString());
+                endIO.TimeStamp = DateTime.Now;
+                db.EndPointIOs.Add(endIO);
+                db.SaveChanges();
+                return UnitOfWork.resultInfo.GenerateOKResult("Saved", endIO.ID);
+            }
+            catch
+            {
+                return UnitOfWork.resultInfo.GetResultByID(1);
+            }
         }
         #endregion
 
         #region Submit IO
         private ResultInfo.Result SubmitIO(Guid endPointKeyPass, EndPointIOType IOTypeID, string Valu, DateTime executionTimeStamp)
         {
-            List<Endpoint> ends = db.Endpoints.Where(e => e.GUID == endPointKeyPass).ToList();
-            if (ends.Count == 1)
+            try
             {
-                Add(ends[0].ID, Valu, IOTypeID, executionTimeStamp);
-                return UnitOfWork.resultInfo.GenerateOKResult();
+                List<Endpoint> ends = db.Endpoints.Where(e => e.GUID == endPointKeyPass).ToList();
+                if (ends.Count == 1)
+                {
+                    return Add(ends[0].ID, Valu, IOTypeID, executionTimeStamp);
+                }
+                else
+                {
+                    return UnitOfWork.resultInfo.GetResultByID(1);
+                }
             }
-            else
+            catch
             {
                 return UnitOfWork.resultInfo.GetResultByID(1);
             }
@@ -170,11 +199,11 @@ namespace DynThings.Data.Repositories
         #region Get Pending Commands
         public List<EndPointIO> GetPendingCommandsList(Guid endPointKeyPass)
         {
-          List<EndPointIO> ios = db.EndPointIOs
-              .Where(i => i.Endpoint.KeyPass == endPointKeyPass
-                    && i.ExecTimeStamp == null)
-              .OrderByDescending(i => i.ScheduleTimeStamp).Take(100).ToList()
-              .ToList();
+            List<EndPointIO> ios = db.EndPointIOs
+                .Where(i => i.Endpoint.KeyPass == endPointKeyPass
+                      && i.ExecTimeStamp == null)
+                .OrderByDescending(i => i.ScheduleTimeStamp).Take(100).ToList()
+                .ToList();
             return ios;
         }
         #endregion

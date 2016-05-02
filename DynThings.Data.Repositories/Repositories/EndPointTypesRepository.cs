@@ -16,11 +16,14 @@ namespace DynThings.Data.Repositories
 {
     public class EndPointTypesRepository
     {
+        #region Constructor
         public DynThingsEntities db { get; set; }
         public EndPointTypesRepository(DynThingsEntities dynThingsEntities)
         {
             db = dynThingsEntities;
         }
+        #endregion
+
 
         #region GetList
         /// <summary>
@@ -59,16 +62,23 @@ namespace DynThings.Data.Repositories
         #endregion
 
         #region Create
-        public ResultInfo.Result Add(string Title,string measurment,long TypeCategoryID,long IconID)
+        public ResultInfo.Result Add(string Title, string measurment, long TypeCategoryID, long IconID)
         {
-            EndPointType epType = new EndPointType();
-            epType.Title = Title;
-            epType.measurement = measurment;
-            epType.TypeCategoryID = TypeCategoryID;
-            epType.IconID = IconID;
-            db.EndPointTypes.Add(epType);
-            db.SaveChanges();
-            return UnitOfWork.resultInfo.GenerateOKResult();
+            try
+            {
+                EndPointType epType = new EndPointType();
+                epType.Title = Title;
+                epType.measurement = measurment;
+                epType.TypeCategoryID = TypeCategoryID;
+                epType.IconID = IconID;
+                db.EndPointTypes.Add(epType);
+                db.SaveChanges();
+                return UnitOfWork.resultInfo.GenerateOKResult("Saved", epType.ID);
+            }
+            catch
+            {
+                return UnitOfWork.resultInfo.GetResultByID(1);
+            }
         }
 
         #endregion

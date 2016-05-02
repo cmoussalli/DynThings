@@ -16,11 +16,14 @@ namespace DynThings.Data.Repositories
 {
     public class DeviceIOsRepository
     {
+        #region Constructor
         public DynThingsEntities db { get; set; }
         public DeviceIOsRepository(DynThingsEntities dynThingsEntities)
         {
             db = dynThingsEntities;
         }
+        #endregion
+
 
         #region Enums
         public enum deviceIOType
@@ -45,15 +48,22 @@ namespace DynThings.Data.Repositories
         #region Add
         public ResultInfo.Result Add(long deviceID, string value, deviceIOType ioType, DateTime executionTime)
         {
-            DeviceIO endIO = new DeviceIO();
-            endIO.DeviceID = deviceID;
-            endIO.Valu = value;
-            endIO.IOTypeID = long.Parse(ioType.GetHashCode().ToString());
-            endIO.TimeStamp = DateTime.Now;
-            endIO.ExecTimeStamp = executionTime;
-            db.DeviceIOs.Add(endIO);
-            db.SaveChanges();
-            return UnitOfWork.resultInfo.GenerateOKResult();
+            try
+            {
+                DeviceIO endIO = new DeviceIO();
+                endIO.DeviceID = deviceID;
+                endIO.Valu = value;
+                endIO.IOTypeID = long.Parse(ioType.GetHashCode().ToString());
+                endIO.TimeStamp = DateTime.Now;
+                endIO.ExecTimeStamp = executionTime;
+                db.DeviceIOs.Add(endIO);
+                db.SaveChanges();
+                return UnitOfWork.resultInfo.GenerateOKResult("Saved", endIO.ID);
+            }
+            catch
+            {
+                return UnitOfWork.resultInfo.GetResultByID(1);
+            }
         }
 
         public ResultInfo.Result Add(long deviceID, string value, deviceIOType ioType)
@@ -69,18 +79,25 @@ namespace DynThings.Data.Repositories
         }
         #endregion
 
+
         #region Submit IO
         internal ResultInfo.Result SubmitIO(Guid deviceKeyPass, deviceIOType ioType, string Valu)
         {
-            List<Device> devs = db.Devices.Where(e => e.KeyPass == deviceKeyPass).ToList();
-            if (devs.Count == 1)
+            try
             {
-                Add(devs[0].ID, Valu, ioType);
-                return UnitOfWork.resultInfo.GenerateOKResult();
+                List<Device> devs = db.Devices.Where(e => e.KeyPass == deviceKeyPass).ToList();
+                if (devs.Count == 1)
+                {
+                    return Add(devs[0].ID, Valu, ioType);
+                }
+                else
+                {
+                    return UnitOfWork.resultInfo.GetResultByID(1);
+                }
             }
-            else
+            catch
             {
-                return UnitOfWork.resultInfo.GenerateOKResult();
+                return UnitOfWork.resultInfo.GetResultByID(1);
             }
         }
 

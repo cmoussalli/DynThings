@@ -17,11 +17,14 @@ namespace DynThings.Data.Repositories
 {
     public class LocationViewsRepository
     {
+        #region Constructor
         public DynThingsEntities db { get; set; }
         public LocationViewsRepository(DynThingsEntities dynThingsEntities)
         {
             db = dynThingsEntities;
         }
+        #endregion
+
 
         #region Get PagedList
         public IPagedList GetPagedList(string search, int pageNumber, int recordsPerPage)
@@ -58,28 +61,42 @@ namespace DynThings.Data.Repositories
         /// <returns>Result : Ok or Failed</returns>
         public ResultInfo.Result Add(string title, long locationTypeID, string userID)
         {
-            LocationView loc = new LocationView();
-            loc.Title = title;
-            loc.IsActive = false;
-            loc.OwnerID = userID;
-            loc.LocationViewTypeID = locationTypeID;
-            loc.X = "";
-            loc.Y = "";
-            loc.Z = "";
-            db.LocationViews.Add(loc);
-            db.SaveChanges();
-            return UnitOfWork.resultInfo.GenerateOKResult();
+            try
+            {
+                LocationView loc = new LocationView();
+                loc.Title = title;
+                loc.IsActive = false;
+                loc.OwnerID = userID;
+                loc.LocationViewTypeID = locationTypeID;
+                loc.X = "";
+                loc.Y = "";
+                loc.Z = "";
+                db.LocationViews.Add(loc);
+                db.SaveChanges();
+                return UnitOfWork.resultInfo.GenerateOKResult("Saved", loc.ID);
+            }
+            catch
+            {
+                return UnitOfWork.resultInfo.GetResultByID(1);
+            }
         }
         #endregion
 
         #region Edit : Title
-        public ResultInfo.Result Edit(long locationViewID ,string title, string userID)
+        public ResultInfo.Result Edit(long locationViewID, string title, string userID)
         {
-            LocationView loc = db.LocationViews.Find(locationViewID);
-            loc.Title = title;
-            loc.IsActive = false;
-            db.SaveChanges();
-            return UnitOfWork.resultInfo.GenerateOKResult();
+            try
+            {
+                LocationView loc = db.LocationViews.Find(locationViewID);
+                loc.Title = title;
+                loc.IsActive = false;
+                db.SaveChanges();
+                return UnitOfWork.resultInfo.GenerateOKResult("Saved", loc.ID);
+            }
+            catch
+            {
+                return UnitOfWork.resultInfo.GetResultByID(1);
+            }
         }
         #endregion
 
@@ -94,15 +111,22 @@ namespace DynThings.Data.Repositories
         /// <param name="z">Map Zoom</param>
         /// <param name="userID">Edited by User ID</param>
         /// <returns></returns>
-        public ResultInfo.Result Edit(long locationViewID, long locationViewTypeID, string x, string y, string z,string userID)
+        public ResultInfo.Result Edit(long locationViewID, long locationViewTypeID, string x, string y, string z, string userID)
         {
-            LocationView loc = db.LocationViews.Find(locationViewID);
-            loc.LocationViewTypeID = locationViewID;
-            loc.X = x;
-            loc.Y = y;
-            loc.Z = z;
-            db.SaveChanges();
-            return UnitOfWork.resultInfo.GenerateOKResult();
+            try
+            {
+                LocationView loc = db.LocationViews.Find(locationViewID);
+                loc.LocationViewTypeID = locationViewID;
+                loc.X = x;
+                loc.Y = y;
+                loc.Z = z;
+                db.SaveChanges();
+                return UnitOfWork.resultInfo.GenerateOKResult("Saved", loc.ID);
+            }
+            catch
+            {
+                return UnitOfWork.resultInfo.GetResultByID(1);
+            }
         }
         #endregion
 
@@ -113,23 +137,30 @@ namespace DynThings.Data.Repositories
         /// <param name="locationViewID">The selected LocationView ID.</param>
         /// <param name="isActive">Activation, True or False.</param>
         /// <returns>Result : Ok or Failed.</returns>
-        public ResultInfo.Result IsActive(long locationViewID, bool isActive,string userID)
+        public ResultInfo.Result IsActive(long locationViewID, bool isActive, string userID)
         {
-            LocationView loc = db.LocationViews.Find(locationViewID);
-            loc.IsActive = isActive;
-            db.SaveChanges();
-            return UnitOfWork.resultInfo.GenerateOKResult();
+            try
+            {
+                LocationView loc = db.LocationViews.Find(locationViewID);
+                loc.IsActive = isActive;
+                db.SaveChanges();
+                return UnitOfWork.resultInfo.GenerateOKResult("Saved", loc.ID);
+            }
+            catch
+            {
+                return UnitOfWork.resultInfo.GetResultByID(1);
+            }
         }
         #endregion
 
         #region AttachLocation
-        public ResultInfo.Result AttachLocation(long locationViewID,long locationID, string userID)
+        public ResultInfo.Result AttachLocation(long locationViewID, long locationID, string userID)
         {
             LinkLocationsLocationView lnk = new LinkLocationsLocationView();
             List<LinkLocationsLocationView> lnks = db.LinkLocationsLocationViews.Where(l => l.LocationID == locationID && l.LocationViewID == locationViewID).ToList();
             if (lnks.Count > 0)
             {
-                return UnitOfWork.resultInfo.GetResultByID(5);
+                return UnitOfWork.resultInfo.GetResultByID(1);
             }
             lnk.LocationID = locationID;
             lnk.LocationViewID = locationViewID;
@@ -143,9 +174,9 @@ namespace DynThings.Data.Repositories
         public ResultInfo.Result DeattachLocation(long locationViewID, long locationID, string userID)
         {
             List<LinkLocationsLocationView> lnks = db.LinkLocationsLocationViews.Where(l => l.LocationID == locationID && l.LocationViewID == locationViewID).ToList();
-          if (lnks.Count != 1)
+            if (lnks.Count != 1)
             {
-                return UnitOfWork.resultInfo.GetResultByID(6);
+                return UnitOfWork.resultInfo.GetResultByID(1);
             }
             LinkLocationsLocationView lnk = lnks[0];
             db.LinkLocationsLocationViews.Remove(lnk);

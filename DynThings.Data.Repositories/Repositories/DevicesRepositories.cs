@@ -16,11 +16,14 @@ namespace DynThings.Data.Repositories
 {
     public class DevicesRepositories
     {
+        #region Constructor
         public DynThingsEntities db { get; set; }
         public DevicesRepositories(DynThingsEntities dynThingsEntities)
         {
             db = dynThingsEntities;
         }
+        #endregion
+
 
         #region GetList
         /// <summary>
@@ -48,7 +51,7 @@ namespace DynThings.Data.Repositories
         {
             IPagedList devs = db.Devices
               .Where(e => search == null || e.Title.Contains(search)
-              && e.LinkDevicesLocations.Any(l => l.LocationID ==locationID)
+              && e.LinkDevicesLocations.Any(l => l.LocationID == locationID)
               )
               .OrderBy(e => e.Title).ToList()
               .ToPagedList(pageNumber, recordsPerPage);
@@ -133,10 +136,9 @@ namespace DynThings.Data.Repositories
             }
             catch
             {
-
                 return UnitOfWork.resultInfo.GetResultByID(1);
             }
-            return UnitOfWork.resultInfo.GenerateOKResult();
+            return UnitOfWork.resultInfo.GenerateOKResult("Saved", dev.ID);
         }
         #endregion
 
@@ -149,10 +151,17 @@ namespace DynThings.Data.Repositories
         /// <returns>Result : Ok or Failed</returns>
         public ResultInfo.Result Edit(long id, string title)
         {
-            Device dev = db.Devices.Find(id);
-            dev.Title = title;
-            db.SaveChanges();
-            return UnitOfWork.resultInfo.GenerateOKResult();
+            try
+            {
+                Device dev = db.Devices.Find(id);
+                dev.Title = title;
+                db.SaveChanges();
+                return UnitOfWork.resultInfo.GenerateOKResult("Saved", dev.ID);
+            }
+            catch
+            {
+                return UnitOfWork.resultInfo.GetResultByID(1);
+            }
         }
 
         #endregion
@@ -165,12 +174,17 @@ namespace DynThings.Data.Repositories
         /// <returns>Result : Ok or Failed</returns>
         public ResultInfo.Result RenewKeyPass(long deviceID)
         {
-            Device dev = db.Devices.Find(deviceID);
-
-            dev.GUID = Guid.NewGuid();
-            db.SaveChanges();
-
-            return UnitOfWork.resultInfo.GenerateOKResult();
+            try
+            {
+                Device dev = db.Devices.Find(deviceID);
+                dev.GUID = Guid.NewGuid();
+                db.SaveChanges();
+                return UnitOfWork.resultInfo.GenerateOKResult("Saved", dev.ID);
+            }
+            catch
+            {
+                return UnitOfWork.resultInfo.GetResultByID(1);
+            }
         }
 
         #endregion

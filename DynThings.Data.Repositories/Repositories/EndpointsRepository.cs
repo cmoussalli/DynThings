@@ -16,11 +16,13 @@ namespace DynThings.Data.Repositories
 {
     public class EndpointsRepository
     {
+        #region Constructor
         public DynThingsEntities db{ get; set; }
         public EndpointsRepository(DynThingsEntities dynThingsEntities)
         {
             this.db = dynThingsEntities;
         }
+        #endregion
 
 
         #region GetList
@@ -120,7 +122,7 @@ namespace DynThings.Data.Repositories
                 end.TypeID = typeID;
                 db.Endpoints.Add(end);
                 db.SaveChanges();
-                return UnitOfWork.resultInfo.GenerateOKResult("EndPoint has been added", end.ID);
+                return UnitOfWork.resultInfo.GenerateOKResult("Saved", end.ID);
             }
             catch
             {
@@ -139,7 +141,7 @@ namespace DynThings.Data.Repositories
                 end.Title = title;
                 end.TypeID = typeID;
                 db.SaveChanges();
-                return UnitOfWork.resultInfo.GenerateOKResult();
+                return UnitOfWork.resultInfo.GenerateOKResult("Saved", end.ID);
             }
             catch
             {

@@ -16,11 +16,14 @@ namespace DynThings.Data.Repositories
 {
     public class DeviceCommandsRepository
     {
+        #region Constructor
         public DynThingsEntities db { get; set; }
         public DeviceCommandsRepository(DynThingsEntities dynThingsEntities)
         {
             db = dynThingsEntities;
         }
+        #endregion
+
 
         #region Get List
         public List<DeviceCommand> GetListByDeviceGUID(Guid deviceGUID)
@@ -76,15 +79,22 @@ namespace DynThings.Data.Repositories
         #region Add
         public ResultInfo.Result Add(string title, long deviceID, string description, string commandCode, string ownerID)
         {
-            DeviceCommand cmd = new DeviceCommand();
-            cmd.Title = title;
-            cmd.DeviceID = deviceID;
-            cmd.Description = description;
-            cmd.CommandCode = commandCode;
-            cmd.OwnerID = ownerID;
-            db.DeviceCommands.Add(cmd);
-            db.SaveChanges();
-            return UnitOfWork.resultInfo.GenerateOKResult();
+            try
+            {
+                DeviceCommand cmd = new DeviceCommand();
+                cmd.Title = title;
+                cmd.DeviceID = deviceID;
+                cmd.Description = description;
+                cmd.CommandCode = commandCode;
+                cmd.OwnerID = ownerID;
+                db.DeviceCommands.Add(cmd);
+                db.SaveChanges();
+                return UnitOfWork.resultInfo.GenerateOKResult("Saved", cmd.ID);
+            }
+            catch
+            {
+                return UnitOfWork.resultInfo.GetResultByID(1);
+            }
         }
 
         #endregion
@@ -92,13 +102,20 @@ namespace DynThings.Data.Repositories
         #region Edit
         public ResultInfo.Result Edit(long id, string title, string description, long deviceID, string commandCode)
         {
-            DeviceCommand cmd = db.DeviceCommands.Find(id);
-            cmd.Title = title;
-            cmd.Description = description;
-            cmd.CommandCode = commandCode;
-            cmd.DeviceID = deviceID;
-            db.SaveChanges();
-            return UnitOfWork.resultInfo.GenerateOKResult();
+            try
+            {
+                DeviceCommand cmd = db.DeviceCommands.Find(id);
+                cmd.Title = title;
+                cmd.Description = description;
+                cmd.CommandCode = commandCode;
+                cmd.DeviceID = deviceID;
+                db.SaveChanges();
+                return UnitOfWork.resultInfo.GenerateOKResult("Saved", cmd.ID);
+            }
+            catch
+            {
+                return UnitOfWork.resultInfo.GetResultByID(1);
+            }
         }
 
         #endregion
@@ -106,12 +123,22 @@ namespace DynThings.Data.Repositories
         #region Execute
         public ResultInfo.Result Execute(long commandID, Guid deviceKeyPass, string ownerID)
         {
-            DeviceCommand cmd = Find(commandID);
-            if (cmd.Device.KeyPass == deviceKeyPass)
+            try
             {
-                UnitOfWork.repoDeviceIOs.Add(cmd.Device.ID, cmd.CommandCode, DeviceIOsRepository.deviceIOType.Command);
+                DeviceCommand cmd = Find(commandID);
+                if (cmd.Device.KeyPass == deviceKeyPass)
+                {
+                    return UnitOfWork.repoDeviceIOs.Add(cmd.Device.ID, cmd.CommandCode, DeviceIOsRepository.deviceIOType.Command);
+                }
+                else
+                {
+                    return UnitOfWork.resultInfo.GetResultByID(1);
+                }
             }
-            return UnitOfWork.resultInfo.GenerateOKResult();
+            catch
+            {
+                return UnitOfWork.resultInfo.GetResultByID(1);
+            }
         }
         #endregion
 

@@ -15,11 +15,13 @@ namespace DynThings.Data.Repositories
 {
     public class LocationViewTypesRepository
     {
+        #region Constructor
         public DynThingsEntities db { get; set; }
         public LocationViewTypesRepository(DynThingsEntities dynThingsEntities)
         {
             db = dynThingsEntities;
         }
+        #endregion
 
         #region GetList
         /// <summary>

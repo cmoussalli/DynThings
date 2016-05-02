@@ -16,11 +16,14 @@ namespace DynThings.Data.Repositories
 {
     public class IOTypesRepository
     {
+        #region Constructor
         public DynThingsEntities db { get; set; }
         public IOTypesRepository(DynThingsEntities dynThingsEntities)
         {
             db = dynThingsEntities;
         }
+        #endregion
+
 
         public List<IOType> GetList(bool EnableUnspecified)
         {
