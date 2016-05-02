@@ -16,9 +16,13 @@ namespace DynThings.Data.Repositories
 {
     public class DynSettingsRepository
     {
-        private DynThingsEntities db = new DynThingsEntities();
+        public DynThingsEntities db { get; set; }
+        public DynSettingsRepository(DynThingsEntities dynThingsEntities)
+        {
+            db = dynThingsEntities;
+        }
 
-      
+
         #region Get Configs
         public DynSetting GetConfig()
         {

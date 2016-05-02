@@ -49,12 +49,11 @@ namespace DynThings.WebAPI.Controllers
                 }
 
                 //Parse KeyPass
-                DevicesRepositories oDevicesRepositories = new DevicesRepositories();
                 Guid deviceGuid;
                 if (Guid.TryParse(deviceInput.KeyPass, out deviceGuid))
                 {
                     //Device keyPass Validation
-                    DynThings.Data.Models.Device device = oDevicesRepositories.FindByKeyPass(deviceGuid);
+                    DynThings.Data.Models.Device device = UnitOfWork.repoDevices.FindByKeyPass(deviceGuid);
                     if (device != null)
                     {
                         //Try Parse ExecutionTimeStamp to DateTime
@@ -69,8 +68,7 @@ namespace DynThings.WebAPI.Controllers
                         }
 
                         //Submit Data to Database
-                        DeviceIOsRepository oDeviceIOsRepository = new DeviceIOsRepository();
-                        ResultInfo.Result repoResult = oDeviceIOsRepository.Add(device.ID, deviceInput.Value.ToString(), DeviceIOsRepository.deviceIOType.Input, execTime);
+                        ResultInfo.Result repoResult = UnitOfWork.repoDeviceIOs.Add(device.ID, deviceInput.Value.ToString(), DeviceIOsRepository.deviceIOType.Input, execTime);
 
                         //Validate Result
                         if (repoResult.ResultType == ResultInfo.ResultType.Ok)
@@ -121,12 +119,11 @@ namespace DynThings.WebAPI.Controllers
                 }
 
                 //Parse KeyPass
-                DevicesRepositories oDevicesRepositories = new DevicesRepositories();
                 Guid deviceGuid;
                 if (Guid.TryParse(deviceInput.KeyPass, out deviceGuid))
                 {
                     //Device keyPass Validation
-                    DynThings.Data.Models.Device device = oDevicesRepositories.FindByKeyPass(deviceGuid);
+                    DynThings.Data.Models.Device device = UnitOfWork.repoDevices.FindByKeyPass(deviceGuid);
                     if (device != null)
                     {
                         //Try Parse ExecutionTimeStamp to DateTime
@@ -141,8 +138,7 @@ namespace DynThings.WebAPI.Controllers
                         }
 
                         //Submit Data to Database
-                        DeviceIOsRepository oDeviceIOsRepository = new DeviceIOsRepository();
-                        ResultInfo.Result repoResult = oDeviceIOsRepository.Add(device.ID, deviceInput.Value.ToString(), DeviceIOsRepository.deviceIOType.Log, execTime);
+                        ResultInfo.Result repoResult = UnitOfWork.repoDeviceIOs.Add(device.ID, deviceInput.Value.ToString(), DeviceIOsRepository.deviceIOType.Log, execTime);
 
                         //Validate Result
                         if (repoResult.ResultType == ResultInfo.ResultType.Ok)
@@ -231,8 +227,7 @@ namespace DynThings.WebAPI.Controllers
                         }
 
                         //Submit Data to Database
-                        EndpointIOsRepository oEndPointInputsRepository = new EndpointIOsRepository();
-                        ResultInfo.Result repoResult = oEndPointInputsRepository.Add(oEndpoint.ID, oEndPointInput.Value.ToString(), EndpointIOsRepository.EndPointIOType.Input, execTime);
+                        ResultInfo.Result repoResult = UnitOfWork.repoEndpointIOs.Add(oEndpoint.ID, oEndPointInput.Value.ToString(), EndpointIOsRepository.EndPointIOType.Input, execTime);
 
                         //Validate Result
                         if (repoResult.ResultType == ResultInfo.ResultType.Ok)
@@ -301,8 +296,7 @@ namespace DynThings.WebAPI.Controllers
                         }
 
                         //Submit Data to Database
-                        EndpointIOsRepository oEndPointInputsRepository = new EndpointIOsRepository();
-                        ResultInfo.Result repoResult = oEndPointInputsRepository.Add(oEndpoint.ID, oEndPointLog.Value.ToString(), EndpointIOsRepository.EndPointIOType.Log, execTime);
+                        ResultInfo.Result repoResult = UnitOfWork.repoEndpointIOs.Add(oEndpoint.ID, oEndPointLog.Value.ToString(), EndpointIOsRepository.EndPointIOType.Log, execTime);
 
                         //Validate Result
                         if (repoResult.ResultType == ResultInfo.ResultType.Ok)

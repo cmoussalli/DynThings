@@ -18,21 +18,21 @@ namespace DynThings.Data.Repositories
     {
         private static DynThingsEntities dynDB = new DynThingsEntities();
 
-        public static ResultInfo resultInfo = new ResultInfo();
+        public static ResultInfo resultInfo = new ResultInfo(dynDB);
 
         #region Repositories
-        public static DynSettingsRepository repoDynSettings = new DynSettingsRepository();
-        public static LocationViewsRepository repoLocationViews = new LocationViewsRepository();
-        public static LocationViewTypesRepository repoLocationViewTypes = new LocationViewTypesRepository();
-        public static LocationsRepository repoLocations = new LocationsRepository();
+        public static DynSettingsRepository repoDynSettings = new DynSettingsRepository(dynDB);
+        public static LocationViewsRepository repoLocationViews = new LocationViewsRepository(dynDB);
+        public static LocationViewTypesRepository repoLocationViewTypes = new LocationViewTypesRepository(dynDB);
+        public static LocationsRepository repoLocations = new LocationsRepository(dynDB);
         public static EndpointsRepository repoEndpoints = new EndpointsRepository(dynDB);
-        public static EndpointIOsRepository repoEndpointIOs = new EndpointIOsRepository();
-        public static EndPointTypesRepository repoEndpointTypes = new EndPointTypesRepository();
-        public static DevicesRepositories repoDevices = new DevicesRepositories();
-        public static DeviceCommandsRepository repoDeviceCommands = new DeviceCommandsRepository();
+        public static EndpointIOsRepository repoEndpointIOs = new EndpointIOsRepository(dynDB);
+        public static EndPointTypesRepository repoEndpointTypes = new EndPointTypesRepository(dynDB);
+        public static DevicesRepositories repoDevices = new DevicesRepositories(dynDB);
+        public static DeviceCommandsRepository repoDeviceCommands = new DeviceCommandsRepository(dynDB);
         public static EndPointCommandsRepository repoEndPointCommands = new EndPointCommandsRepository(dynDB);
-        public static DeviceIOsRepository repoDeviceIOs = new DeviceIOsRepository();
-        public static IOTypesRepository repoIOTypes = new IOTypesRepository();
+        public static DeviceIOsRepository repoDeviceIOs = new DeviceIOsRepository(dynDB);
+        public static IOTypesRepository repoIOTypes = new IOTypesRepository(dynDB);
 
 
         #endregion

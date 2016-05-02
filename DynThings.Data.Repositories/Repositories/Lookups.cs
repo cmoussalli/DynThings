@@ -10,7 +10,11 @@ namespace DynThings.Data.Repositories
 {
     public class Lookups
     {
-        private DynThingsEntities db = new DynThingsEntities();
+        public DynThingsEntities db { get; set; }
+        public Lookups(DynThingsEntities dynThingsEntities)
+        {
+            db = dynThingsEntities;
+        }
 
 
         public void IOTypes()

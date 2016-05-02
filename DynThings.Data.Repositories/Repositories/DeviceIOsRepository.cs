@@ -16,7 +16,11 @@ namespace DynThings.Data.Repositories
 {
     public class DeviceIOsRepository
     {
-        private DynThingsEntities db = new DynThingsEntities();
+        public DynThingsEntities db { get; set; }
+        public DeviceIOsRepository(DynThingsEntities dynThingsEntities)
+        {
+            db = dynThingsEntities;
+        }
 
         #region Enums
         public enum deviceIOType

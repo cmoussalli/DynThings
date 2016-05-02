@@ -17,7 +17,11 @@ namespace DynThings.Data.Repositories
 {
     public class LocationViewsRepository
     {
-        private DynThingsEntities db = new DynThingsEntities();
+        public DynThingsEntities db { get; set; }
+        public LocationViewsRepository(DynThingsEntities dynThingsEntities)
+        {
+            db = dynThingsEntities;
+        }
 
         #region Get PagedList
         public IPagedList GetPagedList(string search, int pageNumber, int recordsPerPage)

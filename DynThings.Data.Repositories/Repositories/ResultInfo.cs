@@ -9,7 +9,11 @@ namespace DynThings.Data.Repositories
 {
     public class ResultInfo
     {
-        private DynThingsEntities db = new DynThingsEntities();
+        public DynThingsEntities db { get; set; }
+        public ResultInfo(DynThingsEntities dynThingsEntities)
+        {
+            db = dynThingsEntities;
+        }
 
         #region Enums
         public enum ResultType

@@ -16,7 +16,11 @@ namespace DynThings.Data.Repositories
 {
     public class DeviceCommandsRepository
     {
-        private DynThingsEntities db = new DynThingsEntities();
+        public DynThingsEntities db { get; set; }
+        public DeviceCommandsRepository(DynThingsEntities dynThingsEntities)
+        {
+            db = dynThingsEntities;
+        }
 
         #region Get List
         public List<DeviceCommand> GetListByDeviceGUID(Guid deviceGUID)
