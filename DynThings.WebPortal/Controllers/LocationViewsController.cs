@@ -74,7 +74,7 @@ namespace DynThings.WebPortal.Controllers
         [HttpGet]
         public PartialViewResult AddPV()
         {
-            ViewBag.LocationViewTypeID = new SelectList(UnitOfWork.repoLocationViewTypes.GetList(), "ID", "Title",1);
+            ViewBag.LocationViewTypeID = new SelectList(UnitOfWork.repoLocationViewTypes.GetList(), "ID", "Title", 1);
             return PartialView("_Add");
         }
 
@@ -82,8 +82,12 @@ namespace DynThings.WebPortal.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult AddPV([Bind(Include = "Title,LocationViewTypeID")] LocationView locationView)
         {
-            UnitOfWork.repoLocationViews.Add(locationView.Title, locationView.LocationViewTypeID,"1");
-            return Content("Ok");
+            ResultInfo.Result res = UnitOfWork.resultInfo.GetResultByID(1);
+            if (ModelState.IsValid)
+            {
+                res = UnitOfWork.repoLocationViews.Add(locationView.Title, locationView.LocationViewTypeID, "1");
+            }
+            return Json(res);
         }
         #endregion
 
@@ -99,12 +103,12 @@ namespace DynThings.WebPortal.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult EditTitlePV([Bind(Include = "ID,Title")] LocationView locationView)
         {
+            ResultInfo.Result res = UnitOfWork.resultInfo.GetResultByID(1);
             if (ModelState.IsValid)
             {
-                UnitOfWork.repoLocationViews.Edit(locationView.ID, locationView.Title,"1");
-                return Content("Ok");
+                res = UnitOfWork.repoLocationViews.Edit(locationView.ID, locationView.Title, "1");
             }
-            return Content("Failed");
+            return Json(res);
         }
         #endregion
 
@@ -120,12 +124,12 @@ namespace DynThings.WebPortal.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult EditMapPV([Bind(Include = "ID,X,Y,Z")] LocationView locationView)
         {
+            ResultInfo.Result res = UnitOfWork.resultInfo.GetResultByID(1);
             if (ModelState.IsValid)
             {
-                UnitOfWork.repoLocationViews.Edit(locationView.ID, 3, locationView.X, locationView.Y, locationView.Z, "1");
-                return Content("Ok");
+                res = UnitOfWork.repoLocationViews.Edit(locationView.ID, 3, locationView.X, locationView.Y, locationView.Z, "1");
             }
-            return Content("Failed");
+            return Json(res);
         }
         #endregion
 
@@ -133,9 +137,9 @@ namespace DynThings.WebPortal.Controllers
 
         #region LocationsListPV
         [HttpGet]
-        public PartialViewResult LocationsByLocationViewIDListGridPV(string searchfor = null,long locationViewID = 0, int page = 1, int recordsperpage = 0)
+        public PartialViewResult LocationsByLocationViewIDListGridPV(string searchfor = null, long locationViewID = 0, int page = 1, int recordsperpage = 0)
         {
-            IPagedList views = UnitOfWork.repoLocations.GetPagedList(searchfor,locationViewID, page, Helpers.Configs.validateRecordsPerMaster(recordsperpage));
+            IPagedList views = UnitOfWork.repoLocations.GetPagedList(searchfor, locationViewID, page, Helpers.Configs.validateRecordsPerMaster(recordsperpage));
             return PartialView("_LocationsList", views);
         }
         #endregion
@@ -144,8 +148,12 @@ namespace DynThings.WebPortal.Controllers
         [HttpPost]
         public ActionResult AttachLocation(long locationViewID, long locationID, string userID)
         {
-            ResultInfo.Result res = UnitOfWork.repoLocationViews.AttachLocation(locationViewID, locationID, userID);
-            return Content(res.Message);
+            ResultInfo.Result res = UnitOfWork.resultInfo.GetResultByID(1);
+            if (ModelState.IsValid)
+            {
+                res = UnitOfWork.repoLocationViews.AttachLocation(locationViewID, locationID, userID);
+            }
+            return Json(res);
         }
         #endregion
 
@@ -153,8 +161,12 @@ namespace DynThings.WebPortal.Controllers
         [HttpPost]
         public ActionResult DeAttachLocation(long locationViewID, long locationID, string userID)
         {
-            ResultInfo.Result res = UnitOfWork.repoLocationViews.DeattachLocation(locationViewID, locationID, userID);
-            return Content(res.Message);
+            ResultInfo.Result res = UnitOfWork.resultInfo.GetResultByID(1);
+            if (ModelState.IsValid)
+            {
+                res = UnitOfWork.repoLocationViews.DeattachLocation(locationViewID, locationID, userID);
+            }
+            return Json(res);
         }
         #endregion
 
@@ -191,19 +203,19 @@ namespace DynThings.WebPortal.Controllers
             IPagedList IOs = UnitOfWork.repoEndpointIOs.GetPagedList(endPointID, 1, 3);
             return PartialView("_EndPointHistory", IOs);
         }
-        
+
 
         [HttpGet]
         public PartialViewResult GetEndPointCommandsByEndPointGUIDPV(long endPointID)
         {
-            IPagedList endCmds = UnitOfWork.repoEndPointCommands.GetPagedListByEndPointID("", endPointID, 1,3);
+            IPagedList endCmds = UnitOfWork.repoEndPointCommands.GetPagedListByEndPointID("", endPointID, 1, 3);
             return PartialView("_EndPointCommands", endCmds);
         }
         #endregion
 
 
 
-#endregion
+        #endregion
 
 
 

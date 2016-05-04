@@ -71,8 +71,13 @@ namespace DynThings.WebPortal.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult AddPV([Bind(Include = "Title")] Device device)
         {
-            UnitOfWork.repoDevices.Add(device.Title);
-            return Content("Ok");
+            ResultInfo.Result res = UnitOfWork.resultInfo.GetResultByID(1);
+            if (ModelState.IsValid)
+            {
+                res = UnitOfWork.repoDevices.Add(device.Title);
+                return Json(res);
+            }
+            return Json(res);
         }
         #endregion
 
@@ -88,21 +93,18 @@ namespace DynThings.WebPortal.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult EditPV([Bind(Include = "ID,Title")] Device device)
         {
+            ResultInfo.Result res = UnitOfWork.resultInfo.GetResultByID(1);
             if (ModelState.IsValid)
             {
-                UnitOfWork.repoDevices.Edit(device.ID, device.Title);
+                res = UnitOfWork.repoDevices.Edit(device.ID, device.Title);
+                return Json(res);
             }
-            else
-            {
-                return Content("Error");
-            }
-            return View(device);
+            return Json(res);
         }
         #endregion
 
-        
-
         #endregion
+
 
         #region LookUP
         #region Lookup Main Div

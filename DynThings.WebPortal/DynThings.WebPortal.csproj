@@ -189,7 +189,6 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\APIEndPointIOsController.cs" />
-    <Compile Include="Controllers\APIEndpointsController.cs" />
     <Compile Include="Controllers\ConfigController.cs" />
     <Compile Include="Controllers\DeviceCommandsController.cs" />
     <Compile Include="Controllers\DevicesController.cs" />

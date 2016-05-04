@@ -77,8 +77,13 @@ namespace DynThings.WebPortal.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult AddPV([Bind(Include = "Title")] Location location)
         {
-            UnitOfWork.repoLocations.Add(location.Title);
-            return Content("Ok");
+            ResultInfo.Result res = UnitOfWork.resultInfo.GetResultByID(1);
+            if (ModelState.IsValid)
+            {
+                res = UnitOfWork.repoLocations.Add(location.Title);
+                return Json(res);
+            }
+            return Json(res);
         }
         #endregion
 
@@ -95,15 +100,13 @@ namespace DynThings.WebPortal.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult EditMainPV([Bind(Include = "ID,Title,IsActive")] Location location)
         {
+            ResultInfo.Result res = UnitOfWork.resultInfo.GetResultByID(1);
             if (ModelState.IsValid)
             {
-                UnitOfWork.repoLocations.EditMain(location.ID, location.Title, location.isActive);
+                res = UnitOfWork.repoLocations.EditMain(location.ID, location.Title, location.isActive);
+                return Json(res);
             }
-            else
-            {
-                return Content("Error");
-            }
-            return Content("Ok");
+            return Json(res);
         }
         #endregion
 
@@ -119,15 +122,13 @@ namespace DynThings.WebPortal.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult EditGeoLocationPV([Bind(Include = "ID,LongitudeY,LatitudeX")] Location location)
         {
+            ResultInfo.Result res = UnitOfWork.resultInfo.GetResultByID(1);
             if (ModelState.IsValid)
             {
                 UnitOfWork.repoLocations.EditGeoLocation(location.ID, location.LongitudeY, location.LatitudeX);
+                return Json(res);
             }
-            else
-            {
-                return Content("Error");
-            }
-            return Content("Ok");
+            return Json(res);
         }
         #endregion
 
@@ -148,8 +149,13 @@ namespace DynThings.WebPortal.Controllers
         [HttpPost]
         public ActionResult AttachDevice(long LocationID, long DeviceID, string userID)
         {
-            ResultInfo.Result res = UnitOfWork.repoLocations.AttachDevice(LocationID, DeviceID, userID);
-            return Content(res.Message);
+            ResultInfo.Result res = UnitOfWork.resultInfo.GetResultByID(1);
+            if (ModelState.IsValid)
+            {
+                res = UnitOfWork.repoLocations.AttachDevice(LocationID, DeviceID, userID);
+                return Json(res);
+            }
+            return Json(res);
         }
         #endregion
 
@@ -157,8 +163,13 @@ namespace DynThings.WebPortal.Controllers
         [HttpPost]
         public ActionResult DeAttachDevice(long LocationID, long DeviceID, string userID)
         {
-            ResultInfo.Result res = UnitOfWork.repoLocations.DeattachDevice(LocationID, DeviceID, userID);
-            return Content(res.Message);
+            ResultInfo.Result res = UnitOfWork.resultInfo.GetResultByID(1);
+            if (ModelState.IsValid)
+            {
+                res = UnitOfWork.repoLocations.DeattachDevice(LocationID, DeviceID, userID);
+                return Json(res);
+            }
+            return Json(res);
         }
         #endregion
 

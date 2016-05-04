@@ -42,12 +42,13 @@ namespace DynThings.WebPortal.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult GridsPV([Bind(Include = "DefaultRecordsPerMaster,DefaultRecordsPerChild")] DynSetting config)
         {
+            ResultInfo.Result res = UnitOfWork.resultInfo.GetResultByID(1);
             if (ModelState.IsValid)
             {
-                UnitOfWork.repoDynSettings.SetGridRowsCount(config.DefaultRecordsPerMaster, config.DefaultRecordsPerChild);
-                return Content("Ok");
+                res =  UnitOfWork.repoDynSettings.SetGridRowsCount(config.DefaultRecordsPerMaster, config.DefaultRecordsPerChild);
+                return Json(res);
             }
-            return Content("Failed");
+            return Json(res);
         }
         #endregion
     }

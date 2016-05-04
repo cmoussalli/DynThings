@@ -65,9 +65,14 @@ namespace DynThings.WebPortal.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult AddPV([Bind(Include = "Title,EndPointID,Description,CommandCode")] EndPointCommand command)
         {
-            long cmd = long.Parse(command.EndPointID.ToString());
-            UnitOfWork.repoEndPointCommands.Add(command.Title, long.Parse(command.EndPointID.ToString()), command.Description, command.CommandCode, "1");
-            return Content("Ok");
+            ResultInfo.Result res = UnitOfWork.resultInfo.GetResultByID(1);
+            if (ModelState.IsValid)
+            {
+                long cmd = long.Parse(command.EndPointID.ToString());
+                res = UnitOfWork.repoEndPointCommands.Add(command.Title, long.Parse(command.EndPointID.ToString()), command.Description, command.CommandCode, "1");
+                return Json(res);
+            }
+            return Json(res);
         }
         #endregion
 
@@ -84,12 +89,13 @@ namespace DynThings.WebPortal.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult EditPV([Bind(Include = "ID,Title,Description,EndPointID,CommandCode")] EndPointCommand Command)
         {
+            ResultInfo.Result res = UnitOfWork.resultInfo.GetResultByID(1);
             if (ModelState.IsValid)
             {
-                UnitOfWork.repoEndPointCommands.Edit(Command.ID, Command.Title, Command.Description, long.Parse(Command.EndPointID.ToString()), Command.CommandCode);
-                return Content("Ok");
+                res = UnitOfWork.repoEndPointCommands.Edit(Command.ID, Command.Title, Command.Description, long.Parse(Command.EndPointID.ToString()), Command.CommandCode);
+                return Json(res);
             }
-            return Content("Failed");
+            return Json(res);
         }
         #endregion
 
@@ -105,13 +111,14 @@ namespace DynThings.WebPortal.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult ExecutePV([Bind(Include = "ID,EndPointID")] EndPointCommand Command)
         {
+            ResultInfo.Result res = UnitOfWork.resultInfo.GetResultByID(1);
             if (ModelState.IsValid)
             {
                 Endpoint end = UnitOfWork.repoEndpoints.Find((long)Command.EndPointID);
-                UnitOfWork.repoEndPointCommands.Execute(Command.ID, Guid.Parse(end.KeyPass.ToString()), User.Identity.ToString());
-                return Content("Ok");
+                res = UnitOfWork.repoEndPointCommands.Execute(Command.ID, Guid.Parse(end.KeyPass.ToString()), User.Identity.ToString());
+                return Json(res);
             }
-            return Content("Failed");
+            return Json(res);
         }
         #endregion
 

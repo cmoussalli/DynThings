@@ -70,7 +70,12 @@ namespace DynThings.WebPortal.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult AddPV([Bind(Include = "Title,TypeID,DeviceID")] Endpoint endpoint)
         {
-            ResultInfo.Result res = UnitOfWork.repoEndpoints.Add(endpoint.Title, endpoint.TypeID, endpoint.DeviceID);
+            ResultInfo.Result res = UnitOfWork.resultInfo.GetResultByID(1);
+            if (ModelState.IsValid)
+            {
+                res = UnitOfWork.repoEndpoints.Add(endpoint.Title, endpoint.TypeID, endpoint.DeviceID);
+                return Json(res);
+            }
             return Json(res);
         }
         #endregion
@@ -89,7 +94,12 @@ namespace DynThings.WebPortal.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult EditPV([Bind(Include = "ID,Title,TypeID,DeviceID")] Endpoint endpoint)
         {
-            ResultInfo.Result res = UnitOfWork.repoEndpoints.Edit(endpoint.ID, endpoint.Title, endpoint.TypeID);
+            ResultInfo.Result res = UnitOfWork.resultInfo.GetResultByID(1);
+            if (ModelState.IsValid)
+            {
+                res = UnitOfWork.repoEndpoints.Edit(endpoint.ID, endpoint.Title, endpoint.TypeID);
+                return Json(res);
+            }
             return Json(res);
         }
         #endregion

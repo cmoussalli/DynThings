@@ -65,9 +65,13 @@ namespace DynThings.WebPortal.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult AddPV([Bind(Include = "Title,DeviceID,Description,CommandCode")] DeviceCommand command)
         {
-            long cmd = long.Parse(command.DeviceID.ToString());
-            UnitOfWork.repoDeviceCommands.Add(command.Title, long.Parse(command.DeviceID.ToString()), command.Description, command.CommandCode, "1");
-            return Content("Ok");
+            ResultInfo.Result res = UnitOfWork.resultInfo.GetResultByID(1);
+            if (ModelState.IsValid)
+            {
+                long cmd = long.Parse(command.DeviceID.ToString());
+                res = UnitOfWork.repoDeviceCommands.Add(command.Title, long.Parse(command.DeviceID.ToString()), command.Description, command.CommandCode, "1");
+            }
+            return Json(res) ;
         }
         #endregion
 
@@ -84,12 +88,13 @@ namespace DynThings.WebPortal.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult EditPV([Bind(Include = "ID,Title,Description,DeviceID,CommandCode")] DeviceCommand Command)
         {
+            ResultInfo.Result res = UnitOfWork.resultInfo.GetResultByID(1);
             if (ModelState.IsValid)
             {
-                UnitOfWork.repoDeviceCommands.Edit(Command.ID, Command.Title, Command.Description, long.Parse(Command.DeviceID.ToString()), Command.CommandCode);
-                return Content("Ok");
+                res = UnitOfWork.repoDeviceCommands.Edit(Command.ID, Command.Title, Command.Description, long.Parse(Command.DeviceID.ToString()), Command.CommandCode);
+                return Json(res);
             }
-            return Content("Failed");
+            return Json(res);
         }
         #endregion
 
@@ -107,13 +112,14 @@ namespace DynThings.WebPortal.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult ExecutePV([Bind(Include = "ID,DeviceID")] DeviceCommand Command)
         {
+            ResultInfo.Result res = UnitOfWork.resultInfo.GetResultByID(1);
             if (ModelState.IsValid)
             {
                 Device dev = UnitOfWork.repoDevices.Find((long)Command.DeviceID);
-                UnitOfWork.repoDeviceCommands.Execute(Command.ID, Guid.Parse(dev.KeyPass.ToString()), User.Identity.ToString());
-                return Content("Ok");
+                res = UnitOfWork.repoDeviceCommands.Execute(Command.ID, Guid.Parse(dev.KeyPass.ToString()), User.Identity.ToString());
+                return Json(res);
             }
-            return Content("Failed");
+            return Json(res);
         }
         #endregion
 
