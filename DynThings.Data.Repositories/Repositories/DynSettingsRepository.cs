@@ -52,6 +52,7 @@ namespace DynThings.Data.Repositories
                 cons[0].DefaultRecordsPerMaster = masterGridRowsCount;
                 cons[0].DefaultRecordsPerChild = childGridRowsCount;
                 db.SaveChanges();
+                Core.Config.Refresh();
             }
             else
             {

@@ -1,6 +1,7 @@
 ﻿//Attach : Pager
 function AttachEventEndPointCommandsListPager() {
     $(document).on("click", "#EndPointCommandsListPager a[href]", function () {
+        event.preventDefault();
         var loadingpart = LoadDivLoading();
         $("#divEndPointCommandsList").html(loadingpart);
         $.ajax({
@@ -50,6 +51,7 @@ function LoadPart_EndPointCommandListDiv(search) {
         .done(function (partialViewResult) {
             $("#divEndPointCommandsList").html(partialViewResult);
         });
+    AttachEventEndPointCommandsListPager();
     return false;
 };
 //Get List By EndPointID
