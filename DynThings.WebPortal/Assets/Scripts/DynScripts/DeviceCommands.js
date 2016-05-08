@@ -92,6 +92,19 @@ function LoadPart_DialogDeviceCommandEdit(id) {
     });
 }
 
+//Get Delete
+function LoadPart_DialogDeviceCommandDelete(id) {
+    var loadingpart = LoadDivLoading();
+    $("#modal").html(loadingpart);
+    $.ajax({
+        url: getRootURL() + '/DeviceCommands/deletepv?id=' + id,
+        type: "GET",
+    })
+    .done(function (partialViewResult) {
+        $("#modal").html(partialViewResult);
+    });
+}
+
 //Get Execute
 function LoadPart_DialogDeviceCommandExecute(id) {
     var loadingpart = LoadDivLoading();

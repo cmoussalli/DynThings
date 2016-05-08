@@ -1,0 +1,51 @@
+﻿@model DynThings.Data.Models.EndPointCommand
+
+<div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+    <h4 class="modal-title" id="myModalLabel">Delete Confirmation</h4>
+</div>
+@using (Html.BeginForm("DeletePV", "EndPointCommands", FormMethod.Post, new { id = "EndPointCommandDeleteForm" }))
+{
+    <div class="modal-body">
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.ID)
+        @Html.HiddenFor(model => model.Title)
+        @Html.HiddenFor(model => model.Description)
+        @Html.HiddenFor(model => model.EndPointID)
+        @Html.HiddenFor(model => model.CommandCode)
+        
+        <span>Are you sure that you want to delete the following object?</span><br /><br />
+        <span>Type: EndPoint Command</span><br />
+        <span>Title: @Model.Title</span><br />
+        <span>Description: @Model.Description</span><br />
+
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-danger">Delete</button>
+    </div>
+}
+
+<script>
+    //Attach : Delete Form Submit
+    $(document).ready(function () {
+        $("#EndPointCommandDeleteForm").on("submit", function (event) {
+            event.preventDefault();
+            var url = $(this).attr("action");
+            var formData = $(this).serialize();
+            $.ajax({
+                url: url,
+                type: "POST",
+                data: formData,
+                dataType: "json",
+                success: function (resp) {
+                    window.location = getRootURL() + "endpointcommands";
+                }
+            })
+            LoadPart_EndPointCommandListDiv();
+            $('#mdl').modal('hide');
+        });
+    });
+
+</script>

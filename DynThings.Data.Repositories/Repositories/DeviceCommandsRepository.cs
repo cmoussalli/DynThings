@@ -120,6 +120,24 @@ namespace DynThings.Data.Repositories
 
         #endregion
 
+        #region Delete
+        public ResultInfo.Result Detele(long id)
+        {
+            try
+            {
+                DeviceCommand cmd = db.DeviceCommands.Find(id);
+                db.DeviceCommands.Remove(cmd);
+                db.SaveChanges();
+                return UnitOfWork.resultInfo.GenerateOKResult("Deleted", cmd.ID);
+            }
+            catch
+            {
+                return UnitOfWork.resultInfo.GetResultByID(1);
+            }
+        }
+
+        #endregion
+
         #region Execute
         public ResultInfo.Result Execute(long commandID, Guid deviceKeyPass, string ownerID)
         {

@@ -98,6 +98,29 @@ namespace DynThings.WebPortal.Controllers
         }
         #endregion
 
+        #region DeletePV
+        [HttpGet]
+        public PartialViewResult DeletePV(long id)
+        {
+            DeviceCommand Command = UnitOfWork.repoDeviceCommands.Find(id);
+            ViewBag.DeviceID = new SelectList(UnitOfWork.repoEndpoints.GetList(), "ID", "Title", Command.DeviceID);
+            return PartialView("_Delete", Command);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeletePV([Bind(Include = "ID,Title,Description,DeviceID")] DeviceCommand Command)
+        {
+            ResultInfo.Result res = UnitOfWork.resultInfo.GetResultByID(1);
+            if (ModelState.IsValid)
+            {
+                res = UnitOfWork.repoDeviceCommands.Detele(Command.ID);
+                return Json(res);
+            }
+            return Json(res);
+        }
+        #endregion
+
         #region ExecutePV
 
 

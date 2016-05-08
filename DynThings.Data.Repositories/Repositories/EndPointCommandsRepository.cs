@@ -103,6 +103,24 @@ namespace DynThings.Data.Repositories
 
         #endregion
 
+        #region Delete
+        public ResultInfo.Result Detele(long id)
+        {
+            try
+            {
+                EndPointCommand cmd = db.EndPointCommands.Find(id);
+                db.EndPointCommands.Remove(cmd);
+                db.SaveChanges();
+                return UnitOfWork.resultInfo.GenerateOKResult("Deleted", cmd.ID);
+            }
+            catch
+            {
+                return UnitOfWork.resultInfo.GetResultByID(1);
+            }
+        }
+
+        #endregion
+
         #region Edit
         public ResultInfo.Result Edit(long id, string title, string description, long EndPointID, string commandCode)
         {

@@ -574,6 +574,8 @@
     <Content Include="Views\Config\_Main.cshtml" />
     <Content Include="Views\Config\_Security.cshtml" />
     <Content Include="Views\Config\_Grids.cshtml" />
+    <Content Include="Views\EndPointCommands\_Delete.cshtml" />
+    <Content Include="Views\DeviceCommands\_Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

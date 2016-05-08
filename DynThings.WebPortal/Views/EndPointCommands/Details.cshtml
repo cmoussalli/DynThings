@@ -13,6 +13,7 @@
                 <li class="active"><a data-toggle="tab" href="#tabCommandmain">Main</a></li>
                 <li><a data-toggle="tab" href="#tabCommandhistory">History</a></li>
                 <li><a data-toggle="tab" href="#tabCommandDevkeys">Dev Keys</a></li>
+                <li><a data-toggle="tab" href="#tabCommandDelete">Delete</a></li>
             </ul>
             <div class="panel panel-default">
                 <div class="panel-body">
@@ -33,6 +34,11 @@
                             <div id="divCommandDevkeys">
                             </div>
                         </div>
+                        <div id="tabCommandDelete" class="tab-pane fade">
+                            <div id="divCommandDelete">
+                                <button type="button" class="btn btn-danger" onclick="LoadPart_DialogEndPointCommandDelete(@Model.ID)" data-toggle="modal" data-target="#mdl">Delete</button>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -40,7 +46,6 @@
     </div>
 </div>
 <!-- Button trigger modal -->
-
 
 @section scriptfiles{
     <script src="~/Assets/Scripts/DynScripts/EndPointCommands.js"></script>
