@@ -48,6 +48,7 @@ function AttachEventEndPointAddForm() {
             dataType: "json",
             success: function (resp) {
                 ServerResponse(resp);
+                LoadPart_EndPointListDiv();
             },
             error: function () {
                 ServerResponse(resp);

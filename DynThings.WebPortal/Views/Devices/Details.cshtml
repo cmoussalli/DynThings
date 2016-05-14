@@ -1,14 +1,12 @@
 ﻿@model DynThings.Data.Models.Device
-
 @{
     ViewBag.Title = "Device Details";
 }
-
 <div class="container">
     <div class="page-header">
         <h1>Device Details</h1>
     </div>
-    
+
     <div class="row">
         <div class="col-md-12">
             <ul class="nav nav-tabs">
@@ -17,6 +15,7 @@
                 <li><a data-toggle="tab" href="#tabDevicecommands">Commands</a></li>
                 <li><a data-toggle="tab" href="#tabDeviceEndPoints">EndPoints</a></li>
                 <li><a data-toggle="tab" href="#tabDeviceDevkeys">Dev Keys</a></li>
+                <li><a data-toggle="tab" href="#tabDeviceDelete">Delete</a></li>
             </ul>
             <div class="panel panel-default">
                 <div class="panel-body">
@@ -41,15 +40,20 @@
                             <div id="divDeviceDevkeys">
                             </div>
                         </div>
+                        <div id="tabDeviceDelete" class="tab-pane fade">
+                            <div id="divDeviceDelete">
+                                <button type="button" class="btn btn-danger" onclick="LoadPart_DialogDeviceDelete(@Model.ID)" data-toggle="modal" data-target="#mdl">Delete</button>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
-
 @section scripts{
-<script>
-
-    </script>    
+    <script src="~/Assets/Scripts/DynScripts/Devices.js"></script>
+    <script src="~/Assets/Scripts/DynScripts/DeviceCommands.js"></script>
+    <script>
+    </script>
 }

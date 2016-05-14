@@ -152,6 +152,23 @@ namespace DynThings.Data.Repositories
 
         #endregion
 
+        #region Add
+        public ResultInfo.Result Delete(long id)
+        {
+            try
+            {
+                Endpoint end = db.Endpoints.Find(id);
+                db.Endpoints.Remove(end);
+                db.SaveChanges();
+                return UnitOfWork.resultInfo.GenerateOKResult("Deleted", end.ID);
+            }
+            catch
+            {
+                return UnitOfWork.resultInfo.GetResultByID(1);
+            }
+        }
+
+        #endregion
 
 
 

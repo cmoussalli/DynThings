@@ -37,9 +37,30 @@
 }
 
 <script>
+    //Attach : Add Form Submit
     $(document).ready(function () {
-     
-
+        $("#DeviceCommandAddForm").on("submit", function (event) {
+            event.preventDefault();
+            var url = $(this).attr("action");
+            var formData = $(this).serialize();
+            $.ajax({
+                url: url,
+                type: "POST",
+                data: formData,
+                dataType: "json",
+                success: function (resp) {
+                    if (resp.ResultType == "0") {
+                    window.location = getRootURL() + "\Devicecommands\\details" + "\\" + resp.Reference;
+                    }
+                    else
+                    {
+                        window.location = getRootURL() + "Devicecommands";
+                    }
+                }
+            })
+            LoadPart_DeviceCommandListDiv();
+            $('#mdl').modal('hide');
+        });
     });
 
 </script>

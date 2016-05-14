@@ -237,7 +237,9 @@
           <Property Name="IsError" Type="bit" />
         </EntityType>
         <Association Name="FK__Commands__Device__4D94879B">
-          <End Role="Devices" Type="Self.Devices" Multiplicity="0..1" />
+          <End Role="Devices" Type="Self.Devices" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="DeviceCommands" Type="Self.DeviceCommands" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Devices">
@@ -249,7 +251,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__DeviceIOs__Devic__19AACF41">
-          <End Role="Devices" Type="Self.Devices" Multiplicity="0..1" />
+          <End Role="Devices" Type="Self.Devices" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="DeviceIOs" Type="Self.DeviceIOs" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Devices">
@@ -273,7 +277,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__Devices__StatusI__01D345B0">
-          <End Role="DeviceStatus" Type="Self.DeviceStatus" Multiplicity="0..1" />
+          <End Role="DeviceStatus" Type="Self.DeviceStatus" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Devices" Type="Self.Devices" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="DeviceStatus">
@@ -285,7 +291,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__EndPointC__EndPo__4222D4EF">
-          <End Role="Endpoints" Type="Self.Endpoints" Multiplicity="0..1" />
+          <End Role="Endpoints" Type="Self.Endpoints" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="EndPointCommands" Type="Self.EndPointCommands" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Endpoints">
@@ -297,7 +305,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__EndPointI__EndPo__29572725">
-          <End Role="Endpoints" Type="Self.Endpoints" Multiplicity="1" />
+          <End Role="Endpoints" Type="Self.Endpoints" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="EndPointIOs" Type="Self.EndPointIOs" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Endpoints">
@@ -321,7 +331,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__Endpoints__Devic__00DF2177">
-          <End Role="Devices" Type="Self.Devices" Multiplicity="1" />
+          <End Role="Devices" Type="Self.Devices" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Endpoints" Type="Self.Endpoints" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Devices">
@@ -664,7 +676,7 @@
             <End Role="IOType" EntitySet="IOTypes" />
             <End Role="EndPointIO" EntitySet="EndPointIOs" />
           </AssociationSet>
-          <AssociationSet Name="FK__EndPoints__TypeI__21B6055D" Association="DynThingsModel.FK__EndPoints__TypeI__21B6055D">
+          <AssociationSet Name="FK__Endpoints__TypeI__45F365D3" Association="DynThingsModel.FK__Endpoints__TypeI__45F365D3">
             <End Role="EndPointType" EntitySet="EndPointTypes" />
             <End Role="Endpoint" EntitySet="Endpoints" />
           </AssociationSet>
@@ -855,7 +867,7 @@
           <NavigationProperty Name="Device" Relationship="DynThingsModel.FK__Endpoints__Devic__00DF2177" FromRole="Endpoint" ToRole="Device" />
           <NavigationProperty Name="EndPointCommands" Relationship="DynThingsModel.FK__EndPointC__EndPo__4222D4EF" FromRole="Endpoint" ToRole="EndPointCommand" />
           <NavigationProperty Name="EndPointIOs" Relationship="DynThingsModel.FK__EndPointI__EndPo__29572725" FromRole="Endpoint" ToRole="EndPointIO" />
-          <NavigationProperty Name="EndPointType" Relationship="DynThingsModel.FK__EndPoints__TypeI__21B6055D" FromRole="Endpoint" ToRole="EndPointType" />
+          <NavigationProperty Name="EndPointType" Relationship="DynThingsModel.FK__Endpoints__TypeI__45F365D3" FromRole="Endpoint" ToRole="EndPointType" />
         </EntityType>
         <EntityType Name="EndPointTypeCategory">
           <Key>
@@ -875,7 +887,7 @@
           <Property Name="TypeCategoryID" Type="Int64" />
           <Property Name="IconID" Type="Int64" />
           <NavigationProperty Name="CssIcon" Relationship="DynThingsModel.FK__EndPointT__IconI__3FD07829" FromRole="EndPointType" ToRole="CssIcon" />
-          <NavigationProperty Name="Endpoints" Relationship="DynThingsModel.FK__EndPoints__TypeI__21B6055D" FromRole="EndPointType" ToRole="Endpoint" />
+          <NavigationProperty Name="Endpoints" Relationship="DynThingsModel.FK__Endpoints__TypeI__45F365D3" FromRole="EndPointType" ToRole="Endpoint" />
           <NavigationProperty Name="EndPointTypeCategory" Relationship="DynThingsModel.FK__EndPointT__TypeC__47DBAE45" FromRole="EndPointType" ToRole="EndPointTypeCategory" />
         </EntityType>
         <EntityType Name="IOType">
@@ -995,7 +1007,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__Commands__Device__4D94879B">
-          <End Type="DynThingsModel.Device" Role="Device" Multiplicity="0..1" />
+          <End Type="DynThingsModel.Device" Role="Device" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Type="DynThingsModel.DeviceCommand" Role="DeviceCommand" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Device">
@@ -1007,7 +1021,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__DeviceIOs__Devic__19AACF41">
-          <End Type="DynThingsModel.Device" Role="Device" Multiplicity="0..1" />
+          <End Type="DynThingsModel.Device" Role="Device" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Type="DynThingsModel.DeviceIO" Role="DeviceIO" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Device">
@@ -1031,7 +1047,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__Devices__StatusI__01D345B0">
-          <End Type="DynThingsModel.DeviceStatu" Role="DeviceStatu" Multiplicity="0..1" />
+          <End Type="DynThingsModel.DeviceStatu" Role="DeviceStatu" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Type="DynThingsModel.Device" Role="Device" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="DeviceStatu">
@@ -1043,7 +1061,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__Endpoints__Devic__00DF2177">
-          <End Type="DynThingsModel.Device" Role="Device" Multiplicity="1" />
+          <End Type="DynThingsModel.Device" Role="Device" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Type="DynThingsModel.Endpoint" Role="Endpoint" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Device">
@@ -1067,7 +1087,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__EndPointC__EndPo__4222D4EF">
-          <End Type="DynThingsModel.Endpoint" Role="Endpoint" Multiplicity="0..1" />
+          <End Type="DynThingsModel.Endpoint" Role="Endpoint" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Type="DynThingsModel.EndPointCommand" Role="EndPointCommand" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Endpoint">
@@ -1079,7 +1101,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__EndPointI__EndPo__29572725">
-          <End Type="DynThingsModel.Endpoint" Role="Endpoint" Multiplicity="1" />
+          <End Type="DynThingsModel.Endpoint" Role="Endpoint" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Type="DynThingsModel.EndPointIO" Role="EndPointIO" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Endpoint">
@@ -1102,7 +1126,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__EndPoints__TypeI__21B6055D">
+        <Association Name="FK__Endpoints__TypeI__45F365D3">
           <End Type="DynThingsModel.EndPointType" Role="EndPointType" Multiplicity="1" />
           <End Type="DynThingsModel.Endpoint" Role="Endpoint" Multiplicity="*" />
           <ReferentialConstraint>

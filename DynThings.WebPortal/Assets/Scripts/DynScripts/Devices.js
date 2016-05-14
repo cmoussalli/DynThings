@@ -93,8 +93,19 @@ function LoadPart_DialogDeviceAdd() {
 //Get Edit
 //TODO
 
-//Button: Edit
-//TODO
+//Get Delete
+function LoadPart_DialogDeviceDelete(id) {
+    var loadingpart = LoadDivLoading();
+    $("#modal").html(loadingpart);
+    $.ajax({
+        url: getRootURL() + '/Devices/DeletePV?id=' + id,
+        //page=" + $("#DynConfigCurrentPage").html,
+        type: "GET",
+    })
+    .done(function (partialViewResult) {
+        $("#modal").html(partialViewResult);
+    });
+}
 
 
 

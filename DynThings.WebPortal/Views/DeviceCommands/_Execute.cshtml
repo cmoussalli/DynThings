@@ -50,7 +50,7 @@
                 data: formData,
                 dataType: "json",
                 success: function (resp) {
-                    alert('ok');
+                    NotifyWithTitle('s', 'Success', 'Command has been sent');
                 }
             })
             $('#mdl').modal('hide');

@@ -202,6 +202,7 @@
     <Compile Include="Controllers\LocationViewTypesController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\APISimulatorServicesController.cs" />
+    <Compile Include="Controllers\SetupController.cs" />
     <Compile Include="Controllers\ThingsIOController.cs" />
     <Compile Include="Controllers\UsersManagementController.cs" />
     <Compile Include="Global.asax.cs">
@@ -576,6 +577,8 @@
     <Content Include="Views\Config\_Grids.cshtml" />
     <Content Include="Views\EndPointCommands\_Delete.cshtml" />
     <Content Include="Views\DeviceCommands\_Delete.cshtml" />
+    <Content Include="Views\Devices\_Delete.cshtml" />
+    <Content Include="Views\Setup\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

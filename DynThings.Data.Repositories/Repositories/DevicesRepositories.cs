@@ -134,9 +134,9 @@ namespace DynThings.Data.Repositories
                 db.Devices.Add(dev);
                 db.SaveChanges();
             }
-            catch
+            catch(Exception ex)
             {
-                return UnitOfWork.resultInfo.GetResultByID(1);
+                return UnitOfWork.resultInfo.GenerateErrorResult(ex.InnerException.ToString());
             }
             return UnitOfWork.resultInfo.GenerateOKResult("Saved", dev.ID);
         }
@@ -161,6 +161,25 @@ namespace DynThings.Data.Repositories
             catch
             {
                 return UnitOfWork.resultInfo.GetResultByID(1);
+            }
+        }
+
+        #endregion
+
+        #region Delete
+        public ResultInfo.Result Delete(long id)
+        {
+            try
+            {
+                Device dev = db.Devices.Find(id);
+                
+                db.Devices.Remove(dev);
+                db.SaveChanges();
+                return UnitOfWork.resultInfo.GenerateOKResult("Deleted", dev.ID);
+            }
+            catch(Exception ex)
+            {
+                return UnitOfWork.resultInfo.GenerateErrorResult(ex.Message + " -- " + ex.InnerException);
             }
         }
 

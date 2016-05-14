@@ -104,6 +104,28 @@ namespace DynThings.WebPortal.Controllers
         }
         #endregion
 
+        #region DeletePV
+        [HttpGet]
+        public PartialViewResult DeletePV(long id)
+        {
+            Endpoint endpoint = UnitOfWork.repoEndpoints.Find(id);
+            return PartialView("_Delete", endpoint);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeletePV([Bind(Include = "ID,Title")] Endpoint endpoint)
+        {
+            ResultInfo.Result res = UnitOfWork.resultInfo.GetResultByID(1);
+            if (ModelState.IsValid)
+            {
+                res = UnitOfWork.repoEndpoints.Delete(endpoint.ID);
+                return Json(res);
+            }
+            return Json(res);
+        }
+        #endregion
+
 
         #region EndPoint History
         [HttpGet]

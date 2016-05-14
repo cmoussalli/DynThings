@@ -73,6 +73,11 @@ namespace DynThings.Data.Repositories
             return res;
         }
 
+        public Result GenerateErrorResult(string message)
+        {
+            return new Result(0, ResultType.Failed, message,0);
+        }
+
         #endregion
 
 
