@@ -28,7 +28,7 @@ namespace DynThings.WebPortal.Controllers
         }
 
 
-        #region EditPV
+        #region GridsPV
         [HttpGet]
         public PartialViewResult GridsPV()
         {
@@ -46,6 +46,28 @@ namespace DynThings.WebPortal.Controllers
             if (ModelState.IsValid)
             {
                 res =  UnitOfWork.repoDynSettings.SetGridRowsCount(config.DefaultRecordsPerMaster, config.DefaultRecordsPerChild);
+                return Json(res);
+            }
+            return Json(res);
+        }
+        #endregion
+
+        #region DevModePV
+        [HttpGet]
+        public PartialViewResult DevModePV()
+        {
+            DynSetting config = UnitOfWork.repoDynSettings.GetConfig();
+            return PartialView("_DevMode", config);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult DevModePV([Bind(Include = "DevelopmentMode")] DynSetting config)
+        {
+            ResultInfo.Result res = UnitOfWork.resultInfo.GetResultByID(1);
+            if (ModelState.IsValid)
+            {
+                res = UnitOfWork.repoDynSettings.SetDevelopmentMode(config.DevelopmentMode);
                 return Json(res);
             }
             return Json(res);

@@ -61,5 +61,23 @@ namespace DynThings.Data.Repositories
             return UnitOfWork.resultInfo.GenerateOKResult("Saved");
         }
         #endregion
+
+        #region Update: DevelopmentMode
+        public ResultInfo.Result SetDevelopmentMode(bool DevelopmentMode)
+        {
+            List<DynSetting> cons = db.DynSettings.Where(l => l.ID == 1).ToList();
+            if (cons.Count == 1)
+            {
+                cons[0].DevelopmentMode = DevelopmentMode;
+                db.SaveChanges();
+                Core.Config.Refresh();
+            }
+            else
+            {
+                return UnitOfWork.resultInfo.GetResultByID(1);
+            }
+            return UnitOfWork.resultInfo.GenerateOKResult("Saved");
+        }
+        #endregion
     }
 }

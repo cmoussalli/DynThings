@@ -14,6 +14,7 @@
                 <li><a data-toggle="tab" href="#tabConfiggrids">Data Tables</a></li>
                 <li><a data-toggle="tab" href="#tabConfigbehavior">Users Behavior</a></li>
                 <li><a data-toggle="tab" href="#tabConfigsecurity">Security</a></li>
+                <li><a data-toggle="tab" href="#tabConfigDevMode">Dev Mode</a></li>
                 <li><a data-toggle="tab" href="#tabConfigDevkeys">Dev Keys</a></li>
             </ul>
             <div class="panel panel-default">
@@ -35,6 +36,10 @@
                         </div>
                         <div id="tabConfigsecurity" class="tab-pane fade">
                             <div id="divConfigSecurity">
+                            </div>
+                        </div>
+                        <div id="tabConfigDevMode" class="tab-pane fade">
+                            <div id="divConfigDevMode">
                             </div>
                         </div>
                         <div id="tabConfigDevkeys" class="tab-pane fade">
@@ -61,6 +66,7 @@
         $(document).ready(function () {
             LoadPart_ConfigDetailsMainDiv();
             LoadPart_ConfigDetailsGridsDiv();
+            LoadPart_ConfigDetailsDevModeDiv();
         });
 
         

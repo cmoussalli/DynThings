@@ -1,0 +1,20 @@
+﻿@model DynThings.Data.Models.DynSetting
+
+@using (Html.BeginForm("DevModePV", "Config", FormMethod.Post, new { id = "ConfigDevModeEditForm" }))
+{
+    @Html.AntiForgeryToken()
+    <div class="form-group">
+        @Html.LabelFor(model => model.DevelopmentMode, htmlAttributes: new { @class = "" })
+        @Html.EditorFor(model => model.DevelopmentMode, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.ValidationMessageFor(model => model.DevelopmentMode, "", new { @class = "text-danger" })
+    </div>
+    <br />
+
+
+    <button type="submit" class="btn btn-primary">Save changes</button>
+}
+<script>
+    $(document).ready(function () {
+        AttachEventConfigDevModeEditForm();
+        });
+</script>
