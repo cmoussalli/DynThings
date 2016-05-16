@@ -580,6 +580,7 @@
     <Content Include="Views\Devices\_Delete.cshtml" />
     <Content Include="Views\Setup\Index.cshtml" />
     <Content Include="Views\Config\_DevMode.cshtml" />
+    <Content Include="Views\Endpoints\_Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

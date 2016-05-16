@@ -141,6 +141,20 @@ function LoadPart_DialogEndPointEdit(id) {
     });
 }
 
+//Get Delete
+function LoadPart_DialogEndPointDelete(id) {
+    var loadingpart = LoadDivLoading();
+    $("#modal").html(loadingpart);
+    $.ajax({
+        url: getRootURL() + '/EndPoints/DeletePV?id=' + id,
+        //page=" + $("#DynConfigCurrentPage").html,
+        type: "GET",
+    })
+    .done(function (partialViewResult) {
+        $("#modal").html(partialViewResult);
+    });
+}
+
 function LoadEndpointEditor(id) {
     LoadPart_DialogEndPointEdit(id);
     LoadPart_EndPointDetailsDiv(id);

@@ -1,6 +1,6 @@
-﻿@model DynThings.Data.Models.Device
+﻿@model DynThings.Data.Models.Endpoint
 
-@using (Html.BeginForm("DeletePV", "Devices", FormMethod.Post, new { id = "DeviceDeleteForm" }))
+@using (Html.BeginForm("DeletePV", "Endpoints", FormMethod.Post, new { id = "EndPointDeleteForm" }))
 {
     <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -8,20 +8,13 @@
     </div>
     <div class="modal-body">
 
-        @if (Model.Endpoints.Count > 0)
-        {
-            <div class="alert alert-warning alert-dismissable">
-                <h3>Warning</h3><h5> you have @Model.Endpoints.Count Endpoint(s) associated with the selected Device.</h5>
-                <h5>All associated data will be removed.</h5>
-            </div><br />
-        }
 
         @Html.AntiForgeryToken()
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.ID)
         @Html.HiddenFor(model => model.Title)
         <span>Are you sure you want to delete the following object?</span><br /><br />
-        <span>Type: Device</span><br />
+        <span>Type: EndPoint</span><br />
         <span>Title: @Model.Title</span><br />
 
     </div>
@@ -34,7 +27,7 @@
 <script>
     //Attach : Delete Form Submit
     $(document).ready(function () {
-        $("#DeviceDeleteForm").on("submit", function (event) {
+        $("#EndPointDeleteForm").on("submit", function (event) {
             event.preventDefault();
             var url = $(this).attr("action");
             var formData = $(this).serialize();
@@ -44,11 +37,12 @@
                 data: formData,
                 dataType: "json",
                 success: function (resp) {
-                    window.location = getRootURL() + "Devices";
+                    window.location = getRootURL() + "EndPoints";
                 }
             })
-            LoadPart_DeviceListDiv();
+            LoadPart_EndPointListDiv();
             $('#mdl').modal('hide');
         });
     });
 </script>
+

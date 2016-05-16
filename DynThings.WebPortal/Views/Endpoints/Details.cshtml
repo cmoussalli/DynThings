@@ -26,6 +26,7 @@
                 <li><a data-toggle="tab" href="#tabEndPointhistory">History</a></li>
                 <li><a data-toggle="tab" href="#tabEndPointcommands">Commands</a></li>
                 <li><a data-toggle="tab" href="#tabEndPointDevkeys">Dev Keys</a></li>
+                <li><a data-toggle="tab" href="#tabEndPointDelete">Delete</a></li>
             </ul>
             <div class="panel panel-default">
                 <div class="panel-body">
@@ -44,6 +45,11 @@
                         </div>
                         <div id="tabEndPointDevkeys" class="tab-pane fade">
                             <div id="divEndPointDevkeys">
+                            </div>
+                        </div>
+                        <div id="tabEndPointDelete" class="tab-pane fade">
+                            <div id="divEndPointDelete">
+                                <button type="button" class="btn btn-danger" onclick="LoadPart_DialogEndPointDelete(@Model.ID)" data-toggle="modal" data-target="#mdl">Delete</button>
                             </div>
                         </div>
                     </div>
