@@ -10,25 +10,21 @@
         </tr>
     </thead>
     <tbody>
-        
+
         @foreach (var loc in Model)
-        {
+            {
             <Text>
             <tr>
                 <td>@loc.Valu</td>
                 <td>@loc.IOType.Title</td>
                 <td>@loc.TimeStamp</td>
             </tr>
-
             </text>
         }
     </tbody>
 </table>
-
 <div id="EndPointIOsListPager">
     <input id="EndPointIOsCurrentPage" value="@Model.PageNumber.ToString()" hidden />
     @Html.PagedListPager(Model, page => Url.Action("GetPVEndPointHistory", new { page }))
 </div>
-
-
 
