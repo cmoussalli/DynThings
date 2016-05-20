@@ -154,6 +154,15 @@ namespace DynThings.WebPortal.Controllers
         }
         #endregion
 
+        #region EndPoint Keys
+        [HttpGet]
+        public PartialViewResult EndPointKeysPV(long id)
+        {
+            Endpoint endpoint = UnitOfWork.repoEndpoints.Find(id);
+            return PartialView("_Details_Keys", endpoint);
+        }
+        #endregion
+
         #endregion
 
 

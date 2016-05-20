@@ -108,6 +108,20 @@ function LoadPart_DialogLocationMainEdit(id) {
     });
 }
 
+//Get Delete
+function LoadPart_DialogLocationDelete(id) {
+    var loadingpart = LoadDivLoading();
+    $("#modal").html(loadingpart);
+    $.ajax({
+        url: getRootURL() + '/Locations/DeletePV?id=' + id,
+        //page=" + $("#DynConfigCurrentPage").html,
+        type: "GET",
+    })
+    .done(function (partialViewResult) {
+        $("#modal").html(partialViewResult);
+    });
+}
+
 //Get Devices List
 function LoadPart_DevicesListByLocationIDDiv(locationID) {
     var loadingpart = LoadDivLoading();

@@ -169,6 +169,24 @@ namespace DynThings.Data.Repositories
 
         #endregion
 
+        #region Delete
+        public ResultInfo.Result Delete(long id)
+        {
+            try
+            {
+                Location loc = db.Locations.Find(id);
+                db.Locations.Remove(loc);
+                db.SaveChanges();
+                return UnitOfWork.resultInfo.GenerateOKResult("Deleted", loc.ID);
+            }
+            catch
+            {
+                return UnitOfWork.resultInfo.GetResultByID(1);
+            }
+        }
+
+        #endregion
+
         #region AttachDevice
         public ResultInfo.Result AttachDevice(long locationID, long deviceID, string userID)
         {

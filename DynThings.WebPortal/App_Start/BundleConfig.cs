@@ -20,6 +20,7 @@ namespace DynThings.WebPortal
                         "~/Scripts/modernizr-*"));
 
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
+                "~/Scripts/bootstraps.js",
                       "~/Scripts/bootstrap.js",
                       "~/Scripts/respond.js"));
 
