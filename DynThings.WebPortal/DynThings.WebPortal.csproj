@@ -582,6 +582,7 @@
     <Content Include="Views\Endpoints\_Delete.cshtml" />
     <Content Include="Views\Locations\_Delete.cshtml" />
     <Content Include="Views\Endpoints\_Details_Keys.cshtml" />
+    <Content Include="Views\LocationViews\_Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

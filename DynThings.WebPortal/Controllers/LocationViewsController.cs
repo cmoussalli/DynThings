@@ -173,6 +173,28 @@ namespace DynThings.WebPortal.Controllers
 
         #endregion
 
+        #region DeletePV
+        [HttpGet]
+        public PartialViewResult DeletePV(int id)
+        {
+            LocationView locationView = UnitOfWork.repoLocationViews.Find(id);
+            return PartialView("_Delete", locationView);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeletePV([Bind(Include = "ID,Title")] LocationView locationView)
+        {
+            ResultInfo.Result res = UnitOfWork.resultInfo.GetResultByID(1);
+            if (ModelState.IsValid)
+            {
+                res = UnitOfWork.repoLocationViews.Delete(locationView.ID);
+                return Json(res);
+            }
+            return Json(res);
+        }
+        #endregion
+
         #region Monitor Components
         [HttpGet]
         public PartialViewResult GetPVLocationViewMap(int id)

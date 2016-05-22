@@ -153,6 +153,24 @@ namespace DynThings.Data.Repositories
         }
         #endregion
 
+        #region Delete
+        public ResultInfo.Result Delete(long id)
+        {
+            try
+            {
+                LocationView locView = db.LocationViews.Find(id);
+                db.LocationViews.Remove(locView);
+                db.SaveChanges();
+                return UnitOfWork.resultInfo.GenerateOKResult("Deleted", locView.ID);
+            }
+            catch
+            {
+                return UnitOfWork.resultInfo.GetResultByID(1);
+            }
+        }
+
+        #endregion
+
         #region AttachLocation
         public ResultInfo.Result AttachLocation(long locationViewID, long locationID, string userID)
         {

@@ -94,6 +94,20 @@ function LoadPart_DialogLocationViewAdd() {
 //Get Edit
 //TODO
 
+//Get Delete
+function LoadPart_DialogLocationViewDelete(id) {
+    var loadingpart = LoadDivLoading();
+    $("#modal").html(loadingpart);
+    $.ajax({
+        url: getRootURL() + '/LocationViews/DeletePV?id=' + id,
+        //page=" + $("#DynConfigCurrentPage").html,
+        type: "GET",
+    })
+    .done(function (partialViewResult) {
+        $("#modal").html(partialViewResult);
+    });
+}
+
 //Button: Edit
 //TODO
 
