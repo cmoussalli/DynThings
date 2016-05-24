@@ -17,6 +17,7 @@ using DynThings.Data.Models;
 using DynThings.Data.Repositories;
 using PagedList;
 using DynThings.Core;
+using DynThings.Data.Models.ReportsModels;
 
 namespace DynThings.WebPortal.Controllers
 {
@@ -185,5 +186,66 @@ namespace DynThings.WebPortal.Controllers
         #endregion
         #endregion
 
+
+        #region DataServices
+        [HttpGet]
+        public ActionResult AVG_Month(long endPointID)
+        {
+            HighChartsModel hc = new HighChartsModel();
+            hc.Title = "Monthly Average";
+            hc.SubTitle = "Extra Text Here";
+
+
+            List<string> xa = new List<string>();
+            string xa1 = "Jan";
+            string xa2 = "Feb";
+            string xa3 = "Mar";
+            string xa4 = "Apr";
+            xa.Add(xa1);
+            xa.Add(xa2);
+            xa.Add(xa3);
+            xa.Add(xa4);
+
+            hc.XAxisList = xa;
+            hc.XAxisList.Add("May");
+
+            hc.ToolTip = "*C";
+
+
+            yAxis ya = new yAxis { Value = 0, Width = 1, Color = "#808080" };
+            List<yAxis> yas = new List<yAxis>();
+            yas.Add(ya);
+            hc.YAxisList=yas;
+
+            hc.YAxisTitle = "Temprature";
+
+            legend legend = new legend(layout.vertical, hAlign.right, vAlign.middle, 0);
+            hc.Legend = legend;
+
+            serie s1 = new serie();
+            s1.Name = "Ozaiba";
+            
+
+            
+
+            List<int> result = new List<int>();
+            int x1 = 11;
+            int x2 = 22;
+            int x3 = 33;
+            int x4 = 22;
+            result.Add(x1);
+            result.Add(x2);
+            result.Add(x3);
+            result.Add(x4);
+
+            s1.Data = result;
+            List<serie> series = new List<serie>();
+            series.Add(s1);
+
+            hc.Series = series ;
+
+            return PartialView("_HighChart",hc);
+        }
+        #endregion
     }
 }

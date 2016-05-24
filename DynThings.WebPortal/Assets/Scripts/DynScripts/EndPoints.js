@@ -239,3 +239,17 @@ function SelectEndPointFromLookUp(id, title) {
     selectedEndPointTitle = title;
     EventSelectEndPoint();
 }
+
+//HighChart
+function LoadChart_EndPoint_AvgMonthDiv(endPointID) {
+    var loadingpart = LoadDivLoading();
+    $("#EndPointChartDiv").html(loadingpart);
+    $.ajax({
+        url: getRootURL() + '/EndPoints/AVG_Month?EndPointID=' + endPointID ,
+        type: "GET",
+    })
+        .done(function (partialViewResult) {
+            $("#EndPointChartDiv").html(partialViewResult);
+        });
+    return false;
+}
