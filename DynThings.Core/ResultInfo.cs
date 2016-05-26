@@ -5,15 +5,12 @@ using System.Text;
 using System.Threading.Tasks;
 using DynThings.Data.Models;
 
-namespace DynThings.Data.Repositories
+namespace DynThings.Core
 {
-    public class ResultInfo
+    public static class ResultInfo
     {
-        public DynThingsEntities db { get; set; }
-        public ResultInfo(DynThingsEntities dynThingsEntities)
-        {
-            db = dynThingsEntities;
-        }
+        public static DynThingsEntities db = new DynThingsEntities();
+       
 
         #region Enums
         public enum ResultType
@@ -41,19 +38,19 @@ namespace DynThings.Data.Repositories
         #endregion
 
         #region Method: Generate Ok Result
-        public Result GenerateOKResult()
+        public static Result GenerateOKResult()
         {
             return new Result(0,ResultType.Ok, "",0);
         }
-        public Result GenerateOKResult(string message, long referenceID)
+        public static Result GenerateOKResult(string message, long referenceID)
         {
             return new Result(0, ResultType.Ok, message,referenceID);
         }
-        public Result GenerateOKResult(string message)
+        public static Result GenerateOKResult(string message)
         {
             return new Result(0, ResultType.Ok, message, 0);
         }
-        public Result GenerateOKResult(long referenceID)
+        public static Result GenerateOKResult(long referenceID)
         {
             return new Result(0, ResultType.Ok, "", referenceID);
         }
@@ -61,7 +58,7 @@ namespace DynThings.Data.Repositories
         #endregion
 
         #region Method: Generate Error Result based on Database
-        public Result GetResultByID(long resultID)
+        public static Result GetResultByID(long resultID)
         {
             ResultMessage msg = db.ResultMessages.Find(resultID);
             ResultType rt = new ResultType();
@@ -73,7 +70,7 @@ namespace DynThings.Data.Repositories
             return res;
         }
 
-        public Result GenerateErrorResult(string message)
+        public static Result GenerateErrorResult(string message)
         {
             return new Result(0, ResultType.Failed, message,0);
         }

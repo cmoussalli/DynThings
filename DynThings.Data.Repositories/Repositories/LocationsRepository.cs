@@ -11,6 +11,7 @@ using System.Text;
 using System.Threading.Tasks;
 using DynThings.Data.Models;
 using PagedList;
+using DynThings.Core;
 
 namespace DynThings.Data.Repositories
 {
@@ -104,11 +105,11 @@ namespace DynThings.Data.Repositories
                 loc.LongitudeY = "";
                 db.Locations.Add(loc);
                 db.SaveChanges();
-                return UnitOfWork.resultInfo.GenerateOKResult("Saved", loc.ID);
+                return ResultInfo.GenerateOKResult("Saved", loc.ID);
             }
             catch
             {
-                return UnitOfWork.resultInfo.GetResultByID(1);
+                return ResultInfo.GetResultByID(1);
             }
         }
 
@@ -127,11 +128,11 @@ namespace DynThings.Data.Repositories
                 loc.Status = status;
                 loc.IconID = iconID;
                 db.SaveChanges();
-                return UnitOfWork.resultInfo.GenerateOKResult("Saved", loc.ID);
+                return ResultInfo.GenerateOKResult("Saved", loc.ID);
             }
             catch
             {
-                return UnitOfWork.resultInfo.GetResultByID(1);
+                return ResultInfo.GetResultByID(1);
             }
         }
 
@@ -143,11 +144,11 @@ namespace DynThings.Data.Repositories
                 loc.Title = title;
                 loc.isActive = isActive;
                 db.SaveChanges();
-                return UnitOfWork.resultInfo.GenerateOKResult("Saved", loc.ID);
+                return ResultInfo.GenerateOKResult("Saved", loc.ID);
             }
             catch
             {
-                return UnitOfWork.resultInfo.GetResultByID(1);
+                return ResultInfo.GetResultByID(1);
             }
         }
 
@@ -159,11 +160,11 @@ namespace DynThings.Data.Repositories
                 loc.LongitudeY = longitudeY;
                 loc.LatitudeX = latitudeX;
                 db.SaveChanges();
-                return UnitOfWork.resultInfo.GenerateOKResult("Saved", loc.ID);
+                return ResultInfo.GenerateOKResult("Saved", loc.ID);
             }
             catch
             {
-                return UnitOfWork.resultInfo.GetResultByID(1);
+                return ResultInfo.GetResultByID(1);
             }
         }
 
@@ -177,11 +178,11 @@ namespace DynThings.Data.Repositories
                 Location loc = db.Locations.Find(id);
                 db.Locations.Remove(loc);
                 db.SaveChanges();
-                return UnitOfWork.resultInfo.GenerateOKResult("Deleted", loc.ID);
+                return ResultInfo.GenerateOKResult("Deleted", loc.ID);
             }
             catch
             {
-                return UnitOfWork.resultInfo.GetResultByID(1);
+                return ResultInfo.GetResultByID(1);
             }
         }
 
@@ -196,17 +197,17 @@ namespace DynThings.Data.Repositories
                 List<LinkDevicesLocation> lnks = db.LinkDevicesLocations.Where(l => l.LocationID == locationID && l.DeviceID == deviceID).ToList();
                 if (lnks.Count > 0)
                 {
-                    return UnitOfWork.resultInfo.GetResultByID(1);
+                    return ResultInfo.GetResultByID(1);
                 }
                 lnk.LocationID = locationID;
                 lnk.DeviceID = deviceID;
                 db.LinkDevicesLocations.Add(lnk);
                 db.SaveChanges();
-                return UnitOfWork.resultInfo.GenerateOKResult("Saved");
+                return ResultInfo.GenerateOKResult("Saved");
             }
             catch
             {
-                return UnitOfWork.resultInfo.GetResultByID(1);
+                return ResultInfo.GetResultByID(1);
             }
         }
         #endregion
@@ -219,16 +220,16 @@ namespace DynThings.Data.Repositories
                 List<LinkDevicesLocation> lnks = db.LinkDevicesLocations.Where(l => l.LocationID == locationID && l.DeviceID == deviceID).ToList();
                 if (lnks.Count != 1)
                 {
-                    return UnitOfWork.resultInfo.GetResultByID(1);
+                    return ResultInfo.GetResultByID(1);
                 }
                 LinkDevicesLocation lnk = lnks[0];
                 db.LinkDevicesLocations.Remove(lnk);
                 db.SaveChanges();
-                return UnitOfWork.resultInfo.GenerateOKResult("Saved");
+                return ResultInfo.GenerateOKResult("Saved");
             }
             catch
             {
-                return UnitOfWork.resultInfo.GetResultByID(1);
+                return ResultInfo.GetResultByID(1);
             }
         }
         #endregion

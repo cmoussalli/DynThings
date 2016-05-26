@@ -11,6 +11,7 @@ using System.Text;
 using System.Threading.Tasks;
 using DynThings.Data.Models;
 using PagedList;
+using DynThings.Core;
 
 namespace DynThings.Data.Repositories
 {
@@ -122,11 +123,11 @@ namespace DynThings.Data.Repositories
                 end.TypeID = typeID;
                 db.Endpoints.Add(end);
                 db.SaveChanges();
-                return UnitOfWork.resultInfo.GenerateOKResult("Saved", end.ID);
+                return ResultInfo.GenerateOKResult("Saved", end.ID);
             }
             catch
             {
-                return UnitOfWork.resultInfo.GetResultByID(1);
+                return ResultInfo.GetResultByID(1);
             }
         }
 
@@ -141,11 +142,11 @@ namespace DynThings.Data.Repositories
                 end.Title = title;
                 end.TypeID = typeID;
                 db.SaveChanges();
-                return UnitOfWork.resultInfo.GenerateOKResult("Saved", end.ID);
+                return ResultInfo.GenerateOKResult("Saved", end.ID);
             }
             catch
             {
-                return UnitOfWork.resultInfo.GetResultByID(1);
+                return ResultInfo.GetResultByID(1);
             }
 
         }
@@ -160,11 +161,11 @@ namespace DynThings.Data.Repositories
                 Endpoint end = db.Endpoints.Find(id);
                 db.Endpoints.Remove(end);
                 db.SaveChanges();
-                return UnitOfWork.resultInfo.GenerateOKResult("Deleted", end.ID);
+                return ResultInfo.GenerateOKResult("Deleted", end.ID);
             }
             catch
             {
-                return UnitOfWork.resultInfo.GetResultByID(1);
+                return ResultInfo.GetResultByID(1);
             }
         }
 

@@ -73,11 +73,11 @@ namespace DynThings.Data.Repositories
                 loc.Z = "";
                 db.LocationViews.Add(loc);
                 db.SaveChanges();
-                return UnitOfWork.resultInfo.GenerateOKResult("Saved", loc.ID);
+                return ResultInfo.GenerateOKResult("Saved", loc.ID);
             }
             catch
             {
-                return UnitOfWork.resultInfo.GetResultByID(1);
+                return ResultInfo.GetResultByID(1);
             }
         }
         #endregion
@@ -91,11 +91,11 @@ namespace DynThings.Data.Repositories
                 loc.Title = title;
                 loc.IsActive = false;
                 db.SaveChanges();
-                return UnitOfWork.resultInfo.GenerateOKResult("Saved", loc.ID);
+                return ResultInfo.GenerateOKResult("Saved", loc.ID);
             }
             catch
             {
-                return UnitOfWork.resultInfo.GetResultByID(1);
+                return ResultInfo.GetResultByID(1);
             }
         }
         #endregion
@@ -121,11 +121,11 @@ namespace DynThings.Data.Repositories
                 loc.Y = y;
                 loc.Z = z;
                 db.SaveChanges();
-                return UnitOfWork.resultInfo.GenerateOKResult("Saved", loc.ID);
+                return ResultInfo.GenerateOKResult("Saved", loc.ID);
             }
             catch
             {
-                return UnitOfWork.resultInfo.GetResultByID(1);
+                return ResultInfo.GetResultByID(1);
             }
         }
         #endregion
@@ -144,11 +144,11 @@ namespace DynThings.Data.Repositories
                 LocationView loc = db.LocationViews.Find(locationViewID);
                 loc.IsActive = isActive;
                 db.SaveChanges();
-                return UnitOfWork.resultInfo.GenerateOKResult("Saved", loc.ID);
+                return ResultInfo.GenerateOKResult("Saved", loc.ID);
             }
             catch
             {
-                return UnitOfWork.resultInfo.GetResultByID(1);
+                return ResultInfo.GetResultByID(1);
             }
         }
         #endregion
@@ -161,11 +161,11 @@ namespace DynThings.Data.Repositories
                 LocationView locView = db.LocationViews.Find(id);
                 db.LocationViews.Remove(locView);
                 db.SaveChanges();
-                return UnitOfWork.resultInfo.GenerateOKResult("Deleted", locView.ID);
+                return ResultInfo.GenerateOKResult("Deleted", locView.ID);
             }
             catch
             {
-                return UnitOfWork.resultInfo.GetResultByID(1);
+                return ResultInfo.GetResultByID(1);
             }
         }
 
@@ -178,13 +178,13 @@ namespace DynThings.Data.Repositories
             List<LinkLocationsLocationView> lnks = db.LinkLocationsLocationViews.Where(l => l.LocationID == locationID && l.LocationViewID == locationViewID).ToList();
             if (lnks.Count > 0)
             {
-                return UnitOfWork.resultInfo.GetResultByID(1);
+                return ResultInfo.GetResultByID(1);
             }
             lnk.LocationID = locationID;
             lnk.LocationViewID = locationViewID;
             db.LinkLocationsLocationViews.Add(lnk);
             db.SaveChanges();
-            return UnitOfWork.resultInfo.GenerateOKResult();
+            return ResultInfo.GenerateOKResult();
         }
         #endregion
 
@@ -194,12 +194,12 @@ namespace DynThings.Data.Repositories
             List<LinkLocationsLocationView> lnks = db.LinkLocationsLocationViews.Where(l => l.LocationID == locationID && l.LocationViewID == locationViewID).ToList();
             if (lnks.Count != 1)
             {
-                return UnitOfWork.resultInfo.GetResultByID(1);
+                return ResultInfo.GetResultByID(1);
             }
             LinkLocationsLocationView lnk = lnks[0];
             db.LinkLocationsLocationViews.Remove(lnk);
             db.SaveChanges();
-            return UnitOfWork.resultInfo.GenerateOKResult();
+            return ResultInfo.GenerateOKResult();
         }
         #endregion
     }

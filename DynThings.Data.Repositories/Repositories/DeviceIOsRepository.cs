@@ -11,6 +11,7 @@ using System.Text;
 using System.Threading.Tasks;
 using DynThings.Data.Models;
 using PagedList;
+using DynThings.Core;
 
 namespace DynThings.Data.Repositories
 {
@@ -58,11 +59,11 @@ namespace DynThings.Data.Repositories
                 endIO.ExecTimeStamp = executionTime;
                 db.DeviceIOs.Add(endIO);
                 db.SaveChanges();
-                return UnitOfWork.resultInfo.GenerateOKResult("Saved", endIO.ID);
+                return ResultInfo.GenerateOKResult("Saved", endIO.ID);
             }
             catch
             {
-                return UnitOfWork.resultInfo.GetResultByID(1);
+                return ResultInfo.GetResultByID(1);
             }
         }
 
@@ -75,7 +76,7 @@ namespace DynThings.Data.Repositories
             endIO.TimeStamp = DateTime.Now;
             db.DeviceIOs.Add(endIO);
             db.SaveChanges();
-            return UnitOfWork.resultInfo.GenerateOKResult();
+            return ResultInfo.GenerateOKResult();
         }
         #endregion
 
@@ -92,12 +93,12 @@ namespace DynThings.Data.Repositories
                 }
                 else
                 {
-                    return UnitOfWork.resultInfo.GetResultByID(1);
+                    return ResultInfo.GetResultByID(1);
                 }
             }
             catch
             {
-                return UnitOfWork.resultInfo.GetResultByID(1);
+                return ResultInfo.GetResultByID(1);
             }
         }
 

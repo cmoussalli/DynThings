@@ -18,6 +18,7 @@ using DynThings.WebAPI.Models;
 using DynThings.Data.Models;
 using DynThings.WebAPI.Models.TypesMapper;
 
+
 namespace DynThings.WebPortal.Controllers
 {
     public class APISimulatorServicesController : ApiController
@@ -27,7 +28,7 @@ namespace DynThings.WebPortal.Controllers
         [HttpGet]
         public List<APIDevice> GetDevicesList(Guid platformKey)
         {
-            List<Device> devs = UnitOfWork.repoDevices.GetList();
+            List<Device> devs = UnitOfWork_Repositories.repoDevices.GetList();
             List<APIDevice> apiDevs = new List<APIDevice>();
             foreach (Device dev in devs)
             {
@@ -42,7 +43,7 @@ namespace DynThings.WebPortal.Controllers
         [HttpGet]
         public APIDevice GetDeviceInfo(Guid platformKey, Guid deviceKeyPass)
         {
-            Device dev = UnitOfWork.repoDevices.FindByKeyPass(deviceKeyPass);
+            Device dev = UnitOfWork_Repositories.repoDevices.FindByKeyPass(deviceKeyPass);
             APIDevice apiDev = APIDeviceAdapter.fromDevice(dev);
             //List<APIDeviceCommand> apiCmds = new List<APIDeviceCommand>();
             //foreach(DeviceCommand cmd in dev.DeviceCommands)

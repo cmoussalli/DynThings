@@ -11,6 +11,7 @@ using System.Text;
 using System.Threading.Tasks;
 using DynThings.Data.Models;
 using PagedList;
+using DynThings.Core;
 
 namespace DynThings.Data.Repositories
 {
@@ -56,9 +57,9 @@ namespace DynThings.Data.Repositories
             }
             else
             {
-              return  UnitOfWork.resultInfo.GetResultByID(1);
+              return  ResultInfo.GetResultByID(1);
             }
-            return UnitOfWork.resultInfo.GenerateOKResult("Saved");
+            return ResultInfo.GenerateOKResult("Saved");
         }
         #endregion
 
@@ -74,9 +75,9 @@ namespace DynThings.Data.Repositories
             }
             else
             {
-                return UnitOfWork.resultInfo.GetResultByID(1);
+                return ResultInfo.GetResultByID(1);
             }
-            return UnitOfWork.resultInfo.GenerateOKResult("Saved");
+            return ResultInfo.GenerateOKResult("Saved");
         }
         #endregion
     }

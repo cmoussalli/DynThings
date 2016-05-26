@@ -17,6 +17,9 @@ using System;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 
+using System.Data.Entity.Core.Objects;
+using System.Linq;
+
 
 public partial class DynThingsEntities : DbContext
 {
@@ -75,6 +78,18 @@ public partial class DynThingsEntities : DbContext
     public virtual DbSet<LocationViewType> LocationViewTypes { get; set; }
 
     public virtual DbSet<ResultMessage> ResultMessages { get; set; }
+
+
+    public virtual ObjectResult<Rpt_EndPoint_IOs_Months_Result> Rpt_EndPoint_IOs_Months(Nullable<long> ePID)
+    {
+
+        var ePIDParameter = ePID.HasValue ?
+            new ObjectParameter("EPID", ePID) :
+            new ObjectParameter("EPID", typeof(long));
+
+
+        return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Rpt_EndPoint_IOs_Months_Result>("Rpt_EndPoint_IOs_Months", ePIDParameter);
+    }
 
 }
 

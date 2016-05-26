@@ -18,6 +18,7 @@ using DynThings.Data.Models;
 using DynThings.Data.Repositories;
 using DynThings.Core;
 
+
 namespace DynThings.WebPortal.Controllers
 {
     public class DevicesController : Controller
@@ -32,7 +33,7 @@ namespace DynThings.WebPortal.Controllers
 
         public ActionResult Details(int id)
         {
-            Device device = UnitOfWork.repoDevices.Find(id);
+            Device device = UnitOfWork_Repositories.repoDevices.Find(id);
             return View(device);
         }
 
@@ -43,7 +44,7 @@ namespace DynThings.WebPortal.Controllers
         #region DetailsPV
         public PartialViewResult DetailsPV(Guid guid)
         {
-            Device device = UnitOfWork.repoDevices.Find(guid);
+            Device device = UnitOfWork_Repositories.repoDevices.Find(guid);
             return PartialView("_Details_Main", device);
         }
         #endregion
@@ -71,10 +72,10 @@ namespace DynThings.WebPortal.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult AddPV([Bind(Include = "Title")] Device device)
         {
-            ResultInfo.Result res = UnitOfWork.resultInfo.GetResultByID(1);
+            ResultInfo.Result res = ResultInfo.GetResultByID(1);
             if (ModelState.IsValid)
             {
-                res = UnitOfWork.repoDevices.Add(device.Title);
+                res = UnitOfWork_Repositories.repoDevices.Add(device.Title);
                 return Json(res);
             }
             return Json(res);
@@ -85,7 +86,7 @@ namespace DynThings.WebPortal.Controllers
         [HttpGet]
         public PartialViewResult EditPV(Guid guid)
         {
-            Device device = UnitOfWork.repoDevices.Find(guid);
+            Device device = UnitOfWork_Repositories.repoDevices.Find(guid);
             return PartialView("_Edit", device);
         }
 
@@ -93,10 +94,10 @@ namespace DynThings.WebPortal.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult EditPV([Bind(Include = "ID,Title")] Device device)
         {
-            ResultInfo.Result res = UnitOfWork.resultInfo.GetResultByID(1);
+            ResultInfo.Result res = ResultInfo.GetResultByID(1);
             if (ModelState.IsValid)
             {
-                res = UnitOfWork.repoDevices.Edit(device.ID, device.Title);
+                res = UnitOfWork_Repositories.repoDevices.Edit(device.ID, device.Title);
                 return Json(res);
             }
             return Json(res);
@@ -107,7 +108,7 @@ namespace DynThings.WebPortal.Controllers
         [HttpGet]
         public PartialViewResult DeletePV(long id)
         {
-            Device device = UnitOfWork.repoDevices.Find(id);
+            Device device = UnitOfWork_Repositories.repoDevices.Find(id);
             return PartialView("_Delete", device);
         }
 
@@ -115,10 +116,10 @@ namespace DynThings.WebPortal.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeletePV([Bind(Include = "ID,Title")] Device device)
         {
-            ResultInfo.Result res = UnitOfWork.resultInfo.GetResultByID(1);
+            ResultInfo.Result res = ResultInfo.GetResultByID(1);
             if (ModelState.IsValid)
             {
-                res = UnitOfWork.repoDevices.Delete(device.ID);
+                res = UnitOfWork_Repositories.repoDevices.Delete(device.ID);
                 return Json(res);
             }
             return Json(res);
@@ -133,7 +134,7 @@ namespace DynThings.WebPortal.Controllers
         [HttpGet]
         public PartialViewResult LookupPV(string searchfor = null, int page = 1, int recordsperpage = 0)
         {
-            PagedList.IPagedList locs = UnitOfWork.repoDevices.GetPagedList("", 1, 10);
+            PagedList.IPagedList locs = UnitOfWork_Repositories.repoDevices.GetPagedList("", 1, 10);
             return PartialView("lookup/Index", locs);
         }
         #endregion
@@ -141,7 +142,7 @@ namespace DynThings.WebPortal.Controllers
         [HttpGet]
         public PartialViewResult LookupListPV(string searchfor = null, int page = 1, int recordsperpage = 0)
         {
-            PagedList.IPagedList locs = UnitOfWork.repoDevices.GetPagedList(searchfor, page, Config.DefaultRecordsPerChild);
+            PagedList.IPagedList locs = UnitOfWork_Repositories.repoDevices.GetPagedList(searchfor, page, Config.DefaultRecordsPerChild);
             return PartialView("lookup/List", locs);
         }
         #endregion

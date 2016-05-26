@@ -9,13 +9,17 @@
     </div>
     <div class="row">
         <div class="col-lg-12">
-            <select id="drpEndpointHighchartsView" class="form-control">
+            <select id="drpEndpointHighchartsView" class="form-control" onchange="drpReport_Select(@Model.ID)">
                 <option value="1">Inputs: Monthly\Year (Average)</option>
                 <option value="2">Inputs: Daily\Month (Average)</option>
                 <option value="3">Inputs: Hourly\Day (Average)</option>
                 <option value="4">Inputs: Minutes\Hour (Average)</option>
                 <option value="5">Network: Connection drops\Months  (Count)</option>
             </select>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
             <div id="EndPointChartDiv"></div>
         </div>
     </div>
@@ -48,7 +52,7 @@
                         </div>
                         <div id="tabEndPointDevkeys" class="tab-pane fade">
                             <div id="divEndPointDevkeys">
-                                @Html.Partial("_Details_Keys",Model)
+                                @Html.Partial("_Details_Keys", Model)
                             </div>
                         </div>
                         <div id="tabEndPointDelete" class="tab-pane fade">
@@ -69,14 +73,14 @@
 
 
 @section scripts{
-<script src="~/Assets/Scripts/DynScripts/EndPoints.js"></script>
-<script src="~/Assets/Scripts/DynScripts/EndPointCommands.js"></script>
+    <script src="~/Assets/Scripts/DynScripts/EndPoints.js"></script>
+    <script src="~/Assets/Scripts/DynScripts/EndPointCommands.js"></script>
 
     <script>
         $(document).ready(function () {
             LoadPart_EndPointDetailsDiv('@Model.ID');
             LoadPart_EndPointHistoryDiv('@Model.ID');
-            LoadPart_EndPointCommandListByEndPointIDDiv('@Model.ID','');
+            LoadPart_EndPointCommandListByEndPointIDDiv('@Model.ID', '');
             LoadChart_EndPoint_AvgMonthDiv('@Model.ID');
         });
     </script>
@@ -100,5 +104,5 @@
         });
 
     </script>
-    
+
 }

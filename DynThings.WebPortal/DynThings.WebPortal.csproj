@@ -49,6 +49,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="DynHighCharts, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\_Libraries\_Libs\DynHighCharts.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="PagedList, Version=1.17.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
       <HintPath>..\packages\PagedList.1.17.0.0\lib\net40\PagedList.dll</HintPath>
@@ -603,6 +607,10 @@
     <ProjectReference Include="..\DynThings.Data.Models\DynThings.Data.Models.csproj">
       <Project>{946862be-8456-4882-9a11-09ed0afd407b}</Project>
       <Name>DynThings.Data.Models</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DynThings.Data.Reports\DynThings.Data.Reports.csproj">
+      <Project>{AB08055F-4BAB-48A5-A76C-F97AEE45A9C8}</Project>
+      <Name>DynThings.Data.Reports</Name>
     </ProjectReference>
     <ProjectReference Include="..\DynThings.Data.Repositories\DynThings.Data.Repositories.csproj">
       <Project>{3eb80ea4-99d5-4db4-bd84-2370dce356d0}</Project>

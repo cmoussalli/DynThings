@@ -11,6 +11,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using DynThings.Data.Models;
+using DynThings.Core;
 
 namespace DynThings.Data.Repositories
 {
@@ -73,11 +74,11 @@ namespace DynThings.Data.Repositories
                 epType.IconID = IconID;
                 db.EndPointTypes.Add(epType);
                 db.SaveChanges();
-                return UnitOfWork.resultInfo.GenerateOKResult("Saved", epType.ID);
+                return ResultInfo.GenerateOKResult("Saved", epType.ID);
             }
             catch
             {
-                return UnitOfWork.resultInfo.GetResultByID(1);
+                return ResultInfo.GetResultByID(1);
             }
         }
 

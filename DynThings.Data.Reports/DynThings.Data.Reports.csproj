@@ -4,14 +4,13 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{CA4E274C-2541-4221-819E-441E7C20FEEE}</ProjectGuid>
+    <ProjectGuid>{AB08055F-4BAB-48A5-A76C-F97AEE45A9C8}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>DynThings.Core</RootNamespace>
-    <AssemblyName>DynThings.Core</AssemblyName>
+    <RootNamespace>DynThings.Data.Reports</RootNamespace>
+    <AssemblyName>DynThings.Data.Reports</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -31,6 +30,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="DynHighCharts">
+      <HintPath>..\..\_Libraries\_Libs\DynHighCharts.dll</HintPath>
+    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
       <Private>True</Private>
@@ -42,7 +44,6 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -51,15 +52,22 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Configs.cs" />
+    <Compile Include="EndpointsReport.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ResultInfo.cs" />
-    <Compile Include="StaticMenus.cs" />
+    <Compile Include="UnitOfWork_Reports.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\DynThings.Core\DynThings.Core.csproj">
+      <Project>{ca4e274c-2541-4221-819e-441e7c20feee}</Project>
+      <Name>DynThings.Core</Name>
+    </ProjectReference>
     <ProjectReference Include="..\DynThings.Data.Models\DynThings.Data.Models.csproj">
       <Project>{946862be-8456-4882-9a11-09ed0afd407b}</Project>
       <Name>DynThings.Data.Models</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DynThings.Data.Repositories\DynThings.Data.Repositories.csproj">
+      <Project>{3eb80ea4-99d5-4db4-bd84-2370dce356d0}</Project>
+      <Name>DynThings.Data.Repositories</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

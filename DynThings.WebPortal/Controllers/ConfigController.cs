@@ -16,14 +16,14 @@ namespace DynThings.WebPortal.Controllers
         // GET: Config
         public ActionResult Index()
         {
-            DynSetting config = UnitOfWork.repoDynSettings.GetConfig();
+            DynSetting config = UnitOfWork_Repositories.repoDynSettings.GetConfig();
             return View();
         }
 
 
         public PartialViewResult MainPV()
         {
-            DynSetting config = UnitOfWork.repoDynSettings.GetConfig();
+            DynSetting config = UnitOfWork_Repositories.repoDynSettings.GetConfig();
             return PartialView("_Main", config);
         }
 
@@ -32,7 +32,7 @@ namespace DynThings.WebPortal.Controllers
         [HttpGet]
         public PartialViewResult GridsPV()
         {
-            DynSetting config = UnitOfWork.repoDynSettings.GetConfig();
+            DynSetting config = UnitOfWork_Repositories.repoDynSettings.GetConfig();
             ViewBag.DefaultRecordsPerMaster = new SelectList(StaticMenus.GetGridRowsCount(),config.DefaultRecordsPerMaster.ToString());
             ViewBag.DefaultRecordsPerChild = new SelectList(StaticMenus.GetGridRowsCount(), config.DefaultRecordsPerChild.ToString());
             return PartialView("_Grids", config);
@@ -42,10 +42,10 @@ namespace DynThings.WebPortal.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult GridsPV([Bind(Include = "DefaultRecordsPerMaster,DefaultRecordsPerChild")] DynSetting config)
         {
-            ResultInfo.Result res = UnitOfWork.resultInfo.GetResultByID(1);
+            ResultInfo.Result res = ResultInfo.GetResultByID(1);
             if (ModelState.IsValid)
             {
-                res =  UnitOfWork.repoDynSettings.SetGridRowsCount(config.DefaultRecordsPerMaster, config.DefaultRecordsPerChild);
+                res =  UnitOfWork_Repositories.repoDynSettings.SetGridRowsCount(config.DefaultRecordsPerMaster, config.DefaultRecordsPerChild);
                 return Json(res);
             }
             return Json(res);
@@ -56,7 +56,7 @@ namespace DynThings.WebPortal.Controllers
         [HttpGet]
         public PartialViewResult DevModePV()
         {
-            DynSetting config = UnitOfWork.repoDynSettings.GetConfig();
+            DynSetting config = UnitOfWork_Repositories.repoDynSettings.GetConfig();
             return PartialView("_DevMode", config);
         }
 
@@ -64,10 +64,10 @@ namespace DynThings.WebPortal.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DevModePV([Bind(Include = "DevelopmentMode")] DynSetting config)
         {
-            ResultInfo.Result res = UnitOfWork.resultInfo.GetResultByID(1);
+            ResultInfo.Result res = ResultInfo.GetResultByID(1);
             if (ModelState.IsValid)
             {
-                res = UnitOfWork.repoDynSettings.SetDevelopmentMode(config.DevelopmentMode);
+                res = UnitOfWork_Repositories.repoDynSettings.SetDevelopmentMode(config.DevelopmentMode);
                 return Json(res);
             }
             return Json(res);

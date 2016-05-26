@@ -11,6 +11,7 @@ using System.Text;
 using System.Threading.Tasks;
 using DynThings.Data.Models;
 using PagedList;
+using DynThings.Core;
 
 namespace DynThings.Data.Repositories
 {
@@ -136,9 +137,9 @@ namespace DynThings.Data.Repositories
             }
             catch(Exception ex)
             {
-                return UnitOfWork.resultInfo.GenerateErrorResult(ex.InnerException.ToString());
+                return ResultInfo.GenerateErrorResult(ex.InnerException.ToString());
             }
-            return UnitOfWork.resultInfo.GenerateOKResult("Saved", dev.ID);
+            return ResultInfo.GenerateOKResult("Saved", dev.ID);
         }
         #endregion
 
@@ -156,11 +157,11 @@ namespace DynThings.Data.Repositories
                 Device dev = db.Devices.Find(id);
                 dev.Title = title;
                 db.SaveChanges();
-                return UnitOfWork.resultInfo.GenerateOKResult("Saved", dev.ID);
+                return ResultInfo.GenerateOKResult("Saved", dev.ID);
             }
             catch
             {
-                return UnitOfWork.resultInfo.GetResultByID(1);
+                return ResultInfo.GetResultByID(1);
             }
         }
 
@@ -175,11 +176,11 @@ namespace DynThings.Data.Repositories
                 
                 db.Devices.Remove(dev);
                 db.SaveChanges();
-                return UnitOfWork.resultInfo.GenerateOKResult("Deleted", dev.ID);
+                return ResultInfo.GenerateOKResult("Deleted", dev.ID);
             }
             catch(Exception ex)
             {
-                return UnitOfWork.resultInfo.GenerateErrorResult(ex.Message + " -- " + ex.InnerException);
+                return ResultInfo.GenerateErrorResult(ex.Message + " -- " + ex.InnerException);
             }
         }
 
@@ -198,11 +199,11 @@ namespace DynThings.Data.Repositories
                 Device dev = db.Devices.Find(deviceID);
                 dev.GUID = Guid.NewGuid();
                 db.SaveChanges();
-                return UnitOfWork.resultInfo.GenerateOKResult("Saved", dev.ID);
+                return ResultInfo.GenerateOKResult("Saved", dev.ID);
             }
             catch
             {
-                return UnitOfWork.resultInfo.GetResultByID(1);
+                return ResultInfo.GetResultByID(1);
             }
         }
 

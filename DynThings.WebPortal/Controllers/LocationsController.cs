@@ -32,7 +32,7 @@ namespace DynThings.WebPortal.Controllers
 
         public ActionResult Details(int id)
         {
-            Location loc = UnitOfWork.repoLocations.Find(id);
+            Location loc = UnitOfWork_Repositories.repoLocations.Find(id);
             return View(loc);
         }
 
@@ -43,7 +43,7 @@ namespace DynThings.WebPortal.Controllers
         #region DetailsPV : Main
         public PartialViewResult DetailsMainPV(int id)
         {
-            Location locs = UnitOfWork.repoLocations.Find(id);
+            Location locs = UnitOfWork_Repositories.repoLocations.Find(id);
             return PartialView("_Details_Main", locs);
         }
         #endregion
@@ -51,7 +51,7 @@ namespace DynThings.WebPortal.Controllers
         #region DetailsPV : GeoLocation
         public PartialViewResult DetailsGeoLocationPV(int id)
         {
-            Location locs = UnitOfWork.repoLocations.Find(id);
+            Location locs = UnitOfWork_Repositories.repoLocations.Find(id);
             return PartialView("_Details_GeoLocation", locs);
         }
 
@@ -61,7 +61,7 @@ namespace DynThings.WebPortal.Controllers
         [HttpGet]
         public PartialViewResult ListPV(string searchfor = null, int page = 1, int recordsperpage = 0)
         {
-            PagedList.IPagedList locs = UnitOfWork.repoLocations.GetPagedList(searchfor, page, Helpers.Configs.validateRecordsPerMaster(recordsperpage));
+            PagedList.IPagedList locs = UnitOfWork_Repositories.repoLocations.GetPagedList(searchfor, page, Helpers.Configs.validateRecordsPerMaster(recordsperpage));
             return PartialView("_List", locs);
         }
         #endregion
@@ -77,10 +77,10 @@ namespace DynThings.WebPortal.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult AddPV([Bind(Include = "Title")] Location location)
         {
-            ResultInfo.Result res = UnitOfWork.resultInfo.GetResultByID(1);
+            ResultInfo.Result res = ResultInfo.GetResultByID(1);
             if (ModelState.IsValid)
             {
-                res = UnitOfWork.repoLocations.Add(location.Title);
+                res = UnitOfWork_Repositories.repoLocations.Add(location.Title);
                 return Json(res);
             }
             return Json(res);
@@ -92,7 +92,7 @@ namespace DynThings.WebPortal.Controllers
         [HttpGet]
         public PartialViewResult EditMainPV(int id)
         {
-            Location location = UnitOfWork.repoLocations.Find(id);
+            Location location = UnitOfWork_Repositories.repoLocations.Find(id);
             return PartialView("_EditMain", location);
         }
 
@@ -100,10 +100,10 @@ namespace DynThings.WebPortal.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult EditMainPV([Bind(Include = "ID,Title,IsActive")] Location location)
         {
-            ResultInfo.Result res = UnitOfWork.resultInfo.GetResultByID(1);
+            ResultInfo.Result res = ResultInfo.GetResultByID(1);
             if (ModelState.IsValid)
             {
-                res = UnitOfWork.repoLocations.EditMain(location.ID, location.Title, location.isActive);
+                res = UnitOfWork_Repositories.repoLocations.EditMain(location.ID, location.Title, location.isActive);
                 return Json(res);
             }
             return Json(res);
@@ -114,7 +114,7 @@ namespace DynThings.WebPortal.Controllers
         [HttpGet]
         public PartialViewResult EditGeoLocationPV(int id)
         {
-            Location location = UnitOfWork.repoLocations.Find(id);
+            Location location = UnitOfWork_Repositories.repoLocations.Find(id);
             return PartialView("_EditGeoLocation", location);
         }
 
@@ -122,10 +122,10 @@ namespace DynThings.WebPortal.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult EditGeoLocationPV([Bind(Include = "ID,LongitudeY,LatitudeX")] Location location)
         {
-            ResultInfo.Result res = UnitOfWork.resultInfo.GetResultByID(1);
+            ResultInfo.Result res = ResultInfo.GetResultByID(1);
             if (ModelState.IsValid)
             {
-                UnitOfWork.repoLocations.EditGeoLocation(location.ID, location.LongitudeY, location.LatitudeX);
+                UnitOfWork_Repositories.repoLocations.EditGeoLocation(location.ID, location.LongitudeY, location.LatitudeX);
                 return Json(res);
             }
             return Json(res);
@@ -138,7 +138,7 @@ namespace DynThings.WebPortal.Controllers
         [HttpGet]
         public PartialViewResult DeletePV(int id)
         {
-            Location location = UnitOfWork.repoLocations.Find(id);
+            Location location = UnitOfWork_Repositories.repoLocations.Find(id);
             return PartialView("_Delete", location);
         }
 
@@ -146,10 +146,10 @@ namespace DynThings.WebPortal.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeletePV([Bind(Include = "ID,Title,IsActive")] Location location)
         {
-            ResultInfo.Result res = UnitOfWork.resultInfo.GetResultByID(1);
+            ResultInfo.Result res = ResultInfo.GetResultByID(1);
             if (ModelState.IsValid)
             {
-                res = UnitOfWork.repoLocations.Delete(location.ID);
+                res = UnitOfWork_Repositories.repoLocations.Delete(location.ID);
                 return Json(res);
             }
             return Json(res);
@@ -163,7 +163,7 @@ namespace DynThings.WebPortal.Controllers
         [HttpGet]
         public PartialViewResult DevicesByLocationIDListGridPV(string searchfor = null, long LocationID = 0, int page = 1, int recordsperpage = 0)
         {
-            IPagedList views = UnitOfWork.repoDevices.GetPagedList(searchfor, LocationID, page, Helpers.Configs.validateRecordsPerMaster(recordsperpage));
+            IPagedList views = UnitOfWork_Repositories.repoDevices.GetPagedList(searchfor, LocationID, page, Helpers.Configs.validateRecordsPerMaster(recordsperpage));
             return PartialView("_DevicesList", views);
         }
         #endregion
@@ -172,10 +172,10 @@ namespace DynThings.WebPortal.Controllers
         [HttpPost]
         public ActionResult AttachDevice(long LocationID, long DeviceID, string userID)
         {
-            ResultInfo.Result res = UnitOfWork.resultInfo.GetResultByID(1);
+            ResultInfo.Result res = ResultInfo.GetResultByID(1);
             if (ModelState.IsValid)
             {
-                res = UnitOfWork.repoLocations.AttachDevice(LocationID, DeviceID, userID);
+                res = UnitOfWork_Repositories.repoLocations.AttachDevice(LocationID, DeviceID, userID);
                 return Json(res);
             }
             return Json(res);
@@ -186,10 +186,10 @@ namespace DynThings.WebPortal.Controllers
         [HttpPost]
         public ActionResult DeAttachDevice(long LocationID, long DeviceID, string userID)
         {
-            ResultInfo.Result res = UnitOfWork.resultInfo.GetResultByID(1);
+            ResultInfo.Result res = ResultInfo.GetResultByID(1);
             if (ModelState.IsValid)
             {
-                res = UnitOfWork.repoLocations.DeattachDevice(LocationID, DeviceID, userID);
+                res = UnitOfWork_Repositories.repoLocations.DeattachDevice(LocationID, DeviceID, userID);
                 return Json(res);
             }
             return Json(res);
@@ -206,7 +206,7 @@ namespace DynThings.WebPortal.Controllers
         [HttpGet]
         public PartialViewResult LookupPV(string searchfor = null, int page = 1, int recordsperpage = 0)
         {
-            PagedList.IPagedList locs = UnitOfWork.repoLocations.GetPagedList("", 1, 10);
+            PagedList.IPagedList locs = UnitOfWork_Repositories.repoLocations.GetPagedList("", 1, 10);
             return PartialView("lookup/Index", locs);
         }
         #endregion
@@ -214,7 +214,7 @@ namespace DynThings.WebPortal.Controllers
         [HttpGet]
         public PartialViewResult LookupListPV(string searchfor = null, int page = 1, int recordsperpage = 0)
         {
-            PagedList.IPagedList locs = UnitOfWork.repoLocations.GetPagedList(searchfor, page, Config.DefaultRecordsPerChild);
+            PagedList.IPagedList locs = UnitOfWork_Repositories.repoLocations.GetPagedList(searchfor, page, Config.DefaultRecordsPerChild);
             return PartialView("lookup/List", locs);
         }
         #endregion

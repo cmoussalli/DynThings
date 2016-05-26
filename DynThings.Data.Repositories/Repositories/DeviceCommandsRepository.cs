@@ -1,7 +1,7 @@
 ﻿/////////////////////////////////////////////////////////////////
 // Created by : Caesar Moussalli                               //
 // TimeStamp  : 16-2-2016                                      //
-// Content    : Handle DeviceCommands CRUD                           //
+// Content    : Handle DeviceCommands CRUD                     //
 // Notes      :                                                //
 /////////////////////////////////////////////////////////////////
 using System;
@@ -11,6 +11,8 @@ using System.Text;
 using System.Threading.Tasks;
 using DynThings.Data.Models;
 using PagedList;
+using DynThings.Data;
+using DynThings.Core;
 
 namespace DynThings.Data.Repositories
 {
@@ -89,11 +91,11 @@ namespace DynThings.Data.Repositories
                 cmd.OwnerID = ownerID;
                 db.DeviceCommands.Add(cmd);
                 db.SaveChanges();
-                return UnitOfWork.resultInfo.GenerateOKResult("Saved", cmd.ID);
+                return ResultInfo.GenerateOKResult("Saved", cmd.ID);
             }
             catch
             {
-                return UnitOfWork.resultInfo.GetResultByID(1);
+                return ResultInfo.GetResultByID(1);
             }
         }
 
@@ -110,11 +112,11 @@ namespace DynThings.Data.Repositories
                 cmd.CommandCode = commandCode;
                 cmd.DeviceID = deviceID;
                 db.SaveChanges();
-                return UnitOfWork.resultInfo.GenerateOKResult("Saved", cmd.ID);
+                return ResultInfo.GenerateOKResult("Saved", cmd.ID);
             }
             catch
             {
-                return UnitOfWork.resultInfo.GetResultByID(1);
+                return ResultInfo.GetResultByID(1);
             }
         }
 
@@ -128,11 +130,11 @@ namespace DynThings.Data.Repositories
                 DeviceCommand cmd = db.DeviceCommands.Find(id);
                 db.DeviceCommands.Remove(cmd);
                 db.SaveChanges();
-                return UnitOfWork.resultInfo.GenerateOKResult("Deleted", cmd.ID);
+                return ResultInfo.GenerateOKResult("Deleted", cmd.ID);
             }
             catch
             {
-                return UnitOfWork.resultInfo.GetResultByID(1);
+                return ResultInfo.GetResultByID(1);
             }
         }
 
@@ -146,16 +148,16 @@ namespace DynThings.Data.Repositories
                 DeviceCommand cmd = Find(commandID);
                 if (cmd.Device.KeyPass == deviceKeyPass)
                 {
-                    return UnitOfWork.repoDeviceIOs.Add(cmd.Device.ID, cmd.CommandCode, DeviceIOsRepository.deviceIOType.Command);
+                    return  UnitOfWork_Repositories.repoDeviceIOs.Add(cmd.Device.ID, cmd.CommandCode, DeviceIOsRepository.deviceIOType.Command);
                 }
                 else
                 {
-                    return UnitOfWork.resultInfo.GetResultByID(1);
+                    return ResultInfo.GetResultByID(1);
                 }
             }
             catch
             {
-                return UnitOfWork.resultInfo.GetResultByID(1);
+                return ResultInfo.GetResultByID(1);
             }
         }
         #endregion

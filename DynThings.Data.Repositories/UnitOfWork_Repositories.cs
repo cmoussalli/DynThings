@@ -14,11 +14,12 @@ using DynThings.Data.Models;
 
 namespace DynThings.Data.Repositories
 {
-    public static class UnitOfWork
+    public static class UnitOfWork_Repositories
     {
+
         private static DynThingsEntities dynDB = new DynThingsEntities();
 
-        public static ResultInfo resultInfo = new ResultInfo(dynDB);
+        //public static ResultInfo resultInfo = new ResultInfo(db);
 
         #region Repositories
         public static DynSettingsRepository repoDynSettings = new DynSettingsRepository(dynDB);

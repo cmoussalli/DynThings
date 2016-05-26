@@ -14,13 +14,13 @@ namespace DynThings.WebPortal.Controllers
         #region ActionResult: Views
         public ActionResult Index()
         {
-            ViewBag.IOTypeID = new SelectList(UnitOfWork.repoIOTypes.GetList(true), "ID", "Title",0);
+            ViewBag.IOTypeID = new SelectList(UnitOfWork_Repositories.repoIOTypes.GetList(true), "ID", "Title",0);
             return View();
         }
 
         public ActionResult Details(long id)
         {
-            EndPointIO io = UnitOfWork.repoEndpointIOs.Find(id);
+            EndPointIO io = UnitOfWork_Repositories.repoEndpointIOs.Find(id);
             return View(io);
         }
         #endregion
@@ -33,7 +33,7 @@ namespace DynThings.WebPortal.Controllers
         public PartialViewResult ListPV(string search, long endPointID, long ioTypeID, int page = 1, int recordsperpage = 0)
         {
          
-            PagedList.IPagedList ios = UnitOfWork.repoEndpointIOs.GetPagedList(search, endPointID, ioTypeID, page, Helpers.Configs.validateRecordsPerMaster(recordsperpage));
+            PagedList.IPagedList ios = UnitOfWork_Repositories.repoEndpointIOs.GetPagedList(search, endPointID, ioTypeID, page, Helpers.Configs.validateRecordsPerMaster(recordsperpage));
             return PartialView("_List", ios);
         }
 

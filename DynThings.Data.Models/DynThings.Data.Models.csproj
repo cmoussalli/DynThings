@@ -144,6 +144,9 @@
     <Compile Include="ResultMessage.cs">
       <DependentUpon>DynThingsModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Rpt_EndPoint_IOs_Months_Result.cs">
+      <DependentUpon>DynThingsModel.tt</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <EntityDeploy Include="DynThingsModel.edmx">

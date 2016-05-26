@@ -1,43 +1,10 @@
-﻿@model DynThings.Data.Models.ReportsModels.HighChartsModel
+﻿@model DynHighCharts.Chart
 
 <div id="HCEndPoint" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
 
 
 <script>
     $(function () {
-        $('#HCEndPoint').highcharts({
-            title: {
-                text: '@Model.Title',
-                x: -20 //center
-            },
-            credits:false,
-            subtitle: {
-                text: '@Model.SubTitle',
-                x: -20
-            },
-            xAxis: {
-                categories: @Html.Raw(@Model.XAxisListOutput)
-            },
-            yAxis: {
-                title: {
-                    text: '@Model.YAxisTitle'
-                },
-                plotLines: [{
-                    value: 0,
-                    width: 1,
-                    color: '#808080'
-                }]
-            },
-            tooltip: {
-                valueSuffix: '°C'
-            },
-            legend: {
-                layout: 'vertical',
-                align: 'right',
-                verticalAlign: 'middle',
-                borderWidth: 0
-            },
-            series: @Html.Raw(@Model.SeriesListOutput)
-        });
+        $('#HCEndPoint').highcharts(@Html.Raw( @Model.JsonOutput(Model)))
     });
 </script>

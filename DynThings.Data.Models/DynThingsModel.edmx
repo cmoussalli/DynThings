@@ -381,7 +381,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__LinkDevic__Devic__48CFD27E">
-          <End Role="Devices" Type="Self.Devices" Multiplicity="0..1" />
+          <End Role="Devices" Type="Self.Devices" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="LinkDevicesLocations" Type="Self.LinkDevicesLocations" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Devices">
@@ -393,7 +395,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__LinkDevic__Locat__49C3F6B7">
-          <End Role="Locations" Type="Self.Locations" Multiplicity="0..1" />
+          <End Role="Locations" Type="Self.Locations" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="LinkDevicesLocations" Type="Self.LinkDevicesLocations" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Locations">
@@ -405,7 +409,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__LinkLocat__Locat__35BCFE0A">
-          <End Role="Locations" Type="Self.Locations" Multiplicity="1" />
+          <End Role="Locations" Type="Self.Locations" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="LinkLocationsLocationViews" Type="Self.LinkLocationsLocationViews" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Locations">
@@ -417,7 +423,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__LinkLocat__Locat__36B12243">
-          <End Role="LocationViews" Type="Self.LocationViews" Multiplicity="1" />
+          <End Role="LocationViews" Type="Self.LocationViews" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="LinkLocationsLocationViews" Type="Self.LinkLocationsLocationViews" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="LocationViews">
@@ -429,7 +437,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__LocationV__Locat__286302EC">
-          <End Role="LocationViewTypes" Type="Self.LocationViewTypes" Multiplicity="1" />
+          <End Role="LocationViewTypes" Type="Self.LocationViewTypes" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="LocationViews" Type="Self.LocationViews" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="LocationViewTypes">
@@ -496,6 +506,9 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="Rpt_EndPoint_IOs_Months" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="EPID" Type="bigint" Mode="In" />
+        </Function>
         <EntityContainer Name="DynThingsModelStoreContainer">
           <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRoles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaims" Schema="dbo" store:Type="Tables" />
@@ -704,6 +717,9 @@
             <End Role="AspNetRole" EntitySet="AspNetRoles" />
             <End Role="AspNetUser" EntitySet="AspNetUsers" />
           </AssociationSet>
+          <FunctionImport Name="Rpt_EndPoint_IOs_Months" ReturnType="Collection(DynThingsModel.Rpt_EndPoint_IOs_Months_Result)">
+            <Parameter Name="EPID" Mode="In" Type="Int64" />
+          </FunctionImport>
         </EntityContainer>
         <EntityType Name="AspNetRole">
           <Key>
@@ -1202,6 +1218,23 @@
           <End Type="DynThingsModel.AspNetRole" Role="AspNetRole" Multiplicity="*" />
           <End Type="DynThingsModel.AspNetUser" Role="AspNetUser" Multiplicity="*" />
         </Association>
+        <ComplexType Name="Rpt_EndPoint_IOs_Months_Result">
+          <Property Type="Int64" Name="ID" Nullable="false" />
+          <Property Type="String" Name="Title" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Fx" Nullable="false" MaxLength="3" />
+          <Property Type="Int32" Name="C1" Nullable="true" />
+          <Property Type="Int32" Name="C2" Nullable="true" />
+          <Property Type="Int32" Name="C3" Nullable="true" />
+          <Property Type="Int32" Name="C4" Nullable="true" />
+          <Property Type="Int32" Name="C5" Nullable="true" />
+          <Property Type="Int32" Name="C6" Nullable="true" />
+          <Property Type="Int32" Name="C7" Nullable="true" />
+          <Property Type="Int32" Name="C8" Nullable="true" />
+          <Property Type="Int32" Name="C9" Nullable="true" />
+          <Property Type="Int32" Name="C10" Nullable="true" />
+          <Property Type="Int32" Name="C11" Nullable="true" />
+          <Property Type="Int32" Name="C12" Nullable="true" />
+        </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1459,6 +1492,27 @@
               <ScalarProperty Name="Id" ColumnName="RoleId" />
             </EndProperty>
           </AssociationSetMapping>
+          <FunctionImportMapping FunctionImportName="Rpt_EndPoint_IOs_Months" FunctionName="DynThingsModel.Store.Rpt_EndPoint_IOs_Months">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DynThingsModel.Rpt_EndPoint_IOs_Months_Result">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Fx" ColumnName="Fx" />
+                <ScalarProperty Name="C1" ColumnName="1" />
+                <ScalarProperty Name="C2" ColumnName="2" />
+                <ScalarProperty Name="C3" ColumnName="3" />
+                <ScalarProperty Name="C4" ColumnName="4" />
+                <ScalarProperty Name="C5" ColumnName="5" />
+                <ScalarProperty Name="C6" ColumnName="6" />
+                <ScalarProperty Name="C7" ColumnName="7" />
+                <ScalarProperty Name="C8" ColumnName="8" />
+                <ScalarProperty Name="C9" ColumnName="9" />
+                <ScalarProperty Name="C10" ColumnName="10" />
+                <ScalarProperty Name="C11" ColumnName="11" />
+                <ScalarProperty Name="C12" ColumnName="12" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

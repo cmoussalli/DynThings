@@ -58,10 +58,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Reports\EndPointsReport.cs" />
     <Compile Include="Repositories\IOTypesRepository.cs" />
     <Compile Include="Repositories\DynSettingsRepository.cs" />
     <Compile Include="Repositories\Lookups.cs" />
-    <Compile Include="Repositories\ResultInfo.cs" />
     <Compile Include="Repositories\EndPointCommandsRepository.cs" />
     <Compile Include="Repositories\DevicesRepositories.cs" />
     <Compile Include="Repositories\DeviceCommandsRepository.cs" />
@@ -72,8 +72,8 @@
     <Compile Include="Repositories\LocationsRepository.cs" />
     <Compile Include="Repositories\LocationViewsRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="UnitOfWork.cs" />
     <Compile Include="Repositories\LocationViewTypesRepository.cs" />
+    <Compile Include="UnitOfWork_Repositories.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DynThings.Core\DynThings.Core.csproj">

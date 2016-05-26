@@ -240,6 +240,13 @@ function SelectEndPointFromLookUp(id, title) {
     EventSelectEndPoint();
 }
 
+
+function drpReport_Select(endPointID) {
+    
+    LoadChart_EndPoint_AvgMonthDiv(endPointID);
+}
+
+
 //HighChart
 function LoadChart_EndPoint_AvgMonthDiv(endPointID) {
     var loadingpart = LoadDivLoading();

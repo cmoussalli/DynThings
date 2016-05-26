@@ -11,6 +11,8 @@ using System.Text;
 using System.Threading.Tasks;
 using DynThings.Data.Models;
 using PagedList;
+using DynThings.Core;
+
 
 namespace DynThings.Data.Repositories
 {
@@ -93,11 +95,11 @@ namespace DynThings.Data.Repositories
                 cmd.OwnerID = ownerID;
                 db.EndPointCommands.Add(cmd);
                 db.SaveChanges();
-                return UnitOfWork.resultInfo.GenerateOKResult("Saved", cmd.ID);
+                return ResultInfo.GenerateOKResult("Saved", cmd.ID);
             }
             catch
             {
-                return UnitOfWork.resultInfo.GetResultByID(1);
+                return ResultInfo.GetResultByID(1);
             }
         }
 
@@ -111,11 +113,11 @@ namespace DynThings.Data.Repositories
                 EndPointCommand cmd = db.EndPointCommands.Find(id);
                 db.EndPointCommands.Remove(cmd);
                 db.SaveChanges();
-                return UnitOfWork.resultInfo.GenerateOKResult("Deleted", cmd.ID);
+                return ResultInfo.GenerateOKResult("Deleted", cmd.ID);
             }
             catch
             {
-                return UnitOfWork.resultInfo.GetResultByID(1);
+                return ResultInfo.GetResultByID(1);
             }
         }
 
@@ -132,11 +134,11 @@ namespace DynThings.Data.Repositories
                 cmd.CommandCode = commandCode;
                 cmd.EndPointID = EndPointID;
                 db.SaveChanges();
-                return UnitOfWork.resultInfo.GenerateOKResult("Saved", cmd.ID);
+                return ResultInfo.GenerateOKResult("Saved", cmd.ID);
             }
             catch
             {
-                return UnitOfWork.resultInfo.GetResultByID(1);
+                return ResultInfo.GetResultByID(1);
             }
         }
 
@@ -150,16 +152,17 @@ namespace DynThings.Data.Repositories
                 EndPointCommand cmd = Find(commandID);
                 if (cmd.Endpoint.KeyPass == endPointKeyPass)
                 {
-                    return UnitOfWork.repoEndpointIOs.Add(cmd.Endpoint.ID, cmd.CommandCode, EndpointIOsRepository.EndPointIOType.Command);
+                    
+                    return UnitOfWork_Repositories.repoEndpointIOs.Add(cmd.Endpoint.ID, cmd.CommandCode, EndpointIOsRepository.EndPointIOType.Command);
                 }
                 else
                 {
-                    return UnitOfWork.resultInfo.GetResultByID(1);
+                    return ResultInfo.GetResultByID(1);
                 }
             }
             catch
             {
-                return UnitOfWork.resultInfo.GetResultByID(1);
+                return ResultInfo.GetResultByID(1);
             }
 
         }

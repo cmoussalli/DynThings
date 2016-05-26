@@ -9,21 +9,18 @@ using Newtonsoft.Json;
 namespace DynThings.Data.Models.ReportsModels
 {
     #region Enums
-
-    public enum layout
+    public enum Layout
     {
         vertical,
         horizontal
     }
-
-    public enum hAlign
+    public enum HAlign
     {
         left,
         center,
         right
     }
-
-    public enum vAlign
+    public enum VAlign
     {
         top,
         middle,
@@ -33,35 +30,131 @@ namespace DynThings.Data.Models.ReportsModels
 
 
     #region Props
+    public class Title
+    {
+        #region Constructor
+        public Title()
+        {
+            this.Text = "";
+            this.X = -20;
+        }
+        public Title(string titleText)
+        {
+            
+            this.Text = titleText;
+            this.X  = -20;
+        }
+        #endregion
 
-    public class serie
+        [JsonProperty(PropertyName = "text")]
+        public string Text = "";
+        [JsonProperty(PropertyName = "x")]
+        public double X = -20;
+    }
+    public class Serie
     {
         [JsonProperty(PropertyName = "name")]
         public string Name;
         [JsonProperty(PropertyName = "data")]
-        public List<int> Data;
+        public List<int> Data = new List<int>();
     }
 
-    public class yAxis
+    public class XAxis
     {
+        [JsonProperty(PropertyName = "categories")]
+        public List<string> Categories = new List<string>();
+
+        public void GenerateMonthsList()
+        {
+            List<string> cats = new List<string>();
+            string c1 = "Jan";
+            string c2 = "Feb";
+            string c3 = "Mar";
+            string c4 = "Apr";
+            string c5 = "Mar";
+            string c6 = "Jun";
+            string c7 = "Jul";
+            string c8 = "Aug";
+            string c9 = "Sep";
+            string c10 = "Oct";
+            string c11 = "Nov";
+            string c12 = "Dec";
+
+            cats.Add(c1);
+            cats.Add(c2);
+            cats.Add(c3);
+            cats.Add(c4);
+            cats.Add(c5);
+            cats.Add(c6);
+            cats.Add(c7);
+            cats.Add(c8);
+            cats.Add(c9);
+            cats.Add(c10);
+            cats.Add(c11);
+            cats.Add(c12);
+
+            Categories = cats;
+        }
+    }
+
+    public class YAxis
+    {
+        public YAxis()
+        {
+            plotLines.Add(new PlotLine { Value = 0, Width = 1, Color = "#808080" });
+        }
+        public Title title = new Title();
+        public List<PlotLine> plotLines = new List<PlotLine>();
+    }
+    public class PlotLine
+    {
+        public PlotLine()
+        {
+            Value = 0;
+            Width = 1;
+            Color = "#808080";
+        }
+        [JsonProperty(PropertyName = "value")]
         public int Value;
+        [JsonProperty(PropertyName = "width")]
         public int Width;
+        [JsonProperty(PropertyName = "color")]
         public string Color;
     }
 
-    public class legend
+    public class Tooltip
     {
-        public legend(layout _Layout, hAlign _HAlign, vAlign _VAlign, int _Borderwidth)
+        public string valueSuffix = "";
+    }
+    public class Legend
+    {
+        #region Constructor
+        public Legend()
         {
-            BorderWidth = _Borderwidth;
-            Layout = _Layout;
-            HAlign = _HAlign;
-            VAlign = _VAlign;
+            borderWidth = 0;
+            layout = Layout.vertical.ToString();
+            hAlign = HAlign.right.ToString();
+            vAlign = VAlign.middle.ToString();
         }
-        public layout Layout;
-        public hAlign HAlign;
-        public vAlign VAlign;
-        public int BorderWidth;
+        public Legend(Layout _layout, HAlign _hAlign, VAlign _vAlign, int _borderwidth)
+        {
+            borderWidth = _borderwidth;
+            layout = _layout.ToString();
+            hAlign = _hAlign.ToString();
+            vAlign = _vAlign.ToString();
+        }
+        #endregion
+
+        [JsonProperty(PropertyName = "vertical")]
+        public string layout;
+
+        [JsonProperty(PropertyName = "align")]
+        public string hAlign;
+
+        [JsonProperty(PropertyName = "verticalAlign")]
+        public string vAlign;
+
+        public int borderWidth;
 
     }
     #endregion
@@ -72,38 +165,30 @@ namespace DynThings.Data.Models.ReportsModels
         #region Constructor
         public HighChartsModel()
         {
-            legend lgnd = new legend(layout.vertical, hAlign.right, vAlign.middle, 0);
-            Legend = lgnd;
+            yAxis = new YAxis();
         }
         #endregion
 
-        public string Title;
-        public string SubTitle;
-        public List<string> XAxisList;
-        public List<yAxis> YAxisList;
-        public string YAxisTitle;
-        public legend Legend;
-        public string ToolTip;
-        public List<serie> Series;
 
-        public string XAxisListOutput
+
+        public Title title = new Title();
+        public bool credits { get { return false; } }
+
+        [JsonProperty(PropertyName = "subtitle")]
+        public Title subTitle = new Title();
+        public XAxis xAxis = new XAxis();
+        public YAxis yAxis;
+        public Tooltip tooltip = new Tooltip();
+        public Legend legend = new Legend();
+        public List<Serie> series = new List<Serie>();
+
+
+        public string JsonOutput(HighChartsModel model)
         {
-            get
-            {
-                string json = JsonConvert.SerializeObject(XAxisList);
-                return json;
-            }
+            string json = JsonConvert.SerializeObject(model);
+            return json;
         }
 
-        public string SeriesListOutput
-        {
-            get
-            {
-                string json = JsonConvert.SerializeObject(Series);
-                //json = json.Replace("\"Name\"", "name");
-                //json = json.Replace("\"Data\"", "data");
-                return json;
-            }
-        }
+
     }
 }
