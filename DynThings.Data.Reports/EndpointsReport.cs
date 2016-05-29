@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using DynHighCharts;
 using DynThings.Data.Repositories;
 using DynHighCharts.Properies;
+using DynHighCharts.Enums;
 
 namespace DynThings.Data.Reports
 {
@@ -28,13 +29,9 @@ namespace DynThings.Data.Reports
             hc.title.Text = "Monthly Average";
             hc.subTitle.Text = endPointID.ToString();
             hc.xAxis.GenerateMonthsList();
-
+            hc.legend.layout = Layout.vertical.ToString();
 
             List<Rpt_EndPoint_IOs_Months_Result> rpt = db.Rpt_EndPoint_IOs_Months(endPointID).ToList();
-
-
-            Serie s3 = new Serie();
-            s3.Name = "Avg";
 
             #region GetMin
             Serie s1 = new Serie();
@@ -57,7 +54,7 @@ namespace DynThings.Data.Reports
             hc.series.Add(s1);
             #endregion
 
-            #region GetMin
+            #region GetMax
             Serie s2 = new Serie();
             s2.Name = "Max";
             Rpt_EndPoint_IOs_Months_Result rpt2 = rpt[1];
@@ -78,6 +75,26 @@ namespace DynThings.Data.Reports
             hc.series.Add(s2);
             #endregion
 
+            #region GetAvg
+            Serie s3 = new Serie();
+            s3.Name = "Avg";
+            Rpt_EndPoint_IOs_Months_Result rpt3 = rpt[2];
+            List<int> resultAvg = new List<int>();
+            resultAvg.Add(rpt3.C1.GetValueOrDefault());
+            resultAvg.Add(rpt3.C2.GetValueOrDefault());
+            resultAvg.Add(rpt3.C3.GetValueOrDefault());
+            resultAvg.Add(rpt3.C4.GetValueOrDefault());
+            resultAvg.Add(rpt3.C5.GetValueOrDefault());
+            resultAvg.Add(rpt3.C6.GetValueOrDefault());
+            resultAvg.Add(rpt3.C7.GetValueOrDefault());
+            resultAvg.Add(rpt3.C8.GetValueOrDefault());
+            resultAvg.Add(rpt3.C9.GetValueOrDefault());
+            resultAvg.Add(rpt3.C10.GetValueOrDefault());
+            resultAvg.Add(rpt3.C11.GetValueOrDefault());
+            resultAvg.Add(rpt3.C12.GetValueOrDefault());
+            s3.Data = resultAvg;
+            hc.series.Add(s3);
+            #endregion
 
 
 

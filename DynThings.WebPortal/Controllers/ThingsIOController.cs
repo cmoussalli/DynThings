@@ -217,6 +217,10 @@ namespace DynThings.WebAPI.Controllers
                     {
                         //Try Parse ExecutionTimeStamp to DateTime
                         DateTime execTime;
+                        if (oEndPointInput.ExectionTimeStamp == "")
+                        {
+                            oEndPointInput.ExectionTimeStamp = DateTime.Now.ToString();
+                        }
                         if (DateTime.TryParse(oEndPointInput.ExectionTimeStamp, out execTime))
                         { }
                         else
