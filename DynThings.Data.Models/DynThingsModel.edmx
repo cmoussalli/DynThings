@@ -506,8 +506,12 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="Rpt_EndPoint_IOs_Days" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="EPID" Type="bigint" Mode="In" />
+        </Function>
         <Function Name="Rpt_EndPoint_IOs_Months" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="EPID" Type="bigint" Mode="In" />
+          <Parameter Name="Year" Type="nvarchar" Mode="In" />
         </Function>
         <EntityContainer Name="DynThingsModelStoreContainer">
           <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRoles" Schema="dbo" store:Type="Tables" />
@@ -718,6 +722,10 @@
             <End Role="AspNetUser" EntitySet="AspNetUsers" />
           </AssociationSet>
           <FunctionImport Name="Rpt_EndPoint_IOs_Months" ReturnType="Collection(DynThingsModel.Rpt_EndPoint_IOs_Months_Result)">
+            <Parameter Name="EPID" Mode="In" Type="Int64" />
+            <Parameter Name="Year" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="Rpt_EndPoint_IOs_Days" ReturnType="Collection(DynThingsModel.Rpt_EndPoint_IOs_Days_Result)">
             <Parameter Name="EPID" Mode="In" Type="Int64" />
           </FunctionImport>
         </EntityContainer>
@@ -1235,6 +1243,41 @@
           <Property Type="Int32" Name="C11" Nullable="true" />
           <Property Type="Int32" Name="C12" Nullable="true" />
         </ComplexType>
+        <ComplexType Name="Rpt_EndPoint_IOs_Days_Result">
+          <Property Type="Int64" Name="ID" Nullable="false" />
+          <Property Type="String" Name="Title" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Fx" Nullable="false" MaxLength="3" />
+          <Property Type="Int32" Name="C1" Nullable="true" />
+          <Property Type="Int32" Name="C2" Nullable="true" />
+          <Property Type="Int32" Name="C3" Nullable="true" />
+          <Property Type="Int32" Name="C4" Nullable="true" />
+          <Property Type="Int32" Name="C5" Nullable="true" />
+          <Property Type="Int32" Name="C6" Nullable="true" />
+          <Property Type="Int32" Name="C7" Nullable="true" />
+          <Property Type="Int32" Name="C8" Nullable="true" />
+          <Property Type="Int32" Name="C9" Nullable="true" />
+          <Property Type="Int32" Name="C10" Nullable="true" />
+          <Property Type="Int32" Name="C11" Nullable="true" />
+          <Property Type="Int32" Name="C12" Nullable="true" />
+          <Property Type="Int32" Name="C13" Nullable="true" />
+          <Property Type="Int32" Name="C14" Nullable="true" />
+          <Property Type="Int32" Name="C15" Nullable="true" />
+          <Property Type="Int32" Name="C16" Nullable="true" />
+          <Property Type="Int32" Name="C17" Nullable="true" />
+          <Property Type="Int32" Name="C18" Nullable="true" />
+          <Property Type="Int32" Name="C19" Nullable="true" />
+          <Property Type="Int32" Name="C20" Nullable="true" />
+          <Property Type="Int32" Name="C21" Nullable="true" />
+          <Property Type="Int32" Name="C22" Nullable="true" />
+          <Property Type="Int32" Name="C23" Nullable="true" />
+          <Property Type="Int32" Name="C24" Nullable="true" />
+          <Property Type="Int32" Name="C25" Nullable="true" />
+          <Property Type="Int32" Name="C26" Nullable="true" />
+          <Property Type="Int32" Name="C27" Nullable="true" />
+          <Property Type="Int32" Name="C28" Nullable="true" />
+          <Property Type="Int32" Name="C29" Nullable="true" />
+          <Property Type="Int32" Name="C30" Nullable="true" />
+        </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1510,6 +1553,45 @@
                 <ScalarProperty Name="C10" ColumnName="10" />
                 <ScalarProperty Name="C11" ColumnName="11" />
                 <ScalarProperty Name="C12" ColumnName="12" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Rpt_EndPoint_IOs_Days" FunctionName="DynThingsModel.Store.Rpt_EndPoint_IOs_Days">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DynThingsModel.Rpt_EndPoint_IOs_Days_Result">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Fx" ColumnName="Fx" />
+                <ScalarProperty Name="C1" ColumnName="1" />
+                <ScalarProperty Name="C2" ColumnName="2" />
+                <ScalarProperty Name="C3" ColumnName="3" />
+                <ScalarProperty Name="C4" ColumnName="4" />
+                <ScalarProperty Name="C5" ColumnName="5" />
+                <ScalarProperty Name="C6" ColumnName="6" />
+                <ScalarProperty Name="C7" ColumnName="7" />
+                <ScalarProperty Name="C8" ColumnName="8" />
+                <ScalarProperty Name="C9" ColumnName="9" />
+                <ScalarProperty Name="C10" ColumnName="10" />
+                <ScalarProperty Name="C11" ColumnName="11" />
+                <ScalarProperty Name="C12" ColumnName="12" />
+                <ScalarProperty Name="C13" ColumnName="13" />
+                <ScalarProperty Name="C14" ColumnName="14" />
+                <ScalarProperty Name="C15" ColumnName="15" />
+                <ScalarProperty Name="C16" ColumnName="16" />
+                <ScalarProperty Name="C17" ColumnName="17" />
+                <ScalarProperty Name="C18" ColumnName="18" />
+                <ScalarProperty Name="C19" ColumnName="19" />
+                <ScalarProperty Name="C20" ColumnName="20" />
+                <ScalarProperty Name="C21" ColumnName="21" />
+                <ScalarProperty Name="C22" ColumnName="22" />
+                <ScalarProperty Name="C23" ColumnName="23" />
+                <ScalarProperty Name="C24" ColumnName="24" />
+                <ScalarProperty Name="C25" ColumnName="25" />
+                <ScalarProperty Name="C26" ColumnName="26" />
+                <ScalarProperty Name="C27" ColumnName="27" />
+                <ScalarProperty Name="C28" ColumnName="28" />
+                <ScalarProperty Name="C29" ColumnName="29" />
+                <ScalarProperty Name="C30" ColumnName="30" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

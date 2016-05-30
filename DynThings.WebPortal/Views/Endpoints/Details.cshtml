@@ -9,11 +9,11 @@
     </div>
     <div class="row">
         <div class="col-lg-12">
-            <select id="drpEndpointHighchartsView" class="form-control" onchange="drpReport_Select(@Model.ID)">
-                <option value="1">Inputs: Monthly\Year (Average)</option>
-                <option value="2">Inputs: Daily\Month (Average)</option>
-                <option value="3">Inputs: Hourly\Day (Average)</option>
-                <option value="4">Inputs: Minutes\Hour (Average)</option>
+            <select id="drpEndpointHighchartsView" class="form-control" onchange="drpReport_Select(@Model.ID,'@DateTime.Now.Year.ToString()')">
+                <option value="1">Inputs: Minutes\Hour</option>
+                <option value="2">Inputs: Hour\Day</option>
+                <option value="3">Inputs: Day\Month</option>
+                <option value="4">Inputs: Month\Year</option>
                 <option value="5">Network: Connection drops\Months  (Count)</option>
             </select>
         </div>
@@ -81,7 +81,8 @@
             LoadPart_EndPointDetailsDiv('@Model.ID');
             LoadPart_EndPointHistoryDiv('@Model.ID');
             LoadPart_EndPointCommandListByEndPointIDDiv('@Model.ID', '');
-            LoadChart_EndPoint_AvgMonthDiv('@Model.ID');
+            //LoadChart_EndPoint_MonthDiv('@Model.ID','@DateTime.Now.Year.ToString()');
+            LoadChart_EndPoint_DayDiv('@Model.ID');
         });
     </script>
 

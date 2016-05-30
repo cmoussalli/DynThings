@@ -241,18 +241,38 @@ function SelectEndPointFromLookUp(id, title) {
 }
 
 
-function drpReport_Select(endPointID) {
+function drpReport_Select(endPointID,year) {
+
+    if ($("#drpEndpointHighchartsView").val() == 3)
+    {
+    LoadChart_EndPoint_DayDiv(endPointID);
+    }
+    if ($("#drpEndpointHighchartsView").val() == 4) {
+        LoadChart_EndPoint_MonthDiv(endPointID,year);
+    }
     
-    LoadChart_EndPoint_AvgMonthDiv(endPointID);
 }
 
 
 //HighChart
-function LoadChart_EndPoint_AvgMonthDiv(endPointID) {
+function LoadChart_EndPoint_MonthDiv(endPointID,year) {
     var loadingpart = LoadDivLoading();
     $("#EndPointChartDiv").html(loadingpart);
     $.ajax({
-        url: getRootURL() + '/EndPoints/AVG_Month?EndPointID=' + endPointID ,
+        url: getRootURL() + '/EndPoints/Rpt_Month?EndPointID=' + endPointID + '&year=2016',
+        type: "GET",
+    })
+        .done(function (partialViewResult) {
+            $("#EndPointChartDiv").html(partialViewResult);
+        });
+    return false;
+}
+
+function LoadChart_EndPoint_DayDiv(endPointID) {
+    var loadingpart = LoadDivLoading();
+    $("#EndPointChartDiv").html(loadingpart);
+    $.ajax({
+        url: getRootURL() + '/EndPoints/Rpt_Day?EndPointID=' + endPointID,
         type: "GET",
     })
         .done(function (partialViewResult) {

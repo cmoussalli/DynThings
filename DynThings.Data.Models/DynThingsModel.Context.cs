@@ -80,7 +80,7 @@ public partial class DynThingsEntities : DbContext
     public virtual DbSet<ResultMessage> ResultMessages { get; set; }
 
 
-    public virtual ObjectResult<Rpt_EndPoint_IOs_Months_Result> Rpt_EndPoint_IOs_Months(Nullable<long> ePID)
+    public virtual ObjectResult<Rpt_EndPoint_IOs_Months_Result> Rpt_EndPoint_IOs_Months(Nullable<long> ePID, string year)
     {
 
         var ePIDParameter = ePID.HasValue ?
@@ -88,7 +88,24 @@ public partial class DynThingsEntities : DbContext
             new ObjectParameter("EPID", typeof(long));
 
 
-        return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Rpt_EndPoint_IOs_Months_Result>("Rpt_EndPoint_IOs_Months", ePIDParameter);
+        var yearParameter = year != null ?
+            new ObjectParameter("Year", year) :
+            new ObjectParameter("Year", typeof(string));
+
+
+        return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Rpt_EndPoint_IOs_Months_Result>("Rpt_EndPoint_IOs_Months", ePIDParameter, yearParameter);
+    }
+
+
+    public virtual ObjectResult<Rpt_EndPoint_IOs_Days_Result> Rpt_EndPoint_IOs_Days(Nullable<long> ePID)
+    {
+
+        var ePIDParameter = ePID.HasValue ?
+            new ObjectParameter("EPID", ePID) :
+            new ObjectParameter("EPID", typeof(long));
+
+
+        return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Rpt_EndPoint_IOs_Days_Result>("Rpt_EndPoint_IOs_Days", ePIDParameter);
     }
 
 }

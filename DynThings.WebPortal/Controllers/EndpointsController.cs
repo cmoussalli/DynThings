@@ -191,9 +191,17 @@ namespace DynThings.WebPortal.Controllers
 
         #region Reports
         [HttpGet]
-        public ActionResult AVG_Month(long endPointID)
+        public ActionResult Rpt_Month(long endPointID,string year)
         {
-            Chart chrt =  UnitOfWork_Reports.rptEndpoints.IOs_Monthly_Average(endPointID);
+            Chart chrt =  UnitOfWork_Reports.rptEndpoints.IOs_Monthly(endPointID,year);
+
+            return PartialView("_HighChart", chrt);
+        }
+
+        [HttpGet]
+        public ActionResult Rpt_Day(long endPointID)
+        {
+            Chart chrt = UnitOfWork_Reports.rptEndpoints.IOs_Daily(endPointID);
 
             return PartialView("_HighChart", chrt);
         }
