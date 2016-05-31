@@ -147,6 +147,12 @@
     <Compile Include="Rpt_EndPoint_IOs_Days_Result.cs">
       <DependentUpon>DynThingsModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Rpt_EndPoint_IOs_HOURs_Result.cs">
+      <DependentUpon>DynThingsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Rpt_EndPoint_IOs_Minutes_Result.cs">
+      <DependentUpon>DynThingsModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Rpt_EndPoint_IOs_Months_Result.cs">
       <DependentUpon>DynThingsModel.tt</DependentUpon>
     </Compile>

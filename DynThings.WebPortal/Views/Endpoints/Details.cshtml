@@ -9,13 +9,18 @@
     </div>
     <div class="row">
         <div class="col-lg-12">
-            <select id="drpEndpointHighchartsView" class="form-control" onchange="drpReport_Select(@Model.ID,'@DateTime.Now.Year.ToString()')">
-                <option value="1">Inputs: Minutes\Hour</option>
-                <option value="2">Inputs: Hour\Day</option>
-                <option value="3">Inputs: Day\Month</option>
-                <option value="4">Inputs: Month\Year</option>
-                <option value="5">Network: Connection drops\Months  (Count)</option>
-            </select>
+            <div class="input-group">
+                <select id="drpEndpointHighchartsView" class="form-control" onchange="drpReport_Select(@Model.ID,'@DateTime.Now.Year.ToString()')">
+                    <option value="1">Inputs: Minutes\Hour</option>
+                    <option value="2">Inputs: Hour\Day</option>
+                    <option value="3">Inputs: Day\Month</option>
+                    <option value="4">Inputs: Month\Year</option>
+                    <option value="5">Network: Connection drops\Months  (Count)</option>
+                </select>
+                <div class="input-group-btn">
+                    <button onclick="drpReport_Select(@Model.ID,'@DateTime.Now.Year.ToString()')" class="btn btn-primary">Refresh</button>
+                </div>
+            </div>
         </div>
     </div>
     <div class="row">

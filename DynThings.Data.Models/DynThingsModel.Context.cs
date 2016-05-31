@@ -108,6 +108,30 @@ public partial class DynThingsEntities : DbContext
         return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Rpt_EndPoint_IOs_Days_Result>("Rpt_EndPoint_IOs_Days", ePIDParameter);
     }
 
+
+    public virtual ObjectResult<Rpt_EndPoint_IOs_HOURs_Result> Rpt_EndPoint_IOs_HOURs(Nullable<long> ePID)
+    {
+
+        var ePIDParameter = ePID.HasValue ?
+            new ObjectParameter("EPID", ePID) :
+            new ObjectParameter("EPID", typeof(long));
+
+
+        return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Rpt_EndPoint_IOs_HOURs_Result>("Rpt_EndPoint_IOs_HOURs", ePIDParameter);
+    }
+
+
+    public virtual ObjectResult<Rpt_EndPoint_IOs_Minutes_Result> Rpt_EndPoint_IOs_Minutes(Nullable<long> ePID)
+    {
+
+        var ePIDParameter = ePID.HasValue ?
+            new ObjectParameter("EPID", ePID) :
+            new ObjectParameter("EPID", typeof(long));
+
+
+        return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Rpt_EndPoint_IOs_Minutes_Result>("Rpt_EndPoint_IOs_Minutes", ePIDParameter);
+    }
+
 }
 
 }

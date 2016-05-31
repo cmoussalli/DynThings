@@ -194,7 +194,6 @@ namespace DynThings.WebPortal.Controllers
         public ActionResult Rpt_Month(long endPointID,string year)
         {
             Chart chrt =  UnitOfWork_Reports.rptEndpoints.IOs_Monthly(endPointID,year);
-
             return PartialView("_HighChart", chrt);
         }
 
@@ -202,7 +201,20 @@ namespace DynThings.WebPortal.Controllers
         public ActionResult Rpt_Day(long endPointID)
         {
             Chart chrt = UnitOfWork_Reports.rptEndpoints.IOs_Daily(endPointID);
+            return PartialView("_HighChart", chrt);
+        }
 
+        [HttpGet]
+        public ActionResult Rpt_Hour(long endPointID)
+        {
+            Chart chrt = UnitOfWork_Reports.rptEndpoints.IOs_Hour(endPointID);
+            return PartialView("_HighChart", chrt);
+        }
+
+        [HttpGet]
+        public ActionResult Rpt_Minute(long endPointID)
+        {
+            Chart chrt = UnitOfWork_Reports.rptEndpoints.IOs_Minute(endPointID);
             return PartialView("_HighChart", chrt);
         }
         #endregion

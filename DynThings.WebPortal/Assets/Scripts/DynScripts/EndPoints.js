@@ -250,6 +250,14 @@ function drpReport_Select(endPointID,year) {
     if ($("#drpEndpointHighchartsView").val() == 4) {
         LoadChart_EndPoint_MonthDiv(endPointID,year);
     }
+    if ($("#drpEndpointHighchartsView").val() == 2) {
+        LoadChart_EndPoint_HourDiv(endPointID);
+    }
+    if ($("#drpEndpointHighchartsView").val() == 1) {
+        LoadChart_EndPoint_MinuteDiv(endPointID);
+    }
+
+
     
 }
 
@@ -273,6 +281,32 @@ function LoadChart_EndPoint_DayDiv(endPointID) {
     $("#EndPointChartDiv").html(loadingpart);
     $.ajax({
         url: getRootURL() + '/EndPoints/Rpt_Day?EndPointID=' + endPointID,
+        type: "GET",
+    })
+        .done(function (partialViewResult) {
+            $("#EndPointChartDiv").html(partialViewResult);
+        });
+    return false;
+}
+
+function LoadChart_EndPoint_HourDiv(endPointID) {
+    var loadingpart = LoadDivLoading();
+    $("#EndPointChartDiv").html(loadingpart);
+    $.ajax({
+        url: getRootURL() + '/EndPoints/Rpt_Hour?EndPointID=' + endPointID,
+        type: "GET",
+    })
+        .done(function (partialViewResult) {
+            $("#EndPointChartDiv").html(partialViewResult);
+        });
+    return false;
+}
+
+function LoadChart_EndPoint_MinuteDiv(endPointID) {
+    var loadingpart = LoadDivLoading();
+    $("#EndPointChartDiv").html(loadingpart);
+    $.ajax({
+        url: getRootURL() + '/EndPoints/Rpt_Minute?EndPointID=' + endPointID,
         type: "GET",
     })
         .done(function (partialViewResult) {
