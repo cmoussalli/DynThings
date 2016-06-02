@@ -213,16 +213,18 @@ namespace DynThings.WebAPI.Controllers
                 {
                     //endPoint keyPass Validation
                     DynThings.Data.Models.Endpoint oEndpoint = UnitOfWork_Repositories.repoEndpoints.FindByKeyPass(endPointKeyPass);
+                    
                     if (oEndpoint != null)
                     {
                         //Try Parse ExecutionTimeStamp to DateTime
                         DateTime execTime;
                         if (oEndPointInput.ExectionTimeStamp == "")
                         {
-                            oEndPointInput.ExectionTimeStamp = DateTime.Now.ToString();
+                            oEndPointInput.ExectionTimeStamp = DateTime.UtcNow.AddHours(int.Parse(oEndpoint.UTC_Diff.ToString())).ToString();
                         }
                         if (DateTime.TryParse(oEndPointInput.ExectionTimeStamp, out execTime))
-                        { }
+                        {
+                        }
                         else
                         {//DateTime Parse Failed
                             ResultInfo.Result result = ResultInfo.GetResultByID(1);

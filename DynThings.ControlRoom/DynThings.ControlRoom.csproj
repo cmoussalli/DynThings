@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
-    <ProjectGuid>{BAB68515-B2DC-4F5A-8C07-05E89C88510B}</ProjectGuid>
+    <ProjectGuid>{1DA6841C-84F4-4EF5-AD43-EFAF9CE224BB}</ProjectGuid>
     <OutputType>AppContainerExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>DynThings.ControlRoom</RootNamespace>

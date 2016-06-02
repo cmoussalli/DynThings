@@ -14,7 +14,6 @@
         <EntityTypeShape EntityType="DynThingsModel.DeviceIO" Width="1.5" PointX="5.25" PointY="4.875" />
         <EntityTypeShape EntityType="DynThingsModel.Device" Width="1.5" PointX="3" PointY="8.625" />
         <EntityTypeShape EntityType="DynThingsModel.DeviceStatu" Width="1.5" PointX="0.75" PointY="9.375" />
-        <EntityTypeShape EntityType="DynThingsModel.DynSetting" Width="1.5" PointX="0.75" PointY="12.75" />
         <EntityTypeShape EntityType="DynThingsModel.EndPointCommand" Width="1.5" PointX="10.5" PointY="12.5" />
         <EntityTypeShape EntityType="DynThingsModel.EndPointIO" Width="1.5" PointX="10.5" PointY="8.875" />
         <EntityTypeShape EntityType="DynThingsModel.Endpoint" Width="1.5" PointX="8.25" PointY="8.625" />
@@ -46,6 +45,7 @@
         <AssociationConnector Association="DynThingsModel.FK__LinkLocat__Locat__36B12243" />
         <AssociationConnector Association="DynThingsModel.FK__LocationV__Locat__286302EC" />
         <AssociationConnector Association="DynThingsModel.AspNetUserRoles" />
+        <EntityTypeShape EntityType="DynThingsModel.DynSetting" Width="1.5" PointX="0.75" PointY="12.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

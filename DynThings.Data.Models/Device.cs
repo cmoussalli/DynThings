@@ -45,6 +45,8 @@ public partial class Device
 
     public Nullable<long> StatusID { get; set; }
 
+    public Nullable<int> UTC_Diff { get; set; }
+
 
 
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

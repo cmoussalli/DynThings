@@ -43,6 +43,8 @@ public partial class Endpoint
 
     public long TypeID { get; set; }
 
+    public Nullable<int> UTC_Diff { get; set; }
+
 
 
     public virtual Device Device { get; set; }

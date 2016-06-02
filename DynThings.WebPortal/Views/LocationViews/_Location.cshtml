@@ -3,7 +3,7 @@
 @foreach (var ePoint in Model.EndPoints)
 {
     <Text>
-    <button id="btnEndPoint_@ePoint.GUID" class="btn btn-default" onclick="LoadEndPointParts('@ePoint.ID')" style="height:120px;min-width:120px">
+    <button id="btnEndPoint_@ePoint.GUID" class="btn btn-default" onclick="LoadEndPointParts(@ePoint.ID)" style="height:120px;min-width:120px">
         @*<span class="glyphicon glyphicon-star" aria-hidden="true"></span>*@
         @*<span class="@ePoint.CssIcon.Css"></span>*@
         <span class="title">@ePoint.Title</span>
@@ -43,7 +43,8 @@
 
 <script>
     function LoadEndPointParts(endPointID) {
-        LoadPart_MonitorEndPointMain(endPointID);
+        alert('1');
+        //LoadPart_MonitorEndPointMain(endPointID);
         LoadPart_MonitorEndPointHistory(endPointID);
         LoadPart_MonitorEndPointCommands(endPointID);
     }

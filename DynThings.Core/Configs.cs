@@ -72,6 +72,14 @@ namespace DynThings.Core
                 return db.DynSettings.First().PlatformKey;
             }
         }
+        public static int App_TimeZone
+        {
+            get
+            {
+                return db.DynSettings.First().App_TimeZone;
+            }
+        }
+
 
         public static void SetDevelopmentMode(bool activation)
         {
@@ -119,8 +127,16 @@ namespace DynThings.Core
             dset.PlatformKey = newKey;
             db.SaveChanges();
         }
+        public static void SetApp_TimeZone(int recordsCount)
+        {
+            DynSetting dset = db.DynSettings.First();
+            dset.App_TimeZone = recordsCount;
+            db.SaveChanges();
+        }
 
-       
+
+        
+
     }
 
 

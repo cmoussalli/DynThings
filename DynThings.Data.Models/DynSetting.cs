@@ -36,6 +36,8 @@ public partial class DynSetting
 
     public bool EnableSystemLogger { get; set; }
 
+    public int App_TimeZone { get; set; }
+
 }
 
 }

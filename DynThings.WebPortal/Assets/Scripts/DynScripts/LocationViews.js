@@ -142,6 +142,7 @@ function LoadPart_MonitorEndPointMain(endPointID) {
 
 //Get EndPointHistory
 function LoadPart_MonitorEndPointHistory(endPointID) {
+    alert('2');
     var loadingpart = LoadDivLoading();
     $("#SelectedEndPointID").val(endPointID);
     $("#divMonitorEndPointHistory").html(loadingpart);

@@ -97,6 +97,7 @@
           <Property Name="PinCode" Type="nvarchar" MaxLength="50" />
           <Property Name="Title" Type="nvarchar" MaxLength="50" />
           <Property Name="StatusID" Type="bigint" />
+          <Property Name="UTC_Diff" Type="int" />
         </EntityType>
         <EntityType Name="DeviceStatus">
           <Key>
@@ -118,6 +119,7 @@
           <Property Name="PublicAccess" Type="bit" Nullable="false" />
           <Property Name="PublicSignUP" Type="bit" Nullable="false" />
           <Property Name="EnableSystemLogger" Type="bit" Nullable="false" />
+          <Property Name="App_TimeZone" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="EndPointCommands">
           <Key>
@@ -153,6 +155,7 @@
           <Property Name="Title" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="DeviceID" Type="bigint" Nullable="false" />
           <Property Name="TypeID" Type="bigint" Nullable="false" />
+          <Property Name="UTC_Diff" Type="int" />
         </EntityType>
         <EntityType Name="EndPointTypeCategorys">
           <Key>
@@ -638,7 +641,6 @@
           <EntitySet Name="DeviceIOs" EntityType="DynThingsModel.DeviceIO" />
           <EntitySet Name="Devices" EntityType="DynThingsModel.Device" />
           <EntitySet Name="DeviceStatus" EntityType="DynThingsModel.DeviceStatu" />
-          <EntitySet Name="DynSettings" EntityType="DynThingsModel.DynSetting" />
           <EntitySet Name="EndPointCommands" EntityType="DynThingsModel.EndPointCommand" />
           <EntitySet Name="EndPointIOs" EntityType="DynThingsModel.EndPointIO" />
           <EntitySet Name="Endpoints" EntityType="DynThingsModel.Endpoint" />
@@ -738,8 +740,9 @@
           <Parameter Name="EPID" Mode="In" Type="Int64" />
           </FunctionImport>
           <FunctionImport Name="Rpt_EndPoint_IOs_Minutes" ReturnType="Collection(DynThingsModel.Rpt_EndPoint_IOs_Minutes_Result)">
-            <Parameter Name="EPID" Mode="In" Type="Int64" />
+          <Parameter Name="EPID" Mode="In" Type="Int64" />
           </FunctionImport>
+          <EntitySet Name="DynSettings" EntityType="DynThingsModel.DynSetting" />
         </EntityContainer>
         <EntityType Name="AspNetRole">
           <Key>
@@ -840,6 +843,7 @@
           <NavigationProperty Name="DeviceStatu" Relationship="DynThingsModel.FK__Devices__StatusI__01D345B0" FromRole="Device" ToRole="DeviceStatu" />
           <NavigationProperty Name="Endpoints" Relationship="DynThingsModel.FK__Endpoints__Devic__00DF2177" FromRole="Device" ToRole="Endpoint" />
           <NavigationProperty Name="LinkDevicesLocations" Relationship="DynThingsModel.FK__LinkDevic__Devic__48CFD27E" FromRole="Device" ToRole="LinkDevicesLocation" />
+          <Property Name="UTC_Diff" Type="Int32" />
         </EntityType>
         <EntityType Name="DeviceStatu">
           <Key>
@@ -848,20 +852,6 @@
           <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Devices" Relationship="DynThingsModel.FK__Devices__StatusI__01D345B0" FromRole="DeviceStatu" ToRole="Device" />
-        </EntityType>
-        <EntityType Name="DynSetting">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="DBVersion" Type="Single" Nullable="false" />
-          <Property Name="DevelopmentMode" Type="Boolean" Nullable="false" />
-          <Property Name="DefaultRecordsPerMaster" Type="Int32" Nullable="false" />
-          <Property Name="DefaultRecordsPerChild" Type="Int32" Nullable="false" />
-          <Property Name="PlatformKey" Type="Guid" Nullable="false" />
-          <Property Name="PublicAccess" Type="Boolean" Nullable="false" />
-          <Property Name="PublicSignUP" Type="Boolean" Nullable="false" />
-          <Property Name="EnableSystemLogger" Type="Boolean" Nullable="false" />
         </EntityType>
         <EntityType Name="EndPointCommand">
           <Key>
@@ -904,6 +894,7 @@
           <NavigationProperty Name="EndPointCommands" Relationship="DynThingsModel.FK__EndPointC__EndPo__4222D4EF" FromRole="Endpoint" ToRole="EndPointCommand" />
           <NavigationProperty Name="EndPointIOs" Relationship="DynThingsModel.FK__EndPointI__EndPo__29572725" FromRole="Endpoint" ToRole="EndPointIO" />
           <NavigationProperty Name="EndPointType" Relationship="DynThingsModel.FK__Endpoints__TypeI__45F365D3" FromRole="Endpoint" ToRole="EndPointType" />
+          <Property Name="UTC_Diff" Type="Int32" />
         </EntityType>
         <EntityType Name="EndPointTypeCategory">
           <Key>
@@ -1384,6 +1375,21 @@
           <Property Type="Int32" Name="C59" Nullable="true" />
           <Property Type="Int32" Name="C60" Nullable="true" />
         </ComplexType>
+        <EntityType Name="DynSetting">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DBVersion" Type="Single" Nullable="false" />
+          <Property Name="DevelopmentMode" Type="Boolean" Nullable="false" />
+          <Property Name="DefaultRecordsPerMaster" Type="Int32" Nullable="false" />
+          <Property Name="DefaultRecordsPerChild" Type="Int32" Nullable="false" />
+          <Property Name="PlatformKey" Type="Guid" Nullable="false" />
+          <Property Name="PublicAccess" Type="Boolean" Nullable="false" />
+          <Property Name="PublicSignUP" Type="Boolean" Nullable="false" />
+          <Property Name="EnableSystemLogger" Type="Boolean" Nullable="false" />
+          <Property Name="App_TimeZone" Type="Int32" Nullable="false" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1472,6 +1478,7 @@
           <EntitySetMapping Name="Devices">
             <EntityTypeMapping TypeName="DynThingsModel.Device">
               <MappingFragment StoreEntitySet="Devices">
+                <ScalarProperty Name="UTC_Diff" ColumnName="UTC_Diff" />
                 <ScalarProperty Name="StatusID" ColumnName="StatusID" />
                 <ScalarProperty Name="Title" ColumnName="Title" />
                 <ScalarProperty Name="PinCode" ColumnName="PinCode" />
@@ -1485,21 +1492,6 @@
             <EntityTypeMapping TypeName="DynThingsModel.DeviceStatu">
               <MappingFragment StoreEntitySet="DeviceStatus">
                 <ScalarProperty Name="Title" ColumnName="Title" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="DynSettings">
-            <EntityTypeMapping TypeName="DynThingsModel.DynSetting">
-              <MappingFragment StoreEntitySet="DynSettings">
-                <ScalarProperty Name="EnableSystemLogger" ColumnName="EnableSystemLogger" />
-                <ScalarProperty Name="PublicSignUP" ColumnName="PublicSignUP" />
-                <ScalarProperty Name="PublicAccess" ColumnName="PublicAccess" />
-                <ScalarProperty Name="PlatformKey" ColumnName="PlatformKey" />
-                <ScalarProperty Name="DefaultRecordsPerChild" ColumnName="DefaultRecordsPerChild" />
-                <ScalarProperty Name="DefaultRecordsPerMaster" ColumnName="DefaultRecordsPerMaster" />
-                <ScalarProperty Name="DevelopmentMode" ColumnName="DevelopmentMode" />
-                <ScalarProperty Name="DBVersion" ColumnName="DBVersion" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -1532,6 +1524,7 @@
           <EntitySetMapping Name="Endpoints">
             <EntityTypeMapping TypeName="DynThingsModel.Endpoint">
               <MappingFragment StoreEntitySet="Endpoints">
+                <ScalarProperty Name="UTC_Diff" ColumnName="UTC_Diff" />
                 <ScalarProperty Name="TypeID" ColumnName="TypeID" />
                 <ScalarProperty Name="DeviceID" ColumnName="DeviceID" />
                 <ScalarProperty Name="Title" ColumnName="Title" />
@@ -1803,6 +1796,22 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <EntitySetMapping Name="DynSettings">
+            <EntityTypeMapping TypeName="DynThingsModel.DynSetting">
+              <MappingFragment StoreEntitySet="DynSettings">
+                <ScalarProperty Name="App_TimeZone" ColumnName="App_TimeZone" />
+                <ScalarProperty Name="EnableSystemLogger" ColumnName="EnableSystemLogger" />
+                <ScalarProperty Name="PublicSignUP" ColumnName="PublicSignUP" />
+                <ScalarProperty Name="PublicAccess" ColumnName="PublicAccess" />
+                <ScalarProperty Name="PlatformKey" ColumnName="PlatformKey" />
+                <ScalarProperty Name="DefaultRecordsPerChild" ColumnName="DefaultRecordsPerChild" />
+                <ScalarProperty Name="DefaultRecordsPerMaster" ColumnName="DefaultRecordsPerMaster" />
+                <ScalarProperty Name="DevelopmentMode" ColumnName="DevelopmentMode" />
+                <ScalarProperty Name="DBVersion" ColumnName="DBVersion" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

@@ -4,12 +4,16 @@ using DynThings.ControlRoom.Services.SettingsServices;
 using Windows.ApplicationModel.Activation;
 using Template10.Controls;
 using Template10.Common;
+using System;
+using System.Linq;
+using Windows.UI.Xaml.Data;
 
 namespace DynThings.ControlRoom
 {
     /// Documentation on APIs used in this page:
     /// https://github.com/Windows-XAML/Template10/wiki
 
+    [Bindable]
     sealed partial class App : Template10.Common.BootStrapper
     {
         public App()
@@ -29,11 +33,12 @@ namespace DynThings.ControlRoom
 
         public override async Task OnInitializeAsync(IActivatedEventArgs args)
         {
-            // content may already be shell when resuming
-            if ((Window.Current.Content as ModalDialog) == null)
+            if (Window.Current.Content as ModalDialog == null)
             {
-                // setup hamburger shell inside a modal dialog
+                // create a new frame 
                 var nav = NavigationServiceFactory(BackButton.Attach, ExistingContent.Include);
+
+                // create modal root
                 Window.Current.Content = new ModalDialog
                 {
                     DisableBackButtonWhenModal = true,
@@ -47,6 +52,7 @@ namespace DynThings.ControlRoom
         public override async Task OnStartAsync(StartKind startKind, IActivatedEventArgs args)
         {
             // long-running startup tasks go here
+            await Task.Delay(1000);
 
             NavigationService.Navigate(typeof(Views.MainPage));
             await Task.CompletedTask;

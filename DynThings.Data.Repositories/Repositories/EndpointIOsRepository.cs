@@ -120,7 +120,7 @@ namespace DynThings.Data.Repositories
                 endIO.EndPointID = endPointID;
                 endIO.Valu = value;
                 endIO.IOTypeID = long.Parse(ioType.GetHashCode().ToString());
-                endIO.TimeStamp = DateTime.Now;
+                endIO.TimeStamp = executionTime;
                 endIO.ExecTimeStamp = executionTime;
                 endIO.ScheduleTimeStamp = executionTime;
                 db.EndPointIOs.Add(endIO);
@@ -141,7 +141,7 @@ namespace DynThings.Data.Repositories
                 endIO.EndPointID = endPointID;
                 endIO.Valu = value;
                 endIO.IOTypeID = long.Parse(ioType.GetHashCode().ToString());
-                endIO.TimeStamp = DateTime.Now;
+                endIO.TimeStamp = executionTime;
                 endIO.ExecTimeStamp = executionTime;
                 endIO.ScheduleTimeStamp = scheduleTimeStamp;
                 db.EndPointIOs.Add(endIO);
@@ -162,7 +162,7 @@ namespace DynThings.Data.Repositories
                 endIO.EndPointID = endPointID;
                 endIO.Valu = value;
                 endIO.IOTypeID = long.Parse(ioType.GetHashCode().ToString());
-                endIO.TimeStamp = DateTime.Now;
+                endIO.TimeStamp = DateTime.UtcNow.AddHours(double.Parse (endIO.Endpoint.UTC_Diff.ToString()));
                 db.EndPointIOs.Add(endIO);
                 db.SaveChanges();
                 return ResultInfo.GenerateOKResult("Saved", endIO.ID);
