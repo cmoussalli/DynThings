@@ -62,7 +62,17 @@ namespace DynThings.WebPortal.Controllers
 
         #endregion
 
+        #region DynUser Roles
+        [HttpGet]
+        public PartialViewResult GetPVDynUserRoles(string DynUserID)
+        {
+            List<AspNetRole> rols = Data.Repositories.UnitOfWork_Repositories.repoRoles.GetListByUserID(DynUserID);
+            return PartialView("_Details_Roles", rols);
 
+        }
+
+        
+        #endregion
 
 
         #endregion

@@ -598,6 +598,7 @@
     <Content Include="Views\DynUsers\Index.cshtml" />
     <Content Include="Views\DynUsers\_ListCards.cshtml" />
     <Content Include="Views\DynUsers\_Details_Main.cshtml" />
+    <Content Include="Views\DynUsers\_Details_Roles.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

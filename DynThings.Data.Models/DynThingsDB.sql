@@ -1,4 +1,4 @@
---DB Version 0.104
+--DB Version 0.105
 USE [master]
 GO
 /****** Object:  Database [DynThings]    Script Date: 2/8/2016 12:47:48 PM ******/
@@ -25,7 +25,7 @@ CREATE TABLE [dbo].[AspNetRoles](
 ) ON [PRIMARY]
 
 GO
-/****** Object:  Table [dbo].[AspNetUserClaims]    Script Date: 5/20/2016 1:56:28 PM ******/
+/****** Object:  Table [dbo].[AspNetUserClaims]    Script Date: 6/6/2016 6:16:14 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -42,7 +42,7 @@ CREATE TABLE [dbo].[AspNetUserClaims](
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 
 GO
-/****** Object:  Table [dbo].[AspNetUserLogins]    Script Date: 5/20/2016 1:56:28 PM ******/
+/****** Object:  Table [dbo].[AspNetUserLogins]    Script Date: 6/6/2016 6:16:14 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -60,7 +60,7 @@ CREATE TABLE [dbo].[AspNetUserLogins](
 ) ON [PRIMARY]
 
 GO
-/****** Object:  Table [dbo].[AspNetUserRoles]    Script Date: 5/20/2016 1:56:28 PM ******/
+/****** Object:  Table [dbo].[AspNetUserRoles]    Script Date: 6/6/2016 6:16:14 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -76,7 +76,7 @@ CREATE TABLE [dbo].[AspNetUserRoles](
 ) ON [PRIMARY]
 
 GO
-/****** Object:  Table [dbo].[AspNetUsers]    Script Date: 5/20/2016 1:56:28 PM ******/
+/****** Object:  Table [dbo].[AspNetUsers]    Script Date: 6/6/2016 6:16:14 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -94,6 +94,7 @@ CREATE TABLE [dbo].[AspNetUsers](
 	[LockoutEnabled] [bit] NOT NULL,
 	[AccessFailedCount] [int] NOT NULL,
 	[UserName] [nvarchar](256) NOT NULL,
+	[FullName] [nvarchar](50) NULL,
  CONSTRAINT [PK_dbo.AspNetUsers] PRIMARY KEY CLUSTERED 
 (
 	[Id] ASC
@@ -101,7 +102,7 @@ CREATE TABLE [dbo].[AspNetUsers](
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 
 GO
-/****** Object:  Table [dbo].[CssIcons]    Script Date: 5/20/2016 1:56:28 PM ******/
+/****** Object:  Table [dbo].[CssIcons]    Script Date: 6/6/2016 6:16:14 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -117,7 +118,7 @@ CREATE TABLE [dbo].[CssIcons](
 ) ON [PRIMARY]
 
 GO
-/****** Object:  Table [dbo].[DeviceCommands]    Script Date: 5/20/2016 1:56:28 PM ******/
+/****** Object:  Table [dbo].[DeviceCommands]    Script Date: 6/6/2016 6:16:14 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -136,7 +137,7 @@ CREATE TABLE [dbo].[DeviceCommands](
 ) ON [PRIMARY]
 
 GO
-/****** Object:  Table [dbo].[DeviceIOs]    Script Date: 5/20/2016 1:56:28 PM ******/
+/****** Object:  Table [dbo].[DeviceIOs]    Script Date: 6/6/2016 6:16:14 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -156,7 +157,7 @@ CREATE TABLE [dbo].[DeviceIOs](
 ) ON [PRIMARY]
 
 GO
-/****** Object:  Table [dbo].[Devices]    Script Date: 5/20/2016 1:56:28 PM ******/
+/****** Object:  Table [dbo].[Devices]    Script Date: 6/6/2016 6:16:14 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -168,6 +169,7 @@ CREATE TABLE [dbo].[Devices](
 	[PinCode] [nvarchar](50) NULL,
 	[Title] [nvarchar](50) NULL,
 	[StatusID] [bigint] NULL,
+	[UTC_Diff] [int] NULL,
  CONSTRAINT [PK_Devices_1] PRIMARY KEY CLUSTERED 
 (
 	[ID] ASC
@@ -175,7 +177,7 @@ CREATE TABLE [dbo].[Devices](
 ) ON [PRIMARY]
 
 GO
-/****** Object:  Table [dbo].[DeviceStatus]    Script Date: 5/20/2016 1:56:28 PM ******/
+/****** Object:  Table [dbo].[DeviceStatus]    Script Date: 6/6/2016 6:16:14 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -190,7 +192,7 @@ CREATE TABLE [dbo].[DeviceStatus](
 ) ON [PRIMARY]
 
 GO
-/****** Object:  Table [dbo].[DynSettings]    Script Date: 5/20/2016 1:56:28 PM ******/
+/****** Object:  Table [dbo].[DynSettings]    Script Date: 6/6/2016 6:16:14 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -205,6 +207,7 @@ CREATE TABLE [dbo].[DynSettings](
 	[PublicAccess] [bit] NOT NULL,
 	[PublicSignUP] [bit] NOT NULL,
 	[EnableSystemLogger] [bit] NOT NULL,
+	[App_TimeZone] [int] NOT NULL,
  CONSTRAINT [PK_DynSettings] PRIMARY KEY CLUSTERED 
 (
 	[ID] ASC
@@ -212,7 +215,7 @@ CREATE TABLE [dbo].[DynSettings](
 ) ON [PRIMARY]
 
 GO
-/****** Object:  Table [dbo].[EndPointCommands]    Script Date: 5/20/2016 1:56:28 PM ******/
+/****** Object:  Table [dbo].[EndPointCommands]    Script Date: 6/6/2016 6:16:14 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -231,7 +234,7 @@ CREATE TABLE [dbo].[EndPointCommands](
 ) ON [PRIMARY]
 
 GO
-/****** Object:  Table [dbo].[EndPointIOs]    Script Date: 5/20/2016 1:56:28 PM ******/
+/****** Object:  Table [dbo].[EndPointIOs]    Script Date: 6/6/2016 6:16:14 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -251,7 +254,7 @@ CREATE TABLE [dbo].[EndPointIOs](
 ) ON [PRIMARY]
 
 GO
-/****** Object:  Table [dbo].[Endpoints]    Script Date: 5/20/2016 1:56:28 PM ******/
+/****** Object:  Table [dbo].[Endpoints]    Script Date: 6/6/2016 6:16:14 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -264,6 +267,7 @@ CREATE TABLE [dbo].[Endpoints](
 	[Title] [nvarchar](50) NOT NULL,
 	[DeviceID] [bigint] NOT NULL,
 	[TypeID] [bigint] NOT NULL,
+	[UTC_Diff] [int] NULL,
  CONSTRAINT [PK_Devices] PRIMARY KEY CLUSTERED 
 (
 	[ID] ASC
@@ -271,7 +275,7 @@ CREATE TABLE [dbo].[Endpoints](
 ) ON [PRIMARY]
 
 GO
-/****** Object:  Table [dbo].[EndPointTypeCategorys]    Script Date: 5/20/2016 1:56:28 PM ******/
+/****** Object:  Table [dbo].[EndPointTypeCategorys]    Script Date: 6/6/2016 6:16:14 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -286,7 +290,7 @@ CREATE TABLE [dbo].[EndPointTypeCategorys](
 ) ON [PRIMARY]
 
 GO
-/****** Object:  Table [dbo].[EndPointTypes]    Script Date: 5/20/2016 1:56:28 PM ******/
+/****** Object:  Table [dbo].[EndPointTypes]    Script Date: 6/6/2016 6:16:14 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -304,7 +308,7 @@ CREATE TABLE [dbo].[EndPointTypes](
 ) ON [PRIMARY]
 
 GO
-/****** Object:  Table [dbo].[IOTypes]    Script Date: 5/20/2016 1:56:28 PM ******/
+/****** Object:  Table [dbo].[IOTypes]    Script Date: 6/6/2016 6:16:14 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -320,7 +324,7 @@ CREATE TABLE [dbo].[IOTypes](
 ) ON [PRIMARY]
 
 GO
-/****** Object:  Table [dbo].[LinkDevicesLocations]    Script Date: 5/20/2016 1:56:28 PM ******/
+/****** Object:  Table [dbo].[LinkDevicesLocations]    Script Date: 6/6/2016 6:16:14 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -336,7 +340,7 @@ CREATE TABLE [dbo].[LinkDevicesLocations](
 ) ON [PRIMARY]
 
 GO
-/****** Object:  Table [dbo].[LinkLocationsLocationViews]    Script Date: 5/20/2016 1:56:28 PM ******/
+/****** Object:  Table [dbo].[LinkLocationsLocationViews]    Script Date: 6/6/2016 6:16:14 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -352,7 +356,7 @@ CREATE TABLE [dbo].[LinkLocationsLocationViews](
 ) ON [PRIMARY]
 
 GO
-/****** Object:  Table [dbo].[Locations]    Script Date: 5/20/2016 1:56:28 PM ******/
+/****** Object:  Table [dbo].[Locations]    Script Date: 6/6/2016 6:16:14 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -373,7 +377,7 @@ CREATE TABLE [dbo].[Locations](
 ) ON [PRIMARY]
 
 GO
-/****** Object:  Table [dbo].[LocationViews]    Script Date: 5/20/2016 1:56:28 PM ******/
+/****** Object:  Table [dbo].[LocationViews]    Script Date: 6/6/2016 6:16:14 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -394,7 +398,7 @@ CREATE TABLE [dbo].[LocationViews](
 ) ON [PRIMARY]
 
 GO
-/****** Object:  Table [dbo].[LocationViewTypes]    Script Date: 5/20/2016 1:56:28 PM ******/
+/****** Object:  Table [dbo].[LocationViewTypes]    Script Date: 6/6/2016 6:16:14 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -409,7 +413,7 @@ CREATE TABLE [dbo].[LocationViewTypes](
 ) ON [PRIMARY]
 
 GO
-/****** Object:  Table [dbo].[ResultMessages]    Script Date: 5/20/2016 1:56:28 PM ******/
+/****** Object:  Table [dbo].[ResultMessages]    Script Date: 6/6/2016 6:16:14 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -425,7 +429,17 @@ CREATE TABLE [dbo].[ResultMessages](
 ) ON [PRIMARY]
 
 GO
-INSERT [dbo].[AspNetUsers] ([Id], [Email], [EmailConfirmed], [PasswordHash], [SecurityStamp], [PhoneNumber], [PhoneNumberConfirmed], [TwoFactorEnabled], [LockoutEndDateUtc], [LockoutEnabled], [AccessFailedCount], [UserName]) VALUES (N'367df69f-c059-4295-95b0-718c93dfa843', N'cmoussalli@gmail.com', 0, N'ALwtfGaSrttw1t7mVutBUXjw1u/7CgWgBeIxkRWlPVMmuBZb517J4JNc1UsFplmZ0g==', N'6304491a-a9ec-493b-9fbe-8a827c93a492', NULL, 0, 0, NULL, 1, 0, N'cmoussalli@gmail.com')
+INSERT [dbo].[AspNetRoles] ([Id], [Name]) VALUES (N'1', N'Admin')
+GO
+INSERT [dbo].[AspNetRoles] ([Id], [Name]) VALUES (N'2', N'Monitor & Control')
+GO
+INSERT [dbo].[AspNetRoles] ([Id], [Name]) VALUES (N'3', N'Monitor Only')
+GO
+INSERT [dbo].[AspNetUserRoles] ([UserId], [RoleId]) VALUES (N'367df69f-c059-4295-95b0-718c93dfa843', N'1')
+GO
+INSERT [dbo].[AspNetUsers] ([Id], [Email], [EmailConfirmed], [PasswordHash], [SecurityStamp], [PhoneNumber], [PhoneNumberConfirmed], [TwoFactorEnabled], [LockoutEndDateUtc], [LockoutEnabled], [AccessFailedCount], [UserName], [FullName]) VALUES (N'367df69f-c059-4295-95b0-718c93dfa843', N'cmoussalli@gmail.com', 0, N'ALwtfGaSrttw1t7mVutBUXjw1u/7CgWgBeIxkRWlPVMmuBZb517J4JNc1UsFplmZ0g==', N'6304491a-a9ec-493b-9fbe-8a827c93a492', NULL, 0, 0, NULL, 1, 0, N'cmoussalli@gmail.com', N'Caesar Moussalli')
+GO
+INSERT [dbo].[AspNetUsers] ([Id], [Email], [EmailConfirmed], [PasswordHash], [SecurityStamp], [PhoneNumber], [PhoneNumberConfirmed], [TwoFactorEnabled], [LockoutEndDateUtc], [LockoutEnabled], [AccessFailedCount], [UserName], [FullName]) VALUES (N'8393618a-ea66-442c-9eff-f48c53f982a4', N'cesar_moussalli@hotmail.com', 0, N'ACXpg5EJ6G3kpffDpIJbFD1wb9125WnI0JTrAH3rASEoosbB1qSgWxSiWQDxe7/CmA==', N'3402829b-5d04-4c93-a64e-83b942c81e9f', NULL, 0, 0, NULL, 1, 0, N'cesar_moussalli@hotmail.com', N'Caesar')
 GO
 SET IDENTITY_INSERT [dbo].[CssIcons] ON 
 
@@ -457,7 +471,7 @@ GO
 SET IDENTITY_INSERT [dbo].[Devices] ON 
 
 GO
-INSERT [dbo].[Devices] ([ID], [GUID], [KeyPass], [PinCode], [Title], [StatusID]) VALUES (9, N'b3f18d2c-135a-43c9-9d58-e3bf543a1a10', N'87fb81a8-d600-4cc9-9302-ec3d45e350e7', N'0000', N'Test 2', 1)
+INSERT [dbo].[Devices] ([ID], [GUID], [KeyPass], [PinCode], [Title], [StatusID], [UTC_Diff]) VALUES (9, N'b3f18d2c-135a-43c9-9d58-e3bf543a1a10', N'87fb81a8-d600-4cc9-9302-ec3d45e350e7', N'0000', N'Test 2', 1, NULL)
 GO
 SET IDENTITY_INSERT [dbo].[Devices] OFF
 GO
@@ -477,14 +491,108 @@ GO
 SET IDENTITY_INSERT [dbo].[DynSettings] ON 
 
 GO
-INSERT [dbo].[DynSettings] ([ID], [DBVersion], [DevelopmentMode], [DefaultRecordsPerMaster], [DefaultRecordsPerChild], [PlatformKey], [PublicAccess], [PublicSignUP], [EnableSystemLogger]) VALUES (1, 0.104, 1, 3, 3, N'a86bb826-988d-4f9a-9f43-169045506194', 1, 1, 1)
+INSERT [dbo].[DynSettings] ([ID], [DBVersion], [DevelopmentMode], [DefaultRecordsPerMaster], [DefaultRecordsPerChild], [PlatformKey], [PublicAccess], [PublicSignUP], [EnableSystemLogger], [App_TimeZone]) VALUES (1, 0.104, 1, 3, 3, N'a86bb826-988d-4f9a-9f43-169045506194', 1, 1, 1, 4)
 GO
 SET IDENTITY_INSERT [dbo].[DynSettings] OFF
+GO
+SET IDENTITY_INSERT [dbo].[EndPointCommands] ON 
+
+GO
+INSERT [dbo].[EndPointCommands] ([ID], [Title], [Description], [EndPointID], [CommandCode], [OwnerID]) VALUES (15, N'Turn ON', N'Turn On Temp Flat8', 46, N'rst', N'1')
+GO
+SET IDENTITY_INSERT [dbo].[EndPointCommands] OFF
+GO
+SET IDENTITY_INSERT [dbo].[EndPointIOs] ON 
+
+GO
+INSERT [dbo].[EndPointIOs] ([ID], [EndPointID], [IOTypeID], [Valu], [TimeStamp], [ExecTimeStamp], [ScheduleTimeStamp]) VALUES (12, 46, 1, N'21', CAST(N'2016-05-25 09:56:12.720' AS DateTime), CAST(N'2016-05-29 23:03:35.000' AS DateTime), NULL)
+GO
+INSERT [dbo].[EndPointIOs] ([ID], [EndPointID], [IOTypeID], [Valu], [TimeStamp], [ExecTimeStamp], [ScheduleTimeStamp]) VALUES (13, 46, 1, N'22', CAST(N'2016-05-24 00:00:00.000' AS DateTime), CAST(N'2016-05-29 23:03:35.000' AS DateTime), NULL)
+GO
+INSERT [dbo].[EndPointIOs] ([ID], [EndPointID], [IOTypeID], [Valu], [TimeStamp], [ExecTimeStamp], [ScheduleTimeStamp]) VALUES (14, 46, 1, N'23', CAST(N'2016-04-24 00:00:00.000' AS DateTime), CAST(N'2016-05-29 23:03:35.000' AS DateTime), NULL)
+GO
+INSERT [dbo].[EndPointIOs] ([ID], [EndPointID], [IOTypeID], [Valu], [TimeStamp], [ExecTimeStamp], [ScheduleTimeStamp]) VALUES (15, 46, 1, N'24', CAST(N'2016-05-29 23:03:35.367' AS DateTime), CAST(N'2016-05-29 23:03:35.000' AS DateTime), CAST(N'2016-05-29 23:03:35.000' AS DateTime))
+GO
+INSERT [dbo].[EndPointIOs] ([ID], [EndPointID], [IOTypeID], [Valu], [TimeStamp], [ExecTimeStamp], [ScheduleTimeStamp]) VALUES (16, 46, 1, N'25', CAST(N'2016-05-30 00:02:20.267' AS DateTime), CAST(N'2016-05-30 00:01:32.000' AS DateTime), CAST(N'2016-05-30 00:01:32.000' AS DateTime))
+GO
+INSERT [dbo].[EndPointIOs] ([ID], [EndPointID], [IOTypeID], [Valu], [TimeStamp], [ExecTimeStamp], [ScheduleTimeStamp]) VALUES (17, 46, 1, N'26', CAST(N'2016-05-30 00:06:38.293' AS DateTime), CAST(N'2016-05-30 00:06:01.000' AS DateTime), CAST(N'2016-05-30 00:06:01.000' AS DateTime))
+GO
+INSERT [dbo].[EndPointIOs] ([ID], [EndPointID], [IOTypeID], [Valu], [TimeStamp], [ExecTimeStamp], [ScheduleTimeStamp]) VALUES (18, 46, 1, N'27', CAST(N'2016-05-30 00:14:42.000' AS DateTime), CAST(N'2016-05-30 00:13:35.000' AS DateTime), CAST(N'2016-05-30 00:13:35.000' AS DateTime))
+GO
+INSERT [dbo].[EndPointIOs] ([ID], [EndPointID], [IOTypeID], [Valu], [TimeStamp], [ExecTimeStamp], [ScheduleTimeStamp]) VALUES (19, 46, 1, N'28', CAST(N'2016-05-30 00:18:08.333' AS DateTime), CAST(N'2016-05-30 00:18:08.000' AS DateTime), CAST(N'2016-05-30 00:18:08.000' AS DateTime))
+GO
+INSERT [dbo].[EndPointIOs] ([ID], [EndPointID], [IOTypeID], [Valu], [TimeStamp], [ExecTimeStamp], [ScheduleTimeStamp]) VALUES (20, 46, 1, N'29', CAST(N'2016-05-28 00:18:19.020' AS DateTime), CAST(N'2016-05-28 00:18:19.000' AS DateTime), CAST(N'2016-05-30 00:18:19.000' AS DateTime))
+GO
+INSERT [dbo].[EndPointIOs] ([ID], [EndPointID], [IOTypeID], [Valu], [TimeStamp], [ExecTimeStamp], [ScheduleTimeStamp]) VALUES (21, 46, 1, N'30', CAST(N'2016-05-30 00:23:14.767' AS DateTime), CAST(N'2016-05-28 00:22:31.000' AS DateTime), CAST(N'2016-05-30 00:22:31.000' AS DateTime))
+GO
+INSERT [dbo].[EndPointIOs] ([ID], [EndPointID], [IOTypeID], [Valu], [TimeStamp], [ExecTimeStamp], [ScheduleTimeStamp]) VALUES (22, 46, 1, N'31', CAST(N'2016-05-30 00:23:29.020' AS DateTime), CAST(N'2016-05-29 00:23:29.000' AS DateTime), CAST(N'2016-05-30 00:23:29.000' AS DateTime))
+GO
+INSERT [dbo].[EndPointIOs] ([ID], [EndPointID], [IOTypeID], [Valu], [TimeStamp], [ExecTimeStamp], [ScheduleTimeStamp]) VALUES (23, 46, 1, N'32', CAST(N'2016-05-30 00:24:06.397' AS DateTime), CAST(N'2016-05-30 00:24:06.000' AS DateTime), CAST(N'2016-05-30 00:24:06.000' AS DateTime))
+GO
+INSERT [dbo].[EndPointIOs] ([ID], [EndPointID], [IOTypeID], [Valu], [TimeStamp], [ExecTimeStamp], [ScheduleTimeStamp]) VALUES (24, 46, 2, N'rst', CAST(N'2016-05-30 14:49:38.523' AS DateTime), NULL, NULL)
+GO
+INSERT [dbo].[EndPointIOs] ([ID], [EndPointID], [IOTypeID], [Valu], [TimeStamp], [ExecTimeStamp], [ScheduleTimeStamp]) VALUES (25, 46, 1, N'25', CAST(N'2016-05-31 12:16:25.353' AS DateTime), CAST(N'2016-05-31 12:16:25.000' AS DateTime), CAST(N'2016-05-31 12:16:25.000' AS DateTime))
+GO
+INSERT [dbo].[EndPointIOs] ([ID], [EndPointID], [IOTypeID], [Valu], [TimeStamp], [ExecTimeStamp], [ScheduleTimeStamp]) VALUES (26, 46, 1, N'27', CAST(N'2016-05-31 12:16:46.697' AS DateTime), CAST(N'2016-05-31 12:16:46.000' AS DateTime), CAST(N'2016-05-31 12:16:46.000' AS DateTime))
+GO
+INSERT [dbo].[EndPointIOs] ([ID], [EndPointID], [IOTypeID], [Valu], [TimeStamp], [ExecTimeStamp], [ScheduleTimeStamp]) VALUES (27, 46, 1, N'35', CAST(N'2016-05-31 12:16:50.493' AS DateTime), CAST(N'2016-05-31 12:16:50.000' AS DateTime), CAST(N'2016-05-31 12:16:50.000' AS DateTime))
+GO
+INSERT [dbo].[EndPointIOs] ([ID], [EndPointID], [IOTypeID], [Valu], [TimeStamp], [ExecTimeStamp], [ScheduleTimeStamp]) VALUES (28, 46, 1, N'35', CAST(N'2016-05-31 13:55:24.453' AS DateTime), CAST(N'2016-05-31 13:55:24.000' AS DateTime), CAST(N'2016-05-31 13:55:24.000' AS DateTime))
+GO
+INSERT [dbo].[EndPointIOs] ([ID], [EndPointID], [IOTypeID], [Valu], [TimeStamp], [ExecTimeStamp], [ScheduleTimeStamp]) VALUES (29, 46, 1, N'35', CAST(N'2016-05-31 13:55:31.580' AS DateTime), CAST(N'2016-05-31 13:55:31.000' AS DateTime), CAST(N'2016-05-31 13:55:31.000' AS DateTime))
+GO
+INSERT [dbo].[EndPointIOs] ([ID], [EndPointID], [IOTypeID], [Valu], [TimeStamp], [ExecTimeStamp], [ScheduleTimeStamp]) VALUES (30, 46, 1, N'30', CAST(N'2016-05-31 13:55:36.247' AS DateTime), CAST(N'2016-05-31 13:55:36.000' AS DateTime), CAST(N'2016-05-31 13:55:36.000' AS DateTime))
+GO
+INSERT [dbo].[EndPointIOs] ([ID], [EndPointID], [IOTypeID], [Valu], [TimeStamp], [ExecTimeStamp], [ScheduleTimeStamp]) VALUES (31, 46, 1, N'30', CAST(N'2016-05-31 14:26:57.753' AS DateTime), CAST(N'2016-05-31 14:26:57.000' AS DateTime), CAST(N'2016-05-31 14:26:57.000' AS DateTime))
+GO
+INSERT [dbo].[EndPointIOs] ([ID], [EndPointID], [IOTypeID], [Valu], [TimeStamp], [ExecTimeStamp], [ScheduleTimeStamp]) VALUES (32, 46, 1, N'28', CAST(N'2016-05-31 14:26:59.843' AS DateTime), CAST(N'2016-05-31 14:26:59.000' AS DateTime), CAST(N'2016-05-31 14:26:59.000' AS DateTime))
+GO
+INSERT [dbo].[EndPointIOs] ([ID], [EndPointID], [IOTypeID], [Valu], [TimeStamp], [ExecTimeStamp], [ScheduleTimeStamp]) VALUES (33, 46, 1, N'24', CAST(N'2016-05-31 14:27:03.883' AS DateTime), CAST(N'2016-05-31 14:27:03.000' AS DateTime), CAST(N'2016-05-31 14:27:03.000' AS DateTime))
+GO
+INSERT [dbo].[EndPointIOs] ([ID], [EndPointID], [IOTypeID], [Valu], [TimeStamp], [ExecTimeStamp], [ScheduleTimeStamp]) VALUES (34, 46, 1, N'24', CAST(N'2016-05-31 19:31:06.930' AS DateTime), CAST(N'2016-05-31 19:31:06.000' AS DateTime), CAST(N'2016-05-31 19:31:06.000' AS DateTime))
+GO
+INSERT [dbo].[EndPointIOs] ([ID], [EndPointID], [IOTypeID], [Valu], [TimeStamp], [ExecTimeStamp], [ScheduleTimeStamp]) VALUES (35, 46, 1, N'25', CAST(N'2016-05-31 19:31:33.467' AS DateTime), CAST(N'2016-05-31 19:31:33.000' AS DateTime), CAST(N'2016-05-31 19:31:33.000' AS DateTime))
+GO
+INSERT [dbo].[EndPointIOs] ([ID], [EndPointID], [IOTypeID], [Valu], [TimeStamp], [ExecTimeStamp], [ScheduleTimeStamp]) VALUES (36, 46, 1, N'26', CAST(N'2016-05-31 19:31:37.530' AS DateTime), CAST(N'2016-05-31 19:31:37.000' AS DateTime), CAST(N'2016-05-31 19:31:37.000' AS DateTime))
+GO
+INSERT [dbo].[EndPointIOs] ([ID], [EndPointID], [IOTypeID], [Valu], [TimeStamp], [ExecTimeStamp], [ScheduleTimeStamp]) VALUES (37, 46, 1, N'26', CAST(N'2016-05-31 19:32:53.237' AS DateTime), CAST(N'2016-05-31 19:32:53.000' AS DateTime), CAST(N'2016-05-31 19:32:53.000' AS DateTime))
+GO
+INSERT [dbo].[EndPointIOs] ([ID], [EndPointID], [IOTypeID], [Valu], [TimeStamp], [ExecTimeStamp], [ScheduleTimeStamp]) VALUES (38, 46, 1, N'26', CAST(N'2016-05-31 19:47:34.473' AS DateTime), CAST(N'2016-05-31 19:47:34.000' AS DateTime), CAST(N'2016-05-31 19:47:34.000' AS DateTime))
+GO
+INSERT [dbo].[EndPointIOs] ([ID], [EndPointID], [IOTypeID], [Valu], [TimeStamp], [ExecTimeStamp], [ScheduleTimeStamp]) VALUES (39, 46, 1, N'29', CAST(N'2016-05-31 19:47:59.117' AS DateTime), CAST(N'2016-05-31 19:47:59.000' AS DateTime), CAST(N'2016-05-31 19:47:59.000' AS DateTime))
+GO
+INSERT [dbo].[EndPointIOs] ([ID], [EndPointID], [IOTypeID], [Valu], [TimeStamp], [ExecTimeStamp], [ScheduleTimeStamp]) VALUES (40, 46, 1, N'29', CAST(N'2016-06-02 12:50:43.177' AS DateTime), CAST(N'2016-06-02 12:50:43.000' AS DateTime), CAST(N'2016-06-02 12:50:43.000' AS DateTime))
+GO
+INSERT [dbo].[EndPointIOs] ([ID], [EndPointID], [IOTypeID], [Valu], [TimeStamp], [ExecTimeStamp], [ScheduleTimeStamp]) VALUES (41, 46, 1, N'33', CAST(N'2016-06-02 13:04:18.170' AS DateTime), CAST(N'2016-06-02 13:04:18.000' AS DateTime), CAST(N'2016-06-02 13:04:18.000' AS DateTime))
+GO
+INSERT [dbo].[EndPointIOs] ([ID], [EndPointID], [IOTypeID], [Valu], [TimeStamp], [ExecTimeStamp], [ScheduleTimeStamp]) VALUES (42, 46, 1, N'33', CAST(N'2016-06-02 13:09:15.893' AS DateTime), CAST(N'2016-06-02 13:09:15.000' AS DateTime), CAST(N'2016-06-02 13:09:15.000' AS DateTime))
+GO
+INSERT [dbo].[EndPointIOs] ([ID], [EndPointID], [IOTypeID], [Valu], [TimeStamp], [ExecTimeStamp], [ScheduleTimeStamp]) VALUES (43, 46, 1, N'33', CAST(N'2016-06-02 14:07:36.357' AS DateTime), CAST(N'2016-06-02 10:07:36.000' AS DateTime), CAST(N'2016-06-02 10:07:36.000' AS DateTime))
+GO
+INSERT [dbo].[EndPointIOs] ([ID], [EndPointID], [IOTypeID], [Valu], [TimeStamp], [ExecTimeStamp], [ScheduleTimeStamp]) VALUES (44, 46, 1, N'33', CAST(N'2016-06-02 14:09:14.087' AS DateTime), CAST(N'2016-06-02 10:09:14.000' AS DateTime), CAST(N'2016-06-02 10:09:14.000' AS DateTime))
+GO
+INSERT [dbo].[EndPointIOs] ([ID], [EndPointID], [IOTypeID], [Valu], [TimeStamp], [ExecTimeStamp], [ScheduleTimeStamp]) VALUES (45, 46, 1, N'33', CAST(N'2016-06-02 14:09:29.350' AS DateTime), CAST(N'2016-06-02 10:09:29.000' AS DateTime), CAST(N'2016-06-02 10:09:29.000' AS DateTime))
+GO
+INSERT [dbo].[EndPointIOs] ([ID], [EndPointID], [IOTypeID], [Valu], [TimeStamp], [ExecTimeStamp], [ScheduleTimeStamp]) VALUES (46, 46, 1, N'33', CAST(N'2016-06-02 14:13:24.477' AS DateTime), CAST(N'2016-06-02 10:13:24.000' AS DateTime), CAST(N'2016-06-02 10:13:24.000' AS DateTime))
+GO
+INSERT [dbo].[EndPointIOs] ([ID], [EndPointID], [IOTypeID], [Valu], [TimeStamp], [ExecTimeStamp], [ScheduleTimeStamp]) VALUES (47, 46, 1, N'33', CAST(N'2016-06-02 14:26:49.000' AS DateTime), CAST(N'2016-06-02 14:26:49.000' AS DateTime), CAST(N'2016-06-02 14:26:49.000' AS DateTime))
+GO
+INSERT [dbo].[EndPointIOs] ([ID], [EndPointID], [IOTypeID], [Valu], [TimeStamp], [ExecTimeStamp], [ScheduleTimeStamp]) VALUES (48, 46, 1, N'34', CAST(N'2016-06-02 14:36:30.000' AS DateTime), CAST(N'2016-06-02 14:36:30.000' AS DateTime), CAST(N'2016-06-02 14:36:30.000' AS DateTime))
+GO
+INSERT [dbo].[EndPointIOs] ([ID], [EndPointID], [IOTypeID], [Valu], [TimeStamp], [ExecTimeStamp], [ScheduleTimeStamp]) VALUES (49, 46, 1, N'34', CAST(N'2016-06-02 14:56:49.000' AS DateTime), CAST(N'2016-06-02 14:56:49.000' AS DateTime), CAST(N'2016-06-02 14:56:49.000' AS DateTime))
+GO
+INSERT [dbo].[EndPointIOs] ([ID], [EndPointID], [IOTypeID], [Valu], [TimeStamp], [ExecTimeStamp], [ScheduleTimeStamp]) VALUES (50, 46, 1, N'35', CAST(N'2016-06-02 14:59:46.000' AS DateTime), CAST(N'2016-06-02 14:59:46.000' AS DateTime), CAST(N'2016-06-02 14:59:46.000' AS DateTime))
+GO
+INSERT [dbo].[EndPointIOs] ([ID], [EndPointID], [IOTypeID], [Valu], [TimeStamp], [ExecTimeStamp], [ScheduleTimeStamp]) VALUES (51, 46, 1, N'34', CAST(N'2016-06-04 13:46:18.000' AS DateTime), CAST(N'2016-06-04 13:46:18.000' AS DateTime), CAST(N'2016-06-04 13:46:18.000' AS DateTime))
+GO
+INSERT [dbo].[EndPointIOs] ([ID], [EndPointID], [IOTypeID], [Valu], [TimeStamp], [ExecTimeStamp], [ScheduleTimeStamp]) VALUES (52, 46, 1, N'34', CAST(N'2016-06-05 12:09:23.000' AS DateTime), CAST(N'2016-06-05 12:09:23.000' AS DateTime), CAST(N'2016-06-05 12:09:23.000' AS DateTime))
+GO
+SET IDENTITY_INSERT [dbo].[EndPointIOs] OFF
 GO
 SET IDENTITY_INSERT [dbo].[Endpoints] ON 
 
 GO
-INSERT [dbo].[Endpoints] ([ID], [GUID], [KeyPass], [PinCode], [Title], [DeviceID], [TypeID]) VALUES (46, N'f5b4f219-0629-421d-991e-55ff0b8409a1', N'1cfb97d0-5a7d-443f-9d25-ee143d2f6465', N'0000', N'End 21', 9, 1)
+INSERT [dbo].[Endpoints] ([ID], [GUID], [KeyPass], [PinCode], [Title], [DeviceID], [TypeID], [UTC_Diff]) VALUES (46, N'f5b4f219-0629-421d-991e-55ff0b8409a1', N'1cfb97d0-5a7d-443f-9d25-ee143d2f6465', N'0000', N'End 21', 9, 1, 4)
 GO
 SET IDENTITY_INSERT [dbo].[Endpoints] OFF
 GO
@@ -548,6 +656,13 @@ INSERT [dbo].[IOTypes] ([ID], [IO], [Title]) VALUES (2, N'C', N'Command')
 GO
 INSERT [dbo].[IOTypes] ([ID], [IO], [Title]) VALUES (3, N'L', N'Log')
 GO
+SET IDENTITY_INSERT [dbo].[LinkDevicesLocations] ON 
+
+GO
+INSERT [dbo].[LinkDevicesLocations] ([ID], [LocationID], [DeviceID]) VALUES (18, 1, 9)
+GO
+SET IDENTITY_INSERT [dbo].[LinkDevicesLocations] OFF
+GO
 SET IDENTITY_INSERT [dbo].[LinkLocationsLocationViews] ON 
 
 GO
@@ -570,8 +685,6 @@ GO
 INSERT [dbo].[LocationViews] ([ID], [Title], [IsActive], [OwnerID], [LocationViewTypeID], [X], [Y], [Z]) VALUES (1, N'Location View 1', 1, N'1', 1, N'23.595871952755317', N'58.36894947803896', N'15')
 GO
 INSERT [dbo].[LocationViews] ([ID], [Title], [IsActive], [OwnerID], [LocationViewTypeID], [X], [Y], [Z]) VALUES (2, N'Location View 2', 1, N'1', 2, N'23.5972750548066', N'58.36019218865334', N'16')
-GO
-INSERT [dbo].[LocationViews] ([ID], [Title], [IsActive], [OwnerID], [LocationViewTypeID], [X], [Y], [Z]) VALUES (7, N'3', 0, N'1', 1, N'', N'', N'')
 GO
 SET IDENTITY_INSERT [dbo].[LocationViews] OFF
 GO
@@ -603,7 +716,7 @@ GO
 SET ANSI_PADDING ON
 
 GO
-/****** Object:  Index [RoleNameIndex]    Script Date: 5/20/2016 1:56:28 PM ******/
+/****** Object:  Index [RoleNameIndex]    Script Date: 6/6/2016 6:16:14 PM ******/
 CREATE UNIQUE NONCLUSTERED INDEX [RoleNameIndex] ON [dbo].[AspNetRoles]
 (
 	[Name] ASC
@@ -612,7 +725,7 @@ GO
 SET ANSI_PADDING ON
 
 GO
-/****** Object:  Index [IX_UserId]    Script Date: 5/20/2016 1:56:28 PM ******/
+/****** Object:  Index [IX_UserId]    Script Date: 6/6/2016 6:16:14 PM ******/
 CREATE NONCLUSTERED INDEX [IX_UserId] ON [dbo].[AspNetUserClaims]
 (
 	[UserId] ASC
@@ -621,7 +734,7 @@ GO
 SET ANSI_PADDING ON
 
 GO
-/****** Object:  Index [IX_UserId]    Script Date: 5/20/2016 1:56:28 PM ******/
+/****** Object:  Index [IX_UserId]    Script Date: 6/6/2016 6:16:14 PM ******/
 CREATE NONCLUSTERED INDEX [IX_UserId] ON [dbo].[AspNetUserLogins]
 (
 	[UserId] ASC
@@ -630,7 +743,7 @@ GO
 SET ANSI_PADDING ON
 
 GO
-/****** Object:  Index [IX_RoleId]    Script Date: 5/20/2016 1:56:28 PM ******/
+/****** Object:  Index [IX_RoleId]    Script Date: 6/6/2016 6:16:14 PM ******/
 CREATE NONCLUSTERED INDEX [IX_RoleId] ON [dbo].[AspNetUserRoles]
 (
 	[RoleId] ASC
@@ -639,7 +752,7 @@ GO
 SET ANSI_PADDING ON
 
 GO
-/****** Object:  Index [IX_UserId]    Script Date: 5/20/2016 1:56:28 PM ******/
+/****** Object:  Index [IX_UserId]    Script Date: 6/6/2016 6:16:14 PM ******/
 CREATE NONCLUSTERED INDEX [IX_UserId] ON [dbo].[AspNetUserRoles]
 (
 	[UserId] ASC
@@ -648,7 +761,7 @@ GO
 SET ANSI_PADDING ON
 
 GO
-/****** Object:  Index [UserNameIndex]    Script Date: 5/20/2016 1:56:28 PM ******/
+/****** Object:  Index [UserNameIndex]    Script Date: 6/6/2016 6:16:14 PM ******/
 CREATE UNIQUE NONCLUSTERED INDEX [UserNameIndex] ON [dbo].[AspNetUsers]
 (
 	[UserName] ASC
@@ -711,8 +824,10 @@ ON DELETE CASCADE
 GO
 ALTER TABLE [dbo].[EndPointIOs] CHECK CONSTRAINT [FK__EndPointI__EndPo__29572725]
 GO
-ALTER TABLE [dbo].[EndPointIOs]  WITH CHECK ADD FOREIGN KEY([IOTypeID])
+ALTER TABLE [dbo].[EndPointIOs]  WITH CHECK ADD  CONSTRAINT [FK__EndPointI__IOTyp__440B1D61] FOREIGN KEY([IOTypeID])
 REFERENCES [dbo].[IOTypes] ([ID])
+GO
+ALTER TABLE [dbo].[EndPointIOs] CHECK CONSTRAINT [FK__EndPointI__IOTyp__440B1D61]
 GO
 ALTER TABLE [dbo].[Endpoints]  WITH CHECK ADD  CONSTRAINT [FK__Endpoints__Devic__00DF2177] FOREIGN KEY([DeviceID])
 REFERENCES [dbo].[Devices] ([ID])
@@ -760,6 +875,1398 @@ REFERENCES [dbo].[LocationViewTypes] ([ID])
 ON DELETE CASCADE
 GO
 ALTER TABLE [dbo].[LocationViews] CHECK CONSTRAINT [FK__LocationV__Locat__286302EC]
+GO
+/****** Object:  StoredProcedure [dbo].[Rpt_EndPoint_IOs_Days]    Script Date: 6/6/2016 6:16:14 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE procedure [dbo].[Rpt_EndPoint_IOs_Days] 
+ @EPID bigint
+ as
+ begin
+ SET NOCOUNT ON
+ select ID,Title,'Min' as 'Fx',
+
+	(select min(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between CONVERT(varchar(10),DATEADD(day,-1,GetDate()), 120) + ' 00:00:00'  and GetDate() and EndPointID = @EPID)as '1',
+
+	(select min(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between CONVERT(varchar(10),DATEADD(day,-2,GetDate()), 120) + ' 00:00:00' and CONVERT(varchar(10),DATEADD(day,-1,GetDate()), 120) + ' 00:00:00' and EndPointID = @EPID)as '2',
+
+		(select min(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between CONVERT(varchar(10),DATEADD(day,-3,GetDate()), 120) + ' 00:00:00' and CONVERT(varchar(10),DATEADD(day,-2,GetDate()), 120) + ' 00:00:00' and EndPointID = @EPID)as '3',
+
+		(select min(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between CONVERT(varchar(10),DATEADD(day,-4,GetDate()), 120) + ' 00:00:00' and CONVERT(varchar(10),DATEADD(day,-3,GetDate()), 120) + ' 00:00:00' and EndPointID = @EPID)as '4',
+	
+			(select min(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between CONVERT(varchar(10),DATEADD(day,-5,GetDate()), 120) + ' 00:00:00' and CONVERT(varchar(10),DATEADD(day,-4,GetDate()), 120) + ' 00:00:00' and EndPointID = @EPID)as '5',
+
+			(select min(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between CONVERT(varchar(10),DATEADD(day,-6,GetDate()), 120) + ' 00:00:00' and CONVERT(varchar(10),DATEADD(day,-5,GetDate()), 120) + ' 00:00:00' and EndPointID = @EPID)as '6',
+
+			(select min(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between CONVERT(varchar(10),DATEADD(day,-7,GetDate()), 120) + ' 00:00:00' and CONVERT(varchar(10),DATEADD(day,-6,GetDate()), 120) + ' 00:00:00' and EndPointID = @EPID)as '7',
+
+			(select min(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between CONVERT(varchar(10),DATEADD(day,-8,GetDate()), 120) + ' 00:00:00' and CONVERT(varchar(10),DATEADD(day,-7,GetDate()), 120) + ' 00:00:00' and EndPointID = @EPID)as '8',
+
+			(select min(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between CONVERT(varchar(10),DATEADD(day,-9,GetDate()), 120) + ' 00:00:00' and CONVERT(varchar(10),DATEADD(day,-8,GetDate()), 120) + ' 00:00:00' and EndPointID = @EPID)as '9',
+
+			(select min(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between CONVERT(varchar(10),DATEADD(day,-10,GetDate()), 120) + ' 00:00:00' and CONVERT(varchar(10),DATEADD(day,-9,GetDate()), 120) + ' 00:00:00' and EndPointID = @EPID)as '10',
+
+			(select min(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between CONVERT(varchar(10),DATEADD(day,-11,GetDate()), 120) + ' 00:00:00' and CONVERT(varchar(10),DATEADD(day,-10,GetDate()), 120) + ' 00:00:00' and EndPointID = @EPID)as '11',
+
+			(select min(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between CONVERT(varchar(10),DATEADD(day,-12,GetDate()), 120) + ' 00:00:00' and CONVERT(varchar(10),DATEADD(day,-11,GetDate()), 120) + ' 00:00:00' and EndPointID = @EPID)as '12',
+
+			(select min(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between CONVERT(varchar(10),DATEADD(day,-13,GetDate()), 120) + ' 00:00:00' and CONVERT(varchar(10),DATEADD(day,-12,GetDate()), 120) + ' 00:00:00' and EndPointID = @EPID)as '13',
+
+			(select min(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between CONVERT(varchar(10),DATEADD(day,-14,GetDate()), 120) + ' 00:00:00' and CONVERT(varchar(10),DATEADD(day,-13,GetDate()), 120) + ' 00:00:00' and EndPointID = @EPID)as '14',
+
+			(select min(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between CONVERT(varchar(10),DATEADD(day,-15,GetDate()), 120) + ' 00:00:00' and CONVERT(varchar(10),DATEADD(day,-14,GetDate()), 120) + ' 00:00:00' and EndPointID = @EPID)as '15',
+
+			(select min(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between CONVERT(varchar(10),DATEADD(day,-16,GetDate()), 120) + ' 00:00:00' and CONVERT(varchar(10),DATEADD(day,-15,GetDate()), 120) + ' 00:00:00' and EndPointID = @EPID)as '16',
+
+			(select min(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between CONVERT(varchar(10),DATEADD(day,-17,GetDate()), 120) + ' 00:00:00' and CONVERT(varchar(10),DATEADD(day,-16,GetDate()), 120) + ' 00:00:00' and EndPointID = @EPID)as '17',
+
+			(select min(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between CONVERT(varchar(10),DATEADD(day,-18,GetDate()), 120) + ' 00:00:00' and CONVERT(varchar(10),DATEADD(day,-17,GetDate()), 120) + ' 00:00:00' and EndPointID = @EPID)as '18',
+
+			(select min(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between CONVERT(varchar(10),DATEADD(day,-19,GetDate()), 120) + ' 00:00:00' and CONVERT(varchar(10),DATEADD(day,-18,GetDate()), 120) + ' 00:00:00' and EndPointID = @EPID)as '19',
+
+	(select min(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between CONVERT(varchar(10),DATEADD(day,-20,GetDate()), 120) + ' 00:00:00' and CONVERT(varchar(10),DATEADD(day,-19,GetDate()), 120) + ' 00:00:00' and EndPointID = @EPID)as '20',
+
+	(select min(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between CONVERT(varchar(10),DATEADD(day,-21,GetDate()), 120) + ' 00:00:00' and CONVERT(varchar(10),DATEADD(day,-20,GetDate()), 120) + ' 00:00:00' and EndPointID = @EPID)as '21',
+
+	(select min(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between CONVERT(varchar(10),DATEADD(day,-22,GetDate()), 120) + ' 00:00:00' and CONVERT(varchar(10),DATEADD(day,-21,GetDate()), 120) + ' 00:00:00' and EndPointID = @EPID)as '22',
+
+	(select min(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between CONVERT(varchar(10),DATEADD(day,-23,GetDate()), 120) + ' 00:00:00' and CONVERT(varchar(10),DATEADD(day,-22,GetDate()), 120) + ' 00:00:00' and EndPointID = @EPID)as '23',
+
+	(select min(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between CONVERT(varchar(10),DATEADD(day,-24,GetDate()), 120) + ' 00:00:00' and CONVERT(varchar(10),DATEADD(day,-23,GetDate()), 120) + ' 00:00:00' and EndPointID = @EPID)as '24',
+
+	(select min(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between CONVERT(varchar(10),DATEADD(day,-25,GetDate()), 120) + ' 00:00:00' and CONVERT(varchar(10),DATEADD(day,-24,GetDate()), 120) + ' 00:00:00' and EndPointID = @EPID)as '25',
+
+	(select min(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between CONVERT(varchar(10),DATEADD(day,-26,GetDate()), 120) + ' 00:00:00' and CONVERT(varchar(10),DATEADD(day,-25,GetDate()), 120) + ' 00:00:00' and EndPointID = @EPID)as '26',
+
+	(select min(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between CONVERT(varchar(10),DATEADD(day,-27,GetDate()), 120) + ' 00:00:00' and CONVERT(varchar(10),DATEADD(day,-26,GetDate()), 120) + ' 00:00:00' and EndPointID = @EPID)as '27',
+
+
+	(select min(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between CONVERT(varchar(10),DATEADD(day,-28,GetDate()), 120) + ' 00:00:00' and CONVERT(varchar(10),DATEADD(day,-27,GetDate()), 120) + ' 00:00:00' and EndPointID = @EPID)as '28',
+
+	(select min(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between CONVERT(varchar(10),DATEADD(day,-29,GetDate()), 120) + ' 00:00:00' and CONVERT(varchar(10),DATEADD(day,-28,GetDate()), 120) + ' 00:00:00' and EndPointID = @EPID)as '29',
+
+
+	(select min(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between CONVERT(varchar(10),DATEADD(day,-30,GetDate()), 120) + ' 00:00:00' and CONVERT(varchar(10),DATEADD(day,-29,GetDate()), 120) + ' 00:00:00' and EndPointID = @EPID)as '30'
+
+from [Endpoints] e where e.ID = @EPID
+
+union all
+
+(
+select ID,Title,'max' as 'Fx',
+
+	(select max(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between CONVERT(varchar(10),DATEADD(day,-1,GetDate()), 120) + ' 00:00:00'  and GetDate() and EndPointID = @EPID)as '1',
+
+	(select max(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between CONVERT(varchar(10),DATEADD(day,-2,GetDate()), 120) + ' 00:00:00' and CONVERT(varchar(10),DATEADD(day,-1,GetDate()), 120) + ' 00:00:00' and EndPointID = @EPID)as '2',
+
+		(select max(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between CONVERT(varchar(10),DATEADD(day,-3,GetDate()), 120) + ' 00:00:00' and CONVERT(varchar(10),DATEADD(day,-2,GetDate()), 120) + ' 00:00:00' and EndPointID = @EPID)as '3',
+
+		(select max(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between CONVERT(varchar(10),DATEADD(day,-4,GetDate()), 120) + ' 00:00:00' and CONVERT(varchar(10),DATEADD(day,-3,GetDate()), 120) + ' 00:00:00' and EndPointID = @EPID)as '4',
+	
+			(select max(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between CONVERT(varchar(10),DATEADD(day,-5,GetDate()), 120) + ' 00:00:00' and CONVERT(varchar(10),DATEADD(day,-4,GetDate()), 120) + ' 00:00:00' and EndPointID = @EPID)as '5',
+
+			(select max(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between CONVERT(varchar(10),DATEADD(day,-6,GetDate()), 120) + ' 00:00:00' and CONVERT(varchar(10),DATEADD(day,-5,GetDate()), 120) + ' 00:00:00' and EndPointID = @EPID)as '6',
+
+			(select max(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between CONVERT(varchar(10),DATEADD(day,-7,GetDate()), 120) + ' 00:00:00' and CONVERT(varchar(10),DATEADD(day,-6,GetDate()), 120) + ' 00:00:00' and EndPointID = @EPID)as '7',
+
+			(select max(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between CONVERT(varchar(10),DATEADD(day,-8,GetDate()), 120) + ' 00:00:00' and CONVERT(varchar(10),DATEADD(day,-7,GetDate()), 120) + ' 00:00:00' and EndPointID = @EPID)as '8',
+
+			(select max(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between CONVERT(varchar(10),DATEADD(day,-9,GetDate()), 120) + ' 00:00:00' and CONVERT(varchar(10),DATEADD(day,-8,GetDate()), 120) + ' 00:00:00' and EndPointID = @EPID)as '9',
+
+			(select max(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between CONVERT(varchar(10),DATEADD(day,-10,GetDate()), 120) + ' 00:00:00' and CONVERT(varchar(10),DATEADD(day,-9,GetDate()), 120) + ' 00:00:00' and EndPointID = @EPID)as '10',
+
+			(select max(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between CONVERT(varchar(10),DATEADD(day,-11,GetDate()), 120) + ' 00:00:00' and CONVERT(varchar(10),DATEADD(day,-10,GetDate()), 120) + ' 00:00:00' and EndPointID = @EPID)as '11',
+
+			(select max(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between CONVERT(varchar(10),DATEADD(day,-12,GetDate()), 120) + ' 00:00:00' and CONVERT(varchar(10),DATEADD(day,-11,GetDate()), 120) + ' 00:00:00' and EndPointID = @EPID)as '12',
+
+			(select max(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between CONVERT(varchar(10),DATEADD(day,-13,GetDate()), 120) + ' 00:00:00' and CONVERT(varchar(10),DATEADD(day,-12,GetDate()), 120) + ' 00:00:00' and EndPointID = @EPID)as '13',
+
+			(select max(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between CONVERT(varchar(10),DATEADD(day,-14,GetDate()), 120) + ' 00:00:00' and CONVERT(varchar(10),DATEADD(day,-13,GetDate()), 120) + ' 00:00:00' and EndPointID = @EPID)as '14',
+
+			(select max(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between CONVERT(varchar(10),DATEADD(day,-15,GetDate()), 120) + ' 00:00:00' and CONVERT(varchar(10),DATEADD(day,-14,GetDate()), 120) + ' 00:00:00' and EndPointID = @EPID)as '15',
+
+			(select max(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between CONVERT(varchar(10),DATEADD(day,-16,GetDate()), 120) + ' 00:00:00' and CONVERT(varchar(10),DATEADD(day,-15,GetDate()), 120) + ' 00:00:00' and EndPointID = @EPID)as '16',
+
+			(select max(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between CONVERT(varchar(10),DATEADD(day,-17,GetDate()), 120) + ' 00:00:00' and CONVERT(varchar(10),DATEADD(day,-16,GetDate()), 120) + ' 00:00:00' and EndPointID = @EPID)as '17',
+
+			(select max(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between CONVERT(varchar(10),DATEADD(day,-18,GetDate()), 120) + ' 00:00:00' and CONVERT(varchar(10),DATEADD(day,-17,GetDate()), 120) + ' 00:00:00' and EndPointID = @EPID)as '18',
+
+			(select max(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between CONVERT(varchar(10),DATEADD(day,-19,GetDate()), 120) + ' 00:00:00' and CONVERT(varchar(10),DATEADD(day,-18,GetDate()), 120) + ' 00:00:00' and EndPointID = @EPID)as '19',
+
+	(select max(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between CONVERT(varchar(10),DATEADD(day,-20,GetDate()), 120) + ' 00:00:00' and CONVERT(varchar(10),DATEADD(day,-19,GetDate()), 120) + ' 00:00:00' and EndPointID = @EPID)as '20',
+
+	(select max(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between CONVERT(varchar(10),DATEADD(day,-21,GetDate()), 120) + ' 00:00:00' and CONVERT(varchar(10),DATEADD(day,-20,GetDate()), 120) + ' 00:00:00' and EndPointID = @EPID)as '21',
+
+	(select max(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between CONVERT(varchar(10),DATEADD(day,-22,GetDate()), 120) + ' 00:00:00' and CONVERT(varchar(10),DATEADD(day,-21,GetDate()), 120) + ' 00:00:00' and EndPointID = @EPID)as '22',
+
+	(select max(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between CONVERT(varchar(10),DATEADD(day,-23,GetDate()), 120) + ' 00:00:00' and CONVERT(varchar(10),DATEADD(day,-22,GetDate()), 120) + ' 00:00:00' and EndPointID = @EPID)as '23',
+
+	(select max(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between CONVERT(varchar(10),DATEADD(day,-24,GetDate()), 120) + ' 00:00:00' and CONVERT(varchar(10),DATEADD(day,-23,GetDate()), 120) + ' 00:00:00' and EndPointID = @EPID)as '24',
+
+	(select max(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between CONVERT(varchar(10),DATEADD(day,-25,GetDate()), 120) + ' 00:00:00' and CONVERT(varchar(10),DATEADD(day,-24,GetDate()), 120) + ' 00:00:00' and EndPointID = @EPID)as '25',
+
+	(select max(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between CONVERT(varchar(10),DATEADD(day,-26,GetDate()), 120) + ' 00:00:00' and CONVERT(varchar(10),DATEADD(day,-25,GetDate()), 120) + ' 00:00:00' and EndPointID = @EPID)as '26',
+
+	(select max(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between CONVERT(varchar(10),DATEADD(day,-27,GetDate()), 120) + ' 00:00:00' and CONVERT(varchar(10),DATEADD(day,-26,GetDate()), 120) + ' 00:00:00' and EndPointID = @EPID)as '27',
+
+
+	(select max(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between CONVERT(varchar(10),DATEADD(day,-28,GetDate()), 120) + ' 00:00:00' and CONVERT(varchar(10),DATEADD(day,-27,GetDate()), 120) + ' 00:00:00' and EndPointID = @EPID)as '28',
+
+	(select max(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between CONVERT(varchar(10),DATEADD(day,-29,GetDate()), 120) + ' 00:00:00' and CONVERT(varchar(10),DATEADD(day,-28,GetDate()), 120) + ' 00:00:00' and EndPointID = @EPID)as '29',
+
+
+	(select max(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between CONVERT(varchar(10),DATEADD(day,-30,GetDate()), 120) + ' 00:00:00' and CONVERT(varchar(10),DATEADD(day,-29,GetDate()), 120) + ' 00:00:00' and EndPointID = @EPID)as '30'
+
+from [Endpoints] e where e.ID = @EPID
+
+)
+union all
+(
+select ID,Title,'avg' as 'Fx',
+
+	(select avg(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between CONVERT(varchar(10),DATEADD(day,-1,GetDate()), 120) + ' 00:00:00'  and GetDate() and EndPointID = @EPID)as '1',
+
+	(select avg(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between CONVERT(varchar(10),DATEADD(day,-2,GetDate()), 120) + ' 00:00:00' and CONVERT(varchar(10),DATEADD(day,-1,GetDate()), 120) + ' 00:00:00' and EndPointID = @EPID)as '2',
+
+		(select avg(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between CONVERT(varchar(10),DATEADD(day,-3,GetDate()), 120) + ' 00:00:00' and CONVERT(varchar(10),DATEADD(day,-2,GetDate()), 120) + ' 00:00:00' and EndPointID = @EPID)as '3',
+
+		(select avg(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between CONVERT(varchar(10),DATEADD(day,-4,GetDate()), 120) + ' 00:00:00' and CONVERT(varchar(10),DATEADD(day,-3,GetDate()), 120) + ' 00:00:00' and EndPointID = @EPID)as '4',
+	
+			(select avg(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between CONVERT(varchar(10),DATEADD(day,-5,GetDate()), 120) + ' 00:00:00' and CONVERT(varchar(10),DATEADD(day,-4,GetDate()), 120) + ' 00:00:00' and EndPointID = @EPID)as '5',
+
+			(select avg(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between CONVERT(varchar(10),DATEADD(day,-6,GetDate()), 120) + ' 00:00:00' and CONVERT(varchar(10),DATEADD(day,-5,GetDate()), 120) + ' 00:00:00' and EndPointID = @EPID)as '6',
+
+			(select avg(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between CONVERT(varchar(10),DATEADD(day,-7,GetDate()), 120) + ' 00:00:00' and CONVERT(varchar(10),DATEADD(day,-6,GetDate()), 120) + ' 00:00:00' and EndPointID = @EPID)as '7',
+
+			(select avg(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between CONVERT(varchar(10),DATEADD(day,-8,GetDate()), 120) + ' 00:00:00' and CONVERT(varchar(10),DATEADD(day,-7,GetDate()), 120) + ' 00:00:00' and EndPointID = @EPID)as '8',
+
+			(select avg(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between CONVERT(varchar(10),DATEADD(day,-9,GetDate()), 120) + ' 00:00:00' and CONVERT(varchar(10),DATEADD(day,-8,GetDate()), 120) + ' 00:00:00' and EndPointID = @EPID)as '9',
+
+			(select avg(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between CONVERT(varchar(10),DATEADD(day,-10,GetDate()), 120) + ' 00:00:00' and CONVERT(varchar(10),DATEADD(day,-9,GetDate()), 120) + ' 00:00:00' and EndPointID = @EPID)as '10',
+
+			(select avg(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between CONVERT(varchar(10),DATEADD(day,-11,GetDate()), 120) + ' 00:00:00' and CONVERT(varchar(10),DATEADD(day,-10,GetDate()), 120) + ' 00:00:00' and EndPointID = @EPID)as '11',
+
+			(select avg(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between CONVERT(varchar(10),DATEADD(day,-12,GetDate()), 120) + ' 00:00:00' and CONVERT(varchar(10),DATEADD(day,-11,GetDate()), 120) + ' 00:00:00' and EndPointID = @EPID)as '12',
+
+			(select avg(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between CONVERT(varchar(10),DATEADD(day,-13,GetDate()), 120) + ' 00:00:00' and CONVERT(varchar(10),DATEADD(day,-12,GetDate()), 120) + ' 00:00:00' and EndPointID = @EPID)as '13',
+
+			(select avg(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between CONVERT(varchar(10),DATEADD(day,-14,GetDate()), 120) + ' 00:00:00' and CONVERT(varchar(10),DATEADD(day,-13,GetDate()), 120) + ' 00:00:00' and EndPointID = @EPID)as '14',
+
+			(select avg(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between CONVERT(varchar(10),DATEADD(day,-15,GetDate()), 120) + ' 00:00:00' and CONVERT(varchar(10),DATEADD(day,-14,GetDate()), 120) + ' 00:00:00' and EndPointID = @EPID)as '15',
+
+			(select avg(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between CONVERT(varchar(10),DATEADD(day,-16,GetDate()), 120) + ' 00:00:00' and CONVERT(varchar(10),DATEADD(day,-15,GetDate()), 120) + ' 00:00:00' and EndPointID = @EPID)as '16',
+
+			(select avg(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between CONVERT(varchar(10),DATEADD(day,-17,GetDate()), 120) + ' 00:00:00' and CONVERT(varchar(10),DATEADD(day,-16,GetDate()), 120) + ' 00:00:00' and EndPointID = @EPID)as '17',
+
+			(select avg(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between CONVERT(varchar(10),DATEADD(day,-18,GetDate()), 120) + ' 00:00:00' and CONVERT(varchar(10),DATEADD(day,-17,GetDate()), 120) + ' 00:00:00' and EndPointID = @EPID)as '18',
+
+			(select avg(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between CONVERT(varchar(10),DATEADD(day,-19,GetDate()), 120) + ' 00:00:00' and CONVERT(varchar(10),DATEADD(day,-18,GetDate()), 120) + ' 00:00:00' and EndPointID = @EPID)as '19',
+
+	(select avg(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between CONVERT(varchar(10),DATEADD(day,-20,GetDate()), 120) + ' 00:00:00' and CONVERT(varchar(10),DATEADD(day,-19,GetDate()), 120) + ' 00:00:00' and EndPointID = @EPID)as '20',
+
+	(select avg(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between CONVERT(varchar(10),DATEADD(day,-21,GetDate()), 120) + ' 00:00:00' and CONVERT(varchar(10),DATEADD(day,-20,GetDate()), 120) + ' 00:00:00' and EndPointID = @EPID)as '21',
+
+	(select avg(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between CONVERT(varchar(10),DATEADD(day,-22,GetDate()), 120) + ' 00:00:00' and CONVERT(varchar(10),DATEADD(day,-21,GetDate()), 120) + ' 00:00:00' and EndPointID = @EPID)as '22',
+
+	(select avg(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between CONVERT(varchar(10),DATEADD(day,-23,GetDate()), 120) + ' 00:00:00' and CONVERT(varchar(10),DATEADD(day,-22,GetDate()), 120) + ' 00:00:00' and EndPointID = @EPID)as '23',
+
+	(select avg(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between CONVERT(varchar(10),DATEADD(day,-24,GetDate()), 120) + ' 00:00:00' and CONVERT(varchar(10),DATEADD(day,-23,GetDate()), 120) + ' 00:00:00' and EndPointID = @EPID)as '24',
+
+	(select avg(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between CONVERT(varchar(10),DATEADD(day,-25,GetDate()), 120) + ' 00:00:00' and CONVERT(varchar(10),DATEADD(day,-24,GetDate()), 120) + ' 00:00:00' and EndPointID = @EPID)as '25',
+
+	(select avg(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between CONVERT(varchar(10),DATEADD(day,-26,GetDate()), 120) + ' 00:00:00' and CONVERT(varchar(10),DATEADD(day,-25,GetDate()), 120) + ' 00:00:00' and EndPointID = @EPID)as '26',
+
+	(select avg(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between CONVERT(varchar(10),DATEADD(day,-27,GetDate()), 120) + ' 00:00:00' and CONVERT(varchar(10),DATEADD(day,-26,GetDate()), 120) + ' 00:00:00' and EndPointID = @EPID)as '27',
+
+
+	(select avg(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between CONVERT(varchar(10),DATEADD(day,-28,GetDate()), 120) + ' 00:00:00' and CONVERT(varchar(10),DATEADD(day,-27,GetDate()), 120) + ' 00:00:00' and EndPointID = @EPID)as '28',
+
+	(select avg(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between CONVERT(varchar(10),DATEADD(day,-29,GetDate()), 120) + ' 00:00:00' and CONVERT(varchar(10),DATEADD(day,-28,GetDate()), 120) + ' 00:00:00' and EndPointID = @EPID)as '29',
+
+
+	(select avg(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between CONVERT(varchar(10),DATEADD(day,-30,GetDate()), 120) + ' 00:00:00' and CONVERT(varchar(10),DATEADD(day,-29,GetDate()), 120) + ' 00:00:00' and EndPointID = @EPID)as '30'
+
+from [Endpoints] e where e.ID = @EPID
+
+)
+end
+
+
+GO
+/****** Object:  StoredProcedure [dbo].[Rpt_EndPoint_IOs_HOURs]    Script Date: 6/6/2016 6:16:14 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE procedure [dbo].[Rpt_EndPoint_IOs_HOURs] 
+ @EPID bigint
+ as
+ begin
+ SET NOCOUNT ON
+
+	declare @EPTimeZone int 
+	select @EPTimeZone =   UTC_Diff from [endpoints] where id = @EPID
+ declare @StartTime datetime
+ set @StartTime = dateadd(HOUR,@EPTimeZone,GETUTCDATE() )
+
+ select ID,Title,'Min' as 'Fx',
+
+	(select min(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between DATEADD(HOUR,-1,@StartTime)  and DATEADD(HOUR,-0,@StartTime) and EndPointID = @EPID)as '1',
+
+	(select min(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between DATEADD(HOUR,-2,@StartTime)  and DATEADD(HOUR,-1,@StartTime) and EndPointID = @EPID)as '2',
+
+	(select min(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between DATEADD(HOUR,-3,@StartTime)  and DATEADD(HOUR,-2,@StartTime) and EndPointID = @EPID)as '3',
+
+	(select min(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between DATEADD(HOUR,-4,@StartTime)  and DATEADD(HOUR,-3,@StartTime) and EndPointID = @EPID)as '4',
+
+	(select min(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between DATEADD(HOUR,-5,@StartTime)  and DATEADD(HOUR,-4,@StartTime) and EndPointID = @EPID)as '5',
+
+	(select min(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between DATEADD(HOUR,-6,@StartTime)  and DATEADD(HOUR,-5,@StartTime) and EndPointID = @EPID)as '6',
+
+	(select min(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between DATEADD(HOUR,-7,@StartTime)  and DATEADD(HOUR,-6,@StartTime) and EndPointID = @EPID)as '7',
+
+	(select min(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between DATEADD(HOUR,-8,@StartTime)  and DATEADD(HOUR,-7,@StartTime) and EndPointID = @EPID)as '8',
+
+	(select min(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between DATEADD(HOUR,-9,@StartTime)  and DATEADD(HOUR,-8,@StartTime) and EndPointID = @EPID)as '9',
+
+	(select min(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between DATEADD(HOUR,-10,@StartTime)  and DATEADD(HOUR,-9,@StartTime) and EndPointID = @EPID)as '10',
+
+	(select min(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between DATEADD(HOUR,-11,@StartTime)  and DATEADD(HOUR,-10,@StartTime) and EndPointID = @EPID)as '11',
+
+	(select min(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between DATEADD(HOUR,-12,@StartTime)  and DATEADD(HOUR,-11,@StartTime) and EndPointID = @EPID)as '12',
+
+	(select min(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between DATEADD(HOUR,-13,@StartTime)  and DATEADD(HOUR,-12,@StartTime) and EndPointID = @EPID)as '13',
+
+	(select min(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between DATEADD(HOUR,-14,@StartTime)  and DATEADD(HOUR,-13,@StartTime) and EndPointID = @EPID)as '14',
+
+	(select min(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between DATEADD(HOUR,-15,@StartTime)  and DATEADD(HOUR,-14,@StartTime) and EndPointID = @EPID)as '15',
+
+	(select min(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between DATEADD(HOUR,-16,@StartTime)  and DATEADD(HOUR,-15,@StartTime) and EndPointID = @EPID)as '16',
+
+	(select min(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between DATEADD(HOUR,-17,@StartTime)  and DATEADD(HOUR,-16,@StartTime) and EndPointID = @EPID)as '17',
+
+	(select min(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between DATEADD(HOUR,-18,@StartTime)  and DATEADD(HOUR,-17,@StartTime) and EndPointID = @EPID)as '18',
+
+	(select min(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between DATEADD(HOUR,-19,@StartTime)  and DATEADD(HOUR,-18,@StartTime) and EndPointID = @EPID)as '19',
+
+	(select min(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between DATEADD(HOUR,-20,@StartTime)  and DATEADD(HOUR,-19,@StartTime) and EndPointID = @EPID)as '20',
+
+	(select min(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between DATEADD(HOUR,-21,@StartTime)  and DATEADD(HOUR,-20,@StartTime) and EndPointID = @EPID)as '21',
+
+	(select min(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between DATEADD(HOUR,-22,@StartTime)  and DATEADD(HOUR,-21,@StartTime) and EndPointID = @EPID)as '22',
+
+	(select min(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between DATEADD(HOUR,-23,@StartTime)  and DATEADD(HOUR,-22,@StartTime) and EndPointID = @EPID)as '23',
+
+	(select min(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between DATEADD(HOUR,-24,@StartTime)  and DATEADD(HOUR,-23,@StartTime) and EndPointID = @EPID)as '24'
+
+
+from [Endpoints] e where e.ID = @EPID
+
+union all
+
+(
+select ID,Title,'max' as 'Fx',
+
+		(select max(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between DATEADD(HOUR,-1,@StartTime)  and DATEADD(HOUR,-0,@StartTime) and EndPointID = @EPID)as '1',
+
+	(select max(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between DATEADD(HOUR,-2,@StartTime)  and DATEADD(HOUR,-1,@StartTime) and EndPointID = @EPID)as '2',
+
+	(select max(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between DATEADD(HOUR,-3,@StartTime)  and DATEADD(HOUR,-2,@StartTime) and EndPointID = @EPID)as '3',
+
+	(select max(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between DATEADD(HOUR,-4,@StartTime)  and DATEADD(HOUR,-3,@StartTime) and EndPointID = @EPID)as '41',
+
+	(select max(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between DATEADD(HOUR,-5,@StartTime)  and DATEADD(HOUR,-4,@StartTime) and EndPointID = @EPID)as '5',
+
+	(select max(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between DATEADD(HOUR,-6,@StartTime)  and DATEADD(HOUR,-5,@StartTime) and EndPointID = @EPID)as '6',
+
+	(select max(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between DATEADD(HOUR,-7,@StartTime)  and DATEADD(HOUR,-6,@StartTime) and EndPointID = @EPID)as '7',
+
+	(select max(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between DATEADD(HOUR,-8,@StartTime)  and DATEADD(HOUR,-7,@StartTime) and EndPointID = @EPID)as '8',
+
+	(select max(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between DATEADD(HOUR,-9,@StartTime)  and DATEADD(HOUR,-8,@StartTime) and EndPointID = @EPID)as '9',
+
+	(select max(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between DATEADD(HOUR,-10,@StartTime)  and DATEADD(HOUR,-9,@StartTime) and EndPointID = @EPID)as '10',
+
+	(select max(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between DATEADD(HOUR,-11,@StartTime)  and DATEADD(HOUR,-10,@StartTime) and EndPointID = @EPID)as '11',
+
+	(select max(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between DATEADD(HOUR,-12,@StartTime)  and DATEADD(HOUR,-11,@StartTime) and EndPointID = @EPID)as '12',
+
+	(select max(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between DATEADD(HOUR,-13,@StartTime)  and DATEADD(HOUR,-12,@StartTime) and EndPointID = @EPID)as '13',
+
+	(select max(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between DATEADD(HOUR,-14,@StartTime)  and DATEADD(HOUR,-13,@StartTime) and EndPointID = @EPID)as '14',
+
+	(select max(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between DATEADD(HOUR,-15,@StartTime)  and DATEADD(HOUR,-14,@StartTime) and EndPointID = @EPID)as '15',
+
+	(select max(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between DATEADD(HOUR,-16,@StartTime)  and DATEADD(HOUR,-15,@StartTime) and EndPointID = @EPID)as '16',
+
+	(select max(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between DATEADD(HOUR,-17,@StartTime)  and DATEADD(HOUR,-16,@StartTime) and EndPointID = @EPID)as '17',
+
+	(select max(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between DATEADD(HOUR,-18,@StartTime)  and DATEADD(HOUR,-17,@StartTime) and EndPointID = @EPID)as '18',
+
+	(select max(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between DATEADD(HOUR,-19,@StartTime)  and DATEADD(HOUR,-18,@StartTime) and EndPointID = @EPID)as '19',
+
+	(select max(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between DATEADD(HOUR,-20,@StartTime)  and DATEADD(HOUR,-19,@StartTime) and EndPointID = @EPID)as '20',
+
+	(select max(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between DATEADD(HOUR,-21,@StartTime)  and DATEADD(HOUR,-20,@StartTime) and EndPointID = @EPID)as '21',
+
+	(select max(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between DATEADD(HOUR,-22,@StartTime)  and DATEADD(HOUR,-21,@StartTime) and EndPointID = @EPID)as '22',
+
+	(select max(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between DATEADD(HOUR,-23,@StartTime)  and DATEADD(HOUR,-22,@StartTime) and EndPointID = @EPID)as '23',
+
+	(select max(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between DATEADD(HOUR,-24,@StartTime)  and DATEADD(HOUR,-23,@StartTime) and EndPointID = @EPID)as '24'
+
+
+
+from [Endpoints] e where e.ID = @EPID
+
+)
+union all
+(
+select ID,Title,'avg' as 'Fx',
+
+		(select avg(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between DATEADD(HOUR,-1,@StartTime)  and DATEADD(HOUR,-0,@StartTime) and EndPointID = @EPID)as '1',
+
+	(select avg(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between DATEADD(HOUR,-2,@StartTime)  and DATEADD(HOUR,-1,@StartTime) and EndPointID = @EPID)as '2',
+
+	(select avg(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between DATEADD(HOUR,-3,@StartTime)  and DATEADD(HOUR,-2,@StartTime) and EndPointID = @EPID)as '3',
+
+	(select avg(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between DATEADD(HOUR,-4,@StartTime)  and DATEADD(HOUR,-3,@StartTime) and EndPointID = @EPID)as '41',
+
+	(select avg(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between DATEADD(HOUR,-5,@StartTime)  and DATEADD(HOUR,-4,@StartTime) and EndPointID = @EPID)as '5',
+
+	(select avg(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between DATEADD(HOUR,-6,@StartTime)  and DATEADD(HOUR,-5,@StartTime) and EndPointID = @EPID)as '6',
+
+	(select avg(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between DATEADD(HOUR,-7,@StartTime)  and DATEADD(HOUR,-6,@StartTime) and EndPointID = @EPID)as '7',
+
+	(select avg(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between DATEADD(HOUR,-8,@StartTime)  and DATEADD(HOUR,-7,@StartTime) and EndPointID = @EPID)as '8',
+
+	(select avg(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between DATEADD(HOUR,-9,@StartTime)  and DATEADD(HOUR,-8,@StartTime) and EndPointID = @EPID)as '9',
+
+	(select avg(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between DATEADD(HOUR,-10,@StartTime)  and DATEADD(HOUR,-9,@StartTime) and EndPointID = @EPID)as '10',
+
+	(select avg(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between DATEADD(HOUR,-11,@StartTime)  and DATEADD(HOUR,-10,@StartTime) and EndPointID = @EPID)as '11',
+
+	(select avg(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between DATEADD(HOUR,-12,@StartTime)  and DATEADD(HOUR,-11,@StartTime) and EndPointID = @EPID)as '12',
+
+	(select avg(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between DATEADD(HOUR,-13,@StartTime)  and DATEADD(HOUR,-12,@StartTime) and EndPointID = @EPID)as '13',
+
+	(select avg(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between DATEADD(HOUR,-14,@StartTime)  and DATEADD(HOUR,-13,@StartTime) and EndPointID = @EPID)as '14',
+
+	(select avg(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between DATEADD(HOUR,-15,@StartTime)  and DATEADD(HOUR,-14,@StartTime) and EndPointID = @EPID)as '15',
+
+	(select avg(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between DATEADD(HOUR,-16,@StartTime)  and DATEADD(HOUR,-15,@StartTime) and EndPointID = @EPID)as '16',
+
+	(select avg(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between DATEADD(HOUR,-17,@StartTime)  and DATEADD(HOUR,-16,@StartTime) and EndPointID = @EPID)as '17',
+
+	(select avg(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between DATEADD(HOUR,-18,@StartTime)  and DATEADD(HOUR,-17,@StartTime) and EndPointID = @EPID)as '18',
+
+	(select avg(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between DATEADD(HOUR,-19,@StartTime)  and DATEADD(HOUR,-18,@StartTime) and EndPointID = @EPID)as '19',
+
+	(select avg(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between DATEADD(HOUR,-20,@StartTime)  and DATEADD(HOUR,-19,@StartTime) and EndPointID = @EPID)as '20',
+
+	(select avg(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between DATEADD(HOUR,-21,@StartTime)  and DATEADD(HOUR,-20,@StartTime) and EndPointID = @EPID)as '21',
+
+	(select avg(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between DATEADD(HOUR,-22,@StartTime)  and DATEADD(HOUR,-21,@StartTime) and EndPointID = @EPID)as '22',
+
+	(select avg(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between DATEADD(HOUR,-23,@StartTime)  and DATEADD(HOUR,-22,@StartTime) and EndPointID = @EPID)as '23',
+
+	(select avg(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between DATEADD(HOUR,-24,@StartTime)  and DATEADD(HOUR,-23,@StartTime) and EndPointID = @EPID)as '24'
+
+
+
+from [Endpoints] e where e.ID = @EPID
+
+)
+end
+
+
+GO
+/****** Object:  StoredProcedure [dbo].[Rpt_EndPoint_IOs_Minutes]    Script Date: 6/6/2016 6:16:14 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+
+
+CREATE procedure [dbo].[Rpt_EndPoint_IOs_Minutes] 
+ @EPID bigint
+ as
+ begin
+ SET NOCOUNT ON
+
+	declare @EPTimeZone int 
+	select @EPTimeZone =   UTC_Diff from [endpoints] where id = @EPID
+ declare @StartTime datetime
+ set @StartTime = dateadd(HOUR,@EPTimeZone,GETUTCDATE() )
+
+ select ID,Title,'Min' as 'Fx',
+
+	(select min(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between DATEADD(minute,-1,@StartTime)  and DATEADD(minute,-0,@StartTime) and EndPointID = @EPID)as '1',
+
+	(select min(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between DATEADD(minute,-2,@StartTime)  and DATEADD(minute,-1,@StartTime) and EndPointID = @EPID)as '2',
+
+	(select min(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between DATEADD(minute,-3,@StartTime)  and DATEADD(minute,-2,@StartTime) and EndPointID = @EPID)as '3',
+
+	(select min(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between DATEADD(minute,-4,@StartTime)  and DATEADD(minute,-3,@StartTime) and EndPointID = @EPID)as '4',
+
+	(select min(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between DATEADD(minute,-5,@StartTime)  and DATEADD(minute,-4,@StartTime) and EndPointID = @EPID)as '5',
+
+	(select min(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between DATEADD(minute,-6,@StartTime)  and DATEADD(minute,-5,@StartTime) and EndPointID = @EPID)as '6',
+
+	(select min(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between DATEADD(minute,-7,@StartTime)  and DATEADD(minute,-6,@StartTime) and EndPointID = @EPID)as '7',
+
+	(select min(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between DATEADD(minute,-8,@StartTime)  and DATEADD(minute,-7,@StartTime) and EndPointID = @EPID)as '8',
+
+	(select min(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between DATEADD(minute,-9,@StartTime)  and DATEADD(minute,-8,@StartTime) and EndPointID = @EPID)as '9',
+
+	(select min(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between DATEADD(minute,-10,@StartTime)  and DATEADD(minute,-9,@StartTime) and EndPointID = @EPID)as '10',
+
+	(select min(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between DATEADD(minute,-11,@StartTime)  and DATEADD(minute,-10,@StartTime) and EndPointID = @EPID)as '11',
+
+	(select min(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between DATEADD(minute,-12,@StartTime)  and DATEADD(minute,-11,@StartTime) and EndPointID = @EPID)as '12',
+
+	(select min(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between DATEADD(minute,-13,@StartTime)  and DATEADD(minute,-12,@StartTime) and EndPointID = @EPID)as '13',
+
+	(select min(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between DATEADD(minute,-14,@StartTime)  and DATEADD(minute,-13,@StartTime) and EndPointID = @EPID)as '14',
+
+	(select min(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between DATEADD(minute,-15,@StartTime)  and DATEADD(minute,-14,@StartTime) and EndPointID = @EPID)as '15',
+
+	(select min(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between DATEADD(minute,-16,@StartTime)  and DATEADD(minute,-15,@StartTime) and EndPointID = @EPID)as '16',
+
+	(select min(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between DATEADD(minute,-17,@StartTime)  and DATEADD(minute,-16,@StartTime) and EndPointID = @EPID)as '17',
+
+	(select min(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between DATEADD(minute,-18,@StartTime)  and DATEADD(minute,-17,@StartTime) and EndPointID = @EPID)as '18',
+
+	(select min(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between DATEADD(minute,-19,@StartTime)  and DATEADD(minute,-18,@StartTime) and EndPointID = @EPID)as '19',
+
+	(select min(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between DATEADD(minute,-20,@StartTime)  and DATEADD(minute,-19,@StartTime) and EndPointID = @EPID)as '20',
+
+	(select min(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between DATEADD(minute,-21,@StartTime)  and DATEADD(minute,-20,@StartTime) and EndPointID = @EPID)as '21',
+
+	(select min(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between DATEADD(minute,-22,@StartTime)  and DATEADD(minute,-21,@StartTime) and EndPointID = @EPID)as '22',
+
+	(select min(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between DATEADD(minute,-23,@StartTime)  and DATEADD(minute,-22,@StartTime) and EndPointID = @EPID)as '23',
+
+	(select min(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between DATEADD(minute,-24,@StartTime)  and DATEADD(minute,-23,@StartTime) and EndPointID = @EPID)as '24',
+
+		(select min(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between DATEADD(minute,-25,@StartTime)  and DATEADD(minute,-24,@StartTime) and EndPointID = @EPID)as '25',
+
+	(select min(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between DATEADD(minute,-26,@StartTime)  and DATEADD(minute,-25,@StartTime) and EndPointID = @EPID)as '26',
+
+	(select min(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between DATEADD(minute,-27,@StartTime)  and DATEADD(minute,-26,@StartTime) and EndPointID = @EPID)as '27',
+
+	(select min(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between DATEADD(minute,-28,@StartTime)  and DATEADD(minute,-27,@StartTime) and EndPointID = @EPID)as '28',
+
+	(select min(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between DATEADD(minute,-29,@StartTime)  and DATEADD(minute,-28,@StartTime) and EndPointID = @EPID)as '29',
+
+	(select min(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between DATEADD(minute,-30,@StartTime)  and DATEADD(minute,-29,@StartTime) and EndPointID = @EPID)as '30',
+
+	(select min(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between DATEADD(minute,-31,@StartTime)  and DATEADD(minute,-30,@StartTime) and EndPointID = @EPID)as '31',
+
+	(select min(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between DATEADD(minute,-32,@StartTime)  and DATEADD(minute,-31,@StartTime) and EndPointID = @EPID)as '32',
+
+	(select min(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between DATEADD(minute,-33,@StartTime)  and DATEADD(minute,-32,@StartTime) and EndPointID = @EPID)as '33',
+
+	(select min(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between DATEADD(minute,-34,@StartTime)  and DATEADD(minute,-33,@StartTime) and EndPointID = @EPID)as '34',
+
+	(select min(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between DATEADD(minute,-35,@StartTime)  and DATEADD(minute,-34,@StartTime) and EndPointID = @EPID)as '35',
+
+	(select min(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between DATEADD(minute,-36,@StartTime)  and DATEADD(minute,-35,@StartTime) and EndPointID = @EPID)as '36',
+
+	(select min(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between DATEADD(minute,-37,@StartTime)  and DATEADD(minute,-36,@StartTime) and EndPointID = @EPID)as '37',
+
+	(select min(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between DATEADD(minute,-38,@StartTime)  and DATEADD(minute,-37,@StartTime) and EndPointID = @EPID)as '38',
+
+	(select min(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between DATEADD(minute,-39,@StartTime)  and DATEADD(minute,-38,@StartTime) and EndPointID = @EPID)as '39',
+
+	(select min(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between DATEADD(minute,-40,@StartTime)  and DATEADD(minute,-39,@StartTime) and EndPointID = @EPID)as '40',
+
+	(select min(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between DATEADD(minute,-41,@StartTime)  and DATEADD(minute,-40,@StartTime) and EndPointID = @EPID)as '41',
+
+	(select min(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between DATEADD(minute,-42,@StartTime)  and DATEADD(minute,-41,@StartTime) and EndPointID = @EPID)as '42',
+
+	(select min(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between DATEADD(minute,-43,@StartTime)  and DATEADD(minute,-42,@StartTime) and EndPointID = @EPID)as '43',
+
+	(select min(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between DATEADD(minute,-44,@StartTime)  and DATEADD(minute,-43,@StartTime) and EndPointID = @EPID)as '44',
+
+	(select min(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between DATEADD(minute,-45,@StartTime)  and DATEADD(minute,-44,@StartTime) and EndPointID = @EPID)as '45',
+
+	(select min(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between DATEADD(minute,-46,@StartTime)  and DATEADD(minute,-45,@StartTime) and EndPointID = @EPID)as '46',
+
+	(select min(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between DATEADD(minute,-47,@StartTime)  and DATEADD(minute,-46,@StartTime) and EndPointID = @EPID)as '47',
+
+	(select min(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between DATEADD(minute,-48,@StartTime)  and DATEADD(minute,-47,@StartTime) and EndPointID = @EPID)as '48',
+
+		(select min(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between DATEADD(minute,-49,@StartTime)  and DATEADD(minute,-48,@StartTime) and EndPointID = @EPID)as '49',
+
+	(select min(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between DATEADD(minute,-50,@StartTime)  and DATEADD(minute,-49,@StartTime) and EndPointID = @EPID)as '50',
+
+	(select min(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between DATEADD(minute,-51,@StartTime)  and DATEADD(minute,-50,@StartTime) and EndPointID = @EPID)as '51',
+
+	(select min(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between DATEADD(minute,-52,@StartTime)  and DATEADD(minute,-51,@StartTime) and EndPointID = @EPID)as '52',
+
+	(select min(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between DATEADD(minute,-53,@StartTime)  and DATEADD(minute,-52,@StartTime) and EndPointID = @EPID)as '53',
+
+	(select min(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between DATEADD(minute,-54,@StartTime)  and DATEADD(minute,-53,@StartTime) and EndPointID = @EPID)as '54',
+
+	(select min(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between DATEADD(minute,-55,@StartTime)  and DATEADD(minute,-54,@StartTime) and EndPointID = @EPID)as '55',
+
+	(select min(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between DATEADD(minute,-56,@StartTime)  and DATEADD(minute,-55,@StartTime) and EndPointID = @EPID)as '56',
+
+	(select min(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between DATEADD(minute,-57,@StartTime)  and DATEADD(minute,-56,@StartTime) and EndPointID = @EPID)as '57',
+
+	(select min(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between DATEADD(minute,-58,@StartTime)  and DATEADD(minute,-57,@StartTime) and EndPointID = @EPID)as '58',
+
+	(select min(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between DATEADD(minute,-59,@StartTime)  and DATEADD(minute,-58,@StartTime) and EndPointID = @EPID)as '59',
+
+	(select min(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between DATEADD(minute,-60,@StartTime)  and DATEADD(minute,-59,@StartTime) and EndPointID = @EPID)as '60'
+
+
+from [Endpoints] e where e.ID = @EPID
+
+union all
+
+(
+select ID,Title,'max' as 'Fx',
+
+			(select max(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between DATEADD(minute,-1,@StartTime)  and DATEADD(minute,-0,@StartTime) and EndPointID = @EPID)as '1',
+
+	(select max(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between DATEADD(minute,-2,@StartTime)  and DATEADD(minute,-1,@StartTime) and EndPointID = @EPID)as '2',
+
+	(select max(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between DATEADD(minute,-3,@StartTime)  and DATEADD(minute,-2,@StartTime) and EndPointID = @EPID)as '3',
+
+	(select max(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between DATEADD(minute,-4,@StartTime)  and DATEADD(minute,-3,@StartTime) and EndPointID = @EPID)as '4',
+
+	(select max(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between DATEADD(minute,-5,@StartTime)  and DATEADD(minute,-4,@StartTime) and EndPointID = @EPID)as '5',
+
+	(select max(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between DATEADD(minute,-6,@StartTime)  and DATEADD(minute,-5,@StartTime) and EndPointID = @EPID)as '6',
+
+	(select max(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between DATEADD(minute,-7,@StartTime)  and DATEADD(minute,-6,@StartTime) and EndPointID = @EPID)as '7',
+
+	(select max(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between DATEADD(minute,-8,@StartTime)  and DATEADD(minute,-7,@StartTime) and EndPointID = @EPID)as '8',
+
+	(select max(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between DATEADD(minute,-9,@StartTime)  and DATEADD(minute,-8,@StartTime) and EndPointID = @EPID)as '9',
+
+	(select max(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between DATEADD(minute,-10,@StartTime)  and DATEADD(minute,-9,@StartTime) and EndPointID = @EPID)as '10',
+
+	(select max(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between DATEADD(minute,-11,@StartTime)  and DATEADD(minute,-10,@StartTime) and EndPointID = @EPID)as '11',
+
+	(select max(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between DATEADD(minute,-12,@StartTime)  and DATEADD(minute,-11,@StartTime) and EndPointID = @EPID)as '12',
+
+	(select max(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between DATEADD(minute,-13,@StartTime)  and DATEADD(minute,-12,@StartTime) and EndPointID = @EPID)as '13',
+
+	(select max(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between DATEADD(minute,-14,@StartTime)  and DATEADD(minute,-13,@StartTime) and EndPointID = @EPID)as '14',
+
+	(select max(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between DATEADD(minute,-15,@StartTime)  and DATEADD(minute,-14,@StartTime) and EndPointID = @EPID)as '15',
+
+	(select max(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between DATEADD(minute,-16,@StartTime)  and DATEADD(minute,-15,@StartTime) and EndPointID = @EPID)as '16',
+
+	(select max(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between DATEADD(minute,-17,@StartTime)  and DATEADD(minute,-16,@StartTime) and EndPointID = @EPID)as '17',
+
+	(select max(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between DATEADD(minute,-18,@StartTime)  and DATEADD(minute,-17,@StartTime) and EndPointID = @EPID)as '18',
+
+	(select max(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between DATEADD(minute,-19,@StartTime)  and DATEADD(minute,-18,@StartTime) and EndPointID = @EPID)as '19',
+
+	(select max(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between DATEADD(minute,-20,@StartTime)  and DATEADD(minute,-19,@StartTime) and EndPointID = @EPID)as '20',
+
+	(select max(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between DATEADD(minute,-21,@StartTime)  and DATEADD(minute,-20,@StartTime) and EndPointID = @EPID)as '21',
+
+	(select max(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between DATEADD(minute,-22,@StartTime)  and DATEADD(minute,-21,@StartTime) and EndPointID = @EPID)as '22',
+
+	(select max(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between DATEADD(minute,-23,@StartTime)  and DATEADD(minute,-22,@StartTime) and EndPointID = @EPID)as '23',
+
+	(select max(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between DATEADD(minute,-24,@StartTime)  and DATEADD(minute,-23,@StartTime) and EndPointID = @EPID)as '24',
+
+		(select max(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between DATEADD(minute,-25,@StartTime)  and DATEADD(minute,-24,@StartTime) and EndPointID = @EPID)as '25',
+
+	(select max(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between DATEADD(minute,-26,@StartTime)  and DATEADD(minute,-25,@StartTime) and EndPointID = @EPID)as '26',
+
+	(select max(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between DATEADD(minute,-27,@StartTime)  and DATEADD(minute,-26,@StartTime) and EndPointID = @EPID)as '27',
+
+	(select max(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between DATEADD(minute,-28,@StartTime)  and DATEADD(minute,-27,@StartTime) and EndPointID = @EPID)as '28',
+
+	(select max(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between DATEADD(minute,-29,@StartTime)  and DATEADD(minute,-28,@StartTime) and EndPointID = @EPID)as '29',
+
+	(select max(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between DATEADD(minute,-30,@StartTime)  and DATEADD(minute,-29,@StartTime) and EndPointID = @EPID)as '30',
+
+	(select max(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between DATEADD(minute,-31,@StartTime)  and DATEADD(minute,-30,@StartTime) and EndPointID = @EPID)as '31',
+
+	(select max(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between DATEADD(minute,-32,@StartTime)  and DATEADD(minute,-31,@StartTime) and EndPointID = @EPID)as '32',
+
+	(select max(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between DATEADD(minute,-33,@StartTime)  and DATEADD(minute,-32,@StartTime) and EndPointID = @EPID)as '33',
+
+	(select max(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between DATEADD(minute,-34,@StartTime)  and DATEADD(minute,-33,@StartTime) and EndPointID = @EPID)as '34',
+
+	(select max(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between DATEADD(minute,-35,@StartTime)  and DATEADD(minute,-34,@StartTime) and EndPointID = @EPID)as '35',
+
+	(select max(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between DATEADD(minute,-36,@StartTime)  and DATEADD(minute,-35,@StartTime) and EndPointID = @EPID)as '36',
+
+	(select max(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between DATEADD(minute,-37,@StartTime)  and DATEADD(minute,-36,@StartTime) and EndPointID = @EPID)as '37',
+
+	(select max(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between DATEADD(minute,-38,@StartTime)  and DATEADD(minute,-37,@StartTime) and EndPointID = @EPID)as '38',
+
+	(select max(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between DATEADD(minute,-39,@StartTime)  and DATEADD(minute,-38,@StartTime) and EndPointID = @EPID)as '39',
+
+	(select max(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between DATEADD(minute,-40,@StartTime)  and DATEADD(minute,-39,@StartTime) and EndPointID = @EPID)as '40',
+
+	(select max(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between DATEADD(minute,-41,@StartTime)  and DATEADD(minute,-40,@StartTime) and EndPointID = @EPID)as '41',
+
+	(select max(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between DATEADD(minute,-42,@StartTime)  and DATEADD(minute,-41,@StartTime) and EndPointID = @EPID)as '42',
+
+	(select max(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between DATEADD(minute,-43,@StartTime)  and DATEADD(minute,-42,@StartTime) and EndPointID = @EPID)as '43',
+
+	(select max(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between DATEADD(minute,-44,@StartTime)  and DATEADD(minute,-43,@StartTime) and EndPointID = @EPID)as '44',
+
+	(select max(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between DATEADD(minute,-45,@StartTime)  and DATEADD(minute,-44,@StartTime) and EndPointID = @EPID)as '45',
+
+	(select max(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between DATEADD(minute,-46,@StartTime)  and DATEADD(minute,-45,@StartTime) and EndPointID = @EPID)as '46',
+
+	(select max(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between DATEADD(minute,-47,@StartTime)  and DATEADD(minute,-46,@StartTime) and EndPointID = @EPID)as '47',
+
+	(select max(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between DATEADD(minute,-48,@StartTime)  and DATEADD(minute,-47,@StartTime) and EndPointID = @EPID)as '48',
+
+		(select max(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between DATEADD(minute,-49,@StartTime)  and DATEADD(minute,-48,@StartTime) and EndPointID = @EPID)as '49',
+
+	(select max(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between DATEADD(minute,-50,@StartTime)  and DATEADD(minute,-49,@StartTime) and EndPointID = @EPID)as '50',
+
+	(select max(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between DATEADD(minute,-51,@StartTime)  and DATEADD(minute,-50,@StartTime) and EndPointID = @EPID)as '51',
+
+	(select max(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between DATEADD(minute,-52,@StartTime)  and DATEADD(minute,-51,@StartTime) and EndPointID = @EPID)as '52',
+
+	(select max(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between DATEADD(minute,-53,@StartTime)  and DATEADD(minute,-52,@StartTime) and EndPointID = @EPID)as '53',
+
+	(select max(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between DATEADD(minute,-54,@StartTime)  and DATEADD(minute,-53,@StartTime) and EndPointID = @EPID)as '54',
+
+	(select max(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between DATEADD(minute,-55,@StartTime)  and DATEADD(minute,-54,@StartTime) and EndPointID = @EPID)as '55',
+
+	(select max(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between DATEADD(minute,-56,@StartTime)  and DATEADD(minute,-55,@StartTime) and EndPointID = @EPID)as '56',
+
+	(select max(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between DATEADD(minute,-57,@StartTime)  and DATEADD(minute,-56,@StartTime) and EndPointID = @EPID)as '57',
+
+	(select max(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between DATEADD(minute,-58,@StartTime)  and DATEADD(minute,-57,@StartTime) and EndPointID = @EPID)as '58',
+
+	(select max(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between DATEADD(minute,-59,@StartTime)  and DATEADD(minute,-58,@StartTime) and EndPointID = @EPID)as '59',
+
+	(select max(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between DATEADD(minute,-60,@StartTime)  and DATEADD(minute,-59,@StartTime) and EndPointID = @EPID)as '60'
+
+from [Endpoints] e where e.ID = @EPID
+
+)
+union all
+(
+select ID,Title,'avg' as 'Fx',
+
+			(select avg(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between DATEADD(minute,-1,@StartTime)  and DATEADD(minute,-0,@StartTime) and EndPointID = @EPID)as '1',
+
+	(select avg(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between DATEADD(minute,-2,@StartTime)  and DATEADD(minute,-1,@StartTime) and EndPointID = @EPID)as '2',
+
+	(select avg(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between DATEADD(minute,-3,@StartTime)  and DATEADD(minute,-2,@StartTime) and EndPointID = @EPID)as '3',
+
+	(select avg(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between DATEADD(minute,-4,@StartTime)  and DATEADD(minute,-3,@StartTime) and EndPointID = @EPID)as '4',
+
+	(select avg(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between DATEADD(minute,-5,@StartTime)  and DATEADD(minute,-4,@StartTime) and EndPointID = @EPID)as '5',
+
+	(select avg(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between DATEADD(minute,-6,@StartTime)  and DATEADD(minute,-5,@StartTime) and EndPointID = @EPID)as '6',
+
+	(select avg(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between DATEADD(minute,-7,@StartTime)  and DATEADD(minute,-6,@StartTime) and EndPointID = @EPID)as '7',
+
+	(select avg(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between DATEADD(minute,-8,@StartTime)  and DATEADD(minute,-7,@StartTime) and EndPointID = @EPID)as '8',
+
+	(select avg(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between DATEADD(minute,-9,@StartTime)  and DATEADD(minute,-8,@StartTime) and EndPointID = @EPID)as '9',
+
+	(select avg(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between DATEADD(minute,-10,@StartTime)  and DATEADD(minute,-9,@StartTime) and EndPointID = @EPID)as '10',
+
+	(select avg(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between DATEADD(minute,-11,@StartTime)  and DATEADD(minute,-10,@StartTime) and EndPointID = @EPID)as '11',
+
+	(select avg(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between DATEADD(minute,-12,@StartTime)  and DATEADD(minute,-11,@StartTime) and EndPointID = @EPID)as '12',
+
+	(select avg(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between DATEADD(minute,-13,@StartTime)  and DATEADD(minute,-12,@StartTime) and EndPointID = @EPID)as '13',
+
+	(select avg(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between DATEADD(minute,-14,@StartTime)  and DATEADD(minute,-13,@StartTime) and EndPointID = @EPID)as '14',
+
+	(select avg(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between DATEADD(minute,-15,@StartTime)  and DATEADD(minute,-14,@StartTime) and EndPointID = @EPID)as '15',
+
+	(select avg(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between DATEADD(minute,-16,@StartTime)  and DATEADD(minute,-15,@StartTime) and EndPointID = @EPID)as '16',
+
+	(select avg(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between DATEADD(minute,-17,@StartTime)  and DATEADD(minute,-16,@StartTime) and EndPointID = @EPID)as '17',
+
+	(select avg(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between DATEADD(minute,-18,@StartTime)  and DATEADD(minute,-17,@StartTime) and EndPointID = @EPID)as '18',
+
+	(select avg(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between DATEADD(minute,-19,@StartTime)  and DATEADD(minute,-18,@StartTime) and EndPointID = @EPID)as '19',
+
+	(select avg(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between DATEADD(minute,-20,@StartTime)  and DATEADD(minute,-19,@StartTime) and EndPointID = @EPID)as '20',
+
+	(select avg(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between DATEADD(minute,-21,@StartTime)  and DATEADD(minute,-20,@StartTime) and EndPointID = @EPID)as '21',
+
+	(select avg(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between DATEADD(minute,-22,@StartTime)  and DATEADD(minute,-21,@StartTime) and EndPointID = @EPID)as '22',
+
+	(select avg(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between DATEADD(minute,-23,@StartTime)  and DATEADD(minute,-22,@StartTime) and EndPointID = @EPID)as '23',
+
+	(select avg(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between DATEADD(minute,-24,@StartTime)  and DATEADD(minute,-23,@StartTime) and EndPointID = @EPID)as '24',
+
+		(select avg(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between DATEADD(minute,-25,@StartTime)  and DATEADD(minute,-24,@StartTime) and EndPointID = @EPID)as '25',
+
+	(select avg(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between DATEADD(minute,-26,@StartTime)  and DATEADD(minute,-25,@StartTime) and EndPointID = @EPID)as '26',
+
+	(select avg(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between DATEADD(minute,-27,@StartTime)  and DATEADD(minute,-26,@StartTime) and EndPointID = @EPID)as '27',
+
+	(select avg(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between DATEADD(minute,-28,@StartTime)  and DATEADD(minute,-27,@StartTime) and EndPointID = @EPID)as '28',
+
+	(select avg(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between DATEADD(minute,-29,@StartTime)  and DATEADD(minute,-28,@StartTime) and EndPointID = @EPID)as '29',
+
+	(select avg(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between DATEADD(minute,-30,@StartTime)  and DATEADD(minute,-29,@StartTime) and EndPointID = @EPID)as '30',
+
+	(select avg(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between DATEADD(minute,-31,@StartTime)  and DATEADD(minute,-30,@StartTime) and EndPointID = @EPID)as '31',
+
+	(select avg(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between DATEADD(minute,-32,@StartTime)  and DATEADD(minute,-31,@StartTime) and EndPointID = @EPID)as '32',
+
+	(select avg(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between DATEADD(minute,-33,@StartTime)  and DATEADD(minute,-32,@StartTime) and EndPointID = @EPID)as '33',
+
+	(select avg(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between DATEADD(minute,-34,@StartTime)  and DATEADD(minute,-33,@StartTime) and EndPointID = @EPID)as '34',
+
+	(select avg(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between DATEADD(minute,-35,@StartTime)  and DATEADD(minute,-34,@StartTime) and EndPointID = @EPID)as '35',
+
+	(select avg(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between DATEADD(minute,-36,@StartTime)  and DATEADD(minute,-35,@StartTime) and EndPointID = @EPID)as '36',
+
+	(select avg(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between DATEADD(minute,-37,@StartTime)  and DATEADD(minute,-36,@StartTime) and EndPointID = @EPID)as '37',
+
+	(select avg(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between DATEADD(minute,-38,@StartTime)  and DATEADD(minute,-37,@StartTime) and EndPointID = @EPID)as '38',
+
+	(select avg(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between DATEADD(minute,-39,@StartTime)  and DATEADD(minute,-38,@StartTime) and EndPointID = @EPID)as '39',
+
+	(select avg(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between DATEADD(minute,-40,@StartTime)  and DATEADD(minute,-39,@StartTime) and EndPointID = @EPID)as '40',
+
+	(select avg(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between DATEADD(minute,-41,@StartTime)  and DATEADD(minute,-40,@StartTime) and EndPointID = @EPID)as '41',
+
+	(select avg(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between DATEADD(minute,-42,@StartTime)  and DATEADD(minute,-41,@StartTime) and EndPointID = @EPID)as '42',
+
+	(select avg(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between DATEADD(minute,-43,@StartTime)  and DATEADD(minute,-42,@StartTime) and EndPointID = @EPID)as '43',
+
+	(select avg(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between DATEADD(minute,-44,@StartTime)  and DATEADD(minute,-43,@StartTime) and EndPointID = @EPID)as '44',
+
+	(select avg(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between DATEADD(minute,-45,@StartTime)  and DATEADD(minute,-44,@StartTime) and EndPointID = @EPID)as '45',
+
+	(select avg(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between DATEADD(minute,-46,@StartTime)  and DATEADD(minute,-45,@StartTime) and EndPointID = @EPID)as '46',
+
+	(select avg(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between DATEADD(minute,-47,@StartTime)  and DATEADD(minute,-46,@StartTime) and EndPointID = @EPID)as '47',
+
+	(select avg(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between DATEADD(minute,-48,@StartTime)  and DATEADD(minute,-47,@StartTime) and EndPointID = @EPID)as '48',
+
+		(select avg(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between DATEADD(minute,-49,@StartTime)  and DATEADD(minute,-48,@StartTime) and EndPointID = @EPID)as '49',
+
+	(select avg(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between DATEADD(minute,-50,@StartTime)  and DATEADD(minute,-49,@StartTime) and EndPointID = @EPID)as '50',
+
+	(select avg(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between DATEADD(minute,-51,@StartTime)  and DATEADD(minute,-50,@StartTime) and EndPointID = @EPID)as '51',
+
+	(select avg(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between DATEADD(minute,-52,@StartTime)  and DATEADD(minute,-51,@StartTime) and EndPointID = @EPID)as '52',
+
+	(select avg(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between DATEADD(minute,-53,@StartTime)  and DATEADD(minute,-52,@StartTime) and EndPointID = @EPID)as '53',
+
+	(select avg(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between DATEADD(minute,-54,@StartTime)  and DATEADD(minute,-53,@StartTime) and EndPointID = @EPID)as '54',
+
+	(select avg(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between DATEADD(minute,-55,@StartTime)  and DATEADD(minute,-54,@StartTime) and EndPointID = @EPID)as '55',
+
+	(select avg(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between DATEADD(minute,-56,@StartTime)  and DATEADD(minute,-55,@StartTime) and EndPointID = @EPID)as '56',
+
+	(select avg(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between DATEADD(minute,-57,@StartTime)  and DATEADD(minute,-56,@StartTime) and EndPointID = @EPID)as '57',
+
+	(select avg(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between DATEADD(minute,-58,@StartTime)  and DATEADD(minute,-57,@StartTime) and EndPointID = @EPID)as '58',
+
+	(select avg(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between DATEADD(minute,-59,@StartTime)  and DATEADD(minute,-58,@StartTime) and EndPointID = @EPID)as '59',
+
+	(select avg(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between DATEADD(minute,-60,@StartTime)  and DATEADD(minute,-59,@StartTime) and EndPointID = @EPID)as '60'
+
+
+
+from [Endpoints] e where e.ID = @EPID
+
+)
+end
+GO
+/****** Object:  StoredProcedure [dbo].[Rpt_EndPoint_IOs_MonthAVG]    Script Date: 6/6/2016 6:16:14 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE procedure [dbo].[Rpt_EndPoint_IOs_MonthAVG] 
+ @EPID bigint
+ as
+ begin
+ SET NOCOUNT ON
+ select ID,Title, 
+
+	(select avg(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between '1-1-2016' and '1-31-2016' and EndPointID = @EPID)as '1',
+
+	(select avg(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between '2-1-2016' and '2-28-2016' and EndPointID = @EPID)as '2',
+
+	(select avg(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between '3-1-2016' and '3-31-2016' and EndPointID = @EPID)as '3',
+
+	(select avg(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between '4-1-2016' and '4-30-2016' and EndPointID = @EPID)as '4',
+
+	(select avg(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between '5-1-2016' and '5-31-2016' and EndPointID = @EPID)as '5',
+
+	(select avg(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between '6-1-2016' and '6-30-2016' and EndPointID = @EPID)as '6',
+
+		(select avg(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between '7-1-2016' and '7-30-2016' and EndPointID = @EPID)as '7',
+
+		(select avg(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between '8-1-2016' and '8-31-2016' and EndPointID = @EPID)as '8',
+
+		(select avg(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between '9-1-2016' and '9-30-2016' and EndPointID = @EPID)as '9',
+
+		(select avg(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between '10-1-2016' and '10-31-2016' and EndPointID = @EPID)as '10',
+
+		(select avg(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between '11-1-2016' and '11-30-2016' and EndPointID = @EPID)as '11',
+
+		(select avg(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between '12-1-2016' and '12-31-2016' and EndPointID = @EPID)as '12'
+
+from [Endpoints] e where e.ID = @EPID
+end
+GO
+/****** Object:  StoredProcedure [dbo].[Rpt_EndPoint_IOs_MonthMAX]    Script Date: 6/6/2016 6:16:14 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+create procedure [dbo].[Rpt_EndPoint_IOs_MonthMAX] 
+ @EPID bigint
+ as
+ begin
+ SET NOCOUNT ON
+ select ID,Title, 
+
+	(select max(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between '1-1-2016' and '1-31-2016' and EndPointID = @EPID)as '1',
+
+	(select max(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between '2-1-2016' and '2-28-2016' and EndPointID = @EPID)as '2',
+
+	(select max(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between '3-1-2016' and '3-31-2016' and EndPointID = @EPID)as '3',
+
+	(select max(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between '4-1-2016' and '4-30-2016' and EndPointID = @EPID)as '4',
+
+	(select max(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between '5-1-2016' and '5-31-2016' and EndPointID = @EPID)as '5',
+
+	(select max(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between '6-1-2016' and '6-30-2016' and EndPointID = @EPID)as '6',
+
+		(select max(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between '7-1-2016' and '7-30-2016' and EndPointID = @EPID)as '7',
+
+		(select max(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between '8-1-2016' and '8-31-2016' and EndPointID = @EPID)as '8',
+
+		(select max(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between '9-1-2016' and '9-30-2016' and EndPointID = @EPID)as '9',
+
+		(select max(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between '10-1-2016' and '10-31-2016' and EndPointID = @EPID)as '10',
+
+		(select max(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between '11-1-2016' and '11-30-2016' and EndPointID = @EPID)as '11',
+
+		(select max(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where [ExecTimeStamp] between '12-1-2016' and '12-31-2016' and EndPointID = @EPID)as '12'
+
+from [Endpoints] e where e.ID = @EPID
+end
+GO
+/****** Object:  StoredProcedure [dbo].[Rpt_EndPoint_IOs_Months]    Script Date: 6/6/2016 6:16:14 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE procedure [dbo].[Rpt_EndPoint_IOs_Months] 
+ @EPID bigint,
+ @Year nvarchar(4)
+ as
+ begin
+ SET NOCOUNT ON
+ select ID,Title,'Min' as 'Fx',
+
+	(select min(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where MONTH(ExecTimeStamp) = 1 and Year(ExecTimeStamp) = @Year and EndPointID = @EPID)as '1',
+
+	(select min(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where MONTH(ExecTimeStamp) = 2 and Year(ExecTimeStamp) = @Year and EndPointID = @EPID)as '2',
+
+	(select min(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where MONTH(ExecTimeStamp) = 3 and Year(ExecTimeStamp) = @Year and EndPointID = @EPID)as '3',
+
+	(select min(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where MONTH(ExecTimeStamp) = 4 and Year(ExecTimeStamp) = @Year and EndPointID = @EPID)as '4',
+
+	(select min(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where MONTH(ExecTimeStamp) = 5 and Year(ExecTimeStamp) = @Year and EndPointID = @EPID)as '5',
+
+	(select min(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where MONTH(ExecTimeStamp) = 6 and Year(ExecTimeStamp) = @Year and EndPointID = @EPID)as '6',
+
+		(select min(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where MONTH(ExecTimeStamp) = 7 and Year(ExecTimeStamp) = @Year and EndPointID = @EPID)as '7',
+
+		(select min(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where MONTH(ExecTimeStamp) = 8 and Year(ExecTimeStamp) = @Year and EndPointID = @EPID)as '8',
+
+		(select min(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where MONTH(ExecTimeStamp) = 9 and Year(ExecTimeStamp) = @Year and EndPointID = @EPID)as '9',
+
+		(select min(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where MONTH(ExecTimeStamp) = 10 and Year(ExecTimeStamp) = @Year and EndPointID = @EPID)as '10',
+
+		(select min(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where MONTH(ExecTimeStamp) = 11 and Year(ExecTimeStamp) = @Year and EndPointID = @EPID)as '11',
+
+		(select min(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where MONTH(ExecTimeStamp) = 12 and Year(ExecTimeStamp) = @Year and EndPointID = @EPID)as '12'
+
+from [Endpoints] e where e.ID = @EPID
+
+union all(
+
+  select ID,Title,'max' as 'Fx',
+
+	(select max(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where MONTH(ExecTimeStamp) = 1 and Year(ExecTimeStamp) = @Year and EndPointID = @EPID)as '1',
+
+	(select max(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where MONTH(ExecTimeStamp) = 2 and Year(ExecTimeStamp) = @Year and EndPointID = @EPID)as '2',
+
+	(select max(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where MONTH(ExecTimeStamp) = 3 and Year(ExecTimeStamp) = @Year and EndPointID = @EPID)as '3',
+
+	(select max(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where MONTH(ExecTimeStamp) = 4 and Year(ExecTimeStamp) = @Year and EndPointID = @EPID)as '4',
+
+	(select max(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where MONTH(ExecTimeStamp) = 5 and Year(ExecTimeStamp) = @Year and EndPointID = @EPID)as '5',
+
+	(select max(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where MONTH(ExecTimeStamp) = 6 and Year(ExecTimeStamp) = @Year and EndPointID = @EPID)as '6',
+
+		(select max(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where MONTH(ExecTimeStamp) = 7 and Year(ExecTimeStamp) = @Year and EndPointID = @EPID)as '7',
+
+		(select max(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where MONTH(ExecTimeStamp) = 8 and Year(ExecTimeStamp) = @Year and EndPointID = @EPID)as '8',
+
+		(select max(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where MONTH(ExecTimeStamp) = 9 and Year(ExecTimeStamp) = @Year and EndPointID = @EPID)as '9',
+
+		(select max(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where MONTH(ExecTimeStamp) = 10 and Year(ExecTimeStamp) = @Year and EndPointID = @EPID)as '10',
+
+		(select max(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where MONTH(ExecTimeStamp) = 11 and Year(ExecTimeStamp) = @Year and EndPointID = @EPID)as '11',
+
+		(select max(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where MONTH(ExecTimeStamp) = 12 and Year(ExecTimeStamp) = @Year and EndPointID = @EPID)as '12'
+
+from [Endpoints] e where e.ID = @EPID
+
+)union all(
+
+  select ID,Title,'avg' as 'Fx',
+
+	(select avg(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where MONTH(ExecTimeStamp) = 1 and Year(ExecTimeStamp) = @Year and EndPointID = @EPID)as '1',
+
+	(select avg(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where MONTH(ExecTimeStamp) = 2 and Year(ExecTimeStamp) = @Year and EndPointID = @EPID)as '2',
+
+	(select avg(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where MONTH(ExecTimeStamp) = 3 and Year(ExecTimeStamp) = @Year and EndPointID = @EPID)as '3',
+
+	(select avg(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where MONTH(ExecTimeStamp) = 4 and Year(ExecTimeStamp) = @Year and EndPointID = @EPID)as '4',
+
+	(select avg(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where MONTH(ExecTimeStamp) = 5 and Year(ExecTimeStamp) = @Year and EndPointID = @EPID)as '5',
+
+	(select avg(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where MONTH(ExecTimeStamp) = 6 and Year(ExecTimeStamp) = @Year and EndPointID = @EPID)as '6',
+
+		(select avg(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where MONTH(ExecTimeStamp) = 7 and Year(ExecTimeStamp) = @Year and EndPointID = @EPID)as '7',
+
+		(select avg(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where MONTH(ExecTimeStamp) = 8 and Year(ExecTimeStamp) = @Year and EndPointID = @EPID)as '8',
+
+		(select avg(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where MONTH(ExecTimeStamp) = 9 and Year(ExecTimeStamp) = @Year and EndPointID = @EPID)as '9',
+
+		(select avg(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where MONTH(ExecTimeStamp) = 10 and Year(ExecTimeStamp) = @Year and EndPointID = @EPID)as '10',
+
+		(select avg(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where MONTH(ExecTimeStamp) = 11 and Year(ExecTimeStamp) = @Year and EndPointID = @EPID)as '11',
+
+		(select avg(CAST(CAST(valu AS float) AS INT))  from EndPointIOs
+	where MONTH(ExecTimeStamp) = 12 and Year(ExecTimeStamp) = @Year and EndPointID = @EPID)as '12'
+
+from [Endpoints] e where e.ID = @EPID
+
+)
+end
 GO
 USE [master]
 GO

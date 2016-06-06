@@ -74,6 +74,7 @@
     <Compile Include="Repositories\LocationViewsRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\LocationViewTypesRepository.cs" />
+    <Compile Include="Repositories\RolesRepository.cs" />
     <Compile Include="UnitOfWork_Repositories.cs" />
   </ItemGroup>
   <ItemGroup>

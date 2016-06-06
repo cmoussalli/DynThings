@@ -43,3 +43,17 @@ function LoadPart_DynUserDetailsDiv(id) {
         $("#divDynUserMain").html(partialViewResult);
     });
 }
+
+//Get User Roles
+function LoadPart_DynUserRolesDiv(DynUserID) {
+    var loadingpart = LoadDivLoading();
+    $("#SelectedDynUserID").val(DynUserID);
+    $("#divDynUserRoles").html(loadingpart);
+    $.ajax({
+        url: getRootURL() + '/DynUsers/GetPVDynUserRoles?DynUserID=' + DynUserID,
+        type: "GET",
+    })
+    .done(function (partialViewResult) {
+        $("#divDynUserRoles").html(partialViewResult);
+    });
+}

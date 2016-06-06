@@ -35,6 +35,7 @@ namespace DynThings.Data.Repositories
         public static DeviceIOsRepository repoDeviceIOs = new DeviceIOsRepository(dynDB);
         public static IOTypesRepository repoIOTypes = new IOTypesRepository(dynDB);
         public static DynUsersRepository repoDynUsers = new DynUsersRepository(dynDB);
+        public static RolesRepository repoRoles = new RolesRepository(dynDB);
 
         #endregion
 
