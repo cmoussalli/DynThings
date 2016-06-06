@@ -1,0 +1,20 @@
+﻿
+@model IPagedList<DynThings.Data.Models.AspNetUser>
+
+    <text>
+        @foreach (var itm in Model)
+        {
+            <div class="col-sm-6 col-md-4">
+                <div class="thumbnail">
+                    @*<img src="..." alt="...">*@
+                    <div class="caption">
+                        <h3>@itm.UserName</h3>
+                        <p>@itm.Email</p>
+                        <p>
+                            <a href="DynUsers\Details?id=@itm.Id" class="btn btn-primary" role="button">Manage</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        }
+    </text>

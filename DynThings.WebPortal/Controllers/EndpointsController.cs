@@ -23,6 +23,7 @@ using DynHighCharts;
 
 namespace DynThings.WebPortal.Controllers
 {
+    
     public class EndpointsController : Controller
     {
         #region ActionResult: Views
@@ -31,6 +32,7 @@ namespace DynThings.WebPortal.Controllers
             return View();
         }
 
+        
         public ActionResult Details(long id)
         {
             Endpoint endpoint = Data.Repositories.UnitOfWork_Repositories.repoEndpoints.Find(id);
@@ -111,12 +113,18 @@ namespace DynThings.WebPortal.Controllers
         [HttpGet]
         public PartialViewResult DeletePV(long id)
         {
+            if (!User.IsInRole("Admin"))
+            {
+                ResultInfo.Result rm = Core.ResultInfo.GetResultByID(1);
+                return PartialView("_PVResult",rm);
+            }
             Endpoint endpoint = UnitOfWork_Repositories.repoEndpoints.Find(id);
             return PartialView("_Delete", endpoint);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
         public ActionResult DeletePV([Bind(Include = "ID,Title")] Endpoint endpoint)
         {
             ResultInfo.Result res = ResultInfo.GetResultByID(1);
