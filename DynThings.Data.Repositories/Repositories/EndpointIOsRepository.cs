@@ -59,9 +59,11 @@ namespace DynThings.Data.Repositories
         {
             PagedList.IPagedList ios = db.EndPointIOs
               .Where(i => i.Endpoint.ID == endPointID)
+              
               .OrderByDescending(i => i.TimeStamp).Take(100).ToList()
               .ToPagedList(pageNumber, recordsPerPage);
             return ios;
+           
         }
 
         public IPagedList GetPagedList(string search, Guid endPointGUID, DateTime fromDate, DateTime toDate, int pageNumber, int recordsPerPage)
@@ -156,21 +158,24 @@ namespace DynThings.Data.Repositories
 
         public ResultInfo.Result Add(long endPointID, string value, EndPointIOType ioType)
         {
-            try
-            {
-                EndPointIO endIO = new EndPointIO();
-                endIO.EndPointID = endPointID;
-                endIO.Valu = value;
-                endIO.IOTypeID = long.Parse(ioType.GetHashCode().ToString());
-                endIO.TimeStamp = DateTime.UtcNow.AddHours(double.Parse (endIO.Endpoint.UTC_Diff.ToString()));
-                db.EndPointIOs.Add(endIO);
-                db.SaveChanges();
-                return ResultInfo.GenerateOKResult("Saved", endIO.ID);
-            }
-            catch
-            {
-                return ResultInfo.GetResultByID(1);
-            }
+            //try
+            //{
+            Endpoint ep = db.Endpoints.Find(endPointID);
+
+            EndPointIO endIO = new EndPointIO();
+            endIO.EndPointID = endPointID;
+            endIO.Valu = value;
+            endIO.IOTypeID = long.Parse(ioType.GetHashCode().ToString());
+            DateTime execTime = DateTime.UtcNow.AddHours(double.Parse(ep.UTC_Diff.ToString()));
+            endIO.TimeStamp = execTime;
+            db.EndPointIOs.Add(endIO);
+            db.SaveChanges();
+            return ResultInfo.GenerateOKResult("Saved", endIO.ID);
+            //}
+            //catch (Exception ex)
+            //{
+            //    return ResultInfo.GenerateErrorResult(ex.Message + " :: " + ex.InnerException);
+            //}
         }
         #endregion
 

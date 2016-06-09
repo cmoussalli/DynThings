@@ -25,7 +25,20 @@
                                Text="Home" />
                 </StackPanel>
             </Controls:HamburgerButtonInfo>
+            <Controls:HamburgerButtonInfo ClearHistory="False" PageType="views:LocationViews" 
+                                          AutomationProperties.Name="Jerry"
+                                          >
+                <StackPanel Orientation="Horizontal">
+                    <SymbolIcon Width="48" Height="48"
+                                Symbol="Map" />
+                    <TextBlock Margin="12,0,0,0" VerticalAlignment="Center"
+                               Text="Link2" />
+                </StackPanel>
+            </Controls:HamburgerButtonInfo>
+
+
         </Controls:HamburgerMenu.PrimaryButtons>
+
 
         <Controls:HamburgerMenu.SecondaryButtons>
             <!--  settingspage button  -->

@@ -8,7 +8,7 @@
     <div class="page-header">
         <h1>User Details</h1>
     </div>
-    
+
     <div class="row">
         <div class="col-md-6">
             <ul class="nav nav-tabs">
@@ -25,7 +25,8 @@
                         </div>
                         <div id="tabDynUserRoles" class="tab-pane fade">
                             <div class="right">
-                                <button type="button" class="btn btn-info pull-right" onclick="LoadPart_DynUserRolesDiv('@Model.Id')">Refresh</button>
+                                <button type="button" class="btn btn-info btn-sm pull-right" onclick="LoadPart_DynUserRolesDiv('@Model.Id')" >Refresh</button>
+                                <button type="button" class="btn btn-info btn-sm pull-right" onclick="LoadPart_DialogDynUserRoleAdd()" data-toggle="modal" data-target="#mdl">Add</button>
                             </div>
                             <div id="divDynUserRoles">
                             </div>
@@ -52,11 +53,13 @@
 
     <script>
         $(document).ready(function () {
+            selectedDynUserID = '@Model.Id';
             LoadPart_DynUserDetailsDiv('@Model.Id');
+            LoadPart_DynUserRolesDiv('@Model.Id')
         });
     </script>
 
-    
+
 
 }
 

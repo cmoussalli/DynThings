@@ -45,13 +45,58 @@ namespace DynThings.Data.Repositories
         }
         #endregion
 
+
+        #region Methods
+        #region Get User Name
         public string GetUserName(string ID)
         {
             AspNetUser usr = db.AspNetUsers.Find(ID);
             return usr.FullName;
         }
+        #endregion
 
-        
+        #endregion
+
+
+
+        #region Attach Role
+        public ResultInfo.Result AttachRole(string userID,string roleID)
+        {
+            AspNetUser usr = db.AspNetUsers.Find(userID);
+            List<AspNetRole> usrRole = usr.AspNetRoles.Where(r => r.Id == roleID).ToList();
+            if (usrRole.Count>0)
+            {//Role already Exist
+                return ResultInfo.GetResultByID(1);
+            }
+            else
+            {//Role not exist, must attach role to user
+                AspNetRole rol = UnitOfWork_Repositories.repoRoles.Find(roleID);
+                usr.AspNetRoles.Add(rol);
+                db.SaveChanges();
+            }
+            return ResultInfo.GenerateOKResult("Saved");
+        }
+        #endregion
+
+        #region DeAttach Role
+        public ResultInfo.Result DeAttachRole(string userID, string roleID)
+        {
+            AspNetUser usr = db.AspNetUsers.Find(userID);
+            List<AspNetRole> usrRole = usr.AspNetRoles.Where(r => r.Id == roleID).ToList();
+            if (usrRole.Count > 0)
+            {//Role already Exist, must delete
+                usr.AspNetRoles.Remove(usrRole[0]);
+                db.SaveChanges();
+                
+            }
+            else
+            {//Role not exist, ERROR
+                return ResultInfo.GetResultByID(1);
+            }
+            return ResultInfo.GenerateOKResult("Saved");
+        }
+        #endregion
+
 
 
     }

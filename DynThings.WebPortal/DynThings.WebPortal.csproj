@@ -53,6 +53,14 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\_Libraries\_Libs\DynHighCharts.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.AspNet.SignalR.Core, Version=2.2.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.SignalR.Core.2.2.0\lib\net45\Microsoft.AspNet.SignalR.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.SignalR.SystemWeb, Version=2.2.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.SignalR.SystemWeb.2.2.0\lib\net45\Microsoft.AspNet.SignalR.SystemWeb.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="PagedList, Version=1.17.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
       <HintPath>..\packages\PagedList.1.17.0.0\lib\net40\PagedList.dll</HintPath>
@@ -196,7 +204,6 @@
     <Compile Include="Controllers\ConfigController.cs" />
     <Compile Include="Controllers\DeviceCommandsController.cs" />
     <Compile Include="Controllers\DevicesController.cs" />
-    <Compile Include="Controllers\DynSettingsController.cs" />
     <Compile Include="Controllers\DynUsersController.cs" />
     <Compile Include="Controllers\EndPointCommandsController.cs" />
     <Compile Include="Controllers\EndPointIOsController.cs" />
@@ -430,11 +437,17 @@
     <Content Include="Scripts\Highcharts\highcharts-more.src.js" />
     <Content Include="Scripts\Highcharts\highcharts.js" />
     <Content Include="Scripts\Highcharts\highcharts.src.js" />
-    <Content Include="Scripts\jquery-2.1.4.js" />
-    <Content Include="Scripts\jquery-2.1.4.min.js" />
-    <Content Include="Scripts\jquery-2.1.4.min.map" />
+    <Content Include="Scripts\bootstrap-wizard\jquery.bootstrap.wizard.js" />
+    <Content Include="Scripts\bootstrap-wizard\jquery.bootstrap.wizard.min.js" />
+    <Content Include="Scripts\bootstrap-wizard\jquery.bootstrap.wizard.min.js.map" />
+    <Content Include="Scripts\bootstrap-wizard\jquery.bootstrap.wizard.js.map" />
+    <None Include="Scripts\jquery-2.2.3.intellisense.js" />
+    <Content Include="Scripts\jquery-2.2.3.js" />
+    <Content Include="Scripts\jquery-2.2.3.min.js" />
+    <Content Include="Scripts\jquery-2.2.3.min.map" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
-    <None Include="Scripts\jquery-2.1.4-vsdoc.js" />
+    <Content Include="Scripts\jquery.signalR-2.2.0.js" />
+    <Content Include="Scripts\jquery.signalR-2.2.0.min.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
@@ -599,6 +612,8 @@
     <Content Include="Views\DynUsers\_ListCards.cshtml" />
     <Content Include="Views\DynUsers\_Details_Main.cshtml" />
     <Content Include="Views\DynUsers\_Details_Roles.cshtml" />
+    <Content Include="Views\DynUsers\_Details_Roles_Add.cshtml" />
+    <Content Include="Views\DynUsers\_Add.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

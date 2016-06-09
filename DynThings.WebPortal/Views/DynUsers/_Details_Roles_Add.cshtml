@@ -1,0 +1,31 @@
+﻿@model DynThings.Data.Models.AspNetUser
+
+<div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+    <h4 class="modal-title" id="myModalLabel">User Editor</h4>
+</div>
+
+    <div class="modal-body">
+       
+        @Html.HiddenFor(model => model.Id)
+
+        <span>User: @Model.FullName</span><br />
+        <span>Type: User</span><br /><br />
+        <span>Role: </span>
+        @Html.DropDownList("RoleID", null, htmlAttributes: new { @class = "form-control" })
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" onclick="AttachRole()">Save</button>
+    </div>
+
+<script>
+    function AttachRole() {
+        AttachRoleToDynUser(selectedDynUserID, $("#RoleID").val());
+        
+    }
+
+</script>
+
+
+

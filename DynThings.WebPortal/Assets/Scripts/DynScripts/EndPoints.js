@@ -1,20 +1,6 @@
 ﻿//Vars
 var selectedEndPointID = 0;
 var selectedEndPointTitle = 0;
-//Server Response
-function ServerResponse(response) {
-    var Ntyp = '';
-    var Ntitle = ''
-    if (response.ResultType == '0') {
-        Ntyp = 's';
-        Ntitle = 'Success';
-    }
-    else {
-        Ntyp = 'd';
-        Ntitle = 'Error';
-    }
-    NotifyWithTitle(Ntyp, Ntitle, response.Message);
-};
 
 
 //Attach : Pager

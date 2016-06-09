@@ -143,17 +143,10 @@ namespace DynThings.WebPortal.Controllers
         public PartialViewResult GetPVEndPointHistory(long endPointID, int page = 1, int recordsperpage = 0)
         {
             IPagedList IOs = Data.Repositories.UnitOfWork_Repositories.repoEndpointIOs.GetPagedList(endPointID, page, Helpers.Configs.validateRecordsPerChild(Config.DefaultRecordsPerChild));
-            return PartialView("_EndPointHistory", IOs);
+            return PartialView("_Details_History", IOs);
 
         }
 
-        //[HttpGet]
-        //public PartialViewResult GetPVEndPointHistory(long endPointID,int page= 1,int recordsperpage = 0)
-        //{
-        //    IPagedList IOs = UnitOfWork_Repositories.repoEndpointIOs.GetPagedList("",endPointID,1, page, Helpers.Configs.validateRecordsPerChild(Config.DefaultRecordsPerChild));
-        //    return PartialView("_EndPointHistory", IOs);
-
-        //}
         #endregion
 
         #region EndPoint Commands

@@ -21,7 +21,7 @@ namespace DynThings.Data.Repositories
 
 
         #region Get List
-        public List<AspNetRole> GetList(string search)
+        public List<AspNetRole> GetList()
         {
             List<AspNetRole> roles = db.AspNetRoles.ToList();
             return roles;

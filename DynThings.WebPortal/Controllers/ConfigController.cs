@@ -9,7 +9,7 @@ using DynThings.Core;
 
 namespace DynThings.WebPortal.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = "Admin")]
     public class ConfigController : Controller
     {
 

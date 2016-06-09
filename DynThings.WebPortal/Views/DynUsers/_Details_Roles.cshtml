@@ -1,5 +1,26 @@
 ﻿@model List<DynThings.Data.Models.AspNetRole>
 
+<table class="table striped hovered border bordered">
+    <thead>
+        <tr>
+            <th>Title</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    <button type="button" class="btn btn-danger pull-right" onclick="DeattachRoleFromUser(selectedDynUserID,@item.Id)" >Delete</button>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
 
 
 
