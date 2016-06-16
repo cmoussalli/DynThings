@@ -40,7 +40,9 @@ namespace DynThings.Data.Repositories
         public EndPointIO Find(long id)
         {
             EndPointIO io = new EndPointIO();
-            List<EndPointIO> ios = db.EndPointIOs.Where(l => l.ID == id).ToList();
+            List<EndPointIO> ios = db.EndPointIOs
+                .Include("Device")
+                .Where(l => l.ID == id).ToList();
             if (ios.Count == 1)
             {
                 io = ios[0];
@@ -57,7 +59,7 @@ namespace DynThings.Data.Repositories
         #region Get PagedList
         public IPagedList GetPagedList(long endPointID, int pageNumber, int recordsPerPage)
         {
-            PagedList.IPagedList ios = db.EndPointIOs
+            PagedList.IPagedList ios = db.EndPointIOs.Include("IOType")
               .Where(i => i.Endpoint.ID == endPointID)
               
               .OrderByDescending(i => i.TimeStamp).Take(100).ToList()
