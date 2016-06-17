@@ -30,6 +30,7 @@ namespace DynThings.Data.Repositories
         public IPagedList GetPagedList(string search, int pageNumber, int recordsPerPage)
         {
             IPagedList views = db.LocationViews
+                .Include("LocationViewType")
                 .Where(
                 l => search == null || l.Title.Contains(search))
                               .OrderBy(l => l.Title).ToList()
@@ -68,9 +69,9 @@ namespace DynThings.Data.Repositories
                 loc.IsActive = false;
                 loc.OwnerID = userID;
                 loc.LocationViewTypeID = locationTypeID;
-                loc.X = "";
-                loc.Y = "";
-                loc.Z = "";
+                loc.X = "57";
+                loc.Y = "0.6";
+                loc.Z = "1";
                 db.LocationViews.Add(loc);
                 db.SaveChanges();
                 return ResultInfo.GenerateOKResult("Saved", loc.ID);

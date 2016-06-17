@@ -1,12 +1,12 @@
 ﻿@model DynThings.Data.Models.AspNetUser
 <div class="right">
-    <button type="button" class="btn btn-info pull-right" onclick="LoadDynUserEditor(@Model.Id)" data-toggle="modal" data-target="#mdl">Edit</button>
+    <button type="button" class="btn btn-info pull-right" onclick="LoadPart_DialogDynUserEdit(@Model.Id)" data-toggle="modal" data-target="#mdl">Edit</button>
 </div>
 
 <strong>UserName\E-Mail</strong><br>
 @Model.UserName<br><br>
 
-<strong>User</strong><br>
+<strong>Full Name</strong><br>
 @Model.FullName<br><br>
 
 

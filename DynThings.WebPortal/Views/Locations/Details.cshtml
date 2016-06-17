@@ -18,7 +18,7 @@
                 <li class="active"><a data-toggle="tab" href="#tabLocationmain">Main</a></li>
                 <li><a data-toggle="tab" href="#tabLocationGeoLocation">Geo Location</a></li>
                 <li><a data-toggle="tab" href="#tabLocationDevices">Devices</a></li>
-                <li><a data-toggle="tab" href="#tabLocationViews">Dev Keys</a></li>
+                @*<li><a data-toggle="tab" href="#tabLocationViews">Dev Keys</a></li>*@
                 <li><a data-toggle="tab" href="#tabLocationDelete">Delete</a></li>
             </ul>
             <div class="panel panel-default">
@@ -52,10 +52,10 @@
                                 </div>
                             </div>
                         </div>
-                        <div id="tabLocationDevkeys" class="tab-pane fade">
+                        @*<div id="tabLocationDevkeys" class="tab-pane fade">
                             <div id="divLocationDevkeys">
                             </div>
-                        </div>
+                        </div>*@
                         <div id="tabLocationDelete" class="tab-pane fade">
                             <div id="divLocationDelete">
                                 <button type="button" class="btn btn-danger" onclick="LoadPart_DialogLocationDelete(@Model.ID)" data-toggle="modal" data-target="#mdl">Delete</button>

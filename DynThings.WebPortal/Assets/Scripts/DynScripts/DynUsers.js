@@ -77,6 +77,18 @@ function LoadPart_DialogDynUserRoleAdd() {
     });
 }
 
+//Get Edit
+function LoadPart_DialogDynUserEdit(id) {
+    var loadingpart = LoadDivLoading();
+    $("#modal").html(loadingpart);
+    $.ajax({
+        url: getRootURL() + '/DynUsers/editpv?id=' + id,
+        type: "GET",
+    })
+    .done(function (partialViewResult) {
+        $("#modal").html(partialViewResult);
+    });
+}
 
 
 function AttachRoleToDynUser(UserID, RoleID) {

@@ -633,13 +633,13 @@
     <Content Include="Views\DynUsers\Create.cshtml" />
     <Content Include="Views\DynUsers\Delete.cshtml" />
     <Content Include="Views\DynUsers\Details.cshtml" />
-    <Content Include="Views\DynUsers\Edit.cshtml" />
     <Content Include="Views\DynUsers\Index.cshtml" />
     <Content Include="Views\DynUsers\_ListCards.cshtml" />
     <Content Include="Views\DynUsers\_Details_Main.cshtml" />
     <Content Include="Views\DynUsers\_Details_Roles.cshtml" />
     <Content Include="Views\DynUsers\_Details_Roles_Add.cshtml" />
     <Content Include="Views\DynUsers\_Add.cshtml" />
+    <Content Include="Views\DynUsers\_Edit_Main.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
