@@ -10,7 +10,7 @@ function AttachEventDevicesListPager() {
             url: $(this).attr("href") + "&searchfor=" + $(txtDeviceSearch).val() + '&recordsperpage=0',
             type: 'GET',
             cache: false,
-            success: function (result) {
+            done: function (result) {
                 $("#divDevicesList").html(result);
                 return false;
             }
@@ -30,7 +30,7 @@ function AttachEventDeviceAddForm() {
             type: "POST",
             data: formData,
             dataType: "json",
-            success: function (resp) {
+            done: function (resp) {
             }
         })
 
@@ -50,7 +50,7 @@ function AttachEventDeviceEditForm(deviceID) {
             type: "POST",
             data: formData,
             dataType: "json",
-            success: function (resp) {
+            done: function (resp) {
             }
         })
         LoadPart_DeviceDetailsDiv(deviceID);
@@ -74,6 +74,17 @@ function LoadPart_DeviceListDiv() {
 };
 
 //Get Details
+function LoadPart_DeviceDetailsDiv(id) {
+    var loadingpart = LoadDivLoading();
+    $("#divDeviceMain").html(loadingpart);
+    $.ajax({
+        url: getRootURL() + '/Devices/DetailsPV?id=' + id,
+        type: "GET",
+    })
+    .done(function (partialViewResult) {
+        $("#divDeviceMain").html(partialViewResult);
+    });
+}
 //TODO
 
 //Get Add
@@ -91,6 +102,19 @@ function LoadPart_DialogDeviceAdd() {
 }
 
 //Get Edit
+function LoadPart_DialogDeviceEdit(id) {
+    var loadingpart = LoadDivLoading();
+    $("#modal").html(loadingpart);
+    $.ajax({
+        url: getRootURL() + '/Devices/editpv?id=' + id,
+        type: "GET",
+    })
+    .done (function (partialViewResult) {
+        $("#modal").html(partialViewResult);
+        LoadPart_DeviceDetailsDiv(id);
+    });
+    
+}
 //TODO
 
 //Get Delete
@@ -145,7 +169,7 @@ function AttachEventDevicesLookupListPager() {
             url: $(this).attr("href") + "&searchfor=" + $(txtDeviceLookupSearch).val() + '&recordsperpage=0',
             type: 'GET',
             cache: false,
-            success: function (result) {
+            done: function (result) {
                 $("#divDevicesLookupList").html(result);
                 return false;
             }

@@ -54,6 +54,11 @@
 @section scripts{
     <script src="~/Assets/Scripts/DynScripts/Devices.js"></script>
     <script src="~/Assets/Scripts/DynScripts/DeviceCommands.js"></script>
+    
     <script>
+        $(document).ready(function () {
+            LoadPart_DeviceDetailsDiv('@Model.ID');
+          
+        });
     </script>
 }

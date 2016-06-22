@@ -23,7 +23,15 @@ namespace DynThings.Core
             return result;
         }
 
-
+        public static List<int> GetRegionalTimeOptions()
+        {
+            List<int> result = new List<int>();
+            for (int x = -12;x<13;x++)
+            {
+                result.Add(x);
+            }
+            return result;
+        }
 
 
 

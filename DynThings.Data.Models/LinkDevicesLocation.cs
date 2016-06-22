@@ -26,9 +26,9 @@ public partial class LinkDevicesLocation
 
 
 
-    public virtual Device Device { get; set; }
-
     public virtual Location Location { get; set; }
+
+    public virtual Device Device { get; set; }
 
 }
 

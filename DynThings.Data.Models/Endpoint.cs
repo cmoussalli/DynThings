@@ -43,11 +43,7 @@ public partial class Endpoint
 
     public long TypeID { get; set; }
 
-    public Nullable<int> UTC_Diff { get; set; }
 
-
-
-    public virtual Device Device { get; set; }
 
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
 
@@ -58,6 +54,8 @@ public partial class Endpoint
     public virtual ICollection<EndPointIO> EndPointIOs { get; set; }
 
     public virtual EndPointType EndPointType { get; set; }
+
+    public virtual Device Device { get; set; }
 
 }
 

@@ -402,6 +402,7 @@
     <None Include="Properties\PublishProfiles\DynThingsDemo - Web Deploy %283%29.pubxml" />
     <None Include="Properties\PublishProfiles\DynThingsDemo - Web Deploy %284%29.pubxml" />
     <None Include="Properties\PublishProfiles\DynThingsDemo - Web Deploy.pubxml" />
+    <None Include="Properties\PublishProfiles\DynThingsDemo.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -580,7 +581,6 @@
     <Content Include="Views\Devices\_Edit.cshtml" />
     <Content Include="Views\LocationViews\_EditTitle.cshtml" />
     <Content Include="Views\Endpoints\_Details_History.cshtml" />
-    <Content Include="Views\Endpoints\_EndPointHistory.cshtml" />
     <Content Include="Views\DeviceCommands\_List.cshtml" />
     <Content Include="Views\DeviceCommands\Details.cshtml" />
     <Content Include="Views\DeviceCommands\_Details_Main.cshtml" />
@@ -626,7 +626,7 @@
     <Content Include="Views\Config\_DevMode.cshtml" />
     <Content Include="Views\Endpoints\_Delete.cshtml" />
     <Content Include="Views\Locations\_Delete.cshtml" />
-    <Content Include="Views\Endpoints\_Details_Keys.cshtml" />
+    <Content Include="Views\Endpoints\_Details_DevKeys.cshtml" />
     <Content Include="Views\LocationViews\_Delete.cshtml" />
     <Content Include="Views\Shared\_HighChart.cshtml" />
     <Content Include="Views\Shared\_PVResult.cshtml" />
@@ -640,6 +640,8 @@
     <Content Include="Views\DynUsers\_Details_Roles_Add.cshtml" />
     <Content Include="Views\DynUsers\_Add.cshtml" />
     <Content Include="Views\DynUsers\_Edit_Main.cshtml" />
+    <Content Include="Views\Endpoints\_Edit_DevKeys.cshtml" />
+    <Content Include="Views\LocationViews\Monitor.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

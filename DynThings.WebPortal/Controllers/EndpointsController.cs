@@ -1,11 +1,4 @@
-﻿/////////////////////////////////////////////////////////////////
-// Created by : Caesar Moussalli                               //
-// TimeStamp  : 31-1-2016                                      //
-// Content    : Handel the Endpoints Actions                  //
-// Notes      :                                                //
-//                                                             //
-/////////////////////////////////////////////////////////////////
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
@@ -158,13 +151,36 @@ namespace DynThings.WebPortal.Controllers
         }
         #endregion
 
-        #region EndPoint Keys
+        #region EndPoint DevKeys
         [HttpGet]
-        public PartialViewResult EndPointKeysPV(long id)
+        public PartialViewResult DevKeysPV(long id)
         {
             Endpoint endpoint = Data.Repositories.UnitOfWork_Repositories.repoEndpoints.Find(id);
-            return PartialView("_Details_Keys", endpoint);
+            return PartialView("_Details_DevKeys", endpoint);
         }
+        #endregion
+
+        #region EndPoint Keys
+        [HttpGet]
+        public PartialViewResult EditDevKeysPV(long id)
+        {
+            Endpoint endpoint = Data.Repositories.UnitOfWork_Repositories.repoEndpoints.Find(id);
+            return PartialView("_Edit_DevKeys", endpoint);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult EditDevKeysPV([Bind(Include = "ID,GUID,KeyPass")] Endpoint endpoint)
+        {
+            ResultInfo.Result res = ResultInfo.GetResultByID(1);
+            if (ModelState.IsValid)
+            {
+                res = UnitOfWork_Repositories.repoEndpoints.EditDevKeys(endpoint.ID, endpoint.GUID, endpoint.KeyPass);
+                return Json(res);
+            }
+            return Json(res);
+        }
+
         #endregion
 
         #endregion

@@ -69,6 +69,7 @@ namespace DynThings.Data.Repositories
             List<DynSetting> cons = db.DynSettings.Where(l => l.ID == 1).ToList();
             if (cons.Count == 1)
             {
+                
                 cons[0].DevelopmentMode = DevelopmentMode;
                 db.SaveChanges();
                 Core.Config.Refresh();

@@ -45,7 +45,11 @@ public partial class Device
 
     public Nullable<long> StatusID { get; set; }
 
-    public Nullable<int> UTC_Diff { get; set; }
+    public int UTC_Diff { get; set; }
+
+    public int IsConnectedDelay { get; set; }
+
+    public bool IsConnected { get; set; }
 
 
 

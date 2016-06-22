@@ -168,7 +168,7 @@ namespace DynThings.Data.Repositories
             endIO.EndPointID = endPointID;
             endIO.Valu = value;
             endIO.IOTypeID = long.Parse(ioType.GetHashCode().ToString());
-            DateTime execTime = DateTime.UtcNow.AddHours(double.Parse(ep.UTC_Diff.ToString()));
+            DateTime execTime = DateTime.UtcNow.AddHours(double.Parse(ep.Device.UTC_Diff.ToString()));
             endIO.TimeStamp = execTime;
             db.EndPointIOs.Add(endIO);
             db.SaveChanges();

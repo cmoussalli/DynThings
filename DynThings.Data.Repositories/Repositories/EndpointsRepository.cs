@@ -153,7 +153,7 @@ namespace DynThings.Data.Repositories
 
         #endregion
 
-        #region Add
+        #region Delete
         public ResultInfo.Result Delete(long id)
         {
             try
@@ -171,6 +171,25 @@ namespace DynThings.Data.Repositories
 
         #endregion
 
+        #region Edit Dev Keys
+        public ResultInfo.Result EditDevKeys(long id, Guid guid, Guid keyPass)
+        {
+            try
+            {
+                Endpoint end = db.Endpoints.Find(id);
+                end.GUID = guid;
+                end.KeyPass = keyPass;
+                db.SaveChanges();
+                return ResultInfo.GenerateOKResult("Saved", end.ID);
+            }
+            catch (Exception ex)
+            {
+                return ResultInfo.GenerateErrorResult(ex.Message);
+            }
+
+        }
+
+        #endregion
 
 
     }

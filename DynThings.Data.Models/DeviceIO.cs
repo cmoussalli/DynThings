@@ -34,9 +34,9 @@ public partial class DeviceIO
 
 
 
-    public virtual Device Device { get; set; }
-
     public virtual IOType IOType { get; set; }
+
+    public virtual Device Device { get; set; }
 
 }
 

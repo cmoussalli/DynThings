@@ -98,7 +98,9 @@
           <Property Name="PinCode" Type="nvarchar" MaxLength="50" />
           <Property Name="Title" Type="nvarchar" MaxLength="50" />
           <Property Name="StatusID" Type="bigint" />
-          <Property Name="UTC_Diff" Type="int" />
+          <Property Name="UTC_Diff" Type="int" Nullable="false" />
+          <Property Name="IsConnectedDelay" Type="int" Nullable="false" />
+          <Property Name="IsConnected" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="DeviceStatus">
           <Key>
@@ -156,7 +158,6 @@
           <Property Name="Title" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="DeviceID" Type="bigint" Nullable="false" />
           <Property Name="TypeID" Type="bigint" Nullable="false" />
-          <Property Name="UTC_Diff" Type="int" />
         </EntityType>
         <EntityType Name="EndPointTypeCategorys">
           <Key>
@@ -441,9 +442,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__LocationV__Locat__286302EC">
-          <End Role="LocationViewTypes" Type="Self.LocationViewTypes" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
+          <End Role="LocationViewTypes" Type="Self.LocationViewTypes" Multiplicity="1" />
           <End Role="LocationViews" Type="Self.LocationViews" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="LocationViewTypes">
@@ -640,7 +639,6 @@
           <EntitySet Name="CssIcons" EntityType="DynThingsModel.CssIcon" />
           <EntitySet Name="DeviceCommands" EntityType="DynThingsModel.DeviceCommand" />
           <EntitySet Name="DeviceIOs" EntityType="DynThingsModel.DeviceIO" />
-          <EntitySet Name="Devices" EntityType="DynThingsModel.Device" />
           <EntitySet Name="DeviceStatus" EntityType="DynThingsModel.DeviceStatu" />
           <EntitySet Name="EndPointCommands" EntityType="DynThingsModel.EndPointCommand" />
           <EntitySet Name="EndPointIOs" EntityType="DynThingsModel.EndPointIO" />
@@ -666,29 +664,9 @@
             <End Role="CssIcon" EntitySet="CssIcons" />
             <End Role="EndPointType" EntitySet="EndPointTypes" />
           </AssociationSet>
-          <AssociationSet Name="FK__Commands__Device__4D94879B" Association="DynThingsModel.FK__Commands__Device__4D94879B">
-            <End Role="Device" EntitySet="Devices" />
-            <End Role="DeviceCommand" EntitySet="DeviceCommands" />
-          </AssociationSet>
-          <AssociationSet Name="FK__DeviceIOs__Devic__19AACF41" Association="DynThingsModel.FK__DeviceIOs__Devic__19AACF41">
-            <End Role="Device" EntitySet="Devices" />
-            <End Role="DeviceIO" EntitySet="DeviceIOs" />
-          </AssociationSet>
           <AssociationSet Name="FK__DeviceIOs__IOTyp__403A8C7D" Association="DynThingsModel.FK__DeviceIOs__IOTyp__403A8C7D">
             <End Role="IOType" EntitySet="IOTypes" />
             <End Role="DeviceIO" EntitySet="DeviceIOs" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Devices__StatusI__01D345B0" Association="DynThingsModel.FK__Devices__StatusI__01D345B0">
-            <End Role="DeviceStatu" EntitySet="DeviceStatus" />
-            <End Role="Device" EntitySet="Devices" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Endpoints__Devic__00DF2177" Association="DynThingsModel.FK__Endpoints__Devic__00DF2177">
-            <End Role="Device" EntitySet="Devices" />
-            <End Role="Endpoint" EntitySet="Endpoints" />
-          </AssociationSet>
-          <AssociationSet Name="FK__LinkDevic__Devic__48CFD27E" Association="DynThingsModel.FK__LinkDevic__Devic__48CFD27E">
-            <End Role="Device" EntitySet="Devices" />
-            <End Role="LinkDevicesLocation" EntitySet="LinkDevicesLocations" />
           </AssociationSet>
           <AssociationSet Name="FK__EndPointC__EndPo__4222D4EF" Association="DynThingsModel.FK__EndPointC__EndPo__4222D4EF">
             <End Role="Endpoint" EntitySet="Endpoints" />
@@ -744,6 +722,27 @@
           <Parameter Name="EPID" Mode="In" Type="Int64" />
           </FunctionImport>
           <EntitySet Name="DynSettings" EntityType="DynThingsModel.DynSetting" />
+          <EntitySet Name="Devices" EntityType="DynThingsModel.Device" />
+          <AssociationSet Name="FK__Commands__Device__4D94879B" Association="DynThingsModel.FK__Commands__Device__4D94879B">
+            <End Role="Device" EntitySet="Devices" />
+            <End Role="DeviceCommand" EntitySet="DeviceCommands" />
+          </AssociationSet>
+          <AssociationSet Name="FK__DeviceIOs__Devic__19AACF41" Association="DynThingsModel.FK__DeviceIOs__Devic__19AACF41">
+            <End Role="Device" EntitySet="Devices" />
+            <End Role="DeviceIO" EntitySet="DeviceIOs" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Devices__StatusI__01D345B0" Association="DynThingsModel.FK__Devices__StatusI__01D345B0">
+            <End Role="DeviceStatu" EntitySet="DeviceStatus" />
+            <End Role="Device" EntitySet="Devices" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Endpoints__Devic__00DF2177" Association="DynThingsModel.FK__Endpoints__Devic__00DF2177">
+            <End Role="Device" EntitySet="Devices" />
+            <End Role="Endpoint" EntitySet="Endpoints" />
+          </AssociationSet>
+          <AssociationSet Name="FK__LinkDevic__Devic__48CFD27E" Association="DynThingsModel.FK__LinkDevic__Devic__48CFD27E">
+            <End Role="Device" EntitySet="Devices" />
+            <End Role="LinkDevicesLocation" EntitySet="LinkDevicesLocations" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="AspNetRole">
           <Key>
@@ -827,25 +826,8 @@
           <Property Name="TimeStamp" Type="DateTime" Precision="3" />
           <Property Name="ExecTimeStamp" Type="DateTime" Precision="3" />
           <Property Name="ScheduleTimeStamp" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="Device" Relationship="DynThingsModel.FK__DeviceIOs__Devic__19AACF41" FromRole="DeviceIO" ToRole="Device" />
           <NavigationProperty Name="IOType" Relationship="DynThingsModel.FK__DeviceIOs__IOTyp__403A8C7D" FromRole="DeviceIO" ToRole="IOType" />
-        </EntityType>
-        <EntityType Name="Device">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="GUID" Type="Guid" />
-          <Property Name="KeyPass" Type="Guid" />
-          <Property Name="PinCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="StatusID" Type="Int64" />
-          <NavigationProperty Name="DeviceCommands" Relationship="DynThingsModel.FK__Commands__Device__4D94879B" FromRole="Device" ToRole="DeviceCommand" />
-          <NavigationProperty Name="DeviceIOs" Relationship="DynThingsModel.FK__DeviceIOs__Devic__19AACF41" FromRole="Device" ToRole="DeviceIO" />
-          <NavigationProperty Name="DeviceStatu" Relationship="DynThingsModel.FK__Devices__StatusI__01D345B0" FromRole="Device" ToRole="DeviceStatu" />
-          <NavigationProperty Name="Endpoints" Relationship="DynThingsModel.FK__Endpoints__Devic__00DF2177" FromRole="Device" ToRole="Endpoint" />
-          <NavigationProperty Name="LinkDevicesLocations" Relationship="DynThingsModel.FK__LinkDevic__Devic__48CFD27E" FromRole="Device" ToRole="LinkDevicesLocation" />
-          <Property Name="UTC_Diff" Type="Int32" />
+          <NavigationProperty Name="Device" Relationship="DynThingsModel.FK__DeviceIOs__Devic__19AACF41" FromRole="DeviceIO" ToRole="Device" />
         </EntityType>
         <EntityType Name="DeviceStatu">
           <Key>
@@ -892,11 +874,10 @@
           <Property Name="Title" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="DeviceID" Type="Int64" Nullable="false" />
           <Property Name="TypeID" Type="Int64" Nullable="false" />
-          <NavigationProperty Name="Device" Relationship="DynThingsModel.FK__Endpoints__Devic__00DF2177" FromRole="Endpoint" ToRole="Device" />
           <NavigationProperty Name="EndPointCommands" Relationship="DynThingsModel.FK__EndPointC__EndPo__4222D4EF" FromRole="Endpoint" ToRole="EndPointCommand" />
           <NavigationProperty Name="EndPointIOs" Relationship="DynThingsModel.FK__EndPointI__EndPo__29572725" FromRole="Endpoint" ToRole="EndPointIO" />
           <NavigationProperty Name="EndPointType" Relationship="DynThingsModel.FK__Endpoints__TypeI__45F365D3" FromRole="Endpoint" ToRole="EndPointType" />
-          <Property Name="UTC_Diff" Type="Int32" />
+          <NavigationProperty Name="Device" Relationship="DynThingsModel.FK__Endpoints__Devic__00DF2177" FromRole="Endpoint" ToRole="Device" />
         </EntityType>
         <EntityType Name="EndPointTypeCategory">
           <Key>
@@ -936,8 +917,8 @@
           <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="LocationID" Type="Int64" />
           <Property Name="DeviceID" Type="Int64" />
-          <NavigationProperty Name="Device" Relationship="DynThingsModel.FK__LinkDevic__Devic__48CFD27E" FromRole="LinkDevicesLocation" ToRole="Device" />
           <NavigationProperty Name="Location" Relationship="DynThingsModel.FK__LinkDevic__Locat__49C3F6B7" FromRole="LinkDevicesLocation" ToRole="Location" />
+          <NavigationProperty Name="Device" Relationship="DynThingsModel.FK__LinkDevic__Devic__48CFD27E" FromRole="LinkDevicesLocation" ToRole="Device" />
         </EntityType>
         <EntityType Name="LinkLocationsLocationView">
           <Key>
@@ -1035,34 +1016,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Commands__Device__4D94879B">
-          <End Type="DynThingsModel.Device" Role="Device" Multiplicity="0..1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Type="DynThingsModel.DeviceCommand" Role="DeviceCommand" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Device">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="DeviceCommand">
-              <PropertyRef Name="DeviceID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__DeviceIOs__Devic__19AACF41">
-          <End Type="DynThingsModel.Device" Role="Device" Multiplicity="0..1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Type="DynThingsModel.DeviceIO" Role="DeviceIO" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Device">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="DeviceIO">
-              <PropertyRef Name="DeviceID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK__DeviceIOs__IOTyp__403A8C7D">
           <End Type="DynThingsModel.IOType" Role="IOType" Multiplicity="0..1" />
           <End Type="DynThingsModel.DeviceIO" Role="DeviceIO" Multiplicity="*" />
@@ -1072,46 +1025,6 @@
             </Principal>
             <Dependent Role="DeviceIO">
               <PropertyRef Name="IOTypeID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__Devices__StatusI__01D345B0">
-          <End Type="DynThingsModel.DeviceStatu" Role="DeviceStatu" Multiplicity="0..1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Type="DynThingsModel.Device" Role="Device" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="DeviceStatu">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="Device">
-              <PropertyRef Name="StatusID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__Endpoints__Devic__00DF2177">
-          <End Type="DynThingsModel.Device" Role="Device" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Type="DynThingsModel.Endpoint" Role="Endpoint" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Device">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="Endpoint">
-              <PropertyRef Name="DeviceID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__LinkDevic__Devic__48CFD27E">
-          <End Type="DynThingsModel.Device" Role="Device" Multiplicity="0..1" />
-          <End Type="DynThingsModel.LinkDevicesLocation" Role="LinkDevicesLocation" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Device">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="LinkDevicesLocation">
-              <PropertyRef Name="DeviceID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1392,6 +1305,95 @@
           <Property Name="EnableSystemLogger" Type="Boolean" Nullable="false" />
           <Property Name="App_TimeZone" Type="Int32" Nullable="false" />
         </EntityType>
+        <EntityType Name="Device">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="GUID" Type="Guid" />
+          <Property Name="KeyPass" Type="Guid" />
+          <Property Name="PinCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="StatusID" Type="Int64" />
+          <Property Name="UTC_Diff" Type="Int32" Nullable="false" />
+          <Property Name="IsConnectedDelay" Type="Int32" Nullable="false" />
+          <Property Name="IsConnected" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="DeviceCommands" Relationship="DynThingsModel.FK__Commands__Device__4D94879B" FromRole="Device" ToRole="DeviceCommand" />
+          <NavigationProperty Name="DeviceIOs" Relationship="DynThingsModel.FK__DeviceIOs__Devic__19AACF41" FromRole="Device" ToRole="DeviceIO" />
+          <NavigationProperty Name="DeviceStatu" Relationship="DynThingsModel.FK__Devices__StatusI__01D345B0" FromRole="Device" ToRole="DeviceStatu" />
+          <NavigationProperty Name="Endpoints" Relationship="DynThingsModel.FK__Endpoints__Devic__00DF2177" FromRole="Device" ToRole="Endpoint" />
+          <NavigationProperty Name="LinkDevicesLocations" Relationship="DynThingsModel.FK__LinkDevic__Devic__48CFD27E" FromRole="Device" ToRole="LinkDevicesLocation" />
+        </EntityType>
+        <Association Name="FK__Commands__Device__4D94879B">
+          <End Type="DynThingsModel.Device" Role="Device" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="DynThingsModel.DeviceCommand" Role="DeviceCommand" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Device">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="DeviceCommand">
+              <PropertyRef Name="DeviceID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__DeviceIOs__Devic__19AACF41">
+          <End Type="DynThingsModel.Device" Role="Device" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="DynThingsModel.DeviceIO" Role="DeviceIO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Device">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="DeviceIO">
+              <PropertyRef Name="DeviceID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Devices__StatusI__01D345B0">
+          <End Type="DynThingsModel.DeviceStatu" Role="DeviceStatu" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="DynThingsModel.Device" Role="Device" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DeviceStatu">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Device">
+              <PropertyRef Name="StatusID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Endpoints__Devic__00DF2177">
+          <End Type="DynThingsModel.Device" Role="Device" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="DynThingsModel.Endpoint" Role="Endpoint" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Device">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Endpoint">
+              <PropertyRef Name="DeviceID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__LinkDevic__Devic__48CFD27E">
+          <End Type="DynThingsModel.Device" Role="Device" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="DynThingsModel.LinkDevicesLocation" Role="LinkDevicesLocation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Device">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="LinkDevicesLocation">
+              <PropertyRef Name="DeviceID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1478,19 +1480,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Devices">
-            <EntityTypeMapping TypeName="DynThingsModel.Device">
-              <MappingFragment StoreEntitySet="Devices">
-                <ScalarProperty Name="UTC_Diff" ColumnName="UTC_Diff" />
-                <ScalarProperty Name="StatusID" ColumnName="StatusID" />
-                <ScalarProperty Name="Title" ColumnName="Title" />
-                <ScalarProperty Name="PinCode" ColumnName="PinCode" />
-                <ScalarProperty Name="KeyPass" ColumnName="KeyPass" />
-                <ScalarProperty Name="GUID" ColumnName="GUID" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="DeviceStatus">
             <EntityTypeMapping TypeName="DynThingsModel.DeviceStatu">
               <MappingFragment StoreEntitySet="DeviceStatus">
@@ -1527,7 +1516,6 @@
           <EntitySetMapping Name="Endpoints">
             <EntityTypeMapping TypeName="DynThingsModel.Endpoint">
               <MappingFragment StoreEntitySet="Endpoints">
-                <ScalarProperty Name="UTC_Diff" ColumnName="UTC_Diff" />
                 <ScalarProperty Name="TypeID" ColumnName="TypeID" />
                 <ScalarProperty Name="DeviceID" ColumnName="DeviceID" />
                 <ScalarProperty Name="Title" ColumnName="Title" />
@@ -1811,6 +1799,21 @@
                 <ScalarProperty Name="DefaultRecordsPerMaster" ColumnName="DefaultRecordsPerMaster" />
                 <ScalarProperty Name="DevelopmentMode" ColumnName="DevelopmentMode" />
                 <ScalarProperty Name="DBVersion" ColumnName="DBVersion" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Devices">
+            <EntityTypeMapping TypeName="DynThingsModel.Device">
+              <MappingFragment StoreEntitySet="Devices">
+                <ScalarProperty Name="IsConnected" ColumnName="IsConnected" />
+                <ScalarProperty Name="IsConnectedDelay" ColumnName="IsConnectedDelay" />
+                <ScalarProperty Name="UTC_Diff" ColumnName="UTC_Diff" />
+                <ScalarProperty Name="StatusID" ColumnName="StatusID" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="PinCode" ColumnName="PinCode" />
+                <ScalarProperty Name="KeyPass" ColumnName="KeyPass" />
+                <ScalarProperty Name="GUID" ColumnName="GUID" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>

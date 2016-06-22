@@ -72,6 +72,28 @@ function AttachEventEndPointEditForm(endPointID) {
     });
 };
 
+function AttachEventEndPointDevKeysEditForm(endPointID) {
+    $("#EndPointDevKeysEditForm").on("submit", function (event) {
+        event.preventDefault();
+        var url = $(this).attr("action");
+        var formData = $(this).serialize();
+        $.ajax({
+            url: url,
+            type: "POST",
+            data: formData,
+            dataType: "json",
+            success: function (resp) {
+                ServerResponse(resp);
+            },
+            error: function () {
+                ServerResponse(resp);
+            }
+        })
+        $('#mdl').modal('hide');
+        LoadPart_EndPointDevKeysDiv(endPointID);
+    });
+};
+
 //Get List
 function LoadPart_EndPointListDiv() {
     var loadingpart = LoadDivLoading();
@@ -81,7 +103,7 @@ function LoadPart_EndPointListDiv() {
         //page=" + $("#DynConfigCurrentPage").html,
         type: "GET",
     })
-        .done(function (partialViewResult) {
+        .success(function (partialViewResult) {
             $("#divEndPointsList").html(partialViewResult);
         });
     return false;
@@ -95,7 +117,7 @@ function LoadPart_EndPointDetailsDiv(id) {
         url: getRootURL() + '/EndPoints/DetailsPV?id=' + id,
         type: "GET",
     })
-    .done(function (partialViewResult) {
+    .success(function (partialViewResult) {
         $("#divEndPointMain").html(partialViewResult);
     });
 }
@@ -109,7 +131,7 @@ function LoadPart_DialogEndPointAdd() {
         //page=" + $("#DynConfigCurrentPage").html,
         type: "GET",
     })
-    .done(function (partialViewResult) {
+    .success(function (partialViewResult) {
         $("#modal").html(partialViewResult);
     });
 }
@@ -122,7 +144,7 @@ function LoadPart_DialogEndPointEdit(id) {
         url: getRootURL() + '/EndPoints/editpv?id=' + id,
         type: "GET",
     })
-    .done(function (partialViewResult) {
+    .success(function (partialViewResult) {
         $("#modal").html(partialViewResult);
     });
 }
@@ -136,7 +158,7 @@ function LoadPart_DialogEndPointDelete(id) {
         //page=" + $("#DynConfigCurrentPage").html,
         type: "GET",
     })
-    .done(function (partialViewResult) {
+    .success(function (partialViewResult) {
         $("#modal").html(partialViewResult);
     });
 }
@@ -155,7 +177,7 @@ function LoadPart_EndPointHistoryDiv(endPointID) {
         url: getRootURL() + '/EndPoints/GetPVEndPointHistory?endPointID=' + endPointID + '&page=1&recordsPerPage=0',
         type: "GET",
     })
-    .done(function (partialViewResult) {
+    .success(function (partialViewResult) {
         $("#divEndPointHistory").html(partialViewResult);
     });
 }
@@ -168,10 +190,37 @@ function LoadPart_EndPointCommandListByEndPointIDDiv(endPointID, search) {
         url: getRootURL() + '/EndPoints/EndPointCommandsListByEndPointIDPV?searchfor=' + search + '&EndPointID=' + endPointID + '&recordsperpage=0',
         type: "GET",
     })
-        .done(function (partialViewResult) {
+        .success(function (partialViewResult) {
             $("#divEndPointCommandsList").html(partialViewResult);
         });
     return false;
+}
+
+//Get DevKeys
+function LoadPart_EndPointDevKeysDiv(endPointID) {
+    var loadingpart = LoadDivLoading();
+    $("#divEndPointDevkeys").html(loadingpart);
+    $.ajax({
+        url: getRootURL() + '/EndPoints/DevKeysPV?ID=' + endPointID,
+        type: "GET",
+    })
+        .success(function (partialViewResult) {
+            $("#divEndPointDevkeys").html(partialViewResult);
+        });
+    return false;
+}
+
+//Get Edit DevKeys
+function LoadPart_DialogEndPointDevKeysEdit(id) {
+    var loadingpart = LoadDivLoading();
+    $("#modal").html(loadingpart);
+    $.ajax({
+        url: getRootURL() + '/EndPoints/EditDevKeysPV?id=' + id,
+        type: "GET",
+    })
+    .success(function (partialViewResult) {
+        $("#modal").html(partialViewResult);
+    });
 }
 
 
@@ -184,7 +233,7 @@ function LoadPart_EndPointLookup(placeHolder) {
         url: getRootURL() + '/EndPoints/LookupPV',
         type: "GET",
     })
-    .done(function (partialViewResult) {
+    .success(function (partialViewResult) {
         $(placeHolder).html(partialViewResult);
     });
 }
@@ -197,7 +246,7 @@ function LoadPart_EndPointListLookupDiv() {
         //page=" + $("#DynConfigCurrentPage").html,
         type: "GET",
     })
-        .done(function (partialViewResult) {
+        .success(function (partialViewResult) {
             $("#divEndPointsLookupList").html(partialViewResult);
         });
     return false;
@@ -256,7 +305,7 @@ function LoadChart_EndPoint_MonthDiv(endPointID,year) {
         url: getRootURL() + '/EndPoints/Rpt_Month?EndPointID=' + endPointID + '&year=2016',
         type: "GET",
     })
-        .done(function (partialViewResult) {
+        .success(function (partialViewResult) {
             $("#EndPointChartDiv").html(partialViewResult);
         });
     return false;
@@ -269,7 +318,7 @@ function LoadChart_EndPoint_DayDiv(endPointID) {
         url: getRootURL() + '/EndPoints/Rpt_Day?EndPointID=' + endPointID,
         type: "GET",
     })
-        .done(function (partialViewResult) {
+        .success(function (partialViewResult) {
             $("#EndPointChartDiv").html(partialViewResult);
         });
     return false;
@@ -282,7 +331,7 @@ function LoadChart_EndPoint_HourDiv(endPointID) {
         url: getRootURL() + '/EndPoints/Rpt_Hour?EndPointID=' + endPointID,
         type: "GET",
     })
-        .done(function (partialViewResult) {
+        .success(function (partialViewResult) {
             $("#EndPointChartDiv").html(partialViewResult);
         });
     return false;
@@ -295,7 +344,7 @@ function LoadChart_EndPoint_MinuteDiv(endPointID) {
         url: getRootURL() + '/EndPoints/Rpt_Minute?EndPointID=' + endPointID,
         type: "GET",
     })
-        .done(function (partialViewResult) {
+        .success(function (partialViewResult) {
             $("#EndPointChartDiv").html(partialViewResult);
         });
     return false;

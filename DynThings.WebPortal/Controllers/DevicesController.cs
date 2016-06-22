@@ -34,7 +34,7 @@ namespace DynThings.WebPortal.Controllers
         public ActionResult Details(int id)
         {
             Device device = UnitOfWork_Repositories.repoDevices.Find(id);
-            return View(device);
+            return View("Details", device);
         }
 
         #endregion
@@ -42,9 +42,10 @@ namespace DynThings.WebPortal.Controllers
         #region PartialViewResult: Partial Views
 
         #region DetailsPV
-        public PartialViewResult DetailsPV(Guid guid)
+      
+        public PartialViewResult DetailsPV(int id)
         {
-            Device device = UnitOfWork_Repositories.repoDevices.Find(guid);
+            Device device = UnitOfWork_Repositories.repoDevices.Find(id);
             return PartialView("_Details_Main", device);
         }
         #endregion
@@ -65,39 +66,41 @@ namespace DynThings.WebPortal.Controllers
         [HttpGet]
         public PartialViewResult AddPV()
         {
+            ViewBag.UTC_Diff = new SelectList(StaticMenus.GetRegionalTimeOptions(), Config.App_TimeZone);
             return PartialView("_Add");
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult AddPV([Bind(Include = "Title")] Device device)
+        public ActionResult AddPV([Bind(Include = "Title,UTC_Diff")] Device device)
         {
             ResultInfo.Result res = ResultInfo.GetResultByID(1);
             if (ModelState.IsValid)
             {
-                res = UnitOfWork_Repositories.repoDevices.Add(device.Title);
+                res = UnitOfWork_Repositories.repoDevices.Add(device.Title,device.UTC_Diff);
                 return Json(res);
             }
             return Json(res);
         }
         #endregion
 
-        #region EditPV : Title
+        #region EditPV
         [HttpGet]
-        public PartialViewResult EditPV(Guid guid)
+        public PartialViewResult EditPV(long id)
         {
-            Device device = UnitOfWork_Repositories.repoDevices.Find(guid);
+            Device device = UnitOfWork_Repositories.repoDevices.Find(id);
+            ViewBag.UTC_Diff = new SelectList(StaticMenus.GetRegionalTimeOptions(), device.UTC_Diff);
             return PartialView("_Edit", device);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult EditPV([Bind(Include = "ID,Title")] Device device)
+        public ActionResult EditPV([Bind(Include = "ID,Title,UTC_Diff")] Device device)
         {
             ResultInfo.Result res = ResultInfo.GetResultByID(1);
             if (ModelState.IsValid)
             {
-                res = UnitOfWork_Repositories.repoDevices.Edit(device.ID, device.Title);
+                res = UnitOfWork_Repositories.repoDevices.Edit(device.ID, device.Title,int.Parse(device.UTC_Diff.ToString()));
                 return Json(res);
             }
             return Json(res);

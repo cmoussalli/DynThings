@@ -114,12 +114,22 @@ namespace DynThings.Core
 
         public static Result GenerateErrorResult(string message)
         {
-            return new Result(0, ResultType.Failed_DevelopmentMode, message,0);
+          return  GenerateErrorResult(message, 0);
         }
 
         public static Result GenerateErrorResult(string message,long resultID)
         {
-            return new Result(0, ResultType.Failed_DevelopmentMode, message, resultID);
+            ResultType rt = new ResultType();
+            if (Config.DevelopmentMode == true)
+            {
+                rt = ResultType.Failed_DevelopmentMode;
+            }
+            else
+            {
+                rt = ResultType.Failed_ProductionMode;
+                message = "";
+            }
+            return new Result(0, rt, message, resultID);
         }
         #endregion
 

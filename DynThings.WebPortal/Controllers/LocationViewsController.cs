@@ -22,6 +22,12 @@ namespace DynThings.WebPortal.Controllers
 {
     public class LocationViewsController : Controller
     {
+        public ActionResult Monitor()
+        {
+            return View("Monitor");
+        }
+
+
         #region ActionResult: Views
 
         #region Get LocationViews List

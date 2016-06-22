@@ -1,10 +1,12 @@
 ﻿@model DynThings.Data.Models.Device
 <div class="right">
-    <button type="button" class="btn btn-info pull-right" onclick="LoadDeviceEditor(@Model.ID)" data-toggle="modal" data-target="#mdl">Edit</button>
+    <button type="button" class="btn btn-info pull-right" onclick="LoadPart_DialogDeviceEdit(@Model.ID)" data-toggle="modal" data-target="#mdl">Edit</button>
+    <button type="button" class="btn btn-info pull-right" onclick="LoadPart_DeviceDetailsDiv(@Model.ID)" >Refresh</button>
 </div>
-
-<strong>Uniqe Identifier</strong><br>
-@Model.GUID<br><br>
 
 <strong>Title</strong><br>
 @Model.Title<br>
+
+<br/>
+<strong>Regional Area</strong><br>
+@Model.UTC_Diff<br>

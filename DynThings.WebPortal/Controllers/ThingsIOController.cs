@@ -1,10 +1,4 @@
-﻿/////////////////////////////////////////////////////////////////
-// Created by : Arshad Ashraf                                   //
-// TimeStamp  : 03-02-2016                                      //
-// Content    : Handle Device Input, Log And Commands           //
-// Notes      :                                                 //
-/////////////////////////////////////////////////////////////////
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -30,6 +24,81 @@ namespace DynThings.WebAPI.Controllers
         }
         #endregion
 
+        #region Core
+        #region Submit Input
+        private ApiResponse CoreSubmitEndPointInput(Models.SubmissionEndPointIO oEndPointInput)
+        {
+            ApiResponse oApiResponse = new ApiResponse();
+            //Validate KeyPass
+            try
+            {
+                if (string.IsNullOrEmpty(oEndPointInput.KeyPass))
+                {
+                    ResultInfo.Result result = ResultInfo.GetResultByID(1);
+                    oApiResponse = ApiResponseAdapter.fromResult(result);
+                    return oApiResponse;
+                }
+
+                Guid endPointKeyPass;
+                if (Guid.TryParse(oEndPointInput.KeyPass, out endPointKeyPass))
+                {
+                    //endPoint keyPass Validation
+                    DynThings.Data.Models.Endpoint oEndpoint = UnitOfWork_Repositories.repoEndpoints.FindByKeyPass(endPointKeyPass);
+
+                    if (oEndpoint != null)
+                    {
+                        //Try Parse ExecutionTimeStamp to DateTime
+                        DateTime execTime;
+                        if (oEndPointInput.ExectionTimeStamp == "")
+                        {
+                            oEndPointInput.ExectionTimeStamp = DateTime.UtcNow.AddHours(int.Parse(oEndpoint.Device.UTC_Diff.ToString())).ToString();
+                        }
+                        if (DateTime.TryParse(oEndPointInput.ExectionTimeStamp, out execTime))
+                        {
+                        }
+                        else
+                        {//DateTime Parse Failed
+                            ResultInfo.Result result = ResultInfo.GetResultByID(1);
+                            oApiResponse = ApiResponseAdapter.fromResult(result);
+                            return oApiResponse;
+                        }
+
+                        //Submit Data to Database
+                        ResultInfo.Result repoResult = UnitOfWork_Repositories.repoEndpointIOs.Add(oEndpoint.ID, oEndPointInput.Value.ToString(), EndpointIOsRepository.EndPointIOType.Input, execTime);
+
+                        //Validate Result
+                        if (repoResult.ResultType == ResultInfo.ResultType.Ok)
+                        {//Submited
+                            ResultInfo.Result result = ResultInfo.GenerateOKResult();
+                            oApiResponse = ApiResponseAdapter.fromResult(result);
+                            return oApiResponse;
+                        }
+                        else
+                        {//Submition Failed
+                            ResultInfo.Result result = ResultInfo.GetResultByID(1);
+                            oApiResponse = ApiResponseAdapter.fromResult(result);
+                            return oApiResponse;
+                        }
+                    }
+                }
+                else
+                {// KeyPass Parse Failed
+                    ResultInfo.Result result = ResultInfo.GetResultByID(1);
+                    oApiResponse = ApiResponseAdapter.fromResult(result);
+                    return oApiResponse;
+                }
+
+            }
+            catch (Exception ex)
+            {
+                ResultInfo.Result result = ResultInfo.GetResultByID(1);
+                oApiResponse = ApiResponseAdapter.fromResult(result);
+            }
+            return oApiResponse;
+        }
+        #endregion
+
+        #endregion
 
         #region Devices IO
         #region :: Submit input from device ::
@@ -195,75 +264,18 @@ namespace DynThings.WebAPI.Controllers
         #region EndPoints IO
         #region :: Submit input from endpoints ::
         [HttpPost]
-        public ApiResponse SubmitEndPointInput(Models.SubmissionEndPointIO oEndPointInput)
+        public ApiResponse SubmitEndPointInput(Models.SubmissionEndPointIO endPointInput)
         {
-            ApiResponse oApiResponse = new ApiResponse();
-            //Validate KeyPass
-            try
-            {
-                if (string.IsNullOrEmpty(oEndPointInput.KeyPass))
-                {
-                    ResultInfo.Result result = ResultInfo.GetResultByID(1);
-                    oApiResponse = ApiResponseAdapter.fromResult(result);
-                    return oApiResponse;
-                }
+            return CoreSubmitEndPointInput(endPointInput);
+        }
 
-                Guid endPointKeyPass;
-                if (Guid.TryParse(oEndPointInput.KeyPass, out endPointKeyPass))
-                {
-                    //endPoint keyPass Validation
-                    DynThings.Data.Models.Endpoint oEndpoint = UnitOfWork_Repositories.repoEndpoints.FindByKeyPass(endPointKeyPass);
-                    
-                    if (oEndpoint != null)
-                    {
-                        //Try Parse ExecutionTimeStamp to DateTime
-                        DateTime execTime;
-                        if (oEndPointInput.ExectionTimeStamp == "")
-                        {
-                            oEndPointInput.ExectionTimeStamp = DateTime.UtcNow.AddHours(int.Parse(oEndpoint.UTC_Diff.ToString())).ToString();
-                        }
-                        if (DateTime.TryParse(oEndPointInput.ExectionTimeStamp, out execTime))
-                        {
-                        }
-                        else
-                        {//DateTime Parse Failed
-                            ResultInfo.Result result = ResultInfo.GetResultByID(1);
-                            oApiResponse = ApiResponseAdapter.fromResult(result);
-                            return oApiResponse;
-                        }
-
-                        //Submit Data to Database
-                        ResultInfo.Result repoResult = UnitOfWork_Repositories.repoEndpointIOs.Add(oEndpoint.ID, oEndPointInput.Value.ToString(), EndpointIOsRepository.EndPointIOType.Input, execTime);
-
-                        //Validate Result
-                        if (repoResult.ResultType == ResultInfo.ResultType.Ok)
-                        {//Submited
-                            ResultInfo.Result result = ResultInfo.GenerateOKResult();
-                            oApiResponse = ApiResponseAdapter.fromResult(result);
-                            return oApiResponse;
-                        }
-                        else
-                        {//Submition Failed
-                            ResultInfo.Result result = ResultInfo.GetResultByID(1);
-                            oApiResponse = ApiResponseAdapter.fromResult(result);
-                            return oApiResponse;
-                        }
-                    }
-                }
-                else
-                {// KeyPass Parse Failed
-                    ResultInfo.Result result = ResultInfo.GetResultByID(1);
-                    oApiResponse = ApiResponseAdapter.fromResult(result);
-                    return oApiResponse;
-                }
-
-            }
-            catch (Exception ex)
-            {
-                ResultInfo.Result result = ResultInfo.GetResultByID(1);
-                oApiResponse = ApiResponseAdapter.fromResult(result);
-            }
-            return oApiResponse;
+        [HttpGet]
+        public ApiResponse SubmitEndPointInput(string keypass, string value)
+        {
+            SubmissionEndPointIO sub = new SubmissionEndPointIO();
+            sub.KeyPass = keypass;
+            sub.Value = decimal.Parse( value);
+            return CoreSubmitEndPointInput(sub);
         }
         #endregion
 
