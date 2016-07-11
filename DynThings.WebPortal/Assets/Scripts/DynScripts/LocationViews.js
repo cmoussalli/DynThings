@@ -126,6 +126,7 @@ function LoadPart_MonitorLocation(id) {
     });
 }
 
+////////////Monitor
 //Get EndPoint MainTab
 function LoadPart_MonitorEndPointMain(endPointID) {
     var loadingpart = LoadDivLoading();
@@ -168,6 +169,20 @@ function LoadPart_MonitorEndPointCommands(endPointID) {
     });
 }
 
+//Get Thing Ends
+function LoadPart_MonitorThingEndsList(locationID,thingID) {
+    var loadingpart = LoadDivLoading();
+    $("#DivThingContent").html(loadingpart);
+    $.ajax({
+        url: getRootURL() + '/locationviews/GetLocationThingEndsListPV?searchfor=' + $(txtSearch).val() + '&LocationID=' + locationID + '&ThingID=' + thingID + '&recordsperpage=0',
+        type: "GET",
+    })
+    .done(function (partialViewResult) {
+        $("#DivThingContent").html(partialViewResult);
+    });
+}
+
+
 //Get Locations List
 function LoadPart_LocationsListByLocationViewIDDiv(locationViewID) {
     var loadingpart = LoadDivLoading();
@@ -183,6 +198,8 @@ function LoadPart_LocationsListByLocationViewIDDiv(locationViewID) {
         });
     return false;
 };
+
+
 
 
 function getEditLocationViewMap(x, y, z) {

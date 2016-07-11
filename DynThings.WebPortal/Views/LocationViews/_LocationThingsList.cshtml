@@ -1,0 +1,18 @@
+﻿@model IPagedList<DynThings.Data.Models.Thing>
+<div class="list-group">
+    @foreach (var thing in Model)
+    {
+        <a href="#" class="list-group-item">
+            <Text>
+                <h5 class="list-group-item-heading">@thing.Title</h5>
+                <p class="list-group-item-text">@thing.ThingCategory.Title</p>
+            </Text>
+        </a>
+    }
+</div>
+
+
+
+
+
+

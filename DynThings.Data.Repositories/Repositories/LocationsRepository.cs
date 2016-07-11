@@ -188,20 +188,60 @@ namespace DynThings.Data.Repositories
 
         #endregion
 
+
+        #region Get LocationDevices PagedList
+        public IPagedList GetLocationDevicesPagedList(string search,long LocationID, int pageNumber, int recordsPerPage)
+        {
+            IPagedList locs = db.LinkDevicesLocations
+              .Where(e => search == null || e.Device.Title.Contains(search) && e.LocationID == LocationID)
+              
+              .OrderByDescending(e => e.StartTimeStamp).ToList()
+              .ToPagedList(pageNumber, recordsPerPage);
+            return locs;
+        }
+        #endregion
+
         #region AttachDevice
         public ResultInfo.Result AttachDevice(long locationID, long deviceID, string userID)
         {
             try
             {
+                DateTime enddate = new DateTime(2100,12,31);
+
+                Device dev = db.Devices.Find(deviceID);
                 LinkDevicesLocation lnk = new LinkDevicesLocation();
-                List<LinkDevicesLocation> lnks = db.LinkDevicesLocations.Where(l => l.LocationID == locationID && l.DeviceID == deviceID).ToList();
-                if (lnks.Count > 0)
+               
+                lnk.LocationID = locationID;
+                lnk.DeviceID = deviceID;
+                lnk.StartByUser = userID;
+                lnk.StartTimeStamp = DateTime.UtcNow.AddHours(dev.UTC_Diff);
+                //lnk.EndByUser = "";
+                lnk.EndTimeStamp = enddate;
+                db.LinkDevicesLocations.Add(lnk);
+                db.SaveChanges();
+                return ResultInfo.GenerateOKResult("Saved");
+            }
+            catch (Exception ex)
+            {
+                return ResultInfo.GenerateErrorResult(ex.Message);
+            }
+        }
+        #endregion
+
+        #region DeAttachDevice
+        public ResultInfo.Result DeattachDevice(long lnkID, string userID)
+        {
+            try
+            {
+                List<LinkDevicesLocation> lnks = db.LinkDevicesLocations.Where(l => l.ID == lnkID).ToList();
+                if (lnks.Count != 1)
                 {
                     return ResultInfo.GetResultByID(1);
                 }
-                lnk.LocationID = locationID;
-                lnk.DeviceID = deviceID;
-                db.LinkDevicesLocations.Add(lnk);
+                LinkDevicesLocation lnk = lnks[0];
+                Device dev = db.Devices.Find(lnk.DeviceID);
+                lnk.EndByUser = userID;
+                lnk.EndTimeStamp = DateTime.UtcNow.AddHours(dev.UTC_Diff);
                 db.SaveChanges();
                 return ResultInfo.GenerateOKResult("Saved");
             }
@@ -212,18 +252,54 @@ namespace DynThings.Data.Repositories
         }
         #endregion
 
-        #region DeAttachDevice
-        public ResultInfo.Result DeattachDevice(long locationID, long deviceID, string userID)
+
+        #region Get LocationThings PagedList
+        public IPagedList GetLocationThingsPagedList(string search, long LocationID, int pageNumber, int recordsPerPage)
+        {
+            IPagedList locs = db.LinkThingsLocations
+              .Where(e => search == null || e.Thing.Title.Contains(search))
+              .OrderByDescending(e => e.Thing.Title).ToList()
+              .ToPagedList(pageNumber, recordsPerPage);
+            return locs;
+        }
+        #endregion
+
+        #region AttachThing
+        public ResultInfo.Result AttachThing(long locationID, long ThingID, string userID)
         {
             try
             {
-                List<LinkDevicesLocation> lnks = db.LinkDevicesLocations.Where(l => l.LocationID == locationID && l.DeviceID == deviceID).ToList();
+                Thing thing = db.Things.Find(ThingID);
+                LinkThingsLocation lnk = new LinkThingsLocation();
+
+                lnk.LocationID = locationID;
+                lnk.ThingID = ThingID;
+                lnk.CreateByUser = userID;
+                lnk.CreateTimeStamp = DateTime.UtcNow;
+                db.LinkThingsLocations.Add(lnk);
+
+                db.SaveChanges();
+                return ResultInfo.GenerateOKResult("Saved");
+            }
+            catch (Exception ex)
+            {
+                return ResultInfo.GenerateErrorResult(ex.Message);
+            }
+        }
+        #endregion
+
+        #region DeAttachThing
+        public ResultInfo.Result DeattachThing(long lnkID, string userID)
+        {
+            try
+            {
+                List<LinkThingsLocation> lnks = db.LinkThingsLocations.Where(l => l.ID == lnkID).ToList();
                 if (lnks.Count != 1)
                 {
                     return ResultInfo.GetResultByID(1);
                 }
-                LinkDevicesLocation lnk = lnks[0];
-                db.LinkDevicesLocations.Remove(lnk);
+                LinkThingsLocation lnk = lnks[0];
+                db.LinkThingsLocations.Remove(lnk);
                 db.SaveChanges();
                 return ResultInfo.GenerateOKResult("Saved");
             }
@@ -233,5 +309,9 @@ namespace DynThings.Data.Repositories
             }
         }
         #endregion
+
+
+
+
     }
 }

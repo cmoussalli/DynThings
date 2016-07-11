@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="153eea3d35a046aa8fab5470a9c25b99" Name="Diagram1" ZoomLevel="71">
+      <Diagram DiagramId="153eea3d35a046aa8fab5470a9c25b99" Name="Diagram1" ZoomLevel="50">
         <EntityTypeShape EntityType="DynThingsModel.AspNetRole" Width="1.5" PointX="7.75" PointY="3.5" />
         <EntityTypeShape EntityType="DynThingsModel.AspNetUserClaim" Width="2" PointX="12.25" PointY="4.625" />
         <EntityTypeShape EntityType="DynThingsModel.AspNetUserLogin" Width="2.25" PointX="12.25" PointY="2.125" />
@@ -19,7 +19,6 @@
         <EntityTypeShape EntityType="DynThingsModel.EndPointTypeCategory" Width="1.5" PointX="3.75" PointY="15.75" />
         <EntityTypeShape EntityType="DynThingsModel.EndPointType" Width="1.5" PointX="6" PointY="14" />
         <EntityTypeShape EntityType="DynThingsModel.IOType" Width="1.5" PointX="3" PointY="5.25" />
-        <EntityTypeShape EntityType="DynThingsModel.LinkDevicesLocation" Width="1.5" PointX="5.25" PointY="9.25" />
         <EntityTypeShape EntityType="DynThingsModel.LinkLocationsLocationView" Width="1.5" PointX="17.25" PointY="4.875" />
         <EntityTypeShape EntityType="DynThingsModel.Location" Width="1.5" PointX="3" PointY="0.75" />
         <EntityTypeShape EntityType="DynThingsModel.LocationView" Width="1.5" PointX="15" PointY="8" />
@@ -34,7 +33,6 @@
         <AssociationConnector Association="DynThingsModel.FK__EndPointI__IOTyp__440B1D61" />
         <AssociationConnector Association="DynThingsModel.FK__Endpoints__TypeI__45F365D3" />
         <AssociationConnector Association="DynThingsModel.FK__EndPointT__TypeC__47DBAE45" />
-        <AssociationConnector Association="DynThingsModel.FK__LinkDevic__Locat__49C3F6B7" />
         <AssociationConnector Association="DynThingsModel.FK__LinkLocat__Locat__35BCFE0A" />
         <AssociationConnector Association="DynThingsModel.FK__LinkLocat__Locat__36B12243" />
         <AssociationConnector Association="DynThingsModel.FK__LocationV__Locat__286302EC" />
@@ -45,7 +43,19 @@
         <AssociationConnector Association="DynThingsModel.FK__DeviceIOs__Devic__19AACF41" />
         <AssociationConnector Association="DynThingsModel.FK__Devices__StatusI__01D345B0" />
         <AssociationConnector Association="DynThingsModel.FK__Endpoints__Devic__00DF2177" />
+        <EntityTypeShape EntityType="DynThingsModel.LinkDevicesLocation" Width="1.5" PointX="15.25" PointY="0.875" />
+        <AssociationConnector Association="DynThingsModel.FK__LinkDevic__EndBy__6166761E" />
+        <AssociationConnector Association="DynThingsModel.FK__LinkDevic__Start__607251E5" />
         <AssociationConnector Association="DynThingsModel.FK__LinkDevic__Devic__48CFD27E" />
+        <AssociationConnector Association="DynThingsModel.FK__LinkDevic__Locat__49C3F6B7" />
+        <EntityTypeShape EntityType="DynThingsModel.ThingCategory" Width="1.5" PointX="13.375" PointY="15" />
+        <EntityTypeShape EntityType="DynThingsModel.Thing" Width="1.5" PointX="15.625" PointY="14.875" />
+        <AssociationConnector Association="DynThingsModel.FK__Things__Category__662B2B3B" />
+        <AssociationConnector Association="DynThingsModel.FK__EndPointI__Thing__7E02B4CC" />
+        <AssociationConnector Association="DynThingsModel.FK__Endpoints__Thing__7EF6D905" />
+        <EntityTypeShape EntityType="DynThingsModel.LinkThingsLocation" Width="1.5" PointX="17.875" PointY="7.875" />
+        <AssociationConnector Association="DynThingsModel.FK__LinkThing__Locat__078C1F06" />
+        <AssociationConnector Association="DynThingsModel.FK__LinkThing__Thing__0697FACD" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

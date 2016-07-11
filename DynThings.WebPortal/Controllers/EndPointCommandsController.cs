@@ -9,16 +9,24 @@ using DynThings.Core;
 
 namespace DynThings.WebPortal.Controllers
 {
-    public class EndPointCommandsController : Controller
+    public class EndPointCommandsController : BaseController
     {
         #region ActionResult: Views
         public ActionResult Index()
         {
+            if (ValidateUserPermissions(true, false) == false)
+            {
+                return RedirectToAction("Login", "Account");
+            }
             return View();
         }
 
         public ActionResult Details(long id)
         {
+            if (ValidateUserPermissions(true, false) == false)
+            {
+                return RedirectToAction("Login", "Account");
+            }
             EndPointCommand cmd = UnitOfWork_Repositories.repoEndPointCommands.Find(id);
             return View(cmd);
         }

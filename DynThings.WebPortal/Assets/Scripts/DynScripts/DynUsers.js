@@ -62,7 +62,7 @@ function LoadPart_DynUserRolesDiv(DynUserID) {
 }
 
 
-//Get Add
+//Get Attach Role
 function LoadPart_DialogDynUserRoleAdd() {
     var loadingpart = LoadDivLoading();
     $("#modal").html(loadingpart);

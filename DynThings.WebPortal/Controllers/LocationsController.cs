@@ -17,21 +17,29 @@ using DynThings.Core;
 using DynThings.Data.Models;
 using DynThings.Data.Repositories;
 using PagedList;
+using Microsoft.AspNet.Identity;
 
 namespace DynThings.WebPortal.Controllers
 {
-    public class LocationsController : Controller
+    public class LocationsController : BaseController
     {
-        private DynThingsEntities db = new DynThingsEntities();
 
         #region ActionResult: Views
         public ActionResult Index()
         {
+            if (ValidateUserPermissions(false, false) == false)
+            {
+                return RedirectToAction("Login", "Account");
+            }
             return View();
         }
 
         public ActionResult Details(int id)
         {
+            if (ValidateUserPermissions(false, false) == false)
+            {
+                return RedirectToAction("Login", "Account");
+            }
             Location loc = UnitOfWork_Repositories.repoLocations.Find(id);
             return View(loc);
         }
@@ -161,21 +169,21 @@ namespace DynThings.WebPortal.Controllers
 
         #region DevicesListPV
         [HttpGet]
-        public PartialViewResult DevicesByLocationIDListGridPV(string searchfor = null, long LocationID = 0, int page = 1, int recordsperpage = 0)
+        public PartialViewResult LnkLocationDevicesListGridPV(string searchfor = null, long LocationID = 0, int page = 1, int recordsperpage = 0)
         {
-            IPagedList views = UnitOfWork_Repositories.repoDevices.GetPagedList(searchfor, LocationID, page, Helpers.Configs.validateRecordsPerMaster(recordsperpage));
+            IPagedList views = UnitOfWork_Repositories.repoLocations.GetLocationDevicesPagedList(searchfor, LocationID, page, Helpers.Configs.validateRecordsPerMaster(recordsperpage));
             return PartialView("_DevicesList", views);
         }
         #endregion
 
         #region AttachDevice
         [HttpPost]
-        public ActionResult AttachDevice(long LocationID, long DeviceID, string userID)
+        public ActionResult AttachDevice(long LocationID, long DeviceID)
         {
             ResultInfo.Result res = ResultInfo.GetResultByID(1);
             if (ModelState.IsValid)
             {
-                res = UnitOfWork_Repositories.repoLocations.AttachDevice(LocationID, DeviceID, userID);
+                res = UnitOfWork_Repositories.repoLocations.AttachDevice(LocationID, DeviceID,User.Identity.GetUserId());
                 return Json(res);
             }
             return Json(res);
@@ -184,12 +192,12 @@ namespace DynThings.WebPortal.Controllers
 
         #region DeAttachDevice
         [HttpPost]
-        public ActionResult DeAttachDevice(long LocationID, long DeviceID, string userID)
+        public ActionResult DeAttachDevice(long linkID)
         {
             ResultInfo.Result res = ResultInfo.GetResultByID(1);
             if (ModelState.IsValid)
             {
-                res = UnitOfWork_Repositories.repoLocations.DeattachDevice(LocationID, DeviceID, userID);
+                res = UnitOfWork_Repositories.repoLocations.DeattachDevice(linkID,currentUser.Id);
                 return Json(res);
             }
             return Json(res);
@@ -222,13 +230,6 @@ namespace DynThings.WebPortal.Controllers
 
 
 
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
-        }
+       
     }
 }

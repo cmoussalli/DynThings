@@ -24,11 +24,23 @@ public partial class LinkDevicesLocation
 
     public Nullable<long> DeviceID { get; set; }
 
+    public Nullable<System.DateTime> StartTimeStamp { get; set; }
+
+    public Nullable<System.DateTime> EndTimeStamp { get; set; }
+
+    public string StartByUser { get; set; }
+
+    public string EndByUser { get; set; }
 
 
-    public virtual Location Location { get; set; }
+
+    public virtual AspNetUser EndByAspNetUser { get; set; }
+
+    public virtual AspNetUser StartByAspNetUser { get; set; }
 
     public virtual Device Device { get; set; }
+
+    public virtual Location Location { get; set; }
 
 }
 

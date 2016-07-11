@@ -59,12 +59,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Reports\EndPointsReport.cs" />
+    <Compile Include="Repositories\ThingCategorysRepository.cs" />
+    <Compile Include="Repositories\ThingsRepository.cs" />
     <Compile Include="Repositories\DynUsersRepository.cs" />
     <Compile Include="Repositories\IOTypesRepository.cs" />
     <Compile Include="Repositories\DynSettingsRepository.cs" />
     <Compile Include="Repositories\Lookups.cs" />
     <Compile Include="Repositories\EndPointCommandsRepository.cs" />
-    <Compile Include="Repositories\DevicesRepositories.cs" />
+    <Compile Include="Repositories\DevicesRepository.cs" />
     <Compile Include="Repositories\DeviceCommandsRepository.cs" />
     <Compile Include="Repositories\DeviceIOsRepository.cs" />
     <Compile Include="Repositories\EndpointIOsRepository.cs" />

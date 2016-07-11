@@ -15,11 +15,11 @@ using DynThings.Core;
 
 namespace DynThings.Data.Repositories
 {
-    public class DevicesRepositories
+    public class DevicesRepository
     {
         #region Constructor
         public DynThingsEntities db { get; set; }
-        public DevicesRepositories(DynThingsEntities dynThingsEntities)
+        public DevicesRepository(DynThingsEntities dynThingsEntities)
         {
             db = dynThingsEntities;
         }
@@ -133,6 +133,8 @@ namespace DynThings.Data.Repositories
                 dev.Title = title;
                 dev.PinCode = "0000";
                 dev.UTC_Diff = utc_Diff;
+                dev.IsConnected = false;
+                dev.IsConnectedDelay = 60;
                 db.Devices.Add(dev);
                 db.SaveChanges();
             }

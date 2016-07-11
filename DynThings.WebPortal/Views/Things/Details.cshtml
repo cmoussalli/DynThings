@@ -1,0 +1,92 @@
+﻿@model DynThings.Data.Models.Thing
+@{
+    ViewBag.Title = "Thing Details";
+}
+<div class="container">
+    <div class="page-header">
+        <h1>Thing Details</h1>
+    </div>
+   
+    <div class="row">
+        <div class="col-md-6">
+            <ul class="nav nav-tabs">
+                <li class="active"><a data-toggle="tab" href="#tabThingmain">Main</a></li>
+                <li><a data-toggle="tab" href="#tabThinghistory">History</a></li>
+                <li><a data-toggle="tab" href="#tabThingcommands">Commands</a></li>
+                <li><a data-toggle="tab" href="#tabThingDevkeys">Dev Keys</a></li>
+                <li><a data-toggle="tab" href="#tabThingDelete">Delete</a></li>
+            </ul>
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="tab-content">
+                        <div id="tabThingmain" class="tab-pane fade in active">
+                            <div id="divThingMain">
+                            </div>
+                        </div>
+                        <div id="tabThinghistory" class="tab-pane fade">
+                            <div class="right">
+                                <button type="button" class="btn btn-info pull-right" onclick="LoadPart_ThingHistoryDiv('@Model.ID')">Refresh</button>
+                            </div>
+                            <div id="divThingHistory">
+                            </div>
+                        </div>
+                        <div id="tabThingcommands" class="tab-pane fade">
+                            <div class="right">
+                                <button type="button" class="btn btn-info pull-right" onclick="LoadPart_ThingCommandListByThingIDDiv('@Model.ID','')">Refresh</button>
+                            </div>
+                            <div id="divThingCommandsList">
+                            </div>
+                        </div>
+                        <div id="tabThingDevkeys" class="tab-pane fade">
+                            <div id="divThingDevkeys">
+                                @*@Html.Partial("_Details_Keys", Model)*@
+                            </div>
+                        </div>
+                        <div id="tabThingDelete" class="tab-pane fade">
+                            <div id="divThingDelete">
+                                <button type="button" class="btn btn-danger" onclick="LoadPart_DialogThingDelete(@Model.ID)" data-toggle="modal" data-target="#mdl">Delete</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Button trigger modal -->
+
+
+
+
+@section scripts{
+    <script src="~/Assets/Scripts/DynScripts/Things.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            LoadPart_ThingDetailsDiv('@Model.ID');
+          
+        });
+    </script>
+
+    <script>
+        $(document).ready(function () {
+            $(document).on("click", "#ThingIOsListPager a[href]", function () {
+                var loadingpart = LoadDivLoading();
+                $("#divThingHistory").html(loadingpart);
+                $.ajax({
+                    url: $(this).attr("href") + '&Thingid=@Model.ID&recordsperpage=0',
+                    type: 'GET',
+                    cache: false,
+                    success: function (result) {
+                        $("#divThingHistory").html(result);
+                        return false;
+                    }
+                });
+                return false;
+            });
+        });
+
+    </script>
+
+}

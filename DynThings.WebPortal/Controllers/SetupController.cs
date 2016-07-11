@@ -6,11 +6,15 @@ using System.Web.Mvc;
 
 namespace DynThings.WebPortal.Controllers
 {
-    public class SetupController : Controller
+    public class SetupController : BaseController
     {
         // GET: Setup
         public ActionResult Index()
         {
+            if (ValidateUserPermissions(false, false) == false)
+            {
+                return RedirectToAction("Login", "Account");
+            }
             return View();
         }
     }

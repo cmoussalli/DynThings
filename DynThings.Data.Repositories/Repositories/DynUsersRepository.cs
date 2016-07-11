@@ -45,6 +45,43 @@ namespace DynThings.Data.Repositories
         }
         #endregion
 
+        #region Edit
+        public ResultInfo.Result Edit(string id, string fullName)
+        {
+            try
+            {
+                AspNetUser usr = db.AspNetUsers.Find(id);
+                usr.FullName = fullName;
+                db.SaveChanges();
+                return ResultInfo.GenerateOKResult("Saved", long.Parse(usr.Id));
+            }
+            catch
+            {
+                return ResultInfo.GetResultByID(1);
+            }
+
+        }
+
+        #endregion
+
+        #region Delete
+        public ResultInfo.Result Delete(string id)
+        {
+            try
+            {
+                AspNetUser usr = db.AspNetUsers.Find(id);
+                db.AspNetUsers.Remove(usr);
+                db.SaveChanges();
+                return ResultInfo.GenerateOKResult("Deleted", long.Parse(usr.Id));
+            }
+            catch
+            {
+                return ResultInfo.GetResultByID(1);
+            }
+        }
+
+        #endregion
+
 
         #region Methods
         #region Get User Name

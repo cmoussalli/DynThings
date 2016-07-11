@@ -28,6 +28,10 @@ public partial class AspNetUser
 
         this.AspNetRoles = new HashSet<AspNetRole>();
 
+        this.LinkDevicesLocations = new HashSet<LinkDevicesLocation>();
+
+        this.LinkDevicesLocations1 = new HashSet<LinkDevicesLocation>();
+
     }
 
 
@@ -70,6 +74,14 @@ public partial class AspNetUser
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
 
     public virtual ICollection<AspNetRole> AspNetRoles { get; set; }
+
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+
+    public virtual ICollection<LinkDevicesLocation> LinkDevicesLocations { get; set; }
+
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+
+    public virtual ICollection<LinkDevicesLocation> LinkDevicesLocations1 { get; set; }
 
 }
 

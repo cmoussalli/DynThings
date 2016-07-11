@@ -64,6 +64,49 @@ namespace DynThings.WebPortal.Controllers
 
         #endregion
 
+        #region EditPV
+        [HttpGet]
+        public PartialViewResult EditPV(string id)
+        {
+            AspNetUser usr = UnitOfWork_Repositories.repoDynUsers.Find(id);
+            return PartialView("_Edit", usr);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult EditPV([Bind(Include = "Id,FullName")] AspNetUser aspNetUser)
+        {
+            ResultInfo.Result res = ResultInfo.GetResultByID(1);
+            if (ModelState.IsValid)
+            {
+                res = UnitOfWork_Repositories.repoDynUsers.Edit(aspNetUser.Id,aspNetUser.FullName);
+                return Json(res);
+            }
+            return Json(res);
+        }
+        #endregion
+
+        #region DeletePV
+        [HttpGet]
+        public PartialViewResult DeletePV(string id)
+        {
+            AspNetUser usr = UnitOfWork_Repositories.repoDynUsers.Find(id);
+            return PartialView("_Delete", usr);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeletePV([Bind(Include = "Id,FullName")] AspNetUser aspNetUser)
+        {
+            ResultInfo.Result res = ResultInfo.GetResultByID(1);
+            if (ModelState.IsValid)
+            {
+                res = UnitOfWork_Repositories.repoDynUsers.Delete(aspNetUser.Id);
+                return Json(res);
+            }
+            return Json(res);
+        }
+        #endregion
 
 
         #region DynUser Roles

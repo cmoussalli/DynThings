@@ -9,17 +9,25 @@ using DynThings.Core;
 
 namespace DynThings.WebPortal.Controllers
 {
-    public class EndPointIOsController : Controller
+    public class EndPointIOsController : BaseController
     {
         #region ActionResult: Views
         public ActionResult Index()
         {
+            if (ValidateUserPermissions(true, false) == false)
+            {
+                return RedirectToAction("Login", "Account");
+            }
             ViewBag.IOTypeID = new SelectList(UnitOfWork_Repositories.repoIOTypes.GetList(true), "ID", "Title",0);
             return View();
         }
 
         public ActionResult Details(long id)
         {
+            if (ValidateUserPermissions(true, false) == false)
+            {
+                return RedirectToAction("Login", "Account");
+            }
             EndPointIO io = UnitOfWork_Repositories.repoEndpointIOs.Find(id);
             return View(io);
         }

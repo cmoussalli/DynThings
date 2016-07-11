@@ -114,6 +114,10 @@
     <Compile Include="EndPointTypeCategory.cs">
       <DependentUpon>DynThingsModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="ExtraModels\ThingEnd.cs" />
+    <Compile Include="GetThingEnds_Result.cs">
+      <DependentUpon>DynThingsModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="IOType.cs">
       <DependentUpon>DynThingsModel.tt</DependentUpon>
     </Compile>
@@ -121,6 +125,9 @@
       <DependentUpon>DynThingsModel.tt</DependentUpon>
     </Compile>
     <Compile Include="LinkLocationsLocationView.cs">
+      <DependentUpon>DynThingsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LinkThingsLocation.cs">
       <DependentUpon>DynThingsModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Location.cs">
@@ -155,6 +162,12 @@
       <DependentUpon>DynThingsModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Rpt_EndPoint_IOs_Months_Result.cs">
+      <DependentUpon>DynThingsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Thing.cs">
+      <DependentUpon>DynThingsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ThingCategory.cs">
       <DependentUpon>DynThingsModel.tt</DependentUpon>
     </Compile>
   </ItemGroup>

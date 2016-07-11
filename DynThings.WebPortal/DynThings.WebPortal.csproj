@@ -201,12 +201,14 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\APIEndPointIOsController.cs" />
+    <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\ConfigController.cs" />
     <Compile Include="Controllers\DeviceCommandsController.cs" />
     <Compile Include="Controllers\DevicesController.cs" />
     <Compile Include="Controllers\DynUsersController.cs" />
     <Compile Include="Controllers\EndPointCommandsController.cs" />
     <Compile Include="Controllers\EndPointIOsController.cs" />
+    <Compile Include="Controllers\ThingsController.cs" />
     <Compile Include="Controllers\EndpointsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LocationsController.cs" />
@@ -229,6 +231,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Assets\Scripts\DynScripts\DynUsers.js" />
+    <Content Include="Assets\Scripts\DynScripts\Things.js" />
     <Content Include="Assets\Scripts\MidLayerScripts\Notify.js" />
     <Content Include="Assets\Imgs\spinner-md.gif" />
     <Content Include="Content\bootstrap.css" />
@@ -330,6 +333,7 @@
     <Content Include="Content\DataTables\images\sort_desc.png" />
     <Content Include="Content\DataTables\images\sort_desc_disabled.png" />
     <Content Include="Content\DataTables\swf\flashExport.swf" />
+    <Content Include="Content\docs.min.css" />
     <Content Include="Content\PagedList.css" />
     <Content Include="Content\themes\Azure\css\BOOTSTRAP-LICENSE.txt" />
     <Content Include="Content\themes\Azure\css\bootstrap.css" />
@@ -397,12 +401,15 @@
     <Content Include="Content\themes\Azure\fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="Content\themes\Azure\fonts\glyphicons-halflings-regular.woff" />
     <Content Include="Content\themes\Azure\js\HTML5SHIV-LICENSES.md" />
+    <None Include="Properties\PublishProfiles\Default Settings.pubxml" />
+    <None Include="Properties\PublishProfiles\DynThingsDemo %285%29.pubxml" />
     <None Include="Properties\PublishProfiles\DynThingsDemo - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\DynThingsDemo - Web Deploy %282%29.pubxml" />
     <None Include="Properties\PublishProfiles\DynThingsDemo - Web Deploy %283%29.pubxml" />
     <None Include="Properties\PublishProfiles\DynThingsDemo - Web Deploy %284%29.pubxml" />
     <None Include="Properties\PublishProfiles\DynThingsDemo - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\DynThingsDemo.pubxml" />
+    <None Include="Properties\PublishProfiles\DynThingsMEMCO.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -551,7 +558,6 @@
     <Content Include="Views\Locations\Index.cshtml" />
     <Content Include="Views\Endpoints\Details.cshtml" />
     <Content Include="Views\Endpoints\Index.cshtml" />
-    <Content Include="Views\LocationViews\MonitorView.cshtml" />
     <Content Include="Views\LocationViews\_LocationViewMap.cshtml" />
     <Content Include="Views\LocationViews\_Location.cshtml" />
     <Content Include="Views\Shared\_PVLoading.cshtml" />
@@ -642,9 +648,22 @@
     <Content Include="Views\DynUsers\_Edit_Main.cshtml" />
     <Content Include="Views\Endpoints\_Edit_DevKeys.cshtml" />
     <Content Include="Views\LocationViews\Monitor.cshtml" />
+    <Content Include="Views\LocationViews\_LocationThingsList.cshtml" />
+    <Content Include="Views\LocationViews\_ThingEnds.cshtml" />
+    <Content Include="Views\Things\Index.cshtml" />
+    <Content Include="Views\Things\Details.cshtml" />
+    <Content Include="Views\Things\_List.cshtml" />
+    <Content Include="Views\Things\_Add.cshtml" />
+    <Content Include="Views\Things\_Delete.cshtml" />
+    <Content Include="Views\Things\_Edit.cshtml" />
+    <Content Include="Views\Things\Lookup\Index.cshtml" />
+    <Content Include="Views\Things\Lookup\List.cshtml" />
+    <Content Include="Views\Things\_Details_Main.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="App_Code\" />
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Base\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

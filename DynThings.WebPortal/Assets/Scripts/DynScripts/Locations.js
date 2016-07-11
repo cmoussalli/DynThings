@@ -123,21 +123,39 @@ function LoadPart_DialogLocationDelete(id) {
 }
 
 //Get Devices List
-function LoadPart_DevicesListByLocationIDDiv(locationID) {
+function LoadPart_LocationDevicesByLocationIDDiv(locationID) {
     var loadingpart = LoadDivLoading();
-    $("#divDevicesList").html(loadingpart);
+    $("#divLnkLocationDevicesList").html(loadingpart);
     $.ajax({
-        url: getRootURL() + '/locations/DevicesByLocationIDListGridPV?searchfor=' + $(txtDevicesSearch).val() + '&locationID=' + locationID + '&recordsperpage=0',
+        url: getRootURL() + '/locations/LnkLocationDevicesListGridPV?searchfor=' + $(txtDevicesSearch).val() + '&locationID=' + locationID + '&recordsperpage=0',
         //page=" + $("#DynConfigCurrentPage").html,
         type: "GET",
     })
         .done(function (partialViewResult) {
-            $("#divDevicesList").html(partialViewResult);
-            AttachEventDevicesListPager();
+            $("#divLnkLocationDevicesList").html(partialViewResult);
+            AttachEventLnkLocationDevicesListPager();
         });
     return false;
 };
 
+//Attach :LnkLocationDevices Pager
+function AttachEventLnkLocationDevicesListPager() {
+    $(document).on("click", "#LnkLocationDevicesListPager a[href]", function () {
+        var loadingpart = LoadDivLoading();
+        $("#divLnkLocationDevicesList").html(loadingpart);
+
+        $.ajax({
+            url: $(this).attr("href") + "&searchfor=" + $(txtDevicesSearch).val() + '&recordsperpage=0',
+            type: 'GET',
+            cache: false,
+            success: function (result) {
+                $("#divLnkLocationDevicesList").html(result);
+                return false;
+            }
+        });
+        return false;
+    });
+}
 
 
 //Lookup
@@ -192,17 +210,17 @@ function SelectLocationFromLookUp(value) {
 
 function AttachDeviceToLocation(locationID, DeviceID) {
     $.ajax({
-        url: getRootURL() + '/Locations/AttachDevice?locationID=' + locationID + '&DeviceID=' + DeviceID + '&userID=0',
+        url: getRootURL() + '/Locations/AttachDevice?locationID=' + locationID + '&DeviceID=' + DeviceID,
         type: "POST",
     })
     HideModal();
-    LoadPart_DevicesListByLocationIDDiv(locationID);
+    LoadPart_LocationDevicesByLocationIDDiv(selectedLocation);
 }
 
-function DeattachDeviceFromLocation(locationID, DeviceID) {
+function DeattachDeviceFromLocation(lnkID) {
     $.ajax({
-        url: getRootURL() + '/Locations/DeAttachDevice?locationID=' + locationID + '&DeviceID=' + DeviceID + '&userID=0',
+        url: getRootURL() + '/Locations/DeAttachDevice?linkID=' + lnkID,
         type: "POST",
     })
-    LoadPart_DevicesListByLocationIDDiv(locationID);
+    LoadPart_LocationDevicesByLocationIDDiv(selectedLocation);
 }

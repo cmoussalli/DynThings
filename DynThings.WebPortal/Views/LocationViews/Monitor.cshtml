@@ -3,5 +3,38 @@
     ViewBag.Title = "Monitor";
 }
 
-<h2>Monitor</h2>
+<div hidden="hidden">
+    <input id="SelectedLocationID" type="text" />
+    <input id="SelectedEndPointID" type="text" />
+</div>
 
+<div class="container-fluid fullHeight">
+
+    <div class="row fullHeight">
+        <div class="col-sm-9 nopadding" style="height:100%">
+            
+            @Html.Partial("_LocationViewMap", Model)
+
+        </div>
+        <div class="col-sm-3 nopadding">
+            <div class="" id="divMonitorLocation"></div>
+        </div>
+    </div>
+</div>
+
+
+@section scriptfiles{
+    <script src="~/Scripts/Gauges/justgage.js"></script>
+    <script src="~/Scripts/Gauges/raphael-2.1.4.min.js"></script>
+    <script src="~/Scripts/MsMaps/mapcontrol.js"></script>
+    <script src="~/Assets/Scripts/DynScripts/EndPointCommands.js"></script>
+    <script src="~/Assets/Scripts/DynScripts/LocationViews.js"></script>
+}
+
+@section scripts{
+    <script>
+        $(document).ready(function () {
+        });
+
+    </script>
+}

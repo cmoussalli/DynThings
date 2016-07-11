@@ -41,14 +41,14 @@
                                     <div class="input-group">
                                         <input type="search" id="txtDevicesSearch" class="form-control" onkeydown="if (event.keyCode == 13) { alert(@Model.ID); return false; }" />
                                         <div class="input-group-btn">
-                                            <button type="button" class="btn btn-primary" onclick="LoadPart_DevicesListByLocationIDDiv(@Model.ID)">Search</button>
+                                            <button type="button" class="btn btn-primary" onclick="LoadPart_LocationDevicesByLocationIDDiv(@Model.ID)">Search</button>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             <br />
                             <div class="well well-lg">
-                                <div id="divDevicesList">
+                                <div id="divLnkLocationDevicesList">
                                 </div>
                             </div>
                         </div>
@@ -77,10 +77,10 @@
 @section scripts{
     <script>
         $(document).ready(function () {
-            selectedLocation = @Model.ID
+            selectedLocation = '@Model.ID'
             LoadPart_LocationDetailsMainDiv('@Model.ID');
             LoadPart_LocationDetailsGeoLocationDiv('@Model.ID');
-            LoadPart_DevicesListByLocationIDDiv('@Model.ID');
+            LoadPart_LocationDevicesByLocationIDDiv('@Model.ID');
         });
     </script>
 }

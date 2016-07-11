@@ -1,10 +1,4 @@
-﻿/////////////////////////////////////////////////////////////////
-// Created by : Caesar Moussalli                               //
-// TimeStamp  : 31-1-2016                                      //
-// Content    : Extend the properties of Location Model        //
-// Notes      : Don't add Behavior in this class               //
-/////////////////////////////////////////////////////////////////
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -48,8 +42,6 @@ namespace DynThings.Data.Models
             }
         }
 
-
-
         public List<LocationView> locationViews
         {
             get
@@ -64,6 +56,24 @@ namespace DynThings.Data.Models
                 return locs;
             }
         }
+
+        public List<Thing> Things
+        {
+            get
+            {
+                DynThingsEntities db = new DynThingsEntities();
+                List<Thing> things = new List<Thing>();
+                List<LinkThingsLocation> lnks = db.LinkThingsLocations.Where(l => l.LocationID == this.ID).ToList();
+                foreach (LinkThingsLocation lnk in lnks)
+                {
+                    Thing thing = db.Things.Find(lnk.ThingID);
+                    things.Add(thing);
+                }
+                return things;
+            }
+        }
+
+
 
     }
 }

@@ -17,17 +17,25 @@ using DynHighCharts;
 namespace DynThings.WebPortal.Controllers
 {
     
-    public class EndpointsController : Controller
+    public class EndpointsController : BaseController
     {
         #region ActionResult: Views
         public ActionResult Index()
         {
+            if (ValidateUserPermissions(false, false) == false)
+            {
+                return RedirectToAction("Login", "Account");
+            }
             return View();
         }
 
         
         public ActionResult Details(long id)
         {
+            if (ValidateUserPermissions(false, false) == false)
+            {
+                return RedirectToAction("Login", "Account");
+            }
             Endpoint endpoint = Data.Repositories.UnitOfWork_Repositories.repoEndpoints.Find(id);
             return View(endpoint);
         }
@@ -58,7 +66,6 @@ namespace DynThings.WebPortal.Controllers
         [HttpGet]
         public PartialViewResult AddPV()
         {
-
             ViewBag.TypeID = new SelectList(UnitOfWork_Repositories.repoEndpointTypes.GetList(), "ID", "Title", 1);
             ViewBag.DeviceID = new SelectList(UnitOfWork_Repositories.repoDevices.GetList(), "ID", "Title", 1);
             return PartialView("_Add");

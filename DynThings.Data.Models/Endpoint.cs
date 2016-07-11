@@ -43,6 +43,8 @@ public partial class Endpoint
 
     public long TypeID { get; set; }
 
+    public long ThingID { get; set; }
+
 
 
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
@@ -56,6 +58,8 @@ public partial class Endpoint
     public virtual EndPointType EndPointType { get; set; }
 
     public virtual Device Device { get; set; }
+
+    public virtual Thing Thing { get; set; }
 
 }
 

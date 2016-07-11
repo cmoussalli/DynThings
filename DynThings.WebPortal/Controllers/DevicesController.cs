@@ -21,18 +21,26 @@ using DynThings.Core;
 
 namespace DynThings.WebPortal.Controllers
 {
-    public class DevicesController : Controller
+    public class DevicesController : BaseController
     {
         private DynThingsEntities db = new DynThingsEntities();
 
         #region ActionResult: Views
         public ActionResult Index()
         {
+            if (ValidateUserPermissions(true, false ) == false)
+            {
+                return RedirectToAction("Login", "Account");
+            }
             return View();
         }
 
         public ActionResult Details(int id)
         {
+            if (ValidateUserPermissions(true, false) == false)
+            {
+                return RedirectToAction("Login", "Account");
+            }
             Device device = UnitOfWork_Repositories.repoDevices.Find(id);
             return View("Details", device);
         }

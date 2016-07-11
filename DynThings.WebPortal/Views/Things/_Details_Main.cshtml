@@ -1,0 +1,13 @@
+﻿@model DynThings.Data.Models.Thing
+<div class="right">
+    <button type="button" class="btn btn-info pull-right" onclick="LoadThingEditor(@Model.ID)" data-toggle="modal" data-target="#mdl">Edit</button>
+</div>
+
+<strong>Title</strong><br>
+@Model.Title<br><br>
+
+<strong>Type</strong><br>
+@Model.ThingCategory.Title<br><br>
+
+<strong>Regional Time Zone</strong><br>
+@Model.UTC_Diff<br><br>

@@ -10,16 +10,24 @@ using DynThings.Core;
 
 namespace DynThings.WebPortal.Controllers
 {
-    public class DeviceCommandsController : Controller
+    public class DeviceCommandsController : BaseController
     {
         #region ActionResult: Views
         public ActionResult Index()
         {
+            if (ValidateUserPermissions(true,false) == false)
+            {
+                return RedirectToAction("Login", "Account");
+            }
             return View();
         }
 
         public ActionResult Details(long id)
         {
+            if (ValidateUserPermissions(true, false) == false)
+            {
+                return RedirectToAction("Login", "Account");
+            }
             DeviceCommand cmd = UnitOfWork_Repositories.repoDeviceCommands.Find(id);
             return View(cmd);
         }

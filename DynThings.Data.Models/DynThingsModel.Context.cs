@@ -63,8 +63,6 @@ public partial class DynThingsEntities : DbContext
 
     public virtual DbSet<IOType> IOTypes { get; set; }
 
-    public virtual DbSet<LinkDevicesLocation> LinkDevicesLocations { get; set; }
-
     public virtual DbSet<LinkLocationsLocationView> LinkLocationsLocationViews { get; set; }
 
     public virtual DbSet<Location> Locations { get; set; }
@@ -78,6 +76,14 @@ public partial class DynThingsEntities : DbContext
     public virtual DbSet<DynSetting> DynSettings { get; set; }
 
     public virtual DbSet<Device> Devices { get; set; }
+
+    public virtual DbSet<LinkDevicesLocation> LinkDevicesLocations { get; set; }
+
+    public virtual DbSet<ThingCategory> ThingCategorys { get; set; }
+
+    public virtual DbSet<Thing> Things { get; set; }
+
+    public virtual DbSet<LinkThingsLocation> LinkThingsLocations { get; set; }
 
 
     public virtual ObjectResult<Rpt_EndPoint_IOs_Months_Result> Rpt_EndPoint_IOs_Months(Nullable<long> ePID, string year)
@@ -130,6 +136,38 @@ public partial class DynThingsEntities : DbContext
 
 
         return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Rpt_EndPoint_IOs_Minutes_Result>("Rpt_EndPoint_IOs_Minutes", ePIDParameter);
+    }
+
+
+    public virtual ObjectResult<GetThingEnds_Result> GetThingEnds(Nullable<long> locationID, Nullable<long> thingID, Nullable<long> thingCategoryID, Nullable<long> endPointID, Nullable<long> endPointTypeID)
+    {
+
+        var locationIDParameter = locationID.HasValue ?
+            new ObjectParameter("LocationID", locationID) :
+            new ObjectParameter("LocationID", typeof(long));
+
+
+        var thingIDParameter = thingID.HasValue ?
+            new ObjectParameter("ThingID", thingID) :
+            new ObjectParameter("ThingID", typeof(long));
+
+
+        var thingCategoryIDParameter = thingCategoryID.HasValue ?
+            new ObjectParameter("ThingCategoryID", thingCategoryID) :
+            new ObjectParameter("ThingCategoryID", typeof(long));
+
+
+        var endPointIDParameter = endPointID.HasValue ?
+            new ObjectParameter("EndPointID", endPointID) :
+            new ObjectParameter("EndPointID", typeof(long));
+
+
+        var endPointTypeIDParameter = endPointTypeID.HasValue ?
+            new ObjectParameter("EndPointTypeID", endPointTypeID) :
+            new ObjectParameter("EndPointTypeID", typeof(long));
+
+
+        return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetThingEnds_Result>("GetThingEnds", locationIDParameter, thingIDParameter, thingCategoryIDParameter, endPointIDParameter, endPointTypeIDParameter);
     }
 
 }

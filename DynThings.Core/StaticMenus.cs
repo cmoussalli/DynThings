@@ -26,11 +26,30 @@ namespace DynThings.Core
         public static List<int> GetRegionalTimeOptions()
         {
             List<int> result = new List<int>();
-            for (int x = -12;x<13;x++)
+            for (int x = -12; x < 13; x++)
             {
                 result.Add(x);
             }
             return result;
+        }
+
+        public static class UserRoles
+        {
+
+            public static string GetAdminRoleName()
+            {
+                return "Admin";
+            }
+
+            public static string GetMonitorAndControlRoleName()
+            {
+                return "Monitor and Control";
+            }
+
+            public static string GetMonitorOnlyRoleName()
+            {
+                return "Monitor Only";
+            }
         }
 
 

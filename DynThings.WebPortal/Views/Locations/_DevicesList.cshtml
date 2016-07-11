@@ -1,11 +1,16 @@
-﻿@model IPagedList<DynThings.Data.Models.Device>
+﻿@using Microsoft.AspNet.Identity;
+@model IPagedList<DynThings.Data.Models.LinkDevicesLocation>
 
 <table class="table striped hovered border bordered">
     <thead>
         <tr>
-            <th>Title</th>
-            <th>GUID</th>
-            <th></th>
+            <th>Device</th>
+            <th>Deploy Time Stamp</th>
+            <th>Deployed by</th>
+            <th>Remove Time Stamp</th>
+            <th>Removed by</th>
+            <th>Status</th>
+            <th></th>>
         </tr>
     </thead>
     <tbody>
@@ -13,23 +18,50 @@
         {
             <tr>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Title)
+                    @Html.DisplayFor(modelItem => item.Device.Title)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.GUID)
+                    @Html.DisplayFor(modelItem => item.StartTimeStamp)
                 </td>
-
                 <td>
-                    <button onclick="DeattachDeviceFromLocation(selectedLocation, @item.ID)">Delete</button>
+                    @Html.DisplayFor(modelItem => item.StartByAspNetUser.FullName)
+                </td>
+                <td>
+                    @if (!String.IsNullOrEmpty( item.EndByUser) )
+                    {
+                        @Html.DisplayFor(modelItem => item.EndTimeStamp)
+                    }
+                </td>
+                <td>
+                    @if (!String.IsNullOrEmpty(item.EndByUser))
+                    {
+                        @Html.DisplayFor(modelItem => item.EndByAspNetUser.FullName)
+                    }
+                </td>
+                <td>
+                    @if (String.IsNullOrEmpty(item.EndByUser))
+                    {
+                        <h5><span class="label label-info ">Deployed</span></h5>
+                    }
+                    else
+                    {
+                        <h5><span class="label label-warning">Removed</span></h5>
+                    }
+                </td>
+                <td>
+                    @if (String.IsNullOrEmpty(item.EndByUser))
+                    {
+                        <button class="btn btn-danger btn-sm" onclick="DeattachDeviceFromLocation(@item.ID)">Remove</button>
+                    }
                 </td>
             </tr>
         }
     </tbody>
 </table>
 
-<div id="DevicesListPager">
-    <input id="DeviceCurrentPage" value="@Model.PageNumber.ToString()" hidden />
-    @Html.PagedListPager(Model, page => Url.Action("DevicesByLocationIDListGridPV", "Locations", new { page })+"&LocationID=1")
+<div id="LnkLocationDevicesListPager">
+    <input id="LnkLocationDevicesCurrentPage" value="@Model.PageNumber.ToString()" hidden />
+    @Html.PagedListPager(Model, page => Url.Action("LnkLocationDevicesListGridPV", "Locations", new { page }) + "&LocationID=1")
 </div>
 
 <script>
