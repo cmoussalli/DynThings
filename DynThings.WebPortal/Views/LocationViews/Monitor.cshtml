@@ -9,11 +9,11 @@
 </div>
 
 <div class="container-fluid fullHeight">
-
     <div class="row fullHeight">
-        <div class="col-sm-9 nopadding" style="height:100%">
-            
+        <div id="divMonitorMap" class="col-sm-9 nopadding" style="height:100%">
             @Html.Partial("_LocationViewMap", Model)
+        </div>
+        <div id="divMonitorDetails" hidden  class="col-sm-9 nopadding" style="height:100%">
 
         </div>
         <div class="col-sm-3 nopadding">
@@ -27,8 +27,9 @@
     <script src="~/Scripts/Gauges/justgage.js"></script>
     <script src="~/Scripts/Gauges/raphael-2.1.4.min.js"></script>
     <script src="~/Scripts/MsMaps/mapcontrol.js"></script>
-    <script src="~/Assets/Scripts/DynScripts/EndPointCommands.js"></script>
-    <script src="~/Assets/Scripts/DynScripts/LocationViews.js"></script>
+    @*<script src="~/Assets/Scripts/DynScripts/EndPointCommands.js"></script>*@
+    <script src="~/Assets/Scripts/DynScripts/Monitor.js"></script>
+
 }
 
 @section scripts{
@@ -38,3 +39,13 @@
 
     </script>
 }
+
+
+<style type="text/css">
+    html, body {
+        height: 100%;
+        margin: 0px;
+        padding: 0px;
+        padding-top: 12px;
+    }
+</style>

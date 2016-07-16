@@ -141,44 +141,32 @@ namespace DynThings.Data.Repositories
 
         #endregion
 
+
         public IPagedList GetThingEndsList(string searchFor ="" ,long ?locationID = null, long ?thingID = null,long ?thingCategoryID = null, long ?endpointTypeID = null,long ?endPointID = null, int pageNumber = 1, int recordsPerPage = 0)
         {
             
-            List<GetThingEnds_Result> queryResult = db.GetThingEnds(locationID,thingID,thingCategoryID,endPointID,endpointTypeID).ToList();
+            List<GetThingEnds_Result> queryResult = db.GetThingEnds(locationID,thingID,thingCategoryID,endPointID,endpointTypeID).Where(x => x.ThingTitle.Contains(searchFor)).ToList();
             List<ThingEnd> thingEnds = new List<ThingEnd>();
+
 
             foreach (GetThingEnds_Result res in queryResult)
             {
                 ThingEnd thingEnd = new ThingEnd();
-                VMLocation loc = new VMLocation();
-                loc.ID = res.LocationID;
-                loc.Title = res.LocationTitle;
-                thingEnd.Location = loc;
-
-                VMThing tng = new VMThing();
-                tng.ID = res.ThingID;
-                tng.Title = res.ThingTitle;
-                tng.CategoryID = res.ThingCategoryID;
-                tng.CategoryTitle = res.ThingCategoryTitle;
-                thingEnd.Thing = tng;
-
-                VMEndPoint end = new VMEndPoint();
-                end.ID = res.EndPointID;
-                end.Title = res.EndPointTitle;
-                end.Measurement = res.EndPointMeasurement;
-                end.TypeID = res.EndPointTypeID;
-                end.TypeTitle = res.EndPointTypeTitle;
-                thingEnd.EndPoint = end;
-
-
-                thingEnd.LastSubmitValue = res.LastIOValue;
-                thingEnd.LastSubmitTimeStamp = res.LastIOTimeStamp;
-
+                thingEnd.ConvertFromQuery_GetThingEndsList(res);
                 thingEnds.Add(thingEnd);
             }
 
             return thingEnds.ToPagedList(pageNumber, recordsPerPage);
         }
 
+        public ThingEnd GetThingEnd(long thingID, long thingEndpointTypeID)
+        {
+            ThingEnd tngEnd = new ThingEnd();
+            List<GetThingEnds_Result> queryResult = db.GetThingEnds(null, thingID, null, null, thingEndpointTypeID).ToList();
+
+            ThingEnd thingEnd = new ThingEnd();
+            thingEnd.ConvertFromQuery_GetThingEndsList(queryResult[0]);
+            return thingEnd;
+        }
     }
 }

@@ -17,6 +17,7 @@ using DynThings.Data.Models;
 using DynThings.Data.Repositories;
 using PagedList;
 using DynThings.Core;
+using DynThings.Data.Models.ViewModels;
 
 namespace DynThings.WebPortal.Controllers
 {
@@ -221,26 +222,6 @@ namespace DynThings.WebPortal.Controllers
             return PartialView("_Location", location);
         }
 
-        //[HttpGet]
-        //public PartialViewResult GetPVLocationViewEndPointMain(long endPointID)
-        //{
-        //    Endpoint endPoint = UnitOfWork_Repositories.repoEndpoints.Find(endPointID);
-        //    return PartialView("_EndPointMain", endPoint);
-        //}
-
-        //[HttpGet]
-        //public PartialViewResult GetPVLocationViewEndPointHistory(long endPointID)
-        //{
-        //    IPagedList IOs = UnitOfWork_Repositories.repoEndpointIOs.GetPagedList(endPointID, 1, 3);
-        //    return PartialView("_EndPointHistory", IOs);
-        //}
-
-        //[HttpGet]
-        //public PartialViewResult GetEndPointCommandsByEndPointGUIDPV(long endPointID)
-        //{
-        //    IPagedList endCmds = UnitOfWork_Repositories.repoEndPointCommands.GetPagedListByEndPointID("", endPointID, 1, 3);
-        //    return PartialView("_EndPointCommands", endCmds);
-        //}
         #endregion
 
 
@@ -255,8 +236,15 @@ namespace DynThings.WebPortal.Controllers
         [HttpGet]
         public PartialViewResult GetLocationThingEndsListPV(string searchfor = "", long ?locationID = null,long ?thingID = null,long ?thingTypeID = null,long ?endpointTypeID = null,long ?endpointID = null, int page = 1, int recordsperpage = 0)
         {
-            IPagedList things = UnitOfWork_Repositories.repoThings.GetThingEndsList("",null,null,null,null,null, page, Helpers.Configs.validateRecordsPerMaster(recordsperpage));
-            return PartialView("_ThingEnds", things);
+            IPagedList things = UnitOfWork_Repositories.repoThings.GetThingEndsList(searchfor,locationID,thingID,null,null,null, page, Helpers.Configs.validateRecordsPerMaster(recordsperpage));
+            return PartialView("_ThingEnds_List", things);
+        }
+
+        [HttpGet]
+        public PartialViewResult GetThingEndDetailsPV(long thingID, long thingEndTypeID)
+        {
+            ThingEnd thingEnd = UnitOfWork_Repositories.repoThings.GetThingEnd(thingID, thingEndTypeID);
+            return PartialView("_ThingEnd_Details", thingEnd);
         }
 
 

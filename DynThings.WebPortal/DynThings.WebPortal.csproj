@@ -231,6 +231,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Assets\Scripts\DynScripts\DynUsers.js" />
+    <Content Include="Assets\Scripts\DynScripts\Monitor.js" />
     <Content Include="Assets\Scripts\DynScripts\Things.js" />
     <Content Include="Assets\Scripts\MidLayerScripts\Notify.js" />
     <Content Include="Assets\Imgs\spinner-md.gif" />
@@ -604,7 +605,6 @@
     <Content Include="Views\Config\Index.cshtml" />
     <Content Include="Views\Endpoints\_Details_Commands.cshtml" />
     <Content Include="Views\LocationViews\Details.cshtml" />
-    <Content Include="Views\LocationViews\Edit.cshtml" />
     <Content Include="Views\LocationViews\_EditMap.cshtml" />
     <Content Include="Views\LocationViews\_LocationsList.cshtml" />
     <Content Include="Views\Locations\_List.cshtml" />
@@ -649,7 +649,7 @@
     <Content Include="Views\Endpoints\_Edit_DevKeys.cshtml" />
     <Content Include="Views\LocationViews\Monitor.cshtml" />
     <Content Include="Views\LocationViews\_LocationThingsList.cshtml" />
-    <Content Include="Views\LocationViews\_ThingEnds.cshtml" />
+    <Content Include="Views\LocationViews\_ThingEnds_List.cshtml" />
     <Content Include="Views\Things\Index.cshtml" />
     <Content Include="Views\Things\Details.cshtml" />
     <Content Include="Views\Things\_List.cshtml" />
@@ -659,6 +659,7 @@
     <Content Include="Views\Things\Lookup\Index.cshtml" />
     <Content Include="Views\Things\Lookup\List.cshtml" />
     <Content Include="Views\Things\_Details_Main.cshtml" />
+    <Content Include="Views\LocationViews\_ThingEnd_Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Code\" />
