@@ -1,0 +1,11 @@
+﻿
+@model DynHighCharts.Chart
+
+<div id="HCThing" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+
+
+<script>
+    $(function () {
+        $('#HCThing').highcharts(@Html.Raw( @Model.JsonOutput(Model)))
+    });
+</script>

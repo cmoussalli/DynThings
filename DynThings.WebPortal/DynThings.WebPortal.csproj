@@ -235,6 +235,7 @@
     <Content Include="Assets\Scripts\DynScripts\Things.js" />
     <Content Include="Assets\Scripts\MidLayerScripts\Notify.js" />
     <Content Include="Assets\Imgs\spinner-md.gif" />
+    <Content Include="Assets\Styles\CustomStyle.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\DataTables\css\autoFill.bootstrap.css" />
@@ -660,6 +661,7 @@
     <Content Include="Views\Things\Lookup\List.cshtml" />
     <Content Include="Views\Things\_Details_Main.cshtml" />
     <Content Include="Views\LocationViews\_ThingEnd_Details.cshtml" />
+    <Content Include="Views\Things\Charts\_HCBasicLines.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Code\" />

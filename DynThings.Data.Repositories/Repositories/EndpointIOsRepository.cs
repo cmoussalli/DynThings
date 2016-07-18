@@ -120,6 +120,7 @@ namespace DynThings.Data.Repositories
         {
             try
             {
+                Endpoint end = db.Endpoints.Find(endPointID);
                 EndPointIO endIO = new EndPointIO();
                 endIO.EndPointID = endPointID;
                 endIO.Valu = value;
@@ -127,6 +128,7 @@ namespace DynThings.Data.Repositories
                 endIO.TimeStamp = executionTime;
                 endIO.ExecTimeStamp = executionTime;
                 endIO.ScheduleTimeStamp = executionTime;
+                endIO.ThingID = end.ThingID;
                 db.EndPointIOs.Add(endIO);
                 db.SaveChanges();
                 return ResultInfo.GenerateOKResult("Saved", endIO.ID);
@@ -141,6 +143,7 @@ namespace DynThings.Data.Repositories
         {
             try
             {
+                Endpoint end = db.Endpoints.Find(endPointID);
                 EndPointIO endIO = new EndPointIO();
                 endIO.EndPointID = endPointID;
                 endIO.Valu = value;
@@ -148,6 +151,7 @@ namespace DynThings.Data.Repositories
                 endIO.TimeStamp = executionTime;
                 endIO.ExecTimeStamp = executionTime;
                 endIO.ScheduleTimeStamp = scheduleTimeStamp;
+                endIO.ThingID = end.ThingID;
                 db.EndPointIOs.Add(endIO);
                 db.SaveChanges();
                 return ResultInfo.GenerateOKResult("Saved", endIO.ID);
@@ -170,6 +174,7 @@ namespace DynThings.Data.Repositories
             endIO.IOTypeID = long.Parse(ioType.GetHashCode().ToString());
             DateTime execTime = DateTime.UtcNow.AddHours(double.Parse(ep.Device.UTC_Diff.ToString()));
             endIO.TimeStamp = execTime;
+            endIO.ThingID = ep.ThingID;
             db.EndPointIOs.Add(endIO);
             db.SaveChanges();
             return ResultInfo.GenerateOKResult("Saved", endIO.ID);

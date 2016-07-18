@@ -1,0 +1,16 @@
+﻿
+html, body {
+    height: 100%;
+    margin: 0px;
+    padding: 0px;
+}
+
+.fullHeight {
+    background: #ffffff;
+    height: 100%;
+}
+
+.nopadding {
+    padding: 0 !important;
+    margin: 0 !important;
+}

@@ -21,7 +21,7 @@ namespace DynThings.Data.Reports
 
         #region Reports
         public static EndpointsReport rptEndpoints = new EndpointsReport(dynDB);
-
+        public static ThingsReport rptThings = new ThingsReport(dynDB);
 
 
         #endregion

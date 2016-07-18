@@ -114,6 +114,9 @@
     <Compile Include="EndPointTypeCategory.cs">
       <DependentUpon>DynThingsModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Rpt_ThingEnd_IOs_Minutes_Result.cs">
+      <DependentUpon>DynThingsModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="ViewModels\ThingEnd.cs" />
     <Compile Include="GetThingEnds_Result.cs">
       <DependentUpon>DynThingsModel.tt</DependentUpon>
