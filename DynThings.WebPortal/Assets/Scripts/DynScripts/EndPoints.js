@@ -278,17 +278,17 @@ function SelectEndPointFromLookUp(id, title) {
 
 function drpReport_Select(endPointID,year) {
 
-    if ($("#drpEndpointHighchartsView").val() == 3)
+    if ($("#drpEndpointHighchartsView").val() === 3)
     {
     LoadChart_EndPoint_DayDiv(endPointID);
     }
-    if ($("#drpEndpointHighchartsView").val() == 4) {
+    if ($("#drpEndpointHighchartsView").val() === 4) {
         LoadChart_EndPoint_MonthDiv(endPointID,year);
     }
-    if ($("#drpEndpointHighchartsView").val() == 2) {
+    if ($("#drpEndpointHighchartsView").val() === 2) {
         LoadChart_EndPoint_HourDiv(endPointID);
     }
-    if ($("#drpEndpointHighchartsView").val() == 1) {
+    if ($("#drpEndpointHighchartsView").val() === 1) {
         LoadChart_EndPoint_MinuteDiv(endPointID);
     }
 

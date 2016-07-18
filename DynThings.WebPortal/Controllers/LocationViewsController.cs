@@ -222,10 +222,6 @@ namespace DynThings.WebPortal.Controllers
             return PartialView("_Location", location);
         }
 
-        #endregion
-
-
-
         [HttpGet]
         public PartialViewResult GetLocationThingsListPV(string searchfor = null,long locationID = 0, int page = 1, int recordsperpage = 0)
         {
@@ -246,6 +242,11 @@ namespace DynThings.WebPortal.Controllers
             ThingEnd thingEnd = UnitOfWork_Repositories.repoThings.GetThingEnd(thingID, thingEndTypeID);
             return PartialView("_ThingEnd_Details", thingEnd);
         }
+
+        #endregion
+
+
+        
 
 
         #endregion

@@ -25,7 +25,7 @@ namespace DynThings.Data.Reports
         {
             Endpoint ep = UnitOfWork_Repositories.repoEndpoints.Find(endPointID);
 
-            Chart hc = new Chart();
+            Chart hc = new Chart("HC_" + "EndPoint" + endPointID + "Inputs");
             hc.title.Text = "Monthly Average";
             hc.subTitle.Text = ep.Title;
             hc.xAxis.GenerateMonthsList();
@@ -103,7 +103,7 @@ namespace DynThings.Data.Reports
         {
             Endpoint ep = UnitOfWork_Repositories.repoEndpoints.Find(endPointID);
 
-            Chart hc = new Chart();
+            Chart hc = new Chart("HC_" + "EndPoint" + endPointID + "Inputs");
             hc.title.Text = "Endpoint Daily Report";
             hc.subTitle.Text = ep.Title;
             hc.xAxis.GenerateDaysList(true);
@@ -239,7 +239,7 @@ namespace DynThings.Data.Reports
         public Chart IOs_Hour(long endPointID)
         {
             Endpoint ep = UnitOfWork_Repositories.repoEndpoints.Find(endPointID);
-            Chart hc = new Chart();
+            Chart hc = new Chart("HC_" + "EndPoint" + endPointID + "Inputs");
             hc.title.Text = "Endpoint Hourly Report";
             hc.subTitle.Text = ep.Title;
             hc.xAxis.GenerateHoursList(true);
@@ -355,7 +355,7 @@ namespace DynThings.Data.Reports
         public Chart IOs_Minute(long endPointID)
         {
             Endpoint ep = UnitOfWork_Repositories.repoEndpoints.Find(endPointID);
-            Chart hc = new Chart();
+            Chart hc = new Chart("HC_" + "EndPoint" + endPointID + "Inputs");
             hc.title.Text = "Endpoint Minutes Report";
             hc.subTitle.Text = ep.Title;
             hc.xAxis.GenerateMinutesList(true);

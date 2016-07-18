@@ -356,7 +356,7 @@ namespace DynThings.Data.Reports
         {
             EndPointType endType = UnitOfWork_Repositories.repoEndpointTypes.Find(EndPointTypeID);
             Thing th = UnitOfWork_Repositories.repoThings.Find(ThingID);
-            Chart hc = new Chart();
+            Chart hc = new Chart("HC_" + "Thing" + ThingID + "EndPointType" + EndPointTypeID + "Inputs");
             hc.title.Text = "Thing Minutes Report";
             hc.subTitle.Text = th.Title + " - " + endType.Title ;
             hc.xAxis.GenerateMinutesList(true);

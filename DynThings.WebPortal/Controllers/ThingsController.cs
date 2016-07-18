@@ -213,7 +213,7 @@ namespace DynThings.WebPortal.Controllers
         #endregion
 
 
-        //#region Reports
+        #region Reports
         //[HttpGet]
         //public ActionResult Rpt_Month(long ThingID,string year)
         //{
@@ -235,12 +235,13 @@ namespace DynThings.WebPortal.Controllers
         //    return PartialView("_HighChart", chrt);
         //}
 
-        //[HttpGet]
-        //public ActionResult Rpt_Minute(long ThingID)
-        //{
-        //    Chart chrt = UnitOfWork_Reports.rptThings.IOs_Minute(ThingID);
-        //    return PartialView("_HighChart", chrt);
-        //}
-        //#endregion
+        [HttpGet]
+        public ActionResult Rpt_Minute(long ThingID,long endPointTypeID)
+        {
+            Chart chrt = UnitOfWork_Reports.rptThings.IOs_Minute(ThingID,endPointTypeID);
+            
+            return PartialView("_HighChart", chrt);
+        }
+        #endregion
     }
 }

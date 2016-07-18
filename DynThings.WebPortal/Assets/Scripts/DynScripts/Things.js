@@ -200,3 +200,18 @@ function SelectThingFromLookUp(id, title) {
     EventSelectThing();
 }
 
+
+//HighChart
+//ThingEnd Inputs
+function LoadChart_ThingEnd_InputsMinutesDiv(thingID,endPointTypeID) {
+    var loadingpart = LoadDivLoading();
+    $("#divThingEndChart_Inputs").html(loadingpart);
+    $.ajax({
+        url: getRootURL() + '/things/Rpt_Minute?thingID=' + thingID + '&endPointTypeID=' + endPointTypeID   ,
+        type: "GET",
+    })
+        .success(function (partialViewResult) {
+            $("#divThingEndChart_Inputs").html(partialViewResult);
+        });
+    return false;
+}
