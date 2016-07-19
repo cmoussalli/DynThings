@@ -662,6 +662,7 @@
     <Content Include="Views\Things\_Details_Main.cshtml" />
     <Content Include="Views\LocationViews\_ThingEnd_Details.cshtml" />
     <Content Include="Views\Things\Charts\BasicLine.cshtml" />
+    <Content Include="Views\Things\Charts\InputValues_BasicLine.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Code\" />

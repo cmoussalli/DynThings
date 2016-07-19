@@ -215,3 +215,19 @@ function LoadChart_ThingEnd_InputsMinutesDiv(thingID,endPointTypeID) {
         });
     return false;
 }
+
+function LoadChart_ThingEnd_InputsHoursDiv(thingID, endPointTypeID) {
+    var loadingpart = LoadDivLoading();
+    $("#divThingEndChart_Inputs").html(loadingpart);
+    $.ajax({
+        url: getRootURL() + '/things/Rpt_Hour?thingID=' + thingID + '&endPointTypeID=' + endPointTypeID,
+        type: "GET",
+    })
+        .success(function (partialViewResult) {
+            $("#divThingEndChart_Inputs").html(partialViewResult);
+        });
+    return false;
+}
+
+
+

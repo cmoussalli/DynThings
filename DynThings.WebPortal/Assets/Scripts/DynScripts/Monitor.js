@@ -1,4 +1,6 @@
-﻿
+﻿var selectedThingEndDetailsView = "dashboard";
+
+
 //Get Location by ID
 function LoadPart_MonitorLocation(id) {
     $("#SelectedLocationID").val(id);

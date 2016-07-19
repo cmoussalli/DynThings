@@ -228,19 +228,18 @@ namespace DynThings.WebPortal.Controllers
         //    return PartialView("_HighChart", chrt);
         //}
 
-        //[HttpGet]
-        //public ActionResult Rpt_Hour(long ThingID)
-        //{
-        //    Chart chrt = UnitOfWork_Reports.rptThings.IOs_Hour(ThingID);
-        //    return PartialView("_HighChart", chrt);
-        //}
+        [HttpGet]
+        public ActionResult Rpt_Hour(long ThingID, long endPointTypeID)
+        {
+            Chart chrt = UnitOfWork_Reports.rptThings.IOs_Hour(ThingID, endPointTypeID);
+            return PartialView("Charts/InputValues_BasicLine", chrt);
+        }
 
         [HttpGet]
         public ActionResult Rpt_Minute(long ThingID,long endPointTypeID)
         {
             Chart chrt = UnitOfWork_Reports.rptThings.IOs_Minute(ThingID,endPointTypeID);
-            
-            return PartialView("_HighChart", chrt);
+            return PartialView("Charts/InputValues_BasicLine", chrt);
         }
         #endregion
     }

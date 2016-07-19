@@ -1,0 +1,22 @@
+﻿@model DynHighCharts.Chart
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <div class="btn-group pull-right" style="padding-top:0px;margin-top:0px;">
+            <a href="#" class="btn btn-default btn-sm" onclick="Load_ThingEnd_InputsMinutesDiv();" style="padding-top:0px;margin-top:0px;">Last 60 Minutes</a>
+            <a href="#" class="btn btn-default btn-sm" onclick="Load_ThingEnd_InputsHoursDiv();" style="padding-top:0px;margin-top:0px">Last 24 Hours</a>
+            <a href="#" class="btn btn-default btn-sm" onclick="Load_ThingEnd_InputsDaysDiv();" style="padding-top:0px;margin-top:0px">Last 30 Days</a>
+            <a href="#" class="btn btn-default btn-sm" onclick="Load_ThingEnd_InputsMonthsDiv();" style="padding-top:0px;margin-top:0px">Last 12 Months</a>
+        </div>
+        <span>EndPoint Inputs</span>
+    </div>
+    <div class="panel-body">
+        <div id="@Model.chartID" style=" height: 400px; margin: 0 auto; width:100%"></div>
+    </div>
+</div>
+
+
+<script>
+    $(function () {
+        $('#@Model.chartID').highcharts(@Html.Raw( @Model.JsonOutput(Model)))
+    });
+</script>

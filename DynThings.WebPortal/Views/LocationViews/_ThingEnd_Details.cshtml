@@ -11,46 +11,54 @@
                 <span class="icon-bar"></span>
             </button>
             <a class="navbar-brand" href="#">@Model.Thing.Title (@Model.EndPoint.TypeTitle)</a>
+
+
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 
+            <ul class="nav navbar-nav navbar-left">
+                <li id="liThingEndDashboard" class="active"><a href="#" onclick="SelectThingEndDetailsView_Dashboard()">Dashboard</a></li>
+                <li id="liThingEndHistory"><a href="#" onclick="SelectThingEndDetailsView_History()">History</a></li>
+            </ul>
 
             <ul class="nav navbar-nav navbar-right">
                 <li><a href="#" onclick="Load_ThingEnd_InputsMinutesDiv()">Refresh</a></li>
 
-                <li><a href="#" onclick="Load_ThingsEnd_DetailsCharts()">Close</a></li>
+                <li><a href="#" onclick="ClosedivMonitorDetailsDiv()">Close</a></li>
             </ul>
         </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->
 </nav>
 
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-lg-12">
-
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <div class="btn-group pull-right" style="padding-top:0px;margin-top:0px;" >
-                        <a href="#" class="btn btn-default btn-sm" onclick="Load_ThingEnd_InputsMinutesDiv();" style="padding-top:0px;margin-top:0px;">Last 60 Minutes</a>
-                        <a href="#" class="btn btn-default btn-sm" onclick="Load_ThingEnd_InputsHoursDiv();" style="padding-top:0px;margin-top:0px">Last 24 Hours</a>
-                        <a href="#" class="btn btn-default btn-sm" onclick="Load_ThingEnd_InputsDaysDiv();" style="padding-top:0px;margin-top:0px">Last 30 Days</a>
-                        <a href="#" class="btn btn-default btn-sm" onclick="Load_ThingEnd_InputsMonthsDiv();" style="padding-top:0px;margin-top:0px">Last 12 Months</a>
+<div id="divThingEndDetailsView_Dashboard">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12">
+                <div id="divThingEndChart_Inputs"></div>
+                @*<div class="panel panel-default">
+                    <div class="panel-heading">
+                        <div class="btn-group pull-right" style="padding-top:0px;margin-top:0px;">
+                            <a href="#" class="btn btn-default btn-sm" onclick="Load_ThingEnd_InputsMinutesDiv();" style="padding-top:0px;margin-top:0px;">Last 60 Minutes</a>
+                            <a href="#" class="btn btn-default btn-sm" onclick="Load_ThingEnd_InputsHoursDiv();" style="padding-top:0px;margin-top:0px">Last 24 Hours</a>
+                            <a href="#" class="btn btn-default btn-sm" onclick="Load_ThingEnd_InputsDaysDiv();" style="padding-top:0px;margin-top:0px">Last 30 Days</a>
+                            <a href="#" class="btn btn-default btn-sm" onclick="Load_ThingEnd_InputsMonthsDiv();" style="padding-top:0px;margin-top:0px">Last 12 Months</a>
+                        </div>
+                        <span>EndPoint Inputs</span>
                     </div>
-                    <span>EndPoint Inputs</span>
-                    
+                    <div class="panel-body">
+                        <div id="divThingEndChart_Inputs"></div>
+                    </div>
+                </div>*@
 
-
-
-                </div>
-                <div class="panel-body">
-                    <div id="divThingEndChart_Inputs"></div>
-                </div>
             </div>
-
         </div>
     </div>
+</div>
+
+<div id="divThingEndDetailsView_History" class="hidden">
+    His
 </div>
 
 <script>
@@ -58,9 +66,36 @@
         Load_ThingEnd_InputsMinutesDiv();
     });
 
-    function Load_ThingsEnd_DetailsCharts()
-    {
-        Load_ThingEnd_InputsMinutesDiv();
+    function UnSelectThingEndDetailsView() {
+        $('#liThingEndDashboard').removeClass('active');
+        $('#liThingEndHistory').removeClass('active');
+
+        $('#divThingEndDetailsView_Dashboard').hide();
+        $('#divThingEndDetailsView_History').hide();
+    }
+    function SelectThingEndDetailsView_Dashboard() {
+        selectedThingEndDetailsView = 'dashboard';
+        UnSelectThingEndDetailsView();
+        $('#liThingEndDashboard').addClass('active');
+        $('#divThingEndDetailsView_Dashboard').show();
+    }
+    function SelectThingEndDetailsView_History() {
+        selectedThingEndDetailsView = 'history';
+        UnSelectThingEndDetailsView();
+        $('#liThingEndHistory').addClass('active');
+        $('#divThingEndDetailsView_History').show();
+    }
+
+
+
+    function Load_ThingsEnd_Details() {
+        if (selectedThingEndDetailsView == 'dashboard') {
+            Load_ThingEnd_InputsMinutesDiv();
+        }
+        if (selectedThingEndDetailsView == 'history') {
+
+        }
+
     }
 
     function Load_ThingEnd_InputsMinutesDiv() {
