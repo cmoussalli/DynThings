@@ -16,7 +16,7 @@ using DynHighCharts;
 
 namespace DynThings.WebPortal.Controllers
 {
-    
+
     public class ThingsController : BaseController
     {
         #region ActionResult: Views
@@ -29,7 +29,7 @@ namespace DynThings.WebPortal.Controllers
             return View();
         }
 
-        
+
         public ActionResult Details(long id)
         {
             if (ValidateUserPermissions(false, false) == false)
@@ -78,7 +78,7 @@ namespace DynThings.WebPortal.Controllers
             ResultInfo.Result res = ResultInfo.GetResultByID(1);
             if (ModelState.IsValid)
             {
-                res = UnitOfWork_Repositories.repoThings.Add(Thing.Title, Thing.CategoryID, Thing.UTC_Diff,currentUser.Id);
+                res = UnitOfWork_Repositories.repoThings.Add(Thing.Title, Thing.CategoryID, Thing.UTC_Diff, currentUser.Id);
                 return Json(res);
             }
             return Json(res);
@@ -102,7 +102,7 @@ namespace DynThings.WebPortal.Controllers
             ResultInfo.Result res = ResultInfo.GetResultByID(1);
             if (ModelState.IsValid)
             {
-                res = UnitOfWork_Repositories.repoThings.Edit(Thing.ID, Thing.Title, Thing.CategoryID,Thing.UTC_Diff);
+                res = UnitOfWork_Repositories.repoThings.Edit(Thing.ID, Thing.Title, Thing.CategoryID, Thing.UTC_Diff);
                 return Json(res);
             }
             return Json(res);
@@ -116,7 +116,7 @@ namespace DynThings.WebPortal.Controllers
             if (!User.IsInRole("Admin"))
             {
                 ResultInfo.Result rm = Core.ResultInfo.GetResultByID(1);
-                return PartialView("_PVResult",rm);
+                return PartialView("_PVResult", rm);
             }
             Thing Thing = UnitOfWork_Repositories.repoThings.Find(id);
             return PartialView("_Delete", Thing);
@@ -232,15 +232,27 @@ namespace DynThings.WebPortal.Controllers
         public ActionResult Rpt_Hour(long ThingID, long endPointTypeID)
         {
             Chart chrt = UnitOfWork_Reports.rptThings.IOs_Hour(ThingID, endPointTypeID);
-            return PartialView("Charts/InputValues_BasicLine", chrt);
+            return PartialView("Reports/Charts/InputValues_BasicLine", chrt);
         }
 
         [HttpGet]
-        public ActionResult Rpt_Minute(long ThingID,long endPointTypeID)
+        public ActionResult Rpt_Minute(long ThingID, long endPointTypeID)
         {
-            Chart chrt = UnitOfWork_Reports.rptThings.IOs_Minute(ThingID,endPointTypeID);
-            return PartialView("Charts/InputValues_BasicLine", chrt);
+            Chart chrt = UnitOfWork_Reports.rptThings.IOs_Minute(ThingID, endPointTypeID);
+            return PartialView("Reports/Charts/InputValues_BasicLine", chrt);
         }
-        #endregion
+
+
+        [HttpGet]
+        public ActionResult Rpt_IOsHistory(long ThingID, long endPointTypeID, DateTime fromDate, DateTime toDate, int page = 1, int recordsperpage = 0)
+        {
+            IPagedList IOs = UnitOfWork_Repositories.repoThings.GetThingEndIOs(ThingID, endPointTypeID, fromDate, toDate, page, Helpers.Configs.validateRecordsPerMaster(recordsperpage));
+            return PartialView("Reports/Grids/HistoryIOs", IOs);
+
+
+            #endregion
+
+
+        }
     }
 }

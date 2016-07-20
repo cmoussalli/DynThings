@@ -34,8 +34,6 @@ namespace DynThings.Data.Models.ViewModels
             this.Thing = tng;
 
             VMEndPoint end = new VMEndPoint();
-            end.ID = source.EndPointID;
-            end.Title = source.EndPointTitle;
             end.Measurement = source.EndPointMeasurement;
             end.TypeID = source.EndPointTypeID;
             end.TypeTitle = source.EndPointTypeTitle;

@@ -938,13 +938,6 @@
             <End Role="Thing" EntitySet="Things" />
             <End Role="LinkThingsLocation" EntitySet="LinkThingsLocations" />
           </AssociationSet>
-          <FunctionImport Name="GetThingEnds" ReturnType="Collection(DynThingsModel.GetThingEnds_Result)">
-            <Parameter Name="LocationID" Mode="In" Type="Int64" />
-            <Parameter Name="ThingID" Mode="In" Type="Int64" />
-            <Parameter Name="ThingCategoryID" Mode="In" Type="Int64" />
-            <Parameter Name="EndPointID" Mode="In" Type="Int64" />
-            <Parameter Name="EndPointTypeID" Mode="In" Type="Int64" />
-          </FunctionImport>
           <FunctionImport Name="Rpt_ThingEnd_IOs_Minutes" ReturnType="Collection(DynThingsModel.Rpt_ThingEnd_IOs_Minutes_Result)">
             <Parameter Name="ThingID" Mode="In" Type="Int64" />
             <Parameter Name="TypeID" Mode="In" Type="Int64" />
@@ -952,6 +945,13 @@
           <FunctionImport Name="Rpt_ThingEnd_IOs_Hours" ReturnType="Collection(DynThingsModel.Rpt_ThingEnd_IOs_Hours_Result)">
             <Parameter Name="ThingID" Mode="In" Type="Int64" />
             <Parameter Name="TypeID" Mode="In" Type="Int64" />
+          </FunctionImport>
+          <FunctionImport Name="GetThingEnds" ReturnType="Collection(DynThingsModel.GetThingEnds_Result)">
+            <Parameter Name="LocationID" Mode="In" Type="Int64" />
+            <Parameter Name="ThingID" Mode="In" Type="Int64" />
+            <Parameter Name="ThingCategoryID" Mode="In" Type="Int64" />
+            <Parameter Name="EndPointID" Mode="In" Type="Int64" />
+            <Parameter Name="EndPointTypeID" Mode="In" Type="Int64" />
           </FunctionImport>
           </EntityContainer>
         <EntityType Name="AspNetRole">
@@ -1738,22 +1738,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <ComplexType Name="GetThingEnds_Result">
-          <Property Type="Int64" Name="LocationID" Nullable="false" />
-          <Property Type="String" Name="LocationTitle" Nullable="false" MaxLength="50" />
-          <Property Type="Int64" Name="ThingID" Nullable="false" />
-          <Property Type="String" Name="ThingTitle" Nullable="false" MaxLength="128" />
-          <Property Type="Int64" Name="ThingCategoryID" Nullable="false" />
-          <Property Type="String" Name="ThingCategoryTitle" Nullable="true" MaxLength="50" />
-          <Property Type="Int64" Name="EndPointID" Nullable="false" />
-          <Property Type="String" Name="EndPointTitle" Nullable="false" MaxLength="50" />
-          <Property Type="Int64" Name="EndPointTypeID" Nullable="false" />
-          <Property Type="String" Name="EndPointTypeTitle" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="EndPointMeasurement" Nullable="true" MaxLength="50" />
-          <Property Type="Int64" Name="LastIOID" Nullable="true" />
-          <Property Type="String" Name="LastIOValue" Nullable="true" MaxLength="50" />
-          <Property Type="DateTime" Name="LastIOTimeStamp" Nullable="true" Precision="23" />
-        </ComplexType>
         <ComplexType Name="Rpt_ThingEnd_IOs_Minutes_Result">
           <Property Type="Int64" Name="ID" Nullable="false" />
           <Property Type="String" Name="Title" Nullable="false" MaxLength="128" />
@@ -1847,6 +1831,20 @@
           <Property Type="Int32" Name="C22" Nullable="true" />
           <Property Type="Int32" Name="C23" Nullable="true" />
           <Property Type="Int32" Name="C24" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="GetThingEnds_Result">
+          <Property Type="Int64" Name="LocationID" Nullable="false" />
+          <Property Type="String" Name="LocationTitle" Nullable="false" MaxLength="50" />
+          <Property Type="Int64" Name="ThingID" Nullable="false" />
+          <Property Type="String" Name="ThingTitle" Nullable="false" MaxLength="128" />
+          <Property Type="Int64" Name="ThingCategoryID" Nullable="false" />
+          <Property Type="String" Name="ThingCategoryTitle" Nullable="true" MaxLength="50" />
+          <Property Type="Int64" Name="EndPointTypeID" Nullable="false" />
+          <Property Type="String" Name="EndPointTypeTitle" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="EndPointMeasurement" Nullable="true" MaxLength="50" />
+          <Property Type="Int64" Name="LastIOID" Nullable="true" />
+          <Property Type="String" Name="LastIOValue" Nullable="true" MaxLength="50" />
+          <Property Type="DateTime" Name="LastIOTimeStamp" Nullable="true" Precision="23" />
         </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
@@ -2309,26 +2307,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <FunctionImportMapping FunctionImportName="GetThingEnds" FunctionName="DynThingsModel.Store.GetThingEnds">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="DynThingsModel.GetThingEnds_Result">
-                <ScalarProperty Name="LocationID" ColumnName="LocationID" />
-                <ScalarProperty Name="LocationTitle" ColumnName="LocationTitle" />
-                <ScalarProperty Name="ThingID" ColumnName="ThingID" />
-                <ScalarProperty Name="ThingTitle" ColumnName="ThingTitle" />
-                <ScalarProperty Name="ThingCategoryID" ColumnName="ThingCategoryID" />
-                <ScalarProperty Name="ThingCategoryTitle" ColumnName="ThingCategoryTitle" />
-                <ScalarProperty Name="EndPointID" ColumnName="EndPointID" />
-                <ScalarProperty Name="EndPointTitle" ColumnName="EndPointTitle" />
-                <ScalarProperty Name="EndPointTypeID" ColumnName="EndPointTypeID" />
-                <ScalarProperty Name="EndPointTypeTitle" ColumnName="EndPointTypeTitle" />
-                <ScalarProperty Name="EndPointMeasurement" ColumnName="EndPointMeasurement" />
-                <ScalarProperty Name="LastIOID" ColumnName="LastIOID" />
-                <ScalarProperty Name="LastIOValue" ColumnName="LastIOValue" />
-                <ScalarProperty Name="LastIOTimeStamp" ColumnName="LastIOTimeStamp" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="Rpt_ThingEnd_IOs_Minutes" FunctionName="DynThingsModel.Store.Rpt_ThingEnd_IOs_Minutes">
             <ResultMapping>
               <ComplexTypeMapping TypeName="DynThingsModel.Rpt_ThingEnd_IOs_Minutes_Result">
@@ -2428,6 +2406,24 @@
                 <ScalarProperty Name="C22" ColumnName="22" />
                 <ScalarProperty Name="C23" ColumnName="23" />
                 <ScalarProperty Name="C24" ColumnName="24" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetThingEnds" FunctionName="DynThingsModel.Store.GetThingEnds">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DynThingsModel.GetThingEnds_Result">
+                <ScalarProperty Name="LocationID" ColumnName="LocationID" />
+                <ScalarProperty Name="LocationTitle" ColumnName="LocationTitle" />
+                <ScalarProperty Name="ThingID" ColumnName="ThingID" />
+                <ScalarProperty Name="ThingTitle" ColumnName="ThingTitle" />
+                <ScalarProperty Name="ThingCategoryID" ColumnName="ThingCategoryID" />
+                <ScalarProperty Name="ThingCategoryTitle" ColumnName="ThingCategoryTitle" />
+                <ScalarProperty Name="EndPointTypeID" ColumnName="EndPointTypeID" />
+                <ScalarProperty Name="EndPointTypeTitle" ColumnName="EndPointTypeTitle" />
+                <ScalarProperty Name="EndPointMeasurement" ColumnName="EndPointMeasurement" />
+                <ScalarProperty Name="LastIOID" ColumnName="LastIOID" />
+                <ScalarProperty Name="LastIOValue" ColumnName="LastIOValue" />
+                <ScalarProperty Name="LastIOTimeStamp" ColumnName="LastIOTimeStamp" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

@@ -1,6 +1,7 @@
 ﻿//Vars
 var selectedThingID = 0;
 var selectedThingTitle = 0;
+var selectedThingEndPointTypeID = 0;
 
 
 //Attach : Pager
@@ -229,5 +230,43 @@ function LoadChart_ThingEnd_InputsHoursDiv(thingID, endPointTypeID) {
     return false;
 }
 
+function LoadChart_ThingEnd_InputsDaysDiv(thingID, endPointTypeID) {
+    var loadingpart = LoadDivLoading();
+    $("#divThingEndChart_Inputs").html(loadingpart);
+    $.ajax({
+        url: getRootURL() + '/things/Rpt_Day?thingID=' + thingID + '&endPointTypeID=' + endPointTypeID,
+        type: "GET",
+    })
+        .success(function (partialViewResult) {
+            $("#divThingEndChart_Inputs").html(partialViewResult);
+        });
+    return false;
+}
+
+function LoadChart_ThingEnd_InputsMonthsDiv(thingID, endPointTypeID) {
+    var loadingpart = LoadDivLoading();
+    $("#divThingEndChart_Inputs").html(loadingpart);
+    $.ajax({
+        url: getRootURL() + '/things/Rpt_Month?thingID=' + thingID + '&endPointTypeID=' + endPointTypeID,
+        type: "GET",
+    })
+        .success(function (partialViewResult) {
+            $("#divThingEndChart_Inputs").html(partialViewResult);
+        });
+    return false;
+}
 
 
+
+function LoadGrid_ThingEnd_HistoryDiv(thingID, endPointTypeID,fromDate,toDate) {
+    var loadingpart = LoadDivLoading();
+    $("#divThingEndHistory_Inputs").html(loadingpart);
+    $.ajax({
+        url: getRootURL() + '/things/Rpt_IOsHistory?thingID=' + thingID + '&endPointTypeID=' + endPointTypeID + '&fromDate=' + fromDate + '&toDate=' + toDate,
+        type: "GET",
+    })
+        .success(function (partialViewResult) {
+            $("#divThingEndHistory_Inputs").html(partialViewResult);
+        });
+    return false;
+}

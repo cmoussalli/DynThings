@@ -29,10 +29,6 @@ public partial class GetThingEnds_Result
 
     public string ThingCategoryTitle { get; set; }
 
-    public long EndPointID { get; set; }
-
-    public string EndPointTitle { get; set; }
-
     public long EndPointTypeID { get; set; }
 
     public string EndPointTypeTitle { get; set; }

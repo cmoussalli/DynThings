@@ -12,15 +12,17 @@
 
 
         @Html.LabelFor(model => model.Title, htmlAttributes: new { @class = "" })
-
         @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control" } })
         @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
 
 
         @Html.LabelFor(model => model.TypeID, "TypeID", htmlAttributes: new { @class = "" })
-
         @Html.DropDownList("TypeID", null, htmlAttributes: new { @class = "form-control" })
         @Html.ValidationMessageFor(model => model.TypeID, "", new { @class = "text-danger" })
+
+        @Html.LabelFor(model => model.TypeID, "ThingID", htmlAttributes: new { @class = "" })
+        @Html.DropDownList("ThingID", null, htmlAttributes: new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.ThingID, "", new { @class = "text-danger" })
 
         <div class="modal-footer">
             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>

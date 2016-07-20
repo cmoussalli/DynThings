@@ -661,8 +661,9 @@
     <Content Include="Views\Things\Lookup\List.cshtml" />
     <Content Include="Views\Things\_Details_Main.cshtml" />
     <Content Include="Views\LocationViews\_ThingEnd_Details.cshtml" />
-    <Content Include="Views\Things\Charts\BasicLine.cshtml" />
-    <Content Include="Views\Things\Charts\InputValues_BasicLine.cshtml" />
+    <Content Include="Views\Things\Reports\Charts\BasicLine.cshtml" />
+    <Content Include="Views\Things\Reports\Charts\InputValues_BasicLine.cshtml" />
+    <Content Include="Views\Things\Reports\Grids\HistoryIOs.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Code\" />

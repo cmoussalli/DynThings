@@ -110,7 +110,7 @@ namespace DynThings.Data.Repositories
         #endregion
 
         #region Add
-        public ResultInfo.Result Add(string title, long typeID, long deviceID)
+        public ResultInfo.Result Add(string title, long typeID, long deviceID,long thingID)
         {
             Endpoint end = new Endpoint();
             try
@@ -121,6 +121,7 @@ namespace DynThings.Data.Repositories
                 end.Title = title;
                 end.DeviceID = deviceID;
                 end.TypeID = typeID;
+                end.ThingID = thingID;
                 db.Endpoints.Add(end);
                 db.SaveChanges();
                 return ResultInfo.GenerateOKResult("Saved", end.ID);
@@ -134,13 +135,14 @@ namespace DynThings.Data.Repositories
         #endregion
 
         #region Edit
-        public ResultInfo.Result Edit(long id, string title, long typeID)
+        public ResultInfo.Result Edit(long id, string title, long typeID,long thingID)
         {
             try
             {
                 Endpoint end = db.Endpoints.Find(id);
                 end.Title = title;
                 end.TypeID = typeID;
+                end.ThingID = thingID;
                 db.SaveChanges();
                 return ResultInfo.GenerateOKResult("Saved", end.ID);
             }

@@ -3,9 +3,7 @@
     @foreach (var item in Model)
     {
         <div class="list-group-item">
-
-
-            <div class="row" onclick="showEndDetails(@item.Thing.ID,@item.EndPoint.TypeID);" style="cursor:pointer">
+            <div class="row" onclick="showEndDetails(@item.Thing.ID.ToString(),@item.EndPoint.TypeID.ToString())" style="cursor:pointer">
                 <div class="col-md-6">
                     <h5><span><strong>@item.Thing.Title</strong></span></h5>
                     <h5><span>@item.Thing.CategoryTitle</span></h5>
@@ -15,25 +13,24 @@
                 </div>
 
                 <div class="col-md-6">
-                    <div id="gauge_@item.Location.ID.ToString()_@item.Thing.ID.ToString()_@item.EndPoint.ID.ToString()"></div>
-
+                    <div id="gauge_@item.Location.ID.ToString()_@item.Thing.ID.ToString()_@item.EndPoint.TypeID.ToString()"></div>
                 </div>
-                <script>
-                    var g = new JustGage({
-                        id: "gauge_@item.Location.ID.ToString()_@item.Thing.ID.ToString()_@item.EndPoint.ID.ToString()",
-                        value: @item.LastSubmitValue,
-                        min: 0,
-                        max: 85,
-                        title: "@item.EndPoint.TypeTitle",
-                        label:"@item.EndPoint.Measurement"
-
-                    });
-                </script>
             </div>
-
-
         </div>
+        
+        <script>
+            var g = new JustGage({
+                id: "gauge_@item.Location.ID.ToString()_@item.Thing.ID.ToString()_@item.EndPoint.TypeID.ToString()",
+                value: @item.LastSubmitValue,
+                min: 0,
+                max: 85,
+                title: "@item.EndPoint.TypeTitle",
+                label:"@item.EndPoint.Measurement"
+
+            });
+        </script>
     }
+
     @if (Model.PageCount > 1)
     {
         <div id="ThingEndsListPager">

@@ -73,6 +73,8 @@ function LoadPart_MonitorThingEndsList(searchFor,locationID,thingID) {
 
 //Get ThingEnd Details
 function LoadPart_MonitorThingEndDetails(thingID, thingEndTypeID) {
+    selectedThingID = thingID;
+    selectedThingEndPointTypeID = thingEndTypeID;
     var loadingpart = LoadDivLoading();
     $("#divMonitorDetails").html(loadingpart);
     $.ajax({
@@ -83,3 +85,29 @@ function LoadPart_MonitorThingEndDetails(thingID, thingEndTypeID) {
         $("#divMonitorDetails").html(partialViewResult);
     });
 }
+
+
+function Load_ThingsEnd_Details() {
+    Load_ThingEnd_InputsMinutesDiv();
+    Load_ThingEnd_HistoryDiv();
+}
+function UnSelectThingEndDetailsView() {
+    $('#liThingEndDashboard').removeClass('active');
+    $('#liThingEndHistory').removeClass('active');
+
+    $('#divThingEndDetailsView_Dashboard').hide();
+    $('#divThingEndDetailsView_History').hide();
+}
+function SelectThingEndDetailsView_Dashboard() {
+    selectedThingEndDetailsView = 'dashboard';
+    UnSelectThingEndDetailsView();
+    $('#liThingEndDashboard').addClass('active');
+    $('#divThingEndDetailsView_Dashboard').show();
+}
+function SelectThingEndDetailsView_History() {
+    selectedThingEndDetailsView = 'history';
+    UnSelectThingEndDetailsView();
+    $('#liThingEndHistory').addClass('active');
+    $('#divThingEndDetailsView_History').show();
+}
+

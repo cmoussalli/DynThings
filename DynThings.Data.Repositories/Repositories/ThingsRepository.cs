@@ -39,7 +39,7 @@ namespace DynThings.Data.Repositories
         public IPagedList GetPagedList(string search, int pageNumber, int recordsPerPage)
         {
             IPagedList devs = db.Things
-              .Where(e => search == null || e.Title.Contains(search))
+              .Where(e => search == null || e.Title.Contains(search) && e.ID>0 )
               .OrderBy(e => e.Title).ToList()
               .ToPagedList(pageNumber, recordsPerPage);
             return devs;
@@ -50,6 +50,7 @@ namespace DynThings.Data.Repositories
             IPagedList devs = db.Things
               .Where(e => search == null || e.Title.Contains(search)
               && e.LinkThingsLocations.Any(l => l.LocationID == locationID)
+              && e.ID > 0
               )
               .OrderBy(e => e.Title).ToList()
               .ToPagedList(pageNumber, recordsPerPage);
@@ -167,6 +168,20 @@ namespace DynThings.Data.Repositories
             ThingEnd thingEnd = new ThingEnd();
             thingEnd.ConvertFromQuery_GetThingEndsList(queryResult[0]);
             return thingEnd;
+        }
+
+        public IPagedList GetThingEndIOs(long thingID,long thingEndpointTypeID,DateTime fromDate,DateTime toDate, int pageNumber = 1, int recordsPerPage = 0)
+        {
+            IPagedList result = db.EndPointIOs.Where
+                (i => i.ThingID == thingID
+                && i.Endpoint.TypeID == thingEndpointTypeID
+                && i.ExecTimeStamp > fromDate
+                && i.ExecTimeStamp < toDate)
+                .OrderByDescending(i=>i.ExecTimeStamp)
+                .Take(1000)
+                .ToPagedList(pageNumber, recordsPerPage);
+
+            return result;
         }
     }
 }

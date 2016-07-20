@@ -24,7 +24,7 @@
             </ul>
 
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="#" onclick="Load_ThingEnd_InputsMinutesDiv()">Refresh</a></li>
+                <li><a href="#" onclick="Load_ThingsEnd_Details()">Refresh</a></li>
 
                 <li><a href="#" onclick="ClosedivMonitorDetailsDiv()">Close</a></li>
             </ul>
@@ -37,66 +37,33 @@
         <div class="row">
             <div class="col-lg-12">
                 <div id="divThingEndChart_Inputs"></div>
-                @*<div class="panel panel-default">
-                    <div class="panel-heading">
-                        <div class="btn-group pull-right" style="padding-top:0px;margin-top:0px;">
-                            <a href="#" class="btn btn-default btn-sm" onclick="Load_ThingEnd_InputsMinutesDiv();" style="padding-top:0px;margin-top:0px;">Last 60 Minutes</a>
-                            <a href="#" class="btn btn-default btn-sm" onclick="Load_ThingEnd_InputsHoursDiv();" style="padding-top:0px;margin-top:0px">Last 24 Hours</a>
-                            <a href="#" class="btn btn-default btn-sm" onclick="Load_ThingEnd_InputsDaysDiv();" style="padding-top:0px;margin-top:0px">Last 30 Days</a>
-                            <a href="#" class="btn btn-default btn-sm" onclick="Load_ThingEnd_InputsMonthsDiv();" style="padding-top:0px;margin-top:0px">Last 12 Months</a>
-                        </div>
-                        <span>EndPoint Inputs</span>
-                    </div>
-                    <div class="panel-body">
-                        <div id="divThingEndChart_Inputs"></div>
-                    </div>
-                </div>*@
 
             </div>
         </div>
     </div>
 </div>
 
-<div id="divThingEndDetailsView_History" class="hidden">
-    His
+<div id="divThingEndDetailsView_History" >
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12">
+              
+                <div id="divThingEndHistory_Inputs"></div>
+
+            </div>
+        </div>
+    </div>
 </div>
 
 <script>
     $(document).ready(function () {
-        Load_ThingEnd_InputsMinutesDiv();
+        SelectThingEndDetailsView_Dashboard();
+        Load_ThingsEnd_Details();
+        Load_ThingEnd_HistoryDiv();
     });
 
-    function UnSelectThingEndDetailsView() {
-        $('#liThingEndDashboard').removeClass('active');
-        $('#liThingEndHistory').removeClass('active');
-
-        $('#divThingEndDetailsView_Dashboard').hide();
-        $('#divThingEndDetailsView_History').hide();
-    }
-    function SelectThingEndDetailsView_Dashboard() {
-        selectedThingEndDetailsView = 'dashboard';
-        UnSelectThingEndDetailsView();
-        $('#liThingEndDashboard').addClass('active');
-        $('#divThingEndDetailsView_Dashboard').show();
-    }
-    function SelectThingEndDetailsView_History() {
-        selectedThingEndDetailsView = 'history';
-        UnSelectThingEndDetailsView();
-        $('#liThingEndHistory').addClass('active');
-        $('#divThingEndDetailsView_History').show();
-    }
 
 
-
-    function Load_ThingsEnd_Details() {
-        if (selectedThingEndDetailsView == 'dashboard') {
-            Load_ThingEnd_InputsMinutesDiv();
-        }
-        if (selectedThingEndDetailsView == 'history') {
-
-        }
-
-    }
 
     function Load_ThingEnd_InputsMinutesDiv() {
         LoadChart_ThingEnd_InputsMinutesDiv('@Model.Thing.ID', '@Model.EndPoint.TypeID');
@@ -112,5 +79,10 @@
 
     function Load_ThingEnd_InputsMonthsDiv() {
         LoadChart_ThingEnd_InputsMonthsDiv('@Model.Thing.ID', '@Model.EndPoint.TypeID');
+    };
+
+
+    function Load_ThingEnd_HistoryDiv() {
+        LoadGrid_ThingEnd_HistoryDiv('@Model.Thing.ID', '@Model.EndPoint.TypeID', '1-1-2016', '12-31-2016');
     };
 </script>

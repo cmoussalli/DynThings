@@ -68,17 +68,18 @@ namespace DynThings.WebPortal.Controllers
         {
             ViewBag.TypeID = new SelectList(UnitOfWork_Repositories.repoEndpointTypes.GetList(), "ID", "Title", 1);
             ViewBag.DeviceID = new SelectList(UnitOfWork_Repositories.repoDevices.GetList(), "ID", "Title", 1);
+            ViewBag.ThingID = new SelectList(UnitOfWork_Repositories.repoThings.GetList(), "ID", "Title", 1);
             return PartialView("_Add");
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult AddPV([Bind(Include = "Title,TypeID,DeviceID")] Endpoint endpoint)
+        public ActionResult AddPV([Bind(Include = "Title,TypeID,DeviceID,ThingID")] Endpoint endpoint)
         {
             ResultInfo.Result res = ResultInfo.GetResultByID(1);
             if (ModelState.IsValid)
             {
-                res = UnitOfWork_Repositories.repoEndpoints.Add(endpoint.Title, endpoint.TypeID, endpoint.DeviceID);
+                res = UnitOfWork_Repositories.repoEndpoints.Add(endpoint.Title, endpoint.TypeID, endpoint.DeviceID,endpoint.ThingID);
                 return Json(res);
             }
             return Json(res);
@@ -92,17 +93,18 @@ namespace DynThings.WebPortal.Controllers
             Endpoint endpoint = UnitOfWork_Repositories.repoEndpoints.Find(id);
             ViewBag.TypeID = new SelectList(UnitOfWork_Repositories.repoEndpointTypes.GetList(), "ID", "Title", endpoint.TypeID);
             ViewBag.DeviceID = new SelectList(UnitOfWork_Repositories.repoDevices.GetList(), "ID", "Title", endpoint.DeviceID);
+            ViewBag.ThingID = new SelectList(UnitOfWork_Repositories.repoThings.GetList(), "ID", "Title", endpoint.ThingID);
             return PartialView("_Edit", endpoint);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult EditPV([Bind(Include = "ID,Title,TypeID,DeviceID")] Endpoint endpoint)
+        public ActionResult EditPV([Bind(Include = "ID,Title,TypeID,DeviceID,ThingID")] Endpoint endpoint)
         {
             ResultInfo.Result res = ResultInfo.GetResultByID(1);
             if (ModelState.IsValid)
             {
-                res = UnitOfWork_Repositories.repoEndpoints.Edit(endpoint.ID, endpoint.Title, endpoint.TypeID);
+                res = UnitOfWork_Repositories.repoEndpoints.Edit(endpoint.ID, endpoint.Title, endpoint.TypeID,endpoint.ThingID);
                 return Json(res);
             }
             return Json(res);

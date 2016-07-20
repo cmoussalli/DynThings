@@ -1,0 +1,73 @@
+﻿@model IPagedList<DynThings.Data.Models.EndPointIO>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <div class="btn-group pull-right" style="padding-top:0px;margin-top:0px;">
+            <a href="#" class="btn btn-default btn-sm" onclick="Load_ThingEnd_HistoryDiv();" style="padding-top:0px;margin-top:0px;">Refresh</a>
+
+        </div>
+        <span>EndPoint Inputs</span>
+    </div>
+    <div class="panel-body">
+        <table class="table striped hovered border bordered">
+            <thead>
+                <tr>
+                    <th>Execution TimeStamp</th>
+                    <th>Value</th>
+                    <th>Source EndPoint</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ExecTimeStamp)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Valu)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Endpoint.Title)
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+
+
+<div id="ThingEndIOsListPager">
+    <input id="ThingEndIOsCurrentPage" value="@Model.PageNumber.ToString()" hidden />
+
+    @Html.PagedListPager(Model, page => Url.Action("Rpt_IOsHistory", new { page }))
+</div>
+
+
+<script>
+    $(document).ready(function () {
+        AttachEventThingEndIOsListPager();
+    });
+
+
+    //Attach : Pager
+    function AttachEventThingEndIOsListPager() {
+        $(document).on("click", "#ThingEndIOsListPager a[href]", function () {
+            var loadingpart = LoadDivLoading();
+            $("#divThingEndHistory_Inputs").html(loadingpart);
+            $.ajax({
+                url: $(this).attr("href") + "&thingID=" + selectedThingID + '&endPointTypeID=' + selectedThingEndPointTypeID + '&fromDate=' + '1-1-2016' + '&toDate=' + '12-31-2016' + '&recordsperpage=0',
+                type: 'GET',
+                cache: false,
+                success: function (result) {
+                    $("#divThingEndHistory_Inputs").html(result);
+                    return false;
+                }
+            });
+            return false;
+        });
+    }
+</script>
