@@ -34,17 +34,17 @@
                 }
             </tbody>
         </table>
+        <div id="ThingEndIOsListPager">
+            <input id="ThingEndIOsCurrentPage" value="@Model.PageNumber.ToString()" hidden />
+            @Html.PagedListPager(Model, page => Url.Action("Rpt_IOsHistory", new { page }))
+        </div>
     </div>
 </div>
 
 
 
 
-<div id="ThingEndIOsListPager">
-    <input id="ThingEndIOsCurrentPage" value="@Model.PageNumber.ToString()" hidden />
 
-    @Html.PagedListPager(Model, page => Url.Action("Rpt_IOsHistory", new { page }))
-</div>
 
 
 <script>
