@@ -7,7 +7,8 @@
         <tr>
             <th>Title</th>
             <th>Type</th>
-            <th>GUID</th>
+            <th>Device</th>
+            <th>Thing</th>
             <th></th>
         </tr>
     </thead>
@@ -22,9 +23,11 @@
                 @Html.DisplayFor(modelItem => item.EndPointType.Title)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.GUID)
+                @Html.DisplayFor(modelItem => item.Device.Title)
             </td>
-
+            <td>
+                @Html.DisplayFor(modelItem => item.Thing.Title)
+            </td>
             <td>
                 @Html.ActionLink("Details", "Details", new { id = item.ID })
             </td>
