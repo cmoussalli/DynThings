@@ -1,5 +1,5 @@
 ﻿//Vars
-var selectedThingID = 0;
+var selectedThing = 0;
 var selectedThingTitle = 0;
 var selectedThingEndPointTypeID = 0;
 
@@ -196,7 +196,7 @@ function AttachEventThingsLookupListPager() {
 }
 //Select from Lookup
 function SelectThingFromLookUp(id, title) {
-    selectedThingID = id;
+    selectedThing = id;
     selectedThingTitle = title;
     EventSelectThing();
 }

@@ -166,6 +166,7 @@ namespace DynThings.WebPortal.Controllers
 
 
         #region EditComponents
+        #region Location Devices
 
         #region DevicesListPV
         [HttpGet]
@@ -203,7 +204,47 @@ namespace DynThings.WebPortal.Controllers
             return Json(res);
         }
         #endregion
+        #endregion
 
+        #region Location Things
+
+        #region ThingsListPV
+        [HttpGet]
+        public PartialViewResult LnkLocationThingsListGridPV(string searchfor = null, long LocationID = 0, int page = 1, int recordsperpage = 0)
+        {
+            IPagedList views = UnitOfWork_Repositories.repoLocations.GetLocationThingsPagedList(searchfor, LocationID, page, Helpers.Configs.validateRecordsPerMaster(recordsperpage));
+            return PartialView("_ThingsList", views);
+        }
+        #endregion
+
+        #region AttachThing
+        [HttpPost]
+        public ActionResult AttachThing(long LocationID, long ThingID)
+        {
+            ResultInfo.Result res = ResultInfo.GetResultByID(1);
+            if (ModelState.IsValid)
+            {
+                res = UnitOfWork_Repositories.repoLocations.AttachThing(LocationID, ThingID, User.Identity.GetUserId());
+                return Json(res);
+            }
+            return Json(res);
+        }
+        #endregion
+
+        #region DeAttachThing
+        [HttpPost]
+        public ActionResult DeAttachThing(long linkID)
+        {
+            ResultInfo.Result res = ResultInfo.GetResultByID(1);
+            if (ModelState.IsValid)
+            {
+                res = UnitOfWork_Repositories.repoLocations.DeattachThing(linkID, currentUser.Id);
+                return Json(res);
+            }
+            return Json(res);
+        }
+        #endregion
+        #endregion
 
         #endregion
 

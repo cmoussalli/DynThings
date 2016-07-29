@@ -208,6 +208,7 @@
     <Compile Include="Controllers\DynUsersController.cs" />
     <Compile Include="Controllers\EndPointCommandsController.cs" />
     <Compile Include="Controllers\EndPointIOsController.cs" />
+    <Compile Include="Controllers\ThingCategorysController.cs" />
     <Compile Include="Controllers\ThingsController.cs" />
     <Compile Include="Controllers\EndpointsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -232,6 +233,7 @@
   <ItemGroup>
     <Content Include="Assets\Scripts\DynScripts\DynUsers.js" />
     <Content Include="Assets\Scripts\DynScripts\Monitor.js" />
+    <Content Include="Assets\Scripts\DynScripts\ThingCategories.js" />
     <Content Include="Assets\Scripts\DynScripts\Things.js" />
     <Content Include="Assets\Scripts\MidLayerScripts\Notify.js" />
     <Content Include="Assets\Imgs\spinner-md.gif" />
@@ -412,6 +414,7 @@
     <None Include="Properties\PublishProfiles\DynThingsDemo - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\DynThingsDemo.pubxml" />
     <None Include="Properties\PublishProfiles\DynThingsMEMCO.pubxml" />
+    <None Include="Properties\PublishProfiles\MOMP DynThings.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -664,6 +667,12 @@
     <Content Include="Views\Things\Reports\Charts\BasicLine.cshtml" />
     <Content Include="Views\Things\Reports\Charts\InputValues_BasicLine.cshtml" />
     <Content Include="Views\Things\Reports\Grids\HistoryIOs.cshtml" />
+    <Content Include="Views\Locations\_ThingsList.cshtml" />
+    <Content Include="Views\ThingCategorys\Index.cshtml" />
+    <Content Include="Views\ThingCategorys\_List.cshtml" />
+    <Content Include="Views\ThingCategorys\_Add.cshtml" />
+    <Content Include="Views\ThingCategorys\_Edit.cshtml" />
+    <Content Include="Views\ThingCategorys\_Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Code\" />

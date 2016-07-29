@@ -17,8 +17,8 @@
             <ul class="nav nav-tabs">
                 <li class="active"><a data-toggle="tab" href="#tabLocationmain">Main</a></li>
                 <li><a data-toggle="tab" href="#tabLocationGeoLocation">Geo Location</a></li>
+                <li><a data-toggle="tab" href="#tabLocationThings">Things</a></li>
                 <li><a data-toggle="tab" href="#tabLocationDevices">Devices</a></li>
-                @*<li><a data-toggle="tab" href="#tabLocationViews">Dev Keys</a></li>*@
                 <li><a data-toggle="tab" href="#tabLocationDelete">Delete</a></li>
             </ul>
             <div class="panel panel-default">
@@ -30,6 +30,26 @@
                         </div>
                         <div id="tabLocationGeoLocation" class="tab-pane fade">
                             <div id="divLocationGeoLocation">
+                            </div>
+                        </div>
+                        <div id="tabLocationThings" class="tab-pane fade">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <button type="button" class="btn btn-info" onclick="LoadPart_ThingLookup('#modal')" data-toggle="modal" data-target="#mdl">Import</button>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="input-group">
+                                        <input type="search" id="txtThingsSearch" class="form-control" onkeydown="if (event.keyCode == 13) { alert(@Model.ID); return false; }" />
+                                        <div class="input-group-btn">
+                                            <button type="button" class="btn btn-primary" onclick="LoadPart_LocationThingsByLocationIDDiv(@Model.ID)">Search</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <br />
+                            <div class="well well-lg">
+                                <div id="divLnkLocationThingsList">
+                                </div>
                             </div>
                         </div>
                         <div id="tabLocationDevices" class="tab-pane fade">
@@ -53,9 +73,9 @@
                             </div>
                         </div>
                         @*<div id="tabLocationDevkeys" class="tab-pane fade">
-                            <div id="divLocationDevkeys">
-                            </div>
-                        </div>*@
+                                <div id="divLocationDevkeys">
+                                </div>
+                            </div>*@
                         <div id="tabLocationDelete" class="tab-pane fade">
                             <div id="divLocationDelete">
                                 <button type="button" class="btn btn-danger" onclick="LoadPart_DialogLocationDelete(@Model.ID)" data-toggle="modal" data-target="#mdl">Delete</button>
@@ -72,6 +92,7 @@
     <script src="~/Scripts/MsMaps/mapcontrol.js"></script>
     <script src="~/Assets/Scripts/DynScripts/Locations.js"></script>
     <script src="~/Assets/Scripts/DynScripts/Devices.js"></script>
+    <script src="~/Assets/Scripts/DynScripts/Things.js"></script>
 }
 
 @section scripts{
@@ -81,6 +102,7 @@
             LoadPart_LocationDetailsMainDiv('@Model.ID');
             LoadPart_LocationDetailsGeoLocationDiv('@Model.ID');
             LoadPart_LocationDevicesByLocationIDDiv('@Model.ID');
+            LoadPart_LocationThingsByLocationIDDiv('@Model.ID');
         });
     </script>
 }

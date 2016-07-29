@@ -12,6 +12,7 @@ using System.Text;
 using System.Threading.Tasks;
 using DynThings.Data.Models;
 using DynThings.Core;
+using PagedList;
 
 namespace DynThings.Data.Repositories
 {
@@ -25,6 +26,16 @@ namespace DynThings.Data.Repositories
         }
         #endregion
 
+        #region Get PagedList
+        public IPagedList GetPagedList(string search, int pageNumber, int recordsPerPage)
+        {
+            IPagedList cats = db.ThingCategorys
+              .Where(e => search == null || e.Title.Contains(search))
+              .OrderBy(e => e.Title).ToList()
+              .ToPagedList(pageNumber, recordsPerPage);
+            return cats;
+        }
+        #endregion
 
         #region GetList
         /// <summary>
@@ -33,7 +44,7 @@ namespace DynThings.Data.Repositories
         /// <returns>List of Endpoint Types</returns>
         public List<ThingCategory> GetList()
         {
-            List<ThingCategory> types = db.ThingCategorys.ToList();
+            List<ThingCategory> types = db.ThingCategorys.OrderBy(c => c.Title).ToList();
             return types;
         }
 
@@ -48,7 +59,7 @@ namespace DynThings.Data.Repositories
         public ThingCategory Find(long id)
         {
             ThingCategory epType = new ThingCategory();
-            List<ThingCategory> epTypes = db.ThingCategorys.Where(l => l.ID == id).ToList();
+            List<ThingCategory> epTypes = db.ThingCategorys.Where(c => c.ID == id).OrderBy(c => c.Title).ToList();
             if (epTypes.Count == 1)
             {
                 epType = epTypes[0];
@@ -62,8 +73,8 @@ namespace DynThings.Data.Repositories
 
         #endregion
 
-        #region Create
-        public ResultInfo.Result Add(string Title, string measurment, long TypeCategoryID, long IconID)
+        #region Add
+        public ResultInfo.Result Add(string Title)
         {
             try
             {
@@ -80,5 +91,50 @@ namespace DynThings.Data.Repositories
         }
 
         #endregion
+
+        #region Edit
+        public ResultInfo.Result Edit(long ID,string Title)
+        {
+            try
+            {
+                ThingCategory cat = db.ThingCategorys.Find(ID);
+                cat.Title = Title;
+                db.SaveChanges();
+                return ResultInfo.GenerateOKResult("Saved", cat.ID);
+            }
+            catch
+            {
+                return ResultInfo.GetResultByID(1);
+            }
+        }
+
+        #endregion
+
+        #region Delete
+        public ResultInfo.Result Delete(long ID)
+        {
+            try
+            {
+                //Check if the requested Category is used
+                List<Thing> things = db.Things.Where(t => t.ThingCategory.ID == ID).ToList();
+                if (things.Count() > 0)
+                {// Used
+                    return ResultInfo.GetResultByID(1);
+                }
+
+                //Execute Delete and return result
+                ThingCategory cat = db.ThingCategorys.Find(ID);
+                db.SaveChanges();
+                return ResultInfo.GenerateOKResult("Saved", cat.ID);
+            }
+            catch
+            {
+                return ResultInfo.GetResultByID(1);
+            }
+        }
+
+        #endregion
+
+
     }
 }

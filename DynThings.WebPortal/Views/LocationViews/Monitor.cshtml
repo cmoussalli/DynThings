@@ -10,12 +10,15 @@
 
 <div class="container-fluid fullHeight">
     <div class="row fullHeight">
-        <div id="divMonitorMap" class="col-sm-9 nopadding" style="height:100%">
-            @Html.Partial("_LocationViewMap", Model)
-        </div>
-        <div id="divMonitorDetails" hidden  class="col-sm-9 nopadding" style="height:100%">
+        <div class="col-sm-9 nopadding" style="height:100%">
+            <div id="divMonitorMap"  style="height:100%">
+                @Html.Partial("_LocationViewMap", Model)
+            </div>
+            <div id="divMonitorDetails" style="height:100%">
 
+            </div>
         </div>
+       
         <div class="col-sm-3 nopadding">
             <div class="" id="divMonitorLocation"></div>
         </div>

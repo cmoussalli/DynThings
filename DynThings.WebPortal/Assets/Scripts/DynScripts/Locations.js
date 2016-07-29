@@ -122,13 +122,27 @@ function LoadPart_DialogLocationDelete(id) {
     });
 }
 
+//Get Things List
+function LoadPart_LocationThingsByLocationIDDiv(locationID) {
+    var loadingpart = LoadDivLoading();
+    $("#divLnkLocationThingsList").html(loadingpart);
+    $.ajax({
+        url: getRootURL() + '/locations/LnkLocationThingsListGridPV?searchfor=' + $(txtThingsSearch).val() + '&locationID=' + locationID + '&recordsperpage=0',
+        type: "GET",
+    })
+        .done(function (partialViewResult) {
+            $("#divLnkLocationThingsList").html(partialViewResult);
+            //AttachEventLnkLocationThingsListPager();
+        });
+    return false;
+};
+
 //Get Devices List
 function LoadPart_LocationDevicesByLocationIDDiv(locationID) {
     var loadingpart = LoadDivLoading();
     $("#divLnkLocationDevicesList").html(loadingpart);
     $.ajax({
         url: getRootURL() + '/locations/LnkLocationDevicesListGridPV?searchfor=' + $(txtDevicesSearch).val() + '&locationID=' + locationID + '&recordsperpage=0',
-        //page=" + $("#DynConfigCurrentPage").html,
         type: "GET",
     })
         .done(function (partialViewResult) {
@@ -208,6 +222,7 @@ function SelectLocationFromLookUp(value) {
     EventSelectLocation();
 }
 
+
 function AttachDeviceToLocation(locationID, DeviceID) {
     $.ajax({
         url: getRootURL() + '/Locations/AttachDevice?locationID=' + locationID + '&DeviceID=' + DeviceID,
@@ -224,3 +239,22 @@ function DeattachDeviceFromLocation(lnkID) {
     })
     LoadPart_LocationDevicesByLocationIDDiv(selectedLocation);
 }
+
+
+function AttachThingToLocation(locationID, ThingID) {
+    $.ajax({
+        url: getRootURL() + '/Locations/AttachThing?locationID=' + locationID + '&ThingID=' + ThingID,
+        type: "POST",
+    })
+    HideModal();
+    LoadPart_LocationThingsByLocationIDDiv(selectedLocation);
+}
+
+function DeattachThingFromLocation(lnkID) {
+    $.ajax({
+        url: getRootURL() + '/Locations/DeAttachThing?linkID=' + lnkID,
+        type: "POST",
+    })
+    LoadPart_LocationThingsByLocationIDDiv(selectedLocation);
+}
+

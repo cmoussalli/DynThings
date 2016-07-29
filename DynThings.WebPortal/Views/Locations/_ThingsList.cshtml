@@ -1,0 +1,39 @@
+﻿@using Microsoft.AspNet.Identity;
+@model IPagedList<DynThings.Data.Models.LinkThingsLocation>
+
+<table class="table striped hovered border bordered">
+    <thead>
+        <tr>
+            <th>Thing</th>
+            <th>Deploy Time Stamp</th>
+            <th></th>>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Thing.Title)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CreateTimeStamp)
+                </td>
+                <td>
+                        <button class="btn btn-danger btn-sm" onclick="DeattachThingFromLocation('@item.ID')">Remove</button>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<div id="LnkLocationThingsListPager">
+    <input id="LnkLocationThingsCurrentPage" value="@Model.PageNumber.ToString()" hidden />
+    @Html.PagedListPager(Model, page => Url.Action("LnkLocationThingsListGridPV", "Locations", new { page }) + "&LocationID=1")
+</div>
+
+<script>
+    function EventSelectThing() {
+        AttachThingToLocation(selectedLocation, selectedThing);
+    }
+</script>
