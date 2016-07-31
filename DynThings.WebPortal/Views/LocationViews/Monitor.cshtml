@@ -8,13 +8,13 @@
     <input id="SelectedEndPointID" type="text" />
 </div>
 
-<div class="container-fluid fullHeight">
-    <div class="row fullHeight">
+<div class="container-fluid fullHeight" >
+    <div class="row fullHeight" >
         <div class="col-sm-9 nopadding" style="height:100%">
             <div id="divMonitorMap"  style="height:100%">
                 @Html.Partial("_LocationViewMap", Model)
             </div>
-            <div id="divMonitorDetails" style="height:100%">
+            <div id="divMonitorDetails" style="height:100%; display:none">
 
             </div>
         </div>
@@ -47,6 +47,7 @@
 
 <style type="text/css">
     html, body {
+        overflow-y:hidden;
         height: 100%;
         margin: 0px;
         padding: 0px;

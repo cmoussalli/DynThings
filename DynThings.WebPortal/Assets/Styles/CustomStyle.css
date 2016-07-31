@@ -8,6 +8,8 @@ html, body {
 .fullHeight {
     background: #ffffff;
     height: 100%;
+    margin: 0px;
+    padding: 0px;
 }
 
 .nopadding {

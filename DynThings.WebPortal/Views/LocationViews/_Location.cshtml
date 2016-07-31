@@ -1,84 +1,71 @@
 ﻿@model DynThings.Data.Models.Location
+<div class="fullHeight" >
 
-<nav class="navbar navbar-default">
-    <div class="container-fluid">
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-            <ul class="nav navbar-nav">
-
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">View: Things<span class="caret"></span></a>
-                    <ul class="dropdown-menu">
-                        <li><a href="#">Things</a></li>
-                        <li><a href="#">Devices</a></li>
-                        <li><a href="#">EndPoints</a></li>
-                        <li role="separator" class="divider"></li>
-                        <li><a href="#">Alerts</a></li>
-                      
-                    </ul>
-                </li>
-
-                <li><a href="#" onclick="FilterEnds();">Refresh</a></li>
-            </ul>
-
-            @*<ul class="nav navbar-nav navbar-right">
-                    <li><a href="#">Link</a></li>
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
                     <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">View: Things<span class="caret"></span></a>
                         <ul class="dropdown-menu">
-                            <li><a href="#">Action</a></li>
-                            <li><a href="#">Another action</a></li>
-                            <li><a href="#">Something else here</a></li>
+                            <li><a href="#">Things</a></li>
+                            <li><a href="#">Devices</a></li>
+                            <li><a href="#">EndPoints</a></li>
                             <li role="separator" class="divider"></li>
-                            <li><a href="#">Separated link</a></li>
+                            <li><a href="#">Alerts</a></li>
+
                         </ul>
                     </li>
-                </ul>*@
+                    <li><a href="#" onclick="FilterEnds();">Refresh</a></li>
+                </ul>
+            </div>
         </div>
-    </div>
 
-
-
-
-
-
-    <div class="panel panel-default">
-        <div class="panel-heading">
-            <h3 class="panel-title"><span id="lblLocationTitle">@Model.Title</span></h3>
-            <br />
-            @Html.DropDownList("Thing", new SelectList(Model.Things, "ID", "Title"), "<All Things>", new { @class = "form-control" })
-        </div>
-        <div class="panel-body">
-                <form class="" >
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title"><span id="lblLocationTitle">@Model.Title</span></h3>
+                <br />
+                @Html.DropDownList("Thing", new SelectList(Model.Things, "ID", "Title"), "<All Things>", new { @class = "form-control" })
+            </div>
+            <div class="panel-body">
+                <form class="">
                     <div class="form-group">
                         <input type="text" id="txtSearch" onkeydown="if (event.keyCode == 13) { FilterEnds(); return false; }" class="form-control" placeholder="Search">
                     </div>
                 </form>
-            <div id="DivThingContent">
+                <div id="DivThingContent"  style="overflow-y:auto;">
+                </div>
+            </div>
+            <div class="panel-footer">
+                <span id="lblLocationThingEndsListFooter"></span>
             </div>
         </div>
-        @*<div class="panel-footer">
-                Panel footer
-            </div>*@
-    </div>
 
-</nav>
+    </nav>
 
 
 
+</div>
 
 
 <script>
     $(document).ready(function () {
         FilterEnds();
+        FixUI();
     });
 
     function FilterEnds() {
         var drpThingID = $(Thing).val();
         var searchFor = $(txtSearch).val();
         LoadPart_MonitorThingEndsList(searchFor, '@Model.ID', drpThingID);
-        
+
     };
 
-   
+    function FixUI(){
+        $(window).resize(function () {
+            $("#DivThingContent").height($("#divMonitorMap").height() - 290);
+        });
+    }
+
 
 </script>
