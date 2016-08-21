@@ -3,8 +3,9 @@
 <div class="panel panel-default">
     <div class="panel-heading">
         <div class="btn-group pull-right" style="padding-top:0px;margin-top:0px;">
-            <a href="#" class="btn btn-default btn-sm" onclick="Load_ThingEnd_HistoryDiv();" style="padding-top:0px;margin-top:0px;">Refresh</a>
-
+            <a href="#" class="btn btn-default btn-sm pull-right" onclick="Load_ThingEnd_HistoryDiv();" style="padding-top:0px;margin-top:0px;">Refresh</a>
+            <input id="drpHistoryIOsFromDate" type="date" value="1/1/2016"/>
+            <input id="drpHistoryIOsToDate" type="date"/>
         </div>
         <span>EndPoint Inputs</span>
     </div>
@@ -41,17 +42,10 @@
     </div>
 </div>
 
-
-
-
-
-
-
 <script>
     $(document).ready(function () {
         AttachEventThingEndIOsListPager();
     });
-
 
     //Attach : Pager
     function AttachEventThingEndIOsListPager() {

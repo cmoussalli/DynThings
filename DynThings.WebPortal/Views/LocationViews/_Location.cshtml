@@ -1,5 +1,5 @@
 ﻿@model DynThings.Data.Models.Location
-<div class="fullHeight" >
+<div class="fullHeight">
 
     <nav class="navbar navbar-default">
         <div class="container-fluid">
@@ -33,7 +33,7 @@
                         <input type="text" id="txtSearch" onkeydown="if (event.keyCode == 13) { FilterEnds(); return false; }" class="form-control" placeholder="Search">
                     </div>
                 </form>
-                <div id="DivThingContent"  style="overflow-y:auto;">
+                <div id="DivThingContent" style="overflow-y:auto;">
                 </div>
             </div>
             <div class="panel-footer">
@@ -50,6 +50,9 @@
 
 <script>
     $(document).ready(function () {
+        $(window).resize(function () {
+            $("#DivThingContent").height($("#divMonitorMap").height() - 290);
+        });
         FilterEnds();
         FixUI();
     });
@@ -58,13 +61,12 @@
         var drpThingID = $(Thing).val();
         var searchFor = $(txtSearch).val();
         LoadPart_MonitorThingEndsList(searchFor, '@Model.ID', drpThingID);
+        FixUI();
 
     };
 
-    function FixUI(){
-        $(window).resize(function () {
-            $("#DivThingContent").height($("#divMonitorMap").height() - 290);
-        });
+    function FixUI() {
+        $("#DivThingContent").height($("#divMonitorMap").height() - 290);
     }
 
 

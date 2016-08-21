@@ -214,19 +214,6 @@ namespace DynThings.WebPortal.Controllers
 
 
         #region Reports
-        //[HttpGet]
-        //public ActionResult Rpt_Month(long ThingID,string year)
-        //{
-        //    Chart chrt =  UnitOfWork_Reports.rptThings.IOs_Monthly(ThingID,year);
-        //    return PartialView("_HighChart", chrt);
-        //}
-
-        //[HttpGet]
-        //public ActionResult Rpt_Day(long ThingID)
-        //{
-        //    Chart chrt = UnitOfWork_Reports.rptThings.IOs_Daily(ThingID);
-        //    return PartialView("_HighChart", chrt);
-        //}
 
         [HttpGet]
         public ActionResult Rpt_Hour(long ThingID, long endPointTypeID)

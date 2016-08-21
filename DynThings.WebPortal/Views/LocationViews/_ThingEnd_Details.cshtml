@@ -1,6 +1,6 @@
 ﻿@model DynThings.Data.Models.ViewModels.ThingEnd
 
-<nav class="navbar navbar-default navbar-inverse" >
+<nav class="navbar navbar-default navbar-inverse">
     <div class="container-fluid">
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header">
@@ -23,11 +23,13 @@
                 <li id="liThingEndHistory"><a href="#" onclick="SelectThingEndDetailsView_History()">History</a></li>
             </ul>
 
-            <ul class="nav navbar-nav navbar-right">
-                <li><a href="#" onclick="Load_ThingsEnd_Details()">Refresh</a></li>
+            <div class="nav navbar-nav navbar-right">
+                <ul class="nav navbar-nav">
+                    <li><a href="#" onclick="Load_ThingsEnd_Details()">Refresh</a></li>
 
-                <li><a href="#" onclick="ClosedivMonitorDetailsDiv()">Close</a></li>
-            </ul>
+                    <li><a href="#" onclick="ClosedivMonitorDetailsDiv()">Close</a></li>
+                </ul>
+            </div>
         </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->
 </nav>
@@ -43,11 +45,11 @@
     </div>
 </div>
 
-<div id="divThingEndDetailsView_History" >
+<div id="divThingEndDetailsView_History">
     <div class="container-fluid">
         <div class="row">
             <div class="col-lg-12">
-              
+
                 <div id="divThingEndHistory_Inputs"></div>
 
             </div>
