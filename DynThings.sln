@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.25123.0
+VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DynThings.Data.Models", "DynThings.Data.Models\DynThings.Data.Models.csproj", "{946862BE-8456-4882-9A11-09ED0AFD407B}"
 EndProject
@@ -28,6 +28,8 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Apps", "Apps", "{7E57DAB6-000E-4B32-A5BC-0FF6317B315A}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DynThings.ControlRoom", "DynThings.ControlRoom\DynThings.ControlRoom.csproj", "{38414828-8BB3-4962-82AA-92B077BFC18E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DynThings.UpdateTool", "DynThings.UpdateTool\DynThings.UpdateTool.csproj", "{8921CC0A-FBB8-44E9-87CA-FCA3E5B64F96}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -173,6 +175,22 @@ Global
 		{38414828-8BB3-4962-82AA-92B077BFC18E}.Release|x86.ActiveCfg = Release|x86
 		{38414828-8BB3-4962-82AA-92B077BFC18E}.Release|x86.Build.0 = Release|x86
 		{38414828-8BB3-4962-82AA-92B077BFC18E}.Release|x86.Deploy.0 = Release|x86
+		{8921CC0A-FBB8-44E9-87CA-FCA3E5B64F96}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8921CC0A-FBB8-44E9-87CA-FCA3E5B64F96}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8921CC0A-FBB8-44E9-87CA-FCA3E5B64F96}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{8921CC0A-FBB8-44E9-87CA-FCA3E5B64F96}.Debug|ARM.Build.0 = Debug|Any CPU
+		{8921CC0A-FBB8-44E9-87CA-FCA3E5B64F96}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{8921CC0A-FBB8-44E9-87CA-FCA3E5B64F96}.Debug|x64.Build.0 = Debug|Any CPU
+		{8921CC0A-FBB8-44E9-87CA-FCA3E5B64F96}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{8921CC0A-FBB8-44E9-87CA-FCA3E5B64F96}.Debug|x86.Build.0 = Debug|Any CPU
+		{8921CC0A-FBB8-44E9-87CA-FCA3E5B64F96}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8921CC0A-FBB8-44E9-87CA-FCA3E5B64F96}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8921CC0A-FBB8-44E9-87CA-FCA3E5B64F96}.Release|ARM.ActiveCfg = Release|Any CPU
+		{8921CC0A-FBB8-44E9-87CA-FCA3E5B64F96}.Release|ARM.Build.0 = Release|Any CPU
+		{8921CC0A-FBB8-44E9-87CA-FCA3E5B64F96}.Release|x64.ActiveCfg = Release|Any CPU
+		{8921CC0A-FBB8-44E9-87CA-FCA3E5B64F96}.Release|x64.Build.0 = Release|Any CPU
+		{8921CC0A-FBB8-44E9-87CA-FCA3E5B64F96}.Release|x86.ActiveCfg = Release|Any CPU
+		{8921CC0A-FBB8-44E9-87CA-FCA3E5B64F96}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -186,5 +204,6 @@ Global
 		{C5671EE7-F0A2-4D61-815B-E98FFCFD349A} = {7E57DAB6-000E-4B32-A5BC-0FF6317B315A}
 		{AB08055F-4BAB-48A5-A76C-F97AEE45A9C8} = {4CCA1A8E-2A1E-4BC4-AA63-2E26F86F3FBB}
 		{38414828-8BB3-4962-82AA-92B077BFC18E} = {7E57DAB6-000E-4B32-A5BC-0FF6317B315A}
+		{8921CC0A-FBB8-44E9-87CA-FCA3E5B64F96} = {7E57DAB6-000E-4B32-A5BC-0FF6317B315A}
 	EndGlobalSection
 EndGlobal
