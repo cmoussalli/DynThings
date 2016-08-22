@@ -45,6 +45,7 @@
     <Compile Include="APIEndPointIO.cs" />
     <Compile Include="APIEndPoint.cs" />
     <Compile Include="APIDevice.cs" />
+    <Compile Include="APIPlatformInfo.cs" />
     <Compile Include="ApiResponse.cs" />
     <Compile Include="CommandEnitity.cs" />
     <Compile Include="SubmissionDeviceIO.cs" />

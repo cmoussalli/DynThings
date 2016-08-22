@@ -214,6 +214,12 @@ namespace DynThings.WebPortal.Controllers
 
 
         #region Reports
+        [HttpGet]
+        public ActionResult Rpt_Minute(long ThingID, long endPointTypeID)
+        {
+            Chart chrt = UnitOfWork_Reports.rptThings.IOs_Minute(ThingID, endPointTypeID);
+            return PartialView("Reports/Charts/InputValues_BasicLine", chrt);
+        }
 
         [HttpGet]
         public ActionResult Rpt_Hour(long ThingID, long endPointTypeID)
@@ -223,9 +229,16 @@ namespace DynThings.WebPortal.Controllers
         }
 
         [HttpGet]
-        public ActionResult Rpt_Minute(long ThingID, long endPointTypeID)
+        public ActionResult Rpt_Day(long ThingID, long endPointTypeID)
         {
-            Chart chrt = UnitOfWork_Reports.rptThings.IOs_Minute(ThingID, endPointTypeID);
+            Chart chrt = UnitOfWork_Reports.rptThings.IOs_Days(ThingID, endPointTypeID);
+            return PartialView("Reports/Charts/InputValues_BasicLine", chrt);
+        }
+
+        [HttpGet]
+        public ActionResult Rpt_Month(long ThingID, long endPointTypeID)
+        {
+            Chart chrt = UnitOfWork_Reports.rptThings.IOs_Months(ThingID, endPointTypeID);
             return PartialView("Reports/Charts/InputValues_BasicLine", chrt);
         }
 

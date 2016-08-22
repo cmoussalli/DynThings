@@ -79,7 +79,13 @@ namespace DynThings.Core
                 return db.DynSettings.First().App_TimeZone;
             }
         }
-
+        public static string PlatformTitle
+        {
+            get
+            {
+                return db.DynSettings.First().PlatformTitle;
+            }
+        }
 
         public static void SetDevelopmentMode(bool activation)
         {
@@ -87,7 +93,6 @@ namespace DynThings.Core
             dset.DevelopmentMode = activation;
             db.SaveChanges();
         }
-
         public static void SetDefaultRecordsPerPage(int recordsCount)
         {
             DynSetting dset = db.DynSettings.First();
@@ -100,21 +105,18 @@ namespace DynThings.Core
             dset.DefaultRecordsPerChild = recordsCount;
             db.SaveChanges();
         }
-
         public static void SetPublicAccess(bool activation)
         {
             DynSetting dset = db.DynSettings.First();
             dset.PublicAccess = activation;
             db.SaveChanges();
         }
-
         public static void SetPublicSignUP(bool activation)
         {
             DynSetting dset = db.DynSettings.First();
             dset.PublicSignUP = activation;
             db.SaveChanges();
         }
-
         public static void SetSystemLogger(bool activation)
         {
             DynSetting dset = db.DynSettings.First();
@@ -133,9 +135,14 @@ namespace DynThings.Core
             dset.App_TimeZone = recordsCount;
             db.SaveChanges();
         }
+        public static void SetPlatformTitle(string title)
+        {
+            DynSetting dset = db.DynSettings.First();
+            dset.PlatformTitle = title;
+            db.SaveChanges();
+        }
 
 
-        
 
     }
 

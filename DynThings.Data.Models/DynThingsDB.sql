@@ -1,4 +1,4 @@
---DB Version 0.107
+--DB Version 0.108
 USE [master]
 GO
 /****** Object:  Database [DynThings]    Script Date: 2/8/2016 12:47:48 PM ******/
@@ -9,7 +9,8 @@ CREATE DATABASE [DynThings]
 
 USE [DynThings]
 GO
-/****** Object:  Table [dbo].[AspNetRoles]    Script Date: 7/23/2016 9:48:50 AM ******/
+
+/****** Object:  Table [dbo].[AspNetRoles]    Script Date: 8/22/2016 10:19:37 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -24,7 +25,7 @@ CREATE TABLE [dbo].[AspNetRoles](
 ) ON [PRIMARY]
 
 GO
-/****** Object:  Table [dbo].[AspNetUserClaims]    Script Date: 7/23/2016 9:48:50 AM ******/
+/****** Object:  Table [dbo].[AspNetUserClaims]    Script Date: 8/22/2016 10:19:37 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -41,7 +42,7 @@ CREATE TABLE [dbo].[AspNetUserClaims](
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 
 GO
-/****** Object:  Table [dbo].[AspNetUserLogins]    Script Date: 7/23/2016 9:48:50 AM ******/
+/****** Object:  Table [dbo].[AspNetUserLogins]    Script Date: 8/22/2016 10:19:37 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -59,7 +60,7 @@ CREATE TABLE [dbo].[AspNetUserLogins](
 ) ON [PRIMARY]
 
 GO
-/****** Object:  Table [dbo].[AspNetUserRoles]    Script Date: 7/23/2016 9:48:50 AM ******/
+/****** Object:  Table [dbo].[AspNetUserRoles]    Script Date: 8/22/2016 10:19:37 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -75,7 +76,7 @@ CREATE TABLE [dbo].[AspNetUserRoles](
 ) ON [PRIMARY]
 
 GO
-/****** Object:  Table [dbo].[AspNetUsers]    Script Date: 7/23/2016 9:48:50 AM ******/
+/****** Object:  Table [dbo].[AspNetUsers]    Script Date: 8/22/2016 10:19:37 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -101,7 +102,7 @@ CREATE TABLE [dbo].[AspNetUsers](
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 
 GO
-/****** Object:  Table [dbo].[CssIcons]    Script Date: 7/23/2016 9:48:50 AM ******/
+/****** Object:  Table [dbo].[CssIcons]    Script Date: 8/22/2016 10:19:37 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -117,7 +118,7 @@ CREATE TABLE [dbo].[CssIcons](
 ) ON [PRIMARY]
 
 GO
-/****** Object:  Table [dbo].[DeviceCommands]    Script Date: 7/23/2016 9:48:50 AM ******/
+/****** Object:  Table [dbo].[DeviceCommands]    Script Date: 8/22/2016 10:19:37 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -136,7 +137,7 @@ CREATE TABLE [dbo].[DeviceCommands](
 ) ON [PRIMARY]
 
 GO
-/****** Object:  Table [dbo].[DeviceIOs]    Script Date: 7/23/2016 9:48:50 AM ******/
+/****** Object:  Table [dbo].[DeviceIOs]    Script Date: 8/22/2016 10:19:37 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -156,7 +157,7 @@ CREATE TABLE [dbo].[DeviceIOs](
 ) ON [PRIMARY]
 
 GO
-/****** Object:  Table [dbo].[Devices]    Script Date: 7/23/2016 9:48:50 AM ******/
+/****** Object:  Table [dbo].[Devices]    Script Date: 8/22/2016 10:19:37 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -178,7 +179,7 @@ CREATE TABLE [dbo].[Devices](
 ) ON [PRIMARY]
 
 GO
-/****** Object:  Table [dbo].[DeviceStatus]    Script Date: 7/23/2016 9:48:50 AM ******/
+/****** Object:  Table [dbo].[DeviceStatus]    Script Date: 8/22/2016 10:19:37 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -193,7 +194,7 @@ CREATE TABLE [dbo].[DeviceStatus](
 ) ON [PRIMARY]
 
 GO
-/****** Object:  Table [dbo].[DynSettings]    Script Date: 7/23/2016 9:48:50 AM ******/
+/****** Object:  Table [dbo].[DynSettings]    Script Date: 8/22/2016 10:19:37 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -209,6 +210,7 @@ CREATE TABLE [dbo].[DynSettings](
 	[PublicSignUP] [bit] NOT NULL,
 	[EnableSystemLogger] [bit] NOT NULL,
 	[App_TimeZone] [int] NOT NULL,
+	[PlatformTitle] [nvarchar](128) NULL,
  CONSTRAINT [PK_DynSettings] PRIMARY KEY CLUSTERED 
 (
 	[ID] ASC
@@ -216,7 +218,7 @@ CREATE TABLE [dbo].[DynSettings](
 ) ON [PRIMARY]
 
 GO
-/****** Object:  Table [dbo].[EndPointCommands]    Script Date: 7/23/2016 9:48:50 AM ******/
+/****** Object:  Table [dbo].[EndPointCommands]    Script Date: 8/22/2016 10:19:37 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -235,7 +237,7 @@ CREATE TABLE [dbo].[EndPointCommands](
 ) ON [PRIMARY]
 
 GO
-/****** Object:  Table [dbo].[EndPointIOs]    Script Date: 7/23/2016 9:48:50 AM ******/
+/****** Object:  Table [dbo].[EndPointIOs]    Script Date: 8/22/2016 10:19:37 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -256,7 +258,7 @@ CREATE TABLE [dbo].[EndPointIOs](
 ) ON [PRIMARY]
 
 GO
-/****** Object:  Table [dbo].[Endpoints]    Script Date: 7/23/2016 9:48:50 AM ******/
+/****** Object:  Table [dbo].[Endpoints]    Script Date: 8/22/2016 10:19:37 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -277,7 +279,7 @@ CREATE TABLE [dbo].[Endpoints](
 ) ON [PRIMARY]
 
 GO
-/****** Object:  Table [dbo].[EndPointTypeCategorys]    Script Date: 7/23/2016 9:48:50 AM ******/
+/****** Object:  Table [dbo].[EndPointTypeCategorys]    Script Date: 8/22/2016 10:19:37 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -292,7 +294,7 @@ CREATE TABLE [dbo].[EndPointTypeCategorys](
 ) ON [PRIMARY]
 
 GO
-/****** Object:  Table [dbo].[EndPointTypes]    Script Date: 7/23/2016 9:48:50 AM ******/
+/****** Object:  Table [dbo].[EndPointTypes]    Script Date: 8/22/2016 10:19:37 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -310,7 +312,7 @@ CREATE TABLE [dbo].[EndPointTypes](
 ) ON [PRIMARY]
 
 GO
-/****** Object:  Table [dbo].[IOTypes]    Script Date: 7/23/2016 9:48:50 AM ******/
+/****** Object:  Table [dbo].[IOTypes]    Script Date: 8/22/2016 10:19:37 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -326,7 +328,7 @@ CREATE TABLE [dbo].[IOTypes](
 ) ON [PRIMARY]
 
 GO
-/****** Object:  Table [dbo].[LinkDevicesLocations]    Script Date: 7/23/2016 9:48:50 AM ******/
+/****** Object:  Table [dbo].[LinkDevicesLocations]    Script Date: 8/22/2016 10:19:37 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -346,7 +348,7 @@ CREATE TABLE [dbo].[LinkDevicesLocations](
 ) ON [PRIMARY]
 
 GO
-/****** Object:  Table [dbo].[LinkLocationsLocationViews]    Script Date: 7/23/2016 9:48:50 AM ******/
+/****** Object:  Table [dbo].[LinkLocationsLocationViews]    Script Date: 8/22/2016 10:19:37 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -362,7 +364,7 @@ CREATE TABLE [dbo].[LinkLocationsLocationViews](
 ) ON [PRIMARY]
 
 GO
-/****** Object:  Table [dbo].[LinkThingsLocations]    Script Date: 7/23/2016 9:48:50 AM ******/
+/****** Object:  Table [dbo].[LinkThingsLocations]    Script Date: 8/22/2016 10:19:37 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -380,7 +382,7 @@ CREATE TABLE [dbo].[LinkThingsLocations](
 ) ON [PRIMARY]
 
 GO
-/****** Object:  Table [dbo].[Locations]    Script Date: 7/23/2016 9:48:50 AM ******/
+/****** Object:  Table [dbo].[Locations]    Script Date: 8/22/2016 10:19:37 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -401,7 +403,7 @@ CREATE TABLE [dbo].[Locations](
 ) ON [PRIMARY]
 
 GO
-/****** Object:  Table [dbo].[LocationViews]    Script Date: 7/23/2016 9:48:50 AM ******/
+/****** Object:  Table [dbo].[LocationViews]    Script Date: 8/22/2016 10:19:37 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -422,7 +424,7 @@ CREATE TABLE [dbo].[LocationViews](
 ) ON [PRIMARY]
 
 GO
-/****** Object:  Table [dbo].[LocationViewTypes]    Script Date: 7/23/2016 9:48:50 AM ******/
+/****** Object:  Table [dbo].[LocationViewTypes]    Script Date: 8/22/2016 10:19:37 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -437,7 +439,7 @@ CREATE TABLE [dbo].[LocationViewTypes](
 ) ON [PRIMARY]
 
 GO
-/****** Object:  Table [dbo].[ResultMessages]    Script Date: 7/23/2016 9:48:50 AM ******/
+/****** Object:  Table [dbo].[ResultMessages]    Script Date: 8/22/2016 10:19:37 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -453,7 +455,7 @@ CREATE TABLE [dbo].[ResultMessages](
 ) ON [PRIMARY]
 
 GO
-/****** Object:  Table [dbo].[ThingCategorys]    Script Date: 7/23/2016 9:48:50 AM ******/
+/****** Object:  Table [dbo].[ThingCategorys]    Script Date: 8/22/2016 10:19:37 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -468,7 +470,7 @@ CREATE TABLE [dbo].[ThingCategorys](
 ) ON [PRIMARY]
 
 GO
-/****** Object:  Table [dbo].[Things]    Script Date: 7/23/2016 9:48:50 AM ******/
+/****** Object:  Table [dbo].[Things]    Script Date: 8/22/2016 10:19:37 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -526,6 +528,8 @@ SET IDENTITY_INSERT [dbo].[DeviceIOs] ON
 GO
 INSERT [dbo].[DeviceIOs] ([ID], [DeviceID], [IOTypeID], [Valu], [TimeStamp], [ExecTimeStamp], [ScheduleTimeStamp]) VALUES (8, 9, 2, N'rst2', CAST(N'2016-05-14 13:25:00.767' AS DateTime), NULL, NULL)
 GO
+INSERT [dbo].[DeviceIOs] ([ID], [DeviceID], [IOTypeID], [Valu], [TimeStamp], [ExecTimeStamp], [ScheduleTimeStamp]) VALUES (10, 9, 1, N'24', CAST(N'2016-08-22 10:16:49.063' AS DateTime), CAST(N'2016-08-22 00:00:00.000' AS DateTime), NULL)
+GO
 SET IDENTITY_INSERT [dbo].[DeviceIOs] OFF
 GO
 SET IDENTITY_INSERT [dbo].[Devices] ON 
@@ -551,7 +555,7 @@ GO
 SET IDENTITY_INSERT [dbo].[DynSettings] ON 
 
 GO
-INSERT [dbo].[DynSettings] ([ID], [DBVersion], [DevelopmentMode], [DefaultRecordsPerMaster], [DefaultRecordsPerChild], [PlatformKey], [PublicAccess], [PublicSignUP], [EnableSystemLogger], [App_TimeZone]) VALUES (1, 0.107, 1, 5, 5, N'a86bb826-988d-4f9a-9f43-169045506194', 0, 1, 1, 4)
+INSERT [dbo].[DynSettings] ([ID], [DBVersion], [DevelopmentMode], [DefaultRecordsPerMaster], [DefaultRecordsPerChild], [PlatformKey], [PublicAccess], [PublicSignUP], [EnableSystemLogger], [App_TimeZone], [PlatformTitle]) VALUES (1, 0.108, 1, 5, 5, N'a86bb826-988d-4f9a-9f43-169045506194', 0, 1, 1, 4, N'My IoT Platform')
 GO
 SET IDENTITY_INSERT [dbo].[DynSettings] OFF
 GO
@@ -565,43 +569,11 @@ GO
 SET IDENTITY_INSERT [dbo].[EndPointIOs] ON 
 
 GO
-INSERT [dbo].[EndPointIOs] ([ID], [EndPointID], [IOTypeID], [Valu], [TimeStamp], [ExecTimeStamp], [ScheduleTimeStamp], [ThingID]) VALUES (1, 46, 1, N'31', CAST(N'2016-06-26 13:49:01.000' AS DateTime), CAST(N'2016-06-26 13:49:01.000' AS DateTime), CAST(N'2016-06-26 13:49:01.000' AS DateTime), 1)
+INSERT [dbo].[EndPointIOs] ([ID], [EndPointID], [IOTypeID], [Valu], [TimeStamp], [ExecTimeStamp], [ScheduleTimeStamp], [ThingID]) VALUES (1, 47, 1, N'25', CAST(N'2016-08-22 00:00:00.000' AS DateTime), CAST(N'2016-08-22 00:00:00.000' AS DateTime), CAST(N'2016-08-22 00:00:00.000' AS DateTime), 2)
 GO
-INSERT [dbo].[EndPointIOs] ([ID], [EndPointID], [IOTypeID], [Valu], [TimeStamp], [ExecTimeStamp], [ScheduleTimeStamp], [ThingID]) VALUES (2, 46, 1, N'32', CAST(N'2016-06-26 13:50:25.000' AS DateTime), CAST(N'2016-06-26 13:50:25.000' AS DateTime), CAST(N'2016-06-26 13:50:25.000' AS DateTime), 1)
+INSERT [dbo].[EndPointIOs] ([ID], [EndPointID], [IOTypeID], [Valu], [TimeStamp], [ExecTimeStamp], [ScheduleTimeStamp], [ThingID]) VALUES (2, 48, 1, N'27', CAST(N'2016-08-22 00:00:00.000' AS DateTime), CAST(N'2016-08-22 00:00:00.000' AS DateTime), CAST(N'2016-08-22 00:00:00.000' AS DateTime), 1)
 GO
-INSERT [dbo].[EndPointIOs] ([ID], [EndPointID], [IOTypeID], [Valu], [TimeStamp], [ExecTimeStamp], [ScheduleTimeStamp], [ThingID]) VALUES (3, 46, 1, N'33', CAST(N'2016-06-27 09:54:22.000' AS DateTime), CAST(N'2016-06-27 09:54:22.000' AS DateTime), CAST(N'2016-06-27 09:54:22.000' AS DateTime), 1)
-GO
-INSERT [dbo].[EndPointIOs] ([ID], [EndPointID], [IOTypeID], [Valu], [TimeStamp], [ExecTimeStamp], [ScheduleTimeStamp], [ThingID]) VALUES (4, 47, 1, N'34', CAST(N'2016-06-28 18:52:37.000' AS DateTime), CAST(N'2016-06-28 18:52:37.000' AS DateTime), CAST(N'2016-06-28 18:52:37.000' AS DateTime), 2)
-GO
-INSERT [dbo].[EndPointIOs] ([ID], [EndPointID], [IOTypeID], [Valu], [TimeStamp], [ExecTimeStamp], [ScheduleTimeStamp], [ThingID]) VALUES (5, 46, 1, N'33', CAST(N'2016-07-17 14:05:00.000' AS DateTime), CAST(N'2016-07-17 14:05:00.000' AS DateTime), CAST(N'2016-07-17 00:00:00.000' AS DateTime), 1)
-GO
-INSERT [dbo].[EndPointIOs] ([ID], [EndPointID], [IOTypeID], [Valu], [TimeStamp], [ExecTimeStamp], [ScheduleTimeStamp], [ThingID]) VALUES (8, 46, 1, N'32', CAST(N'2016-07-17 00:00:00.000' AS DateTime), CAST(N'2016-07-17 14:06:00.000' AS DateTime), CAST(N'2016-07-17 14:05:00.000' AS DateTime), 1)
-GO
-INSERT [dbo].[EndPointIOs] ([ID], [EndPointID], [IOTypeID], [Valu], [TimeStamp], [ExecTimeStamp], [ScheduleTimeStamp], [ThingID]) VALUES (9, 46, 1, N'36', CAST(N'2016-07-20 18:48:19.000' AS DateTime), CAST(N'2016-07-20 18:48:19.000' AS DateTime), CAST(N'2016-07-20 18:48:19.000' AS DateTime), 2)
-GO
-INSERT [dbo].[EndPointIOs] ([ID], [EndPointID], [IOTypeID], [Valu], [TimeStamp], [ExecTimeStamp], [ScheduleTimeStamp], [ThingID]) VALUES (10, 46, 1, N'36', CAST(N'2016-07-20 18:49:59.000' AS DateTime), CAST(N'2016-07-20 18:49:59.000' AS DateTime), CAST(N'2016-07-20 18:49:59.000' AS DateTime), 1)
-GO
-INSERT [dbo].[EndPointIOs] ([ID], [EndPointID], [IOTypeID], [Valu], [TimeStamp], [ExecTimeStamp], [ScheduleTimeStamp], [ThingID]) VALUES (11, 47, 1, N'37', CAST(N'2016-07-20 18:50:05.000' AS DateTime), CAST(N'2016-07-20 18:50:05.000' AS DateTime), CAST(N'2016-07-20 18:50:05.000' AS DateTime), 1)
-GO
-INSERT [dbo].[EndPointIOs] ([ID], [EndPointID], [IOTypeID], [Valu], [TimeStamp], [ExecTimeStamp], [ScheduleTimeStamp], [ThingID]) VALUES (12, 48, 1, N'45', CAST(N'2016-07-20 19:06:13.000' AS DateTime), CAST(N'2016-07-20 19:06:13.000' AS DateTime), CAST(N'2016-07-20 19:06:13.000' AS DateTime), 1)
-GO
-INSERT [dbo].[EndPointIOs] ([ID], [EndPointID], [IOTypeID], [Valu], [TimeStamp], [ExecTimeStamp], [ScheduleTimeStamp], [ThingID]) VALUES (13, 48, 1, N'46', CAST(N'2016-07-20 19:07:40.000' AS DateTime), CAST(N'2016-07-20 19:07:40.000' AS DateTime), CAST(N'2016-07-20 19:07:40.000' AS DateTime), 1)
-GO
-INSERT [dbo].[EndPointIOs] ([ID], [EndPointID], [IOTypeID], [Valu], [TimeStamp], [ExecTimeStamp], [ScheduleTimeStamp], [ThingID]) VALUES (14, 48, 1, N'46', CAST(N'2016-07-20 19:41:05.000' AS DateTime), CAST(N'2016-07-20 19:41:05.000' AS DateTime), CAST(N'2016-07-20 19:41:05.000' AS DateTime), 1)
-GO
-INSERT [dbo].[EndPointIOs] ([ID], [EndPointID], [IOTypeID], [Valu], [TimeStamp], [ExecTimeStamp], [ScheduleTimeStamp], [ThingID]) VALUES (15, 48, 1, N'47', CAST(N'2016-07-20 19:41:42.000' AS DateTime), CAST(N'2016-07-20 19:41:42.000' AS DateTime), CAST(N'2016-07-20 19:41:42.000' AS DateTime), 1)
-GO
-INSERT [dbo].[EndPointIOs] ([ID], [EndPointID], [IOTypeID], [Valu], [TimeStamp], [ExecTimeStamp], [ScheduleTimeStamp], [ThingID]) VALUES (16, 48, 1, N'46', CAST(N'2016-07-20 19:42:38.000' AS DateTime), CAST(N'2016-07-20 19:42:38.000' AS DateTime), CAST(N'2016-07-20 19:42:38.000' AS DateTime), 1)
-GO
-INSERT [dbo].[EndPointIOs] ([ID], [EndPointID], [IOTypeID], [Valu], [TimeStamp], [ExecTimeStamp], [ScheduleTimeStamp], [ThingID]) VALUES (17, 48, 1, N'47', CAST(N'2016-07-20 19:43:23.000' AS DateTime), CAST(N'2016-07-20 19:43:23.000' AS DateTime), CAST(N'2016-07-20 19:43:23.000' AS DateTime), 1)
-GO
-INSERT [dbo].[EndPointIOs] ([ID], [EndPointID], [IOTypeID], [Valu], [TimeStamp], [ExecTimeStamp], [ScheduleTimeStamp], [ThingID]) VALUES (18, 48, 1, N'47', CAST(N'2016-07-22 15:03:13.000' AS DateTime), CAST(N'2016-07-22 15:03:13.000' AS DateTime), CAST(N'2016-07-22 15:03:13.000' AS DateTime), 1)
-GO
-INSERT [dbo].[EndPointIOs] ([ID], [EndPointID], [IOTypeID], [Valu], [TimeStamp], [ExecTimeStamp], [ScheduleTimeStamp], [ThingID]) VALUES (19, 48, 1, N'46', CAST(N'2016-07-22 15:03:49.000' AS DateTime), CAST(N'2016-07-22 15:03:49.000' AS DateTime), CAST(N'2016-07-22 15:03:49.000' AS DateTime), 1)
-GO
-INSERT [dbo].[EndPointIOs] ([ID], [EndPointID], [IOTypeID], [Valu], [TimeStamp], [ExecTimeStamp], [ScheduleTimeStamp], [ThingID]) VALUES (20, 48, 1, N'46', CAST(N'2016-07-22 15:03:51.000' AS DateTime), CAST(N'2016-07-22 15:03:51.000' AS DateTime), CAST(N'2016-07-22 15:03:51.000' AS DateTime), 1)
-GO
-INSERT [dbo].[EndPointIOs] ([ID], [EndPointID], [IOTypeID], [Valu], [TimeStamp], [ExecTimeStamp], [ScheduleTimeStamp], [ThingID]) VALUES (21, 46, 1, N'36', CAST(N'2016-07-22 15:03:54.000' AS DateTime), CAST(N'2016-07-22 15:03:54.000' AS DateTime), CAST(N'2016-07-22 15:03:54.000' AS DateTime), 1)
+INSERT [dbo].[EndPointIOs] ([ID], [EndPointID], [IOTypeID], [Valu], [TimeStamp], [ExecTimeStamp], [ScheduleTimeStamp], [ThingID]) VALUES (3, 48, 1, N'29', CAST(N'2016-08-22 00:00:00.000' AS DateTime), CAST(N'2016-08-22 00:00:00.000' AS DateTime), CAST(N'2016-08-22 00:00:00.000' AS DateTime), 1)
 GO
 SET IDENTITY_INSERT [dbo].[EndPointIOs] OFF
 GO
@@ -610,7 +582,7 @@ SET IDENTITY_INSERT [dbo].[Endpoints] ON
 GO
 INSERT [dbo].[Endpoints] ([ID], [GUID], [KeyPass], [PinCode], [Title], [DeviceID], [TypeID], [ThingID]) VALUES (46, N'f5b4f219-0629-421d-991e-55ff0b8409a2', N'1cfb97d0-5a7d-443f-9d25-ee143d2f6465', N'0000', N'End 21', 9, 1, 1)
 GO
-INSERT [dbo].[Endpoints] ([ID], [GUID], [KeyPass], [PinCode], [Title], [DeviceID], [TypeID], [ThingID]) VALUES (47, N'3bb4ef21-dcf7-424d-86d9-9de7d1132321', N'ab4bb8b0-44f8-44a8-b41c-d8885a7c9ea6', N'0000', N'e2', 9, 1, 0)
+INSERT [dbo].[Endpoints] ([ID], [GUID], [KeyPass], [PinCode], [Title], [DeviceID], [TypeID], [ThingID]) VALUES (47, N'3bb4ef21-dcf7-424d-86d9-9de7d1132321', N'ab4bb8b0-44f8-44a8-b41c-d8885a7c9ea6', N'0000', N'e2', 9, 1, 2)
 GO
 INSERT [dbo].[Endpoints] ([ID], [GUID], [KeyPass], [PinCode], [Title], [DeviceID], [TypeID], [ThingID]) VALUES (48, N'd5375e38-9bdb-471e-be4b-83f63bd7a9fe', N'2dc5ce71-87c9-4740-a10c-53cc989d2991', N'0000', N'End3', 9, 2, 1)
 GO
@@ -709,11 +681,9 @@ GO
 SET IDENTITY_INSERT [dbo].[LinkThingsLocations] ON 
 
 GO
-INSERT [dbo].[LinkThingsLocations] ([ID], [LocationID], [ThingID], [CreateByUser], [CreateTimeStamp]) VALUES (2, 1, 1, N'367df69f-c059-4295-95b0-718c93dfa843', CAST(N'2016-01-01 00:00:00.000' AS DateTime))
+INSERT [dbo].[LinkThingsLocations] ([ID], [LocationID], [ThingID], [CreateByUser], [CreateTimeStamp]) VALUES (8, 1, 1, N'367df69f-c059-4295-95b0-718c93dfa843', CAST(N'2016-07-29 18:05:51.330' AS DateTime))
 GO
-INSERT [dbo].[LinkThingsLocations] ([ID], [LocationID], [ThingID], [CreateByUser], [CreateTimeStamp]) VALUES (3, 1, 2, N'367df69f-c059-4295-95b0-718c93dfa843', CAST(N'2016-01-01 00:00:00.000' AS DateTime))
-GO
-INSERT [dbo].[LinkThingsLocations] ([ID], [LocationID], [ThingID], [CreateByUser], [CreateTimeStamp]) VALUES (7, 3, 2, N'367df69f-c059-4295-95b0-718c93dfa843', CAST(N'2016-01-01 00:00:00.000' AS DateTime))
+INSERT [dbo].[LinkThingsLocations] ([ID], [LocationID], [ThingID], [CreateByUser], [CreateTimeStamp]) VALUES (9, 1, 2, N'367df69f-c059-4295-95b0-718c93dfa843', CAST(N'2016-07-31 09:05:43.420' AS DateTime))
 GO
 SET IDENTITY_INSERT [dbo].[LinkThingsLocations] OFF
 GO
@@ -779,6 +749,8 @@ INSERT [dbo].[ThingCategorys] ([ID], [Title]) VALUES (6, N'Fan')
 GO
 INSERT [dbo].[ThingCategorys] ([ID], [Title]) VALUES (7, N'Valve')
 GO
+INSERT [dbo].[ThingCategorys] ([ID], [Title]) VALUES (8, N'TT2')
+GO
 SET IDENTITY_INSERT [dbo].[ThingCategorys] OFF
 GO
 SET IDENTITY_INSERT [dbo].[Things] ON 
@@ -797,7 +769,7 @@ GO
 SET ANSI_PADDING ON
 
 GO
-/****** Object:  Index [RoleNameIndex]    Script Date: 7/23/2016 9:48:53 AM ******/
+/****** Object:  Index [RoleNameIndex]    Script Date: 8/22/2016 10:19:37 AM ******/
 CREATE UNIQUE NONCLUSTERED INDEX [RoleNameIndex] ON [dbo].[AspNetRoles]
 (
 	[Name] ASC
@@ -806,7 +778,7 @@ GO
 SET ANSI_PADDING ON
 
 GO
-/****** Object:  Index [IX_UserId]    Script Date: 7/23/2016 9:48:53 AM ******/
+/****** Object:  Index [IX_UserId]    Script Date: 8/22/2016 10:19:37 AM ******/
 CREATE NONCLUSTERED INDEX [IX_UserId] ON [dbo].[AspNetUserClaims]
 (
 	[UserId] ASC
@@ -815,7 +787,7 @@ GO
 SET ANSI_PADDING ON
 
 GO
-/****** Object:  Index [IX_UserId]    Script Date: 7/23/2016 9:48:53 AM ******/
+/****** Object:  Index [IX_UserId]    Script Date: 8/22/2016 10:19:37 AM ******/
 CREATE NONCLUSTERED INDEX [IX_UserId] ON [dbo].[AspNetUserLogins]
 (
 	[UserId] ASC
@@ -824,7 +796,7 @@ GO
 SET ANSI_PADDING ON
 
 GO
-/****** Object:  Index [IX_RoleId]    Script Date: 7/23/2016 9:48:53 AM ******/
+/****** Object:  Index [IX_RoleId]    Script Date: 8/22/2016 10:19:37 AM ******/
 CREATE NONCLUSTERED INDEX [IX_RoleId] ON [dbo].[AspNetUserRoles]
 (
 	[RoleId] ASC
@@ -833,7 +805,7 @@ GO
 SET ANSI_PADDING ON
 
 GO
-/****** Object:  Index [IX_UserId]    Script Date: 7/23/2016 9:48:53 AM ******/
+/****** Object:  Index [IX_UserId]    Script Date: 8/22/2016 10:19:37 AM ******/
 CREATE NONCLUSTERED INDEX [IX_UserId] ON [dbo].[AspNetUserRoles]
 (
 	[UserId] ASC
@@ -842,7 +814,7 @@ GO
 SET ANSI_PADDING ON
 
 GO
-/****** Object:  Index [UserNameIndex]    Script Date: 7/23/2016 9:48:53 AM ******/
+/****** Object:  Index [UserNameIndex]    Script Date: 8/22/2016 10:19:37 AM ******/
 CREATE UNIQUE NONCLUSTERED INDEX [UserNameIndex] ON [dbo].[AspNetUsers]
 (
 	[UserName] ASC
@@ -912,6 +884,7 @@ ALTER TABLE [dbo].[EndPointIOs] CHECK CONSTRAINT [FK__EndPointI__IOTyp__440B1D61
 GO
 ALTER TABLE [dbo].[EndPointIOs]  WITH CHECK ADD  CONSTRAINT [FK__EndPointI__Thing__7E02B4CC] FOREIGN KEY([ThingID])
 REFERENCES [dbo].[Things] ([ID])
+ON DELETE CASCADE
 GO
 ALTER TABLE [dbo].[EndPointIOs] CHECK CONSTRAINT [FK__EndPointI__Thing__7E02B4CC]
 GO
@@ -974,6 +947,7 @@ REFERENCES [dbo].[Locations] ([ID])
 GO
 ALTER TABLE [dbo].[LinkThingsLocations]  WITH CHECK ADD  CONSTRAINT [FK__LinkThing__Thing__0697FACD] FOREIGN KEY([ThingID])
 REFERENCES [dbo].[Things] ([ID])
+ON DELETE CASCADE
 GO
 ALTER TABLE [dbo].[LinkThingsLocations] CHECK CONSTRAINT [FK__LinkThing__Thing__0697FACD]
 GO
@@ -987,7 +961,7 @@ REFERENCES [dbo].[ThingCategorys] ([ID])
 GO
 ALTER TABLE [dbo].[Things] CHECK CONSTRAINT [FK__Things__Category__662B2B3B]
 GO
-/****** Object:  StoredProcedure [dbo].[GetThingEnds]    Script Date: 7/23/2016 9:48:53 AM ******/
+/****** Object:  StoredProcedure [dbo].[GetThingEnds]    Script Date: 8/22/2016 10:19:37 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -1066,7 +1040,24 @@ group by loc.ID
 
 end
 GO
-/****** Object:  StoredProcedure [dbo].[Rpt_EndPoint_IOs_Days]    Script Date: 7/23/2016 9:48:53 AM ******/
+/****** Object:  StoredProcedure [dbo].[ResetDB]    Script Date: 8/22/2016 10:19:37 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+
+CREATE  procedure [dbo].[ResetDB]
+as
+begin
+
+truncate table endpointios
+truncate table deviceios
+
+
+end
+GO
+/****** Object:  StoredProcedure [dbo].[Rpt_EndPoint_IOs_Days]    Script Date: 8/22/2016 10:19:37 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -1375,7 +1366,7 @@ end
 
 
 GO
-/****** Object:  StoredProcedure [dbo].[Rpt_EndPoint_IOs_HOURs]    Script Date: 7/23/2016 9:48:53 AM ******/
+/****** Object:  StoredProcedure [dbo].[Rpt_EndPoint_IOs_HOURs]    Script Date: 8/22/2016 10:19:37 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -1635,7 +1626,7 @@ end
 
 
 GO
-/****** Object:  StoredProcedure [dbo].[Rpt_EndPoint_IOs_Minutes]    Script Date: 7/23/2016 9:48:53 AM ******/
+/****** Object:  StoredProcedure [dbo].[Rpt_EndPoint_IOs_Minutes]    Script Date: 8/22/2016 10:19:37 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -2218,7 +2209,7 @@ from [Endpoints] e where e.ID = @EPID
 )
 end
 GO
-/****** Object:  StoredProcedure [dbo].[Rpt_EndPoint_IOs_MonthAVG]    Script Date: 7/23/2016 9:48:53 AM ******/
+/****** Object:  StoredProcedure [dbo].[Rpt_EndPoint_IOs_MonthAVG]    Script Date: 8/22/2016 10:19:37 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -2269,7 +2260,7 @@ CREATE procedure [dbo].[Rpt_EndPoint_IOs_MonthAVG]
 from [Endpoints] e where e.ID = @EPID
 end
 GO
-/****** Object:  StoredProcedure [dbo].[Rpt_EndPoint_IOs_MonthMAX]    Script Date: 7/23/2016 9:48:53 AM ******/
+/****** Object:  StoredProcedure [dbo].[Rpt_EndPoint_IOs_MonthMAX]    Script Date: 8/22/2016 10:19:37 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -2320,7 +2311,7 @@ create procedure [dbo].[Rpt_EndPoint_IOs_MonthMAX]
 from [Endpoints] e where e.ID = @EPID
 end
 GO
-/****** Object:  StoredProcedure [dbo].[Rpt_EndPoint_IOs_Months]    Script Date: 7/23/2016 9:48:53 AM ******/
+/****** Object:  StoredProcedure [dbo].[Rpt_EndPoint_IOs_Months]    Script Date: 8/22/2016 10:19:37 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -2458,7 +2449,429 @@ from [Endpoints] e where e.ID = @EPID
 )
 end
 GO
-/****** Object:  StoredProcedure [dbo].[Rpt_ThingEnd_IOs_Hours]    Script Date: 7/23/2016 9:48:53 AM ******/
+/****** Object:  StoredProcedure [dbo].[Rpt_ThingEnd_IOs_Days]    Script Date: 8/22/2016 10:19:37 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+
+
+create procedure [dbo].[Rpt_ThingEnd_IOs_Days] 
+ @ThingID bigint,
+ @TypeID bigint
+ as
+ begin
+ SET NOCOUNT ON
+
+	declare @EPTimeZone int 
+	select @EPTimeZone =  4
+ declare @StartTime datetime
+ set @StartTime = dateadd(Day,@EPTimeZone,GETUTCDATE() )
+
+ select ID,Title,'Min' as 'Fx',
+
+	(select min(CAST(CAST(i.valu AS float) AS INT))  from EndPointIOs i, [Endpoints] e 
+	where i.EndPointID = e.ID and i.[ExecTimeStamp] between DATEADD(Day,-1,@StartTime)  and DATEADD(Day,-0,@StartTime) and i.ThingID = @ThingID and e.TypeID = @TypeID and i.IOTypeID = 1)as '1',
+
+(select min(CAST(CAST(i.valu AS float) AS INT))  from EndPointIOs i, [Endpoints] e 
+	where i.EndPointID = e.ID and i.[ExecTimeStamp] between DATEADD(Day,-2,@StartTime)  and DATEADD(Day,-1,@StartTime) and i.ThingID = @ThingID and e.TypeID = @TypeID and i.IOTypeID = 1)as '2',
+
+(select min(CAST(CAST(i.valu AS float) AS INT))  from EndPointIOs i, [Endpoints] e 
+	where i.EndPointID = e.ID and i.[ExecTimeStamp] between DATEADD(Day,-3,@StartTime)  and DATEADD(Day,-2,@StartTime) and i.ThingID = @ThingID and e.TypeID = @TypeID and i.IOTypeID = 1)as '3',
+
+(select min(CAST(CAST(i.valu AS float) AS INT))  from EndPointIOs i, [Endpoints] e 
+	where i.EndPointID = e.ID and i.[ExecTimeStamp] between DATEADD(Day,-4,@StartTime)  and DATEADD(Day,-3,@StartTime) and i.ThingID = @ThingID and e.TypeID = @TypeID and i.IOTypeID = 1)as '4',
+
+(select min(CAST(CAST(i.valu AS float) AS INT))  from EndPointIOs i, [Endpoints] e 
+	where i.EndPointID = e.ID and i.[ExecTimeStamp] between DATEADD(Day,-5,@StartTime)  and DATEADD(Day,-4,@StartTime) and i.ThingID = @ThingID and e.TypeID = @TypeID and i.IOTypeID = 1)as '5',
+
+(select min(CAST(CAST(i.valu AS float) AS INT))  from EndPointIOs i, [Endpoints] e 
+	where i.EndPointID = e.ID and i.[ExecTimeStamp] between DATEADD(Day,-6,@StartTime)  and DATEADD(Day,-5,@StartTime) and i.ThingID = @ThingID and e.TypeID = @TypeID and i.IOTypeID = 1)as '6',
+
+(select min(CAST(CAST(i.valu AS float) AS INT))  from EndPointIOs i, [Endpoints] e 
+	where i.EndPointID = e.ID and i.[ExecTimeStamp] between DATEADD(Day,-7,@StartTime)  and DATEADD(Day,-6,@StartTime) and i.ThingID = @ThingID and e.TypeID = @TypeID and i.IOTypeID = 1)as '7',
+
+(select min(CAST(CAST(i.valu AS float) AS INT))  from EndPointIOs i, [Endpoints] e 
+	where i.EndPointID = e.ID and i.[ExecTimeStamp] between DATEADD(Day,-8,@StartTime)  and DATEADD(Day,-7,@StartTime) and i.ThingID = @ThingID and e.TypeID = @TypeID and i.IOTypeID = 1)as '8',
+
+(select min(CAST(CAST(i.valu AS float) AS INT))  from EndPointIOs i, [Endpoints] e 
+	where i.EndPointID = e.ID and i.[ExecTimeStamp] between DATEADD(Day,-9,@StartTime)  and DATEADD(Day,-8,@StartTime) and i.ThingID = @ThingID and e.TypeID = @TypeID and i.IOTypeID = 1)as '9',
+
+(select min(CAST(CAST(i.valu AS float) AS INT))  from EndPointIOs i, [Endpoints] e 
+	where i.EndPointID = e.ID and i.[ExecTimeStamp] between DATEADD(Day,-10,@StartTime)  and DATEADD(Day,-9,@StartTime) and i.ThingID = @ThingID and e.TypeID = @TypeID and i.IOTypeID = 1)as '10',
+
+(select min(CAST(CAST(i.valu AS float) AS INT))  from EndPointIOs i, [Endpoints] e 
+	where i.EndPointID = e.ID and i.[ExecTimeStamp] between DATEADD(Day,-11,@StartTime)  and DATEADD(Day,-10,@StartTime) and i.ThingID = @ThingID and e.TypeID = @TypeID and i.IOTypeID = 1)as '11',
+
+(select min(CAST(CAST(i.valu AS float) AS INT))  from EndPointIOs i, [Endpoints] e 
+	where i.EndPointID = e.ID and i.[ExecTimeStamp] between DATEADD(Day,-12,@StartTime)  and DATEADD(Day,-11,@StartTime) and i.ThingID = @ThingID and e.TypeID = @TypeID and i.IOTypeID = 1)as '12',
+
+(select min(CAST(CAST(i.valu AS float) AS INT))  from EndPointIOs i, [Endpoints] e 
+	where i.EndPointID = e.ID and i.[ExecTimeStamp] between DATEADD(Day,-13,@StartTime)  and DATEADD(Day,-12,@StartTime) and i.ThingID = @ThingID and e.TypeID = @TypeID and i.IOTypeID = 1)as '13',
+
+(select min(CAST(CAST(i.valu AS float) AS INT))  from EndPointIOs i, [Endpoints] e 
+	where i.EndPointID = e.ID and i.[ExecTimeStamp] between DATEADD(Day,-14,@StartTime)  and DATEADD(Day,-13,@StartTime) and i.ThingID = @ThingID and e.TypeID = @TypeID and i.IOTypeID = 1)as '14',
+
+(select min(CAST(CAST(i.valu AS float) AS INT))  from EndPointIOs i, [Endpoints] e 
+	where i.EndPointID = e.ID and i.[ExecTimeStamp] between DATEADD(Day,-15,@StartTime)  and DATEADD(Day,-14,@StartTime) and i.ThingID = @ThingID and e.TypeID = @TypeID and i.IOTypeID = 1)as '15',
+
+(select min(CAST(CAST(i.valu AS float) AS INT))  from EndPointIOs i, [Endpoints] e 
+	where i.EndPointID = e.ID and i.[ExecTimeStamp] between DATEADD(Day,-16,@StartTime)  and DATEADD(Day,-15,@StartTime) and i.ThingID = @ThingID and e.TypeID = @TypeID and i.IOTypeID = 1)as '16',
+
+(select min(CAST(CAST(i.valu AS float) AS INT))  from EndPointIOs i, [Endpoints] e 
+	where i.EndPointID = e.ID and i.[ExecTimeStamp] between DATEADD(Day,-17,@StartTime)  and DATEADD(Day,-16,@StartTime) and i.ThingID = @ThingID and e.TypeID = @TypeID and i.IOTypeID = 1)as '17',
+
+(select min(CAST(CAST(i.valu AS float) AS INT))  from EndPointIOs i, [Endpoints] e 
+	where i.EndPointID = e.ID and i.[ExecTimeStamp] between DATEADD(Day,-18,@StartTime)  and DATEADD(Day,-17,@StartTime) and i.ThingID = @ThingID and e.TypeID = @TypeID and i.IOTypeID = 1)as '18',
+
+(select min(CAST(CAST(i.valu AS float) AS INT))  from EndPointIOs i, [Endpoints] e 
+	where i.EndPointID = e.ID and i.[ExecTimeStamp] between DATEADD(Day,-19,@StartTime)  and DATEADD(Day,-18,@StartTime) and i.ThingID = @ThingID and e.TypeID = @TypeID and i.IOTypeID = 1)as '19',
+
+(select min(CAST(CAST(i.valu AS float) AS INT))  from EndPointIOs i, [Endpoints] e 
+	where i.EndPointID = e.ID and i.[ExecTimeStamp] between DATEADD(Day,-20,@StartTime)  and DATEADD(Day,-19,@StartTime) and i.ThingID = @ThingID and e.TypeID = @TypeID and i.IOTypeID = 1)as '20',
+
+(select min(CAST(CAST(i.valu AS float) AS INT))  from EndPointIOs i, [Endpoints] e 
+	where i.EndPointID = e.ID and i.[ExecTimeStamp] between DATEADD(Day,-21,@StartTime)  and DATEADD(Day,-20,@StartTime) and i.ThingID = @ThingID and e.TypeID = @TypeID and i.IOTypeID = 1)as '21',
+
+(select min(CAST(CAST(i.valu AS float) AS INT))  from EndPointIOs i, [Endpoints] e 
+	where i.EndPointID = e.ID and i.[ExecTimeStamp] between DATEADD(Day,-22,@StartTime)  and DATEADD(Day,-21,@StartTime) and i.ThingID = @ThingID and e.TypeID = @TypeID and i.IOTypeID = 1)as '22',
+
+(select min(CAST(CAST(i.valu AS float) AS INT))  from EndPointIOs i, [Endpoints] e 
+	where i.EndPointID = e.ID and i.[ExecTimeStamp] between DATEADD(Day,-23,@StartTime)  and DATEADD(Day,-22,@StartTime) and i.ThingID = @ThingID and e.TypeID = @TypeID and i.IOTypeID = 1)as '23',
+
+(select min(CAST(CAST(i.valu AS float) AS INT))  from EndPointIOs i, [Endpoints] e 
+	where i.EndPointID = e.ID and i.[ExecTimeStamp] between DATEADD(Day,-24,@StartTime)  and DATEADD(Day,-23,@StartTime) and i.ThingID = @ThingID and e.TypeID = @TypeID and i.IOTypeID = 1)as '24',
+	
+(select min(CAST(CAST(i.valu AS float) AS INT))  from EndPointIOs i, [Endpoints] e 
+	where i.EndPointID = e.ID and i.[ExecTimeStamp] between DATEADD(Day,-25,@StartTime)  and DATEADD(Day,-24,@StartTime) and i.ThingID = @ThingID and e.TypeID = @TypeID and i.IOTypeID = 1)as '25',
+
+(select min(CAST(CAST(i.valu AS float) AS INT))  from EndPointIOs i, [Endpoints] e 
+	where i.EndPointID = e.ID and i.[ExecTimeStamp] between DATEADD(Day,-26,@StartTime)  and DATEADD(Day,-25,@StartTime) and i.ThingID = @ThingID and e.TypeID = @TypeID and i.IOTypeID = 1)as '26',
+
+(select min(CAST(CAST(i.valu AS float) AS INT))  from EndPointIOs i, [Endpoints] e 
+	where i.EndPointID = e.ID and i.[ExecTimeStamp] between DATEADD(Day,-27,@StartTime)  and DATEADD(Day,-26,@StartTime) and i.ThingID = @ThingID and e.TypeID = @TypeID and i.IOTypeID = 1)as '27',
+
+(select min(CAST(CAST(i.valu AS float) AS INT))  from EndPointIOs i, [Endpoints] e 
+	where i.EndPointID = e.ID and i.[ExecTimeStamp] between DATEADD(Day,-28,@StartTime)  and DATEADD(Day,-27,@StartTime) and i.ThingID = @ThingID and e.TypeID = @TypeID and i.IOTypeID = 1)as '28',
+
+(select min(CAST(CAST(i.valu AS float) AS INT))  from EndPointIOs i, [Endpoints] e 
+	where i.EndPointID = e.ID and i.[ExecTimeStamp] between DATEADD(Day,-29,@StartTime)  and DATEADD(Day,-28,@StartTime) and i.ThingID = @ThingID and e.TypeID = @TypeID and i.IOTypeID = 1)as '29',
+
+(select min(CAST(CAST(i.valu AS float) AS INT))  from EndPointIOs i, [Endpoints] e 
+	where i.EndPointID = e.ID and i.[ExecTimeStamp] between DATEADD(Day,-30,@StartTime)  and DATEADD(Day,-29,@StartTime) and i.ThingID = @ThingID and e.TypeID = @TypeID and i.IOTypeID = 1)as '30'
+
+from 
+	Things t
+where 
+	t.ID = @ThingID
+
+	union all (
+
+	 select ID,Title,'Max' as 'Fx',
+
+	(select max(CAST(CAST(i.valu AS float) AS INT))  from EndPointIOs i, [Endpoints] e 
+	where i.EndPointID = e.ID and i.[ExecTimeStamp] between DATEADD(Day,-1,@StartTime)  and DATEADD(Day,-0,@StartTime) and i.ThingID = @ThingID and e.TypeID = @TypeID and i.IOTypeID = 1)as '1',
+
+(select max(CAST(CAST(i.valu AS float) AS INT))  from EndPointIOs i, [Endpoints] e 
+	where i.EndPointID = e.ID and i.[ExecTimeStamp] between DATEADD(Day,-2,@StartTime)  and DATEADD(Day,-1,@StartTime) and i.ThingID = @ThingID and e.TypeID = @TypeID and i.IOTypeID = 1)as '2',
+
+(select max(CAST(CAST(i.valu AS float) AS INT))  from EndPointIOs i, [Endpoints] e 
+	where i.EndPointID = e.ID and i.[ExecTimeStamp] between DATEADD(Day,-3,@StartTime)  and DATEADD(Day,-2,@StartTime) and i.ThingID = @ThingID and e.TypeID = @TypeID and i.IOTypeID = 1)as '3',
+
+(select max(CAST(CAST(i.valu AS float) AS INT))  from EndPointIOs i, [Endpoints] e 
+	where i.EndPointID = e.ID and i.[ExecTimeStamp] between DATEADD(Day,-4,@StartTime)  and DATEADD(Day,-3,@StartTime) and i.ThingID = @ThingID and e.TypeID = @TypeID and i.IOTypeID = 1)as '4',
+
+(select max(CAST(CAST(i.valu AS float) AS INT))  from EndPointIOs i, [Endpoints] e 
+	where i.EndPointID = e.ID and i.[ExecTimeStamp] between DATEADD(Day,-5,@StartTime)  and DATEADD(Day,-4,@StartTime) and i.ThingID = @ThingID and e.TypeID = @TypeID and i.IOTypeID = 1)as '5',
+
+(select max(CAST(CAST(i.valu AS float) AS INT))  from EndPointIOs i, [Endpoints] e 
+	where i.EndPointID = e.ID and i.[ExecTimeStamp] between DATEADD(Day,-6,@StartTime)  and DATEADD(Day,-5,@StartTime) and i.ThingID = @ThingID and e.TypeID = @TypeID and i.IOTypeID = 1)as '6',
+
+(select max(CAST(CAST(i.valu AS float) AS INT))  from EndPointIOs i, [Endpoints] e 
+	where i.EndPointID = e.ID and i.[ExecTimeStamp] between DATEADD(Day,-7,@StartTime)  and DATEADD(Day,-6,@StartTime) and i.ThingID = @ThingID and e.TypeID = @TypeID and i.IOTypeID = 1)as '7',
+
+(select max(CAST(CAST(i.valu AS float) AS INT))  from EndPointIOs i, [Endpoints] e 
+	where i.EndPointID = e.ID and i.[ExecTimeStamp] between DATEADD(Day,-8,@StartTime)  and DATEADD(Day,-7,@StartTime) and i.ThingID = @ThingID and e.TypeID = @TypeID and i.IOTypeID = 1)as '8',
+
+(select max(CAST(CAST(i.valu AS float) AS INT))  from EndPointIOs i, [Endpoints] e 
+	where i.EndPointID = e.ID and i.[ExecTimeStamp] between DATEADD(Day,-9,@StartTime)  and DATEADD(Day,-8,@StartTime) and i.ThingID = @ThingID and e.TypeID = @TypeID and i.IOTypeID = 1)as '9',
+
+(select max(CAST(CAST(i.valu AS float) AS INT))  from EndPointIOs i, [Endpoints] e 
+	where i.EndPointID = e.ID and i.[ExecTimeStamp] between DATEADD(Day,-10,@StartTime)  and DATEADD(Day,-9,@StartTime) and i.ThingID = @ThingID and e.TypeID = @TypeID and i.IOTypeID = 1)as '10',
+
+(select max(CAST(CAST(i.valu AS float) AS INT))  from EndPointIOs i, [Endpoints] e 
+	where i.EndPointID = e.ID and i.[ExecTimeStamp] between DATEADD(Day,-11,@StartTime)  and DATEADD(Day,-10,@StartTime) and i.ThingID = @ThingID and e.TypeID = @TypeID and i.IOTypeID = 1)as '11',
+
+(select max(CAST(CAST(i.valu AS float) AS INT))  from EndPointIOs i, [Endpoints] e 
+	where i.EndPointID = e.ID and i.[ExecTimeStamp] between DATEADD(Day,-12,@StartTime)  and DATEADD(Day,-11,@StartTime) and i.ThingID = @ThingID and e.TypeID = @TypeID and i.IOTypeID = 1)as '12',
+
+(select max(CAST(CAST(i.valu AS float) AS INT))  from EndPointIOs i, [Endpoints] e 
+	where i.EndPointID = e.ID and i.[ExecTimeStamp] between DATEADD(Day,-13,@StartTime)  and DATEADD(Day,-12,@StartTime) and i.ThingID = @ThingID and e.TypeID = @TypeID and i.IOTypeID = 1)as '13',
+
+(select max(CAST(CAST(i.valu AS float) AS INT))  from EndPointIOs i, [Endpoints] e 
+	where i.EndPointID = e.ID and i.[ExecTimeStamp] between DATEADD(Day,-14,@StartTime)  and DATEADD(Day,-13,@StartTime) and i.ThingID = @ThingID and e.TypeID = @TypeID and i.IOTypeID = 1)as '14',
+
+(select max(CAST(CAST(i.valu AS float) AS INT))  from EndPointIOs i, [Endpoints] e 
+	where i.EndPointID = e.ID and i.[ExecTimeStamp] between DATEADD(Day,-15,@StartTime)  and DATEADD(Day,-14,@StartTime) and i.ThingID = @ThingID and e.TypeID = @TypeID and i.IOTypeID = 1)as '15',
+
+(select max(CAST(CAST(i.valu AS float) AS INT))  from EndPointIOs i, [Endpoints] e 
+	where i.EndPointID = e.ID and i.[ExecTimeStamp] between DATEADD(Day,-16,@StartTime)  and DATEADD(Day,-15,@StartTime) and i.ThingID = @ThingID and e.TypeID = @TypeID and i.IOTypeID = 1)as '16',
+
+(select max(CAST(CAST(i.valu AS float) AS INT))  from EndPointIOs i, [Endpoints] e 
+	where i.EndPointID = e.ID and i.[ExecTimeStamp] between DATEADD(Day,-17,@StartTime)  and DATEADD(Day,-16,@StartTime) and i.ThingID = @ThingID and e.TypeID = @TypeID and i.IOTypeID = 1)as '17',
+
+(select max(CAST(CAST(i.valu AS float) AS INT))  from EndPointIOs i, [Endpoints] e 
+	where i.EndPointID = e.ID and i.[ExecTimeStamp] between DATEADD(Day,-18,@StartTime)  and DATEADD(Day,-17,@StartTime) and i.ThingID = @ThingID and e.TypeID = @TypeID and i.IOTypeID = 1)as '18',
+
+(select max(CAST(CAST(i.valu AS float) AS INT))  from EndPointIOs i, [Endpoints] e 
+	where i.EndPointID = e.ID and i.[ExecTimeStamp] between DATEADD(Day,-19,@StartTime)  and DATEADD(Day,-18,@StartTime) and i.ThingID = @ThingID and e.TypeID = @TypeID and i.IOTypeID = 1)as '19',
+
+(select max(CAST(CAST(i.valu AS float) AS INT))  from EndPointIOs i, [Endpoints] e 
+	where i.EndPointID = e.ID and i.[ExecTimeStamp] between DATEADD(Day,-20,@StartTime)  and DATEADD(Day,-19,@StartTime) and i.ThingID = @ThingID and e.TypeID = @TypeID and i.IOTypeID = 1)as '20',
+
+(select max(CAST(CAST(i.valu AS float) AS INT))  from EndPointIOs i, [Endpoints] e 
+	where i.EndPointID = e.ID and i.[ExecTimeStamp] between DATEADD(Day,-21,@StartTime)  and DATEADD(Day,-20,@StartTime) and i.ThingID = @ThingID and e.TypeID = @TypeID and i.IOTypeID = 1)as '21',
+
+(select max(CAST(CAST(i.valu AS float) AS INT))  from EndPointIOs i, [Endpoints] e 
+	where i.EndPointID = e.ID and i.[ExecTimeStamp] between DATEADD(Day,-22,@StartTime)  and DATEADD(Day,-21,@StartTime) and i.ThingID = @ThingID and e.TypeID = @TypeID and i.IOTypeID = 1)as '22',
+
+(select max(CAST(CAST(i.valu AS float) AS INT))  from EndPointIOs i, [Endpoints] e 
+	where i.EndPointID = e.ID and i.[ExecTimeStamp] between DATEADD(Day,-23,@StartTime)  and DATEADD(Day,-22,@StartTime) and i.ThingID = @ThingID and e.TypeID = @TypeID and i.IOTypeID = 1)as '23',
+
+(select max(CAST(CAST(i.valu AS float) AS INT))  from EndPointIOs i, [Endpoints] e 
+	where i.EndPointID = e.ID and i.[ExecTimeStamp] between DATEADD(Day,-24,@StartTime)  and DATEADD(Day,-23,@StartTime) and i.ThingID = @ThingID and e.TypeID = @TypeID and i.IOTypeID = 1)as '24',
+
+(select max(CAST(CAST(i.valu AS float) AS INT))  from EndPointIOs i, [Endpoints] e 
+	where i.EndPointID = e.ID and i.[ExecTimeStamp] between DATEADD(Day,-25,@StartTime)  and DATEADD(Day,-24,@StartTime) and i.ThingID = @ThingID and e.TypeID = @TypeID and i.IOTypeID = 1)as '25',
+
+(select max(CAST(CAST(i.valu AS float) AS INT))  from EndPointIOs i, [Endpoints] e 
+	where i.EndPointID = e.ID and i.[ExecTimeStamp] between DATEADD(Day,-26,@StartTime)  and DATEADD(Day,-25,@StartTime) and i.ThingID = @ThingID and e.TypeID = @TypeID and i.IOTypeID = 1)as '26',
+
+(select max(CAST(CAST(i.valu AS float) AS INT))  from EndPointIOs i, [Endpoints] e 
+	where i.EndPointID = e.ID and i.[ExecTimeStamp] between DATEADD(Day,-27,@StartTime)  and DATEADD(Day,-26,@StartTime) and i.ThingID = @ThingID and e.TypeID = @TypeID and i.IOTypeID = 1)as '27',
+
+(select max(CAST(CAST(i.valu AS float) AS INT))  from EndPointIOs i, [Endpoints] e 
+	where i.EndPointID = e.ID and i.[ExecTimeStamp] between DATEADD(Day,-28,@StartTime)  and DATEADD(Day,-27,@StartTime) and i.ThingID = @ThingID and e.TypeID = @TypeID and i.IOTypeID = 1)as '28',
+
+(select max(CAST(CAST(i.valu AS float) AS INT))  from EndPointIOs i, [Endpoints] e 
+	where i.EndPointID = e.ID and i.[ExecTimeStamp] between DATEADD(Day,-29,@StartTime)  and DATEADD(Day,-28,@StartTime) and i.ThingID = @ThingID and e.TypeID = @TypeID and i.IOTypeID = 1)as '29',
+
+(select max(CAST(CAST(i.valu AS float) AS INT))  from EndPointIOs i, [Endpoints] e 
+	where i.EndPointID = e.ID and i.[ExecTimeStamp] between DATEADD(Day,-30,@StartTime)  and DATEADD(Day,-29,@StartTime) and i.ThingID = @ThingID and e.TypeID = @TypeID and i.IOTypeID = 1)as '30'
+
+
+from 
+	Things t
+where 
+	t.ID = @ThingID
+
+	)union all (
+
+	 select ID,Title,'avg' as 'Fx',
+
+	(select avg(CAST(CAST(i.valu AS float) AS INT))  from EndPointIOs i, [Endpoints] e 
+	where i.EndPointID = e.ID and i.[ExecTimeStamp] between DATEADD(Day,-1,@StartTime)  and DATEADD(Day,-0,@StartTime) and i.ThingID = @ThingID and e.TypeID = @TypeID and i.IOTypeID = 1)as '1',
+
+(select avg(CAST(CAST(i.valu AS float) AS INT))  from EndPointIOs i, [Endpoints] e 
+	where i.EndPointID = e.ID and i.[ExecTimeStamp] between DATEADD(Day,-2,@StartTime)  and DATEADD(Day,-1,@StartTime) and i.ThingID = @ThingID and e.TypeID = @TypeID and i.IOTypeID = 1)as '2',
+
+(select avg(CAST(CAST(i.valu AS float) AS INT))  from EndPointIOs i, [Endpoints] e 
+	where i.EndPointID = e.ID and i.[ExecTimeStamp] between DATEADD(Day,-3,@StartTime)  and DATEADD(Day,-2,@StartTime) and i.ThingID = @ThingID and e.TypeID = @TypeID and i.IOTypeID = 1)as '3',
+
+(select avg(CAST(CAST(i.valu AS float) AS INT))  from EndPointIOs i, [Endpoints] e 
+	where i.EndPointID = e.ID and i.[ExecTimeStamp] between DATEADD(Day,-4,@StartTime)  and DATEADD(Day,-3,@StartTime) and i.ThingID = @ThingID and e.TypeID = @TypeID and i.IOTypeID = 1)as '4',
+
+(select avg(CAST(CAST(i.valu AS float) AS INT))  from EndPointIOs i, [Endpoints] e 
+	where i.EndPointID = e.ID and i.[ExecTimeStamp] between DATEADD(Day,-5,@StartTime)  and DATEADD(Day,-4,@StartTime) and i.ThingID = @ThingID and e.TypeID = @TypeID and i.IOTypeID = 1)as '5',
+
+(select avg(CAST(CAST(i.valu AS float) AS INT))  from EndPointIOs i, [Endpoints] e 
+	where i.EndPointID = e.ID and i.[ExecTimeStamp] between DATEADD(Day,-6,@StartTime)  and DATEADD(Day,-5,@StartTime) and i.ThingID = @ThingID and e.TypeID = @TypeID and i.IOTypeID = 1)as '6',
+
+(select avg(CAST(CAST(i.valu AS float) AS INT))  from EndPointIOs i, [Endpoints] e 
+	where i.EndPointID = e.ID and i.[ExecTimeStamp] between DATEADD(Day,-7,@StartTime)  and DATEADD(Day,-6,@StartTime) and i.ThingID = @ThingID and e.TypeID = @TypeID and i.IOTypeID = 1)as '7',
+
+(select avg(CAST(CAST(i.valu AS float) AS INT))  from EndPointIOs i, [Endpoints] e 
+	where i.EndPointID = e.ID and i.[ExecTimeStamp] between DATEADD(Day,-8,@StartTime)  and DATEADD(Day,-7,@StartTime) and i.ThingID = @ThingID and e.TypeID = @TypeID and i.IOTypeID = 1)as '8',
+
+(select avg(CAST(CAST(i.valu AS float) AS INT))  from EndPointIOs i, [Endpoints] e 
+	where i.EndPointID = e.ID and i.[ExecTimeStamp] between DATEADD(Day,-9,@StartTime)  and DATEADD(Day,-8,@StartTime) and i.ThingID = @ThingID and e.TypeID = @TypeID and i.IOTypeID = 1)as '9',
+
+(select avg(CAST(CAST(i.valu AS float) AS INT))  from EndPointIOs i, [Endpoints] e 
+	where i.EndPointID = e.ID and i.[ExecTimeStamp] between DATEADD(Day,-10,@StartTime)  and DATEADD(Day,-9,@StartTime) and i.ThingID = @ThingID and e.TypeID = @TypeID and i.IOTypeID = 1)as '10',
+
+(select avg(CAST(CAST(i.valu AS float) AS INT))  from EndPointIOs i, [Endpoints] e 
+	where i.EndPointID = e.ID and i.[ExecTimeStamp] between DATEADD(Day,-11,@StartTime)  and DATEADD(Day,-10,@StartTime) and i.ThingID = @ThingID and e.TypeID = @TypeID and i.IOTypeID = 1)as '11',
+
+(select avg(CAST(CAST(i.valu AS float) AS INT))  from EndPointIOs i, [Endpoints] e 
+	where i.EndPointID = e.ID and i.[ExecTimeStamp] between DATEADD(Day,-12,@StartTime)  and DATEADD(Day,-11,@StartTime) and i.ThingID = @ThingID and e.TypeID = @TypeID and i.IOTypeID = 1)as '12',
+
+(select avg(CAST(CAST(i.valu AS float) AS INT))  from EndPointIOs i, [Endpoints] e 
+	where i.EndPointID = e.ID and i.[ExecTimeStamp] between DATEADD(Day,-13,@StartTime)  and DATEADD(Day,-12,@StartTime) and i.ThingID = @ThingID and e.TypeID = @TypeID and i.IOTypeID = 1)as '13',
+
+(select avg(CAST(CAST(i.valu AS float) AS INT))  from EndPointIOs i, [Endpoints] e 
+	where i.EndPointID = e.ID and i.[ExecTimeStamp] between DATEADD(Day,-14,@StartTime)  and DATEADD(Day,-13,@StartTime) and i.ThingID = @ThingID and e.TypeID = @TypeID and i.IOTypeID = 1)as '14',
+
+(select avg(CAST(CAST(i.valu AS float) AS INT))  from EndPointIOs i, [Endpoints] e 
+	where i.EndPointID = e.ID and i.[ExecTimeStamp] between DATEADD(Day,-15,@StartTime)  and DATEADD(Day,-14,@StartTime) and i.ThingID = @ThingID and e.TypeID = @TypeID and i.IOTypeID = 1)as '15',
+
+(select avg(CAST(CAST(i.valu AS float) AS INT))  from EndPointIOs i, [Endpoints] e 
+	where i.EndPointID = e.ID and i.[ExecTimeStamp] between DATEADD(Day,-16,@StartTime)  and DATEADD(Day,-15,@StartTime) and i.ThingID = @ThingID and e.TypeID = @TypeID and i.IOTypeID = 1)as '16',
+
+(select avg(CAST(CAST(i.valu AS float) AS INT))  from EndPointIOs i, [Endpoints] e 
+	where i.EndPointID = e.ID and i.[ExecTimeStamp] between DATEADD(Day,-17,@StartTime)  and DATEADD(Day,-16,@StartTime) and i.ThingID = @ThingID and e.TypeID = @TypeID and i.IOTypeID = 1)as '17',
+
+(select avg(CAST(CAST(i.valu AS float) AS INT))  from EndPointIOs i, [Endpoints] e 
+	where i.EndPointID = e.ID and i.[ExecTimeStamp] between DATEADD(Day,-18,@StartTime)  and DATEADD(Day,-17,@StartTime) and i.ThingID = @ThingID and e.TypeID = @TypeID and i.IOTypeID = 1)as '18',
+
+(select avg(CAST(CAST(i.valu AS float) AS INT))  from EndPointIOs i, [Endpoints] e 
+	where i.EndPointID = e.ID and i.[ExecTimeStamp] between DATEADD(Day,-19,@StartTime)  and DATEADD(Day,-18,@StartTime) and i.ThingID = @ThingID and e.TypeID = @TypeID and i.IOTypeID = 1)as '19',
+
+(select avg(CAST(CAST(i.valu AS float) AS INT))  from EndPointIOs i, [Endpoints] e 
+	where i.EndPointID = e.ID and i.[ExecTimeStamp] between DATEADD(Day,-20,@StartTime)  and DATEADD(Day,-19,@StartTime) and i.ThingID = @ThingID and e.TypeID = @TypeID and i.IOTypeID = 1)as '20',
+
+(select avg(CAST(CAST(i.valu AS float) AS INT))  from EndPointIOs i, [Endpoints] e 
+	where i.EndPointID = e.ID and i.[ExecTimeStamp] between DATEADD(Day,-21,@StartTime)  and DATEADD(Day,-20,@StartTime) and i.ThingID = @ThingID and e.TypeID = @TypeID and i.IOTypeID = 1)as '21',
+
+(select avg(CAST(CAST(i.valu AS float) AS INT))  from EndPointIOs i, [Endpoints] e 
+	where i.EndPointID = e.ID and i.[ExecTimeStamp] between DATEADD(Day,-22,@StartTime)  and DATEADD(Day,-21,@StartTime) and i.ThingID = @ThingID and e.TypeID = @TypeID and i.IOTypeID = 1)as '22',
+
+(select avg(CAST(CAST(i.valu AS float) AS INT))  from EndPointIOs i, [Endpoints] e 
+	where i.EndPointID = e.ID and i.[ExecTimeStamp] between DATEADD(Day,-23,@StartTime)  and DATEADD(Day,-22,@StartTime) and i.ThingID = @ThingID and e.TypeID = @TypeID and i.IOTypeID = 1)as '23',
+
+(select avg(CAST(CAST(i.valu AS float) AS INT))  from EndPointIOs i, [Endpoints] e 
+	where i.EndPointID = e.ID and i.[ExecTimeStamp] between DATEADD(Day,-24,@StartTime)  and DATEADD(Day,-23,@StartTime) and i.ThingID = @ThingID and e.TypeID = @TypeID and i.IOTypeID = 1)as '24',
+
+(select avg(CAST(CAST(i.valu AS float) AS INT))  from EndPointIOs i, [Endpoints] e 
+	where i.EndPointID = e.ID and i.[ExecTimeStamp] between DATEADD(Day,-25,@StartTime)  and DATEADD(Day,-24,@StartTime) and i.ThingID = @ThingID and e.TypeID = @TypeID and i.IOTypeID = 1)as '25',
+
+(select avg(CAST(CAST(i.valu AS float) AS INT))  from EndPointIOs i, [Endpoints] e 
+	where i.EndPointID = e.ID and i.[ExecTimeStamp] between DATEADD(Day,-26,@StartTime)  and DATEADD(Day,-25,@StartTime) and i.ThingID = @ThingID and e.TypeID = @TypeID and i.IOTypeID = 1)as '26',
+
+(select avg(CAST(CAST(i.valu AS float) AS INT))  from EndPointIOs i, [Endpoints] e 
+	where i.EndPointID = e.ID and i.[ExecTimeStamp] between DATEADD(Day,-27,@StartTime)  and DATEADD(Day,-26,@StartTime) and i.ThingID = @ThingID and e.TypeID = @TypeID and i.IOTypeID = 1)as '27',
+
+(select avg(CAST(CAST(i.valu AS float) AS INT))  from EndPointIOs i, [Endpoints] e 
+	where i.EndPointID = e.ID and i.[ExecTimeStamp] between DATEADD(Day,-28,@StartTime)  and DATEADD(Day,-27,@StartTime) and i.ThingID = @ThingID and e.TypeID = @TypeID and i.IOTypeID = 1)as '28',
+
+(select avg(CAST(CAST(i.valu AS float) AS INT))  from EndPointIOs i, [Endpoints] e 
+	where i.EndPointID = e.ID and i.[ExecTimeStamp] between DATEADD(Day,-29,@StartTime)  and DATEADD(Day,-28,@StartTime) and i.ThingID = @ThingID and e.TypeID = @TypeID and i.IOTypeID = 1)as '29',
+
+(select avg(CAST(CAST(i.valu AS float) AS INT))  from EndPointIOs i, [Endpoints] e 
+	where i.EndPointID = e.ID and i.[ExecTimeStamp] between DATEADD(Day,-30,@StartTime)  and DATEADD(Day,-29,@StartTime) and i.ThingID = @ThingID and e.TypeID = @TypeID and i.IOTypeID = 1)as '30'
+
+	
+from 
+	Things t
+where 
+	t.ID = @ThingID
+
+	) union all (
+
+	 select ID,Title,'count' as 'Fx',
+
+	(select count(CAST(CAST(i.valu AS float) AS INT))  from EndPointIOs i, [Endpoints] e 
+	where i.EndPointID = e.ID and i.[ExecTimeStamp] between DATEADD(Day,-1,@StartTime)  and DATEADD(Day,-0,@StartTime) and i.ThingID = @ThingID and e.TypeID = @TypeID and i.IOTypeID = 1)as '1',
+
+(select count(CAST(CAST(i.valu AS float) AS INT))  from EndPointIOs i, [Endpoints] e 
+	where i.EndPointID = e.ID and i.[ExecTimeStamp] between DATEADD(Day,-2,@StartTime)  and DATEADD(Day,-1,@StartTime) and i.ThingID = @ThingID and e.TypeID = @TypeID and i.IOTypeID = 1)as '2',
+
+(select count(CAST(CAST(i.valu AS float) AS INT))  from EndPointIOs i, [Endpoints] e 
+	where i.EndPointID = e.ID and i.[ExecTimeStamp] between DATEADD(Day,-3,@StartTime)  and DATEADD(Day,-2,@StartTime) and i.ThingID = @ThingID and e.TypeID = @TypeID and i.IOTypeID = 1)as '3',
+
+(select count(CAST(CAST(i.valu AS float) AS INT))  from EndPointIOs i, [Endpoints] e 
+	where i.EndPointID = e.ID and i.[ExecTimeStamp] between DATEADD(Day,-4,@StartTime)  and DATEADD(Day,-3,@StartTime) and i.ThingID = @ThingID and e.TypeID = @TypeID and i.IOTypeID = 1)as '4',
+
+(select count(CAST(CAST(i.valu AS float) AS INT))  from EndPointIOs i, [Endpoints] e 
+	where i.EndPointID = e.ID and i.[ExecTimeStamp] between DATEADD(Day,-5,@StartTime)  and DATEADD(Day,-4,@StartTime) and i.ThingID = @ThingID and e.TypeID = @TypeID and i.IOTypeID = 1)as '5',
+
+(select count(CAST(CAST(i.valu AS float) AS INT))  from EndPointIOs i, [Endpoints] e 
+	where i.EndPointID = e.ID and i.[ExecTimeStamp] between DATEADD(Day,-6,@StartTime)  and DATEADD(Day,-5,@StartTime) and i.ThingID = @ThingID and e.TypeID = @TypeID and i.IOTypeID = 1)as '6',
+
+(select count(CAST(CAST(i.valu AS float) AS INT))  from EndPointIOs i, [Endpoints] e 
+	where i.EndPointID = e.ID and i.[ExecTimeStamp] between DATEADD(Day,-7,@StartTime)  and DATEADD(Day,-6,@StartTime) and i.ThingID = @ThingID and e.TypeID = @TypeID and i.IOTypeID = 1)as '7',
+
+(select count(CAST(CAST(i.valu AS float) AS INT))  from EndPointIOs i, [Endpoints] e 
+	where i.EndPointID = e.ID and i.[ExecTimeStamp] between DATEADD(Day,-8,@StartTime)  and DATEADD(Day,-7,@StartTime) and i.ThingID = @ThingID and e.TypeID = @TypeID and i.IOTypeID = 1)as '8',
+
+(select count(CAST(CAST(i.valu AS float) AS INT))  from EndPointIOs i, [Endpoints] e 
+	where i.EndPointID = e.ID and i.[ExecTimeStamp] between DATEADD(Day,-9,@StartTime)  and DATEADD(Day,-8,@StartTime) and i.ThingID = @ThingID and e.TypeID = @TypeID and i.IOTypeID = 1)as '9',
+
+(select count(CAST(CAST(i.valu AS float) AS INT))  from EndPointIOs i, [Endpoints] e 
+	where i.EndPointID = e.ID and i.[ExecTimeStamp] between DATEADD(Day,-10,@StartTime)  and DATEADD(Day,-9,@StartTime) and i.ThingID = @ThingID and e.TypeID = @TypeID and i.IOTypeID = 1)as '10',
+
+(select count(CAST(CAST(i.valu AS float) AS INT))  from EndPointIOs i, [Endpoints] e 
+	where i.EndPointID = e.ID and i.[ExecTimeStamp] between DATEADD(Day,-11,@StartTime)  and DATEADD(Day,-10,@StartTime) and i.ThingID = @ThingID and e.TypeID = @TypeID and i.IOTypeID = 1)as '11',
+
+(select count(CAST(CAST(i.valu AS float) AS INT))  from EndPointIOs i, [Endpoints] e 
+	where i.EndPointID = e.ID and i.[ExecTimeStamp] between DATEADD(Day,-12,@StartTime)  and DATEADD(Day,-11,@StartTime) and i.ThingID = @ThingID and e.TypeID = @TypeID and i.IOTypeID = 1)as '12',
+
+(select count(CAST(CAST(i.valu AS float) AS INT))  from EndPointIOs i, [Endpoints] e 
+	where i.EndPointID = e.ID and i.[ExecTimeStamp] between DATEADD(Day,-13,@StartTime)  and DATEADD(Day,-12,@StartTime) and i.ThingID = @ThingID and e.TypeID = @TypeID and i.IOTypeID = 1)as '13',
+
+(select count(CAST(CAST(i.valu AS float) AS INT))  from EndPointIOs i, [Endpoints] e 
+	where i.EndPointID = e.ID and i.[ExecTimeStamp] between DATEADD(Day,-14,@StartTime)  and DATEADD(Day,-13,@StartTime) and i.ThingID = @ThingID and e.TypeID = @TypeID and i.IOTypeID = 1)as '14',
+
+(select count(CAST(CAST(i.valu AS float) AS INT))  from EndPointIOs i, [Endpoints] e 
+	where i.EndPointID = e.ID and i.[ExecTimeStamp] between DATEADD(Day,-15,@StartTime)  and DATEADD(Day,-14,@StartTime) and i.ThingID = @ThingID and e.TypeID = @TypeID and i.IOTypeID = 1)as '15',
+
+(select count(CAST(CAST(i.valu AS float) AS INT))  from EndPointIOs i, [Endpoints] e 
+	where i.EndPointID = e.ID and i.[ExecTimeStamp] between DATEADD(Day,-16,@StartTime)  and DATEADD(Day,-15,@StartTime) and i.ThingID = @ThingID and e.TypeID = @TypeID and i.IOTypeID = 1)as '16',
+
+(select count(CAST(CAST(i.valu AS float) AS INT))  from EndPointIOs i, [Endpoints] e 
+	where i.EndPointID = e.ID and i.[ExecTimeStamp] between DATEADD(Day,-17,@StartTime)  and DATEADD(Day,-16,@StartTime) and i.ThingID = @ThingID and e.TypeID = @TypeID and i.IOTypeID = 1)as '17',
+
+(select count(CAST(CAST(i.valu AS float) AS INT))  from EndPointIOs i, [Endpoints] e 
+	where i.EndPointID = e.ID and i.[ExecTimeStamp] between DATEADD(Day,-18,@StartTime)  and DATEADD(Day,-17,@StartTime) and i.ThingID = @ThingID and e.TypeID = @TypeID and i.IOTypeID = 1)as '18',
+
+(select count(CAST(CAST(i.valu AS float) AS INT))  from EndPointIOs i, [Endpoints] e 
+	where i.EndPointID = e.ID and i.[ExecTimeStamp] between DATEADD(Day,-19,@StartTime)  and DATEADD(Day,-18,@StartTime) and i.ThingID = @ThingID and e.TypeID = @TypeID and i.IOTypeID = 1)as '19',
+
+(select count(CAST(CAST(i.valu AS float) AS INT))  from EndPointIOs i, [Endpoints] e 
+	where i.EndPointID = e.ID and i.[ExecTimeStamp] between DATEADD(Day,-20,@StartTime)  and DATEADD(Day,-19,@StartTime) and i.ThingID = @ThingID and e.TypeID = @TypeID and i.IOTypeID = 1)as '20',
+
+(select count(CAST(CAST(i.valu AS float) AS INT))  from EndPointIOs i, [Endpoints] e 
+	where i.EndPointID = e.ID and i.[ExecTimeStamp] between DATEADD(Day,-21,@StartTime)  and DATEADD(Day,-20,@StartTime) and i.ThingID = @ThingID and e.TypeID = @TypeID and i.IOTypeID = 1)as '21',
+
+(select count(CAST(CAST(i.valu AS float) AS INT))  from EndPointIOs i, [Endpoints] e 
+	where i.EndPointID = e.ID and i.[ExecTimeStamp] between DATEADD(Day,-22,@StartTime)  and DATEADD(Day,-21,@StartTime) and i.ThingID = @ThingID and e.TypeID = @TypeID and i.IOTypeID = 1)as '22',
+
+(select count(CAST(CAST(i.valu AS float) AS INT))  from EndPointIOs i, [Endpoints] e 
+	where i.EndPointID = e.ID and i.[ExecTimeStamp] between DATEADD(Day,-23,@StartTime)  and DATEADD(Day,-22,@StartTime) and i.ThingID = @ThingID and e.TypeID = @TypeID and i.IOTypeID = 1)as '23',
+
+(select count(CAST(CAST(i.valu AS float) AS INT))  from EndPointIOs i, [Endpoints] e 
+	where i.EndPointID = e.ID and i.[ExecTimeStamp] between DATEADD(Day,-24,@StartTime)  and DATEADD(Day,-23,@StartTime) and i.ThingID = @ThingID and e.TypeID = @TypeID and i.IOTypeID = 1)as '24',
+
+(select count(CAST(CAST(i.valu AS float) AS INT))  from EndPointIOs i, [Endpoints] e 
+	where i.EndPointID = e.ID and i.[ExecTimeStamp] between DATEADD(Day,-25,@StartTime)  and DATEADD(Day,-24,@StartTime) and i.ThingID = @ThingID and e.TypeID = @TypeID and i.IOTypeID = 1)as '25',
+
+(select count(CAST(CAST(i.valu AS float) AS INT))  from EndPointIOs i, [Endpoints] e 
+	where i.EndPointID = e.ID and i.[ExecTimeStamp] between DATEADD(Day,-26,@StartTime)  and DATEADD(Day,-25,@StartTime) and i.ThingID = @ThingID and e.TypeID = @TypeID and i.IOTypeID = 1)as '26',
+
+(select count(CAST(CAST(i.valu AS float) AS INT))  from EndPointIOs i, [Endpoints] e 
+	where i.EndPointID = e.ID and i.[ExecTimeStamp] between DATEADD(Day,-27,@StartTime)  and DATEADD(Day,-26,@StartTime) and i.ThingID = @ThingID and e.TypeID = @TypeID and i.IOTypeID = 1)as '27',
+
+(select count(CAST(CAST(i.valu AS float) AS INT))  from EndPointIOs i, [Endpoints] e 
+	where i.EndPointID = e.ID and i.[ExecTimeStamp] between DATEADD(Day,-28,@StartTime)  and DATEADD(Day,-27,@StartTime) and i.ThingID = @ThingID and e.TypeID = @TypeID and i.IOTypeID = 1)as '28',
+
+(select count(CAST(CAST(i.valu AS float) AS INT))  from EndPointIOs i, [Endpoints] e 
+	where i.EndPointID = e.ID and i.[ExecTimeStamp] between DATEADD(Day,-29,@StartTime)  and DATEADD(Day,-28,@StartTime) and i.ThingID = @ThingID and e.TypeID = @TypeID and i.IOTypeID = 1)as '29',
+
+(select count(CAST(CAST(i.valu AS float) AS INT))  from EndPointIOs i, [Endpoints] e 
+	where i.EndPointID = e.ID and i.[ExecTimeStamp] between DATEADD(Day,-30,@StartTime)  and DATEADD(Day,-29,@StartTime) and i.ThingID = @ThingID and e.TypeID = @TypeID and i.IOTypeID = 1)as '30'
+
+from 
+	Things t
+where 
+	t.ID = @ThingID
+
+	)
+
+
+
+end
+GO
+/****** Object:  StoredProcedure [dbo].[Rpt_ThingEnd_IOs_Hours]    Script Date: 8/22/2016 10:19:37 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -2804,7 +3217,7 @@ where
 
 end
 GO
-/****** Object:  StoredProcedure [dbo].[Rpt_ThingEnd_IOs_Minutes]    Script Date: 7/23/2016 9:48:53 AM ******/
+/****** Object:  StoredProcedure [dbo].[Rpt_ThingEnd_IOs_Minutes]    Script Date: 8/22/2016 10:19:37 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -3584,7 +3997,214 @@ where
 
 end
 GO
-/****** Object:  Trigger [dbo].[TR_NewUser]    Script Date: 7/23/2016 9:48:53 AM ******/
+/****** Object:  StoredProcedure [dbo].[Rpt_ThingEnd_IOs_Months]    Script Date: 8/22/2016 10:19:37 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+
+
+create procedure [dbo].[Rpt_ThingEnd_IOs_Months] 
+ @ThingID bigint,
+ @TypeID bigint
+ as
+ begin
+ SET NOCOUNT ON
+
+	declare @EPTimeZone int 
+	select @EPTimeZone =  4
+ declare @StartTime datetime
+ set @StartTime = dateadd(HOUR,@EPTimeZone,GETUTCDATE() )
+
+ select ID,Title,'Min' as 'Fx',
+
+	(select min(CAST(CAST(i.valu AS float) AS INT))  from EndPointIOs i, [Endpoints] e 
+	where i.EndPointID = e.ID and i.[ExecTimeStamp] between DATEADD(month,-1,@StartTime)  and DATEADD(month,-0,@StartTime) and i.ThingID = @ThingID and e.TypeID = @TypeID and i.IOTypeID = 1)as '1',
+
+(select min(CAST(CAST(i.valu AS float) AS INT))  from EndPointIOs i, [Endpoints] e 
+	where i.EndPointID = e.ID and i.[ExecTimeStamp] between DATEADD(month,-2,@StartTime)  and DATEADD(month,-1,@StartTime) and i.ThingID = @ThingID and e.TypeID = @TypeID and i.IOTypeID = 1)as '2',
+
+(select min(CAST(CAST(i.valu AS float) AS INT))  from EndPointIOs i, [Endpoints] e 
+	where i.EndPointID = e.ID and i.[ExecTimeStamp] between DATEADD(month,-3,@StartTime)  and DATEADD(month,-2,@StartTime) and i.ThingID = @ThingID and e.TypeID = @TypeID and i.IOTypeID = 1)as '3',
+
+(select min(CAST(CAST(i.valu AS float) AS INT))  from EndPointIOs i, [Endpoints] e 
+	where i.EndPointID = e.ID and i.[ExecTimeStamp] between DATEADD(month,-4,@StartTime)  and DATEADD(month,-3,@StartTime) and i.ThingID = @ThingID and e.TypeID = @TypeID and i.IOTypeID = 1)as '4',
+
+(select min(CAST(CAST(i.valu AS float) AS INT))  from EndPointIOs i, [Endpoints] e 
+	where i.EndPointID = e.ID and i.[ExecTimeStamp] between DATEADD(month,-5,@StartTime)  and DATEADD(month,-4,@StartTime) and i.ThingID = @ThingID and e.TypeID = @TypeID and i.IOTypeID = 1)as '5',
+
+(select min(CAST(CAST(i.valu AS float) AS INT))  from EndPointIOs i, [Endpoints] e 
+	where i.EndPointID = e.ID and i.[ExecTimeStamp] between DATEADD(month,-6,@StartTime)  and DATEADD(month,-5,@StartTime) and i.ThingID = @ThingID and e.TypeID = @TypeID and i.IOTypeID = 1)as '6',
+
+(select min(CAST(CAST(i.valu AS float) AS INT))  from EndPointIOs i, [Endpoints] e 
+	where i.EndPointID = e.ID and i.[ExecTimeStamp] between DATEADD(month,-7,@StartTime)  and DATEADD(month,-6,@StartTime) and i.ThingID = @ThingID and e.TypeID = @TypeID and i.IOTypeID = 1)as '7',
+
+(select min(CAST(CAST(i.valu AS float) AS INT))  from EndPointIOs i, [Endpoints] e 
+	where i.EndPointID = e.ID and i.[ExecTimeStamp] between DATEADD(month,-8,@StartTime)  and DATEADD(month,-7,@StartTime) and i.ThingID = @ThingID and e.TypeID = @TypeID and i.IOTypeID = 1)as '8',
+
+(select min(CAST(CAST(i.valu AS float) AS INT))  from EndPointIOs i, [Endpoints] e 
+	where i.EndPointID = e.ID and i.[ExecTimeStamp] between DATEADD(month,-9,@StartTime)  and DATEADD(month,-8,@StartTime) and i.ThingID = @ThingID and e.TypeID = @TypeID and i.IOTypeID = 1)as '9',
+
+(select min(CAST(CAST(i.valu AS float) AS INT))  from EndPointIOs i, [Endpoints] e 
+	where i.EndPointID = e.ID and i.[ExecTimeStamp] between DATEADD(month,-10,@StartTime)  and DATEADD(month,-9,@StartTime) and i.ThingID = @ThingID and e.TypeID = @TypeID and i.IOTypeID = 1)as '10',
+
+(select min(CAST(CAST(i.valu AS float) AS INT))  from EndPointIOs i, [Endpoints] e 
+	where i.EndPointID = e.ID and i.[ExecTimeStamp] between DATEADD(month,-11,@StartTime)  and DATEADD(month,-10,@StartTime) and i.ThingID = @ThingID and e.TypeID = @TypeID and i.IOTypeID = 1)as '11',
+
+(select min(CAST(CAST(i.valu AS float) AS INT))  from EndPointIOs i, [Endpoints] e 
+	where i.EndPointID = e.ID and i.[ExecTimeStamp] between DATEADD(month,-12,@StartTime)  and DATEADD(month,-11,@StartTime) and i.ThingID = @ThingID and e.TypeID = @TypeID and i.IOTypeID = 1)as '12'
+
+
+from 
+	Things t
+where 
+	t.ID = @ThingID
+
+	union all (
+
+	 select ID,Title,'Max' as 'Fx',
+
+	(select max(CAST(CAST(i.valu AS float) AS INT))  from EndPointIOs i, [Endpoints] e 
+	where i.EndPointID = e.ID and i.[ExecTimeStamp] between DATEADD(month,-1,@StartTime)  and DATEADD(month,-0,@StartTime) and i.ThingID = @ThingID and e.TypeID = @TypeID and i.IOTypeID = 1)as '1',
+
+(select max(CAST(CAST(i.valu AS float) AS INT))  from EndPointIOs i, [Endpoints] e 
+	where i.EndPointID = e.ID and i.[ExecTimeStamp] between DATEADD(month,-2,@StartTime)  and DATEADD(month,-1,@StartTime) and i.ThingID = @ThingID and e.TypeID = @TypeID and i.IOTypeID = 1)as '2',
+
+(select max(CAST(CAST(i.valu AS float) AS INT))  from EndPointIOs i, [Endpoints] e 
+	where i.EndPointID = e.ID and i.[ExecTimeStamp] between DATEADD(month,-3,@StartTime)  and DATEADD(month,-2,@StartTime) and i.ThingID = @ThingID and e.TypeID = @TypeID and i.IOTypeID = 1)as '3',
+
+(select max(CAST(CAST(i.valu AS float) AS INT))  from EndPointIOs i, [Endpoints] e 
+	where i.EndPointID = e.ID and i.[ExecTimeStamp] between DATEADD(month,-4,@StartTime)  and DATEADD(month,-3,@StartTime) and i.ThingID = @ThingID and e.TypeID = @TypeID and i.IOTypeID = 1)as '4',
+
+(select max(CAST(CAST(i.valu AS float) AS INT))  from EndPointIOs i, [Endpoints] e 
+	where i.EndPointID = e.ID and i.[ExecTimeStamp] between DATEADD(month,-5,@StartTime)  and DATEADD(month,-4,@StartTime) and i.ThingID = @ThingID and e.TypeID = @TypeID and i.IOTypeID = 1)as '5',
+
+(select max(CAST(CAST(i.valu AS float) AS INT))  from EndPointIOs i, [Endpoints] e 
+	where i.EndPointID = e.ID and i.[ExecTimeStamp] between DATEADD(month,-6,@StartTime)  and DATEADD(month,-5,@StartTime) and i.ThingID = @ThingID and e.TypeID = @TypeID and i.IOTypeID = 1)as '6',
+
+(select max(CAST(CAST(i.valu AS float) AS INT))  from EndPointIOs i, [Endpoints] e 
+	where i.EndPointID = e.ID and i.[ExecTimeStamp] between DATEADD(month,-7,@StartTime)  and DATEADD(month,-6,@StartTime) and i.ThingID = @ThingID and e.TypeID = @TypeID and i.IOTypeID = 1)as '7',
+
+(select max(CAST(CAST(i.valu AS float) AS INT))  from EndPointIOs i, [Endpoints] e 
+	where i.EndPointID = e.ID and i.[ExecTimeStamp] between DATEADD(month,-8,@StartTime)  and DATEADD(month,-7,@StartTime) and i.ThingID = @ThingID and e.TypeID = @TypeID and i.IOTypeID = 1)as '8',
+
+(select max(CAST(CAST(i.valu AS float) AS INT))  from EndPointIOs i, [Endpoints] e 
+	where i.EndPointID = e.ID and i.[ExecTimeStamp] between DATEADD(month,-9,@StartTime)  and DATEADD(month,-8,@StartTime) and i.ThingID = @ThingID and e.TypeID = @TypeID and i.IOTypeID = 1)as '9',
+
+(select max(CAST(CAST(i.valu AS float) AS INT))  from EndPointIOs i, [Endpoints] e 
+	where i.EndPointID = e.ID and i.[ExecTimeStamp] between DATEADD(month,-10,@StartTime)  and DATEADD(month,-9,@StartTime) and i.ThingID = @ThingID and e.TypeID = @TypeID and i.IOTypeID = 1)as '10',
+
+(select max(CAST(CAST(i.valu AS float) AS INT))  from EndPointIOs i, [Endpoints] e 
+	where i.EndPointID = e.ID and i.[ExecTimeStamp] between DATEADD(month,-11,@StartTime)  and DATEADD(month,-10,@StartTime) and i.ThingID = @ThingID and e.TypeID = @TypeID and i.IOTypeID = 1)as '11',
+
+(select max(CAST(CAST(i.valu AS float) AS INT))  from EndPointIOs i, [Endpoints] e 
+	where i.EndPointID = e.ID and i.[ExecTimeStamp] between DATEADD(month,-12,@StartTime)  and DATEADD(month,-11,@StartTime) and i.ThingID = @ThingID and e.TypeID = @TypeID and i.IOTypeID = 1)as '12'
+
+
+from 
+	Things t
+where 
+	t.ID = @ThingID
+
+	)union all (
+
+	 select ID,Title,'avg' as 'Fx',
+
+	(select avg(CAST(CAST(i.valu AS float) AS INT))  from EndPointIOs i, [Endpoints] e 
+	where i.EndPointID = e.ID and i.[ExecTimeStamp] between DATEADD(month,-1,@StartTime)  and DATEADD(month,-0,@StartTime) and i.ThingID = @ThingID and e.TypeID = @TypeID and i.IOTypeID = 1)as '1',
+
+(select avg(CAST(CAST(i.valu AS float) AS INT))  from EndPointIOs i, [Endpoints] e 
+	where i.EndPointID = e.ID and i.[ExecTimeStamp] between DATEADD(month,-2,@StartTime)  and DATEADD(month,-1,@StartTime) and i.ThingID = @ThingID and e.TypeID = @TypeID and i.IOTypeID = 1)as '2',
+
+(select avg(CAST(CAST(i.valu AS float) AS INT))  from EndPointIOs i, [Endpoints] e 
+	where i.EndPointID = e.ID and i.[ExecTimeStamp] between DATEADD(month,-3,@StartTime)  and DATEADD(month,-2,@StartTime) and i.ThingID = @ThingID and e.TypeID = @TypeID and i.IOTypeID = 1)as '3',
+
+(select avg(CAST(CAST(i.valu AS float) AS INT))  from EndPointIOs i, [Endpoints] e 
+	where i.EndPointID = e.ID and i.[ExecTimeStamp] between DATEADD(month,-4,@StartTime)  and DATEADD(month,-3,@StartTime) and i.ThingID = @ThingID and e.TypeID = @TypeID and i.IOTypeID = 1)as '4',
+
+(select avg(CAST(CAST(i.valu AS float) AS INT))  from EndPointIOs i, [Endpoints] e 
+	where i.EndPointID = e.ID and i.[ExecTimeStamp] between DATEADD(month,-5,@StartTime)  and DATEADD(month,-4,@StartTime) and i.ThingID = @ThingID and e.TypeID = @TypeID and i.IOTypeID = 1)as '5',
+
+(select avg(CAST(CAST(i.valu AS float) AS INT))  from EndPointIOs i, [Endpoints] e 
+	where i.EndPointID = e.ID and i.[ExecTimeStamp] between DATEADD(month,-6,@StartTime)  and DATEADD(month,-5,@StartTime) and i.ThingID = @ThingID and e.TypeID = @TypeID and i.IOTypeID = 1)as '6',
+
+(select avg(CAST(CAST(i.valu AS float) AS INT))  from EndPointIOs i, [Endpoints] e 
+	where i.EndPointID = e.ID and i.[ExecTimeStamp] between DATEADD(month,-7,@StartTime)  and DATEADD(month,-6,@StartTime) and i.ThingID = @ThingID and e.TypeID = @TypeID and i.IOTypeID = 1)as '7',
+
+(select avg(CAST(CAST(i.valu AS float) AS INT))  from EndPointIOs i, [Endpoints] e 
+	where i.EndPointID = e.ID and i.[ExecTimeStamp] between DATEADD(month,-8,@StartTime)  and DATEADD(month,-7,@StartTime) and i.ThingID = @ThingID and e.TypeID = @TypeID and i.IOTypeID = 1)as '8',
+
+(select avg(CAST(CAST(i.valu AS float) AS INT))  from EndPointIOs i, [Endpoints] e 
+	where i.EndPointID = e.ID and i.[ExecTimeStamp] between DATEADD(month,-9,@StartTime)  and DATEADD(month,-8,@StartTime) and i.ThingID = @ThingID and e.TypeID = @TypeID and i.IOTypeID = 1)as '9',
+
+(select avg(CAST(CAST(i.valu AS float) AS INT))  from EndPointIOs i, [Endpoints] e 
+	where i.EndPointID = e.ID and i.[ExecTimeStamp] between DATEADD(month,-10,@StartTime)  and DATEADD(month,-9,@StartTime) and i.ThingID = @ThingID and e.TypeID = @TypeID and i.IOTypeID = 1)as '10',
+
+(select avg(CAST(CAST(i.valu AS float) AS INT))  from EndPointIOs i, [Endpoints] e 
+	where i.EndPointID = e.ID and i.[ExecTimeStamp] between DATEADD(month,-11,@StartTime)  and DATEADD(month,-10,@StartTime) and i.ThingID = @ThingID and e.TypeID = @TypeID and i.IOTypeID = 1)as '11',
+
+(select avg(CAST(CAST(i.valu AS float) AS INT))  from EndPointIOs i, [Endpoints] e 
+	where i.EndPointID = e.ID and i.[ExecTimeStamp] between DATEADD(month,-12,@StartTime)  and DATEADD(month,-11,@StartTime) and i.ThingID = @ThingID and e.TypeID = @TypeID and i.IOTypeID = 1)as '12'
+
+from 
+	Things t
+where 
+	t.ID = @ThingID
+
+	) union all (
+
+	 select ID,Title,'count' as 'Fx',
+
+	(select count(CAST(CAST(i.valu AS float) AS INT))  from EndPointIOs i, [Endpoints] e 
+	where i.EndPointID = e.ID and i.[ExecTimeStamp] between DATEADD(month,-1,@StartTime)  and DATEADD(month,-0,@StartTime) and i.ThingID = @ThingID and e.TypeID = @TypeID and i.IOTypeID = 1)as '1',
+
+(select count(CAST(CAST(i.valu AS float) AS INT))  from EndPointIOs i, [Endpoints] e 
+	where i.EndPointID = e.ID and i.[ExecTimeStamp] between DATEADD(month,-2,@StartTime)  and DATEADD(month,-1,@StartTime) and i.ThingID = @ThingID and e.TypeID = @TypeID and i.IOTypeID = 1)as '2',
+
+(select count(CAST(CAST(i.valu AS float) AS INT))  from EndPointIOs i, [Endpoints] e 
+	where i.EndPointID = e.ID and i.[ExecTimeStamp] between DATEADD(month,-3,@StartTime)  and DATEADD(month,-2,@StartTime) and i.ThingID = @ThingID and e.TypeID = @TypeID and i.IOTypeID = 1)as '3',
+
+(select count(CAST(CAST(i.valu AS float) AS INT))  from EndPointIOs i, [Endpoints] e 
+	where i.EndPointID = e.ID and i.[ExecTimeStamp] between DATEADD(month,-4,@StartTime)  and DATEADD(month,-3,@StartTime) and i.ThingID = @ThingID and e.TypeID = @TypeID and i.IOTypeID = 1)as '4',
+
+(select count(CAST(CAST(i.valu AS float) AS INT))  from EndPointIOs i, [Endpoints] e 
+	where i.EndPointID = e.ID and i.[ExecTimeStamp] between DATEADD(month,-5,@StartTime)  and DATEADD(month,-4,@StartTime) and i.ThingID = @ThingID and e.TypeID = @TypeID and i.IOTypeID = 1)as '5',
+
+(select count(CAST(CAST(i.valu AS float) AS INT))  from EndPointIOs i, [Endpoints] e 
+	where i.EndPointID = e.ID and i.[ExecTimeStamp] between DATEADD(month,-6,@StartTime)  and DATEADD(month,-5,@StartTime) and i.ThingID = @ThingID and e.TypeID = @TypeID and i.IOTypeID = 1)as '6',
+
+(select count(CAST(CAST(i.valu AS float) AS INT))  from EndPointIOs i, [Endpoints] e 
+	where i.EndPointID = e.ID and i.[ExecTimeStamp] between DATEADD(month,-7,@StartTime)  and DATEADD(month,-6,@StartTime) and i.ThingID = @ThingID and e.TypeID = @TypeID and i.IOTypeID = 1)as '7',
+
+(select count(CAST(CAST(i.valu AS float) AS INT))  from EndPointIOs i, [Endpoints] e 
+	where i.EndPointID = e.ID and i.[ExecTimeStamp] between DATEADD(month,-8,@StartTime)  and DATEADD(month,-7,@StartTime) and i.ThingID = @ThingID and e.TypeID = @TypeID and i.IOTypeID = 1)as '8',
+
+(select count(CAST(CAST(i.valu AS float) AS INT))  from EndPointIOs i, [Endpoints] e 
+	where i.EndPointID = e.ID and i.[ExecTimeStamp] between DATEADD(month,-9,@StartTime)  and DATEADD(month,-8,@StartTime) and i.ThingID = @ThingID and e.TypeID = @TypeID and i.IOTypeID = 1)as '9',
+
+(select count(CAST(CAST(i.valu AS float) AS INT))  from EndPointIOs i, [Endpoints] e 
+	where i.EndPointID = e.ID and i.[ExecTimeStamp] between DATEADD(month,-10,@StartTime)  and DATEADD(month,-9,@StartTime) and i.ThingID = @ThingID and e.TypeID = @TypeID and i.IOTypeID = 1)as '10',
+
+(select count(CAST(CAST(i.valu AS float) AS INT))  from EndPointIOs i, [Endpoints] e 
+	where i.EndPointID = e.ID and i.[ExecTimeStamp] between DATEADD(month,-11,@StartTime)  and DATEADD(month,-10,@StartTime) and i.ThingID = @ThingID and e.TypeID = @TypeID and i.IOTypeID = 1)as '11',
+
+(select count(CAST(CAST(i.valu AS float) AS INT))  from EndPointIOs i, [Endpoints] e 
+	where i.EndPointID = e.ID and i.[ExecTimeStamp] between DATEADD(month,-12,@StartTime)  and DATEADD(month,-11,@StartTime) and i.ThingID = @ThingID and e.TypeID = @TypeID and i.IOTypeID = 1)as '12'
+
+
+from 
+	Things t
+where 
+	t.ID = @ThingID
+
+	)
+
+
+
+end
+GO
+/****** Object:  Trigger [dbo].[TR_NewUser]    Script Date: 8/22/2016 10:19:37 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -3598,4 +4218,8 @@ select @UserName =  UserName from inserted
 update AspNetUsers set FullName = @UserName where UserName = @UserName
 
 end
+GO
+USE [master]
+GO
+ALTER DATABASE [DynThings] SET  READ_WRITE 
 GO

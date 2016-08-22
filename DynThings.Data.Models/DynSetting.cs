@@ -38,6 +38,8 @@ public partial class DynSetting
 
     public int App_TimeZone { get; set; }
 
+    public string PlatformTitle { get; set; }
+
 }
 
 }

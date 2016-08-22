@@ -204,6 +204,40 @@ public partial class DynThingsEntities : DbContext
         return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetThingEnds_Result>("GetThingEnds", locationIDParameter, thingIDParameter, thingCategoryIDParameter, endPointIDParameter, endPointTypeIDParameter);
     }
 
+
+    public virtual ObjectResult<Rpt_ThingEnd_IOs_Days_Result> Rpt_ThingEnd_IOs_Days(Nullable<long> thingID, Nullable<long> typeID)
+    {
+
+        var thingIDParameter = thingID.HasValue ?
+            new ObjectParameter("ThingID", thingID) :
+            new ObjectParameter("ThingID", typeof(long));
+
+
+        var typeIDParameter = typeID.HasValue ?
+            new ObjectParameter("TypeID", typeID) :
+            new ObjectParameter("TypeID", typeof(long));
+
+
+        return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Rpt_ThingEnd_IOs_Days_Result>("Rpt_ThingEnd_IOs_Days", thingIDParameter, typeIDParameter);
+    }
+
+
+    public virtual ObjectResult<Rpt_ThingEnd_IOs_Months_Result> Rpt_ThingEnd_IOs_Months(Nullable<long> thingID, Nullable<long> typeID)
+    {
+
+        var thingIDParameter = thingID.HasValue ?
+            new ObjectParameter("ThingID", thingID) :
+            new ObjectParameter("ThingID", typeof(long));
+
+
+        var typeIDParameter = typeID.HasValue ?
+            new ObjectParameter("TypeID", typeID) :
+            new ObjectParameter("TypeID", typeof(long));
+
+
+        return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Rpt_ThingEnd_IOs_Months_Result>("Rpt_ThingEnd_IOs_Months", thingIDParameter, typeIDParameter);
+    }
+
 }
 
 }

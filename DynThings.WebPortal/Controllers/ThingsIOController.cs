@@ -16,11 +16,21 @@ namespace DynThings.WebAPI.Controllers
     public class ThingsIOController : ApiController
     {
 
-        #region Test
+        #region Validate
         [HttpGet]
         public string Get()
         {
             return "Test OK";
+        }
+
+        [HttpGet]
+        public APIPlatformInfo PlatformInfo()
+        {
+            APIPlatformInfo apiPlatformInfo = new APIPlatformInfo();
+            //Get Platform Info from DynThings.Core
+            apiPlatformInfo.DevMode = Config.DevelopmentMode;
+            apiPlatformInfo.Title = Config.PlatformTitle;
+            return apiPlatformInfo;
         }
         #endregion
 
