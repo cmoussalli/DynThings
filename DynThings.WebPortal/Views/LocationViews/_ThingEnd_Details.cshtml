@@ -1,6 +1,6 @@
 ﻿@model DynThings.Data.Models.ViewModels.ThingEnd
 
-<nav class="navbar navbar-default navbar-inverse">
+<nav class="navbar navbar-default navbar-inverse nopadding">
     <div class="container-fluid">
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header">
@@ -38,6 +38,7 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-lg-12">
+                <br />
                 <div id="divThingEndChart_Inputs"></div>
 
             </div>
@@ -45,7 +46,27 @@
     </div>
 </div>
 
-<div id="divThingEndDetailsView_History">
+<div id="divThingEndDetailsView_History" class="nopadding">
+    <div class="row">
+        <div class="col-lg-6 col-md-4 col-sm-1">
+
+        </div>
+        <div class="col-lg-6 col-md-8 col-sm-11">
+            @*<div class="panel panel-default">*@
+            @*<div class="panel-heading">*@
+            <div class="well" style="width:auto">
+
+                <div class="btn-group pull-right nopadding" style="padding-top:0px;margin-top:0px; top:-15px">
+                    <a href="#" class="btn btn-default btn-sm pull-right" onclick="Load_ThingEnd_HistoryDiv();" style="padding-top:0px;margin-top:0px;">Filter</a>
+                    <input id="drpHistoryIOsFromDate" type="date" value="@string.Format("{0:yyyy-MM-dd}", @DateTime.Now)" />
+                    <input id="drpHistoryIOsToDate" type="date" value="@string.Format("{0:yyyy-MM-dd}", @DateTime.Now)" />
+                </div>
+            </div>
+            @*</div>*@
+            @*</div>*@
+        </div>
+    </div>
+
     <div class="container-fluid">
         <div class="row">
             <div class="col-lg-12">
@@ -85,6 +106,6 @@
 
 
     function Load_ThingEnd_HistoryDiv() {
-        LoadGrid_ThingEnd_HistoryDiv('@Model.Thing.ID', '@Model.EndPoint.TypeID', '1-1-2016', '12-31-2016');
+        LoadGrid_ThingEnd_HistoryDiv('@Model.Thing.ID', '@Model.EndPoint.TypeID', $('#drpHistoryIOsFromDate').val(), $('#drpHistoryIOsToDate').val());
     };
 </script>

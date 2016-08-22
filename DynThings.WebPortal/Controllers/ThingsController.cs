@@ -246,7 +246,7 @@ namespace DynThings.WebPortal.Controllers
         [HttpGet]
         public ActionResult Rpt_IOsHistory(long ThingID, long endPointTypeID, DateTime fromDate, DateTime toDate, int page = 1, int recordsperpage = 0)
         {
-            IPagedList IOs = UnitOfWork_Repositories.repoThings.GetThingEndIOs(ThingID, endPointTypeID, fromDate, toDate, page, Helpers.Configs.validateRecordsPerMaster(recordsperpage));
+            IPagedList IOs = UnitOfWork_Repositories.repoThings.GetThingEndIOs(ThingID, endPointTypeID, fromDate, toDate.AddDays(1), page, Helpers.Configs.validateRecordsPerMaster(recordsperpage));
             return PartialView("Reports/Grids/HistoryIOs", IOs);
 
 
