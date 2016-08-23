@@ -102,7 +102,7 @@ namespace DynThings.Simulator
 
 
         #region Device IO
-        public static async Task SubmitDeviceInput(Guid deviceKeyPass, string input, DateTime executionTimeStamp)
+        public static async Task SubmitDeviceInput(Guid deviceKeyPass, string input)
         {
 
             using (var client = new HttpClient())
@@ -112,7 +112,7 @@ namespace DynThings.Simulator
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
                 SubmissionDeviceIO data = new SubmissionDeviceIO();
-                data.ExectionTimeStamp = executionTimeStamp.Month.ToString() + "-" + executionTimeStamp.Day.ToString() + "-" + executionTimeStamp.Year.ToString();
+              
                 data.KeyPass = deviceKeyPass.ToString();
                 data.Value = input;
 
@@ -173,7 +173,7 @@ namespace DynThings.Simulator
 
 
         #region Endpoint IO
-        public static async Task SubmitEndPointInput(Guid endPointKeyPass, string input, DateTime executionTimeStamp)
+        public static async Task SubmitEndPointInput(Guid endPointKeyPass, string input)
         {
 
             using (var client = new HttpClient())
@@ -183,7 +183,6 @@ namespace DynThings.Simulator
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
                 SubmissionDeviceIO data = new SubmissionDeviceIO();
-                data.ExectionTimeStamp = executionTimeStamp.Month.ToString() + "-" + executionTimeStamp.Day.ToString() + "-" + executionTimeStamp.Year.ToString();
                 data.KeyPass = endPointKeyPass.ToString();
                 data.Value = input;
 
@@ -198,7 +197,7 @@ namespace DynThings.Simulator
 
         }
 
-        public static async Task SubmitEndPointLog(Guid endPointKeyPass, string input, DateTime executionTimeStamp)
+        public static async Task SubmitEndPointLog(Guid endPointKeyPass, string input)
         {
 
             using (var client = new HttpClient())
@@ -208,7 +207,6 @@ namespace DynThings.Simulator
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
                 SubmissionDeviceIO data = new SubmissionDeviceIO();
-                data.ExectionTimeStamp = executionTimeStamp.Month.ToString() + "-" + executionTimeStamp.Day.ToString() + "-" + executionTimeStamp.Year.ToString();
                 data.KeyPass = endPointKeyPass.ToString();
                 data.Value = input;
 

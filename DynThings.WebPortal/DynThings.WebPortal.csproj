@@ -673,6 +673,7 @@
     <Content Include="Views\ThingCategorys\_Add.cshtml" />
     <Content Include="Views\ThingCategorys\_Edit.cshtml" />
     <Content Include="Views\ThingCategorys\_Delete.cshtml" />
+    <Content Include="Views\LocationViews\_ThingsCommands_List.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Code\" />

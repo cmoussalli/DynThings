@@ -67,7 +67,7 @@ namespace DynThings.Simulator
             if (SelectedFormType == Device_EndPoint.Device)
             {
                 lntInputs.Items.Add("Send Input : *" + txtInput.Text + "*");
-                APIs.SubmitDeviceInput(SelectedApiDevice.KeyPass, txtInput.Text, DateTime.Now);
+                APIs.SubmitDeviceInput(SelectedApiDevice.KeyPass, txtInput.Text);
                 lntInputs.TopItem = lntInputs.Items[lntInputs.Items.Count - 1];
 
             }
@@ -75,7 +75,7 @@ namespace DynThings.Simulator
             if (SelectedFormType == Device_EndPoint.EndPoint)
             {
                 lntInputs.Items.Add("Send Input : *" + txtInput.Text + "*");
-                APIs.SubmitEndPointInput(SelectedAPIEndPoint.KeyPass, txtInput.Text, DateTime.Now);
+                APIs.SubmitEndPointInput(SelectedAPIEndPoint.KeyPass, txtInput.Text);
                 lntInputs.TopItem = lntInputs.Items[lntInputs.Items.Count - 1];
 
             }
@@ -94,7 +94,7 @@ namespace DynThings.Simulator
             if (SelectedFormType == Device_EndPoint.EndPoint)
             {
                 lntInputs.Items.Add("Send Log : *" + txtInput.Text + "*");
-                APIs.SubmitEndPointLog(SelectedAPIEndPoint.KeyPass, txtLog.Text, DateTime.Now);
+                APIs.SubmitEndPointLog(SelectedAPIEndPoint.KeyPass, txtLog.Text);
                 lntInputs.TopItem = lntInputs.Items[lntInputs.Items.Count - 1];
 
             }

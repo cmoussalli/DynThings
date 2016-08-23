@@ -222,7 +222,7 @@ public partial class DynThingsEntities : DbContext
     }
 
 
-    public virtual ObjectResult<Rpt_ThingEnd_IOs_Months_Result> Rpt_ThingEnd_IOs_Months(Nullable<long> thingID, Nullable<long> typeID)
+    public virtual ObjectResult<Rpt_ThingEnd_IOs_Months_Result> Rpt_ThingEnd_IOs_Months(Nullable<long> thingID, Nullable<long> typeID, Nullable<long> year)
     {
 
         var thingIDParameter = thingID.HasValue ?
@@ -235,7 +235,12 @@ public partial class DynThingsEntities : DbContext
             new ObjectParameter("TypeID", typeof(long));
 
 
-        return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Rpt_ThingEnd_IOs_Months_Result>("Rpt_ThingEnd_IOs_Months", thingIDParameter, typeIDParameter);
+        var yearParameter = year.HasValue ?
+            new ObjectParameter("Year", year) :
+            new ObjectParameter("Year", typeof(long));
+
+
+        return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Rpt_ThingEnd_IOs_Months_Result>("Rpt_ThingEnd_IOs_Months", thingIDParameter, typeIDParameter, yearParameter);
     }
 
 }

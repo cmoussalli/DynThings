@@ -243,11 +243,11 @@ function LoadChart_ThingEnd_InputsDaysDiv(thingID, endPointTypeID) {
     return false;
 }
 
-function LoadChart_ThingEnd_InputsMonthsDiv(thingID, endPointTypeID) {
+function LoadChart_ThingEnd_InputsMonthsDiv(thingID, endPointTypeID,year) {
     var loadingpart = LoadDivLoading();
     $("#divThingEndChart_Inputs").html(loadingpart);
     $.ajax({
-        url: getRootURL() + '/things/Rpt_Month?thingID=' + thingID + '&endPointTypeID=' + endPointTypeID,
+        url: getRootURL() + '/things/Rpt_Month?thingID=' + thingID + '&endPointTypeID=' + endPointTypeID + '&year=' + year,
         type: "GET",
     })
         .success(function (partialViewResult) {

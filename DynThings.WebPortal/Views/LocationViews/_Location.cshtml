@@ -16,6 +16,7 @@
 
                         </ul>
                     </li>
+                  
                     <li><a href="#" onclick="FilterEnds();">Refresh</a></li>
                 </ul>
             </div>
@@ -24,21 +25,37 @@
         <div class="panel panel-default">
             <div class="panel-heading">
                 <h3 class="panel-title"><span id="lblLocationTitle">@Model.Title</span></h3>
-                <br />
-                @Html.DropDownList("Thing", new SelectList(Model.Things, "ID", "Title"), "<All Things>", new { @class = "form-control" })
-            </div>
+
+                    <br />
+                    @Html.DropDownList("Thing", new SelectList(Model.Things, "ID", "Title"), "<All Things>", new { @class = "form-control" })
+              
+</div>
             <div class="panel-body">
                 <form class="">
                     <div class="form-group">
                         <input type="text" id="txtSearch" onkeydown="if (event.keyCode == 13) { FilterEnds(); return false; }" class="form-control" placeholder="Search">
+
                     </div>
                 </form>
                 <div id="DivThingContent" style="overflow-y:auto;">
                 </div>
+                
             </div>
-            <div class="panel-footer">
-                <span id="lblLocationThingEndsListFooter"></span>
-            </div>
+                <div class="panel-footer nopadding" style="width:100%">
+                    <div class="btn-group btn-group-justified" role="group" aria-label="...">
+                        <div class="btn-group" role="group">
+                            <button id="btnInputs" type="button" class="btn btn-info active">Inputs</button>
+                        </div>
+                        <div class="btn-group" role="group">
+                            <button id="btnCommands" type="button" class="btn btn-info">Commands</button>
+                        </div>
+                        <div class="btn-group" role="group">
+                            <button id="btnLogs" type="button" class="btn btn-info">Log</button>
+                        </div>
+                    </div>
+                    <span id="lblLocationThingEndsListFooter"></span>
+                </div>
+            
         </div>
 
     </nav>

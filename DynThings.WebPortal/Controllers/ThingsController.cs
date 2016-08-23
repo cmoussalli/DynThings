@@ -137,59 +137,6 @@ namespace DynThings.WebPortal.Controllers
         }
         #endregion
 
-
-        //#region Thing History
-        //[HttpGet]
-        //public PartialViewResult GetPVThingHistory(long ThingID, int page = 1, int recordsperpage = 0)
-        //{
-        //    IPagedList IOs = Data.Repositories.UnitOfWork_Repositories.repoThingIOs.GetPagedList(ThingID, page, Helpers.Configs.validateRecordsPerChild(Config.DefaultRecordsPerChild));
-        //    return PartialView("_Details_History", IOs);
-
-        //}
-
-        //#endregion
-
-        //#region Thing Commands
-        //[HttpGet]
-        //public PartialViewResult ThingCommandsListByThingIDPV(string searchfor = null, long ThingID = 0, int page = 1, int recordsperpage = 0)
-        //{
-        //    PagedList.IPagedList cmds = Data.Repositories.UnitOfWork_Repositories.repoThingCommands.GetPagedListByThingID(searchfor, ThingID, page, Helpers.Configs.validateRecordsPerMaster(recordsperpage));
-        //    return PartialView("_Details_Commands", cmds);
-        //}
-        //#endregion
-
-        //#region Thing DevKeys
-        //[HttpGet]
-        //public PartialViewResult DevKeysPV(long id)
-        //{
-        //    Thing Thing = Data.Repositories.UnitOfWork_Repositories.repoThings.Find(id);
-        //    return PartialView("_Details_DevKeys", Thing);
-        //}
-        //#endregion
-
-        //#region Thing Keys
-        //[HttpGet]
-        //public PartialViewResult EditDevKeysPV(long id)
-        //{
-        //    Thing Thing = Data.Repositories.UnitOfWork_Repositories.repoThings.Find(id);
-        //    return PartialView("_Edit_DevKeys", Thing);
-        //}
-
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public ActionResult EditDevKeysPV([Bind(Include = "ID,GUID,KeyPass")] Thing Thing)
-        //{
-        //    ResultInfo.Result res = ResultInfo.GetResultByID(1);
-        //    if (ModelState.IsValid)
-        //    {
-        //        res = UnitOfWork_Repositories.repoThings.EditDevKeys(Thing.ID, Thing.GUID, Thing.KeyPass);
-        //        return Json(res);
-        //    }
-        //    return Json(res);
-        //}
-
-        //#endregion
-
         #endregion
 
 
@@ -236,9 +183,9 @@ namespace DynThings.WebPortal.Controllers
         }
 
         [HttpGet]
-        public ActionResult Rpt_Month(long ThingID, long endPointTypeID)
+        public ActionResult Rpt_Month(long ThingID, long endPointTypeID,long year)
         {
-            Chart chrt = UnitOfWork_Reports.rptThings.IOs_Months(ThingID, endPointTypeID);
+            Chart chrt = UnitOfWork_Reports.rptThings.IOs_Months(ThingID, endPointTypeID,year);
             return PartialView("Reports/Charts/InputValues_BasicLine", chrt);
         }
 

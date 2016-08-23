@@ -111,7 +111,7 @@ namespace DynThings.WebAPI.Controllers
         #endregion
 
         #region Devices IO
-        #region :: Submit input from device ::
+        #region :: Submit from device :: input
         [HttpPost]
         public ApiResponse SubmitDeviceInput(Models.SubmissionDeviceIO deviceInput)
         {
@@ -181,7 +181,7 @@ namespace DynThings.WebAPI.Controllers
         }
         #endregion
 
-        #region :: Submit input from device ::
+        #region :: Submit from device :: Log
         [HttpPost]
         public ApiResponse SubmitDeviceLog(Models.SubmissionDeviceIO deviceInput)
         {
@@ -251,7 +251,7 @@ namespace DynThings.WebAPI.Controllers
         }
         #endregion
 
-        #region :: Get device pending Commands ::
+        #region :: Get device pending :: Commands
         [HttpGet]
         public List<APIDeviceIO> GetDevicePendingCommands(Guid deviceKeyPass)
         {

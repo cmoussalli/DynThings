@@ -1,4 +1,4 @@
---DB Version 0.108
+--DB Version 0.109
 USE [master]
 GO
 /****** Object:  Database [DynThings]    Script Date: 2/8/2016 12:47:48 PM ******/
@@ -555,7 +555,7 @@ GO
 SET IDENTITY_INSERT [dbo].[DynSettings] ON 
 
 GO
-INSERT [dbo].[DynSettings] ([ID], [DBVersion], [DevelopmentMode], [DefaultRecordsPerMaster], [DefaultRecordsPerChild], [PlatformKey], [PublicAccess], [PublicSignUP], [EnableSystemLogger], [App_TimeZone], [PlatformTitle]) VALUES (1, 0.108, 1, 5, 5, N'a86bb826-988d-4f9a-9f43-169045506194', 0, 1, 1, 4, N'My IoT Platform')
+INSERT [dbo].[DynSettings] ([ID], [DBVersion], [DevelopmentMode], [DefaultRecordsPerMaster], [DefaultRecordsPerChild], [PlatformKey], [PublicAccess], [PublicSignUP], [EnableSystemLogger], [App_TimeZone], [PlatformTitle]) VALUES (1, 0.109, 1, 5, 5, N'a86bb826-988d-4f9a-9f43-169045506194', 0, 1, 1, 4, N'My IoT Platform')
 GO
 SET IDENTITY_INSERT [dbo].[DynSettings] OFF
 GO
@@ -4007,7 +4007,8 @@ GO
 
 create procedure [dbo].[Rpt_ThingEnd_IOs_Months] 
  @ThingID bigint,
- @TypeID bigint
+ @TypeID bigint,
+ @Year bigint
  as
  begin
  SET NOCOUNT ON
@@ -4020,40 +4021,40 @@ create procedure [dbo].[Rpt_ThingEnd_IOs_Months]
  select ID,Title,'Min' as 'Fx',
 
 	(select min(CAST(CAST(i.valu AS float) AS INT))  from EndPointIOs i, [Endpoints] e 
-	where i.EndPointID = e.ID and i.[ExecTimeStamp] between DATEADD(month,-1,@StartTime)  and DATEADD(month,-0,@StartTime) and i.ThingID = @ThingID and e.TypeID = @TypeID and i.IOTypeID = 1)as '1',
+	where i.EndPointID = e.ID and MONTH(i.ExecTimeStamp) = 1 and Year(i.ExecTimeStamp) = @Year and i.ThingID = @ThingID and e.TypeID = @TypeID and i.IOTypeID = 1)as '1',
 
 (select min(CAST(CAST(i.valu AS float) AS INT))  from EndPointIOs i, [Endpoints] e 
-	where i.EndPointID = e.ID and i.[ExecTimeStamp] between DATEADD(month,-2,@StartTime)  and DATEADD(month,-1,@StartTime) and i.ThingID = @ThingID and e.TypeID = @TypeID and i.IOTypeID = 1)as '2',
+	where i.EndPointID = e.ID and MONTH(i.ExecTimeStamp) = 2 and Year(i.ExecTimeStamp) = @Year and i.ThingID = @ThingID and e.TypeID = @TypeID and i.IOTypeID = 1)as '2',
 
 (select min(CAST(CAST(i.valu AS float) AS INT))  from EndPointIOs i, [Endpoints] e 
-	where i.EndPointID = e.ID and i.[ExecTimeStamp] between DATEADD(month,-3,@StartTime)  and DATEADD(month,-2,@StartTime) and i.ThingID = @ThingID and e.TypeID = @TypeID and i.IOTypeID = 1)as '3',
+	where i.EndPointID = e.ID and MONTH(i.ExecTimeStamp) = 3 and Year(i.ExecTimeStamp) = @Year and i.ThingID = @ThingID and e.TypeID = @TypeID and i.IOTypeID = 1)as '3',
 
 (select min(CAST(CAST(i.valu AS float) AS INT))  from EndPointIOs i, [Endpoints] e 
-	where i.EndPointID = e.ID and i.[ExecTimeStamp] between DATEADD(month,-4,@StartTime)  and DATEADD(month,-3,@StartTime) and i.ThingID = @ThingID and e.TypeID = @TypeID and i.IOTypeID = 1)as '4',
+	where i.EndPointID = e.ID and MONTH(i.ExecTimeStamp) = 4 and Year(i.ExecTimeStamp) = @Year and i.ThingID = @ThingID and e.TypeID = @TypeID and i.IOTypeID = 1)as '4',
 
 (select min(CAST(CAST(i.valu AS float) AS INT))  from EndPointIOs i, [Endpoints] e 
-	where i.EndPointID = e.ID and i.[ExecTimeStamp] between DATEADD(month,-5,@StartTime)  and DATEADD(month,-4,@StartTime) and i.ThingID = @ThingID and e.TypeID = @TypeID and i.IOTypeID = 1)as '5',
+	where i.EndPointID = e.ID and MONTH(i.ExecTimeStamp) = 5 and Year(i.ExecTimeStamp) = @Year and i.ThingID = @ThingID and e.TypeID = @TypeID and i.IOTypeID = 1)as '5',
 
 (select min(CAST(CAST(i.valu AS float) AS INT))  from EndPointIOs i, [Endpoints] e 
-	where i.EndPointID = e.ID and i.[ExecTimeStamp] between DATEADD(month,-6,@StartTime)  and DATEADD(month,-5,@StartTime) and i.ThingID = @ThingID and e.TypeID = @TypeID and i.IOTypeID = 1)as '6',
+	where i.EndPointID = e.ID and MONTH(i.ExecTimeStamp) = 6 and Year(i.ExecTimeStamp) = @Year and i.ThingID = @ThingID and e.TypeID = @TypeID and i.IOTypeID = 1)as '6',
 
 (select min(CAST(CAST(i.valu AS float) AS INT))  from EndPointIOs i, [Endpoints] e 
-	where i.EndPointID = e.ID and i.[ExecTimeStamp] between DATEADD(month,-7,@StartTime)  and DATEADD(month,-6,@StartTime) and i.ThingID = @ThingID and e.TypeID = @TypeID and i.IOTypeID = 1)as '7',
+	where i.EndPointID = e.ID and MONTH(i.ExecTimeStamp) = 7 and Year(i.ExecTimeStamp) = @Year and i.ThingID = @ThingID and e.TypeID = @TypeID and i.IOTypeID = 1)as '7',
 
 (select min(CAST(CAST(i.valu AS float) AS INT))  from EndPointIOs i, [Endpoints] e 
-	where i.EndPointID = e.ID and i.[ExecTimeStamp] between DATEADD(month,-8,@StartTime)  and DATEADD(month,-7,@StartTime) and i.ThingID = @ThingID and e.TypeID = @TypeID and i.IOTypeID = 1)as '8',
+	where i.EndPointID = e.ID and MONTH(i.ExecTimeStamp) = 8 and Year(i.ExecTimeStamp) = @Year and i.ThingID = @ThingID and e.TypeID = @TypeID and i.IOTypeID = 1)as '8',
 
 (select min(CAST(CAST(i.valu AS float) AS INT))  from EndPointIOs i, [Endpoints] e 
-	where i.EndPointID = e.ID and i.[ExecTimeStamp] between DATEADD(month,-9,@StartTime)  and DATEADD(month,-8,@StartTime) and i.ThingID = @ThingID and e.TypeID = @TypeID and i.IOTypeID = 1)as '9',
+	where i.EndPointID = e.ID and MONTH(i.ExecTimeStamp) = 9 and Year(i.ExecTimeStamp) = @Year and i.ThingID = @ThingID and e.TypeID = @TypeID and i.IOTypeID = 1)as '9',
 
 (select min(CAST(CAST(i.valu AS float) AS INT))  from EndPointIOs i, [Endpoints] e 
-	where i.EndPointID = e.ID and i.[ExecTimeStamp] between DATEADD(month,-10,@StartTime)  and DATEADD(month,-9,@StartTime) and i.ThingID = @ThingID and e.TypeID = @TypeID and i.IOTypeID = 1)as '10',
+	where i.EndPointID = e.ID and MONTH(i.ExecTimeStamp) = 10 and Year(i.ExecTimeStamp) = @Year and i.ThingID = @ThingID and e.TypeID = @TypeID and i.IOTypeID = 1)as '10',
 
 (select min(CAST(CAST(i.valu AS float) AS INT))  from EndPointIOs i, [Endpoints] e 
-	where i.EndPointID = e.ID and i.[ExecTimeStamp] between DATEADD(month,-11,@StartTime)  and DATEADD(month,-10,@StartTime) and i.ThingID = @ThingID and e.TypeID = @TypeID and i.IOTypeID = 1)as '11',
+	where i.EndPointID = e.ID and MONTH(i.ExecTimeStamp) = 11 and Year(i.ExecTimeStamp) = @Year and i.ThingID = @ThingID and e.TypeID = @TypeID and i.IOTypeID = 1)as '11',
 
 (select min(CAST(CAST(i.valu AS float) AS INT))  from EndPointIOs i, [Endpoints] e 
-	where i.EndPointID = e.ID and i.[ExecTimeStamp] between DATEADD(month,-12,@StartTime)  and DATEADD(month,-11,@StartTime) and i.ThingID = @ThingID and e.TypeID = @TypeID and i.IOTypeID = 1)as '12'
+	where i.EndPointID = e.ID and MONTH(i.ExecTimeStamp) = 12 and Year(i.ExecTimeStamp) = @Year and i.ThingID = @ThingID and e.TypeID = @TypeID and i.IOTypeID = 1)as '12'
 
 
 from 
@@ -4065,41 +4066,41 @@ where
 
 	 select ID,Title,'Max' as 'Fx',
 
-	(select max(CAST(CAST(i.valu AS float) AS INT))  from EndPointIOs i, [Endpoints] e 
-	where i.EndPointID = e.ID and i.[ExecTimeStamp] between DATEADD(month,-1,@StartTime)  and DATEADD(month,-0,@StartTime) and i.ThingID = @ThingID and e.TypeID = @TypeID and i.IOTypeID = 1)as '1',
+		(select max(CAST(CAST(i.valu AS float) AS INT))  from EndPointIOs i, [Endpoints] e 
+	where i.EndPointID = e.ID and MONTH(i.ExecTimeStamp) = 1 and Year(i.ExecTimeStamp) = @Year and i.ThingID = @ThingID and e.TypeID = @TypeID and i.IOTypeID = 1)as '1',
 
 (select max(CAST(CAST(i.valu AS float) AS INT))  from EndPointIOs i, [Endpoints] e 
-	where i.EndPointID = e.ID and i.[ExecTimeStamp] between DATEADD(month,-2,@StartTime)  and DATEADD(month,-1,@StartTime) and i.ThingID = @ThingID and e.TypeID = @TypeID and i.IOTypeID = 1)as '2',
+	where i.EndPointID = e.ID and MONTH(i.ExecTimeStamp) = 2 and Year(i.ExecTimeStamp) = @Year and i.ThingID = @ThingID and e.TypeID = @TypeID and i.IOTypeID = 1)as '2',
 
 (select max(CAST(CAST(i.valu AS float) AS INT))  from EndPointIOs i, [Endpoints] e 
-	where i.EndPointID = e.ID and i.[ExecTimeStamp] between DATEADD(month,-3,@StartTime)  and DATEADD(month,-2,@StartTime) and i.ThingID = @ThingID and e.TypeID = @TypeID and i.IOTypeID = 1)as '3',
+	where i.EndPointID = e.ID and MONTH(i.ExecTimeStamp) = 3 and Year(i.ExecTimeStamp) = @Year and i.ThingID = @ThingID and e.TypeID = @TypeID and i.IOTypeID = 1)as '3',
 
 (select max(CAST(CAST(i.valu AS float) AS INT))  from EndPointIOs i, [Endpoints] e 
-	where i.EndPointID = e.ID and i.[ExecTimeStamp] between DATEADD(month,-4,@StartTime)  and DATEADD(month,-3,@StartTime) and i.ThingID = @ThingID and e.TypeID = @TypeID and i.IOTypeID = 1)as '4',
+	where i.EndPointID = e.ID and MONTH(i.ExecTimeStamp) = 4 and Year(i.ExecTimeStamp) = @Year and i.ThingID = @ThingID and e.TypeID = @TypeID and i.IOTypeID = 1)as '4',
 
 (select max(CAST(CAST(i.valu AS float) AS INT))  from EndPointIOs i, [Endpoints] e 
-	where i.EndPointID = e.ID and i.[ExecTimeStamp] between DATEADD(month,-5,@StartTime)  and DATEADD(month,-4,@StartTime) and i.ThingID = @ThingID and e.TypeID = @TypeID and i.IOTypeID = 1)as '5',
+	where i.EndPointID = e.ID and MONTH(i.ExecTimeStamp) = 5 and Year(i.ExecTimeStamp) = @Year and i.ThingID = @ThingID and e.TypeID = @TypeID and i.IOTypeID = 1)as '5',
 
 (select max(CAST(CAST(i.valu AS float) AS INT))  from EndPointIOs i, [Endpoints] e 
-	where i.EndPointID = e.ID and i.[ExecTimeStamp] between DATEADD(month,-6,@StartTime)  and DATEADD(month,-5,@StartTime) and i.ThingID = @ThingID and e.TypeID = @TypeID and i.IOTypeID = 1)as '6',
+	where i.EndPointID = e.ID and MONTH(i.ExecTimeStamp) = 6 and Year(i.ExecTimeStamp) = @Year and i.ThingID = @ThingID and e.TypeID = @TypeID and i.IOTypeID = 1)as '6',
 
 (select max(CAST(CAST(i.valu AS float) AS INT))  from EndPointIOs i, [Endpoints] e 
-	where i.EndPointID = e.ID and i.[ExecTimeStamp] between DATEADD(month,-7,@StartTime)  and DATEADD(month,-6,@StartTime) and i.ThingID = @ThingID and e.TypeID = @TypeID and i.IOTypeID = 1)as '7',
+	where i.EndPointID = e.ID and MONTH(i.ExecTimeStamp) = 7 and Year(i.ExecTimeStamp) = @Year and i.ThingID = @ThingID and e.TypeID = @TypeID and i.IOTypeID = 1)as '7',
 
 (select max(CAST(CAST(i.valu AS float) AS INT))  from EndPointIOs i, [Endpoints] e 
-	where i.EndPointID = e.ID and i.[ExecTimeStamp] between DATEADD(month,-8,@StartTime)  and DATEADD(month,-7,@StartTime) and i.ThingID = @ThingID and e.TypeID = @TypeID and i.IOTypeID = 1)as '8',
+	where i.EndPointID = e.ID and MONTH(i.ExecTimeStamp) = 8 and Year(i.ExecTimeStamp) = @Year and i.ThingID = @ThingID and e.TypeID = @TypeID and i.IOTypeID = 1)as '8',
 
 (select max(CAST(CAST(i.valu AS float) AS INT))  from EndPointIOs i, [Endpoints] e 
-	where i.EndPointID = e.ID and i.[ExecTimeStamp] between DATEADD(month,-9,@StartTime)  and DATEADD(month,-8,@StartTime) and i.ThingID = @ThingID and e.TypeID = @TypeID and i.IOTypeID = 1)as '9',
+	where i.EndPointID = e.ID and MONTH(i.ExecTimeStamp) = 9 and Year(i.ExecTimeStamp) = @Year and i.ThingID = @ThingID and e.TypeID = @TypeID and i.IOTypeID = 1)as '9',
 
 (select max(CAST(CAST(i.valu AS float) AS INT))  from EndPointIOs i, [Endpoints] e 
-	where i.EndPointID = e.ID and i.[ExecTimeStamp] between DATEADD(month,-10,@StartTime)  and DATEADD(month,-9,@StartTime) and i.ThingID = @ThingID and e.TypeID = @TypeID and i.IOTypeID = 1)as '10',
+	where i.EndPointID = e.ID and MONTH(i.ExecTimeStamp) = 10 and Year(i.ExecTimeStamp) = @Year and i.ThingID = @ThingID and e.TypeID = @TypeID and i.IOTypeID = 1)as '10',
 
 (select max(CAST(CAST(i.valu AS float) AS INT))  from EndPointIOs i, [Endpoints] e 
-	where i.EndPointID = e.ID and i.[ExecTimeStamp] between DATEADD(month,-11,@StartTime)  and DATEADD(month,-10,@StartTime) and i.ThingID = @ThingID and e.TypeID = @TypeID and i.IOTypeID = 1)as '11',
+	where i.EndPointID = e.ID and MONTH(i.ExecTimeStamp) = 11 and Year(i.ExecTimeStamp) = @Year and i.ThingID = @ThingID and e.TypeID = @TypeID and i.IOTypeID = 1)as '11',
 
 (select max(CAST(CAST(i.valu AS float) AS INT))  from EndPointIOs i, [Endpoints] e 
-	where i.EndPointID = e.ID and i.[ExecTimeStamp] between DATEADD(month,-12,@StartTime)  and DATEADD(month,-11,@StartTime) and i.ThingID = @ThingID and e.TypeID = @TypeID and i.IOTypeID = 1)as '12'
+	where i.EndPointID = e.ID and MONTH(i.ExecTimeStamp) = 12 and Year(i.ExecTimeStamp) = @Year and i.ThingID = @ThingID and e.TypeID = @TypeID and i.IOTypeID = 1)as '12'
 
 
 from 
@@ -4111,86 +4112,41 @@ where
 
 	 select ID,Title,'avg' as 'Fx',
 
-	(select avg(CAST(CAST(i.valu AS float) AS INT))  from EndPointIOs i, [Endpoints] e 
-	where i.EndPointID = e.ID and i.[ExecTimeStamp] between DATEADD(month,-1,@StartTime)  and DATEADD(month,-0,@StartTime) and i.ThingID = @ThingID and e.TypeID = @TypeID and i.IOTypeID = 1)as '1',
+		(select avg(CAST(CAST(i.valu AS float) AS INT))  from EndPointIOs i, [Endpoints] e 
+	where i.EndPointID = e.ID and MONTH(i.ExecTimeStamp) = 1 and Year(i.ExecTimeStamp) = @Year and i.ThingID = @ThingID and e.TypeID = @TypeID and i.IOTypeID = 1)as '1',
 
 (select avg(CAST(CAST(i.valu AS float) AS INT))  from EndPointIOs i, [Endpoints] e 
-	where i.EndPointID = e.ID and i.[ExecTimeStamp] between DATEADD(month,-2,@StartTime)  and DATEADD(month,-1,@StartTime) and i.ThingID = @ThingID and e.TypeID = @TypeID and i.IOTypeID = 1)as '2',
+	where i.EndPointID = e.ID and MONTH(i.ExecTimeStamp) = 2 and Year(i.ExecTimeStamp) = @Year and i.ThingID = @ThingID and e.TypeID = @TypeID and i.IOTypeID = 1)as '2',
 
 (select avg(CAST(CAST(i.valu AS float) AS INT))  from EndPointIOs i, [Endpoints] e 
-	where i.EndPointID = e.ID and i.[ExecTimeStamp] between DATEADD(month,-3,@StartTime)  and DATEADD(month,-2,@StartTime) and i.ThingID = @ThingID and e.TypeID = @TypeID and i.IOTypeID = 1)as '3',
+	where i.EndPointID = e.ID and MONTH(i.ExecTimeStamp) = 3 and Year(i.ExecTimeStamp) = @Year and i.ThingID = @ThingID and e.TypeID = @TypeID and i.IOTypeID = 1)as '3',
 
 (select avg(CAST(CAST(i.valu AS float) AS INT))  from EndPointIOs i, [Endpoints] e 
-	where i.EndPointID = e.ID and i.[ExecTimeStamp] between DATEADD(month,-4,@StartTime)  and DATEADD(month,-3,@StartTime) and i.ThingID = @ThingID and e.TypeID = @TypeID and i.IOTypeID = 1)as '4',
+	where i.EndPointID = e.ID and MONTH(i.ExecTimeStamp) = 4 and Year(i.ExecTimeStamp) = @Year and i.ThingID = @ThingID and e.TypeID = @TypeID and i.IOTypeID = 1)as '4',
 
 (select avg(CAST(CAST(i.valu AS float) AS INT))  from EndPointIOs i, [Endpoints] e 
-	where i.EndPointID = e.ID and i.[ExecTimeStamp] between DATEADD(month,-5,@StartTime)  and DATEADD(month,-4,@StartTime) and i.ThingID = @ThingID and e.TypeID = @TypeID and i.IOTypeID = 1)as '5',
+	where i.EndPointID = e.ID and MONTH(i.ExecTimeStamp) = 5 and Year(i.ExecTimeStamp) = @Year and i.ThingID = @ThingID and e.TypeID = @TypeID and i.IOTypeID = 1)as '5',
 
 (select avg(CAST(CAST(i.valu AS float) AS INT))  from EndPointIOs i, [Endpoints] e 
-	where i.EndPointID = e.ID and i.[ExecTimeStamp] between DATEADD(month,-6,@StartTime)  and DATEADD(month,-5,@StartTime) and i.ThingID = @ThingID and e.TypeID = @TypeID and i.IOTypeID = 1)as '6',
+	where i.EndPointID = e.ID and MONTH(i.ExecTimeStamp) = 6 and Year(i.ExecTimeStamp) = @Year and i.ThingID = @ThingID and e.TypeID = @TypeID and i.IOTypeID = 1)as '6',
 
 (select avg(CAST(CAST(i.valu AS float) AS INT))  from EndPointIOs i, [Endpoints] e 
-	where i.EndPointID = e.ID and i.[ExecTimeStamp] between DATEADD(month,-7,@StartTime)  and DATEADD(month,-6,@StartTime) and i.ThingID = @ThingID and e.TypeID = @TypeID and i.IOTypeID = 1)as '7',
+	where i.EndPointID = e.ID and MONTH(i.ExecTimeStamp) = 7 and Year(i.ExecTimeStamp) = @Year and i.ThingID = @ThingID and e.TypeID = @TypeID and i.IOTypeID = 1)as '7',
 
 (select avg(CAST(CAST(i.valu AS float) AS INT))  from EndPointIOs i, [Endpoints] e 
-	where i.EndPointID = e.ID and i.[ExecTimeStamp] between DATEADD(month,-8,@StartTime)  and DATEADD(month,-7,@StartTime) and i.ThingID = @ThingID and e.TypeID = @TypeID and i.IOTypeID = 1)as '8',
+	where i.EndPointID = e.ID and MONTH(i.ExecTimeStamp) = 8 and Year(i.ExecTimeStamp) = @Year and i.ThingID = @ThingID and e.TypeID = @TypeID and i.IOTypeID = 1)as '8',
 
 (select avg(CAST(CAST(i.valu AS float) AS INT))  from EndPointIOs i, [Endpoints] e 
-	where i.EndPointID = e.ID and i.[ExecTimeStamp] between DATEADD(month,-9,@StartTime)  and DATEADD(month,-8,@StartTime) and i.ThingID = @ThingID and e.TypeID = @TypeID and i.IOTypeID = 1)as '9',
+	where i.EndPointID = e.ID and MONTH(i.ExecTimeStamp) = 9 and Year(i.ExecTimeStamp) = @Year and i.ThingID = @ThingID and e.TypeID = @TypeID and i.IOTypeID = 1)as '9',
 
 (select avg(CAST(CAST(i.valu AS float) AS INT))  from EndPointIOs i, [Endpoints] e 
-	where i.EndPointID = e.ID and i.[ExecTimeStamp] between DATEADD(month,-10,@StartTime)  and DATEADD(month,-9,@StartTime) and i.ThingID = @ThingID and e.TypeID = @TypeID and i.IOTypeID = 1)as '10',
+	where i.EndPointID = e.ID and MONTH(i.ExecTimeStamp) = 10 and Year(i.ExecTimeStamp) = @Year and i.ThingID = @ThingID and e.TypeID = @TypeID and i.IOTypeID = 1)as '10',
 
 (select avg(CAST(CAST(i.valu AS float) AS INT))  from EndPointIOs i, [Endpoints] e 
-	where i.EndPointID = e.ID and i.[ExecTimeStamp] between DATEADD(month,-11,@StartTime)  and DATEADD(month,-10,@StartTime) and i.ThingID = @ThingID and e.TypeID = @TypeID and i.IOTypeID = 1)as '11',
+	where i.EndPointID = e.ID and MONTH(i.ExecTimeStamp) = 11 and Year(i.ExecTimeStamp) = @Year and i.ThingID = @ThingID and e.TypeID = @TypeID and i.IOTypeID = 1)as '11',
 
 (select avg(CAST(CAST(i.valu AS float) AS INT))  from EndPointIOs i, [Endpoints] e 
-	where i.EndPointID = e.ID and i.[ExecTimeStamp] between DATEADD(month,-12,@StartTime)  and DATEADD(month,-11,@StartTime) and i.ThingID = @ThingID and e.TypeID = @TypeID and i.IOTypeID = 1)as '12'
-
-from 
-	Things t
-where 
-	t.ID = @ThingID
-
-	) union all (
-
-	 select ID,Title,'count' as 'Fx',
-
-	(select count(CAST(CAST(i.valu AS float) AS INT))  from EndPointIOs i, [Endpoints] e 
-	where i.EndPointID = e.ID and i.[ExecTimeStamp] between DATEADD(month,-1,@StartTime)  and DATEADD(month,-0,@StartTime) and i.ThingID = @ThingID and e.TypeID = @TypeID and i.IOTypeID = 1)as '1',
-
-(select count(CAST(CAST(i.valu AS float) AS INT))  from EndPointIOs i, [Endpoints] e 
-	where i.EndPointID = e.ID and i.[ExecTimeStamp] between DATEADD(month,-2,@StartTime)  and DATEADD(month,-1,@StartTime) and i.ThingID = @ThingID and e.TypeID = @TypeID and i.IOTypeID = 1)as '2',
-
-(select count(CAST(CAST(i.valu AS float) AS INT))  from EndPointIOs i, [Endpoints] e 
-	where i.EndPointID = e.ID and i.[ExecTimeStamp] between DATEADD(month,-3,@StartTime)  and DATEADD(month,-2,@StartTime) and i.ThingID = @ThingID and e.TypeID = @TypeID and i.IOTypeID = 1)as '3',
-
-(select count(CAST(CAST(i.valu AS float) AS INT))  from EndPointIOs i, [Endpoints] e 
-	where i.EndPointID = e.ID and i.[ExecTimeStamp] between DATEADD(month,-4,@StartTime)  and DATEADD(month,-3,@StartTime) and i.ThingID = @ThingID and e.TypeID = @TypeID and i.IOTypeID = 1)as '4',
-
-(select count(CAST(CAST(i.valu AS float) AS INT))  from EndPointIOs i, [Endpoints] e 
-	where i.EndPointID = e.ID and i.[ExecTimeStamp] between DATEADD(month,-5,@StartTime)  and DATEADD(month,-4,@StartTime) and i.ThingID = @ThingID and e.TypeID = @TypeID and i.IOTypeID = 1)as '5',
-
-(select count(CAST(CAST(i.valu AS float) AS INT))  from EndPointIOs i, [Endpoints] e 
-	where i.EndPointID = e.ID and i.[ExecTimeStamp] between DATEADD(month,-6,@StartTime)  and DATEADD(month,-5,@StartTime) and i.ThingID = @ThingID and e.TypeID = @TypeID and i.IOTypeID = 1)as '6',
-
-(select count(CAST(CAST(i.valu AS float) AS INT))  from EndPointIOs i, [Endpoints] e 
-	where i.EndPointID = e.ID and i.[ExecTimeStamp] between DATEADD(month,-7,@StartTime)  and DATEADD(month,-6,@StartTime) and i.ThingID = @ThingID and e.TypeID = @TypeID and i.IOTypeID = 1)as '7',
-
-(select count(CAST(CAST(i.valu AS float) AS INT))  from EndPointIOs i, [Endpoints] e 
-	where i.EndPointID = e.ID and i.[ExecTimeStamp] between DATEADD(month,-8,@StartTime)  and DATEADD(month,-7,@StartTime) and i.ThingID = @ThingID and e.TypeID = @TypeID and i.IOTypeID = 1)as '8',
-
-(select count(CAST(CAST(i.valu AS float) AS INT))  from EndPointIOs i, [Endpoints] e 
-	where i.EndPointID = e.ID and i.[ExecTimeStamp] between DATEADD(month,-9,@StartTime)  and DATEADD(month,-8,@StartTime) and i.ThingID = @ThingID and e.TypeID = @TypeID and i.IOTypeID = 1)as '9',
-
-(select count(CAST(CAST(i.valu AS float) AS INT))  from EndPointIOs i, [Endpoints] e 
-	where i.EndPointID = e.ID and i.[ExecTimeStamp] between DATEADD(month,-10,@StartTime)  and DATEADD(month,-9,@StartTime) and i.ThingID = @ThingID and e.TypeID = @TypeID and i.IOTypeID = 1)as '10',
-
-(select count(CAST(CAST(i.valu AS float) AS INT))  from EndPointIOs i, [Endpoints] e 
-	where i.EndPointID = e.ID and i.[ExecTimeStamp] between DATEADD(month,-11,@StartTime)  and DATEADD(month,-10,@StartTime) and i.ThingID = @ThingID and e.TypeID = @TypeID and i.IOTypeID = 1)as '11',
-
-(select count(CAST(CAST(i.valu AS float) AS INT))  from EndPointIOs i, [Endpoints] e 
-	where i.EndPointID = e.ID and i.[ExecTimeStamp] between DATEADD(month,-12,@StartTime)  and DATEADD(month,-11,@StartTime) and i.ThingID = @ThingID and e.TypeID = @TypeID and i.IOTypeID = 1)as '12'
+	where i.EndPointID = e.ID and MONTH(i.ExecTimeStamp) = 12 and Year(i.ExecTimeStamp) = @Year and i.ThingID = @ThingID and e.TypeID = @TypeID and i.IOTypeID = 1)as '12'
 
 
 from 
@@ -4199,6 +4155,7 @@ where
 	t.ID = @ThingID
 
 	)
+
 
 
 

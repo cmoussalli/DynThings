@@ -501,17 +501,17 @@ namespace DynThings.Data.Reports
             return hc;
         }
 
-        public Chart IOs_Months(long ThingID, long EndPointTypeID)
+        public Chart IOs_Months(long ThingID, long EndPointTypeID,long Year)
         {
             EndPointType endType = UnitOfWork_Repositories.repoEndpointTypes.Find(EndPointTypeID);
             Thing th = UnitOfWork_Repositories.repoThings.Find(ThingID);
             Chart hc = new Chart("HC_" + "Thing" + ThingID + "EndPointType" + EndPointTypeID + "Inputs");
             hc.title.Text = "Last 12 Months";
             hc.subTitle.Text = th.Title + " - " + endType.Title;
-            hc.xAxis.GenerateDaysList(true);
+            hc.xAxis.GenerateMonthsList();
             hc.legend.layout = Layout.vertical.ToString();
 
-            List<Rpt_ThingEnd_IOs_Months_Result> rpt = db.Rpt_ThingEnd_IOs_Months(ThingID, EndPointTypeID).ToList();
+            List<Rpt_ThingEnd_IOs_Months_Result> rpt = db.Rpt_ThingEnd_IOs_Months(ThingID, EndPointTypeID,Year).ToList();
 
             #region GetMin
             Serie s1 = new Serie();

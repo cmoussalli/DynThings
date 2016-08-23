@@ -667,6 +667,7 @@
         <Function Name="Rpt_ThingEnd_IOs_Months" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="ThingID" Type="bigint" Mode="In" />
           <Parameter Name="TypeID" Type="bigint" Mode="In" />
+          <Parameter Name="Year" Type="bigint" Mode="In" />
         </Function>
         <EntityContainer Name="DynThingsModelStoreContainer">
           <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRoles" Schema="dbo" store:Type="Tables" />
@@ -973,6 +974,7 @@
           <FunctionImport Name="Rpt_ThingEnd_IOs_Months" ReturnType="Collection(DynThingsModel.Rpt_ThingEnd_IOs_Months_Result)">
             <Parameter Name="ThingID" Mode="In" Type="Int64" />
             <Parameter Name="TypeID" Mode="In" Type="Int64" />
+            <Parameter Name="Year" Mode="In" Type="Int64" />
           </FunctionImport>
           </EntityContainer>
         <EntityType Name="AspNetRole">
@@ -1906,7 +1908,7 @@
         <ComplexType Name="Rpt_ThingEnd_IOs_Months_Result">
           <Property Type="Int64" Name="ID" Nullable="false" />
           <Property Type="String" Name="Title" Nullable="false" MaxLength="128" />
-          <Property Type="String" Name="Fx" Nullable="false" MaxLength="5" />
+          <Property Type="String" Name="Fx" Nullable="false" MaxLength="3" />
           <Property Type="Int32" Name="C1" Nullable="true" />
           <Property Type="Int32" Name="C2" Nullable="true" />
           <Property Type="Int32" Name="C3" Nullable="true" />

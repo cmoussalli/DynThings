@@ -57,6 +57,34 @@ namespace DynThings.Data.Repositories
               .ToPagedList(pageNumber, recordsPerPage);
             return cmds;
         }
+
+        public IPagedList GetPagedListByThingID(string search, long ThingID, int pageNumber, int recordsPerPage)
+        {
+            db = new DynThingsEntities();
+            IPagedList cmds = db.EndPointCommands
+              .Where(e => search == null || e.Title.Contains(search) && e.Endpoint.ThingID == ThingID)
+              .OrderBy(e => e.Title).ToList()
+              .ToPagedList(pageNumber, recordsPerPage);
+            return cmds;
+        }
+
+        public IPagedList GetPagedListByLocationID(string search, long LocationID,long ThingID, int pageNumber, int recordsPerPage)
+        {
+            List<LinkThingsLocation> lnks = db.LinkThingsLocations.Where(l => l.LocationID == LocationID).ToList();
+            db = new DynThingsEntities();
+            List<EndPointCommand> cmds = db.EndPointCommands
+              .Where(e => search == null || e.Title.Contains(search) && e.Endpoint.Thing.LinkThingsLocations.Any(l => l.LocationID == LocationID))
+              .OrderBy(e => e.Title).ToList();
+
+            if (ThingID != 0 )
+            {
+                cmds = cmds.Where(c => c.Endpoint.ThingID == ThingID).ToList();
+            }
+
+             IPagedList plCmds = cmds.ToPagedList(pageNumber, recordsPerPage);
+            return plCmds;
+        }
+
         #endregion
 
         #region Find
