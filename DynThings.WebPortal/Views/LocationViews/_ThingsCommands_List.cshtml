@@ -4,66 +4,34 @@
     <div class="list-group">
         @foreach (var item in Model)
         {
-            <div class="list-group-item">
-                <div class="row" onclick="" style="cursor:pointer">
+            <div class="list-group-item" style="cursor:pointer">
+                <div class="row" onclick="" >
                     <div class="col-md-6 col-sm-6 col-xs-6">
                         <h5><span><strong>@item.Endpoint.Thing.Title</strong></span></h5>
-                        <h5><span>@item.Title</span></h5>
-                        <br />
-                        <h6><span>Last update: </span></h6>
+                        <h5><span>@item.Endpoint.Thing.ThingCategory.Title</span></h5>
                     </div>
 
                     <div class="col-md-6 col-sm-6 col-xs-6">
-                        <button id="btn_Command_@item.ID" class="btn btn-primary">Execute</button>
+                        <button id="btn_Command_@item.ID" class="btn btn-primary" style="width:100%" data-toggle="modal" onclick="LoadPart_DialogEndPointCommandExecute(@item.ID)" data-target="#mdl">@item.Title</button> 
                     </div>
                 </div>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h5><p>@item.Description</p></h5>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-9">
+                        <h6><span>Command code: "@item.CommandCode"</span></h6>
+                    </div>
+                    <div class="col-lg-3">
+                        <button id="btn_CommandConfig_@item.ID" class="btn btn-info btn-sm" style="width:100%" onclick="LoadEndPointCommandEditor(@item.ID)" data-toggle="modal" data-target="#mdl">Config</button>
+                    </div>
+                </div>
+
             </div>
-
-            @*<script>
-            var g = new JustGage({
-                id: "gauge_@item.Location.ID.ToString()_@item.Thing.ID.ToString()_@item.EndPoint.TypeID.ToString()",
-                value: @item.LastSubmitValue,
-                min: 0,
-                max: 85,
-                title: "@item.EndPoint.TypeTitle",
-                label:"@item.EndPoint.Measurement"
-
-            });
-            </script>*@
         }
     </div>
 
-    @*@if (Model.PageCount > 1)
-    {
-        <div id="ThingEndsListPager">
-            <input id="ThingEndsCurrentPage" value="@Model.PageNumber.ToString()" hidden />
-            @Html.PagedListPager(Model, page => Url.Action("GetLocationThingEndsListPV", new { page }))
-        </div>
-    }*@
+  
 </div>
-
-
-
-
-
-<script>
-    //$(document).ready(function () {
-    //    FixUI();
-    //});
-
-    //$('#Thing').on('change', function() {
-    //    FilterEnds();
-    //});
-
-    //function showEndDetails(thingID,typeID){
-    //    $('#divMonitorMap').hide();
-    //    $('#divMonitorDetails').show();
-    //    LoadPart_MonitorThingEndDetails(thingID,typeID);
-    //};
-
-    //function ClosedivMonitorDetailsDiv() {
-    //    $('#divMonitorDetails').hide();
-    //    $('#divMonitorMap').show();
-    //};
-
-</script>

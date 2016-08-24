@@ -1,5 +1,6 @@
 ﻿var selectedThingEndDetailsView = "dashboard";
-
+var selectedLocationThingListView = "Inputs";
+var selectedLocation = "";
 
 //Get Location by ID
 function LoadPart_MonitorLocation(id) {
@@ -11,7 +12,6 @@ function LoadPart_MonitorLocation(id) {
         type: "GET",
     })
     .done(function (partialViewResult) {
-
         $("#divMonitorLocation").html(partialViewResult);
     });
 }
@@ -58,18 +58,8 @@ function LoadPart_MonitorEndPointCommands(endPointID) {
     });
 }
 
-//Get Thing Ends
-function LoadPart_MonitorThingEndsList(searchFor,locationID,thingID) {
-    var loadingpart = LoadDivLoading();
-    $("#DivThingContent").html(loadingpart);
-    $.ajax({
-        url: getRootURL() + '/locationviews/GetLocationThingEndsListPV?searchfor=' + searchFor + '&LocationID=' + locationID + '&ThingID=' + thingID + '&recordsperpage=0',
-        type: "GET",
-    })
-    .done(function (partialViewResult) {
-        $("#DivThingContent").html(partialViewResult);
-    });
-}
+
+
 
 //Get ThingEnd Details
 function LoadPart_MonitorThingEndDetails(thingID, thingEndTypeID) {
@@ -111,3 +101,44 @@ function SelectThingEndDetailsView_History() {
     $('#divThingEndDetailsView_History').show();
 }
 
+function LoadPart_MonitorThingView() {
+    if (selectedLocationThingListView == "Inputs") {
+        LoadPart_MonitorThingEndsList();
+    }
+    if (selectedLocationThingListView == "Commands") {
+        LoadPart_MonitorThingCommandsList();
+    }
+    if (selectedLocationThingListView == "Logs") {
+        FilterThingEnds();
+    }
+};
+
+//Get Thing Ends
+function LoadPart_MonitorThingEndsList() {
+    var selectedThingID = $(Thing).val();
+    var searchFor = $(txtSearch).val();
+    var loadingpart = LoadDivLoading();
+    $("#DivThingContent").html(loadingpart);
+    $.ajax({
+        url: getRootURL() + '/locationviews/GetLocationThingEndsListPV?searchfor=' + searchFor + '&LocationID=' + selectedLocation + '&ThingID=' + selectedThingID + '&recordsperpage=0',
+        type: "GET",
+    })
+    .done(function (partialViewResult) {
+        $("#DivThingContent").html(partialViewResult);
+    });
+}
+
+//Get Thing Commands
+function LoadPart_MonitorThingCommandsList() {
+    var selectedThingID = $(Thing).val();
+    var searchFor = $(txtSearch).val();
+    var loadingpart = LoadDivLoading();
+    $("#DivThingContent").html(loadingpart);
+    $.ajax({
+        url: getRootURL() + '/locationviews/GetLocationCommandsListPV?searchfor=' + searchFor + '&LocationID=' + selectedLocation + '&ThingID=' + selectedThingID + '&recordsperpage=0',
+        type: "GET",
+    })
+    .done(function (partialViewResult) {
+        $("#DivThingContent").html(partialViewResult);
+    });
+}

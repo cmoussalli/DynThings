@@ -240,7 +240,7 @@ namespace DynThings.WebPortal.Controllers
         }
 
         [HttpGet]
-        public PartialViewResult GetLocationCommandsListPV(string searchfor = "", long? locationID = null, long? thingID = null, int page = 1, int recordsperpage = 0)
+        public PartialViewResult GetLocationCommandsListPV(string searchfor = "", long? locationID = null, long? thingID = 0, int page = 1, int recordsperpage = 0)
         {
             IPagedList commands = UnitOfWork_Repositories.repoEndPointCommands.GetPagedListByLocationID(searchfor, long.Parse(locationID.ToString()), long.Parse(thingID.ToString()), page, Helpers.Configs.validateRecordsPerMaster(recordsperpage));
             return PartialView("_ThingsCommands_List", commands);
