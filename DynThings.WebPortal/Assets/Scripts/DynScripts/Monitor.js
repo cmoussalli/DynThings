@@ -77,6 +77,7 @@ function LoadPart_MonitorThingEndDetails(thingID, thingEndTypeID) {
 }
 
 
+
 function Load_ThingsEnd_Details() {
     Load_ThingEnd_InputsMinutesDiv();
     Load_ThingEnd_HistoryDiv();
@@ -100,6 +101,8 @@ function SelectThingEndDetailsView_History() {
     $('#liThingEndHistory').addClass('active');
     $('#divThingEndDetailsView_History').show();
 }
+
+
 
 function LoadPart_MonitorThingView() {
     if (selectedLocationThingListView == "Inputs") {
