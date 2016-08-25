@@ -105,13 +105,20 @@ function SelectThingEndDetailsView_History() {
 
 
 function LoadPart_MonitorThingView() {
+    $('#btnInputs').removeClass('active');
+    $('#btnCommands').removeClass('active');
+    $('#btnLogs').removeClass('active');
+
     if (selectedLocationThingListView == "Inputs") {
+        $('#btnInputs').addClass('active');
         LoadPart_MonitorThingEndsList();
     }
     if (selectedLocationThingListView == "Commands") {
+        $('#btnCommands').addClass('active');
         LoadPart_MonitorThingCommandsList();
     }
     if (selectedLocationThingListView == "Logs") {
+        $('#btnLogs').addClass('active');
         FilterThingEnds();
     }
 };
