@@ -1,9 +1,7 @@
 ﻿@model DynThings.Data.Models.LocationView
 <div id='myMap' style="width: 100%; padding-top:50px"></div>
 
-
 @*<script type="text/javascript" src="http://ecn.dev.virtualearth.net/mapcontrol/mapcontrol.ashx?v=7.0"></script>*@
-
 <script>
     var map = null;
     function getMap() {
@@ -15,8 +13,8 @@
                 , showDashboard: true
                 , showMapTypeSelector: true
                 , useInertia: true
-               // ,disablePanning: true
-               //, disableZooming: true
+                // ,disablePanning: true
+                //, disableZooming: true
                 ,mapTypeId: Microsoft.Maps.MapTypeId.birdseye
                 , center: new Microsoft.Maps.Location( @Model.X , @Model.Y),  zoom: @Model.Z });
         @foreach (var loc in @Model.Locations)
@@ -25,7 +23,7 @@
         var offset = new Microsoft.Maps.Point(0, 5);
         var pushpinOptions_@loc.ID = { text: '@loc.ID', visible: true, textOffset: offset };
         var pushpin_@loc.ID = new Microsoft.Maps.Pushpin(new Microsoft.Maps.Location(@loc.LatitudeX, @loc.LongitudeY), pushpinOptions_@loc.ID);
-       
+
         pushpinClick_@loc.ID = Microsoft.Maps.Events.addHandler(pushpin_@loc.ID, 'click', displayEventInfo);
 
         map.entities.push(pushpin_@loc.ID);

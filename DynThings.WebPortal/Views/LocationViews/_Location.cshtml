@@ -16,7 +16,7 @@
 
                         </ul>
                     </li>
-                  
+
                     <li><a href="#" onclick="LoadPart_MonitorThingView();">Refresh</a></li>
                 </ul>
             </div>
@@ -24,12 +24,19 @@
 
         <div class="panel panel-default">
             <div class="panel-heading">
-                <h3 class="panel-title"><span id="lblLocationTitle">@Model.Title</span></h3>
+                <div class="row">
+                    <div class="col-xs-1 hidden-sm hidden-md hidden-lg">
+                        <button id="btnBackToMap" class="btn" onclick="btnBacktoMap()"><</button>
+                    </div>
+                    <div class="col-xs-11 col-sm-12 col-md-12 col-lg-12">
+                        <h2 class="panel-title"><span id="lblLocationTitle">@Model.Title</span></h2>
+                    </div>
+                </div>
 
-                    <br />
-                    @Html.DropDownList("Thing", new SelectList(Model.Things, "ID", "Title"), "<All Things>", new { @class = "form-control" })
-              
-</div>
+                <br />
+                @Html.DropDownList("Thing", new SelectList(Model.Things, "ID", "Title"), "<All Things>", new { @class = "form-control" })
+
+            </div>
             <div class="panel-body">
                 <form class="">
                     <div class="form-group">
@@ -39,23 +46,23 @@
                 </form>
                 <div id="DivThingContent" style="overflow-y:auto;">
                 </div>
-                
+
             </div>
-                <div class="panel-footer nopadding" style="width:100%">
-                    <div class="btn-group btn-group-justified" role="group" aria-label="...">
-                        <div class="btn-group" role="group">
-                            <button id="btnInputs" type="button" onclick="selectedLocationThingListView='Inputs';LoadPart_MonitorThingView();" class="btn btn-info active">Inputs</button>
-                        </div>
-                        <div class="btn-group" role="group">
-                            <button id="btnCommands" type="button" onclick="selectedLocationThingListView='Commands';LoadPart_MonitorThingView();" class="btn btn-info">Commands</button>
-                        </div>
-                        <div class="btn-group" role="group">
-                            <button id="btnLogs" type="button" onclick="selectedLocationThingListView='Logs';LoadPart_MonitorThingView();" class="btn btn-info">Log</button>
-                        </div>
+            <div class="panel-footer nopadding" style="width:100%">
+                <div class="btn-group btn-group-justified" role="group" aria-label="...">
+                    <div class="btn-group " role="group">
+                        <button id="btnInputs" type="button" onclick="selectedLocationThingListView='Inputs';LoadPart_MonitorThingView();" class="btn btn-info btn-lg active">Inputs</button>
                     </div>
-                    <span id="lblLocationThingEndsListFooter"></span>
+                    <div class="btn-group" role="group">
+                        <button id="btnCommands" type="button" onclick="selectedLocationThingListView='Commands';LoadPart_MonitorThingView();" class="btn btn-info btn-lg">Commands</button>
+                    </div>
+                    <div class="btn-group" role="group">
+                        <button id="btnLogs" type="button" onclick="selectedLocationThingListView='Logs';LoadPart_MonitorThingView();" class="btn btn-info btn-lg">Log</button>
+                    </div>
                 </div>
-            
+                <span id="lblLocationThingEndsListFooter"></span>
+            </div>
+
         </div>
 
     </nav>
@@ -68,8 +75,12 @@
 <script>
     $(document).ready(function () {
         $(window).resize(function () {
-            $("#DivThingContent").height($("#divMonitorMap").height() - 290);
+            //if ($("#divMonitorMap").height() - 290 > 50)
+            //{
+            //$("#DivThingContent").height($("#divMonitorMap").height() - 290);
+            //}
             selectedLocation = @Model.ID.ToString();
+            FixUI();
         });
         LoadPart_MonitorThingView();
         FixUI();
@@ -80,7 +91,15 @@
     });
 
     function FixUI() {
-        $("#DivThingContent").height($("#divMonitorMap").height() - 290);
+        if ($("#divMonitorMap").height() - 290 > 50)
+        {
+            $("#DivThingContent").height($("#divMonitorMap").height() - 290);
+        }
+        else
+        {
+            $("#DivThingContent").height(window.innerHeight - 290);
+        }
+
     }
 
 

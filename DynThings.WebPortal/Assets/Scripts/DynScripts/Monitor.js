@@ -4,6 +4,12 @@ var selectedLocation = "";
 
 //Get Location by ID
 function LoadPart_MonitorLocation(id) {
+    //Validate MobileMode
+    if (window.innerWidth < 768)
+    {
+        $('#divMapContrainer').addClass('hidden-xs');
+    }
+
     $("#SelectedLocationID").val(id);
     var loadingpart = LoadDivLoading();
     $("#divMonitorLocation").html(loadingpart);
@@ -152,3 +158,14 @@ function LoadPart_MonitorThingCommandsList() {
         $("#DivThingContent").html(partialViewResult);
     });
 }
+
+//btnBacktoMap
+function btnBacktoMap() {
+    $('#divMapContrainer').removeClass('hidden-xs');
+};
+
+//btnBacktoThingEnds
+function btnBackThingEnds() {
+    $('#divMapContrainer').addClass('hidden-xs');
+    ClosedivMonitorDetailsDiv();
+};
