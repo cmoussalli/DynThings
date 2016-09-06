@@ -95,14 +95,6 @@
           <Property Name="UserName" Type="nvarchar" MaxLength="256" Nullable="false" />
           <Property Name="FullName" Type="nvarchar" MaxLength="50" />
         </EntityType>
-        <EntityType Name="CssIcons">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Title" Type="nvarchar" MaxLength="50" />
-          <Property Name="Css" Type="nvarchar" MaxLength="50" />
-        </EntityType>
         <EntityType Name="DeviceCommands">
           <Key>
             <PropertyRef Name="ID" />
@@ -315,6 +307,7 @@
           </Key>
           <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Title" Type="nvarchar" MaxLength="50" />
+          <Property Name="IconID" Type="bigint" />
         </EntityType>
         <EntityType Name="Things">
           <Key>
@@ -562,18 +555,6 @@ warning 6002: The table/view 'DynThings.dbo.VThingEnds' does not have a primary 
             </Principal>
             <Dependent Role="Endpoints">
               <PropertyRef Name="TypeID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__EndPointT__IconI__3FD07829">
-          <End Role="CssIcons" Type="Self.CssIcons" Multiplicity="0..1" />
-          <End Role="EndPointTypes" Type="Self.EndPointTypes" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="CssIcons">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="EndPointTypes">
-              <PropertyRef Name="IconID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -845,7 +826,6 @@ warning 6002: The table/view 'DynThings.dbo.VThingEnds' does not have a primary 
           <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogins" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetUserRoles" EntityType="Self.AspNetUserRoles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="CssIcons" EntityType="Self.CssIcons" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DeviceCommands" EntityType="Self.DeviceCommands" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DeviceIOs" EntityType="Self.DeviceIOs" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Devices" EntityType="Self.Devices" Schema="dbo" store:Type="Tables" />
@@ -941,10 +921,6 @@ warning 6002: The table/view 'DynThings.dbo.VThingEnds' does not have a primary 
             <End Role="EndPointTypes" EntitySet="EndPointTypes" />
             <End Role="Endpoints" EntitySet="Endpoints" />
           </AssociationSet>
-          <AssociationSet Name="FK__EndPointT__IconI__3FD07829" Association="Self.FK__EndPointT__IconI__3FD07829">
-            <End Role="CssIcons" EntitySet="CssIcons" />
-            <End Role="EndPointTypes" EntitySet="EndPointTypes" />
-          </AssociationSet>
           <AssociationSet Name="FK__EndPointT__TypeC__47DBAE45" Association="Self.FK__EndPointT__TypeC__47DBAE45">
             <End Role="EndPointTypeCategorys" EntitySet="EndPointTypeCategorys" />
             <End Role="EndPointTypes" EntitySet="EndPointTypes" />
@@ -1023,7 +999,6 @@ warning 6002: The table/view 'DynThings.dbo.VThingEnds' does not have a primary 
           <EntitySet Name="AspNetUserClaims" EntityType="DynThingsModel.AspNetUserClaim" />
           <EntitySet Name="AspNetUserLogins" EntityType="DynThingsModel.AspNetUserLogin" />
           <EntitySet Name="AspNetUsers" EntityType="DynThingsModel.AspNetUser" />
-          <EntitySet Name="CssIcons" EntityType="DynThingsModel.CssIcon" />
           <EntitySet Name="DeviceCommands" EntityType="DynThingsModel.DeviceCommand" />
           <EntitySet Name="DeviceIOs" EntityType="DynThingsModel.DeviceIO" />
           <EntitySet Name="DeviceStatus" EntityType="DynThingsModel.DeviceStatu" />
@@ -1045,10 +1020,6 @@ warning 6002: The table/view 'DynThings.dbo.VThingEnds' does not have a primary 
           <AssociationSet Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" Association="DynThingsModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
             <End Role="AspNetUser" EntitySet="AspNetUsers" />
             <End Role="AspNetUserLogin" EntitySet="AspNetUserLogins" />
-          </AssociationSet>
-          <AssociationSet Name="FK__EndPointT__IconI__3FD07829" Association="DynThingsModel.FK__EndPointT__IconI__3FD07829">
-            <End Role="CssIcon" EntitySet="CssIcons" />
-            <End Role="EndPointType" EntitySet="EndPointTypes" />
           </AssociationSet>
           <AssociationSet Name="FK__DeviceIOs__IOTyp__403A8C7D" Association="DynThingsModel.FK__DeviceIOs__IOTyp__403A8C7D">
             <End Role="IOType" EntitySet="IOTypes" />
@@ -1169,13 +1140,6 @@ warning 6002: The table/view 'DynThings.dbo.VThingEnds' does not have a primary 
             <Parameter Name="ThingID" Mode="In" Type="Int64" />
             <Parameter Name="TypeID" Mode="In" Type="Int64" />
           </FunctionImport>
-          <FunctionImport Name="GetThingEnds" ReturnType="Collection(DynThingsModel.GetThingEnds_Result)">
-            <Parameter Name="LocationID" Mode="In" Type="Int64" />
-            <Parameter Name="ThingID" Mode="In" Type="Int64" />
-            <Parameter Name="ThingCategoryID" Mode="In" Type="Int64" />
-            <Parameter Name="EndPointID" Mode="In" Type="Int64" />
-            <Parameter Name="EndPointTypeID" Mode="In" Type="Int64" />
-          </FunctionImport>
           <FunctionImport Name="Rpt_ThingEnd_IOs_Days" ReturnType="Collection(DynThingsModel.Rpt_ThingEnd_IOs_Days_Result)">
             <Parameter Name="ThingID" Mode="In" Type="Int64" />
             <Parameter Name="TypeID" Mode="In" Type="Int64" />
@@ -1220,6 +1184,13 @@ warning 6002: The table/view 'DynThings.dbo.VThingEnds' does not have a primary 
             <End Role="AspNetUser" EntitySet="AspNetUsers" />
             <End Role="LinkUsersAlert" EntitySet="LinkUsersAlerts" />
           </AssociationSet>
+          <FunctionImport Name="GetThingEnds" ReturnType="Collection(DynThingsModel.GetThingEnds_Result)">
+            <Parameter Name="LocationID" Mode="In" Type="Int64" />
+            <Parameter Name="ThingID" Mode="In" Type="Int64" />
+            <Parameter Name="ThingCategoryID" Mode="In" Type="Int64" />
+            <Parameter Name="EndPointID" Mode="In" Type="Int64" />
+            <Parameter Name="EndPointTypeID" Mode="In" Type="Int64" />
+          </FunctionImport>
           </EntityContainer>
         <EntityType Name="AspNetRole">
           <Key>
@@ -1274,15 +1245,6 @@ warning 6002: The table/view 'DynThings.dbo.VThingEnds' does not have a primary 
           <NavigationProperty Name="LinkDevicesLocations1" Relationship="DynThingsModel.FK__LinkDevic__Start__607251E5" FromRole="AspNetUser" ToRole="LinkDevicesLocation" />
           <NavigationProperty Name="LinkUsersAlerts" Relationship="DynThingsModel.FK__LinkUsers__UserI__7DCDAAA2" FromRole="AspNetUser" ToRole="LinkUsersAlert" />
           </EntityType>
-        <EntityType Name="CssIcon">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Css" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="EndPointTypes" Relationship="DynThingsModel.FK__EndPointT__IconI__3FD07829" FromRole="CssIcon" ToRole="EndPointType" />
-        </EntityType>
         <EntityType Name="DeviceCommand">
           <Key>
             <PropertyRef Name="ID" />
@@ -1385,7 +1347,6 @@ warning 6002: The table/view 'DynThings.dbo.VThingEnds' does not have a primary 
           <Property Name="measurement" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="TypeCategoryID" Type="Int64" />
           <Property Name="IconID" Type="Int64" />
-          <NavigationProperty Name="CssIcon" Relationship="DynThingsModel.FK__EndPointT__IconI__3FD07829" FromRole="EndPointType" ToRole="CssIcon" />
           <NavigationProperty Name="Endpoints" Relationship="DynThingsModel.FK__Endpoints__TypeI__45F365D3" FromRole="EndPointType" ToRole="Endpoint" />
           <NavigationProperty Name="EndPointTypeCategory" Relationship="DynThingsModel.FK__EndPointT__TypeC__47DBAE45" FromRole="EndPointType" ToRole="EndPointTypeCategory" />
           <NavigationProperty Name="AlertConditions" Relationship="DynThingsModel.FK__AlertCond__EndPo__0662F0A3" FromRole="EndPointType" ToRole="AlertCondition" />
@@ -1483,18 +1444,6 @@ warning 6002: The table/view 'DynThings.dbo.VThingEnds' does not have a primary 
             </Principal>
             <Dependent Role="AspNetUserLogin">
               <PropertyRef Name="UserId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__EndPointT__IconI__3FD07829">
-          <End Type="DynThingsModel.CssIcon" Role="CssIcon" Multiplicity="0..1" />
-          <End Type="DynThingsModel.EndPointType" Role="EndPointType" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="CssIcon">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="EndPointType">
-              <PropertyRef Name="IconID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1926,6 +1875,7 @@ warning 6002: The table/view 'DynThings.dbo.VThingEnds' does not have a primary 
           <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Things" Relationship="DynThingsModel.FK__Things__Category__662B2B3B" FromRole="ThingCategory" ToRole="Thing" />
+          <Property Name="IconID" Type="Int64" />
         </EntityType>
         <EntityType Name="Thing">
           <Key>
@@ -2108,20 +2058,6 @@ warning 6002: The table/view 'DynThings.dbo.VThingEnds' does not have a primary 
           <Property Type="Int32" Name="C22" Nullable="true" />
           <Property Type="Int32" Name="C23" Nullable="true" />
           <Property Type="Int32" Name="C24" Nullable="true" />
-        </ComplexType>
-        <ComplexType Name="GetThingEnds_Result">
-          <Property Type="Int64" Name="LocationID" Nullable="false" />
-          <Property Type="String" Name="LocationTitle" Nullable="false" MaxLength="50" />
-          <Property Type="Int64" Name="ThingID" Nullable="false" />
-          <Property Type="String" Name="ThingTitle" Nullable="false" MaxLength="128" />
-          <Property Type="Int64" Name="ThingCategoryID" Nullable="false" />
-          <Property Type="String" Name="ThingCategoryTitle" Nullable="true" MaxLength="50" />
-          <Property Type="Int64" Name="EndPointTypeID" Nullable="false" />
-          <Property Type="String" Name="EndPointTypeTitle" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="EndPointMeasurement" Nullable="true" MaxLength="50" />
-          <Property Type="Int64" Name="LastIOID" Nullable="true" />
-          <Property Type="String" Name="LastIOValue" Nullable="true" MaxLength="50" />
-          <Property Type="DateTime" Name="LastIOTimeStamp" Nullable="true" Precision="23" />
         </ComplexType>
         <ComplexType Name="Rpt_ThingEnd_IOs_Days_Result">
           <Property Type="Int64" Name="ID" Nullable="false" />
@@ -2345,6 +2281,21 @@ warning 6002: The table/view 'DynThings.dbo.VThingEnds' does not have a primary 
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <ComplexType Name="GetThingEnds_Result">
+          <Property Type="Int64" Name="LocationID" Nullable="false" />
+          <Property Type="String" Name="LocationTitle" Nullable="false" MaxLength="50" />
+          <Property Type="Int64" Name="ThingID" Nullable="false" />
+          <Property Type="String" Name="ThingTitle" Nullable="false" MaxLength="128" />
+          <Property Type="Int64" Name="ThingCategoryID" Nullable="false" />
+          <Property Type="String" Name="ThingCategoryTitle" Nullable="true" MaxLength="50" />
+          <Property Type="Int64" Name="EndPointTypeID" Nullable="false" />
+          <Property Type="String" Name="EndPointTypeTitle" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="EndPointMeasurement" Nullable="true" MaxLength="50" />
+          <Property Type="Int64" Name="IconID" Nullable="true" />
+          <Property Type="Int64" Name="LastIOID" Nullable="true" />
+          <Property Type="String" Name="LastIOValue" Nullable="true" MaxLength="50" />
+          <Property Type="DateTime" Name="LastIOTimeStamp" Nullable="true" Precision="23" />
+        </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -2394,15 +2345,6 @@ warning 6002: The table/view 'DynThings.dbo.VThingEnds' does not have a primary 
                 <ScalarProperty Name="EmailConfirmed" ColumnName="EmailConfirmed" />
                 <ScalarProperty Name="Email" ColumnName="Email" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="CssIcons">
-            <EntityTypeMapping TypeName="DynThingsModel.CssIcon">
-              <MappingFragment StoreEntitySet="CssIcons">
-                <ScalarProperty Name="Css" ColumnName="Css" />
-                <ScalarProperty Name="Title" ColumnName="Title" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -2784,6 +2726,7 @@ warning 6002: The table/view 'DynThings.dbo.VThingEnds' does not have a primary 
           <EntitySetMapping Name="ThingCategorys">
             <EntityTypeMapping TypeName="DynThingsModel.ThingCategory">
               <MappingFragment StoreEntitySet="ThingCategorys">
+                <ScalarProperty Name="IconID" ColumnName="IconID" />
                 <ScalarProperty Name="Title" ColumnName="Title" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
@@ -2911,24 +2854,6 @@ warning 6002: The table/view 'DynThings.dbo.VThingEnds' does not have a primary 
                 <ScalarProperty Name="C22" ColumnName="22" />
                 <ScalarProperty Name="C23" ColumnName="23" />
                 <ScalarProperty Name="C24" ColumnName="24" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="GetThingEnds" FunctionName="DynThingsModel.Store.GetThingEnds">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="DynThingsModel.GetThingEnds_Result">
-                <ScalarProperty Name="LocationID" ColumnName="LocationID" />
-                <ScalarProperty Name="LocationTitle" ColumnName="LocationTitle" />
-                <ScalarProperty Name="ThingID" ColumnName="ThingID" />
-                <ScalarProperty Name="ThingTitle" ColumnName="ThingTitle" />
-                <ScalarProperty Name="ThingCategoryID" ColumnName="ThingCategoryID" />
-                <ScalarProperty Name="ThingCategoryTitle" ColumnName="ThingCategoryTitle" />
-                <ScalarProperty Name="EndPointTypeID" ColumnName="EndPointTypeID" />
-                <ScalarProperty Name="EndPointTypeTitle" ColumnName="EndPointTypeTitle" />
-                <ScalarProperty Name="EndPointMeasurement" ColumnName="EndPointMeasurement" />
-                <ScalarProperty Name="LastIOID" ColumnName="LastIOID" />
-                <ScalarProperty Name="LastIOValue" ColumnName="LastIOValue" />
-                <ScalarProperty Name="LastIOTimeStamp" ColumnName="LastIOTimeStamp" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
@@ -3073,6 +2998,25 @@ warning 6002: The table/view 'DynThings.dbo.VThingEnds' does not have a primary 
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="GetThingEnds" FunctionName="DynThingsModel.Store.GetThingEnds">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DynThingsModel.GetThingEnds_Result">
+                <ScalarProperty Name="LocationID" ColumnName="LocationID" />
+                <ScalarProperty Name="LocationTitle" ColumnName="LocationTitle" />
+                <ScalarProperty Name="ThingID" ColumnName="ThingID" />
+                <ScalarProperty Name="ThingTitle" ColumnName="ThingTitle" />
+                <ScalarProperty Name="ThingCategoryID" ColumnName="ThingCategoryID" />
+                <ScalarProperty Name="ThingCategoryTitle" ColumnName="ThingCategoryTitle" />
+                <ScalarProperty Name="EndPointTypeID" ColumnName="EndPointTypeID" />
+                <ScalarProperty Name="EndPointTypeTitle" ColumnName="EndPointTypeTitle" />
+                <ScalarProperty Name="EndPointMeasurement" ColumnName="EndPointMeasurement" />
+                <ScalarProperty Name="IconID" ColumnName="IconID" />
+                <ScalarProperty Name="LastIOID" ColumnName="LastIOID" />
+                <ScalarProperty Name="LastIOValue" ColumnName="LastIOValue" />
+                <ScalarProperty Name="LastIOTimeStamp" ColumnName="LastIOTimeStamp" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

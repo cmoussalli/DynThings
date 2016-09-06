@@ -30,7 +30,7 @@ namespace DynThings.Data.Repositories
         public IPagedList GetPagedList(string search, int pageNumber, int recordsPerPage)
         {
             IPagedList cats = db.ThingCategorys
-              .Where(e => search == null || e.Title.Contains(search))
+              .Where(e => e.ID > 0 && search == null || e.ID > 0 &&  e.Title.Contains(search))
               .OrderBy(e => e.Title).ToList()
               .ToPagedList(pageNumber, recordsPerPage);
             return cats;

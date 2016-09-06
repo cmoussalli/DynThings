@@ -35,6 +35,8 @@ public partial class GetThingEnds_Result
 
     public string EndPointMeasurement { get; set; }
 
+    public Nullable<long> IconID { get; set; }
+
     public Nullable<long> LastIOID { get; set; }
 
     public string LastIOValue { get; set; }

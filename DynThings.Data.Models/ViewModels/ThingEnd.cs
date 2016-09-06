@@ -37,6 +37,7 @@ namespace DynThings.Data.Models.ViewModels
             end.Measurement = source.EndPointMeasurement;
             end.TypeID = source.EndPointTypeID;
             end.TypeTitle = source.EndPointTypeTitle;
+            end.IconID = long.Parse(source.IconID.ToString());
             this.EndPoint = end;
 
 
@@ -82,6 +83,7 @@ namespace DynThings.Data.Models.ViewModels
         public long TypeID { get; set; }
         public string TypeTitle { get; set; }
         public string Measurement { get; set; }
+        public long IconID { get; set; }
     }
 
 

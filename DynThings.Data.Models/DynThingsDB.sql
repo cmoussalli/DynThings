@@ -1608,6 +1608,7 @@ select loc.ID as 'LocationID'
 	,eT.ID as 'EndPointTypeID'
 	,eT.Title as 'EndPointTypeTitle'
 	,eT.measurement as 'EndPointMeasurement'
+	,et.IconID
 	--,(select top(1) Valu from EndPointIOs i where t.ID = i.ThingID and i.IOTypeID = 1 order by ExecTimeStamp desc) as 'LastSubmitValue'
 	,max(ios.ID) as 'LastIOID'
 	,(select top(1) valu from EndPointIOs where id = MAX(ios.ID) and IOTypeID = 1 order by id desc) as 'LastIOValue'
@@ -1651,7 +1652,7 @@ group by loc.ID
 	,eT.ID 
 	,eT.Title 
 	,eT.measurement
-
+	,et.IconID
 end
 GO
 /****** Object:  StoredProcedure [dbo].[ResetDB]    Script Date: 9/6/2016 11:51:59 AM ******/

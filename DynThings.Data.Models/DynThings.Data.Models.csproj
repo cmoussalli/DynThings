@@ -75,9 +75,6 @@
     <Compile Include="AspNetUserLogin.cs">
       <DependentUpon>DynThingsModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="CssIcon.cs">
-      <DependentUpon>DynThingsModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="Device.cs">
       <DependentUpon>DynThingsModel.tt</DependentUpon>
     </Compile>

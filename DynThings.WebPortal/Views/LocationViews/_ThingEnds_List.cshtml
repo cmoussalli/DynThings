@@ -7,6 +7,7 @@
                 <div class="row" onclick="showEndDetails(@item.Thing.ID.ToString(),@item.EndPoint.TypeID.ToString())" style="cursor:pointer">
                     <div class="col-md-6 col-sm-6 col-xs-6">
                         <h5><span><strong>@item.Thing.Title</strong></span></h5>
+                        <img id="imgThingEndImage_@item.Thing.ID.ToString()_@item.EndPoint.TypeID.ToString()" />
                         <h5><span>@item.Thing.CategoryTitle</span></h5>
                         <br />
                         <h5><span class="label label-success">Connected</span></h5>
@@ -29,6 +30,8 @@
                 label:"@item.EndPoint.Measurement"
 
             });
+
+                $('#imgThingEndImage_@item.Thing.ID.ToString()_@item.EndPoint.TypeID.ToString()').attr('src',getRootURL() + "/imgs/@(item.EndPoint.IconID.ToString() + ".png")" );
             </script>
         }
     </div>
