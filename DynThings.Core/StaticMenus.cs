@@ -43,7 +43,7 @@ namespace DynThings.Core
 
             public static string GetMonitorAndControlRoleName()
             {
-                return "Monitor and Control";
+                return "Monitor & Control";
             }
 
             public static string GetMonitorOnlyRoleName()

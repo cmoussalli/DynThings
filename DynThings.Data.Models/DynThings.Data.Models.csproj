@@ -54,6 +54,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Alert.cs">
+      <DependentUpon>DynThingsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AlertCondition.cs">
+      <DependentUpon>DynThingsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AlertConditionType.cs">
+      <DependentUpon>DynThingsModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="AspNetRole.cs">
       <DependentUpon>DynThingsModel.tt</DependentUpon>
     </Compile>
@@ -117,6 +126,9 @@
     <Compile Include="GetThingEnds_Result.cs">
       <DependentUpon>DynThingsModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="LinkUsersAlert.cs">
+      <DependentUpon>DynThingsModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Rpt_ThingEnd_IOs_Days_Result.cs">
       <DependentUpon>DynThingsModel.tt</DependentUpon>
     </Compile>
@@ -127,6 +139,12 @@
       <DependentUpon>DynThingsModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Rpt_ThingEnd_IOs_Months_Result.cs">
+      <DependentUpon>DynThingsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UserNotification.cs">
+      <DependentUpon>DynThingsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UserNotificationType.cs">
       <DependentUpon>DynThingsModel.tt</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\ThingEnd.cs" />
@@ -180,6 +198,9 @@
       <DependentUpon>DynThingsModel.tt</DependentUpon>
     </Compile>
     <Compile Include="ThingCategory.cs">
+      <DependentUpon>DynThingsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="VThingEnd.cs">
       <DependentUpon>DynThingsModel.tt</DependentUpon>
     </Compile>
   </ItemGroup>

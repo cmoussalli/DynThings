@@ -5,6 +5,44 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="DynThingsModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="AlertConditions">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AlertID" Type="bigint" Nullable="false" />
+          <Property Name="ThingID" Type="bigint" Nullable="false" />
+          <Property Name="IOTypeID" Type="bigint" />
+          <Property Name="EndPointTypeID" Type="bigint" Nullable="false" />
+          <Property Name="ConditionTypeID" Type="bigint" Nullable="false" />
+          <Property Name="ConditionValue" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="IsMust" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AlertConditionTypes">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Alerts">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" MaxLength="256" />
+          <Property Name="Message" Type="nvarchar" MaxLength="500" />
+          <Property Name="IsActive" Type="bigint" />
+          <Property Name="Sunday" Type="bit" />
+          <Property Name="Monday" Type="bit" />
+          <Property Name="Tuesday" Type="bit" />
+          <Property Name="Wednesday" Type="bit" />
+          <Property Name="Thursday" Type="bit" />
+          <Property Name="Friday" Type="bit" />
+          <Property Name="Saturday" Type="bit" />
+          <Property Name="StartTime" Type="time" Precision="7" />
+          <Property Name="EndTime" Type="time" Precision="7" />
+        </EntityType>
         <EntityType Name="AspNetRoles">
           <Key>
             <PropertyRef Name="Id" />
@@ -161,6 +199,11 @@
           <Property Name="DeviceID" Type="bigint" Nullable="false" />
           <Property Name="TypeID" Type="bigint" Nullable="false" />
           <Property Name="ThingID" Type="bigint" Nullable="false" />
+          <Property Name="IsNumericOnly" Type="bit" />
+          <Property Name="MinValue" Type="real" />
+          <Property Name="MaxValue" Type="real" />
+          <Property Name="LowRange" Type="real" />
+          <Property Name="HighRange" Type="real" />
         </EntityType>
         <EntityType Name="EndPointTypeCategorys">
           <Key>
@@ -216,6 +259,14 @@
           <Property Name="ThingID" Type="bigint" />
           <Property Name="CreateByUser" Type="nvarchar" MaxLength="50" />
           <Property Name="CreateTimeStamp" Type="datetime" />
+        </EntityType>
+        <EntityType Name="LinkUsersAlerts">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserID" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="AlertID" Type="bigint" Nullable="false" />
         </EntityType>
         <EntityType Name="Locations">
           <Key>
@@ -276,6 +327,98 @@
           <Property Name="CreateTimeStamp" Type="datetime" />
           <Property Name="UTC_Diff" Type="int" Nullable="false" />
         </EntityType>
+        <EntityType Name="UserNotifications">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserID" Type="nvarchar" MaxLength="128" />
+          <Property Name="IsRead" Type="bigint" />
+          <Property Name="Txt" Type="nvarchar" MaxLength="512" />
+          <Property Name="NotificationTypeID" Type="bigint" />
+          <Property Name="RefID" Type="bigint" />
+          <Property Name="AlertTimeStamp" Type="datetime" />
+        </EntityType>
+        <EntityType Name="UserNotificationTypes">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" MaxLength="512" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DynThings.dbo.VThingEnds' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="VThingEnds">
+          <Key>
+            <PropertyRef Name="ThingID" />
+            <PropertyRef Name="IOTypeID" />
+            <PropertyRef Name="EndpointTypeID" />
+          </Key>
+          <Property Name="ThingID" Type="bigint" Nullable="false" />
+          <Property Name="IOTypeID" Type="bigint" Nullable="false" />
+          <Property Name="EndpointTypeID" Type="bigint" Nullable="false" />
+          <Property Name="LastValue" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <Association Name="FK__AlertCond__Alert__7720AD13">
+          <End Role="Alerts" Type="Self.Alerts" Multiplicity="1" />
+          <End Role="AlertConditions" Type="Self.AlertConditions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Alerts">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="AlertConditions">
+              <PropertyRef Name="AlertID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__AlertCond__Condi__74444068">
+          <End Role="AlertConditionTypes" Type="Self.AlertConditionTypes" Multiplicity="1" />
+          <End Role="AlertConditions" Type="Self.AlertConditions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AlertConditionTypes">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="AlertConditions">
+              <PropertyRef Name="ConditionTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__AlertCond__EndPo__0662F0A3">
+          <End Role="EndPointTypes" Type="Self.EndPointTypes" Multiplicity="1" />
+          <End Role="AlertConditions" Type="Self.AlertConditions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EndPointTypes">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="AlertConditions">
+              <PropertyRef Name="EndPointTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__AlertCond__IOTyp__056ECC6A">
+          <End Role="IOTypes" Type="Self.IOTypes" Multiplicity="0..1" />
+          <End Role="AlertConditions" Type="Self.AlertConditions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="IOTypes">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="AlertConditions">
+              <PropertyRef Name="IOTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__AlertCond__Thing__762C88DA">
+          <End Role="Things" Type="Self.Things" Multiplicity="1" />
+          <End Role="AlertConditions" Type="Self.AlertConditions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Things">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="AlertConditions">
+              <PropertyRef Name="ThingID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK__Commands__Device__4D94879B">
           <End Role="Devices" Type="Self.Devices" Multiplicity="0..1">
             <OnDelete Action="Cascade" />
@@ -552,6 +695,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK__LinkUsers__Alert__7EC1CEDB">
+          <End Role="Alerts" Type="Self.Alerts" Multiplicity="1" />
+          <End Role="LinkUsersAlerts" Type="Self.LinkUsersAlerts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Alerts">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="LinkUsersAlerts">
+              <PropertyRef Name="AlertID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__LinkUsers__UserI__7DCDAAA2">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
+          <End Role="LinkUsersAlerts" Type="Self.LinkUsersAlerts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="LinkUsersAlerts">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK__LocationV__Locat__286302EC">
           <End Role="LocationViewTypes" Type="Self.LocationViewTypes" Multiplicity="1" />
           <End Role="LocationViews" Type="Self.LocationViews" Multiplicity="*" />
@@ -670,6 +837,9 @@
           <Parameter Name="Year" Type="bigint" Mode="In" />
         </Function>
         <EntityContainer Name="DynThingsModelStoreContainer">
+          <EntitySet Name="AlertConditions" EntityType="Self.AlertConditions" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AlertConditionTypes" EntityType="Self.AlertConditionTypes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Alerts" EntityType="Self.Alerts" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRoles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaims" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogins" Schema="dbo" store:Type="Tables" />
@@ -690,12 +860,43 @@
           <EntitySet Name="LinkDevicesLocations" EntityType="Self.LinkDevicesLocations" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="LinkLocationsLocationViews" EntityType="Self.LinkLocationsLocationViews" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="LinkThingsLocations" EntityType="Self.LinkThingsLocations" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LinkUsersAlerts" EntityType="Self.LinkUsersAlerts" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Locations" EntityType="Self.Locations" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="LocationViews" EntityType="Self.LocationViews" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="LocationViewTypes" EntityType="Self.LocationViewTypes" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ResultMessages" EntityType="Self.ResultMessages" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ThingCategorys" EntityType="Self.ThingCategorys" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Things" EntityType="Self.Things" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserNotifications" EntityType="Self.UserNotifications" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserNotificationTypes" EntityType="Self.UserNotificationTypes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="VThingEnds" EntityType="Self.VThingEnds" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [VThingEnds].[ThingID] AS [ThingID], 
+    [VThingEnds].[IOTypeID] AS [IOTypeID], 
+    [VThingEnds].[EndpointTypeID] AS [EndpointTypeID], 
+    [VThingEnds].[LastValue] AS [LastValue]
+    FROM [dbo].[VThingEnds] AS [VThingEnds]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK__AlertCond__Alert__7720AD13" Association="Self.FK__AlertCond__Alert__7720AD13">
+            <End Role="Alerts" EntitySet="Alerts" />
+            <End Role="AlertConditions" EntitySet="AlertConditions" />
+          </AssociationSet>
+          <AssociationSet Name="FK__AlertCond__Condi__74444068" Association="Self.FK__AlertCond__Condi__74444068">
+            <End Role="AlertConditionTypes" EntitySet="AlertConditionTypes" />
+            <End Role="AlertConditions" EntitySet="AlertConditions" />
+          </AssociationSet>
+          <AssociationSet Name="FK__AlertCond__EndPo__0662F0A3" Association="Self.FK__AlertCond__EndPo__0662F0A3">
+            <End Role="EndPointTypes" EntitySet="EndPointTypes" />
+            <End Role="AlertConditions" EntitySet="AlertConditions" />
+          </AssociationSet>
+          <AssociationSet Name="FK__AlertCond__IOTyp__056ECC6A" Association="Self.FK__AlertCond__IOTyp__056ECC6A">
+            <End Role="IOTypes" EntitySet="IOTypes" />
+            <End Role="AlertConditions" EntitySet="AlertConditions" />
+          </AssociationSet>
+          <AssociationSet Name="FK__AlertCond__Thing__762C88DA" Association="Self.FK__AlertCond__Thing__762C88DA">
+            <End Role="Things" EntitySet="Things" />
+            <End Role="AlertConditions" EntitySet="AlertConditions" />
+          </AssociationSet>
           <AssociationSet Name="FK__Commands__Device__4D94879B" Association="Self.FK__Commands__Device__4D94879B">
             <End Role="Devices" EntitySet="Devices" />
             <End Role="DeviceCommands" EntitySet="DeviceCommands" />
@@ -779,6 +980,14 @@
           <AssociationSet Name="FK__LinkThing__Thing__0697FACD" Association="Self.FK__LinkThing__Thing__0697FACD">
             <End Role="Things" EntitySet="Things" />
             <End Role="LinkThingsLocations" EntitySet="LinkThingsLocations" />
+          </AssociationSet>
+          <AssociationSet Name="FK__LinkUsers__Alert__7EC1CEDB" Association="Self.FK__LinkUsers__Alert__7EC1CEDB">
+            <End Role="Alerts" EntitySet="Alerts" />
+            <End Role="LinkUsersAlerts" EntitySet="LinkUsersAlerts" />
+          </AssociationSet>
+          <AssociationSet Name="FK__LinkUsers__UserI__7DCDAAA2" Association="Self.FK__LinkUsers__UserI__7DCDAAA2">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="LinkUsersAlerts" EntitySet="LinkUsersAlerts" />
           </AssociationSet>
           <AssociationSet Name="FK__LocationV__Locat__286302EC" Association="Self.FK__LocationV__Locat__286302EC">
             <End Role="LocationViewTypes" EntitySet="LocationViewTypes" />
@@ -976,6 +1185,41 @@
             <Parameter Name="TypeID" Mode="In" Type="Int64" />
             <Parameter Name="Year" Mode="In" Type="Int64" />
           </FunctionImport>
+          <EntitySet Name="AlertConditions" EntityType="DynThingsModel.AlertCondition" />
+          <EntitySet Name="AlertConditionTypes" EntityType="DynThingsModel.AlertConditionType" />
+          <EntitySet Name="Alerts" EntityType="DynThingsModel.Alert" />
+          <EntitySet Name="LinkUsersAlerts" EntityType="DynThingsModel.LinkUsersAlert" />
+          <EntitySet Name="UserNotifications" EntityType="DynThingsModel.UserNotification" />
+          <EntitySet Name="UserNotificationTypes" EntityType="DynThingsModel.UserNotificationType" />
+          <EntitySet Name="VThingEnds" EntityType="DynThingsModel.VThingEnd" />
+          <AssociationSet Name="FK__AlertCond__Alert__7720AD13" Association="DynThingsModel.FK__AlertCond__Alert__7720AD13">
+            <End Role="Alert" EntitySet="Alerts" />
+            <End Role="AlertCondition" EntitySet="AlertConditions" />
+          </AssociationSet>
+          <AssociationSet Name="FK__AlertCond__Condi__74444068" Association="DynThingsModel.FK__AlertCond__Condi__74444068">
+            <End Role="AlertConditionType" EntitySet="AlertConditionTypes" />
+            <End Role="AlertCondition" EntitySet="AlertConditions" />
+          </AssociationSet>
+          <AssociationSet Name="FK__AlertCond__EndPo__0662F0A3" Association="DynThingsModel.FK__AlertCond__EndPo__0662F0A3">
+            <End Role="EndPointType" EntitySet="EndPointTypes" />
+            <End Role="AlertCondition" EntitySet="AlertConditions" />
+          </AssociationSet>
+          <AssociationSet Name="FK__AlertCond__IOTyp__056ECC6A" Association="DynThingsModel.FK__AlertCond__IOTyp__056ECC6A">
+            <End Role="IOType" EntitySet="IOTypes" />
+            <End Role="AlertCondition" EntitySet="AlertConditions" />
+          </AssociationSet>
+          <AssociationSet Name="FK__AlertCond__Thing__762C88DA" Association="DynThingsModel.FK__AlertCond__Thing__762C88DA">
+            <End Role="Thing" EntitySet="Things" />
+            <End Role="AlertCondition" EntitySet="AlertConditions" />
+          </AssociationSet>
+          <AssociationSet Name="FK__LinkUsers__Alert__7EC1CEDB" Association="DynThingsModel.FK__LinkUsers__Alert__7EC1CEDB">
+            <End Role="Alert" EntitySet="Alerts" />
+            <End Role="LinkUsersAlert" EntitySet="LinkUsersAlerts" />
+          </AssociationSet>
+          <AssociationSet Name="FK__LinkUsers__UserI__7DCDAAA2" Association="DynThingsModel.FK__LinkUsers__UserI__7DCDAAA2">
+            <End Role="AspNetUser" EntitySet="AspNetUsers" />
+            <End Role="LinkUsersAlert" EntitySet="LinkUsersAlerts" />
+          </AssociationSet>
           </EntityContainer>
         <EntityType Name="AspNetRole">
           <Key>
@@ -1028,6 +1272,7 @@
           <Property Name="FullName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="LinkDevicesLocations" Relationship="DynThingsModel.FK__LinkDevic__EndBy__6166761E" FromRole="AspNetUser" ToRole="LinkDevicesLocation" />
           <NavigationProperty Name="LinkDevicesLocations1" Relationship="DynThingsModel.FK__LinkDevic__Start__607251E5" FromRole="AspNetUser" ToRole="LinkDevicesLocation" />
+          <NavigationProperty Name="LinkUsersAlerts" Relationship="DynThingsModel.FK__LinkUsers__UserI__7DCDAAA2" FromRole="AspNetUser" ToRole="LinkUsersAlert" />
           </EntityType>
         <EntityType Name="CssIcon">
           <Key>
@@ -1117,6 +1362,11 @@
           <NavigationProperty Name="Device" Relationship="DynThingsModel.FK__Endpoints__Devic__00DF2177" FromRole="Endpoint" ToRole="Device" />
           <Property Name="ThingID" Type="Int64" Nullable="false" />
           <NavigationProperty Name="Thing" Relationship="DynThingsModel.FK__Endpoints__Thing__7EF6D905" FromRole="Endpoint" ToRole="Thing" />
+          <Property Name="IsNumericOnly" Type="Boolean" />
+          <Property Name="MinValue" Type="Single" />
+          <Property Name="MaxValue" Type="Single" />
+          <Property Name="LowRange" Type="Single" />
+          <Property Name="HighRange" Type="Single" />
         </EntityType>
         <EntityType Name="EndPointTypeCategory">
           <Key>
@@ -1138,6 +1388,7 @@
           <NavigationProperty Name="CssIcon" Relationship="DynThingsModel.FK__EndPointT__IconI__3FD07829" FromRole="EndPointType" ToRole="CssIcon" />
           <NavigationProperty Name="Endpoints" Relationship="DynThingsModel.FK__Endpoints__TypeI__45F365D3" FromRole="EndPointType" ToRole="Endpoint" />
           <NavigationProperty Name="EndPointTypeCategory" Relationship="DynThingsModel.FK__EndPointT__TypeC__47DBAE45" FromRole="EndPointType" ToRole="EndPointTypeCategory" />
+          <NavigationProperty Name="AlertConditions" Relationship="DynThingsModel.FK__AlertCond__EndPo__0662F0A3" FromRole="EndPointType" ToRole="AlertCondition" />
         </EntityType>
         <EntityType Name="IOType">
           <Key>
@@ -1148,6 +1399,7 @@
           <Property Name="Title" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="DeviceIOs" Relationship="DynThingsModel.FK__DeviceIOs__IOTyp__403A8C7D" FromRole="IOType" ToRole="DeviceIO" />
           <NavigationProperty Name="EndPointIOs" Relationship="DynThingsModel.FK__EndPointI__IOTyp__440B1D61" FromRole="IOType" ToRole="EndPointIO" />
+          <NavigationProperty Name="AlertConditions" Relationship="DynThingsModel.FK__AlertCond__IOTyp__056ECC6A" FromRole="IOType" ToRole="AlertCondition" />
         </EntityType>
         <EntityType Name="LinkLocationsLocationView">
           <Key>
@@ -1689,6 +1941,7 @@
           <Property Name="CreateByUser" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="CreateTimeStamp" Type="DateTime" Precision="3" />
           <Property Name="UTC_Diff" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="AlertConditions" Relationship="DynThingsModel.FK__AlertCond__Thing__762C88DA" FromRole="Thing" ToRole="AlertCondition" />
         </EntityType>
         <Association Name="FK__Things__Category__662B2B3B">
           <End Type="DynThingsModel.ThingCategory" Role="ThingCategory" Multiplicity="1" />
@@ -1922,6 +2175,176 @@
           <Property Type="Int32" Name="C11" Nullable="true" />
           <Property Type="Int32" Name="C12" Nullable="true" />
         </ComplexType>
+        <EntityType Name="AlertCondition">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AlertID" Type="Int64" Nullable="false" />
+          <Property Name="ThingID" Type="Int64" Nullable="false" />
+          <Property Name="IOTypeID" Type="Int64" />
+          <Property Name="EndPointTypeID" Type="Int64" Nullable="false" />
+          <Property Name="ConditionTypeID" Type="Int64" Nullable="false" />
+          <Property Name="ConditionValue" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="IsMust" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Alert" Relationship="DynThingsModel.FK__AlertCond__Alert__7720AD13" FromRole="AlertCondition" ToRole="Alert" />
+          <NavigationProperty Name="AlertConditionType" Relationship="DynThingsModel.FK__AlertCond__Condi__74444068" FromRole="AlertCondition" ToRole="AlertConditionType" />
+          <NavigationProperty Name="EndPointType" Relationship="DynThingsModel.FK__AlertCond__EndPo__0662F0A3" FromRole="AlertCondition" ToRole="EndPointType" />
+          <NavigationProperty Name="IOType" Relationship="DynThingsModel.FK__AlertCond__IOTyp__056ECC6A" FromRole="AlertCondition" ToRole="IOType" />
+          <NavigationProperty Name="Thing" Relationship="DynThingsModel.FK__AlertCond__Thing__762C88DA" FromRole="AlertCondition" ToRole="Thing" />
+        </EntityType>
+        <EntityType Name="AlertConditionType">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AlertConditions" Relationship="DynThingsModel.FK__AlertCond__Condi__74444068" FromRole="AlertConditionType" ToRole="AlertCondition" />
+        </EntityType>
+        <EntityType Name="Alert">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="Message" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="IsActive" Type="Int64" />
+          <Property Name="Sunday" Type="Boolean" />
+          <Property Name="Monday" Type="Boolean" />
+          <Property Name="Tuesday" Type="Boolean" />
+          <Property Name="Wednesday" Type="Boolean" />
+          <Property Name="Thursday" Type="Boolean" />
+          <Property Name="Friday" Type="Boolean" />
+          <Property Name="Saturday" Type="Boolean" />
+          <Property Name="StartTime" Type="Time" Precision="7" />
+          <Property Name="EndTime" Type="Time" Precision="7" />
+          <NavigationProperty Name="AlertConditions" Relationship="DynThingsModel.FK__AlertCond__Alert__7720AD13" FromRole="Alert" ToRole="AlertCondition" />
+          <NavigationProperty Name="LinkUsersAlerts" Relationship="DynThingsModel.FK__LinkUsers__Alert__7EC1CEDB" FromRole="Alert" ToRole="LinkUsersAlert" />
+        </EntityType>
+        <EntityType Name="LinkUsersAlert">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserID" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="AlertID" Type="Int64" Nullable="false" />
+          <NavigationProperty Name="Alert" Relationship="DynThingsModel.FK__LinkUsers__Alert__7EC1CEDB" FromRole="LinkUsersAlert" ToRole="Alert" />
+          <NavigationProperty Name="AspNetUser" Relationship="DynThingsModel.FK__LinkUsers__UserI__7DCDAAA2" FromRole="LinkUsersAlert" ToRole="AspNetUser" />
+        </EntityType>
+        <EntityType Name="UserNotification">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="IsRead" Type="Int64" />
+          <Property Name="Txt" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
+          <Property Name="NotificationTypeID" Type="Int64" />
+          <Property Name="RefID" Type="Int64" />
+          <Property Name="AlertTimeStamp" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="UserNotificationType">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="VThingEnd">
+          <Key>
+            <PropertyRef Name="ThingID" />
+            <PropertyRef Name="IOTypeID" />
+            <PropertyRef Name="EndpointTypeID" />
+          </Key>
+          <Property Name="ThingID" Type="Int64" Nullable="false" />
+          <Property Name="IOTypeID" Type="Int64" Nullable="false" />
+          <Property Name="EndpointTypeID" Type="Int64" Nullable="false" />
+          <Property Name="LastValue" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <Association Name="FK__AlertCond__Alert__7720AD13">
+          <End Type="DynThingsModel.Alert" Role="Alert" Multiplicity="1" />
+          <End Type="DynThingsModel.AlertCondition" Role="AlertCondition" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Alert">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="AlertCondition">
+              <PropertyRef Name="AlertID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__AlertCond__Condi__74444068">
+          <End Type="DynThingsModel.AlertConditionType" Role="AlertConditionType" Multiplicity="1" />
+          <End Type="DynThingsModel.AlertCondition" Role="AlertCondition" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AlertConditionType">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="AlertCondition">
+              <PropertyRef Name="ConditionTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__AlertCond__EndPo__0662F0A3">
+          <End Type="DynThingsModel.EndPointType" Role="EndPointType" Multiplicity="1" />
+          <End Type="DynThingsModel.AlertCondition" Role="AlertCondition" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EndPointType">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="AlertCondition">
+              <PropertyRef Name="EndPointTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__AlertCond__IOTyp__056ECC6A">
+          <End Type="DynThingsModel.IOType" Role="IOType" Multiplicity="0..1" />
+          <End Type="DynThingsModel.AlertCondition" Role="AlertCondition" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="IOType">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="AlertCondition">
+              <PropertyRef Name="IOTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__AlertCond__Thing__762C88DA">
+          <End Type="DynThingsModel.Thing" Role="Thing" Multiplicity="1" />
+          <End Type="DynThingsModel.AlertCondition" Role="AlertCondition" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Thing">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="AlertCondition">
+              <PropertyRef Name="ThingID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__LinkUsers__Alert__7EC1CEDB">
+          <End Type="DynThingsModel.Alert" Role="Alert" Multiplicity="1" />
+          <End Type="DynThingsModel.LinkUsersAlert" Role="LinkUsersAlert" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Alert">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="LinkUsersAlert">
+              <PropertyRef Name="AlertID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__LinkUsers__UserI__7DCDAAA2">
+          <End Type="DynThingsModel.AspNetUser" Role="AspNetUser" Multiplicity="1" />
+          <End Type="DynThingsModel.LinkUsersAlert" Role="LinkUsersAlert" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="LinkUsersAlert">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -2045,6 +2468,11 @@
           <EntitySetMapping Name="Endpoints">
             <EntityTypeMapping TypeName="DynThingsModel.Endpoint">
               <MappingFragment StoreEntitySet="Endpoints">
+                <ScalarProperty Name="HighRange" ColumnName="HighRange" />
+                <ScalarProperty Name="LowRange" ColumnName="LowRange" />
+                <ScalarProperty Name="MaxValue" ColumnName="MaxValue" />
+                <ScalarProperty Name="MinValue" ColumnName="MinValue" />
+                <ScalarProperty Name="IsNumericOnly" ColumnName="IsNumericOnly" />
                 <ScalarProperty Name="ThingID" ColumnName="ThingID" />
                 <ScalarProperty Name="TypeID" ColumnName="TypeID" />
                 <ScalarProperty Name="DeviceID" ColumnName="DeviceID" />
@@ -2564,6 +2992,87 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <EntitySetMapping Name="AlertConditions">
+            <EntityTypeMapping TypeName="DynThingsModel.AlertCondition">
+              <MappingFragment StoreEntitySet="AlertConditions">
+                <ScalarProperty Name="IsMust" ColumnName="IsMust" />
+                <ScalarProperty Name="ConditionValue" ColumnName="ConditionValue" />
+                <ScalarProperty Name="ConditionTypeID" ColumnName="ConditionTypeID" />
+                <ScalarProperty Name="EndPointTypeID" ColumnName="EndPointTypeID" />
+                <ScalarProperty Name="IOTypeID" ColumnName="IOTypeID" />
+                <ScalarProperty Name="ThingID" ColumnName="ThingID" />
+                <ScalarProperty Name="AlertID" ColumnName="AlertID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AlertConditionTypes">
+            <EntityTypeMapping TypeName="DynThingsModel.AlertConditionType">
+              <MappingFragment StoreEntitySet="AlertConditionTypes">
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Alerts">
+            <EntityTypeMapping TypeName="DynThingsModel.Alert">
+              <MappingFragment StoreEntitySet="Alerts">
+                <ScalarProperty Name="EndTime" ColumnName="EndTime" />
+                <ScalarProperty Name="StartTime" ColumnName="StartTime" />
+                <ScalarProperty Name="Saturday" ColumnName="Saturday" />
+                <ScalarProperty Name="Friday" ColumnName="Friday" />
+                <ScalarProperty Name="Thursday" ColumnName="Thursday" />
+                <ScalarProperty Name="Wednesday" ColumnName="Wednesday" />
+                <ScalarProperty Name="Tuesday" ColumnName="Tuesday" />
+                <ScalarProperty Name="Monday" ColumnName="Monday" />
+                <ScalarProperty Name="Sunday" ColumnName="Sunday" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="Message" ColumnName="Message" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LinkUsersAlerts">
+            <EntityTypeMapping TypeName="DynThingsModel.LinkUsersAlert">
+              <MappingFragment StoreEntitySet="LinkUsersAlerts">
+                <ScalarProperty Name="AlertID" ColumnName="AlertID" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserNotifications">
+            <EntityTypeMapping TypeName="DynThingsModel.UserNotification">
+              <MappingFragment StoreEntitySet="UserNotifications">
+                <ScalarProperty Name="AlertTimeStamp" ColumnName="AlertTimeStamp" />
+                <ScalarProperty Name="RefID" ColumnName="RefID" />
+                <ScalarProperty Name="NotificationTypeID" ColumnName="NotificationTypeID" />
+                <ScalarProperty Name="Txt" ColumnName="Txt" />
+                <ScalarProperty Name="IsRead" ColumnName="IsRead" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserNotificationTypes">
+            <EntityTypeMapping TypeName="DynThingsModel.UserNotificationType">
+              <MappingFragment StoreEntitySet="UserNotificationTypes">
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VThingEnds">
+            <EntityTypeMapping TypeName="DynThingsModel.VThingEnd">
+              <MappingFragment StoreEntitySet="VThingEnds">
+                <ScalarProperty Name="LastValue" ColumnName="LastValue" />
+                <ScalarProperty Name="EndpointTypeID" ColumnName="EndpointTypeID" />
+                <ScalarProperty Name="IOTypeID" ColumnName="IOTypeID" />
+                <ScalarProperty Name="ThingID" ColumnName="ThingID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

@@ -13,6 +13,7 @@ using DynThings.Data.Repositories;
 using DynThings.Data.Reports;
 using DynThings.Data.Models.ReportsModels;
 using DynHighCharts;
+using System.IO;
 
 namespace DynThings.WebPortal.Controllers
 {
@@ -132,13 +133,25 @@ namespace DynThings.WebPortal.Controllers
             return Json(res);
         }
         #endregion
-       
+
 
         #endregion
 
+        [HttpPost]
+        public ActionResult UploadImage(HttpPostedFileBase file,long ThingCategoryID)
+        {
+
+            if (file.ContentLength > 0)
+            {
+                var fileName = Path.GetFileName(ThingCategoryID.ToString() + ".jpg");
+                var path = Path.Combine(Server.MapPath("~/Imgs/ThingCategorys"), fileName);
+                file.SaveAs(path);
+            }
+
+            return RedirectToAction("Index");
+        }
 
 
 
-        
     }
 }

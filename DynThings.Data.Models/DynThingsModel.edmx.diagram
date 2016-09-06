@@ -56,6 +56,20 @@
         <EntityTypeShape EntityType="DynThingsModel.LinkThingsLocation" Width="1.5" PointX="17.875" PointY="7.875" />
         <AssociationConnector Association="DynThingsModel.FK__LinkThing__Locat__078C1F06" />
         <AssociationConnector Association="DynThingsModel.FK__LinkThing__Thing__0697FACD" />
+        <EntityTypeShape EntityType="DynThingsModel.AlertCondition" Width="1.5" PointX="17.875" PointY="11.875" />
+        <EntityTypeShape EntityType="DynThingsModel.AlertConditionType" Width="1.5" PointX="15.625" PointY="12.5" />
+        <EntityTypeShape EntityType="DynThingsModel.Alert" Width="1.5" PointX="15.625" PointY="18.875" />
+        <EntityTypeShape EntityType="DynThingsModel.LinkUsersAlert" Width="1.5" PointX="20.875" PointY="11.625" />
+        <EntityTypeShape EntityType="DynThingsModel.UserNotification" Width="1.5" PointX="5.375" PointY="8.75" />
+        <EntityTypeShape EntityType="DynThingsModel.UserNotificationType" Width="1.5" PointX="8.375" PointY="15.75" />
+        <EntityTypeShape EntityType="DynThingsModel.VThingEnd" Width="1.5" PointX="10.375" PointY="15.75" />
+        <AssociationConnector Association="DynThingsModel.FK__AlertCond__Alert__7720AD13" />
+        <AssociationConnector Association="DynThingsModel.FK__AlertCond__Condi__74444068" />
+        <AssociationConnector Association="DynThingsModel.FK__AlertCond__EndPo__0662F0A3" />
+        <AssociationConnector Association="DynThingsModel.FK__AlertCond__IOTyp__056ECC6A" />
+        <AssociationConnector Association="DynThingsModel.FK__AlertCond__Thing__762C88DA" />
+        <AssociationConnector Association="DynThingsModel.FK__LinkUsers__Alert__7EC1CEDB" />
+        <AssociationConnector Association="DynThingsModel.FK__LinkUsers__UserI__7DCDAAA2" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

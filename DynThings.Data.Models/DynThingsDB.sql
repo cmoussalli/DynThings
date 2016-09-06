@@ -1,16 +1,89 @@
---DB Version 0.109
+--DB Version 0.132
 USE [master]
 GO
 /****** Object:  Database [DynThings]    Script Date: 2/8/2016 12:47:48 PM ******/
 CREATE DATABASE [DynThings]
  GO
-
-
-
 USE [DynThings]
 GO
+/****** Object:  Table [dbo].[AlertConditions]    Script Date: 9/6/2016 11:51:59 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[AlertConditions](
+	[ID] [bigint] IDENTITY(1,1) NOT NULL,
+	[AlertID] [bigint] NOT NULL,
+	[ThingID] [bigint] NOT NULL,
+	[IOTypeID] [bigint] NULL,
+	[EndPointTypeID] [bigint] NOT NULL,
+	[ConditionTypeID] [bigint] NOT NULL,
+	[ConditionValue] [nvarchar](50) NOT NULL,
+	[IsMust] [bit] NOT NULL,
+ CONSTRAINT [PK_AlertConditions] PRIMARY KEY CLUSTERED 
+(
+	[ID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
 
-/****** Object:  Table [dbo].[AspNetRoles]    Script Date: 8/22/2016 10:19:37 AM ******/
+GO
+/****** Object:  Table [dbo].[AlertConditionTypes]    Script Date: 9/6/2016 11:51:59 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[AlertConditionTypes](
+	[ID] [bigint] IDENTITY(1,1) NOT NULL,
+	[Title] [nvarchar](50) NULL,
+ CONSTRAINT [PK_Conditions] PRIMARY KEY CLUSTERED 
+(
+	[ID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+/****** Object:  Table [dbo].[AlertLevels]    Script Date: 9/6/2016 11:51:59 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[AlertLevels](
+	[ID] [bigint] IDENTITY(1,1) NOT NULL,
+	[Title] [nvarchar](50) NULL,
+ CONSTRAINT [PK_AlertLevels] PRIMARY KEY CLUSTERED 
+(
+	[ID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+/****** Object:  Table [dbo].[Alerts]    Script Date: 9/6/2016 11:51:59 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Alerts](
+	[ID] [bigint] IDENTITY(1,1) NOT NULL,
+	[Title] [nvarchar](256) NULL,
+	[Message] [nvarchar](500) NULL,
+	[IsActive] [bigint] NULL,
+	[Sunday] [bit] NULL,
+	[Monday] [bit] NULL,
+	[Tuesday] [bit] NULL,
+	[Wednesday] [bit] NULL,
+	[Thursday] [bit] NULL,
+	[Friday] [bit] NULL,
+	[Saturday] [bit] NULL,
+	[StartTime] [time](7) NULL,
+	[EndTime] [time](7) NULL,
+ CONSTRAINT [PK_Alerts] PRIMARY KEY CLUSTERED 
+(
+	[ID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+/****** Object:  Table [dbo].[AspNetRoles]    Script Date: 9/6/2016 11:51:59 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -25,7 +98,7 @@ CREATE TABLE [dbo].[AspNetRoles](
 ) ON [PRIMARY]
 
 GO
-/****** Object:  Table [dbo].[AspNetUserClaims]    Script Date: 8/22/2016 10:19:37 AM ******/
+/****** Object:  Table [dbo].[AspNetUserClaims]    Script Date: 9/6/2016 11:51:59 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -42,7 +115,7 @@ CREATE TABLE [dbo].[AspNetUserClaims](
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 
 GO
-/****** Object:  Table [dbo].[AspNetUserLogins]    Script Date: 8/22/2016 10:19:37 AM ******/
+/****** Object:  Table [dbo].[AspNetUserLogins]    Script Date: 9/6/2016 11:51:59 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -60,7 +133,7 @@ CREATE TABLE [dbo].[AspNetUserLogins](
 ) ON [PRIMARY]
 
 GO
-/****** Object:  Table [dbo].[AspNetUserRoles]    Script Date: 8/22/2016 10:19:37 AM ******/
+/****** Object:  Table [dbo].[AspNetUserRoles]    Script Date: 9/6/2016 11:51:59 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -76,7 +149,7 @@ CREATE TABLE [dbo].[AspNetUserRoles](
 ) ON [PRIMARY]
 
 GO
-/****** Object:  Table [dbo].[AspNetUsers]    Script Date: 8/22/2016 10:19:37 AM ******/
+/****** Object:  Table [dbo].[AspNetUsers]    Script Date: 9/6/2016 11:51:59 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -102,23 +175,7 @@ CREATE TABLE [dbo].[AspNetUsers](
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 
 GO
-/****** Object:  Table [dbo].[CssIcons]    Script Date: 8/22/2016 10:19:37 AM ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-CREATE TABLE [dbo].[CssIcons](
-	[ID] [bigint] IDENTITY(1,1) NOT NULL,
-	[Title] [nvarchar](50) NULL,
-	[Css] [nvarchar](50) NULL,
- CONSTRAINT [PK_CssIcons] PRIMARY KEY CLUSTERED 
-(
-	[ID] ASC
-)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
-) ON [PRIMARY]
-
-GO
-/****** Object:  Table [dbo].[DeviceCommands]    Script Date: 8/22/2016 10:19:37 AM ******/
+/****** Object:  Table [dbo].[DeviceCommands]    Script Date: 9/6/2016 11:51:59 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -137,7 +194,7 @@ CREATE TABLE [dbo].[DeviceCommands](
 ) ON [PRIMARY]
 
 GO
-/****** Object:  Table [dbo].[DeviceIOs]    Script Date: 8/22/2016 10:19:37 AM ******/
+/****** Object:  Table [dbo].[DeviceIOs]    Script Date: 9/6/2016 11:51:59 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -157,7 +214,7 @@ CREATE TABLE [dbo].[DeviceIOs](
 ) ON [PRIMARY]
 
 GO
-/****** Object:  Table [dbo].[Devices]    Script Date: 8/22/2016 10:19:37 AM ******/
+/****** Object:  Table [dbo].[Devices]    Script Date: 9/6/2016 11:51:59 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -179,7 +236,7 @@ CREATE TABLE [dbo].[Devices](
 ) ON [PRIMARY]
 
 GO
-/****** Object:  Table [dbo].[DeviceStatus]    Script Date: 8/22/2016 10:19:37 AM ******/
+/****** Object:  Table [dbo].[DeviceStatus]    Script Date: 9/6/2016 11:51:59 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -194,7 +251,7 @@ CREATE TABLE [dbo].[DeviceStatus](
 ) ON [PRIMARY]
 
 GO
-/****** Object:  Table [dbo].[DynSettings]    Script Date: 8/22/2016 10:19:37 AM ******/
+/****** Object:  Table [dbo].[DynSettings]    Script Date: 9/6/2016 11:51:59 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -218,7 +275,7 @@ CREATE TABLE [dbo].[DynSettings](
 ) ON [PRIMARY]
 
 GO
-/****** Object:  Table [dbo].[EndPointCommands]    Script Date: 8/22/2016 10:19:37 AM ******/
+/****** Object:  Table [dbo].[EndPointCommands]    Script Date: 9/6/2016 11:51:59 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -237,7 +294,7 @@ CREATE TABLE [dbo].[EndPointCommands](
 ) ON [PRIMARY]
 
 GO
-/****** Object:  Table [dbo].[EndPointIOs]    Script Date: 8/22/2016 10:19:37 AM ******/
+/****** Object:  Table [dbo].[EndPointIOs]    Script Date: 9/6/2016 11:51:59 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -258,7 +315,7 @@ CREATE TABLE [dbo].[EndPointIOs](
 ) ON [PRIMARY]
 
 GO
-/****** Object:  Table [dbo].[Endpoints]    Script Date: 8/22/2016 10:19:37 AM ******/
+/****** Object:  Table [dbo].[Endpoints]    Script Date: 9/6/2016 11:51:59 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -272,6 +329,11 @@ CREATE TABLE [dbo].[Endpoints](
 	[DeviceID] [bigint] NOT NULL,
 	[TypeID] [bigint] NOT NULL,
 	[ThingID] [bigint] NOT NULL,
+	[IsNumericOnly] [bit] NULL,
+	[MinValue] [real] NULL,
+	[MaxValue] [real] NULL,
+	[LowRange] [real] NULL,
+	[HighRange] [real] NULL,
  CONSTRAINT [PK_Devices] PRIMARY KEY CLUSTERED 
 (
 	[ID] ASC
@@ -279,7 +341,7 @@ CREATE TABLE [dbo].[Endpoints](
 ) ON [PRIMARY]
 
 GO
-/****** Object:  Table [dbo].[EndPointTypeCategorys]    Script Date: 8/22/2016 10:19:37 AM ******/
+/****** Object:  Table [dbo].[EndPointTypeCategorys]    Script Date: 9/6/2016 11:51:59 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -294,7 +356,7 @@ CREATE TABLE [dbo].[EndPointTypeCategorys](
 ) ON [PRIMARY]
 
 GO
-/****** Object:  Table [dbo].[EndPointTypes]    Script Date: 8/22/2016 10:19:37 AM ******/
+/****** Object:  Table [dbo].[EndPointTypes]    Script Date: 9/6/2016 11:51:59 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -312,7 +374,7 @@ CREATE TABLE [dbo].[EndPointTypes](
 ) ON [PRIMARY]
 
 GO
-/****** Object:  Table [dbo].[IOTypes]    Script Date: 8/22/2016 10:19:37 AM ******/
+/****** Object:  Table [dbo].[IOTypes]    Script Date: 9/6/2016 11:51:59 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -328,7 +390,7 @@ CREATE TABLE [dbo].[IOTypes](
 ) ON [PRIMARY]
 
 GO
-/****** Object:  Table [dbo].[LinkDevicesLocations]    Script Date: 8/22/2016 10:19:37 AM ******/
+/****** Object:  Table [dbo].[LinkDevicesLocations]    Script Date: 9/6/2016 11:51:59 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -348,7 +410,7 @@ CREATE TABLE [dbo].[LinkDevicesLocations](
 ) ON [PRIMARY]
 
 GO
-/****** Object:  Table [dbo].[LinkLocationsLocationViews]    Script Date: 8/22/2016 10:19:37 AM ******/
+/****** Object:  Table [dbo].[LinkLocationsLocationViews]    Script Date: 9/6/2016 11:51:59 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -364,7 +426,7 @@ CREATE TABLE [dbo].[LinkLocationsLocationViews](
 ) ON [PRIMARY]
 
 GO
-/****** Object:  Table [dbo].[LinkThingsLocations]    Script Date: 8/22/2016 10:19:37 AM ******/
+/****** Object:  Table [dbo].[LinkThingsLocations]    Script Date: 9/6/2016 11:51:59 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -382,7 +444,23 @@ CREATE TABLE [dbo].[LinkThingsLocations](
 ) ON [PRIMARY]
 
 GO
-/****** Object:  Table [dbo].[Locations]    Script Date: 8/22/2016 10:19:37 AM ******/
+/****** Object:  Table [dbo].[LinkUsersAlerts]    Script Date: 9/6/2016 11:51:59 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[LinkUsersAlerts](
+	[ID] [bigint] IDENTITY(1,1) NOT NULL,
+	[UserID] [nvarchar](128) NOT NULL,
+	[AlertID] [bigint] NOT NULL,
+ CONSTRAINT [PK_LinkUsersAlerts] PRIMARY KEY CLUSTERED 
+(
+	[ID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+/****** Object:  Table [dbo].[Locations]    Script Date: 9/6/2016 11:51:59 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -403,7 +481,7 @@ CREATE TABLE [dbo].[Locations](
 ) ON [PRIMARY]
 
 GO
-/****** Object:  Table [dbo].[LocationViews]    Script Date: 8/22/2016 10:19:37 AM ******/
+/****** Object:  Table [dbo].[LocationViews]    Script Date: 9/6/2016 11:51:59 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -424,7 +502,7 @@ CREATE TABLE [dbo].[LocationViews](
 ) ON [PRIMARY]
 
 GO
-/****** Object:  Table [dbo].[LocationViewTypes]    Script Date: 8/22/2016 10:19:37 AM ******/
+/****** Object:  Table [dbo].[LocationViewTypes]    Script Date: 9/6/2016 11:51:59 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -439,7 +517,22 @@ CREATE TABLE [dbo].[LocationViewTypes](
 ) ON [PRIMARY]
 
 GO
-/****** Object:  Table [dbo].[ResultMessages]    Script Date: 8/22/2016 10:19:37 AM ******/
+/****** Object:  Table [dbo].[MediaFiles]    Script Date: 9/6/2016 11:51:59 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[MediaFiles](
+	[ID] [bigint] IDENTITY(1,1) NOT NULL,
+	[Title] [nvarchar](50) NULL,
+ CONSTRAINT [PK_MediaFiles] PRIMARY KEY CLUSTERED 
+(
+	[ID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+/****** Object:  Table [dbo].[ResultMessages]    Script Date: 9/6/2016 11:51:59 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -455,7 +548,7 @@ CREATE TABLE [dbo].[ResultMessages](
 ) ON [PRIMARY]
 
 GO
-/****** Object:  Table [dbo].[ThingCategorys]    Script Date: 8/22/2016 10:19:37 AM ******/
+/****** Object:  Table [dbo].[ThingCategorys]    Script Date: 9/6/2016 11:51:59 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -470,7 +563,7 @@ CREATE TABLE [dbo].[ThingCategorys](
 ) ON [PRIMARY]
 
 GO
-/****** Object:  Table [dbo].[Things]    Script Date: 8/22/2016 10:19:37 AM ******/
+/****** Object:  Table [dbo].[Things]    Script Date: 9/6/2016 11:51:59 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -489,6 +582,120 @@ CREATE TABLE [dbo].[Things](
 ) ON [PRIMARY]
 
 GO
+/****** Object:  Table [dbo].[UserNotifications]    Script Date: 9/6/2016 11:51:59 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[UserNotifications](
+	[ID] [bigint] IDENTITY(1,1) NOT NULL,
+	[UserID] [nvarchar](128) NULL,
+	[IsRead] [bigint] NULL,
+	[Txt] [nvarchar](512) NULL,
+	[NotificationTypeID] [bigint] NULL,
+	[RefID] [bigint] NULL,
+	[AlertTimeStamp] [datetime] NULL,
+ CONSTRAINT [PK_UserNotifications] PRIMARY KEY CLUSTERED 
+(
+	[ID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+/****** Object:  Table [dbo].[UserNotificationTypes]    Script Date: 9/6/2016 11:51:59 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[UserNotificationTypes](
+	[ID] [bigint] IDENTITY(1,1) NOT NULL,
+	[Title] [nvarchar](512) NULL,
+ CONSTRAINT [PK_UserNotificationTypes] PRIMARY KEY CLUSTERED 
+(
+	[ID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+/****** Object:  View [dbo].[VThingEnds]    Script Date: 9/6/2016 11:51:59 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+
+CREATE view [dbo].[VThingEnds]
+as
+(
+	select 
+		e.ThingID as 'ThingID'
+		,ios.IOTypeID as 'IOTypeID'
+		,e.TypeID as 'EndpointTypeID'
+		,(select top(1) valu  from EndPointIOs subIos ,[Endpoints] subEnds
+			where 
+				subEnds.ID = subIos.EndPointID
+				and subIos.ThingID = e.ThingID
+				and subIos.IOTypeID = ios.iotypeid
+				and subends.TypeID = e.typeid
+			order by subIos.ID desc
+		) as 'LastValue' 
+				
+	from 
+		[Endpoints] e
+		,EndPointIOs ios
+
+	where e.ID = ios.EndPointID
+
+	group by 
+		e.ThingID 
+		,ios.IOTypeID 		
+		,e.TypeID
+)
+
+
+GO
+SET IDENTITY_INSERT [dbo].[AlertConditions] ON 
+
+GO
+INSERT [dbo].[AlertConditions] ([ID], [AlertID], [ThingID], [IOTypeID], [EndPointTypeID], [ConditionTypeID], [ConditionValue], [IsMust]) VALUES (1, 1, 1, 1, 1, 1, N'30', 1)
+GO
+INSERT [dbo].[AlertConditions] ([ID], [AlertID], [ThingID], [IOTypeID], [EndPointTypeID], [ConditionTypeID], [ConditionValue], [IsMust]) VALUES (3, 1, 1, 1, 2, 1, N'40', 0)
+GO
+SET IDENTITY_INSERT [dbo].[AlertConditions] OFF
+GO
+SET IDENTITY_INSERT [dbo].[AlertConditionTypes] ON 
+
+GO
+INSERT [dbo].[AlertConditionTypes] ([ID], [Title]) VALUES (1, N'equal to')
+GO
+INSERT [dbo].[AlertConditionTypes] ([ID], [Title]) VALUES (2, N'not equal to')
+GO
+INSERT [dbo].[AlertConditionTypes] ([ID], [Title]) VALUES (3, N'greater than')
+GO
+INSERT [dbo].[AlertConditionTypes] ([ID], [Title]) VALUES (4, N'less than')
+GO
+SET IDENTITY_INSERT [dbo].[AlertConditionTypes] OFF
+GO
+SET IDENTITY_INSERT [dbo].[AlertLevels] ON 
+
+GO
+INSERT [dbo].[AlertLevels] ([ID], [Title]) VALUES (1, N'Low')
+GO
+INSERT [dbo].[AlertLevels] ([ID], [Title]) VALUES (2, N'Medium')
+GO
+INSERT [dbo].[AlertLevels] ([ID], [Title]) VALUES (3, N'High')
+GO
+INSERT [dbo].[AlertLevels] ([ID], [Title]) VALUES (4, N'Critical')
+GO
+SET IDENTITY_INSERT [dbo].[AlertLevels] OFF
+GO
+SET IDENTITY_INSERT [dbo].[Alerts] ON 
+
+GO
+INSERT [dbo].[Alerts] ([ID], [Title], [Message], [IsActive], [Sunday], [Monday], [Tuesday], [Wednesday], [Thursday], [Friday], [Saturday], [StartTime], [EndTime]) VALUES (1, N'Alert 1', N'Alert from [Thing], reported [EndpointType]: [Value] [Measurement] @[TimeStamp]', 1, 1, 1, 1, 1, 1, 1, 1, CAST(N'00:00:00' AS Time), CAST(N'23:59:59' AS Time))
+GO
+SET IDENTITY_INSERT [dbo].[Alerts] OFF
+GO
 INSERT [dbo].[AspNetRoles] ([Id], [Name]) VALUES (N'1', N'Admin')
 GO
 INSERT [dbo].[AspNetRoles] ([Id], [Name]) VALUES (N'2', N'Monitor & Control')
@@ -499,22 +706,13 @@ INSERT [dbo].[AspNetUserRoles] ([UserId], [RoleId]) VALUES (N'367df69f-c059-4295
 GO
 INSERT [dbo].[AspNetUserRoles] ([UserId], [RoleId]) VALUES (N'8393618a-ea66-442c-9eff-f48c53f982a4', N'2')
 GO
+INSERT [dbo].[AspNetUserRoles] ([UserId], [RoleId]) VALUES (N'ee7fe3bd-f26b-4ee2-9cba-e9a630fbc904', N'2')
+GO
 INSERT [dbo].[AspNetUsers] ([Id], [Email], [EmailConfirmed], [PasswordHash], [SecurityStamp], [PhoneNumber], [PhoneNumberConfirmed], [TwoFactorEnabled], [LockoutEndDateUtc], [LockoutEnabled], [AccessFailedCount], [UserName], [FullName]) VALUES (N'367df69f-c059-4295-95b0-718c93dfa843', N'cmoussalli@gmail.com', 0, N'ALwtfGaSrttw1t7mVutBUXjw1u/7CgWgBeIxkRWlPVMmuBZb517J4JNc1UsFplmZ0g==', N'6304491a-a9ec-493b-9fbe-8a827c93a492', NULL, 0, 0, NULL, 1, 0, N'cmoussalli@gmail.com', N'Caesar Moussalli')
 GO
 INSERT [dbo].[AspNetUsers] ([Id], [Email], [EmailConfirmed], [PasswordHash], [SecurityStamp], [PhoneNumber], [PhoneNumberConfirmed], [TwoFactorEnabled], [LockoutEndDateUtc], [LockoutEnabled], [AccessFailedCount], [UserName], [FullName]) VALUES (N'8393618a-ea66-442c-9eff-f48c53f982a4', N'cesar_moussalli@hotmail.com', 0, N'ACXpg5EJ6G3kpffDpIJbFD1wb9125WnI0JTrAH3rASEoosbB1qSgWxSiWQDxe7/CmA==', N'3402829b-5d04-4c93-a64e-83b942c81e9f', NULL, 0, 0, NULL, 1, 0, N'cesar_moussalli@hotmail.com', N'Caesar')
 GO
-SET IDENTITY_INSERT [dbo].[CssIcons] ON 
-
-GO
-INSERT [dbo].[CssIcons] ([ID], [Title], [Css]) VALUES (1, N'Temprature', N'glyphicons
-glyphicons-temperature')
-GO
-INSERT [dbo].[CssIcons] ([ID], [Title], [Css]) VALUES (2, N'Humidity', N'glyphicons
-glyphicons-tint')
-GO
-INSERT [dbo].[CssIcons] ([ID], [Title], [Css]) VALUES (3, N'Power', N'glyphicon glyphicon-off')
-GO
-SET IDENTITY_INSERT [dbo].[CssIcons] OFF
+INSERT [dbo].[AspNetUsers] ([Id], [Email], [EmailConfirmed], [PasswordHash], [SecurityStamp], [PhoneNumber], [PhoneNumberConfirmed], [TwoFactorEnabled], [LockoutEndDateUtc], [LockoutEnabled], [AccessFailedCount], [UserName], [FullName]) VALUES (N'ee7fe3bd-f26b-4ee2-9cba-e9a630fbc904', N'demo@demo.com', 0, N'AGwmkRCvfRoX8FkXZGNI2DYXHveAB/pQXJupqNV5ByB+jvTY7fEYyp+LCh5NYvTirA==', N'8d9ef8e4-fd90-423b-b2e6-bc2e6b0eb5e2', NULL, 0, 0, NULL, 1, 0, N'demo@demo.com', N'demo@demo.com')
 GO
 SET IDENTITY_INSERT [dbo].[DeviceCommands] ON 
 
@@ -555,14 +753,14 @@ GO
 SET IDENTITY_INSERT [dbo].[DynSettings] ON 
 
 GO
-INSERT [dbo].[DynSettings] ([ID], [DBVersion], [DevelopmentMode], [DefaultRecordsPerMaster], [DefaultRecordsPerChild], [PlatformKey], [PublicAccess], [PublicSignUP], [EnableSystemLogger], [App_TimeZone], [PlatformTitle]) VALUES (1, 0.109, 1, 5, 5, N'a86bb826-988d-4f9a-9f43-169045506194', 0, 1, 1, 4, N'My IoT Platform')
+INSERT [dbo].[DynSettings] ([ID], [DBVersion], [DevelopmentMode], [DefaultRecordsPerMaster], [DefaultRecordsPerChild], [PlatformKey], [PublicAccess], [PublicSignUP], [EnableSystemLogger], [App_TimeZone], [PlatformTitle]) VALUES (1, 0.132, 1, 5, 5, N'a86bb826-988d-4f9a-9f43-169045506194', 0, 1, 1, 4, N'My IoT Platform')
 GO
 SET IDENTITY_INSERT [dbo].[DynSettings] OFF
 GO
 SET IDENTITY_INSERT [dbo].[EndPointCommands] ON 
 
 GO
-INSERT [dbo].[EndPointCommands] ([ID], [Title], [Description], [EndPointID], [CommandCode], [OwnerID]) VALUES (15, N'Turn ON', N'Turn On Temp Flat8', 46, N'rst', N'1')
+INSERT [dbo].[EndPointCommands] ([ID], [Title], [Description], [EndPointID], [CommandCode], [OwnerID]) VALUES (15, N'Reset', N'Reset the Endpoint', 46, N'rst', N'1')
 GO
 SET IDENTITY_INSERT [dbo].[EndPointCommands] OFF
 GO
@@ -575,16 +773,336 @@ INSERT [dbo].[EndPointIOs] ([ID], [EndPointID], [IOTypeID], [Valu], [TimeStamp],
 GO
 INSERT [dbo].[EndPointIOs] ([ID], [EndPointID], [IOTypeID], [Valu], [TimeStamp], [ExecTimeStamp], [ScheduleTimeStamp], [ThingID]) VALUES (3, 48, 1, N'29', CAST(N'2016-08-22 00:00:00.000' AS DateTime), CAST(N'2016-08-22 00:00:00.000' AS DateTime), CAST(N'2016-08-22 00:00:00.000' AS DateTime), 1)
 GO
+INSERT [dbo].[EndPointIOs] ([ID], [EndPointID], [IOTypeID], [Valu], [TimeStamp], [ExecTimeStamp], [ScheduleTimeStamp], [ThingID]) VALUES (4, 46, 1, N'30', CAST(N'2016-08-23 10:31:36.000' AS DateTime), CAST(N'2016-08-23 10:31:36.000' AS DateTime), CAST(N'2016-08-23 10:31:36.000' AS DateTime), 1)
+GO
+INSERT [dbo].[EndPointIOs] ([ID], [EndPointID], [IOTypeID], [Valu], [TimeStamp], [ExecTimeStamp], [ScheduleTimeStamp], [ThingID]) VALUES (5, 46, 2, N'rst', CAST(N'2016-08-23 10:32:31.840' AS DateTime), NULL, NULL, 1)
+GO
+INSERT [dbo].[EndPointIOs] ([ID], [EndPointID], [IOTypeID], [Valu], [TimeStamp], [ExecTimeStamp], [ScheduleTimeStamp], [ThingID]) VALUES (6, 46, 2, N'rst', CAST(N'2016-08-23 10:34:04.170' AS DateTime), NULL, NULL, 1)
+GO
+INSERT [dbo].[EndPointIOs] ([ID], [EndPointID], [IOTypeID], [Valu], [TimeStamp], [ExecTimeStamp], [ScheduleTimeStamp], [ThingID]) VALUES (7, 46, 1, N'32', CAST(N'2016-08-23 10:35:48.000' AS DateTime), CAST(N'2016-08-23 10:35:48.000' AS DateTime), CAST(N'2016-08-23 10:35:48.000' AS DateTime), 1)
+GO
+INSERT [dbo].[EndPointIOs] ([ID], [EndPointID], [IOTypeID], [Valu], [TimeStamp], [ExecTimeStamp], [ScheduleTimeStamp], [ThingID]) VALUES (10004, 46, 2, N'rst', CAST(N'2016-08-24 12:18:58.453' AS DateTime), NULL, NULL, 1)
+GO
+INSERT [dbo].[EndPointIOs] ([ID], [EndPointID], [IOTypeID], [Valu], [TimeStamp], [ExecTimeStamp], [ScheduleTimeStamp], [ThingID]) VALUES (10005, 46, 2, N'rst', CAST(N'2016-08-25 13:13:04.683' AS DateTime), NULL, NULL, 1)
+GO
+INSERT [dbo].[EndPointIOs] ([ID], [EndPointID], [IOTypeID], [Valu], [TimeStamp], [ExecTimeStamp], [ScheduleTimeStamp], [ThingID]) VALUES (10006, 46, 2, N'rst', CAST(N'2016-08-25 13:14:30.783' AS DateTime), NULL, NULL, 1)
+GO
+INSERT [dbo].[EndPointIOs] ([ID], [EndPointID], [IOTypeID], [Valu], [TimeStamp], [ExecTimeStamp], [ScheduleTimeStamp], [ThingID]) VALUES (10007, 46, 2, N'rst', CAST(N'2016-08-25 13:24:18.447' AS DateTime), NULL, NULL, 1)
+GO
+INSERT [dbo].[EndPointIOs] ([ID], [EndPointID], [IOTypeID], [Valu], [TimeStamp], [ExecTimeStamp], [ScheduleTimeStamp], [ThingID]) VALUES (10008, 46, 2, N'rst', CAST(N'2016-08-28 13:13:39.307' AS DateTime), NULL, NULL, 1)
+GO
+INSERT [dbo].[EndPointIOs] ([ID], [EndPointID], [IOTypeID], [Valu], [TimeStamp], [ExecTimeStamp], [ScheduleTimeStamp], [ThingID]) VALUES (10009, 46, 1, N'35', CAST(N'2016-08-28 19:59:50.000' AS DateTime), CAST(N'2016-08-28 19:59:50.000' AS DateTime), CAST(N'2016-08-28 19:59:50.000' AS DateTime), 1)
+GO
+INSERT [dbo].[EndPointIOs] ([ID], [EndPointID], [IOTypeID], [Valu], [TimeStamp], [ExecTimeStamp], [ScheduleTimeStamp], [ThingID]) VALUES (10010, 46, 2, N'rst', CAST(N'2016-08-28 20:00:41.117' AS DateTime), NULL, NULL, 1)
+GO
+INSERT [dbo].[EndPointIOs] ([ID], [EndPointID], [IOTypeID], [Valu], [TimeStamp], [ExecTimeStamp], [ScheduleTimeStamp], [ThingID]) VALUES (10011, 46, 2, N'rst', CAST(N'2016-08-28 20:25:23.167' AS DateTime), NULL, NULL, 1)
+GO
+INSERT [dbo].[EndPointIOs] ([ID], [EndPointID], [IOTypeID], [Valu], [TimeStamp], [ExecTimeStamp], [ScheduleTimeStamp], [ThingID]) VALUES (10012, 46, 2, N'rst', CAST(N'2016-08-29 14:11:03.930' AS DateTime), NULL, NULL, 1)
+GO
+INSERT [dbo].[EndPointIOs] ([ID], [EndPointID], [IOTypeID], [Valu], [TimeStamp], [ExecTimeStamp], [ScheduleTimeStamp], [ThingID]) VALUES (10013, 46, 1, N'29', CAST(N'2016-08-31 12:44:06.000' AS DateTime), CAST(N'2016-08-31 12:44:06.000' AS DateTime), CAST(N'2016-08-31 12:44:06.000' AS DateTime), 1)
+GO
+INSERT [dbo].[EndPointIOs] ([ID], [EndPointID], [IOTypeID], [Valu], [TimeStamp], [ExecTimeStamp], [ScheduleTimeStamp], [ThingID]) VALUES (10014, 46, 1, N'29', CAST(N'2016-08-31 12:59:41.000' AS DateTime), CAST(N'2016-08-31 12:59:41.000' AS DateTime), CAST(N'2016-08-31 12:59:41.000' AS DateTime), 1)
+GO
+INSERT [dbo].[EndPointIOs] ([ID], [EndPointID], [IOTypeID], [Valu], [TimeStamp], [ExecTimeStamp], [ScheduleTimeStamp], [ThingID]) VALUES (10016, 46, 1, N'29', CAST(N'2016-08-31 13:00:06.000' AS DateTime), CAST(N'2016-08-31 13:00:06.000' AS DateTime), CAST(N'2016-08-31 13:00:06.000' AS DateTime), 1)
+GO
+INSERT [dbo].[EndPointIOs] ([ID], [EndPointID], [IOTypeID], [Valu], [TimeStamp], [ExecTimeStamp], [ScheduleTimeStamp], [ThingID]) VALUES (10017, 46, 1, N'29', CAST(N'2016-08-31 13:00:13.000' AS DateTime), CAST(N'2016-08-31 13:00:13.000' AS DateTime), CAST(N'2016-08-31 13:00:13.000' AS DateTime), 1)
+GO
+INSERT [dbo].[EndPointIOs] ([ID], [EndPointID], [IOTypeID], [Valu], [TimeStamp], [ExecTimeStamp], [ScheduleTimeStamp], [ThingID]) VALUES (10018, 46, 1, N'29', CAST(N'2016-08-31 13:01:47.000' AS DateTime), CAST(N'2016-08-31 13:01:47.000' AS DateTime), CAST(N'2016-08-31 13:01:47.000' AS DateTime), 1)
+GO
+INSERT [dbo].[EndPointIOs] ([ID], [EndPointID], [IOTypeID], [Valu], [TimeStamp], [ExecTimeStamp], [ScheduleTimeStamp], [ThingID]) VALUES (10019, 46, 1, N'33', CAST(N'2016-08-31 13:02:09.000' AS DateTime), CAST(N'2016-08-31 13:02:09.000' AS DateTime), CAST(N'2016-08-31 13:02:09.000' AS DateTime), 1)
+GO
+INSERT [dbo].[EndPointIOs] ([ID], [EndPointID], [IOTypeID], [Valu], [TimeStamp], [ExecTimeStamp], [ScheduleTimeStamp], [ThingID]) VALUES (10020, 46, 1, N'33', CAST(N'2016-08-31 13:03:19.000' AS DateTime), CAST(N'2016-08-31 13:03:19.000' AS DateTime), CAST(N'2016-08-31 13:03:19.000' AS DateTime), 1)
+GO
+INSERT [dbo].[EndPointIOs] ([ID], [EndPointID], [IOTypeID], [Valu], [TimeStamp], [ExecTimeStamp], [ScheduleTimeStamp], [ThingID]) VALUES (10021, 46, 1, N'33', CAST(N'2016-08-31 14:26:32.000' AS DateTime), CAST(N'2016-08-31 14:26:32.000' AS DateTime), CAST(N'2016-08-31 14:26:32.000' AS DateTime), 1)
+GO
+INSERT [dbo].[EndPointIOs] ([ID], [EndPointID], [IOTypeID], [Valu], [TimeStamp], [ExecTimeStamp], [ScheduleTimeStamp], [ThingID]) VALUES (10022, 46, 1, N'34', CAST(N'2016-08-31 14:27:55.000' AS DateTime), CAST(N'2016-08-31 14:27:55.000' AS DateTime), CAST(N'2016-08-31 14:27:55.000' AS DateTime), 1)
+GO
+INSERT [dbo].[EndPointIOs] ([ID], [EndPointID], [IOTypeID], [Valu], [TimeStamp], [ExecTimeStamp], [ScheduleTimeStamp], [ThingID]) VALUES (10032, 47, 1, N'1', CAST(N'2016-09-01 12:53:27.000' AS DateTime), CAST(N'2016-09-01 12:53:27.000' AS DateTime), CAST(N'2016-09-01 12:53:27.000' AS DateTime), 2)
+GO
+INSERT [dbo].[EndPointIOs] ([ID], [EndPointID], [IOTypeID], [Valu], [TimeStamp], [ExecTimeStamp], [ScheduleTimeStamp], [ThingID]) VALUES (10033, 47, 1, N'1', CAST(N'2016-09-01 12:54:14.000' AS DateTime), CAST(N'2016-09-01 12:54:14.000' AS DateTime), CAST(N'2016-09-01 12:54:14.000' AS DateTime), 2)
+GO
+INSERT [dbo].[EndPointIOs] ([ID], [EndPointID], [IOTypeID], [Valu], [TimeStamp], [ExecTimeStamp], [ScheduleTimeStamp], [ThingID]) VALUES (10034, 47, 1, N'2', CAST(N'2016-09-01 12:54:21.000' AS DateTime), CAST(N'2016-09-01 12:54:21.000' AS DateTime), CAST(N'2016-09-01 12:54:21.000' AS DateTime), 2)
+GO
+INSERT [dbo].[EndPointIOs] ([ID], [EndPointID], [IOTypeID], [Valu], [TimeStamp], [ExecTimeStamp], [ScheduleTimeStamp], [ThingID]) VALUES (10035, 46, 1, N'2', CAST(N'2016-09-01 12:56:15.000' AS DateTime), CAST(N'2016-09-01 12:56:15.000' AS DateTime), CAST(N'2016-09-01 12:56:15.000' AS DateTime), 1)
+GO
+INSERT [dbo].[EndPointIOs] ([ID], [EndPointID], [IOTypeID], [Valu], [TimeStamp], [ExecTimeStamp], [ScheduleTimeStamp], [ThingID]) VALUES (10036, 46, 1, N'34', CAST(N'2016-09-01 13:02:43.000' AS DateTime), CAST(N'2016-09-01 13:02:43.000' AS DateTime), CAST(N'2016-09-01 13:02:43.000' AS DateTime), 1)
+GO
+INSERT [dbo].[EndPointIOs] ([ID], [EndPointID], [IOTypeID], [Valu], [TimeStamp], [ExecTimeStamp], [ScheduleTimeStamp], [ThingID]) VALUES (10037, 46, 1, N'5', CAST(N'2016-09-01 13:02:56.000' AS DateTime), CAST(N'2016-09-01 13:02:56.000' AS DateTime), CAST(N'2016-09-01 13:02:56.000' AS DateTime), 1)
+GO
+INSERT [dbo].[EndPointIOs] ([ID], [EndPointID], [IOTypeID], [Valu], [TimeStamp], [ExecTimeStamp], [ScheduleTimeStamp], [ThingID]) VALUES (10038, 46, 1, N'35', CAST(N'2016-09-01 13:03:02.000' AS DateTime), CAST(N'2016-09-01 13:03:02.000' AS DateTime), CAST(N'2016-09-01 13:03:02.000' AS DateTime), 1)
+GO
+INSERT [dbo].[EndPointIOs] ([ID], [EndPointID], [IOTypeID], [Valu], [TimeStamp], [ExecTimeStamp], [ScheduleTimeStamp], [ThingID]) VALUES (10039, 46, 1, N'35', CAST(N'2016-09-01 13:04:47.000' AS DateTime), CAST(N'2016-09-01 13:04:47.000' AS DateTime), CAST(N'2016-09-01 13:04:47.000' AS DateTime), 1)
+GO
+INSERT [dbo].[EndPointIOs] ([ID], [EndPointID], [IOTypeID], [Valu], [TimeStamp], [ExecTimeStamp], [ScheduleTimeStamp], [ThingID]) VALUES (10040, 46, 1, N'33', CAST(N'2016-09-01 13:05:02.000' AS DateTime), CAST(N'2016-09-01 13:05:02.000' AS DateTime), CAST(N'2016-09-01 13:05:02.000' AS DateTime), 1)
+GO
+INSERT [dbo].[EndPointIOs] ([ID], [EndPointID], [IOTypeID], [Valu], [TimeStamp], [ExecTimeStamp], [ScheduleTimeStamp], [ThingID]) VALUES (10041, 46, 1, N'33', CAST(N'2016-09-01 13:05:56.000' AS DateTime), CAST(N'2016-09-01 13:05:56.000' AS DateTime), CAST(N'2016-09-01 13:05:56.000' AS DateTime), 1)
+GO
+INSERT [dbo].[EndPointIOs] ([ID], [EndPointID], [IOTypeID], [Valu], [TimeStamp], [ExecTimeStamp], [ScheduleTimeStamp], [ThingID]) VALUES (10042, 46, 1, N'1', CAST(N'2016-09-01 13:06:18.000' AS DateTime), CAST(N'2016-09-01 13:06:18.000' AS DateTime), CAST(N'2016-09-01 13:06:18.000' AS DateTime), 1)
+GO
+INSERT [dbo].[EndPointIOs] ([ID], [EndPointID], [IOTypeID], [Valu], [TimeStamp], [ExecTimeStamp], [ScheduleTimeStamp], [ThingID]) VALUES (10043, 46, 1, N'35', CAST(N'2016-09-01 13:07:07.000' AS DateTime), CAST(N'2016-09-01 13:07:07.000' AS DateTime), CAST(N'2016-09-01 13:07:07.000' AS DateTime), 1)
+GO
+INSERT [dbo].[EndPointIOs] ([ID], [EndPointID], [IOTypeID], [Valu], [TimeStamp], [ExecTimeStamp], [ScheduleTimeStamp], [ThingID]) VALUES (10048, 46, 1, N'36', CAST(N'2016-09-01 13:07:22.000' AS DateTime), CAST(N'2016-09-01 13:07:22.000' AS DateTime), CAST(N'2016-09-01 13:07:22.000' AS DateTime), 1)
+GO
+INSERT [dbo].[EndPointIOs] ([ID], [EndPointID], [IOTypeID], [Valu], [TimeStamp], [ExecTimeStamp], [ScheduleTimeStamp], [ThingID]) VALUES (10049, 46, 1, N'1', CAST(N'2016-09-01 13:07:51.000' AS DateTime), CAST(N'2016-09-01 13:07:51.000' AS DateTime), CAST(N'2016-09-01 13:07:51.000' AS DateTime), 1)
+GO
+INSERT [dbo].[EndPointIOs] ([ID], [EndPointID], [IOTypeID], [Valu], [TimeStamp], [ExecTimeStamp], [ScheduleTimeStamp], [ThingID]) VALUES (10050, 46, 1, N'355', CAST(N'2016-09-01 13:08:02.000' AS DateTime), CAST(N'2016-09-01 13:08:02.000' AS DateTime), CAST(N'2016-09-01 13:08:02.000' AS DateTime), 1)
+GO
+INSERT [dbo].[EndPointIOs] ([ID], [EndPointID], [IOTypeID], [Valu], [TimeStamp], [ExecTimeStamp], [ScheduleTimeStamp], [ThingID]) VALUES (10051, 46, 1, N'22', CAST(N'2016-09-01 13:08:15.000' AS DateTime), CAST(N'2016-09-01 13:08:15.000' AS DateTime), CAST(N'2016-09-01 13:08:15.000' AS DateTime), 1)
+GO
+INSERT [dbo].[EndPointIOs] ([ID], [EndPointID], [IOTypeID], [Valu], [TimeStamp], [ExecTimeStamp], [ScheduleTimeStamp], [ThingID]) VALUES (10052, 46, 1, N'22', CAST(N'2016-09-01 13:08:38.000' AS DateTime), CAST(N'2016-09-01 13:08:38.000' AS DateTime), CAST(N'2016-09-01 13:08:38.000' AS DateTime), 1)
+GO
+INSERT [dbo].[EndPointIOs] ([ID], [EndPointID], [IOTypeID], [Valu], [TimeStamp], [ExecTimeStamp], [ScheduleTimeStamp], [ThingID]) VALUES (10053, 46, 1, N'21', CAST(N'2016-09-01 13:09:55.000' AS DateTime), CAST(N'2016-09-01 13:09:55.000' AS DateTime), CAST(N'2016-09-01 13:09:55.000' AS DateTime), 1)
+GO
+INSERT [dbo].[EndPointIOs] ([ID], [EndPointID], [IOTypeID], [Valu], [TimeStamp], [ExecTimeStamp], [ScheduleTimeStamp], [ThingID]) VALUES (10054, 46, 1, N'35', CAST(N'2016-09-01 13:10:04.000' AS DateTime), CAST(N'2016-09-01 13:10:04.000' AS DateTime), CAST(N'2016-09-01 13:10:04.000' AS DateTime), 1)
+GO
+INSERT [dbo].[EndPointIOs] ([ID], [EndPointID], [IOTypeID], [Valu], [TimeStamp], [ExecTimeStamp], [ScheduleTimeStamp], [ThingID]) VALUES (10055, 46, 1, N'34', CAST(N'2016-09-01 13:10:37.000' AS DateTime), CAST(N'2016-09-01 13:10:37.000' AS DateTime), CAST(N'2016-09-01 13:10:37.000' AS DateTime), 1)
+GO
+INSERT [dbo].[EndPointIOs] ([ID], [EndPointID], [IOTypeID], [Valu], [TimeStamp], [ExecTimeStamp], [ScheduleTimeStamp], [ThingID]) VALUES (10056, 46, 1, N'32', CAST(N'2016-09-01 13:10:48.000' AS DateTime), CAST(N'2016-09-01 13:10:48.000' AS DateTime), CAST(N'2016-09-01 13:10:48.000' AS DateTime), 1)
+GO
+INSERT [dbo].[EndPointIOs] ([ID], [EndPointID], [IOTypeID], [Valu], [TimeStamp], [ExecTimeStamp], [ScheduleTimeStamp], [ThingID]) VALUES (10057, 46, 1, N'32', CAST(N'2016-09-01 13:10:58.000' AS DateTime), CAST(N'2016-09-01 13:10:58.000' AS DateTime), CAST(N'2016-09-01 13:10:58.000' AS DateTime), 1)
+GO
+INSERT [dbo].[EndPointIOs] ([ID], [EndPointID], [IOTypeID], [Valu], [TimeStamp], [ExecTimeStamp], [ScheduleTimeStamp], [ThingID]) VALUES (10058, 46, 1, N'32', CAST(N'2016-09-01 13:10:58.000' AS DateTime), CAST(N'2016-09-01 13:10:58.000' AS DateTime), CAST(N'2016-09-01 13:10:58.000' AS DateTime), 1)
+GO
+INSERT [dbo].[EndPointIOs] ([ID], [EndPointID], [IOTypeID], [Valu], [TimeStamp], [ExecTimeStamp], [ScheduleTimeStamp], [ThingID]) VALUES (10059, 46, 1, N'32', CAST(N'2016-09-01 13:10:58.000' AS DateTime), CAST(N'2016-09-01 13:10:58.000' AS DateTime), CAST(N'2016-09-01 13:10:58.000' AS DateTime), 1)
+GO
+INSERT [dbo].[EndPointIOs] ([ID], [EndPointID], [IOTypeID], [Valu], [TimeStamp], [ExecTimeStamp], [ScheduleTimeStamp], [ThingID]) VALUES (10060, 46, 1, N'32', CAST(N'2016-09-01 13:10:58.000' AS DateTime), CAST(N'2016-09-01 13:10:58.000' AS DateTime), CAST(N'2016-09-01 13:10:58.000' AS DateTime), 1)
+GO
+INSERT [dbo].[EndPointIOs] ([ID], [EndPointID], [IOTypeID], [Valu], [TimeStamp], [ExecTimeStamp], [ScheduleTimeStamp], [ThingID]) VALUES (10061, 46, 1, N'32', CAST(N'2016-09-01 13:11:07.000' AS DateTime), CAST(N'2016-09-01 13:11:07.000' AS DateTime), CAST(N'2016-09-01 13:11:07.000' AS DateTime), 1)
+GO
+INSERT [dbo].[EndPointIOs] ([ID], [EndPointID], [IOTypeID], [Valu], [TimeStamp], [ExecTimeStamp], [ScheduleTimeStamp], [ThingID]) VALUES (10062, 46, 1, N'32', CAST(N'2016-09-01 13:11:07.000' AS DateTime), CAST(N'2016-09-01 13:11:07.000' AS DateTime), CAST(N'2016-09-01 13:11:07.000' AS DateTime), 1)
+GO
+INSERT [dbo].[EndPointIOs] ([ID], [EndPointID], [IOTypeID], [Valu], [TimeStamp], [ExecTimeStamp], [ScheduleTimeStamp], [ThingID]) VALUES (10063, 46, 1, N'32', CAST(N'2016-09-01 13:11:07.000' AS DateTime), CAST(N'2016-09-01 13:11:07.000' AS DateTime), CAST(N'2016-09-01 13:11:07.000' AS DateTime), 1)
+GO
+INSERT [dbo].[EndPointIOs] ([ID], [EndPointID], [IOTypeID], [Valu], [TimeStamp], [ExecTimeStamp], [ScheduleTimeStamp], [ThingID]) VALUES (10064, 46, 1, N'35', CAST(N'2016-09-01 13:12:29.000' AS DateTime), CAST(N'2016-09-01 13:12:29.000' AS DateTime), CAST(N'2016-09-01 13:12:29.000' AS DateTime), 1)
+GO
+INSERT [dbo].[EndPointIOs] ([ID], [EndPointID], [IOTypeID], [Valu], [TimeStamp], [ExecTimeStamp], [ScheduleTimeStamp], [ThingID]) VALUES (10065, 46, 1, N'37', CAST(N'2016-09-01 13:12:36.000' AS DateTime), CAST(N'2016-09-01 13:12:36.000' AS DateTime), CAST(N'2016-09-01 13:12:36.000' AS DateTime), 1)
+GO
+INSERT [dbo].[EndPointIOs] ([ID], [EndPointID], [IOTypeID], [Valu], [TimeStamp], [ExecTimeStamp], [ScheduleTimeStamp], [ThingID]) VALUES (10066, 46, 1, N'37', CAST(N'2016-09-01 13:12:51.000' AS DateTime), CAST(N'2016-09-01 13:12:51.000' AS DateTime), CAST(N'2016-09-01 13:12:51.000' AS DateTime), 1)
+GO
+INSERT [dbo].[EndPointIOs] ([ID], [EndPointID], [IOTypeID], [Valu], [TimeStamp], [ExecTimeStamp], [ScheduleTimeStamp], [ThingID]) VALUES (10067, 46, 1, N'36', CAST(N'2016-09-01 13:14:40.000' AS DateTime), CAST(N'2016-09-01 13:14:40.000' AS DateTime), CAST(N'2016-09-01 13:14:40.000' AS DateTime), 1)
+GO
+INSERT [dbo].[EndPointIOs] ([ID], [EndPointID], [IOTypeID], [Valu], [TimeStamp], [ExecTimeStamp], [ScheduleTimeStamp], [ThingID]) VALUES (10068, 46, 1, N'36', CAST(N'2016-09-01 14:38:30.000' AS DateTime), CAST(N'2016-09-01 14:38:30.000' AS DateTime), CAST(N'2016-09-01 14:38:30.000' AS DateTime), 1)
+GO
+INSERT [dbo].[EndPointIOs] ([ID], [EndPointID], [IOTypeID], [Valu], [TimeStamp], [ExecTimeStamp], [ScheduleTimeStamp], [ThingID]) VALUES (10069, 47, 1, N'35', CAST(N'2016-09-02 00:48:26.000' AS DateTime), CAST(N'2016-09-02 00:48:26.000' AS DateTime), CAST(N'2016-09-02 00:48:26.000' AS DateTime), 2)
+GO
+INSERT [dbo].[EndPointIOs] ([ID], [EndPointID], [IOTypeID], [Valu], [TimeStamp], [ExecTimeStamp], [ScheduleTimeStamp], [ThingID]) VALUES (10070, 48, 1, N'35', CAST(N'2016-09-02 00:48:47.000' AS DateTime), CAST(N'2016-09-02 00:48:47.000' AS DateTime), CAST(N'2016-09-02 00:48:47.000' AS DateTime), 1)
+GO
+INSERT [dbo].[EndPointIOs] ([ID], [EndPointID], [IOTypeID], [Valu], [TimeStamp], [ExecTimeStamp], [ScheduleTimeStamp], [ThingID]) VALUES (10071, 46, 1, N'35', CAST(N'2016-09-02 00:48:57.000' AS DateTime), CAST(N'2016-09-02 00:48:57.000' AS DateTime), CAST(N'2016-09-02 00:48:57.000' AS DateTime), 1)
+GO
+INSERT [dbo].[EndPointIOs] ([ID], [EndPointID], [IOTypeID], [Valu], [TimeStamp], [ExecTimeStamp], [ScheduleTimeStamp], [ThingID]) VALUES (10072, 46, 1, N'21', CAST(N'2016-09-02 00:49:31.000' AS DateTime), CAST(N'2016-09-02 00:49:31.000' AS DateTime), CAST(N'2016-09-02 00:49:31.000' AS DateTime), 1)
+GO
+INSERT [dbo].[EndPointIOs] ([ID], [EndPointID], [IOTypeID], [Valu], [TimeStamp], [ExecTimeStamp], [ScheduleTimeStamp], [ThingID]) VALUES (10073, 46, 1, N'37', CAST(N'2016-09-02 00:50:32.000' AS DateTime), CAST(N'2016-09-02 00:50:32.000' AS DateTime), CAST(N'2016-09-02 00:50:32.000' AS DateTime), 1)
+GO
+INSERT [dbo].[EndPointIOs] ([ID], [EndPointID], [IOTypeID], [Valu], [TimeStamp], [ExecTimeStamp], [ScheduleTimeStamp], [ThingID]) VALUES (10074, 46, 1, N'38', CAST(N'2016-09-02 00:54:01.000' AS DateTime), CAST(N'2016-09-02 00:54:01.000' AS DateTime), CAST(N'2016-09-02 00:54:01.000' AS DateTime), 1)
+GO
+INSERT [dbo].[EndPointIOs] ([ID], [EndPointID], [IOTypeID], [Valu], [TimeStamp], [ExecTimeStamp], [ScheduleTimeStamp], [ThingID]) VALUES (10075, 46, 1, N'38', CAST(N'2016-09-02 00:54:24.000' AS DateTime), CAST(N'2016-09-02 00:54:24.000' AS DateTime), CAST(N'2016-09-02 00:54:24.000' AS DateTime), 1)
+GO
+INSERT [dbo].[EndPointIOs] ([ID], [EndPointID], [IOTypeID], [Valu], [TimeStamp], [ExecTimeStamp], [ScheduleTimeStamp], [ThingID]) VALUES (10076, 46, 1, N'38', CAST(N'2016-09-02 00:55:42.000' AS DateTime), CAST(N'2016-09-02 00:55:42.000' AS DateTime), CAST(N'2016-09-02 00:55:42.000' AS DateTime), 1)
+GO
+INSERT [dbo].[EndPointIOs] ([ID], [EndPointID], [IOTypeID], [Valu], [TimeStamp], [ExecTimeStamp], [ScheduleTimeStamp], [ThingID]) VALUES (10077, 46, 1, N'39', CAST(N'2016-09-02 00:57:57.000' AS DateTime), CAST(N'2016-09-02 00:57:57.000' AS DateTime), CAST(N'2016-09-02 00:57:57.000' AS DateTime), 1)
+GO
+INSERT [dbo].[EndPointIOs] ([ID], [EndPointID], [IOTypeID], [Valu], [TimeStamp], [ExecTimeStamp], [ScheduleTimeStamp], [ThingID]) VALUES (10078, 46, 1, N'39', CAST(N'2016-09-02 01:09:57.000' AS DateTime), CAST(N'2016-09-02 01:09:57.000' AS DateTime), CAST(N'2016-09-02 01:09:57.000' AS DateTime), 1)
+GO
+INSERT [dbo].[EndPointIOs] ([ID], [EndPointID], [IOTypeID], [Valu], [TimeStamp], [ExecTimeStamp], [ScheduleTimeStamp], [ThingID]) VALUES (10079, 46, 1, N'40', CAST(N'2016-09-02 01:51:14.000' AS DateTime), CAST(N'2016-09-02 01:51:14.000' AS DateTime), CAST(N'2016-09-02 01:51:14.000' AS DateTime), 1)
+GO
+INSERT [dbo].[EndPointIOs] ([ID], [EndPointID], [IOTypeID], [Valu], [TimeStamp], [ExecTimeStamp], [ScheduleTimeStamp], [ThingID]) VALUES (10080, 46, 1, N'40', CAST(N'2016-09-02 01:51:58.000' AS DateTime), CAST(N'2016-09-02 01:51:58.000' AS DateTime), CAST(N'2016-09-02 01:51:58.000' AS DateTime), 1)
+GO
+INSERT [dbo].[EndPointIOs] ([ID], [EndPointID], [IOTypeID], [Valu], [TimeStamp], [ExecTimeStamp], [ScheduleTimeStamp], [ThingID]) VALUES (10081, 46, 1, N'40', CAST(N'2016-09-02 02:05:04.000' AS DateTime), CAST(N'2016-09-02 02:05:04.000' AS DateTime), CAST(N'2016-09-02 02:05:04.000' AS DateTime), 1)
+GO
+INSERT [dbo].[EndPointIOs] ([ID], [EndPointID], [IOTypeID], [Valu], [TimeStamp], [ExecTimeStamp], [ScheduleTimeStamp], [ThingID]) VALUES (10082, 46, 2, N'rst', CAST(N'2016-09-02 02:17:08.487' AS DateTime), NULL, NULL, 1)
+GO
+INSERT [dbo].[EndPointIOs] ([ID], [EndPointID], [IOTypeID], [Valu], [TimeStamp], [ExecTimeStamp], [ScheduleTimeStamp], [ThingID]) VALUES (10083, 46, 1, N'40', CAST(N'2016-09-02 02:20:28.000' AS DateTime), CAST(N'2016-09-02 02:20:28.000' AS DateTime), CAST(N'2016-09-02 02:20:28.000' AS DateTime), 1)
+GO
+INSERT [dbo].[EndPointIOs] ([ID], [EndPointID], [IOTypeID], [Valu], [TimeStamp], [ExecTimeStamp], [ScheduleTimeStamp], [ThingID]) VALUES (10084, 47, 1, N'10', CAST(N'2016-09-02 02:25:03.000' AS DateTime), CAST(N'2016-09-02 02:25:03.000' AS DateTime), CAST(N'2016-09-02 02:25:03.000' AS DateTime), 2)
+GO
+INSERT [dbo].[EndPointIOs] ([ID], [EndPointID], [IOTypeID], [Valu], [TimeStamp], [ExecTimeStamp], [ScheduleTimeStamp], [ThingID]) VALUES (10085, 48, 1, N'20', CAST(N'2016-09-02 02:25:16.000' AS DateTime), CAST(N'2016-09-02 02:25:16.000' AS DateTime), CAST(N'2016-09-02 02:25:16.000' AS DateTime), 1)
+GO
+INSERT [dbo].[EndPointIOs] ([ID], [EndPointID], [IOTypeID], [Valu], [TimeStamp], [ExecTimeStamp], [ScheduleTimeStamp], [ThingID]) VALUES (10086, 46, 1, N'38', CAST(N'2016-09-02 23:07:02.000' AS DateTime), CAST(N'2016-09-02 23:07:02.000' AS DateTime), CAST(N'2016-09-02 23:07:02.000' AS DateTime), 1)
+GO
+INSERT [dbo].[EndPointIOs] ([ID], [EndPointID], [IOTypeID], [Valu], [TimeStamp], [ExecTimeStamp], [ScheduleTimeStamp], [ThingID]) VALUES (10087, 46, 1, N'38', CAST(N'2016-09-02 23:08:29.000' AS DateTime), CAST(N'2016-09-02 23:08:29.000' AS DateTime), CAST(N'2016-09-02 23:08:29.000' AS DateTime), 1)
+GO
+INSERT [dbo].[EndPointIOs] ([ID], [EndPointID], [IOTypeID], [Valu], [TimeStamp], [ExecTimeStamp], [ScheduleTimeStamp], [ThingID]) VALUES (10090, 46, 1, N'37', CAST(N'2016-09-02 23:58:02.000' AS DateTime), CAST(N'2016-09-02 23:58:02.000' AS DateTime), CAST(N'2016-09-02 23:58:02.000' AS DateTime), 1)
+GO
+INSERT [dbo].[EndPointIOs] ([ID], [EndPointID], [IOTypeID], [Valu], [TimeStamp], [ExecTimeStamp], [ScheduleTimeStamp], [ThingID]) VALUES (10091, 46, 1, N'37', CAST(N'2016-09-02 23:58:21.000' AS DateTime), CAST(N'2016-09-02 23:58:21.000' AS DateTime), CAST(N'2016-09-02 23:58:21.000' AS DateTime), 1)
+GO
+INSERT [dbo].[EndPointIOs] ([ID], [EndPointID], [IOTypeID], [Valu], [TimeStamp], [ExecTimeStamp], [ScheduleTimeStamp], [ThingID]) VALUES (10092, 46, 1, N'37', CAST(N'2016-09-02 23:58:49.000' AS DateTime), CAST(N'2016-09-02 23:58:49.000' AS DateTime), CAST(N'2016-09-02 23:58:49.000' AS DateTime), 1)
+GO
+INSERT [dbo].[EndPointIOs] ([ID], [EndPointID], [IOTypeID], [Valu], [TimeStamp], [ExecTimeStamp], [ScheduleTimeStamp], [ThingID]) VALUES (10093, 46, 1, N'36', CAST(N'2016-09-02 23:59:02.000' AS DateTime), CAST(N'2016-09-02 23:59:02.000' AS DateTime), CAST(N'2016-09-02 23:59:02.000' AS DateTime), 1)
+GO
+INSERT [dbo].[EndPointIOs] ([ID], [EndPointID], [IOTypeID], [Valu], [TimeStamp], [ExecTimeStamp], [ScheduleTimeStamp], [ThingID]) VALUES (10095, 46, 1, N'35', CAST(N'2016-09-03 01:22:52.000' AS DateTime), CAST(N'2016-09-03 01:22:52.000' AS DateTime), CAST(N'2016-09-03 01:22:52.000' AS DateTime), 1)
+GO
+INSERT [dbo].[EndPointIOs] ([ID], [EndPointID], [IOTypeID], [Valu], [TimeStamp], [ExecTimeStamp], [ScheduleTimeStamp], [ThingID]) VALUES (10096, 46, 1, N'34', CAST(N'2016-09-03 01:23:13.000' AS DateTime), CAST(N'2016-09-03 01:23:13.000' AS DateTime), CAST(N'2016-09-03 01:23:13.000' AS DateTime), 1)
+GO
+INSERT [dbo].[EndPointIOs] ([ID], [EndPointID], [IOTypeID], [Valu], [TimeStamp], [ExecTimeStamp], [ScheduleTimeStamp], [ThingID]) VALUES (10099, 46, 1, N'33', CAST(N'2016-09-03 01:24:06.000' AS DateTime), CAST(N'2016-09-03 01:24:06.000' AS DateTime), CAST(N'2016-09-03 01:24:06.000' AS DateTime), 1)
+GO
+INSERT [dbo].[EndPointIOs] ([ID], [EndPointID], [IOTypeID], [Valu], [TimeStamp], [ExecTimeStamp], [ScheduleTimeStamp], [ThingID]) VALUES (10100, 46, 1, N'33', CAST(N'2016-09-03 01:25:39.000' AS DateTime), CAST(N'2016-09-03 01:25:39.000' AS DateTime), CAST(N'2016-09-03 01:25:39.000' AS DateTime), 1)
+GO
+INSERT [dbo].[EndPointIOs] ([ID], [EndPointID], [IOTypeID], [Valu], [TimeStamp], [ExecTimeStamp], [ScheduleTimeStamp], [ThingID]) VALUES (10101, 46, 1, N'33', CAST(N'2016-09-03 01:25:48.000' AS DateTime), CAST(N'2016-09-03 01:25:48.000' AS DateTime), CAST(N'2016-09-03 01:25:48.000' AS DateTime), 1)
+GO
+INSERT [dbo].[EndPointIOs] ([ID], [EndPointID], [IOTypeID], [Valu], [TimeStamp], [ExecTimeStamp], [ScheduleTimeStamp], [ThingID]) VALUES (10102, 46, 1, N'32', CAST(N'2016-09-03 01:26:31.000' AS DateTime), CAST(N'2016-09-03 01:26:31.000' AS DateTime), CAST(N'2016-09-03 01:26:31.000' AS DateTime), 1)
+GO
+INSERT [dbo].[EndPointIOs] ([ID], [EndPointID], [IOTypeID], [Valu], [TimeStamp], [ExecTimeStamp], [ScheduleTimeStamp], [ThingID]) VALUES (10104, 46, 1, N'31', CAST(N'2016-09-03 01:26:48.000' AS DateTime), CAST(N'2016-09-03 01:26:48.000' AS DateTime), CAST(N'2016-09-03 01:26:48.000' AS DateTime), 1)
+GO
+INSERT [dbo].[EndPointIOs] ([ID], [EndPointID], [IOTypeID], [Valu], [TimeStamp], [ExecTimeStamp], [ScheduleTimeStamp], [ThingID]) VALUES (10105, 46, 1, N'30', CAST(N'2016-09-03 01:27:00.000' AS DateTime), CAST(N'2016-09-03 01:27:00.000' AS DateTime), CAST(N'2016-09-03 01:27:00.000' AS DateTime), 1)
+GO
+INSERT [dbo].[EndPointIOs] ([ID], [EndPointID], [IOTypeID], [Valu], [TimeStamp], [ExecTimeStamp], [ScheduleTimeStamp], [ThingID]) VALUES (10106, 46, 1, N'30', CAST(N'2016-09-03 01:27:30.000' AS DateTime), CAST(N'2016-09-03 01:27:30.000' AS DateTime), CAST(N'2016-09-03 01:27:30.000' AS DateTime), 1)
+GO
+INSERT [dbo].[EndPointIOs] ([ID], [EndPointID], [IOTypeID], [Valu], [TimeStamp], [ExecTimeStamp], [ScheduleTimeStamp], [ThingID]) VALUES (10111, 46, 1, N'29', CAST(N'2016-09-03 01:35:27.000' AS DateTime), CAST(N'2016-09-03 01:35:27.000' AS DateTime), CAST(N'2016-09-03 01:35:27.000' AS DateTime), 1)
+GO
+INSERT [dbo].[EndPointIOs] ([ID], [EndPointID], [IOTypeID], [Valu], [TimeStamp], [ExecTimeStamp], [ScheduleTimeStamp], [ThingID]) VALUES (10112, 46, 1, N'29', CAST(N'2016-09-03 01:35:40.000' AS DateTime), CAST(N'2016-09-03 01:35:40.000' AS DateTime), CAST(N'2016-09-03 01:35:40.000' AS DateTime), 1)
+GO
+INSERT [dbo].[EndPointIOs] ([ID], [EndPointID], [IOTypeID], [Valu], [TimeStamp], [ExecTimeStamp], [ScheduleTimeStamp], [ThingID]) VALUES (10113, 46, 1, N'29', CAST(N'2016-09-03 01:37:15.000' AS DateTime), CAST(N'2016-09-03 01:37:15.000' AS DateTime), CAST(N'2016-09-03 01:37:15.000' AS DateTime), 1)
+GO
+INSERT [dbo].[EndPointIOs] ([ID], [EndPointID], [IOTypeID], [Valu], [TimeStamp], [ExecTimeStamp], [ScheduleTimeStamp], [ThingID]) VALUES (10114, 46, 1, N'29', CAST(N'2016-09-03 01:40:43.000' AS DateTime), CAST(N'2016-09-03 01:40:43.000' AS DateTime), CAST(N'2016-09-03 01:40:43.000' AS DateTime), 1)
+GO
+INSERT [dbo].[EndPointIOs] ([ID], [EndPointID], [IOTypeID], [Valu], [TimeStamp], [ExecTimeStamp], [ScheduleTimeStamp], [ThingID]) VALUES (10115, 46, 1, N'29', CAST(N'2016-09-03 01:41:25.000' AS DateTime), CAST(N'2016-09-03 01:41:25.000' AS DateTime), CAST(N'2016-09-03 01:41:25.000' AS DateTime), 1)
+GO
+INSERT [dbo].[EndPointIOs] ([ID], [EndPointID], [IOTypeID], [Valu], [TimeStamp], [ExecTimeStamp], [ScheduleTimeStamp], [ThingID]) VALUES (10117, 46, 1, N'28', CAST(N'2016-09-03 01:41:58.000' AS DateTime), CAST(N'2016-09-03 01:41:58.000' AS DateTime), CAST(N'2016-09-03 01:41:58.000' AS DateTime), 1)
+GO
+INSERT [dbo].[EndPointIOs] ([ID], [EndPointID], [IOTypeID], [Valu], [TimeStamp], [ExecTimeStamp], [ScheduleTimeStamp], [ThingID]) VALUES (10118, 46, 1, N'27', CAST(N'2016-09-03 01:42:19.000' AS DateTime), CAST(N'2016-09-03 01:42:19.000' AS DateTime), CAST(N'2016-09-03 01:42:19.000' AS DateTime), 1)
+GO
+INSERT [dbo].[EndPointIOs] ([ID], [EndPointID], [IOTypeID], [Valu], [TimeStamp], [ExecTimeStamp], [ScheduleTimeStamp], [ThingID]) VALUES (10119, 46, 1, N'25', CAST(N'2016-09-03 01:43:29.000' AS DateTime), CAST(N'2016-09-03 01:43:29.000' AS DateTime), CAST(N'2016-09-03 01:43:29.000' AS DateTime), 1)
+GO
+INSERT [dbo].[EndPointIOs] ([ID], [EndPointID], [IOTypeID], [Valu], [TimeStamp], [ExecTimeStamp], [ScheduleTimeStamp], [ThingID]) VALUES (10120, 46, 1, N'24', CAST(N'2016-09-03 01:44:22.000' AS DateTime), CAST(N'2016-09-03 01:44:22.000' AS DateTime), CAST(N'2016-09-03 01:44:22.000' AS DateTime), 1)
+GO
+INSERT [dbo].[EndPointIOs] ([ID], [EndPointID], [IOTypeID], [Valu], [TimeStamp], [ExecTimeStamp], [ScheduleTimeStamp], [ThingID]) VALUES (10121, 46, 1, N'23', CAST(N'2016-09-03 01:45:43.000' AS DateTime), CAST(N'2016-09-03 01:45:43.000' AS DateTime), CAST(N'2016-09-03 01:45:43.000' AS DateTime), 1)
+GO
+INSERT [dbo].[EndPointIOs] ([ID], [EndPointID], [IOTypeID], [Valu], [TimeStamp], [ExecTimeStamp], [ScheduleTimeStamp], [ThingID]) VALUES (10122, 46, 1, N'22', CAST(N'2016-09-03 01:46:04.000' AS DateTime), CAST(N'2016-09-03 01:46:04.000' AS DateTime), CAST(N'2016-09-03 01:46:04.000' AS DateTime), 1)
+GO
+INSERT [dbo].[EndPointIOs] ([ID], [EndPointID], [IOTypeID], [Valu], [TimeStamp], [ExecTimeStamp], [ScheduleTimeStamp], [ThingID]) VALUES (10123, 46, 1, N'21', CAST(N'2016-09-03 01:47:33.000' AS DateTime), CAST(N'2016-09-03 01:47:33.000' AS DateTime), CAST(N'2016-09-03 01:47:33.000' AS DateTime), 1)
+GO
+INSERT [dbo].[EndPointIOs] ([ID], [EndPointID], [IOTypeID], [Valu], [TimeStamp], [ExecTimeStamp], [ScheduleTimeStamp], [ThingID]) VALUES (10124, 46, 1, N'19', CAST(N'2016-09-03 01:52:59.000' AS DateTime), CAST(N'2016-09-03 01:52:59.000' AS DateTime), CAST(N'2016-09-03 01:52:59.000' AS DateTime), 1)
+GO
+INSERT [dbo].[EndPointIOs] ([ID], [EndPointID], [IOTypeID], [Valu], [TimeStamp], [ExecTimeStamp], [ScheduleTimeStamp], [ThingID]) VALUES (10125, 46, 1, N'18', CAST(N'2016-09-03 01:56:51.000' AS DateTime), CAST(N'2016-09-03 01:56:51.000' AS DateTime), CAST(N'2016-09-03 01:56:51.000' AS DateTime), 1)
+GO
+INSERT [dbo].[EndPointIOs] ([ID], [EndPointID], [IOTypeID], [Valu], [TimeStamp], [ExecTimeStamp], [ScheduleTimeStamp], [ThingID]) VALUES (10126, 46, 1, N'17', CAST(N'2016-09-03 11:50:12.000' AS DateTime), CAST(N'2016-09-03 11:50:12.000' AS DateTime), CAST(N'2016-09-03 11:50:12.000' AS DateTime), 1)
+GO
+INSERT [dbo].[EndPointIOs] ([ID], [EndPointID], [IOTypeID], [Valu], [TimeStamp], [ExecTimeStamp], [ScheduleTimeStamp], [ThingID]) VALUES (10127, 46, 1, N'18', CAST(N'2016-09-03 14:14:36.000' AS DateTime), CAST(N'2016-09-03 14:14:36.000' AS DateTime), CAST(N'2016-09-03 14:14:36.000' AS DateTime), 1)
+GO
+INSERT [dbo].[EndPointIOs] ([ID], [EndPointID], [IOTypeID], [Valu], [TimeStamp], [ExecTimeStamp], [ScheduleTimeStamp], [ThingID]) VALUES (10128, 46, 1, N'19', CAST(N'2016-09-03 14:15:32.000' AS DateTime), CAST(N'2016-09-03 14:15:32.000' AS DateTime), CAST(N'2016-09-03 14:15:32.000' AS DateTime), 1)
+GO
+INSERT [dbo].[EndPointIOs] ([ID], [EndPointID], [IOTypeID], [Valu], [TimeStamp], [ExecTimeStamp], [ScheduleTimeStamp], [ThingID]) VALUES (10129, 46, 1, N'20', CAST(N'2016-09-03 15:56:55.000' AS DateTime), CAST(N'2016-09-03 15:56:55.000' AS DateTime), CAST(N'2016-09-03 15:56:55.000' AS DateTime), 1)
+GO
+INSERT [dbo].[EndPointIOs] ([ID], [EndPointID], [IOTypeID], [Valu], [TimeStamp], [ExecTimeStamp], [ScheduleTimeStamp], [ThingID]) VALUES (10130, 46, 1, N'21', CAST(N'2016-09-03 17:16:46.000' AS DateTime), CAST(N'2016-09-03 17:16:46.000' AS DateTime), CAST(N'2016-09-03 17:16:46.000' AS DateTime), 1)
+GO
+INSERT [dbo].[EndPointIOs] ([ID], [EndPointID], [IOTypeID], [Valu], [TimeStamp], [ExecTimeStamp], [ScheduleTimeStamp], [ThingID]) VALUES (10131, 46, 1, N'40', CAST(N'2016-09-03 17:16:58.000' AS DateTime), CAST(N'2016-09-03 17:16:58.000' AS DateTime), CAST(N'2016-09-03 17:16:58.000' AS DateTime), 1)
+GO
+INSERT [dbo].[EndPointIOs] ([ID], [EndPointID], [IOTypeID], [Valu], [TimeStamp], [ExecTimeStamp], [ScheduleTimeStamp], [ThingID]) VALUES (10132, 46, 1, N'30', CAST(N'2016-09-03 17:17:04.000' AS DateTime), CAST(N'2016-09-03 17:17:04.000' AS DateTime), CAST(N'2016-09-03 17:17:04.000' AS DateTime), 1)
+GO
+INSERT [dbo].[EndPointIOs] ([ID], [EndPointID], [IOTypeID], [Valu], [TimeStamp], [ExecTimeStamp], [ScheduleTimeStamp], [ThingID]) VALUES (10133, 46, 1, N'31', CAST(N'2016-09-03 21:03:14.000' AS DateTime), CAST(N'2016-09-03 21:03:14.000' AS DateTime), CAST(N'2016-09-03 21:03:14.000' AS DateTime), 1)
+GO
+INSERT [dbo].[EndPointIOs] ([ID], [EndPointID], [IOTypeID], [Valu], [TimeStamp], [ExecTimeStamp], [ScheduleTimeStamp], [ThingID]) VALUES (10134, 46, 2, N'rst', CAST(N'2016-09-03 21:12:09.347' AS DateTime), NULL, NULL, 1)
+GO
+INSERT [dbo].[EndPointIOs] ([ID], [EndPointID], [IOTypeID], [Valu], [TimeStamp], [ExecTimeStamp], [ScheduleTimeStamp], [ThingID]) VALUES (10135, 46, 2, N'rst', CAST(N'2016-09-03 21:12:46.207' AS DateTime), NULL, NULL, 1)
+GO
+INSERT [dbo].[EndPointIOs] ([ID], [EndPointID], [IOTypeID], [Valu], [TimeStamp], [ExecTimeStamp], [ScheduleTimeStamp], [ThingID]) VALUES (10136, 46, 2, N'rst', CAST(N'2016-09-04 08:53:03.563' AS DateTime), NULL, NULL, 1)
+GO
+INSERT [dbo].[EndPointIOs] ([ID], [EndPointID], [IOTypeID], [Valu], [TimeStamp], [ExecTimeStamp], [ScheduleTimeStamp], [ThingID]) VALUES (10137, 46, 1, N'15', CAST(N'2016-09-05 10:45:21.000' AS DateTime), CAST(N'2016-09-05 10:45:21.000' AS DateTime), CAST(N'2016-09-05 10:45:21.000' AS DateTime), 1)
+GO
+INSERT [dbo].[EndPointIOs] ([ID], [EndPointID], [IOTypeID], [Valu], [TimeStamp], [ExecTimeStamp], [ScheduleTimeStamp], [ThingID]) VALUES (10138, 46, 1, N'15', CAST(N'2016-09-05 11:04:42.000' AS DateTime), CAST(N'2016-09-05 11:04:42.000' AS DateTime), CAST(N'2016-09-05 11:04:42.000' AS DateTime), 1)
+GO
+INSERT [dbo].[EndPointIOs] ([ID], [EndPointID], [IOTypeID], [Valu], [TimeStamp], [ExecTimeStamp], [ScheduleTimeStamp], [ThingID]) VALUES (10139, 48, 1, N'40', CAST(N'2016-09-05 11:08:40.000' AS DateTime), CAST(N'2016-09-05 11:08:40.000' AS DateTime), CAST(N'2016-09-05 11:08:40.000' AS DateTime), 1)
+GO
+INSERT [dbo].[EndPointIOs] ([ID], [EndPointID], [IOTypeID], [Valu], [TimeStamp], [ExecTimeStamp], [ScheduleTimeStamp], [ThingID]) VALUES (10140, 46, 1, N'30', CAST(N'2016-09-05 11:08:56.000' AS DateTime), CAST(N'2016-09-05 11:08:56.000' AS DateTime), CAST(N'2016-09-05 11:08:56.000' AS DateTime), 1)
+GO
+INSERT [dbo].[EndPointIOs] ([ID], [EndPointID], [IOTypeID], [Valu], [TimeStamp], [ExecTimeStamp], [ScheduleTimeStamp], [ThingID]) VALUES (10141, 46, 1, N'30', CAST(N'2016-09-05 11:13:04.000' AS DateTime), CAST(N'2016-09-05 11:13:04.000' AS DateTime), CAST(N'2016-09-05 11:13:04.000' AS DateTime), 1)
+GO
+INSERT [dbo].[EndPointIOs] ([ID], [EndPointID], [IOTypeID], [Valu], [TimeStamp], [ExecTimeStamp], [ScheduleTimeStamp], [ThingID]) VALUES (10142, 46, 1, N'31', CAST(N'2016-09-05 11:15:46.000' AS DateTime), CAST(N'2016-09-05 11:15:46.000' AS DateTime), CAST(N'2016-09-05 11:15:46.000' AS DateTime), 1)
+GO
+INSERT [dbo].[EndPointIOs] ([ID], [EndPointID], [IOTypeID], [Valu], [TimeStamp], [ExecTimeStamp], [ScheduleTimeStamp], [ThingID]) VALUES (10145, 46, 1, N'31', CAST(N'2016-09-05 11:27:25.000' AS DateTime), CAST(N'2016-09-05 11:27:25.000' AS DateTime), CAST(N'2016-09-05 11:27:25.000' AS DateTime), 1)
+GO
+INSERT [dbo].[EndPointIOs] ([ID], [EndPointID], [IOTypeID], [Valu], [TimeStamp], [ExecTimeStamp], [ScheduleTimeStamp], [ThingID]) VALUES (10146, 46, 1, N'30', CAST(N'2016-09-05 11:27:37.000' AS DateTime), CAST(N'2016-09-05 11:27:37.000' AS DateTime), CAST(N'2016-09-05 11:27:37.000' AS DateTime), 1)
+GO
+INSERT [dbo].[EndPointIOs] ([ID], [EndPointID], [IOTypeID], [Valu], [TimeStamp], [ExecTimeStamp], [ScheduleTimeStamp], [ThingID]) VALUES (10147, 46, 1, N'30', CAST(N'2016-09-05 11:27:55.000' AS DateTime), CAST(N'2016-09-05 11:27:55.000' AS DateTime), CAST(N'2016-09-05 11:27:55.000' AS DateTime), 1)
+GO
+INSERT [dbo].[EndPointIOs] ([ID], [EndPointID], [IOTypeID], [Valu], [TimeStamp], [ExecTimeStamp], [ScheduleTimeStamp], [ThingID]) VALUES (10149, 46, 1, N'31', CAST(N'2016-09-05 11:28:33.000' AS DateTime), CAST(N'2016-09-05 11:28:33.000' AS DateTime), CAST(N'2016-09-05 11:28:33.000' AS DateTime), 1)
+GO
+INSERT [dbo].[EndPointIOs] ([ID], [EndPointID], [IOTypeID], [Valu], [TimeStamp], [ExecTimeStamp], [ScheduleTimeStamp], [ThingID]) VALUES (10150, 46, 1, N'30', CAST(N'2016-09-05 11:28:19.000' AS DateTime), CAST(N'2016-09-05 11:28:19.000' AS DateTime), CAST(N'2016-09-05 11:28:19.000' AS DateTime), 1)
+GO
+INSERT [dbo].[EndPointIOs] ([ID], [EndPointID], [IOTypeID], [Valu], [TimeStamp], [ExecTimeStamp], [ScheduleTimeStamp], [ThingID]) VALUES (10151, 46, 1, N'30', CAST(N'2016-09-05 11:28:59.000' AS DateTime), CAST(N'2016-09-05 11:28:59.000' AS DateTime), CAST(N'2016-09-05 11:28:59.000' AS DateTime), 1)
+GO
+INSERT [dbo].[EndPointIOs] ([ID], [EndPointID], [IOTypeID], [Valu], [TimeStamp], [ExecTimeStamp], [ScheduleTimeStamp], [ThingID]) VALUES (10152, 46, 1, N'31', CAST(N'2016-09-05 11:29:14.000' AS DateTime), CAST(N'2016-09-05 11:29:14.000' AS DateTime), CAST(N'2016-09-05 11:29:14.000' AS DateTime), 1)
+GO
+INSERT [dbo].[EndPointIOs] ([ID], [EndPointID], [IOTypeID], [Valu], [TimeStamp], [ExecTimeStamp], [ScheduleTimeStamp], [ThingID]) VALUES (10153, 46, 1, N'31', CAST(N'2016-09-05 11:31:38.000' AS DateTime), CAST(N'2016-09-05 11:31:38.000' AS DateTime), CAST(N'2016-09-05 11:31:38.000' AS DateTime), 1)
+GO
+INSERT [dbo].[EndPointIOs] ([ID], [EndPointID], [IOTypeID], [Valu], [TimeStamp], [ExecTimeStamp], [ScheduleTimeStamp], [ThingID]) VALUES (10154, 46, 1, N'32', CAST(N'2016-09-05 11:31:41.000' AS DateTime), CAST(N'2016-09-05 11:31:41.000' AS DateTime), CAST(N'2016-09-05 11:31:41.000' AS DateTime), 1)
+GO
+INSERT [dbo].[EndPointIOs] ([ID], [EndPointID], [IOTypeID], [Valu], [TimeStamp], [ExecTimeStamp], [ScheduleTimeStamp], [ThingID]) VALUES (10155, 46, 1, N'30', CAST(N'2016-09-05 11:32:04.000' AS DateTime), CAST(N'2016-09-05 11:32:04.000' AS DateTime), CAST(N'2016-09-05 11:32:04.000' AS DateTime), 1)
+GO
+INSERT [dbo].[EndPointIOs] ([ID], [EndPointID], [IOTypeID], [Valu], [TimeStamp], [ExecTimeStamp], [ScheduleTimeStamp], [ThingID]) VALUES (10156, 46, 1, N'30', CAST(N'2016-09-05 11:32:51.000' AS DateTime), CAST(N'2016-09-05 11:32:51.000' AS DateTime), CAST(N'2016-09-05 11:32:51.000' AS DateTime), 1)
+GO
+INSERT [dbo].[EndPointIOs] ([ID], [EndPointID], [IOTypeID], [Valu], [TimeStamp], [ExecTimeStamp], [ScheduleTimeStamp], [ThingID]) VALUES (10157, 46, 1, N'30', CAST(N'2016-09-05 11:33:08.000' AS DateTime), CAST(N'2016-09-05 11:33:08.000' AS DateTime), CAST(N'2016-09-05 11:33:08.000' AS DateTime), 1)
+GO
+INSERT [dbo].[EndPointIOs] ([ID], [EndPointID], [IOTypeID], [Valu], [TimeStamp], [ExecTimeStamp], [ScheduleTimeStamp], [ThingID]) VALUES (10158, 46, 1, N'31', CAST(N'2016-09-05 11:33:30.000' AS DateTime), CAST(N'2016-09-05 11:33:30.000' AS DateTime), CAST(N'2016-09-05 11:33:30.000' AS DateTime), 1)
+GO
+INSERT [dbo].[EndPointIOs] ([ID], [EndPointID], [IOTypeID], [Valu], [TimeStamp], [ExecTimeStamp], [ScheduleTimeStamp], [ThingID]) VALUES (10159, 48, 1, N'39', CAST(N'2016-09-05 11:35:06.000' AS DateTime), CAST(N'2016-09-05 11:35:06.000' AS DateTime), CAST(N'2016-09-05 11:35:06.000' AS DateTime), 1)
+GO
+INSERT [dbo].[EndPointIOs] ([ID], [EndPointID], [IOTypeID], [Valu], [TimeStamp], [ExecTimeStamp], [ScheduleTimeStamp], [ThingID]) VALUES (10160, 48, 1, N'40', CAST(N'2016-09-05 11:35:13.000' AS DateTime), CAST(N'2016-09-05 11:35:13.000' AS DateTime), CAST(N'2016-09-05 11:35:13.000' AS DateTime), 1)
+GO
+INSERT [dbo].[EndPointIOs] ([ID], [EndPointID], [IOTypeID], [Valu], [TimeStamp], [ExecTimeStamp], [ScheduleTimeStamp], [ThingID]) VALUES (10161, 46, 1, N'30', CAST(N'2016-09-05 11:35:24.000' AS DateTime), CAST(N'2016-09-05 11:35:24.000' AS DateTime), CAST(N'2016-09-05 11:35:24.000' AS DateTime), 1)
+GO
+INSERT [dbo].[EndPointIOs] ([ID], [EndPointID], [IOTypeID], [Valu], [TimeStamp], [ExecTimeStamp], [ScheduleTimeStamp], [ThingID]) VALUES (10162, 46, 1, N'30', CAST(N'2016-09-05 11:36:20.000' AS DateTime), CAST(N'2016-09-05 11:36:20.000' AS DateTime), CAST(N'2016-09-05 11:36:20.000' AS DateTime), 1)
+GO
+INSERT [dbo].[EndPointIOs] ([ID], [EndPointID], [IOTypeID], [Valu], [TimeStamp], [ExecTimeStamp], [ScheduleTimeStamp], [ThingID]) VALUES (10163, 46, 1, N'31', CAST(N'2016-09-05 11:37:00.000' AS DateTime), CAST(N'2016-09-05 11:37:00.000' AS DateTime), CAST(N'2016-09-05 11:37:00.000' AS DateTime), 1)
+GO
+INSERT [dbo].[EndPointIOs] ([ID], [EndPointID], [IOTypeID], [Valu], [TimeStamp], [ExecTimeStamp], [ScheduleTimeStamp], [ThingID]) VALUES (10164, 46, 1, N'31', CAST(N'2016-09-05 11:38:27.000' AS DateTime), CAST(N'2016-09-05 11:38:27.000' AS DateTime), CAST(N'2016-09-05 11:38:27.000' AS DateTime), 1)
+GO
+INSERT [dbo].[EndPointIOs] ([ID], [EndPointID], [IOTypeID], [Valu], [TimeStamp], [ExecTimeStamp], [ScheduleTimeStamp], [ThingID]) VALUES (10165, 46, 1, N'30', CAST(N'2016-09-05 11:38:51.000' AS DateTime), CAST(N'2016-09-05 11:38:51.000' AS DateTime), CAST(N'2016-09-05 11:38:51.000' AS DateTime), 1)
+GO
+INSERT [dbo].[EndPointIOs] ([ID], [EndPointID], [IOTypeID], [Valu], [TimeStamp], [ExecTimeStamp], [ScheduleTimeStamp], [ThingID]) VALUES (10166, 46, 1, N'30', CAST(N'2016-09-05 11:40:18.000' AS DateTime), CAST(N'2016-09-05 11:40:18.000' AS DateTime), CAST(N'2016-09-05 11:40:18.000' AS DateTime), 1)
+GO
+INSERT [dbo].[EndPointIOs] ([ID], [EndPointID], [IOTypeID], [Valu], [TimeStamp], [ExecTimeStamp], [ScheduleTimeStamp], [ThingID]) VALUES (10167, 46, 1, N'30', CAST(N'2016-09-05 11:42:36.000' AS DateTime), CAST(N'2016-09-05 11:42:36.000' AS DateTime), CAST(N'2016-09-05 11:42:36.000' AS DateTime), 1)
+GO
+INSERT [dbo].[EndPointIOs] ([ID], [EndPointID], [IOTypeID], [Valu], [TimeStamp], [ExecTimeStamp], [ScheduleTimeStamp], [ThingID]) VALUES (10168, 46, 1, N'31', CAST(N'2016-09-05 11:42:52.000' AS DateTime), CAST(N'2016-09-05 11:42:52.000' AS DateTime), CAST(N'2016-09-05 11:42:52.000' AS DateTime), 1)
+GO
+INSERT [dbo].[EndPointIOs] ([ID], [EndPointID], [IOTypeID], [Valu], [TimeStamp], [ExecTimeStamp], [ScheduleTimeStamp], [ThingID]) VALUES (10169, 46, 1, N'31', CAST(N'2016-09-05 12:32:20.000' AS DateTime), CAST(N'2016-09-05 12:32:20.000' AS DateTime), CAST(N'2016-09-05 12:32:20.000' AS DateTime), 1)
+GO
+INSERT [dbo].[EndPointIOs] ([ID], [EndPointID], [IOTypeID], [Valu], [TimeStamp], [ExecTimeStamp], [ScheduleTimeStamp], [ThingID]) VALUES (10170, 46, 1, N'32', CAST(N'2016-09-05 12:32:25.000' AS DateTime), CAST(N'2016-09-05 12:32:25.000' AS DateTime), CAST(N'2016-09-05 12:32:25.000' AS DateTime), 1)
+GO
+INSERT [dbo].[EndPointIOs] ([ID], [EndPointID], [IOTypeID], [Valu], [TimeStamp], [ExecTimeStamp], [ScheduleTimeStamp], [ThingID]) VALUES (10171, 46, 1, N'30', CAST(N'2016-09-05 12:32:30.000' AS DateTime), CAST(N'2016-09-05 12:32:30.000' AS DateTime), CAST(N'2016-09-05 12:32:30.000' AS DateTime), 1)
+GO
+INSERT [dbo].[EndPointIOs] ([ID], [EndPointID], [IOTypeID], [Valu], [TimeStamp], [ExecTimeStamp], [ScheduleTimeStamp], [ThingID]) VALUES (10172, 46, 1, N'31', CAST(N'2016-09-05 12:33:19.000' AS DateTime), CAST(N'2016-09-05 12:33:19.000' AS DateTime), CAST(N'2016-09-05 12:33:19.000' AS DateTime), 1)
+GO
+INSERT [dbo].[EndPointIOs] ([ID], [EndPointID], [IOTypeID], [Valu], [TimeStamp], [ExecTimeStamp], [ScheduleTimeStamp], [ThingID]) VALUES (10173, 48, 1, N'41', CAST(N'2016-09-05 12:33:30.000' AS DateTime), CAST(N'2016-09-05 12:33:30.000' AS DateTime), CAST(N'2016-09-05 12:33:30.000' AS DateTime), 1)
+GO
+INSERT [dbo].[EndPointIOs] ([ID], [EndPointID], [IOTypeID], [Valu], [TimeStamp], [ExecTimeStamp], [ScheduleTimeStamp], [ThingID]) VALUES (10174, 46, 1, N'30', CAST(N'2016-09-05 12:33:35.000' AS DateTime), CAST(N'2016-09-05 12:33:35.000' AS DateTime), CAST(N'2016-09-05 12:33:35.000' AS DateTime), 1)
+GO
+INSERT [dbo].[EndPointIOs] ([ID], [EndPointID], [IOTypeID], [Valu], [TimeStamp], [ExecTimeStamp], [ScheduleTimeStamp], [ThingID]) VALUES (10175, 48, 1, N'40', CAST(N'2016-09-05 12:33:41.000' AS DateTime), CAST(N'2016-09-05 12:33:41.000' AS DateTime), CAST(N'2016-09-05 12:33:41.000' AS DateTime), 1)
+GO
+INSERT [dbo].[EndPointIOs] ([ID], [EndPointID], [IOTypeID], [Valu], [TimeStamp], [ExecTimeStamp], [ScheduleTimeStamp], [ThingID]) VALUES (10176, 48, 1, N'41', CAST(N'2016-09-05 12:34:19.000' AS DateTime), CAST(N'2016-09-05 12:34:19.000' AS DateTime), CAST(N'2016-09-05 12:34:19.000' AS DateTime), 1)
+GO
+INSERT [dbo].[EndPointIOs] ([ID], [EndPointID], [IOTypeID], [Valu], [TimeStamp], [ExecTimeStamp], [ScheduleTimeStamp], [ThingID]) VALUES (10177, 46, 1, N'30', CAST(N'2016-09-05 12:34:30.000' AS DateTime), CAST(N'2016-09-05 12:34:30.000' AS DateTime), CAST(N'2016-09-05 12:34:30.000' AS DateTime), 1)
+GO
+INSERT [dbo].[EndPointIOs] ([ID], [EndPointID], [IOTypeID], [Valu], [TimeStamp], [ExecTimeStamp], [ScheduleTimeStamp], [ThingID]) VALUES (10178, 46, 1, N'31', CAST(N'2016-09-05 12:34:45.000' AS DateTime), CAST(N'2016-09-05 12:34:45.000' AS DateTime), CAST(N'2016-09-05 12:34:45.000' AS DateTime), 1)
+GO
+INSERT [dbo].[EndPointIOs] ([ID], [EndPointID], [IOTypeID], [Valu], [TimeStamp], [ExecTimeStamp], [ScheduleTimeStamp], [ThingID]) VALUES (10179, 46, 1, N'30', CAST(N'2016-09-05 12:34:51.000' AS DateTime), CAST(N'2016-09-05 12:34:51.000' AS DateTime), CAST(N'2016-09-05 12:34:51.000' AS DateTime), 1)
+GO
+INSERT [dbo].[EndPointIOs] ([ID], [EndPointID], [IOTypeID], [Valu], [TimeStamp], [ExecTimeStamp], [ScheduleTimeStamp], [ThingID]) VALUES (10180, 48, 1, N'40', CAST(N'2016-09-05 12:34:59.000' AS DateTime), CAST(N'2016-09-05 12:34:59.000' AS DateTime), CAST(N'2016-09-05 12:34:59.000' AS DateTime), 1)
+GO
+INSERT [dbo].[EndPointIOs] ([ID], [EndPointID], [IOTypeID], [Valu], [TimeStamp], [ExecTimeStamp], [ScheduleTimeStamp], [ThingID]) VALUES (10181, 46, 1, N'31', CAST(N'2016-09-05 12:35:07.000' AS DateTime), CAST(N'2016-09-05 12:35:07.000' AS DateTime), CAST(N'2016-09-05 12:35:07.000' AS DateTime), 1)
+GO
+INSERT [dbo].[EndPointIOs] ([ID], [EndPointID], [IOTypeID], [Valu], [TimeStamp], [ExecTimeStamp], [ScheduleTimeStamp], [ThingID]) VALUES (10183, 48, 1, N'40', CAST(N'2016-09-05 12:37:16.000' AS DateTime), CAST(N'2016-09-05 12:37:16.000' AS DateTime), CAST(N'2016-09-05 12:37:16.000' AS DateTime), 1)
+GO
+INSERT [dbo].[EndPointIOs] ([ID], [EndPointID], [IOTypeID], [Valu], [TimeStamp], [ExecTimeStamp], [ScheduleTimeStamp], [ThingID]) VALUES (10184, 48, 1, N'40', CAST(N'2016-09-05 12:35:14.000' AS DateTime), CAST(N'2016-09-05 12:35:14.000' AS DateTime), CAST(N'2016-09-05 12:35:14.000' AS DateTime), 1)
+GO
+INSERT [dbo].[EndPointIOs] ([ID], [EndPointID], [IOTypeID], [Valu], [TimeStamp], [ExecTimeStamp], [ScheduleTimeStamp], [ThingID]) VALUES (10185, 46, 1, N'31', CAST(N'2016-09-05 12:37:20.000' AS DateTime), CAST(N'2016-09-05 12:37:20.000' AS DateTime), CAST(N'2016-09-05 12:37:20.000' AS DateTime), 1)
+GO
+INSERT [dbo].[EndPointIOs] ([ID], [EndPointID], [IOTypeID], [Valu], [TimeStamp], [ExecTimeStamp], [ScheduleTimeStamp], [ThingID]) VALUES (10186, 48, 1, N'41', CAST(N'2016-09-05 12:37:31.000' AS DateTime), CAST(N'2016-09-05 12:37:31.000' AS DateTime), CAST(N'2016-09-05 12:37:31.000' AS DateTime), 1)
+GO
+INSERT [dbo].[EndPointIOs] ([ID], [EndPointID], [IOTypeID], [Valu], [TimeStamp], [ExecTimeStamp], [ScheduleTimeStamp], [ThingID]) VALUES (10187, 46, 1, N'31', CAST(N'2016-09-05 12:37:35.000' AS DateTime), CAST(N'2016-09-05 12:37:35.000' AS DateTime), CAST(N'2016-09-05 12:37:35.000' AS DateTime), 1)
+GO
+INSERT [dbo].[EndPointIOs] ([ID], [EndPointID], [IOTypeID], [Valu], [TimeStamp], [ExecTimeStamp], [ScheduleTimeStamp], [ThingID]) VALUES (10188, 46, 1, N'30', CAST(N'2016-09-05 12:37:41.000' AS DateTime), CAST(N'2016-09-05 12:37:41.000' AS DateTime), CAST(N'2016-09-05 12:37:41.000' AS DateTime), 1)
+GO
 SET IDENTITY_INSERT [dbo].[EndPointIOs] OFF
 GO
 SET IDENTITY_INSERT [dbo].[Endpoints] ON 
 
 GO
-INSERT [dbo].[Endpoints] ([ID], [GUID], [KeyPass], [PinCode], [Title], [DeviceID], [TypeID], [ThingID]) VALUES (46, N'f5b4f219-0629-421d-991e-55ff0b8409a2', N'1cfb97d0-5a7d-443f-9d25-ee143d2f6465', N'0000', N'End 21', 9, 1, 1)
+INSERT [dbo].[Endpoints] ([ID], [GUID], [KeyPass], [PinCode], [Title], [DeviceID], [TypeID], [ThingID], [IsNumericOnly], [MinValue], [MaxValue], [LowRange], [HighRange]) VALUES (46, N'f5b4f219-0629-421d-991e-55ff0b8409a2', N'1cfb97d0-5a7d-443f-9d25-ee143d2f6465', N'0000', N'Thing1 Temp', 9, 1, 1, NULL, NULL, NULL, NULL, NULL)
 GO
-INSERT [dbo].[Endpoints] ([ID], [GUID], [KeyPass], [PinCode], [Title], [DeviceID], [TypeID], [ThingID]) VALUES (47, N'3bb4ef21-dcf7-424d-86d9-9de7d1132321', N'ab4bb8b0-44f8-44a8-b41c-d8885a7c9ea6', N'0000', N'e2', 9, 1, 2)
+INSERT [dbo].[Endpoints] ([ID], [GUID], [KeyPass], [PinCode], [Title], [DeviceID], [TypeID], [ThingID], [IsNumericOnly], [MinValue], [MaxValue], [LowRange], [HighRange]) VALUES (47, N'3bb4ef21-dcf7-424d-86d9-9de7d1132321', N'ab4bb8b0-44f8-44a8-b41c-d8885a7c9ea6', N'0000', N'Thing2 Temp', 9, 1, 2, NULL, NULL, NULL, NULL, NULL)
 GO
-INSERT [dbo].[Endpoints] ([ID], [GUID], [KeyPass], [PinCode], [Title], [DeviceID], [TypeID], [ThingID]) VALUES (48, N'd5375e38-9bdb-471e-be4b-83f63bd7a9fe', N'2dc5ce71-87c9-4740-a10c-53cc989d2991', N'0000', N'End3', 9, 2, 1)
+INSERT [dbo].[Endpoints] ([ID], [GUID], [KeyPass], [PinCode], [Title], [DeviceID], [TypeID], [ThingID], [IsNumericOnly], [MinValue], [MaxValue], [LowRange], [HighRange]) VALUES (48, N'd5375e38-9bdb-471e-be4b-83f63bd7a9fe', N'2dc5ce71-87c9-4740-a10c-53cc989d2991', N'0000', N'Thing1 Humid', 9, 2, 1, NULL, NULL, NULL, NULL, NULL)
 GO
 SET IDENTITY_INSERT [dbo].[Endpoints] OFF
 GO
@@ -602,9 +1120,9 @@ GO
 SET IDENTITY_INSERT [dbo].[EndPointTypes] ON 
 
 GO
-INSERT [dbo].[EndPointTypes] ([ID], [Title], [measurement], [TypeCategoryID], [IconID]) VALUES (1, N'Temperature', N'C', 1, 1)
+INSERT [dbo].[EndPointTypes] ([ID], [Title], [measurement], [TypeCategoryID], [IconID]) VALUES (1, N'Temperature', N'C', 1, 3)
 GO
-INSERT [dbo].[EndPointTypes] ([ID], [Title], [measurement], [TypeCategoryID], [IconID]) VALUES (2, N'Humidity', N'%', 1, 2)
+INSERT [dbo].[EndPointTypes] ([ID], [Title], [measurement], [TypeCategoryID], [IconID]) VALUES (2, N'Humidity', N'%', 1, 4)
 GO
 INSERT [dbo].[EndPointTypes] ([ID], [Title], [measurement], [TypeCategoryID], [IconID]) VALUES (3, N'Light', N'', 1, 3)
 GO
@@ -687,6 +1205,17 @@ INSERT [dbo].[LinkThingsLocations] ([ID], [LocationID], [ThingID], [CreateByUser
 GO
 SET IDENTITY_INSERT [dbo].[LinkThingsLocations] OFF
 GO
+SET IDENTITY_INSERT [dbo].[LinkUsersAlerts] ON 
+
+GO
+INSERT [dbo].[LinkUsersAlerts] ([ID], [UserID], [AlertID]) VALUES (2, N'367df69f-c059-4295-95b0-718c93dfa843', 1)
+GO
+INSERT [dbo].[LinkUsersAlerts] ([ID], [UserID], [AlertID]) VALUES (3, N'8393618a-ea66-442c-9eff-f48c53f982a4', 1)
+GO
+INSERT [dbo].[LinkUsersAlerts] ([ID], [UserID], [AlertID]) VALUES (4, N'ee7fe3bd-f26b-4ee2-9cba-e9a630fbc904', 1)
+GO
+SET IDENTITY_INSERT [dbo].[LinkUsersAlerts] OFF
+GO
 SET IDENTITY_INSERT [dbo].[Locations] ON 
 
 GO
@@ -717,6 +1246,23 @@ GO
 INSERT [dbo].[LocationViewTypes] ([ID], [Title]) VALUES (4, N'Image')
 GO
 SET IDENTITY_INSERT [dbo].[LocationViewTypes] OFF
+GO
+SET IDENTITY_INSERT [dbo].[MediaFiles] ON 
+
+GO
+INSERT [dbo].[MediaFiles] ([ID], [Title]) VALUES (1, N'Sensor')
+GO
+INSERT [dbo].[MediaFiles] ([ID], [Title]) VALUES (2, N'Actuator')
+GO
+INSERT [dbo].[MediaFiles] ([ID], [Title]) VALUES (3, N'temperature')
+GO
+INSERT [dbo].[MediaFiles] ([ID], [Title]) VALUES (4, N'Humidity')
+GO
+INSERT [dbo].[MediaFiles] ([ID], [Title]) VALUES (5, N'Gas')
+GO
+INSERT [dbo].[MediaFiles] ([ID], [Title]) VALUES (6, N'GPS')
+GO
+SET IDENTITY_INSERT [dbo].[MediaFiles] OFF
 GO
 INSERT [dbo].[ResultMessages] ([ID], [Message], [IsError]) VALUES (0, N'Ok', 0)
 GO
@@ -758,7 +1304,7 @@ SET IDENTITY_INSERT [dbo].[Things] ON
 GO
 INSERT [dbo].[Things] ([ID], [Title], [CategoryID], [CreateByUser], [CreateTimeStamp], [UTC_Diff]) VALUES (0, N'<Unspecified>', 0, NULL, NULL, 4)
 GO
-INSERT [dbo].[Things] ([ID], [Title], [CategoryID], [CreateByUser], [CreateTimeStamp], [UTC_Diff]) VALUES (1, N'Thing1', 0, NULL, NULL, 2)
+INSERT [dbo].[Things] ([ID], [Title], [CategoryID], [CreateByUser], [CreateTimeStamp], [UTC_Diff]) VALUES (1, N'Thing1', 0, NULL, NULL, 4)
 GO
 INSERT [dbo].[Things] ([ID], [Title], [CategoryID], [CreateByUser], [CreateTimeStamp], [UTC_Diff]) VALUES (2, N'Thing2', 0, NULL, NULL, 4)
 GO
@@ -766,10 +1312,50 @@ INSERT [dbo].[Things] ([ID], [Title], [CategoryID], [CreateByUser], [CreateTimeS
 GO
 SET IDENTITY_INSERT [dbo].[Things] OFF
 GO
+SET IDENTITY_INSERT [dbo].[UserNotifications] ON 
+
+GO
+INSERT [dbo].[UserNotifications] ([ID], [UserID], [IsRead], [Txt], [NotificationTypeID], [RefID], [AlertTimeStamp]) VALUES (103, N'0', 0, N'2', 1, 2, CAST(N'2016-09-05 11:42:36.360' AS DateTime))
+GO
+INSERT [dbo].[UserNotifications] ([ID], [UserID], [IsRead], [Txt], [NotificationTypeID], [RefID], [AlertTimeStamp]) VALUES (104, N'0', 0, N'1', 1, 2, CAST(N'2016-09-05 11:42:52.610' AS DateTime))
+GO
+INSERT [dbo].[UserNotifications] ([ID], [UserID], [IsRead], [Txt], [NotificationTypeID], [RefID], [AlertTimeStamp]) VALUES (105, N'367df69f-c059-4295-95b0-718c93dfa843', 0, N'Alert from Thing1, reported Temperature: 30 C @Sep  5 2016 12:32PM', 1, 10171, CAST(N'2016-09-05 12:32:30.233' AS DateTime))
+GO
+INSERT [dbo].[UserNotifications] ([ID], [UserID], [IsRead], [Txt], [NotificationTypeID], [RefID], [AlertTimeStamp]) VALUES (106, N'8393618a-ea66-442c-9eff-f48c53f982a4', 0, N'Alert from Thing1, reported Temperature: 30 C @Sep  5 2016 12:32PM', 1, 10171, CAST(N'2016-09-05 12:32:30.233' AS DateTime))
+GO
+INSERT [dbo].[UserNotifications] ([ID], [UserID], [IsRead], [Txt], [NotificationTypeID], [RefID], [AlertTimeStamp]) VALUES (107, N'ee7fe3bd-f26b-4ee2-9cba-e9a630fbc904', 0, N'Alert from Thing1, reported Temperature: 30 C @Sep  5 2016 12:32PM', 1, 10171, CAST(N'2016-09-05 12:32:30.233' AS DateTime))
+GO
+INSERT [dbo].[UserNotifications] ([ID], [UserID], [IsRead], [Txt], [NotificationTypeID], [RefID], [AlertTimeStamp]) VALUES (108, N'367df69f-c059-4295-95b0-718c93dfa843', 0, N'Alert from Thing1, reported Humidity: 40 % @Sep  5 2016 12:33PM', 1, 10175, CAST(N'2016-09-05 12:33:41.000' AS DateTime))
+GO
+INSERT [dbo].[UserNotifications] ([ID], [UserID], [IsRead], [Txt], [NotificationTypeID], [RefID], [AlertTimeStamp]) VALUES (109, N'8393618a-ea66-442c-9eff-f48c53f982a4', 0, N'Alert from Thing1, reported Humidity: 40 % @Sep  5 2016 12:33PM', 1, 10175, CAST(N'2016-09-05 12:33:41.000' AS DateTime))
+GO
+INSERT [dbo].[UserNotifications] ([ID], [UserID], [IsRead], [Txt], [NotificationTypeID], [RefID], [AlertTimeStamp]) VALUES (110, N'ee7fe3bd-f26b-4ee2-9cba-e9a630fbc904', 0, N'Alert from Thing1, reported Humidity: 40 % @Sep  5 2016 12:33PM', 1, 10175, CAST(N'2016-09-05 12:33:41.000' AS DateTime))
+GO
+INSERT [dbo].[UserNotifications] ([ID], [UserID], [IsRead], [Txt], [NotificationTypeID], [RefID], [AlertTimeStamp]) VALUES (111, N'367df69f-c059-4295-95b0-718c93dfa843', 0, N'Alert from Thing1, reported Humidity: 40 % @Sep  5 2016 12:34PM', 1, 10180, CAST(N'2016-09-05 12:34:59.000' AS DateTime))
+GO
+INSERT [dbo].[UserNotifications] ([ID], [UserID], [IsRead], [Txt], [NotificationTypeID], [RefID], [AlertTimeStamp]) VALUES (112, N'8393618a-ea66-442c-9eff-f48c53f982a4', 0, N'Alert from Thing1, reported Humidity: 40 % @Sep  5 2016 12:34PM', 1, 10180, CAST(N'2016-09-05 12:34:59.000' AS DateTime))
+GO
+INSERT [dbo].[UserNotifications] ([ID], [UserID], [IsRead], [Txt], [NotificationTypeID], [RefID], [AlertTimeStamp]) VALUES (113, N'ee7fe3bd-f26b-4ee2-9cba-e9a630fbc904', 0, N'Alert from Thing1, reported Humidity: 40 % @Sep  5 2016 12:34PM', 1, 10180, CAST(N'2016-09-05 12:34:59.000' AS DateTime))
+GO
+INSERT [dbo].[UserNotifications] ([ID], [UserID], [IsRead], [Txt], [NotificationTypeID], [RefID], [AlertTimeStamp]) VALUES (114, N'367df69f-c059-4295-95b0-718c93dfa843', 0, N'Alert from Thing1, reported Temperature: 30 C @Sep  5 2016 12:37PM', 1, 10188, CAST(N'2016-09-05 12:37:41.040' AS DateTime))
+GO
+INSERT [dbo].[UserNotifications] ([ID], [UserID], [IsRead], [Txt], [NotificationTypeID], [RefID], [AlertTimeStamp]) VALUES (115, N'8393618a-ea66-442c-9eff-f48c53f982a4', 0, N'Alert from Thing1, reported Temperature: 30 C @Sep  5 2016 12:37PM', 1, 10188, CAST(N'2016-09-05 12:37:41.040' AS DateTime))
+GO
+INSERT [dbo].[UserNotifications] ([ID], [UserID], [IsRead], [Txt], [NotificationTypeID], [RefID], [AlertTimeStamp]) VALUES (116, N'ee7fe3bd-f26b-4ee2-9cba-e9a630fbc904', 0, N'Alert from Thing1, reported Temperature: 30 C @Sep  5 2016 12:37PM', 1, 10188, CAST(N'2016-09-05 12:37:41.040' AS DateTime))
+GO
+SET IDENTITY_INSERT [dbo].[UserNotifications] OFF
+GO
+SET IDENTITY_INSERT [dbo].[UserNotificationTypes] ON 
+
+GO
+INSERT [dbo].[UserNotificationTypes] ([ID], [Title]) VALUES (1, N'Alert- EndPoint Input')
+GO
+SET IDENTITY_INSERT [dbo].[UserNotificationTypes] OFF
+GO
 SET ANSI_PADDING ON
 
 GO
-/****** Object:  Index [RoleNameIndex]    Script Date: 8/22/2016 10:19:37 AM ******/
+/****** Object:  Index [RoleNameIndex]    Script Date: 9/6/2016 11:51:59 AM ******/
 CREATE UNIQUE NONCLUSTERED INDEX [RoleNameIndex] ON [dbo].[AspNetRoles]
 (
 	[Name] ASC
@@ -778,7 +1364,7 @@ GO
 SET ANSI_PADDING ON
 
 GO
-/****** Object:  Index [IX_UserId]    Script Date: 8/22/2016 10:19:37 AM ******/
+/****** Object:  Index [IX_UserId]    Script Date: 9/6/2016 11:51:59 AM ******/
 CREATE NONCLUSTERED INDEX [IX_UserId] ON [dbo].[AspNetUserClaims]
 (
 	[UserId] ASC
@@ -787,7 +1373,7 @@ GO
 SET ANSI_PADDING ON
 
 GO
-/****** Object:  Index [IX_UserId]    Script Date: 8/22/2016 10:19:37 AM ******/
+/****** Object:  Index [IX_UserId]    Script Date: 9/6/2016 11:51:59 AM ******/
 CREATE NONCLUSTERED INDEX [IX_UserId] ON [dbo].[AspNetUserLogins]
 (
 	[UserId] ASC
@@ -796,7 +1382,7 @@ GO
 SET ANSI_PADDING ON
 
 GO
-/****** Object:  Index [IX_RoleId]    Script Date: 8/22/2016 10:19:37 AM ******/
+/****** Object:  Index [IX_RoleId]    Script Date: 9/6/2016 11:51:59 AM ******/
 CREATE NONCLUSTERED INDEX [IX_RoleId] ON [dbo].[AspNetUserRoles]
 (
 	[RoleId] ASC
@@ -805,7 +1391,7 @@ GO
 SET ANSI_PADDING ON
 
 GO
-/****** Object:  Index [IX_UserId]    Script Date: 8/22/2016 10:19:37 AM ******/
+/****** Object:  Index [IX_UserId]    Script Date: 9/6/2016 11:51:59 AM ******/
 CREATE NONCLUSTERED INDEX [IX_UserId] ON [dbo].[AspNetUserRoles]
 (
 	[UserId] ASC
@@ -814,11 +1400,36 @@ GO
 SET ANSI_PADDING ON
 
 GO
-/****** Object:  Index [UserNameIndex]    Script Date: 8/22/2016 10:19:37 AM ******/
+/****** Object:  Index [UserNameIndex]    Script Date: 9/6/2016 11:51:59 AM ******/
 CREATE UNIQUE NONCLUSTERED INDEX [UserNameIndex] ON [dbo].[AspNetUsers]
 (
 	[UserName] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+GO
+ALTER TABLE [dbo].[AlertConditions]  WITH CHECK ADD  CONSTRAINT [FK__AlertCond__Alert__7720AD13] FOREIGN KEY([AlertID])
+REFERENCES [dbo].[Alerts] ([ID])
+GO
+ALTER TABLE [dbo].[AlertConditions] CHECK CONSTRAINT [FK__AlertCond__Alert__7720AD13]
+GO
+ALTER TABLE [dbo].[AlertConditions]  WITH CHECK ADD  CONSTRAINT [FK__AlertCond__Condi__74444068] FOREIGN KEY([ConditionTypeID])
+REFERENCES [dbo].[AlertConditionTypes] ([ID])
+GO
+ALTER TABLE [dbo].[AlertConditions] CHECK CONSTRAINT [FK__AlertCond__Condi__74444068]
+GO
+ALTER TABLE [dbo].[AlertConditions]  WITH CHECK ADD  CONSTRAINT [FK__AlertCond__EndPo__0662F0A3] FOREIGN KEY([EndPointTypeID])
+REFERENCES [dbo].[EndPointTypes] ([ID])
+GO
+ALTER TABLE [dbo].[AlertConditions] CHECK CONSTRAINT [FK__AlertCond__EndPo__0662F0A3]
+GO
+ALTER TABLE [dbo].[AlertConditions]  WITH CHECK ADD  CONSTRAINT [FK__AlertCond__IOTyp__056ECC6A] FOREIGN KEY([IOTypeID])
+REFERENCES [dbo].[IOTypes] ([ID])
+GO
+ALTER TABLE [dbo].[AlertConditions] CHECK CONSTRAINT [FK__AlertCond__IOTyp__056ECC6A]
+GO
+ALTER TABLE [dbo].[AlertConditions]  WITH CHECK ADD  CONSTRAINT [FK__AlertCond__Thing__762C88DA] FOREIGN KEY([ThingID])
+REFERENCES [dbo].[Things] ([ID])
+GO
+ALTER TABLE [dbo].[AlertConditions] CHECK CONSTRAINT [FK__AlertCond__Thing__762C88DA]
 GO
 ALTER TABLE [dbo].[AspNetUserClaims]  WITH CHECK ADD  CONSTRAINT [FK_dbo.AspNetUserClaims_dbo.AspNetUsers_UserId] FOREIGN KEY([UserId])
 REFERENCES [dbo].[AspNetUsers] ([Id])
@@ -904,11 +1515,6 @@ REFERENCES [dbo].[EndPointTypes] ([ID])
 GO
 ALTER TABLE [dbo].[Endpoints] CHECK CONSTRAINT [FK__Endpoints__TypeI__45F365D3]
 GO
-ALTER TABLE [dbo].[EndPointTypes]  WITH CHECK ADD  CONSTRAINT [FK__EndPointT__IconI__3FD07829] FOREIGN KEY([IconID])
-REFERENCES [dbo].[CssIcons] ([ID])
-GO
-ALTER TABLE [dbo].[EndPointTypes] CHECK CONSTRAINT [FK__EndPointT__IconI__3FD07829]
-GO
 ALTER TABLE [dbo].[EndPointTypes]  WITH CHECK ADD FOREIGN KEY([TypeCategoryID])
 REFERENCES [dbo].[EndPointTypeCategorys] ([ID])
 GO
@@ -951,6 +1557,12 @@ ON DELETE CASCADE
 GO
 ALTER TABLE [dbo].[LinkThingsLocations] CHECK CONSTRAINT [FK__LinkThing__Thing__0697FACD]
 GO
+ALTER TABLE [dbo].[LinkUsersAlerts]  WITH CHECK ADD FOREIGN KEY([AlertID])
+REFERENCES [dbo].[Alerts] ([ID])
+GO
+ALTER TABLE [dbo].[LinkUsersAlerts]  WITH CHECK ADD FOREIGN KEY([UserID])
+REFERENCES [dbo].[AspNetUsers] ([Id])
+GO
 ALTER TABLE [dbo].[LocationViews]  WITH CHECK ADD  CONSTRAINT [FK__LocationV__Locat__286302EC] FOREIGN KEY([LocationViewTypeID])
 REFERENCES [dbo].[LocationViewTypes] ([ID])
 GO
@@ -961,7 +1573,7 @@ REFERENCES [dbo].[ThingCategorys] ([ID])
 GO
 ALTER TABLE [dbo].[Things] CHECK CONSTRAINT [FK__Things__Category__662B2B3B]
 GO
-/****** Object:  StoredProcedure [dbo].[GetThingEnds]    Script Date: 8/22/2016 10:19:37 AM ******/
+/****** Object:  StoredProcedure [dbo].[GetThingEnds]    Script Date: 9/6/2016 11:51:59 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -998,8 +1610,8 @@ select loc.ID as 'LocationID'
 	,eT.measurement as 'EndPointMeasurement'
 	--,(select top(1) Valu from EndPointIOs i where t.ID = i.ThingID and i.IOTypeID = 1 order by ExecTimeStamp desc) as 'LastSubmitValue'
 	,max(ios.ID) as 'LastIOID'
-	,(select top(1) valu from EndPointIOs where id = MAX(ios.ID) order by id desc) as 'LastIOValue'
-	,(select top(1) ExecTimeStamp from EndPointIOs where id = MAX(ios.ID) order by id desc) as 'LastIOTimeStamp'
+	,(select top(1) valu from EndPointIOs where id = MAX(ios.ID) and IOTypeID = 1 order by id desc) as 'LastIOValue'
+	,(select top(1) ExecTimeStamp from EndPointIOs where id = MAX(ios.ID) and IOTypeID = 1 order by id desc) as 'LastIOTimeStamp'
 
 from 
 	[EndPointIOs] ios
@@ -1026,6 +1638,8 @@ where
 	and (@EndPointID IS NULL or e.ID like @EndPointID)
 	and (@EndPointTypeID IS NULL or e.TypeID like @EndPointTypeID)
 
+	and ios.IOTypeID = 1
+
 group by loc.ID
 	,loc.Title
 	,t.ID 
@@ -1040,7 +1654,7 @@ group by loc.ID
 
 end
 GO
-/****** Object:  StoredProcedure [dbo].[ResetDB]    Script Date: 8/22/2016 10:19:37 AM ******/
+/****** Object:  StoredProcedure [dbo].[ResetDB]    Script Date: 9/6/2016 11:51:59 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -1057,7 +1671,7 @@ truncate table deviceios
 
 end
 GO
-/****** Object:  StoredProcedure [dbo].[Rpt_EndPoint_IOs_Days]    Script Date: 8/22/2016 10:19:37 AM ******/
+/****** Object:  StoredProcedure [dbo].[Rpt_EndPoint_IOs_Days]    Script Date: 9/6/2016 11:51:59 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -1366,7 +1980,7 @@ end
 
 
 GO
-/****** Object:  StoredProcedure [dbo].[Rpt_EndPoint_IOs_HOURs]    Script Date: 8/22/2016 10:19:37 AM ******/
+/****** Object:  StoredProcedure [dbo].[Rpt_EndPoint_IOs_HOURs]    Script Date: 9/6/2016 11:51:59 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -1626,7 +2240,7 @@ end
 
 
 GO
-/****** Object:  StoredProcedure [dbo].[Rpt_EndPoint_IOs_Minutes]    Script Date: 8/22/2016 10:19:37 AM ******/
+/****** Object:  StoredProcedure [dbo].[Rpt_EndPoint_IOs_Minutes]    Script Date: 9/6/2016 11:51:59 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -2209,7 +2823,7 @@ from [Endpoints] e where e.ID = @EPID
 )
 end
 GO
-/****** Object:  StoredProcedure [dbo].[Rpt_EndPoint_IOs_MonthAVG]    Script Date: 8/22/2016 10:19:37 AM ******/
+/****** Object:  StoredProcedure [dbo].[Rpt_EndPoint_IOs_MonthAVG]    Script Date: 9/6/2016 11:51:59 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -2260,7 +2874,7 @@ CREATE procedure [dbo].[Rpt_EndPoint_IOs_MonthAVG]
 from [Endpoints] e where e.ID = @EPID
 end
 GO
-/****** Object:  StoredProcedure [dbo].[Rpt_EndPoint_IOs_MonthMAX]    Script Date: 8/22/2016 10:19:37 AM ******/
+/****** Object:  StoredProcedure [dbo].[Rpt_EndPoint_IOs_MonthMAX]    Script Date: 9/6/2016 11:51:59 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -2311,7 +2925,7 @@ create procedure [dbo].[Rpt_EndPoint_IOs_MonthMAX]
 from [Endpoints] e where e.ID = @EPID
 end
 GO
-/****** Object:  StoredProcedure [dbo].[Rpt_EndPoint_IOs_Months]    Script Date: 8/22/2016 10:19:37 AM ******/
+/****** Object:  StoredProcedure [dbo].[Rpt_EndPoint_IOs_Months]    Script Date: 9/6/2016 11:51:59 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -2449,7 +3063,7 @@ from [Endpoints] e where e.ID = @EPID
 )
 end
 GO
-/****** Object:  StoredProcedure [dbo].[Rpt_ThingEnd_IOs_Days]    Script Date: 8/22/2016 10:19:37 AM ******/
+/****** Object:  StoredProcedure [dbo].[Rpt_ThingEnd_IOs_Days]    Script Date: 9/6/2016 11:51:59 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -2457,7 +3071,7 @@ GO
 
 
 
-create procedure [dbo].[Rpt_ThingEnd_IOs_Days] 
+CREATE procedure [dbo].[Rpt_ThingEnd_IOs_Days] 
  @ThingID bigint,
  @TypeID bigint
  as
@@ -2467,7 +3081,7 @@ create procedure [dbo].[Rpt_ThingEnd_IOs_Days]
 	declare @EPTimeZone int 
 	select @EPTimeZone =  4
  declare @StartTime datetime
- set @StartTime = dateadd(Day,@EPTimeZone,GETUTCDATE() )
+ set @StartTime = dateadd(hour,@EPTimeZone,GETUTCDATE() )
 
  select ID,Title,'Min' as 'Fx',
 
@@ -2871,7 +3485,7 @@ where
 
 end
 GO
-/****** Object:  StoredProcedure [dbo].[Rpt_ThingEnd_IOs_Hours]    Script Date: 8/22/2016 10:19:37 AM ******/
+/****** Object:  StoredProcedure [dbo].[Rpt_ThingEnd_IOs_Hours]    Script Date: 9/6/2016 11:51:59 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -3217,7 +3831,7 @@ where
 
 end
 GO
-/****** Object:  StoredProcedure [dbo].[Rpt_ThingEnd_IOs_Minutes]    Script Date: 8/22/2016 10:19:37 AM ******/
+/****** Object:  StoredProcedure [dbo].[Rpt_ThingEnd_IOs_Minutes]    Script Date: 9/6/2016 11:51:59 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -3997,7 +4611,7 @@ where
 
 end
 GO
-/****** Object:  StoredProcedure [dbo].[Rpt_ThingEnd_IOs_Months]    Script Date: 8/22/2016 10:19:37 AM ******/
+/****** Object:  StoredProcedure [dbo].[Rpt_ThingEnd_IOs_Months]    Script Date: 9/6/2016 11:51:59 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -4005,7 +4619,7 @@ GO
 
 
 
-create procedure [dbo].[Rpt_ThingEnd_IOs_Months] 
+CREATE procedure [dbo].[Rpt_ThingEnd_IOs_Months] 
  @ThingID bigint,
  @TypeID bigint,
  @Year bigint
@@ -4158,10 +4772,9 @@ where
 
 
 
-
 end
 GO
-/****** Object:  Trigger [dbo].[TR_NewUser]    Script Date: 8/22/2016 10:19:37 AM ******/
+/****** Object:  Trigger [dbo].[TR_NewUser]    Script Date: 9/6/2016 11:51:59 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -4175,6 +4788,261 @@ select @UserName =  UserName from inserted
 update AspNetUsers set FullName = @UserName where UserName = @UserName
 
 end
+GO
+/****** Object:  Trigger [dbo].[TR_IO_Alert]    Script Date: 9/6/2016 11:51:59 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE trigger [dbo].[TR_IO_Alert] on [dbo].[EndPointIOs] for insert
+as
+begin
+	-- Declare Variables :::: Start
+	declare @IOID bigint
+	declare @EndPointID bigint
+	declare @IOTypeID bigint
+	declare @EndpointTypeID bigint
+	declare @EndpointType nvarchar(50)
+	declare @Measurement nvarchar(50)
+	declare @Value nvarchar(50)
+	declare @ExecTimeStamp datetime
+	declare @ThingID bigint
+	declare @ThingTitle nvarchar(128)
+	-- Declare Variables :::: End
+
+	-- Set Variables Values :::: Start
+	select @IOID  = ID from inserted;
+	select @EndPointID = EndPointID from inserted;
+	select @IOTypeID = IOTypeID from inserted;
+	select @EndpointTypeID = TypeID from [Endpoints] where ID = @EndPointID;
+	select @EndpointType = et.Title from [Endpoints] e, EndPointTypes et  where e.TypeID = et.ID and e.ID = @EndPointID;
+	select @Measurement = et.Measurement from [Endpoints] e, EndPointTypes et  where e.TypeID = et.ID and e.ID = @EndPointID;
+	select @Value = Valu from inserted;
+	select @ExecTimeStamp = ExecTimeStamp from inserted;
+	select @ThingID = ThingID from inserted;
+	select @ThingTitle = title from Things where id = @ThingID;
+	-- Set Variables Values :::: End
+	
+
+	WITH TConditions AS 
+	(
+		select 
+		ac.ID as 'ConditionID'
+		,ac.AlertID as 'AlertID'
+		,ac.ThingID as 'ThingID'
+		,ac.IOTypeID as 'IOTypeID'
+		,ac.EndPointTypeID as 'EndpointTypeID'
+		,ac.ConditionTypeID
+		,ac.ConditionValue
+		,ac.IsMust
+		,(select count (*) from AlertConditions sub where sub.AlertID = a.id and sub.IsMust = 1) as 'ConIsMustCount'
+		,(select count (*) from AlertConditions sub where sub.AlertID = a.id and sub.IsMust = 0) as 'ConOptMustCount'
+		,vte.LastValue as 'LastValue'
+		
+		from 
+			alerts a
+			,AlertConditions ac
+			,AlertConditionTypes act
+			,Things t
+			,VThingEnds vte
+
+		where
+			--Tables Rel
+			ac.AlertID = a.ID
+			and ac.ConditionTypeID = act.ID
+			and ac.thingid = t.id
+
+			and vte.ThingID = t.ID
+			and vte.IOTypeID = ac.IOTypeID
+			and vte.EndpointTypeID = ac.EndPointTypeID
+
+			--Params
+			and a.IsActive = 1
+			and a.StartTime <=  CONVERT(time(0),@ExecTimeStamp)
+			and a.EndTime >= CONVERT(time(0),@ExecTimeStamp)
+		
+			--Validate Conditions
+			and (
+				(ac.ConditionTypeID = 1 and ac.ConditionValue = LastValue)
+				or (ac.ConditionTypeID = 2 and ac.ConditionValue != LastValue)
+				or (ac.ConditionTypeID = 3 and LastValue > ac.ConditionValue)
+				or (ac.ConditionTypeID = 4 and LastValue < ac.ConditionValue)			
+			)
+
+	), TAlerts AS(
+
+	
+	select 
+		a.ID
+		,replace(
+			replace(
+				replace(
+					replace(
+						replace(a.[Message]
+						,N'[TimeStamp]',@ExecTimeStamp )
+						,N'[Value]',@Value	)
+						,N'[EndpointType]',@EndpointType)
+						,N'[Measurement]',@Measurement)
+						,N'[Thing]',@ThingTitle
+			 
+			 ) as 'AlertMessage'
+		--,(select count(*) from AlertConditions ac where  ac.AlertID = a.ID )as 'ConditionIsMust' 
+		--,(select count(*) from TConditions tc where  tc.alertID = a.ID )as 'ConditionIsMustTrue' 
+		
+	from
+		alerts a
+		
+		where
+			(select count(*) from AlertConditions ac where  ac.AlertID = a.ID and ac.IsMust = 1 )=
+			(select count(*) from TConditions tc where  tc.alertID = a.ID and tc.IsMust = 1)
+
+	)
+
+	insert into UserNotifications
+	(
+		UserID
+		,IsRead
+		,NotificationTypeID
+		,RefID
+		,Txt
+		,AlertTimeStamp
+	)
+	select 
+		u.Id
+		,0
+		,1
+		,@IOID
+		,ta.AlertMEssage
+		,GetDate()
+	from 
+		TAlerts ta
+		,AspNetUsers u
+		,LinkUsersAlerts l
+
+	where 
+		ta.ID = l.AlertID
+		and u.Id = l.UserID
+
+
+
+
+
+end
+
+
+
+
+
+
+GO
+/****** Object:  Trigger [dbo].[TR_IO_AlertOld]    Script Date: 9/6/2016 11:51:59 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+create trigger [dbo].[TR_IO_AlertOld] on [dbo].[EndPointIOs] for insert
+as
+begin
+	-- Declare Variables :::: Start
+	declare @IOID bigint
+	declare @EndPointID bigint
+	declare @IOTypeID bigint
+	declare @EndpointTypeID bigint
+	declare @EndpointType nvarchar(50)
+	declare @Measurement nvarchar(50)
+	declare @Value nvarchar(50)
+	declare @ExecTimeStamp datetime
+	declare @ThingID bigint
+	-- Declare Variables :::: End
+
+	-- Set Variables Values :::: Start
+	select @IOID  = ID from inserted;
+	select @EndPointID = EndPointID from inserted;
+	select @IOTypeID = IOTypeID from inserted;
+	select @EndpointTypeID = TypeID from [Endpoints] where ID = @EndPointID;
+	select @EndpointType = et.Title from [Endpoints] e, EndPointTypes et  where e.TypeID = et.ID and e.ID = @EndPointID;
+	select @Measurement = et.Measurement from [Endpoints] e, EndPointTypes et  where e.TypeID = et.ID and e.ID = @EndPointID;
+	select @Value = Valu from inserted;
+	select @ExecTimeStamp = ExecTimeStamp from inserted;
+	select @ThingID = ThingID from inserted;
+
+	-- Set Variables Values :::: End
+	
+
+	WITH notis AS 
+	(
+		select 
+		a.Title as 'AlertTitle'
+		,u.Id as 'UserID'
+		,u.FullName as 'UserFullName'
+		,@ThingID as 'ThingID'
+		,@IOTypeID as 'EndpointTypeID'
+		,@Value as 'Value'
+		,replace(
+			replace(
+				replace(
+					replace(
+						replace(a.[Message]
+						,N'[TimeStamp]',@ExecTimeStamp )
+						,N'[Value]',@Value	)
+						,N'[EndpointType]',@EndpointType)
+						,N'[Measurement]',@Measurement)
+						,N'[Thing]',t.Title
+			 
+			 ) as 'AlertMessage'
+		,(select count (*) from AlertConditions sub where sub.AlertID = a.id) as 'ConditionsCount'
+		from 
+			Alerts a
+			,AlertConditions ac
+			,AlertConditionTypes act
+			,LinkUsersAlerts lua
+			,AspNetUsers u
+			,Things t
+
+		where
+			--Tables Rel
+			ac.AlertID = a.ID
+			and ac.ConditionTypeID = act.ID
+			and lua.AlertID = a.ID
+			and lua.UserID = u.Id
+			and ac.thingid = t.id
+
+			--Params
+			and a.IsActive = 1
+			and ac.IOTypeID = @IOTypeID
+			and ac.EndPointTypeID = @EndpointTypeID
+			and ac.ThingID = @ThingID
+			and a.StartTime <=  CONVERT(time(0),@ExecTimeStamp)
+			and a.EndTime >= CONVERT(time(0),@ExecTimeStamp)
+		
+	)
+
+	
+
+	insert into UserNotifications
+	(
+		UserID
+		,IsRead
+		,NotificationTypeID
+		,RefID
+		,Txt
+		,alertTimeStamp
+	)
+	select 
+		UserID
+		,0
+		,1
+		,@IOID
+		--,AlertMessage
+		,ConditionsCount
+		,@ExecTimeStamp
+	from notis
+
+end
+
+
+
+
 GO
 USE [master]
 GO

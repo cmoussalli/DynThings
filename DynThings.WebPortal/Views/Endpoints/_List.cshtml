@@ -20,6 +20,7 @@
                 @Html.DisplayFor(modelItem => item.Title)
             </td>
             <td>
+                <img src="~/Imgs/@(item.EndPointType.IconID.ToString() + ".png")" />
                 @Html.DisplayFor(modelItem => item.EndPointType.Title)
             </td>
             <td>
@@ -29,7 +30,7 @@
                 @Html.DisplayFor(modelItem => item.Thing.Title)
             </td>
             <td>
-                @Html.ActionLink("Details", "Details", new { id = item.ID })
+                <a class="btn btn-info pull-right" href="Endpoints/Details?ID=@item.ID">Details</a>
             </td>
         </tr>
     }

@@ -15,41 +15,55 @@ namespace DynThings.Data.Models
 using System;
     using System.Collections.Generic;
     
-public partial class IOType
+public partial class Alert
 {
 
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-    public IOType()
+    public Alert()
     {
 
-        this.DeviceIOs = new HashSet<DeviceIO>();
-
-        this.EndPointIOs = new HashSet<EndPointIO>();
-
         this.AlertConditions = new HashSet<AlertCondition>();
+
+        this.LinkUsersAlerts = new HashSet<LinkUsersAlert>();
 
     }
 
 
     public long ID { get; set; }
 
-    public string IO { get; set; }
-
     public string Title { get; set; }
 
+    public string Message { get; set; }
+
+    public Nullable<long> IsActive { get; set; }
+
+    public Nullable<bool> Sunday { get; set; }
+
+    public Nullable<bool> Monday { get; set; }
+
+    public Nullable<bool> Tuesday { get; set; }
+
+    public Nullable<bool> Wednesday { get; set; }
+
+    public Nullable<bool> Thursday { get; set; }
+
+    public Nullable<bool> Friday { get; set; }
+
+    public Nullable<bool> Saturday { get; set; }
+
+    public Nullable<System.TimeSpan> StartTime { get; set; }
+
+    public Nullable<System.TimeSpan> EndTime { get; set; }
 
 
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-
-    public virtual ICollection<DeviceIO> DeviceIOs { get; set; }
-
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-
-    public virtual ICollection<EndPointIO> EndPointIOs { get; set; }
 
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
 
     public virtual ICollection<AlertCondition> AlertConditions { get; set; }
+
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+
+    public virtual ICollection<LinkUsersAlert> LinkUsersAlerts { get; set; }
 
 }
 

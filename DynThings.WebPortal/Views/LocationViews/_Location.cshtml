@@ -77,11 +77,12 @@
         $(window).resize(function () {
             //if ($("#divMonitorMap").height() - 290 > 50)
             //{
-            //$("#DivThingContent").height($("#divMonitorMap").height() - 290);
+            //$("#DivThingContent").height($("#divMonitorMap").height() - 290);000
             //}
             selectedLocation = @Model.ID.ToString();
             FixUI();
         });
+        selectedLocation = @Model.ID.ToString();
         LoadPart_MonitorThingView();
         FixUI();
     });

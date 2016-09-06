@@ -37,7 +37,7 @@ namespace DynThings.WebPortal.Controllers
         }
         #endregion
 
-        #region Find
+        #region Monitor
         public ActionResult Monitor(long id)
         {
             if (ValidateUserPermissions(true, true) == false)

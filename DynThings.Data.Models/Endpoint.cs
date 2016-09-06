@@ -45,6 +45,16 @@ public partial class Endpoint
 
     public long ThingID { get; set; }
 
+    public Nullable<bool> IsNumericOnly { get; set; }
+
+    public Nullable<float> MinValue { get; set; }
+
+    public Nullable<float> MaxValue { get; set; }
+
+    public Nullable<float> LowRange { get; set; }
+
+    public Nullable<float> HighRange { get; set; }
+
 
 
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

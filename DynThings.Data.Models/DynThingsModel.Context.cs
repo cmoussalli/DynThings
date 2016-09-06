@@ -85,6 +85,20 @@ public partial class DynThingsEntities : DbContext
 
     public virtual DbSet<LinkThingsLocation> LinkThingsLocations { get; set; }
 
+    public virtual DbSet<AlertCondition> AlertConditions { get; set; }
+
+    public virtual DbSet<AlertConditionType> AlertConditionTypes { get; set; }
+
+    public virtual DbSet<Alert> Alerts { get; set; }
+
+    public virtual DbSet<LinkUsersAlert> LinkUsersAlerts { get; set; }
+
+    public virtual DbSet<UserNotification> UserNotifications { get; set; }
+
+    public virtual DbSet<UserNotificationType> UserNotificationTypes { get; set; }
+
+    public virtual DbSet<VThingEnd> VThingEnds { get; set; }
+
 
     public virtual ObjectResult<Rpt_EndPoint_IOs_Months_Result> Rpt_EndPoint_IOs_Months(Nullable<long> ePID, string year)
     {

@@ -32,6 +32,8 @@ public partial class AspNetUser
 
         this.LinkDevicesLocations1 = new HashSet<LinkDevicesLocation>();
 
+        this.LinkUsersAlerts = new HashSet<LinkUsersAlert>();
+
     }
 
 
@@ -82,6 +84,10 @@ public partial class AspNetUser
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
 
     public virtual ICollection<LinkDevicesLocation> LinkDevicesLocations1 { get; set; }
+
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+
+    public virtual ICollection<LinkUsersAlert> LinkUsersAlerts { get; set; }
 
 }
 
