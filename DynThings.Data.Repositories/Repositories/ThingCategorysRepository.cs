@@ -124,8 +124,9 @@ namespace DynThings.Data.Repositories
 
                 //Execute Delete and return result
                 ThingCategory cat = db.ThingCategorys.Find(ID);
+                db.ThingCategorys.Remove(cat);
                 db.SaveChanges();
-                return ResultInfo.GenerateOKResult("Saved", cat.ID);
+                return ResultInfo.GenerateOKResult("Deleted", cat.ID);
             }
             catch
             {
