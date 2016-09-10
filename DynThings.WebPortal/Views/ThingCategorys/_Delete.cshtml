@@ -10,9 +10,9 @@
 
         @if (Model.Things.Count > 0)
         {
-            <div class="alert alert-warning alert-dismissable">
-                <h3>Warning</h3><h5> you have @Model.Things.Count Endpoint(s) associated with the selected ThingCategory.</h5>
-                <h5>All associated data will be removed.</h5>
+            <div class="alert alert-danger alert-dismissable">
+                <h3>Warning</h3><h5> you have @Model.Things.Count Thing(s) associated with the selected ThingCategory.</h5>
+                <h5>You must delete all associated Thing(s) to able to delete this category.</h5>
             </div><br />
         }
 
@@ -27,7 +27,10 @@
     </div>
     <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        @if (Model.Things.Count == 0)
+        {
         <button type="submit" class="btn btn-danger">Delete</button>
+        }
     </div>
 }
 
