@@ -80,6 +80,7 @@
     <script>
         $(document).ready(function () {
             selectedLocationView = @Model.ID
+            LoadPart_DialogLocationViewEditMain(@Model.ID);
             LoadPart_LocationsListByLocationViewIDDiv(@Model.ID);
 
         });

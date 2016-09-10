@@ -293,6 +293,13 @@
           <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Title" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
+        <EntityType Name="MediaFiles">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" MaxLength="50" />
+        </EntityType>
         <EntityType Name="ResultMessages">
           <Key>
             <PropertyRef Name="ID" />
@@ -712,6 +719,18 @@ warning 6002: The table/view 'DynThings.dbo.VThingEnds' does not have a primary 
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK__ThingCate__IconI__25DB9BFC">
+          <End Role="MediaFiles" Type="Self.MediaFiles" Multiplicity="0..1" />
+          <End Role="ThingCategorys" Type="Self.ThingCategorys" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MediaFiles">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ThingCategorys">
+              <PropertyRef Name="IconID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK__Things__Category__662B2B3B">
           <End Role="ThingCategorys" Type="Self.ThingCategorys" Multiplicity="1" />
           <End Role="Things" Type="Self.Things" Multiplicity="*" />
@@ -844,6 +863,7 @@ warning 6002: The table/view 'DynThings.dbo.VThingEnds' does not have a primary 
           <EntitySet Name="Locations" EntityType="Self.Locations" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="LocationViews" EntityType="Self.LocationViews" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="LocationViewTypes" EntityType="Self.LocationViewTypes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MediaFiles" EntityType="Self.MediaFiles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ResultMessages" EntityType="Self.ResultMessages" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ThingCategorys" EntityType="Self.ThingCategorys" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Things" EntityType="Self.Things" Schema="dbo" store:Type="Tables" />
@@ -968,6 +988,10 @@ warning 6002: The table/view 'DynThings.dbo.VThingEnds' does not have a primary 
           <AssociationSet Name="FK__LocationV__Locat__286302EC" Association="Self.FK__LocationV__Locat__286302EC">
             <End Role="LocationViewTypes" EntitySet="LocationViewTypes" />
             <End Role="LocationViews" EntitySet="LocationViews" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ThingCate__IconI__25DB9BFC" Association="Self.FK__ThingCate__IconI__25DB9BFC">
+            <End Role="MediaFiles" EntitySet="MediaFiles" />
+            <End Role="ThingCategorys" EntitySet="ThingCategorys" />
           </AssociationSet>
           <AssociationSet Name="FK__Things__Category__662B2B3B" Association="Self.FK__Things__Category__662B2B3B">
             <End Role="ThingCategorys" EntitySet="ThingCategorys" />
@@ -1191,6 +1215,11 @@ warning 6002: The table/view 'DynThings.dbo.VThingEnds' does not have a primary 
             <Parameter Name="EndPointID" Mode="In" Type="Int64" />
             <Parameter Name="EndPointTypeID" Mode="In" Type="Int64" />
           </FunctionImport>
+          <EntitySet Name="MediaFiles" EntityType="DynThingsModel.MediaFile" />
+          <AssociationSet Name="FK__ThingCate__IconI__25DB9BFC" Association="DynThingsModel.FK__ThingCate__IconI__25DB9BFC">
+            <End Role="MediaFile" EntitySet="MediaFiles" />
+            <End Role="ThingCategory" EntitySet="ThingCategorys" />
+          </AssociationSet>
           </EntityContainer>
         <EntityType Name="AspNetRole">
           <Key>
@@ -1876,6 +1905,7 @@ warning 6002: The table/view 'DynThings.dbo.VThingEnds' does not have a primary 
           <Property Name="Title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Things" Relationship="DynThingsModel.FK__Things__Category__662B2B3B" FromRole="ThingCategory" ToRole="Thing" />
           <Property Name="IconID" Type="Int64" />
+          <NavigationProperty Name="MediaFile" Relationship="DynThingsModel.FK__ThingCate__IconI__25DB9BFC" FromRole="ThingCategory" ToRole="MediaFile" />
         </EntityType>
         <EntityType Name="Thing">
           <Key>
@@ -2296,6 +2326,26 @@ warning 6002: The table/view 'DynThings.dbo.VThingEnds' does not have a primary 
           <Property Type="String" Name="LastIOValue" Nullable="true" MaxLength="50" />
           <Property Type="DateTime" Name="LastIOTimeStamp" Nullable="true" Precision="23" />
         </ComplexType>
+        <EntityType Name="MediaFile">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="ThingCategorys" Relationship="DynThingsModel.FK__ThingCate__IconI__25DB9BFC" FromRole="MediaFile" ToRole="ThingCategory" />
+        </EntityType>
+        <Association Name="FK__ThingCate__IconI__25DB9BFC">
+          <End Type="DynThingsModel.MediaFile" Role="MediaFile" Multiplicity="0..1" />
+          <End Type="DynThingsModel.ThingCategory" Role="ThingCategory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MediaFile">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ThingCategory">
+              <PropertyRef Name="IconID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -3017,6 +3067,14 @@ warning 6002: The table/view 'DynThings.dbo.VThingEnds' does not have a primary 
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <EntitySetMapping Name="MediaFiles">
+            <EntityTypeMapping TypeName="DynThingsModel.MediaFile">
+              <MappingFragment StoreEntitySet="MediaFiles">
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

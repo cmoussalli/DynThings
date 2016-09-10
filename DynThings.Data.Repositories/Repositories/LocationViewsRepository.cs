@@ -84,12 +84,13 @@ namespace DynThings.Data.Repositories
         #endregion
 
         #region Edit : Title
-        public ResultInfo.Result Edit(long locationViewID, string title, string userID)
+        public ResultInfo.Result Edit(long locationViewID, string title, long TypeID)
         {
             try
             {
                 LocationView loc = db.LocationViews.Find(locationViewID);
                 loc.Title = title;
+                loc.LocationViewTypeID = TypeID;
                 loc.IsActive = false;
                 db.SaveChanges();
                 return ResultInfo.GenerateOKResult("Saved", loc.ID);

@@ -15,14 +15,14 @@ namespace DynThings.Data.Models
 using System;
     using System.Collections.Generic;
     
-public partial class ThingCategory
+public partial class MediaFile
 {
 
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-    public ThingCategory()
+    public MediaFile()
     {
 
-        this.Things = new HashSet<Thing>();
+        this.ThingCategorys = new HashSet<ThingCategory>();
 
     }
 
@@ -31,15 +31,11 @@ public partial class ThingCategory
 
     public string Title { get; set; }
 
-    public Nullable<long> IconID { get; set; }
-
 
 
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
 
-    public virtual ICollection<Thing> Things { get; set; }
-
-    public virtual MediaFile MediaFile { get; set; }
+    public virtual ICollection<ThingCategory> ThingCategorys { get; set; }
 
 }
 

@@ -1,0 +1,74 @@
+﻿@model PagedList.IPagedList<DynThings.Data.Models.MediaFile>
+<table class="table striped hovered border bordered">
+    <thead>
+        <tr>
+            <th>Icon</th>
+            <th>Title</th>
+            <th>
+
+            </th>
+            <th>
+
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    <img src="~/Imgs/@(item.ID.ToString() + ".png")" />
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Title)
+                </td>
+
+                <td>
+                    <div id=@("divMediaFileUpload" + item.ID.ToString())>
+                        <div class="row">
+                            <form action="MediaFiles/UploadMediaFile" method="post" enctype="multipart/form-data">
+                                <div class="col-md-8">
+
+
+                                    <input type="file" name="file" id="file" class="btn btn-info" />
+                                    <input type="text" name="fileNumber" id="fileNumber" hidden="hidden" value="@item.ID.ToString()" />
+
+
+                                </div>
+                                <div class="col-md-4">
+                                    <input type="submit" value="Upload" class="btn btn-info" />
+                                </div>
+
+                            </form>
+                        </div>
+                    </div>
+                </td>
+                <td>
+                    <button class="btn btn-danger pull-right" onclick="LoadPart_DialogMediaFileDelete(@item.ID)" data-toggle="modal" data-target="#mdl">Delete</button>
+                    <button class="btn btn-info pull-right" onclick="LoadPart_DialogMediaFileEdit(@item.ID)" data-toggle="modal" data-target="#mdl">Edit</button>
+                    <button class="btn btn-info pull-right" onclick="LoadPart_DialogMediaFileEditUpload(@item.ID)">Change Icon</button>
+                </td>
+            </tr>
+            <script>
+                $('#divMediaFileUpload' + @item.ID.ToString()).hide();
+            </script>
+        }
+    </tbody>
+</table>
+
+<div id="MediaFilesListPager">
+    <input id="MediaFileCurrentPage" value="@Model.PageNumber.ToString()" hidden />
+
+    @Html.PagedListPager(Model, page => Url.Action("ListPV", new { page }))
+</div>
+
+
+<script>
+    function LoadPart_DialogMediaFileEditUpload(id) {
+        $('#divMediaFileUpload'+id).show();
+    };
+
+    function LoadPart_DialogMediaFileEditUpload0(id) {
+        $('#divMediaFileUpload'+id).hide();
+    };
+</script>

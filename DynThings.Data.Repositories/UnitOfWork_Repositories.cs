@@ -38,6 +38,7 @@ namespace DynThings.Data.Repositories
         public static RolesRepository repoRoles = new RolesRepository(dynDB);
         public static ThingsRepository repoThings = new ThingsRepository(dynDB);
         public static ThingCategorysRepository repoThingCategorys = new ThingCategorysRepository(dynDB);
+        public static MediaFilesRepository repoMediaFiles = new MediaFilesRepository(dynDB);
 
 
         #endregion

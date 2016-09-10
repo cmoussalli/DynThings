@@ -211,6 +211,7 @@
     <Compile Include="Controllers\EndPointCommandsController.cs" />
     <Compile Include="Controllers\EndPointIOsController.cs" />
     <Compile Include="Controllers\EndpointTypesController.cs" />
+    <Compile Include="Controllers\MediaFilesController.cs" />
     <Compile Include="Controllers\ThingCategorysController.cs" />
     <Compile Include="Controllers\ThingsController.cs" />
     <Compile Include="Controllers\EndpointsController.cs" />
@@ -236,6 +237,7 @@
   <ItemGroup>
     <Content Include="Assets\Scripts\DeviceScripts\Android.js" />
     <Content Include="Assets\Scripts\DynScripts\DynUsers.js" />
+    <Content Include="Assets\Scripts\DynScripts\MediaFiles.js" />
     <Content Include="Assets\Scripts\DynScripts\Monitor.js" />
     <Content Include="Assets\Scripts\DynScripts\ThingCategories.js" />
     <Content Include="Assets\Scripts\DynScripts\Things.js" />
@@ -394,6 +396,7 @@
     <Content Include="fonts\metro.svg" />
     <Content Include="Global.asax" />
     <Content Include="HtmlPage1.html" />
+    <Content Include="Imgs\0.png" />
     <Content Include="Scripts\bootstrap-modal.js" />
     <Content Include="fonts\selection.json" />
     <Content Include="fonts\metro.woff" />
@@ -594,7 +597,7 @@
     <Content Include="Views\LocationViews\_Add.cshtml" />
     <Content Include="Views\Devices\_Add.cshtml" />
     <Content Include="Views\Devices\_Edit.cshtml" />
-    <Content Include="Views\LocationViews\_EditTitle.cshtml" />
+    <Content Include="Views\LocationViews\_EditMain.cshtml" />
     <Content Include="Views\Endpoints\_Details_History.cshtml" />
     <Content Include="Views\DeviceCommands\_List.cshtml" />
     <Content Include="Views\DeviceCommands\Details.cshtml" />
@@ -678,6 +681,11 @@
     <Content Include="Views\ThingCategorys\_Edit.cshtml" />
     <Content Include="Views\ThingCategorys\_Delete.cshtml" />
     <Content Include="Views\LocationViews\_ThingsCommands_List.cshtml" />
+    <Content Include="Views\MediaFiles\Index.cshtml" />
+    <Content Include="Views\MediaFiles\_List.cshtml" />
+    <Content Include="Views\MediaFiles\_Edit.cshtml" />
+    <Content Include="Views\MediaFiles\_Add.cshtml" />
+    <Content Include="Views\MediaFiles\_Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Code\" />

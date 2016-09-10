@@ -42,6 +42,28 @@ function AttachEventLocationViewAddForm() {
     });
 }
 
+//Attach : Edit Form Submit : Main
+function AttachEventLocationViewEditForm(locationViewID) {
+    $("#LocationViewEditForm").on("submit", function (event) {
+        event.preventDefault();
+        var url = $(this).attr("action");
+        var formData = $(this).serialize();
+        $.ajax({
+            url: url,
+            type: "POST",
+            data: formData,
+            dataType: "json",
+            success: function (resp) {
+                ServerResponse(resp);
+            },
+            error: function () {
+                ServerResponse(resp);
+            }
+        })
+        LoadPart_DialogLocationViewEditMain(locationViewID);
+    });
+};
+
 //Attach : Edit Form Submit : Map
 function AttachEventLocationViewMapEditForm(locationViewID) {
     $("#LocationViewMapEditForm").on("submit", function (event) {
@@ -92,7 +114,17 @@ function LoadPart_DialogLocationViewAdd() {
 }
 
 //Get Edit
-//TODO
+function LoadPart_DialogLocationViewEditMain(id) {
+    var loadingpart = LoadDivLoading();
+    $("#divLocationViewMain").html(loadingpart);
+    $.ajax({
+        url: getRootURL() + '/LocationViews/EditMainPV?id=' + id,
+        type: "GET",
+    })
+    .success(function (partialViewResult) {
+        $("#divLocationViewMain").html(partialViewResult);
+    });
+}
 
 //Get Delete
 function LoadPart_DialogLocationViewDelete(id) {

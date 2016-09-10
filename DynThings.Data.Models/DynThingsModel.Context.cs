@@ -97,6 +97,8 @@ public partial class DynThingsEntities : DbContext
 
     public virtual DbSet<VThingEnd> VThingEnds { get; set; }
 
+    public virtual DbSet<MediaFile> MediaFiles { get; set; }
+
 
     public virtual ObjectResult<Rpt_EndPoint_IOs_Months_Result> Rpt_EndPoint_IOs_Months(Nullable<long> ePID, string year)
     {

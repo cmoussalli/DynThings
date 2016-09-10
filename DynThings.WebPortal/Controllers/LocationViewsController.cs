@@ -104,20 +104,21 @@ namespace DynThings.WebPortal.Controllers
 
         #region EditPV : Title
         [HttpGet]
-        public PartialViewResult EditTitlePV(long id)
+        public PartialViewResult EditMainPV(long id)
         {
             LocationView locationView = UnitOfWork_Repositories.repoLocationViews.Find(id);
-            return PartialView("_EditTitle", locationView);
+            ViewBag.LocationViewTypeID = new SelectList(UnitOfWork_Repositories.repoLocationViewTypes.GetList(), "ID", "Title", locationView.LocationViewTypeID);
+            return PartialView("_EditMain", locationView);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult EditTitlePV([Bind(Include = "ID,Title")] LocationView locationView)
+        public ActionResult EditMainPV([Bind(Include = "ID,Title,LocationViewTypeID")] LocationView locationView)
         {
             ResultInfo.Result res = ResultInfo.GetResultByID(1);
             if (ModelState.IsValid)
             {
-                res = UnitOfWork_Repositories.repoLocationViews.Edit(locationView.ID, locationView.Title, "1");
+                res = UnitOfWork_Repositories.repoLocationViews.Edit(locationView.ID, locationView.Title, locationView.LocationViewTypeID);
             }
             return Json(res);
         }

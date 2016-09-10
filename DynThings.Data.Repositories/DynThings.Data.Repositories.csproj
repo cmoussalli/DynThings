@@ -59,6 +59,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Reports\EndPointsReport.cs" />
+    <Compile Include="Repositories\MediaFilesRepository.cs" />
     <Compile Include="Repositories\ThingCategorysRepository.cs" />
     <Compile Include="Repositories\ThingsRepository.cs" />
     <Compile Include="Repositories\DynUsersRepository.cs" />

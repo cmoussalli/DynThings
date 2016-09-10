@@ -68,6 +68,8 @@
         <AssociationConnector Association="DynThingsModel.FK__AlertCond__Thing__762C88DA" />
         <AssociationConnector Association="DynThingsModel.FK__LinkUsers__Alert__7EC1CEDB" />
         <AssociationConnector Association="DynThingsModel.FK__LinkUsers__UserI__7DCDAAA2" />
+        <EntityTypeShape EntityType="DynThingsModel.MediaFile" Width="1.5" PointX="11.125" PointY="19.25" />
+        <AssociationConnector Association="DynThingsModel.FK__ThingCate__IconI__25DB9BFC" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
