@@ -686,6 +686,7 @@
     <Content Include="Views\MediaFiles\_Edit.cshtml" />
     <Content Include="Views\MediaFiles\_Add.cshtml" />
     <Content Include="Views\MediaFiles\_Delete.cshtml" />
+    <Content Include="Views\LocationViews\_ThingsLogs_List.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Code\" />

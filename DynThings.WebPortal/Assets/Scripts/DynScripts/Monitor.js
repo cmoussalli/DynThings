@@ -125,7 +125,7 @@ function LoadPart_MonitorThingView() {
     }
     if (selectedLocationThingListView == "Logs") {
         $('#btnLogs').addClass('active');
-        FilterThingEnds();
+        LoadPart_MonitorThingLogsList();
     }
 };
 
@@ -152,6 +152,21 @@ function LoadPart_MonitorThingCommandsList() {
     $("#DivThingContent").html(loadingpart);
     $.ajax({
         url: getRootURL() + '/locationviews/GetLocationCommandsListPV?searchfor=' + searchFor + '&LocationID=' + selectedLocation + '&ThingID=' + selectedThingID + '&recordsperpage=0',
+        type: "GET",
+    })
+    .done(function (partialViewResult) {
+        $("#DivThingContent").html(partialViewResult);
+    });
+}
+
+//Get Thing Logs
+function LoadPart_MonitorThingLogsList() {
+    var selectedThingID = $(Thing).val();
+    var searchFor = $(txtSearch).val();
+    var loadingpart = LoadDivLoading();
+    $("#DivThingContent").html(loadingpart);
+    $.ajax({
+        url: getRootURL() + '/locationviews/GetLocationLogsListPV?searchfor=' + searchFor + '&LocationID=' + selectedLocation + '&ThingID=' + selectedThingID + '&recordsperpage=0',
         type: "GET",
     })
     .done(function (partialViewResult) {

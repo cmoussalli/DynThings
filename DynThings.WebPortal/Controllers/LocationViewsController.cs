@@ -247,6 +247,13 @@ namespace DynThings.WebPortal.Controllers
             return PartialView("_ThingsCommands_List", commands);
         }
 
+        [HttpGet]
+        public PartialViewResult GetLocationLogsListPV(string searchfor = "", long? locationID = null, long? thingID = 0, int page = 1, int recordsperpage = 0)
+        {
+            IPagedList commands = UnitOfWork_Repositories.repoEndpointIOs.GetLogsPagedList(searchfor, long.Parse(locationID.ToString()), long.Parse(thingID.ToString()), page, 25);
+            return PartialView("_ThingsLogs_List", commands);
+        }
+
 
         [HttpGet]
         public PartialViewResult GetThingEndDetailsPV(long thingID, long thingEndTypeID)

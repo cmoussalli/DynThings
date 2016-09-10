@@ -99,18 +99,25 @@ namespace DynThings.Data.Repositories
 
             PagedList.IPagedList ios = query.OrderByDescending(i => i.ExecTimeStamp)
                 .Take(1000).ToList().ToPagedList(pageNumber, recordsPerPage);
-
-            //PagedList.IPagedList ios = db.EndPointIOs
-            //  .Where( i => i.Valu.Contains(search)
-            //    //i => i.Endpoint.ID == endPointID
-            //  && (i.EndPointID != null && i.EndPointID == endPointID)
-            //  && (i.IOTypeID != null && i.IOTypeID == ioTypeID)
-            //  //&& i.ExecTimeStamp > fromDate
-            //  //&& i.ExecTimeStamp < toDate
-            //  )
-            //  .OrderByDescending(i => i.TimeStamp).Take(1000).ToList()
-            //  .ToPagedList(pageNumber, recordsPerPage);
             return ios;
+        }
+
+        public IPagedList GetLogsPagedList(string search, long LocationID, long ThingID, int pageNumber, int recordsPerPage)
+        {
+            db = new DynThingsEntities();
+            List<EndPointIO> logs = db.EndPointIOs
+              .Where(e => search == null || e.Valu.Contains(search) 
+              && e.Endpoint.Thing.LinkThingsLocations.Any(l => l.LocationID == LocationID)
+              && e.IOTypeID == 3)
+              .OrderByDescending(e => e.ExecTimeStamp).ToList();
+
+            if (ThingID != 0)
+            {
+                logs = logs.Where(c => c.Endpoint.ThingID == ThingID).ToList();
+            }
+
+            IPagedList plLogs = logs.ToPagedList(pageNumber, recordsPerPage);
+            return plLogs;
         }
 
         #endregion

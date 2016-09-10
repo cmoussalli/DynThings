@@ -176,8 +176,24 @@ namespace DynThings.Data.Repositories
                 (i => i.ThingID == thingID
                 && i.Endpoint.TypeID == thingEndpointTypeID
                 && i.ExecTimeStamp > fromDate
-                && i.ExecTimeStamp < toDate)
+                && i.ExecTimeStamp < toDate
+                && i.IOTypeID < 3)
                 .OrderByDescending(i=>i.ExecTimeStamp)
+                .Take(1000)
+                .ToPagedList(pageNumber, recordsPerPage);
+
+            return result;
+        }
+
+        public IPagedList GetThingEndLogs(long thingID, long thingEndpointTypeID, DateTime fromDate, DateTime toDate, int pageNumber = 1, int recordsPerPage = 0)
+        {
+            IPagedList result = db.EndPointIOs.Where
+                (i => i.ThingID == thingID
+                && i.Endpoint.TypeID == thingEndpointTypeID
+                && i.ExecTimeStamp > fromDate
+                && i.ExecTimeStamp < toDate
+                && i.IOTypeID == 3)
+                .OrderByDescending(i => i.ExecTimeStamp)
                 .Take(1000)
                 .ToPagedList(pageNumber, recordsPerPage);
 

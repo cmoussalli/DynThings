@@ -1,0 +1,29 @@
+﻿@model IPagedList<DynThings.Data.Models.EndPointIO>
+
+<table class="table striped hovered bordered" id="main_table_demo">
+    <thead>
+        <tr>
+            <th>Value</th>
+            <th>I/O</th>
+            <th>Date</th>
+            <th>Thing</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var io in Model)
+        {
+            <Text>
+            <tr>
+                <td>@io.Valu</td>
+                <td>@io.IOType.Title</td>
+                <td>@io.TimeStamp</td>
+                <td>@io.Thing.Title</td>
+            </tr>
+            </text>
+        }
+    </tbody>
+</table>
+@*<div id="EndPointIOsListPager">
+    <input id="EndPointIOsCurrentPage" value="@Model.PageNumber.ToString()" hidden />
+    @Html.PagedListPager(Model, page => Url.Action("GetPVEndPointHistory", new { page }))
+</div>*@
