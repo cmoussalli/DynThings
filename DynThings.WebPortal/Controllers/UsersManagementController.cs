@@ -20,16 +20,6 @@ namespace DynThings.WebPortal.Controllers
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
       
-        // GET: UsersManagement
-        //public ActionResult Index()
-        //{
-        //        var userStore = new
-
-        //    var usermanager = new _userManager<ApplicationIdentity>.Users.ToList();
-        //    //List<User> users = _userManager.Users.ToList();
-
-        //    //ApplicationUserManager um = new ApplicationUserManager()
-        //    return View(applicationusers);
-        //}
+       
     }
 }

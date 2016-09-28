@@ -28,9 +28,13 @@ namespace DynThings.Data.Repositories
 
 
         #region GetList
-        public List<Thing> GetList()
+        public List<Thing> GetList(bool EnableUnspecified)
         {
             List<Thing> Things = db.Things.ToList();
+            if (EnableUnspecified == false)
+            {
+                Things = Things.Where(t => t.ID > 0).ToList();
+            }
             return Things;
         }
         #endregion

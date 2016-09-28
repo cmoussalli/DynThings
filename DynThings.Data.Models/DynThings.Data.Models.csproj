@@ -63,6 +63,9 @@
     <Compile Include="AlertConditionType.cs">
       <DependentUpon>DynThingsModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="AlertLevel.cs">
+      <DependentUpon>DynThingsModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="AspNetRole.cs">
       <DependentUpon>DynThingsModel.tt</DependentUpon>
     </Compile>
@@ -123,31 +126,6 @@
     <Compile Include="GetThingEnds_Result.cs">
       <DependentUpon>DynThingsModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="LinkUsersAlert.cs">
-      <DependentUpon>DynThingsModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="MediaFile.cs">
-      <DependentUpon>DynThingsModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Rpt_ThingEnd_IOs_Days_Result.cs">
-      <DependentUpon>DynThingsModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Rpt_ThingEnd_IOs_Hours_Result.cs">
-      <DependentUpon>DynThingsModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Rpt_ThingEnd_IOs_Minutes_Result.cs">
-      <DependentUpon>DynThingsModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Rpt_ThingEnd_IOs_Months_Result.cs">
-      <DependentUpon>DynThingsModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="UserNotification.cs">
-      <DependentUpon>DynThingsModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="UserNotificationType.cs">
-      <DependentUpon>DynThingsModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ViewModels\ThingEnd.cs" />
     <Compile Include="IOType.cs">
       <DependentUpon>DynThingsModel.tt</DependentUpon>
     </Compile>
@@ -160,6 +138,9 @@
     <Compile Include="LinkThingsLocation.cs">
       <DependentUpon>DynThingsModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="LinkUsersAlert.cs">
+      <DependentUpon>DynThingsModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Location.cs">
       <DependentUpon>DynThingsModel.tt</DependentUpon>
     </Compile>
@@ -169,16 +150,9 @@
     <Compile Include="LocationViewType.cs">
       <DependentUpon>DynThingsModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="ModelsExtensions\AspNetUser.cs" />
-    <Compile Include="ModelsExtensions\DeviceCommand.cs" />
-    <Compile Include="ModelsExtensions\Device.cs" />
-    <Compile Include="ModelsExtensions\EndPoint.cs" />
-    <Compile Include="ModelsExtensions\EndPointCommand.cs" />
-    <Compile Include="ModelsExtensions\Location.cs" />
-    <Compile Include="ModelsExtensions\LocationView.cs" />
-    <Compile Include="ModelsExtensions\LocationViewTypes.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ReportsModels\EndPointCharts.cs" />
+    <Compile Include="MediaFile.cs">
+      <DependentUpon>DynThingsModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="ResultMessage.cs">
       <DependentUpon>DynThingsModel.tt</DependentUpon>
     </Compile>
@@ -194,12 +168,41 @@
     <Compile Include="Rpt_EndPoint_IOs_Months_Result.cs">
       <DependentUpon>DynThingsModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Rpt_ThingEnd_IOs_Days_Result.cs">
+      <DependentUpon>DynThingsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Rpt_ThingEnd_IOs_Hours_Result.cs">
+      <DependentUpon>DynThingsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Rpt_ThingEnd_IOs_Minutes_Result.cs">
+      <DependentUpon>DynThingsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Rpt_ThingEnd_IOs_Months_Result.cs">
+      <DependentUpon>DynThingsModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Thing.cs">
       <DependentUpon>DynThingsModel.tt</DependentUpon>
     </Compile>
     <Compile Include="ThingCategory.cs">
       <DependentUpon>DynThingsModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="UserNotification.cs">
+      <DependentUpon>DynThingsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UserNotificationType.cs">
+      <DependentUpon>DynThingsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\ThingEnd.cs" />
+    <Compile Include="ModelsExtensions\AspNetUser.cs" />
+    <Compile Include="ModelsExtensions\DeviceCommand.cs" />
+    <Compile Include="ModelsExtensions\Device.cs" />
+    <Compile Include="ModelsExtensions\EndPoint.cs" />
+    <Compile Include="ModelsExtensions\EndPointCommand.cs" />
+    <Compile Include="ModelsExtensions\Location.cs" />
+    <Compile Include="ModelsExtensions\LocationView.cs" />
+    <Compile Include="ModelsExtensions\LocationViewTypes.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ReportsModels\EndPointCharts.cs" />
     <Compile Include="VThingEnd.cs">
       <DependentUpon>DynThingsModel.tt</DependentUpon>
     </Compile>

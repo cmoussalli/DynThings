@@ -22,9 +22,9 @@ public partial class EndPointType
     public EndPointType()
     {
 
-        this.Endpoints = new HashSet<Endpoint>();
-
         this.AlertConditions = new HashSet<AlertCondition>();
+
+        this.Endpoints = new HashSet<Endpoint>();
 
     }
 
@@ -43,13 +43,13 @@ public partial class EndPointType
 
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
 
-    public virtual ICollection<Endpoint> Endpoints { get; set; }
-
-    public virtual EndPointTypeCategory EndPointTypeCategory { get; set; }
+    public virtual ICollection<AlertCondition> AlertConditions { get; set; }
 
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
 
-    public virtual ICollection<AlertCondition> AlertConditions { get; set; }
+    public virtual ICollection<Endpoint> Endpoints { get; set; }
+
+    public virtual EndPointTypeCategory EndPointTypeCategory { get; set; }
 
 }
 

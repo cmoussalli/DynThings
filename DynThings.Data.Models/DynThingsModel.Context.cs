@@ -35,6 +35,14 @@ public partial class DynThingsEntities : DbContext
     }
 
 
+    public virtual DbSet<AlertCondition> AlertConditions { get; set; }
+
+    public virtual DbSet<AlertConditionType> AlertConditionTypes { get; set; }
+
+    public virtual DbSet<AlertLevel> AlertLevels { get; set; }
+
+    public virtual DbSet<Alert> Alerts { get; set; }
+
     public virtual DbSet<AspNetRole> AspNetRoles { get; set; }
 
     public virtual DbSet<AspNetUserClaim> AspNetUserClaims { get; set; }
@@ -47,7 +55,11 @@ public partial class DynThingsEntities : DbContext
 
     public virtual DbSet<DeviceIO> DeviceIOs { get; set; }
 
+    public virtual DbSet<Device> Devices { get; set; }
+
     public virtual DbSet<DeviceStatu> DeviceStatus { get; set; }
+
+    public virtual DbSet<DynSetting> DynSettings { get; set; }
 
     public virtual DbSet<EndPointCommand> EndPointCommands { get; set; }
 
@@ -61,7 +73,13 @@ public partial class DynThingsEntities : DbContext
 
     public virtual DbSet<IOType> IOTypes { get; set; }
 
+    public virtual DbSet<LinkDevicesLocation> LinkDevicesLocations { get; set; }
+
     public virtual DbSet<LinkLocationsLocationView> LinkLocationsLocationViews { get; set; }
+
+    public virtual DbSet<LinkThingsLocation> LinkThingsLocations { get; set; }
+
+    public virtual DbSet<LinkUsersAlert> LinkUsersAlerts { get; set; }
 
     public virtual DbSet<Location> Locations { get; set; }
 
@@ -69,35 +87,19 @@ public partial class DynThingsEntities : DbContext
 
     public virtual DbSet<LocationViewType> LocationViewTypes { get; set; }
 
+    public virtual DbSet<MediaFile> MediaFiles { get; set; }
+
     public virtual DbSet<ResultMessage> ResultMessages { get; set; }
-
-    public virtual DbSet<DynSetting> DynSettings { get; set; }
-
-    public virtual DbSet<Device> Devices { get; set; }
-
-    public virtual DbSet<LinkDevicesLocation> LinkDevicesLocations { get; set; }
 
     public virtual DbSet<ThingCategory> ThingCategorys { get; set; }
 
     public virtual DbSet<Thing> Things { get; set; }
-
-    public virtual DbSet<LinkThingsLocation> LinkThingsLocations { get; set; }
-
-    public virtual DbSet<AlertCondition> AlertConditions { get; set; }
-
-    public virtual DbSet<AlertConditionType> AlertConditionTypes { get; set; }
-
-    public virtual DbSet<Alert> Alerts { get; set; }
-
-    public virtual DbSet<LinkUsersAlert> LinkUsersAlerts { get; set; }
 
     public virtual DbSet<UserNotification> UserNotifications { get; set; }
 
     public virtual DbSet<UserNotificationType> UserNotificationTypes { get; set; }
 
     public virtual DbSet<VThingEnd> VThingEnds { get; set; }
-
-    public virtual DbSet<MediaFile> MediaFiles { get; set; }
 
 
     public virtual ObjectResult<Rpt_EndPoint_IOs_Months_Result> Rpt_EndPoint_IOs_Months(Nullable<long> ePID, string year)

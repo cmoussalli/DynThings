@@ -22,13 +22,13 @@ public partial class Thing
     public Thing()
     {
 
+        this.AlertConditions = new HashSet<AlertCondition>();
+
         this.EndPointIOs = new HashSet<EndPointIO>();
 
         this.Endpoints = new HashSet<Endpoint>();
 
         this.LinkThingsLocations = new HashSet<LinkThingsLocation>();
-
-        this.AlertConditions = new HashSet<AlertCondition>();
 
     }
 
@@ -47,7 +47,9 @@ public partial class Thing
 
 
 
-    public virtual ThingCategory ThingCategory { get; set; }
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+
+    public virtual ICollection<AlertCondition> AlertConditions { get; set; }
 
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
 
@@ -61,9 +63,7 @@ public partial class Thing
 
     public virtual ICollection<LinkThingsLocation> LinkThingsLocations { get; set; }
 
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-
-    public virtual ICollection<AlertCondition> AlertConditions { get; set; }
+    public virtual ThingCategory ThingCategory { get; set; }
 
 }
 

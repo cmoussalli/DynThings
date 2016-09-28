@@ -202,6 +202,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AlertsController.cs" />
     <Compile Include="Controllers\APIEndPointIOsController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\ConfigController.cs" />
@@ -223,6 +224,7 @@
     <Compile Include="Controllers\APISimulatorServicesController.cs" />
     <Compile Include="Controllers\SetupController.cs" />
     <Compile Include="Controllers\ThingsIOController.cs" />
+    <Compile Include="Controllers\UserNotificationsController.cs" />
     <Compile Include="Controllers\UsersManagementController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -235,8 +237,10 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\Imgs\Wizard.png" />
     <Content Include="Assets\Scripts\DeviceScripts\Android.js" />
     <Content Include="Assets\Scripts\DynScripts\DynUsers.js" />
+    <Content Include="Assets\Scripts\DynScripts\Alerts.js" />
     <Content Include="Assets\Scripts\DynScripts\MediaFiles.js" />
     <Content Include="Assets\Scripts\DynScripts\Monitor.js" />
     <Content Include="Assets\Scripts\DynScripts\ThingCategories.js" />
@@ -579,10 +583,7 @@
     <Content Include="Views\Endpoints\_List.cshtml" />
     <Content Include="Views\Endpoints\_Edit.cshtml" />
     <Content Include="Views\Endpoints\_Details_Main.cshtml" />
-    <Content Include="Views\Alerts\Create.cshtml" />
-    <Content Include="Views\Alerts\Delete.cshtml" />
     <Content Include="Views\Alerts\Details.cshtml" />
-    <Content Include="Views\Alerts\Edit.cshtml" />
     <Content Include="Views\Alerts\Index.cshtml" />
     <Content Include="Views\Alerts\_List.cshtml" />
     <Content Include="Views\LocationViews\_EndPointMain.cshtml" />
@@ -629,7 +630,6 @@
     <Content Include="Views\EndPointIOs\_List.cshtml" />
     <Content Include="Views\Endpoints\Lookup\Index.cshtml" />
     <Content Include="Views\Endpoints\Lookup\List.cshtml" />
-    <Content Include="Views\DynSettings\Index.cshtml" />
     <Content Include="Views\Devices\Lookup\Index.cshtml" />
     <Content Include="Views\Devices\Lookup\List.cshtml" />
     <Content Include="Views\Locations\_DevicesList.cshtml" />
@@ -687,13 +687,31 @@
     <Content Include="Views\MediaFiles\_Add.cshtml" />
     <Content Include="Views\MediaFiles\_Delete.cshtml" />
     <Content Include="Views\LocationViews\_ThingsLogs_List.cshtml" />
+    <Content Include="Views\Setup\_Welcome.cshtml" />
+    <Content Include="Views\Shared\_EmptyLayout.cshtml" />
+    <Content Include="Views\Setup\_Database.cshtml" />
+    <Content Include="Views\Setup\_Config.cshtml" />
+    <Content Include="Views\Alerts\_Add.cshtml" />
+    <Content Include="Views\Alerts\_Edit_Main.cshtml" />
+    <Content Include="Views\Alerts\_Details_Main.cshtml" />
+    <Content Include="Views\Setup\_Publish.cshtml" />
+    <Content Include="Views\Alerts\_Details_Schedule.cshtml" />
+    <Content Include="Views\Alerts\_Conditions_List.cshtml" />
+    <Content Include="Views\Alerts\_Conditions_Add.cshtml" />
+    <Content Include="Views\Alerts\_Conditions_Delete.cshtml" />
+    <Content Include="Views\Alerts\_Conditions_Edit.cshtml" />
+    <Content Include="Views\Alerts\_AlertUsers_List.cshtml" />
+    <Content Include="Views\DynUsers\Lookup\Index.cshtml" />
+    <Content Include="Views\DynUsers\Lookup\List.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Code\" />
     <Folder Include="App_Data\" />
     <Folder Include="Imgs\ThingCategorys\" />
     <Folder Include="Views\Base\" />
+    <Folder Include="Views\DynSettings\" />
     <Folder Include="Views\EndpointTypes\" />
+    <Folder Include="Views\UserNotifications\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
@@ -724,6 +742,9 @@
       <Project>{c5987efa-b632-406f-9934-0c6a924e05c7}</Project>
       <Name>DynThings.WebAPI.Models</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

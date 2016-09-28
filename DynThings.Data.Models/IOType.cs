@@ -22,11 +22,11 @@ public partial class IOType
     public IOType()
     {
 
+        this.AlertConditions = new HashSet<AlertCondition>();
+
         this.DeviceIOs = new HashSet<DeviceIO>();
 
         this.EndPointIOs = new HashSet<EndPointIO>();
-
-        this.AlertConditions = new HashSet<AlertCondition>();
 
     }
 
@@ -41,15 +41,15 @@ public partial class IOType
 
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
 
+    public virtual ICollection<AlertCondition> AlertConditions { get; set; }
+
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+
     public virtual ICollection<DeviceIO> DeviceIOs { get; set; }
 
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
 
     public virtual ICollection<EndPointIO> EndPointIOs { get; set; }
-
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-
-    public virtual ICollection<AlertCondition> AlertConditions { get; set; }
 
 }
 

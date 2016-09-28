@@ -34,6 +34,10 @@ namespace DynThings.WebPortal
                     "~/Scripts/Highcharts/highcharts.js",
                     "~/Scripts/Highcharts/exporting.js"));
 
+            //bootstrap-wizard
+            bundles.Add(new ScriptBundle("~/bundles/bootstrapwizard").Include(
+                    "~/Scripts/bootstrap-wizard/jquery.bootstrap.wizard.js"));
+
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
                       "~/Content/site.css"));

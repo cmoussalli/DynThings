@@ -1,51 +1,40 @@
-﻿@model IEnumerable<DynThings.WebPortal.Models.Alert>
-
+﻿@model IEnumerable<DynThings.Data.Models.Alert>
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Alerts";
 }
-
-<h2>Index</h2>
-
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Title)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Text)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.TimeStamp)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Endpoint.PinCode)
-        </th>
-        <th></th>
-    </tr>
-
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Title)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Text)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.TimeStamp)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Endpoint.PinCode)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
-        </td>
-    </tr>
+<div class="container">
+    <div class="page-header">
+        <h1>Alerts</h1>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <button type="button" class="btn btn-info" onclick="LoadPart_DialogAlertAdd()" data-toggle="modal" data-target="#mdl">Add</button>
+        </div>
+        <div class="col-md-6">
+            <div class="input-group">
+                <input type="search" id="txtAlertSearch" class="form-control" onkeydown="if (event.keyCode == 13) { LoadPart_AlertListDiv(); return false; }" />
+                <div class="input-group-btn">
+                    <button type="button" class="btn btn-primary" onclick="LoadPart_AlertListDiv()">Search</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br />
+    <div class="well well-lg">
+        <div id="divAlertsList">
+        </div>
+    </div>
+</div>
+@section scriptfiles{
+    <script src="~/Assets/Scripts/DynScripts/Alerts.js"></script>
 }
+@section scripts{
+    <script>
+        $(document).ready(function () {
+            LoadPart_AlertListDiv();
+            AttachEventAlertsListPager();
+        });
 
-</table>
+
+    </script>
+}

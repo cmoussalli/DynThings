@@ -1,0 +1,55 @@
+﻿
+@model PagedList.IPagedList<DynThings.Data.Models.AlertCondition>
+    
+<div class="well well-lg">
+    <table class="table striped hovered border bordered">
+        <thead>
+            <tr>
+                <th>Thing</th>
+                <th>EndPoint Type</th>
+                <th>IO Type</th>
+                <th>Condition</th>
+                <th>Required\Optional</th>
+
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Thing.Title)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.EndPointType.Title)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.IOType.Title)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.AlertConditionType.Title) @Html.DisplayFor(modelItem => item.ConditionValue)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.IsMust)
+                    </td>
+                    <td>
+                        <button class="btn btn-warning pull-right" onclick="LoadPart_DialogAlertConditionEdit(@item.ID)" data-toggle="modal" data-target="#mdl">Edit</button>
+                        <button class="btn btn-danger pull-right" onclick="LoadPart_DialogAlertConditionDelete(@item.ID)" data-toggle="modal" data-target="#mdl">Delete</button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <div id="AlertConditionsListPager">
+        <input id="AlertConditionsCurrentPage" value="@Model.PageNumber.ToString()" hidden />
+        @Html.PagedListPager(Model, page => Url.Action("AlertConditionsListPV", new { page }) + "&alertID=" + Model[0].AlertID.ToString())
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        AttachEventAlertConditionsListPager();
+    });
+</script>

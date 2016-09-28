@@ -1,0 +1,32 @@
+﻿@model IPagedList<DynThings.Data.Models.AspNetUser>
+<table class="table striped hovered border bordered">
+    <thead>
+        <tr>
+            <th>Full Name</th>
+            <th>User Name</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FullName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UserName)
+                </td>
+                <td>
+                    <a href="#" onclick="SelectDynUserFromLookUp('@item.Id')">Select</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<div id="DynUsersLookupListPager">
+    <input id="DynUserCurrentPage" value="@Model.PageNumber.ToString()" hidden />
+    @Html.PagedListPager(Model, page => Url.Action("LookupListPV", new { page }))
+</div>
+

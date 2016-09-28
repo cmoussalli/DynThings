@@ -27,16 +27,7 @@ namespace DynThings.Data.Repositories
 
         public List<IOType> GetList(bool EnableUnspecified)
         {
-            List<IOType> iotyps = new List<IOType>();
-            if (EnableUnspecified == true)
-            {
-                IOType ioType0 = new IOType();
-                ioType0.ID = 0;
-                ioType0.Title = "-Select All-";
-                iotyps.Add(ioType0);
-
-                iotyps.AddRange(db.IOTypes);
-            }
+            List<IOType> iotyps = db.IOTypes.ToList();
             return iotyps;
         }
 

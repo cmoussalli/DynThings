@@ -1,0 +1,49 @@
+﻿@model PagedList.IPagedList<DynThings.Data.Models.LinkUsersAlert>
+
+<div class="well well-lg">
+    <table class="table striped hovered border bordered">
+        <thead>
+            <tr>
+                <th>User Full Name</th>
+                <th>User</th>
+                <th>E-Mail</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.AspNetUser.FullName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.AspNetUser.UserName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.AspNetUser.Email)
+                    </td>
+                    
+                    <td>
+                        <button class="btn btn-danger pull-right" onclick="SubmitAlertUserDetach('@item.AlertID.ToString()','@item.UserID')">Detach</button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    @*<div id="AlertConditionsListPager">
+        <input id="AlertConditionsCurrentPage" value="@Model.PageNumber.ToString()" hidden />
+        @Html.PagedListPager(Model, page => Url.Action("AlertConditionsListPV", new { page }) + "&alertID=" + Model[0].AlertID.ToString())
+    </div>*@
+</div>
+
+<script>
+    //$(document).ready(function () {
+    //    AttachEventAlertConditionsListPager();
+    //});
+
+    function EventSelectDynUser() {
+        SubmitAlertUserAttach(selectedAlertID, selectedDynUserID);
+    };
+</script>

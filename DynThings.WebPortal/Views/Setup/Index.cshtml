@@ -1,7 +1,129 @@
 ﻿
 @{
     ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_EmptyLayout.cshtml";
 }
 
-<h2>Index</h2>
+<br />
+<div class="container">
+    <div class="page-header">
+        <h1>Setup</h1>
+    </div>
 
+
+    <br />
+    <br />
+
+    <div class="row">
+        <div class="col-lg-4 col-md-4 hidden-sm hidden-xs">
+            <img src="~/Assets/Imgs/Wizard.png" width="100%" />
+        </div>
+        <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
+            <div id="rootwizard">
+                <div class="navbar">
+                    <div class="navbar-inner">
+                        <div class="container">
+                            <ul>
+                                <li><a href="#tab1" data-toggle="tab">Welcome</a></li>
+                                <li><a href="#tab2" data-toggle="tab">DataBase</a></li>
+                                <li><a href="#tab3" data-toggle="tab">Config</a></li>
+                                <li><a href="#tab7" data-toggle="tab">Publish</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-content">
+                    <div class="tab-pane" id="tab1">
+                        @Html.Action("GetWelcomePV")
+                    </div>
+                    <div class="tab-pane" id="tab2">
+                        @Html.Action("DatabaseConfigPV")
+                    </div>
+                    <div class="tab-pane" id="tab3">
+                        @Html.Action("PlatformConfigPV")
+                    </div>
+                    <div class="tab-pane" id="tab7">
+                        @Html.Action("PublishPV")
+                    </div>
+                </div>
+
+                <ul class="pager wizard">
+                    <li class="next btn btn-primary pull-right">Next > </li>
+                    <li class="next finish btn btn-primary pull-right" style="display:none;">Finish</li>
+                    <li class="previous btn btn-primary pull-right">< Previous</li>
+                </ul>
+
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                
+            </div>
+
+        </div>
+
+    </div>
+
+
+</div>
+
+<script>
+    var IPublishSwitch = 0;
+    $(document).ready(function () {
+        $('#rootwizard').bootstrapWizard({
+            onTabShow: function (tab, navigation, index) {
+                var $total = navigation.find('li').length;
+                var $current = index + 1;
+
+                // If it's the last tab then hide the last button and show the finish instead
+                if ($current >= $total) {
+                    $('#rootwizard').find('.pager .next').hide();
+                    $('#rootwizard').find('.pager .finish').show();
+                    $('#rootwizard').find('.pager .finish').removeClass('disabled');
+                } else {
+                    $('#rootwizard').find('.pager .next').show();
+                    $('#rootwizard').find('.pager .finish').hide();
+                }
+
+            }
+        });
+        $('#rootwizard .finish').click(function () {
+            //alert('Finished!, Starting over!');
+            //$('#rootwizard').find("a[href*='tab1']").trigger('click');
+            IpublishSwitch = 0;
+            Publish();
+        });
+    });
+
+    function Publish() {
+        IPublishSwitch = 0;
+        PublishSwitch();
+    };
+
+    function PublishSwitch() {
+        switch (IPublishSwitch)
+        {
+            case 0:
+                $('#lblPublishStatus').text('Testing Database Connection.');
+                btnTestDatabaseConnection();
+                $('#progPublishStatus').width('20%');
+                break;
+            case 1:
+                $('#lblPublishStatus').text('Saving Database Config.');
+                SaveDatabaseConnection();
+                $('#progPublishStatus').width('20%');
+                break;
+            case 2:
+                $('#lblPublishStatus').text('Database Config Saved.');
+                $('#progPublishStatus').width('40%');
+                break;
+
+            case 3:
+
+                break;
+
+        }
+
+
+    };
+</script>

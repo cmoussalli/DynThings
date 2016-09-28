@@ -1,0 +1,57 @@
+﻿@model DynThings.Data.Models.Alert
+<div class="right">
+    <button type="button" class="btn btn-info pull-right" onclick="LoadAlertScheduleEditor(@Model.ID)" data-toggle="modal" data-target="#mdl">Edit</button>
+</div>
+
+<strong>Active Days</strong><br>
+
+
+
+<nav aria-label="Page navigation">
+    <ul class="pagination">
+        <li id="day1"><a>S</a></li>
+        <li id="day2"><a>M</a></li>
+        <li id="day3"><a>T</a></li>
+        <li id="day4"><a>W</a></li>
+        <li id="day5"><a>T</a></li>
+        <li id="day6"><a>F</a></li>
+        <li id="day7"><a>S</a></li>
+    </ul>
+</nav>
+<br />
+
+<strong>Active Hours</strong><br/><br />
+<input id="FromTime" type="time" disabled value="@Model.StartTime" />
+<input id="ToTime" type="time" disabled value="@Model.EndTime" />
+
+
+<script>
+    if ('@Model.Sunday.ToString()' == 'True') {
+        $('#day1').addClass('active');
+    }
+
+    if ('@Model.Monday.ToString()' == 'True') {
+        $('#day2').addClass('active');
+    }
+
+    if ('@Model.Tuesday.ToString()' == 'True') {
+        $('#day3').addClass('active');
+    }
+
+    if ('@Model.Wednesday.ToString()' == 'True') {
+        $('#day4').addClass('active');
+    }
+
+    if ('@Model.Thursday.ToString()' == 'True') {
+        $('#day5').addClass('active');
+    }
+
+    if ('@Model.Friday.ToString()' == 'True') {
+        $('#day6').addClass('active');
+    }
+
+    if ('@Model.Saturday.ToString()' == 'True') {
+        $('#day7').addClass('active');
+    }
+
+</script>

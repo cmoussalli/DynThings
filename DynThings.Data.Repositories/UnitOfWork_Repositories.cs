@@ -39,8 +39,8 @@ namespace DynThings.Data.Repositories
         public static ThingsRepository repoThings = new ThingsRepository(dynDB);
         public static ThingCategorysRepository repoThingCategorys = new ThingCategorysRepository(dynDB);
         public static MediaFilesRepository repoMediaFiles = new MediaFilesRepository(dynDB);
-
-
+        public static AlertsRepository repoAlerts = new AlertsRepository(dynDB);
+        public static AlertConditionTypesRepository repoAlertConditionTypes = new AlertConditionTypesRepository(dynDB);
         #endregion
 
 

@@ -10,21 +10,21 @@ namespace DynThings.Core
     public static class ResultInfo
     {
         public static DynThingsEntities db = new DynThingsEntities();
-       
+
 
         #region Enums
         public enum ResultType
         {
             Ok = 0,
             Failed_DevelopmentMode = 1,
-            Failed_ProductionMode =2
+            Failed_ProductionMode = 2
         }
         #endregion
 
         #region Result Model
         public class Result
         {
-            internal Result(long resultID, ResultType resultType, string message,long reference)
+            internal Result(long resultID, ResultType resultType, string message, long reference)
             {
                 ResultID = resultID;
                 ResultType = resultType;
@@ -38,16 +38,16 @@ namespace DynThings.Core
         }
         #endregion
 
-        
+
 
         #region Method: Generate Ok Result
         public static Result GenerateOKResult()
         {
-            return new Result(0,ResultType.Ok, "",0);
+            return new Result(0, ResultType.Ok, "", 0);
         }
         public static Result GenerateOKResult(string message, long referenceID)
         {
-            return new Result(0, ResultType.Ok, message,referenceID);
+            return new Result(0, ResultType.Ok, message, referenceID);
         }
         public static Result GenerateOKResult(string message)
         {
@@ -66,18 +66,18 @@ namespace DynThings.Core
             return GetResultByID(resultID, 0);
         }
 
-        public static Result GetResultByID(long resultID,long referenceID)
+        public static Result GetResultByID(long resultID, long referenceID)
         {
             ResultMessage msg = db.ResultMessages.Find(resultID);
             string msgTxt = "";
             ResultType rt = new ResultType();
             if (msg.IsError == false)
-            { rt = ResultType.Ok;}
+            { rt = ResultType.Ok; }
             else
             {
                 if (Config.DevelopmentMode == true)
                 {
-                rt = ResultType.Failed_DevelopmentMode;
+                    rt = ResultType.Failed_DevelopmentMode;
                     msgTxt = msg.Message;
                 }
                 else
@@ -86,9 +86,9 @@ namespace DynThings.Core
                 }
             }
 
-            Result res = new Result(resultID, rt,msgTxt, referenceID);
-            res = new Result(msg.ID, rt, msg.Message,0);
-            
+            Result res = new Result(resultID, rt, msgTxt, referenceID);
+            res = new Result(msg.ID, rt, msg.Message, 0);
+
             return res;
         }
 
@@ -114,20 +114,28 @@ namespace DynThings.Core
 
         public static Result GenerateErrorResult(string message)
         {
-          return  GenerateErrorResult(message, 0);
+            return GenerateErrorResult(message, 0);
         }
 
-        public static Result GenerateErrorResult(string message,long resultID)
+        public static Result GenerateErrorResult(string message, long resultID)
         {
             ResultType rt = new ResultType();
-            if (Config.DevelopmentMode == true)
+            try
+            {
+
+                if (Config.DevelopmentMode == true)
+                {
+                    rt = ResultType.Failed_DevelopmentMode;
+                }
+                else
+                {
+                    rt = ResultType.Failed_ProductionMode;
+                    message = "";
+                }
+            }
+            catch
             {
                 rt = ResultType.Failed_DevelopmentMode;
-            }
-            else
-            {
-                rt = ResultType.Failed_ProductionMode;
-                message = "";
             }
             return new Result(0, rt, message, resultID);
         }

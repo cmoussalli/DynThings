@@ -1,0 +1,56 @@
+﻿@model DynThings.Data.Models.AlertCondition
+<div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+    <h4 class="modal-title" id="myModalLabel">Alert Condition Editor</h4>
+</div>
+@using (Html.BeginForm("AlertConditionAddPV", "Alerts", FormMethod.Post, new { id = "AlertConditionAddForm" }))
+{
+    <div class="modal-body">
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.ID)
+        @Html.HiddenFor(model => model.AlertID)
+
+        <span>Thing</span>
+        @Html.DropDownList("ThingID", null, htmlAttributes: new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.ThingID, "", new { @class = "text-danger" })
+        <br />
+
+        <span>IO Type</span>
+        @Html.DropDownList("IOTypeID", null, htmlAttributes: new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.IOTypeID, "", new { @class = "text-danger" })
+        <br />
+
+        <span>EndPoint Type</span>
+        @Html.DropDownList("EndPointTypeID", null, htmlAttributes: new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.EndPointTypeID, "", new { @class = "text-danger" })
+        <br />
+
+        <div class="row">
+            <div class="col-md-6">
+                <span>Condition Type</span>
+                @Html.DropDownList("ConditionTypeID", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.ConditionTypeID, "", new { @class = "text-danger" })
+            </div>
+            <div class="col-md-6">
+                <span>Value</span>
+                @Html.EditorFor(model => model.ConditionValue, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.ConditionValue, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <br />
+
+        <span>Is Required</span>
+        @Html.EditorFor(model => model.IsMust, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.ValidationMessageFor(model => model.IsMust, "", new { @class = "text-danger" })
+
+    </div>
+}
+<div class="modal-footer">
+    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+    <button type="button" class="btn btn-primary" onclick="SubmitAlertConditionAddForm();">Create</button>
+</div>
+
+<script>
+    $('#AlertID').val(selectedAlertID);
+</script>

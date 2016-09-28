@@ -66,9 +66,10 @@ namespace DynThings.WebPortal.Controllers
         [HttpGet]
         public PartialViewResult AddPV()
         {
+
             ViewBag.TypeID = new SelectList(UnitOfWork_Repositories.repoEndpointTypes.GetList(), "ID", "Title", 1);
             ViewBag.DeviceID = new SelectList(UnitOfWork_Repositories.repoDevices.GetList(), "ID", "Title", 1);
-            ViewBag.ThingID = new SelectList(UnitOfWork_Repositories.repoThings.GetList(), "ID", "Title", 1);
+            ViewBag.ThingID = new SelectList(UnitOfWork_Repositories.repoThings.GetList(false), "ID", "Title", 1);
             return PartialView("_Add");
         }
 
@@ -93,7 +94,7 @@ namespace DynThings.WebPortal.Controllers
             Endpoint endpoint = UnitOfWork_Repositories.repoEndpoints.Find(id);
             ViewBag.TypeID = new SelectList(UnitOfWork_Repositories.repoEndpointTypes.GetList(), "ID", "Title", endpoint.TypeID);
             ViewBag.DeviceID = new SelectList(UnitOfWork_Repositories.repoDevices.GetList(), "ID", "Title", endpoint.DeviceID);
-            ViewBag.ThingID = new SelectList(UnitOfWork_Repositories.repoThings.GetList(), "ID", "Title", endpoint.ThingID);
+            ViewBag.ThingID = new SelectList(UnitOfWork_Repositories.repoThings.GetList(false), "ID", "Title", endpoint.ThingID);
             return PartialView("_Edit", endpoint);
         }
 

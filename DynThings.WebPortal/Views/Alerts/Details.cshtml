@@ -1,50 +1,116 @@
-﻿@model DynThings.WebPortal.Models.Alert
-
+﻿@model DynThings.Data.Models.Alert
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Alert Details";
 }
+<div class="container">
+    <div class="page-header">
+        <h1>Alert Details</h1>
+    </div>
+   
+    <div class="row">
+        <div class="col-md-12">
+            <ul class="nav nav-tabs">
+                <li class="active"><a data-toggle="tab" href="#tabAlertMain">Main</a></li>
+                <li><a data-toggle="tab" href="#tabAlertSchedule">Schedule</a></li>
+                <li><a data-toggle="tab" href="#tabAlertConditions">Conditions</a></li>
+                <li><a data-toggle="tab" href="#tabAlertUsers">Alert Users</a></li>
+                <li><a data-toggle="tab" href="#tabAlertDelete">Delete</a></li>
+            </ul>
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="tab-content">
+                        <div id="tabAlertMain" class="tab-pane fade in active">
+                            <div class="right">
+                                <button type="button" class="btn btn-info pull-right" onclick="LoadPart_AlertDetailsMainDiv('@Model.ID')">Refresh</button>
+                            </div>
 
-<h2>Details</h2>
+                            <div id="divAlertMain">
+                                @Html.Action("DetailsMainPV")
+                            </div>
+                        </div>
+                        <div id="tabAlertSchedule" class="tab-pane fade">
+                            <div class="right">
+                                <button type="button" class="btn btn-info pull-right" onclick="LoadPart_AlertScheduleDiv('@Model.ID')">Refresh</button>
+                            </div>
+                            <div id="divAlertSchedule">
+                                @Html.Action("DetailsSchedulePV")
+                            </div>
+                        </div>
+                        <div id="tabAlertConditions" class="tab-pane fade">
 
-<div>
-    <h4>Alert</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Title)
-        </dt>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <button type="button" class="btn btn-info" onclick="LoadPart_DialogAlertConditionAdd()" data-toggle="modal" data-target="#mdl">Add</button>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="input-group">
+                                        <input type="search" id="txtAlertConditionSearch" class="form-control" onkeydown="if (event.keyCode == 13) { LoadPart_AlertConditionsListDiv(); return false; }" />
+                                        <div class="input-group-btn">
+                                            <button type="button" class="btn btn-primary" onclick="LoadPart_AlertConditionsListDiv()">Search</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            @*<div class="right">
+                                <button type="button" class="btn btn-info pull-right" onclick="LoadPart_AlertConditionsListDiv()">Refresh</button>
+                            </div>*@
+                            <br />
+                            <div id="divAlertConditions">
+                               
+                            </div>
+                        </div>
+                        <div id="tabAlertUsers" class="tab-pane fade">
 
-        <dd>
-            @Html.DisplayFor(model => model.Title)
-        </dd>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <button type="button" class="btn btn-info" onclick="LoadPart_DynUserLookup('#modal')" data-toggle="modal" data-target="#mdl">Add</button>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="input-group">
+                                        <input type="search" id="txtAlertUserSearch" class="form-control" onkeydown="if (event.keyCode == 13) { LoadPart_AlertUsersListDiv(); return false; }" />
+                                        <div class="input-group-btn">
+                                            <button type="button" class="btn btn-primary" onclick="LoadPart_AlertUsersListDiv()">Search</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            @*<div class="right">
+                <button type="button" class="btn btn-info pull-right" onclick="LoadPart_AlertConditionsListDiv()">Refresh</button>
+            </div>*@
+                            <br />
+                            <div id="divAlertUsers">
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Text)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Text)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.TimeStamp)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.TimeStamp)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Endpoint.PinCode)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Endpoint.PinCode)
-        </dd>
-
-    </dl>
+                            </div>
+                        </div>
+                        <div id="tabAlertDelete" class="tab-pane fade">
+                            <div id="divAlertDelete">
+                                <button type="button" class="btn btn-danger" onclick="LoadPart_DialogAlertDelete(@Model.ID)" data-toggle="modal" data-target="#mdl">Delete</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+
+<!-- Button trigger modal -->
+
+
+
+
+@section scripts{
+    <script src="~/Assets/Scripts/DynScripts/Alerts.js"></script>
+<script src="~/Assets/Scripts/DynScripts/DynUsers.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            selectedAlertID =@Model.ID
+            LoadPart_AlertConditionsListDiv('@Model.ID');
+            LoadPart_AlertUsersListDiv('@Model.ID');
+        });
+    </script>
+
+  
+
+}

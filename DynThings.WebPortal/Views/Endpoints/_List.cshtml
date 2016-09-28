@@ -31,6 +31,8 @@
             </td>
             <td>
                 <a class="btn btn-info pull-right" href="Endpoints/Details?ID=@item.ID">Details</a>
+                <button class="btn btn-warning pull-right" onclick="LoadPart_DialogThingCategoryEdit(@item.ID)" data-toggle="modal" data-target="#mdl">Edit</button>
+                <button class="btn btn-danger pull-right" onclick="LoadPart_DialogThingCategoryDelete(@item.ID)" data-toggle="modal" data-target="#mdl">Delete</button>
             </td>
         </tr>
     }

@@ -24,7 +24,7 @@ public partial class AlertCondition
 
     public long ThingID { get; set; }
 
-    public Nullable<long> IOTypeID { get; set; }
+    public long IOTypeID { get; set; }
 
     public long EndPointTypeID { get; set; }
 

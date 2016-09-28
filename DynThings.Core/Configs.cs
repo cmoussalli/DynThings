@@ -12,7 +12,9 @@ using System.Collections.Generic;
 using DynThings.Data.Models;
 using System.Web.UI.WebControls;
 using System.Web;
-
+using System.Web.Configuration;
+using System.Configuration;
+using System.Data.SqlClient;
 
 namespace DynThings.Core
 {
@@ -29,17 +31,23 @@ namespace DynThings.Core
 
         }
 
-        public static float DBVersion { get
+        public static float DBVersion
+        {
+            get
             {
-                return  db.DynSettings.First().DBVersion;
+                return db.DynSettings.First().DBVersion;
             }
         }
-        public static bool DevelopmentMode { get
+        public static bool DevelopmentMode
+        {
+            get
             {
                 return db.DynSettings.First().DevelopmentMode;
             }
         }
-        public static int DefaultRecordsPerMaster { get
+        public static int DefaultRecordsPerMaster
+        {
+            get
             {
                 return db.DynSettings.First().DefaultRecordsPerMaster;
             }
@@ -52,22 +60,30 @@ namespace DynThings.Core
                 return db.DynSettings.First().DefaultRecordsPerChild;
             }
         }
-        public static bool PublicAccess { get
+        public static bool PublicAccess
+        {
+            get
             {
                 return db.DynSettings.First().PublicAccess;
             }
         }
-        public static bool PublicSignUP { get
+        public static bool PublicSignUP
+        {
+            get
             {
                 return db.DynSettings.First().PublicSignUP;
             }
         }
-        public static bool SystemLogger { get
+        public static bool SystemLogger
+        {
+            get
             {
                 return db.DynSettings.First().EnableSystemLogger;
             }
         }
-        public static Guid PlatformKey { get
+        public static Guid PlatformKey
+        {
+            get
             {
                 return db.DynSettings.First().PlatformKey;
             }
@@ -86,6 +102,7 @@ namespace DynThings.Core
                 return db.DynSettings.First().PlatformTitle;
             }
         }
+        
 
         public static void SetDevelopmentMode(bool activation)
         {
@@ -142,6 +159,7 @@ namespace DynThings.Core
             db.SaveChanges();
         }
 
+        
 
 
     }

@@ -1,5 +1,6 @@
 ﻿//Vars
 var selectedDynUserID = 0;
+var selectedDynUserUserName = '';
 
 //Attach : Pager
 function AttachEventDynUsersListPager() {
@@ -122,4 +123,56 @@ function DeattachRoleFromUser(UserID, RoleID) {
         }
     })
     LoadPart_DynUserRolesDiv(UserID);
+}
+
+
+//Lookup
+//LoadPart_DynUser Lookup
+function LoadPart_DynUserLookup(placeHolder) {
+    var loadingpart = LoadDivLoading();
+    $(placeHolder).html(loadingpart);
+    $.ajax({
+        url: getRootURL() + '/DynUsers/LookupPV',
+        type: "GET",
+    })
+    .success(function (partialViewResult) {
+        $(placeHolder).html(partialViewResult);
+    });
+}
+//Get Lookup List PV
+function LoadPart_DynUserListLookupDiv() {
+    var loadingpart = LoadDivLoading();
+    $("#divDynUsersLookupList").html(loadingpart);
+    $.ajax({
+        url: getRootURL() + '/DynUsers/LookupListPV?searchfor=' + $(txtDynUserLookupSearch).val() + '&recordsperpage=0',
+        //page=" + $("#DynConfigCurrentPage").html,
+        type: "GET",
+    })
+        .success(function (partialViewResult) {
+            $("#divDynUsersLookupList").html(partialViewResult);
+        });
+    return false;
+};
+//Attach : Pager
+function AttachEventDynUsersLookupListPager() {
+    $(document).on("click", "#DynUsersLookupListPager a[href]", function () {
+        var loadingpart = LoadDivLoading();
+        $("#divDynUsersLookupList").html(loadingpart);
+        $.ajax({
+            url: $(this).attr("href") + "&searchfor=" + $(txtDynUserLookupSearch).val() + '&recordsperpage=0',
+            type: 'GET',
+            cache: false,
+            success: function (result) {
+                $("#divDynUsersLookupList").html(result);
+                return false;
+            }
+        });
+        return false;
+    });
+}
+//Select from Lookup
+function SelectDynUserFromLookUp(id, userName) {
+    selectedDynUserID = id;
+    selectedDynUserUserName = userName;
+    EventSelectDynUser();
 }

@@ -34,9 +34,9 @@ public partial class LinkDevicesLocation
 
 
 
-    public virtual AspNetUser EndByAspNetUser { get; set; }
+    public virtual AspNetUser AspNetUser { get; set; }
 
-    public virtual AspNetUser StartByAspNetUser { get; set; }
+    public virtual AspNetUser AspNetUser1 { get; set; }
 
     public virtual Device Device { get; set; }
 

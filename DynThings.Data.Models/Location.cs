@@ -22,9 +22,9 @@ public partial class Location
     public Location()
     {
 
-        this.LinkLocationsLocationViews = new HashSet<LinkLocationsLocationView>();
-
         this.LinkDevicesLocations = new HashSet<LinkDevicesLocation>();
+
+        this.LinkLocationsLocationViews = new HashSet<LinkLocationsLocationView>();
 
         this.LinkThingsLocations = new HashSet<LinkThingsLocation>();
 
@@ -51,11 +51,11 @@ public partial class Location
 
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
 
-    public virtual ICollection<LinkLocationsLocationView> LinkLocationsLocationViews { get; set; }
+    public virtual ICollection<LinkDevicesLocation> LinkDevicesLocations { get; set; }
 
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
 
-    public virtual ICollection<LinkDevicesLocation> LinkDevicesLocations { get; set; }
+    public virtual ICollection<LinkLocationsLocationView> LinkLocationsLocationViews { get; set; }
 
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
 
