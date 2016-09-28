@@ -703,6 +703,7 @@
     <Content Include="Views\Alerts\_AlertUsers_List.cshtml" />
     <Content Include="Views\DynUsers\Lookup\Index.cshtml" />
     <Content Include="Views\DynUsers\Lookup\List.cshtml" />
+    <Content Include="Views\Alerts\_Edit_Schedule.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Code\" />

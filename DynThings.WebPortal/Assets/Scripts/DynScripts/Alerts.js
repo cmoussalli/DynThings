@@ -47,8 +47,6 @@ function AttachEventAlertAddForm() {
     });
 };
 
-
-
 //Form Submit : Edit Main 
 function SubmitAlertEditMainForm(AlertID) {
     var url = $('#AlertEditMainForm').attr("action");
@@ -69,6 +67,25 @@ function SubmitAlertEditMainForm(AlertID) {
     LoadPart_AlertDetailsMainDiv(AlertID);
 };
 
+//Form Submit : Edit Schedule 
+function SubmitAlertEditScheduleForm(AlertID) {
+    var url = $('#AlertEditScheduleForm').attr("action");
+    var formData = $('#AlertEditScheduleForm').serialize();
+    $.ajax({
+        url: url,
+        type: "POST",
+        data: formData,
+        dataType: "json",
+        success: function (resp) {
+            ServerResponse(resp);
+        },
+        error: function (resp) {
+            ServerResponse(resp);
+        }
+    })
+    $('#mdl').modal('hide');
+    LoadPart_AlertDetailsScheduleDiv(AlertID);
+};
 
 //Get List
 function LoadPart_AlertListDiv() {
@@ -97,6 +114,20 @@ function LoadPart_AlertDetailsMainDiv(id) {
         $("#divAlertMain").html(partialViewResult);
     });
 }
+divAlertSchedule
+
+//Get Details:Schedule
+function LoadPart_AlertDetailsScheduleDiv(id) {
+    var loadingpart = LoadDivLoading();
+    $("#divAlertSchedule").html(loadingpart);
+    $.ajax({
+        url: getRootURL() + '/Alerts/DetailsSchedulePV?id=' + id,
+        type: "GET",
+    })
+    .success(function (partialViewResult) {
+        $("#divAlertSchedule").html(partialViewResult);
+    });
+}
 
 //Get Add
 function LoadPart_DialogAlertAdd() {
@@ -112,12 +143,25 @@ function LoadPart_DialogAlertAdd() {
     });
 }
 
-//Get Edit
+//Get Edit: Main
 function LoadPart_DialogAlertMainEdit(id) {
     var loadingpart = LoadDivLoading();
     $("#modal").html(loadingpart);
     $.ajax({
         url: getRootURL() + '/Alerts/EditMainPV?id=' + id,
+        type: "GET",
+    })
+    .success(function (partialViewResult) {
+        $("#modal").html(partialViewResult);
+    });
+}
+
+//Get Edit: Schedule
+function LoadPart_DialogAlertScheduleEdit(id) {
+    var loadingpart = LoadDivLoading();
+    $("#modal").html(loadingpart);
+    $.ajax({
+        url: getRootURL() + '/Alerts/EditSchedulePV?id=' + id,
         type: "GET",
     })
     .success(function (partialViewResult) {

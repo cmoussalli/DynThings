@@ -104,6 +104,28 @@ namespace DynThings.WebPortal.Controllers
         }
         #endregion
 
+        #region Edit:SchedulePV
+        [HttpGet]
+        public PartialViewResult EditSchedulePV(long id)
+        {
+            Alert Alert = UnitOfWork_Repositories.repoAlerts.Find(id);
+            return PartialView("_Edit_Schedule", Alert);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult EditSchedulePV([Bind(Include = "ID,Sunday,Monday,Tuesday,Wednesday,Thursday,Friday,Saturday,StartTime,EndTime")] Alert alert)
+        {
+            ResultInfo.Result res = ResultInfo.GetResultByID(1);
+            if (ModelState.IsValid)
+            {
+                res = UnitOfWork_Repositories.repoAlerts.EditSchedule(alert.ID,alert.Sunday,alert.Monday,alert.Tuesday,alert.Wednesday,alert.Thursday,alert.Friday,alert.Saturday,alert.StartTime,alert.EndTime);
+                return Json(res);
+            }
+            return Json(res);
+        }
+        #endregion
+
         #region DeletePV
         [HttpGet]
         public PartialViewResult DeletePV(long id)

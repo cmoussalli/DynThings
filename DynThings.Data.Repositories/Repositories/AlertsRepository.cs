@@ -65,7 +65,7 @@ namespace DynThings.Data.Repositories
             try
             {
                 alrt.Title = title;
-                alrt.Message = "";
+                alrt.Message = "Alert from [Thing], reported [EndpointType]: [Value] [Measurement] @[TimeStamp]";
                 alrt.IsActive = false;
                 alrt.Sunday = false;
                 alrt.Monday = false;
@@ -116,6 +116,33 @@ namespace DynThings.Data.Repositories
             {
                 Alert alrt = db.Alerts.Find(id);
                 alrt.Message = message;
+                db.SaveChanges();
+                return ResultInfo.GenerateOKResult("Saved", alrt.ID);
+            }
+            catch
+            {
+                return ResultInfo.GetResultByID(1);
+            }
+
+        }
+
+        #endregion
+
+        #region Edit: Schedule
+        public ResultInfo.Result EditSchedule(long id, bool Sunday, bool Monday,bool Tuesday,bool Wednesday,bool Thursday,bool Friday,bool Saturday, TimeSpan StartTime , TimeSpan EndTime)
+        {
+            try
+            {
+                Alert alrt = db.Alerts.Find(id);
+                alrt.Sunday = Sunday;
+                alrt.Monday = Monday;
+                alrt.Tuesday = Tuesday;
+                alrt.Wednesday = Wednesday;
+                alrt.Thursday = Thursday;
+                alrt.Friday = Friday;
+                alrt.Saturday = Saturday;
+                alrt.StartTime = StartTime;
+                alrt.EndTime = EndTime;
                 db.SaveChanges();
                 return ResultInfo.GenerateOKResult("Saved", alrt.ID);
             }
