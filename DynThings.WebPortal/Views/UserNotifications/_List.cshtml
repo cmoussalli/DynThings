@@ -1,0 +1,31 @@
+﻿@model List<DynThings.Data.Models.UserNotification>
+
+<div class="content">
+    @foreach (var item in Model)
+    {
+        <div id="divNotification_@item.ID.ToString()" class="list-group-item">
+            <div class="row" style="cursor:default">
+                <div class="col-lg-10 col-md-10 col-sm-9 col-xs-7">
+                    <h5><span><strong></strong></span></h5>
+                    <h5><span>@item.Txt</span></h5>
+                    @*<h5><span class="label label-success">Connected</span></h5>*@
+                    <h6><span>@item.AlertTimeStamp</span></h6>
+                </div>
+
+                <div class="col-lg-2 col-md-2 col-sm-3 col-xs-5 pull-right">
+                    <button class="btn btn-info" onclick="SetNotificationAsRead(@item.ID.ToString())">Set as Read</button>
+                </div>
+            </div>
+        </div>
+
+    }
+</div>
+
+<script>
+    $(document).ready(function () {
+        lastReceivedNotificationID = @Model[0].ID;
+        notificationsCount = @Model.Count();
+        $('#lblNotificationsCount').text(@Model.Count());
+    });
+
+</script>

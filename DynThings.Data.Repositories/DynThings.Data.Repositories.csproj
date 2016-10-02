@@ -63,6 +63,7 @@
     <Compile Include="Repositories\MediaFilesRepository.cs" />
     <Compile Include="Repositories\AlertConditionTypesRepository.cs" />
     <Compile Include="Repositories\ThingCategorysRepository.cs" />
+    <Compile Include="Repositories\UserNotificationsRepository.cs" />
     <Compile Include="Repositories\ThingsRepository.cs" />
     <Compile Include="Repositories\DynUsersRepository.cs" />
     <Compile Include="Repositories\IOTypesRepository.cs" />

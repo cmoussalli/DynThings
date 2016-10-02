@@ -80,18 +80,18 @@
             //$("#DivThingContent").height($("#divMonitorMap").height() - 290);000
             //}
             selectedLocation = @Model.ID.ToString();
-            FixUI();
+            FixUI_MonitorLocation();
         });
         selectedLocation = @Model.ID.ToString();
         LoadPart_MonitorThingView();
-        FixUI();
+        FixUI_MonitorLocation();
     });
 
     $('#Thing').on('change', function () {
         LoadPart_MonitorThingView();
     });
 
-    function FixUI() {
+    function FixUI_MonitorLocation() {
         if ($("#divMonitorMap").height() - 290 > 50)
         {
             $("#DivThingContent").height($("#divMonitorMap").height() - 290);

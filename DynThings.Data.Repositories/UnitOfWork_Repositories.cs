@@ -41,6 +41,7 @@ namespace DynThings.Data.Repositories
         public static MediaFilesRepository repoMediaFiles = new MediaFilesRepository(dynDB);
         public static AlertsRepository repoAlerts = new AlertsRepository(dynDB);
         public static AlertConditionTypesRepository repoAlertConditionTypes = new AlertConditionTypesRepository(dynDB);
+        public static UserNotificationsRepository repoUserNotification = new UserNotificationsRepository(dynDB);
         #endregion
 
 
