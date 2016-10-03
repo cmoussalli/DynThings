@@ -2,6 +2,11 @@
 var lastReceivedNotificationID = 0
 var notificationsCount = 0;
 
+//Hide Notifications Modal
+function HideNotificationsModal() {
+    $('#mdlNotifications').modal('hide');
+};
+
 //Get List
 function LoadPart_UserNotificationsListDiv() {
     var loadingpart = LoadDivLoading();
