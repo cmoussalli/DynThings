@@ -90,13 +90,14 @@ namespace DynThings.Data.Repositories
         #endregion
 
         #region Edit: Main
-        public ResultInfo.Result EditMain(long id, string title, bool isActive)
+        public ResultInfo.Result EditMain(long id, string title,string message, bool isActive)
         {
             try
             {
                 Alert alrt = db.Alerts.Find(id);
                 alrt.Title = title;
                 alrt.IsActive = isActive;
+                alrt.Message = message;
                 db.SaveChanges();
                 return ResultInfo.GenerateOKResult("Saved", alrt.ID);
             }

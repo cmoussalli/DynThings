@@ -92,12 +92,12 @@ namespace DynThings.WebPortal.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult EditMainPV([Bind(Include = "ID,Title,IsActive")] Alert Alert)
+        public ActionResult EditMainPV([Bind(Include = "ID,Title,Message,IsActive")] Alert alert)
         {
             ResultInfo.Result res = ResultInfo.GetResultByID(1);
             if (ModelState.IsValid)
             {
-                res = UnitOfWork_Repositories.repoAlerts.EditMain(Alert.ID, Alert.Title, (bool)Alert.IsActive);
+                res = UnitOfWork_Repositories.repoAlerts.EditMain(alert.ID, alert.Title, alert.Message, (bool)alert.IsActive);
                 return Json(res);
             }
             return Json(res);
