@@ -14,11 +14,13 @@
         @Html.LabelFor(model => model.Title, htmlAttributes: new { @class = "" })
         @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control" } })
         @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
-
         <br />
         @Html.Label("Regional Time Zone")
         @Html.DropDownList("UTC_Diff", null, htmlAttributes: new { @class = "form-control" })
-         
+        <br />
+        @Html.Label("Disconnection Delay (Seconds)")
+        @Html.EditorFor(model => model.IsConnectedDelay, new { htmlAttributes = new { @class = "form-control" } }) 
+
     </div>
     <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>

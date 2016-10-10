@@ -17,6 +17,22 @@ namespace DynThings.Data.Models
     {
         private DynThingsEntities db = new DynThingsEntities();
 
-      
+        public bool IsConnected0
+        {
+            get
+            {
+                bool result = false;
+                DynThingsEntities db = new DynThingsEntities();
+                List<EndPointIO> ios = db.EndPointIOs.Where(i => i.Endpoint.DeviceID.ToString() == "1" ).OrderByDescending(eio => eio.TimeStamp).Take(1).ToList();
+                if (ios.Count > 0)
+                {
+                    TimeSpan diff = DateTime.Now - ios[0].TimeStamp;
+                    if ( diff.TotalSeconds > this.IsConnectedDelay )
+                    { result = false; }
+                }
+                return result;
+            }
+        }
+
     }
 }

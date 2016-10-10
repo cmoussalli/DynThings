@@ -18,7 +18,7 @@ namespace DynThings.WebAPI.Models
 
         public string KeyPass { get; set; }
 
-        public decimal Value { get; set; }
+        public string Value { get; set; }
 
         public string ExectionTimeStamp { get; set; }
 
@@ -29,7 +29,7 @@ namespace DynThings.WebAPI.Models
         {
             this.KeyPass = string.Empty;
             this.ExectionTimeStamp = string.Empty;
-            this.Value = -99;
+            this.Value = "";
         } 
         #endregion
     }

@@ -80,12 +80,12 @@ namespace DynThings.WebPortal.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult AddPV([Bind(Include = "Title,UTC_Diff")] Device device)
+        public ActionResult AddPV([Bind(Include = "Title,UTC_Diff,IsConnectedDelay")] Device device)
         {
             ResultInfo.Result res = ResultInfo.GetResultByID(1);
             if (ModelState.IsValid)
             {
-                res = UnitOfWork_Repositories.repoDevices.Add(device.Title,device.UTC_Diff);
+                res = UnitOfWork_Repositories.repoDevices.Add(device.Title,device.UTC_Diff, device.IsConnectedDelay);
                 return Json(res);
             }
             return Json(res);
@@ -103,12 +103,12 @@ namespace DynThings.WebPortal.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult EditPV([Bind(Include = "ID,Title,UTC_Diff")] Device device)
+        public ActionResult EditPV([Bind(Include = "ID,Title,UTC_Diff,IsConnectedDelay")] Device device)
         {
             ResultInfo.Result res = ResultInfo.GetResultByID(1);
             if (ModelState.IsValid)
             {
-                res = UnitOfWork_Repositories.repoDevices.Edit(device.ID, device.Title,int.Parse(device.UTC_Diff.ToString()));
+                res = UnitOfWork_Repositories.repoDevices.Edit(device.ID, device.Title,int.Parse(device.UTC_Diff.ToString()), device.IsConnectedDelay);
                 return Json(res);
             }
             return Json(res);

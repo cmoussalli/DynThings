@@ -217,6 +217,8 @@
     <None Include="App.Config">
       <SubType>Designer</SubType>
     </None>
+    <None Include="ClassDiagram1.cd" />
+    <None Include="ClassDiagram2.cd" />
     <None Include="DynThingsModel.edmx.diagram">
       <DependentUpon>DynThingsModel.edmx</DependentUpon>
     </None>

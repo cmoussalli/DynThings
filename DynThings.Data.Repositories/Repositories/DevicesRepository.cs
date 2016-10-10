@@ -122,7 +122,7 @@ namespace DynThings.Data.Repositories
         /// </summary>
         /// <param name="title">Device's Title</param>
         /// <returns>Result : Ok or Failed</returns>
-        public ResultInfo.Result Add(string title,int utc_Diff)
+        public ResultInfo.Result Add(string title,int utc_Diff,int IsConnectedDelay)
         {
             Device dev = new Device();
             try
@@ -134,7 +134,7 @@ namespace DynThings.Data.Repositories
                 dev.PinCode = "0000";
                 dev.UTC_Diff = utc_Diff;
                 dev.IsConnected = false;
-                dev.IsConnectedDelay = 60;
+                dev.IsConnectedDelay = IsConnectedDelay;
                 db.Devices.Add(dev);
                 db.SaveChanges();
             }
@@ -153,13 +153,14 @@ namespace DynThings.Data.Repositories
         /// <param name="id">Device ID for the editable Device</param>
         /// <param name="title">New Title</param>
         /// <returns>Result : Ok or Failed</returns>
-        public ResultInfo.Result Edit(long id, string title,int utc_Diff)
+        public ResultInfo.Result Edit(long id, string title,int utc_Diff,int IsConnectedDelay)
         {
             try
             {
                 Device dev = db.Devices.Find(id);
                 dev.Title = title;
                 dev.UTC_Diff = utc_Diff;
+                dev.IsConnectedDelay = IsConnectedDelay;
                 db.SaveChanges();
                 return ResultInfo.GenerateOKResult("Saved", dev.ID);
             }

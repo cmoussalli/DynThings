@@ -37,6 +37,12 @@ public partial class GetThingEnds_Result
 
     public Nullable<long> IconID { get; set; }
 
+    public long DeviceID { get; set; }
+
+    public string DeviceTitle { get; set; }
+
+    public Nullable<bool> IsConnected { get; set; }
+
     public Nullable<long> LastIOID { get; set; }
 
     public string LastIOValue { get; set; }

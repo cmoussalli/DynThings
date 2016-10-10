@@ -2,25 +2,6 @@
 var selectedLocationThingListView = "Inputs";
 var selectedLocation = "";
 
-//Get Location by ID
-function LoadPart_MonitorLocation(id) {
-    //Validate MobileMode
-    if (window.innerWidth < 768)
-    {
-        $('#divMapContrainer').addClass('hidden-xs');
-    }
-
-    $("#SelectedLocationID").val(id);
-    var loadingpart = LoadDivLoading();
-    $("#divMonitorLocation").html(loadingpart);
-    $.ajax({
-        url: getRootURL() + '/LocationViews/GetPVLocationViewLocation?id=' + id,
-        type: "GET",
-    })
-    .done(function (partialViewResult) {
-        $("#divMonitorLocation").html(partialViewResult);
-    });
-}
 
 //Get EndPoint MainTab
 function LoadPart_MonitorEndPointMain(endPointID) {
@@ -66,8 +47,8 @@ function LoadPart_MonitorEndPointCommands(endPointID) {
 
 
 
-
-//Get ThingEnd Details
+//#region RightPanel
+//#region Main
 function LoadPart_MonitorThingEndDetails(thingID, thingEndTypeID) {
     selectedThingID = thingID;
     selectedThingEndPointTypeID = thingEndTypeID;
@@ -82,8 +63,108 @@ function LoadPart_MonitorThingEndDetails(thingID, thingEndTypeID) {
     });
 }
 
+function LoadPart_MonitorLocation(id) {
+    //Validate MobileMode
+    if (window.innerWidth < 768) {
+        $('#divMapContrainer').addClass('hidden-xs');
+    }
 
+    $("#SelectedLocationID").val(id);
+    var loadingpart = LoadDivLoading();
+    $("#divMonitorLocation").html(loadingpart);
+    $.ajax({
+        url: getRootURL() + '/LocationViews/GetPVLocationViewLocation?id=' + id,
+        type: "GET",
+    })
+    .done(function (partialViewResult) {
+        $("#divMonitorLocation").html(partialViewResult);
+    });
+}
 
+function LoadPart_MonitorThingView() {
+    $('#btnInputs').removeClass('active');
+    $('#btnCommands').removeClass('active');
+    $('#btnLogs').removeClass('active');
+
+    if (selectedLocationThingListView == "Inputs") {
+        $('#btnInputs').addClass('active');
+        LoadPart_MonitorThingEndsList();
+    }
+    if (selectedLocationThingListView == "Commands") {
+        $('#btnCommands').addClass('active');
+        LoadPart_MonitorThingCommandsList();
+    }
+    if (selectedLocationThingListView == "Logs") {
+        $('#btnLogs').addClass('active');
+        LoadPart_MonitorThingLogsList();
+    }
+};
+
+//#endregion
+
+//#region Inputs
+function LoadPart_MonitorThingEndsList() {
+    var selectedThingID = $(Thing).val();
+    var searchFor = $(txtSearch).val();
+    var loadingpart = LoadDivLoading();
+    $("#DivThingContent").html(loadingpart);
+    $.ajax({
+        url: getRootURL() + '/locationviews/GetLocationThingEndsListPV?searchfor=' + searchFor + '&LocationID=' + selectedLocation + '&ThingID=' + selectedThingID + '&recordsperpage=0',
+        type: "GET",
+    })
+    .done(function (partialViewResult) {
+        $("#DivThingContent").html(partialViewResult);
+    });
+}
+
+function LoadPart_MonitorThingEnd(thingID,endpointTypeID) {
+    //var loadingpart = LoadDivLoading();
+    //$("#Thing_" + thingID +"_EndPointType_" + endpointTypeID).html(loadingpart);
+    $.ajax({
+        url: getRootURL() + '/locationviews/GetLocationThingEndPV?ThingID=' + thingID + '&endpointTypeID=' + endpointTypeID,
+        type: "GET",
+    })
+    .done(function (partialViewResult) {
+        $("#Thing_" + thingID + "_EndPointType_" + endpointTypeID).html(partialViewResult);
+    });
+}
+//#endregion
+
+//#region Commands
+function LoadPart_MonitorThingCommandsList() {
+    var selectedThingID = $(Thing).val();
+    var searchFor = $(txtSearch).val();
+    var loadingpart = LoadDivLoading();
+    $("#DivThingContent").html(loadingpart);
+    $.ajax({
+        url: getRootURL() + '/locationviews/GetLocationCommandsListPV?searchfor=' + searchFor + '&LocationID=' + selectedLocation + '&ThingID=' + selectedThingID + '&recordsperpage=0',
+        type: "GET",
+    })
+    .done(function (partialViewResult) {
+        $("#DivThingContent").html(partialViewResult);
+    });
+}
+//#endregion
+
+//#region Logs
+function LoadPart_MonitorThingLogsList() {
+    var selectedThingID = $(Thing).val();
+    var searchFor = $(txtSearch).val();
+    var loadingpart = LoadDivLoading();
+    $("#DivThingContent").html(loadingpart);
+    $.ajax({
+        url: getRootURL() + '/locationviews/GetLocationLogsListPV?searchfor=' + searchFor + '&LocationID=' + selectedLocation + '&ThingID=' + selectedThingID + '&recordsperpage=0',
+        type: "GET",
+    })
+    .done(function (partialViewResult) {
+        $("#DivThingContent").html(partialViewResult);
+    });
+}
+//#endregion
+
+//#endregion
+
+//#region Left Panel
 function Load_ThingsEnd_Details() {
     Load_ThingEnd_InputsMinutesDiv();
     Load_ThingEnd_HistoryDiv();
@@ -107,80 +188,17 @@ function SelectThingEndDetailsView_History() {
     $('#liThingEndHistory').addClass('active');
     $('#divThingEndDetailsView_History').show();
 }
+//#endregion
 
-
-
-function LoadPart_MonitorThingView() {
-    $('#btnInputs').removeClass('active');
-    $('#btnCommands').removeClass('active');
-    $('#btnLogs').removeClass('active');
-
-    if (selectedLocationThingListView == "Inputs") {
-        $('#btnInputs').addClass('active');
-        LoadPart_MonitorThingEndsList();
-    }
-    if (selectedLocationThingListView == "Commands") {
-        $('#btnCommands').addClass('active');
-        LoadPart_MonitorThingCommandsList();
-    }
-    if (selectedLocationThingListView == "Logs") {
-        $('#btnLogs').addClass('active');
-        LoadPart_MonitorThingLogsList();
-    }
-};
-
-//Get Thing Ends
-function LoadPart_MonitorThingEndsList() {
-    var selectedThingID = $(Thing).val();
-    var searchFor = $(txtSearch).val();
-    var loadingpart = LoadDivLoading();
-    $("#DivThingContent").html(loadingpart);
-    $.ajax({
-        url: getRootURL() + '/locationviews/GetLocationThingEndsListPV?searchfor=' + searchFor + '&LocationID=' + selectedLocation + '&ThingID=' + selectedThingID + '&recordsperpage=0',
-        type: "GET",
-    })
-    .done(function (partialViewResult) {
-        $("#DivThingContent").html(partialViewResult);
-    });
-}
-
-//Get Thing Commands
-function LoadPart_MonitorThingCommandsList() {
-    var selectedThingID = $(Thing).val();
-    var searchFor = $(txtSearch).val();
-    var loadingpart = LoadDivLoading();
-    $("#DivThingContent").html(loadingpart);
-    $.ajax({
-        url: getRootURL() + '/locationviews/GetLocationCommandsListPV?searchfor=' + searchFor + '&LocationID=' + selectedLocation + '&ThingID=' + selectedThingID + '&recordsperpage=0',
-        type: "GET",
-    })
-    .done(function (partialViewResult) {
-        $("#DivThingContent").html(partialViewResult);
-    });
-}
-
-//Get Thing Logs
-function LoadPart_MonitorThingLogsList() {
-    var selectedThingID = $(Thing).val();
-    var searchFor = $(txtSearch).val();
-    var loadingpart = LoadDivLoading();
-    $("#DivThingContent").html(loadingpart);
-    $.ajax({
-        url: getRootURL() + '/locationviews/GetLocationLogsListPV?searchfor=' + searchFor + '&LocationID=' + selectedLocation + '&ThingID=' + selectedThingID + '&recordsperpage=0',
-        type: "GET",
-    })
-    .done(function (partialViewResult) {
-        $("#DivThingContent").html(partialViewResult);
-    });
-}
-
-//btnBacktoMap
+//#region Mobile Extra Functionality
 function btnBacktoMap() {
     $('#divMapContrainer').removeClass('hidden-xs');
 };
 
-//btnBacktoThingEnds
 function btnBackThingEnds() {
     $('#divMapContrainer').addClass('hidden-xs');
     ClosedivMonitorDetailsDiv();
 };
+
+//#endregion
+

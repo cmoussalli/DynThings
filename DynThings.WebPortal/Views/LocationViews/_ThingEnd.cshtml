@@ -1,0 +1,49 @@
+﻿@model DynThings.Data.Models.ViewModels.ThingEnd
+
+<div id="Thing_@Model.Thing.ID.ToString()_EndPointType_@Model.EndPoint.TypeID.ToString()" class="list-group-Model">
+    <div class="row" onclick="showEndDetails(@Model.Thing.ID.ToString(),@Model.EndPoint.TypeID.ToString())" style="cursor:pointer">
+        <div class="col-md-6 col-sm-6 col-xs-6">
+            <h5><span><strong>@Model.Thing.Title</strong></span></h5>
+            <img id="imgThingEndImage_@Model.Thing.ID.ToString()_@Model.EndPoint.TypeID.ToString()" />
+            <h5><span>@Model.Thing.CategoryTitle</span></h5>
+
+            @if (@Model.Device.IsConnected == true)
+            {
+                <h5><span class="label label-success">Connected</span></h5>
+            }
+            else
+            {
+                <h5><span class="label label-danger">Disconnected</span></h5>
+            }
+
+        </div>
+
+        <div class="col-md-6 col-sm-6 col-xs-6">
+            <div id="gauge_@Model.Location.ID.ToString()_@Model.Thing.ID.ToString()_@Model.EndPoint.TypeID.ToString()"></div>
+        </div>
+    </div>
+
+    <div class="row" onclick="showEndDetails(@Model.Thing.ID.ToString(),@Model.EndPoint.TypeID.ToString())" style="cursor:pointer">
+        <div class="col-md-12">
+            <h6><span>Last update: @Model.LastSubmitTimeStamp</span></h6>
+        </div>
+    </div>
+</div>
+
+<script>
+    var g = new JustGage({
+        id: "gauge_@Model.Location.ID.ToString()_@Model.Thing.ID.ToString()_@Model.EndPoint.TypeID.ToString()",
+        value: @Model.LastSubmitValue,
+        min: 0,
+        max: 85,
+        title: "@Model.EndPoint.TypeTitle",
+        label:"@Model.EndPoint.Measurement"
+
+    });
+    $('#imgThingEndImage_@Model.Thing.ID.ToString()_@Model.EndPoint.TypeID.ToString()').attr('src',getRootURL() + "/imgs/@(Model.EndPoint.IconID.ToString() + ".png")" );
+</script>
+
+
+
+
+

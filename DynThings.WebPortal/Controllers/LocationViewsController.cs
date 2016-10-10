@@ -18,6 +18,9 @@ using DynThings.Data.Repositories;
 using PagedList;
 using DynThings.Core;
 using DynThings.Data.Models.ViewModels;
+using Microsoft.AspNet.SignalR;
+using Microsoft.AspNet.SignalR.Hubs;
+using DynThings.WebPortal;
 
 namespace DynThings.WebPortal.Controllers
 {
@@ -211,14 +214,19 @@ namespace DynThings.WebPortal.Controllers
 
         #endregion
 
+
         #region Get Partial Views :: Monitor
+        #region Map
         [HttpGet]
         public PartialViewResult GetPVLocationViewMap(int id)
         {
             LocationView locationView = UnitOfWork_Repositories.repoLocationViews.Find(id);
             return PartialView("_LocationViewMap", locationView);
         }
+        #endregion //Map
 
+        #region Right Panel
+        #region Main
         [HttpGet]
         public PartialViewResult GetPVLocationViewLocation(int id)
         {
@@ -233,6 +241,9 @@ namespace DynThings.WebPortal.Controllers
             return PartialView("_LocationThingsList", things);
         }
 
+        #endregion //Main
+
+        #region Inputs
         [HttpGet]
         public PartialViewResult GetLocationThingEndsListPV(string searchfor = "", long? locationID = null, long? thingID = null, long? thingTypeID = null, long? endpointTypeID = null, long? endpointID = null, int page = 1, int recordsperpage = 0)
         {
@@ -241,20 +252,35 @@ namespace DynThings.WebPortal.Controllers
         }
 
         [HttpGet]
+        public PartialViewResult GetLocationThingEndPV( long thingID,  long endpointTypeID)
+        {
+            ThingEnd thingend = UnitOfWork_Repositories.repoThings.GetThingEnd(thingID,endpointTypeID);
+            return PartialView("_ThingEnd", thingend);
+        }
+
+        #endregion //Inputs
+
+        #region Commands
+        [HttpGet]
         public PartialViewResult GetLocationCommandsListPV(string searchfor = "", long? locationID = null, long? thingID = 0, int page = 1, int recordsperpage = 0)
         {
             IPagedList commands = UnitOfWork_Repositories.repoEndPointCommands.GetPagedListByLocationID(searchfor, long.Parse(locationID.ToString()), long.Parse(thingID.ToString()), page, Helpers.Configs.validateRecordsPerMaster(recordsperpage));
             return PartialView("_ThingsCommands_List", commands);
         }
+        #endregion //Commands
 
+        #region Logs
         [HttpGet]
         public PartialViewResult GetLocationLogsListPV(string searchfor = "", long? locationID = null, long? thingID = 0, int page = 1, int recordsperpage = 0)
         {
             IPagedList commands = UnitOfWork_Repositories.repoEndpointIOs.GetLogsPagedList(searchfor, long.Parse(locationID.ToString()), long.Parse(thingID.ToString()), page, 25);
             return PartialView("_ThingsLogs_List", commands);
         }
+        #endregion //Commands
 
+        #endregion //Right Panel
 
+        #region Left Panel
         [HttpGet]
         public PartialViewResult GetThingEndDetailsPV(long thingID, long thingEndTypeID)
         {
@@ -263,7 +289,9 @@ namespace DynThings.WebPortal.Controllers
         }
 
 
-        #endregion
+        #endregion //Left Panel
+
+        #endregion // Monitor
 
 
 

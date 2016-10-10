@@ -138,6 +138,7 @@
           <Property Name="UTC_Diff" Type="int" Nullable="false" />
           <Property Name="IsConnectedDelay" Type="int" Nullable="false" />
           <Property Name="IsConnected" Type="bit" Nullable="false" />
+          <Property Name="LastConnectionTimeStamp" Type="datetime" />
         </EntityType>
         <EntityType Name="DeviceStatus">
           <Key>
@@ -1057,13 +1058,6 @@ warning 6002: The table/view 'DynThings.dbo.VThingEnds' does not have a primary 
             <Parameter Name="TypeID" Mode="In" Type="Int64" />
             <Parameter Name="Year" Mode="In" Type="Int64" />
           </FunctionImport>
-          <FunctionImport Name="GetThingEnds" ReturnType="Collection(DynThingsModel.GetThingEnds_Result)">
-            <Parameter Name="LocationID" Mode="In" Type="Int64" />
-            <Parameter Name="ThingID" Mode="In" Type="Int64" />
-            <Parameter Name="ThingCategoryID" Mode="In" Type="Int64" />
-            <Parameter Name="EndPointID" Mode="In" Type="Int64" />
-            <Parameter Name="EndPointTypeID" Mode="In" Type="Int64" />
-          </FunctionImport>
           <EntitySet Name="AlertConditions" EntityType="DynThingsModel.AlertCondition" />
           <EntitySet Name="AlertConditionTypes" EntityType="DynThingsModel.AlertConditionType" />
           <EntitySet Name="AlertLevels" EntityType="DynThingsModel.AlertLevel" />
@@ -1229,6 +1223,13 @@ warning 6002: The table/view 'DynThings.dbo.VThingEnds' does not have a primary 
             <End Role="AspNetRole" EntitySet="AspNetRoles" />
             <End Role="AspNetUser" EntitySet="AspNetUsers" />
           </AssociationSet>
+          <FunctionImport Name="GetThingEnds" ReturnType="Collection(DynThingsModel.GetThingEnds_Result)">
+            <Parameter Name="LocationID" Mode="In" Type="Int64" />
+            <Parameter Name="ThingID" Mode="In" Type="Int64" />
+            <Parameter Name="ThingCategoryID" Mode="In" Type="Int64" />
+            <Parameter Name="EndPointID" Mode="In" Type="Int64" />
+            <Parameter Name="EndPointTypeID" Mode="In" Type="Int64" />
+          </FunctionImport>
           </EntityContainer>
         <ComplexType Name="Rpt_EndPoint_IOs_Months_Result">
           <Property Type="Int64" Name="ID" Nullable="false" />
@@ -1522,21 +1523,6 @@ warning 6002: The table/view 'DynThings.dbo.VThingEnds' does not have a primary 
           <Property Type="Int32" Name="C11" Nullable="true" />
           <Property Type="Int32" Name="C12" Nullable="true" />
         </ComplexType>
-        <ComplexType Name="GetThingEnds_Result">
-          <Property Type="Int64" Name="LocationID" Nullable="false" />
-          <Property Type="String" Name="LocationTitle" Nullable="false" MaxLength="50" />
-          <Property Type="Int64" Name="ThingID" Nullable="false" />
-          <Property Type="String" Name="ThingTitle" Nullable="false" MaxLength="128" />
-          <Property Type="Int64" Name="ThingCategoryID" Nullable="false" />
-          <Property Type="String" Name="ThingCategoryTitle" Nullable="true" MaxLength="50" />
-          <Property Type="Int64" Name="EndPointTypeID" Nullable="false" />
-          <Property Type="String" Name="EndPointTypeTitle" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="EndPointMeasurement" Nullable="true" MaxLength="50" />
-          <Property Type="Int64" Name="IconID" Nullable="true" />
-          <Property Type="Int64" Name="LastIOID" Nullable="true" />
-          <Property Type="String" Name="LastIOValue" Nullable="true" MaxLength="50" />
-          <Property Type="DateTime" Name="LastIOTimeStamp" Nullable="true" Precision="23" />
-        </ComplexType>
         <EntityType Name="AlertCondition">
           <Key>
             <PropertyRef Name="ID" />
@@ -1687,6 +1673,7 @@ warning 6002: The table/view 'DynThings.dbo.VThingEnds' does not have a primary 
           <NavigationProperty Name="DeviceStatu" Relationship="DynThingsModel.FK__Devices__StatusI__01D345B0" FromRole="Device" ToRole="DeviceStatu" />
           <NavigationProperty Name="Endpoints" Relationship="DynThingsModel.FK__Endpoints__Devic__00DF2177" FromRole="Device" ToRole="Endpoint" />
           <NavigationProperty Name="LinkDevicesLocations" Relationship="DynThingsModel.FK__LinkDevic__Devic__48CFD27E" FromRole="Device" ToRole="LinkDevicesLocation" />
+          <Property Name="LastConnectionTimeStamp" Type="DateTime" Precision="3" />
         </EntityType>
         <EntityType Name="DeviceStatu">
           <Key>
@@ -2370,6 +2357,24 @@ warning 6002: The table/view 'DynThings.dbo.VThingEnds' does not have a primary 
           <End Type="DynThingsModel.AspNetRole" Role="AspNetRole" Multiplicity="*" />
           <End Type="DynThingsModel.AspNetUser" Role="AspNetUser" Multiplicity="*" />
         </Association>
+        <ComplexType Name="GetThingEnds_Result">
+          <Property Type="Int64" Name="LocationID" Nullable="false" />
+          <Property Type="String" Name="LocationTitle" Nullable="false" MaxLength="50" />
+          <Property Type="Int64" Name="ThingID" Nullable="false" />
+          <Property Type="String" Name="ThingTitle" Nullable="false" MaxLength="128" />
+          <Property Type="Int64" Name="ThingCategoryID" Nullable="false" />
+          <Property Type="String" Name="ThingCategoryTitle" Nullable="true" MaxLength="50" />
+          <Property Type="Int64" Name="EndPointTypeID" Nullable="false" />
+          <Property Type="String" Name="EndPointTypeTitle" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="EndPointMeasurement" Nullable="true" MaxLength="50" />
+          <Property Type="Int64" Name="IconID" Nullable="true" />
+          <Property Type="Int64" Name="DeviceID" Nullable="false" />
+          <Property Type="String" Name="DeviceTitle" Nullable="true" MaxLength="50" />
+          <Property Type="Boolean" Name="IsConnected" Nullable="true" />
+          <Property Type="Int64" Name="LastIOID" Nullable="true" />
+          <Property Type="String" Name="LastIOValue" Nullable="true" MaxLength="50" />
+          <Property Type="DateTime" Name="LastIOTimeStamp" Nullable="true" Precision="23" />
+        </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -2700,25 +2705,6 @@ warning 6002: The table/view 'DynThings.dbo.VThingEnds' does not have a primary 
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="GetThingEnds" FunctionName="DynThingsModel.Store.GetThingEnds">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="DynThingsModel.GetThingEnds_Result">
-                <ScalarProperty Name="LocationID" ColumnName="LocationID" />
-                <ScalarProperty Name="LocationTitle" ColumnName="LocationTitle" />
-                <ScalarProperty Name="ThingID" ColumnName="ThingID" />
-                <ScalarProperty Name="ThingTitle" ColumnName="ThingTitle" />
-                <ScalarProperty Name="ThingCategoryID" ColumnName="ThingCategoryID" />
-                <ScalarProperty Name="ThingCategoryTitle" ColumnName="ThingCategoryTitle" />
-                <ScalarProperty Name="EndPointTypeID" ColumnName="EndPointTypeID" />
-                <ScalarProperty Name="EndPointTypeTitle" ColumnName="EndPointTypeTitle" />
-                <ScalarProperty Name="EndPointMeasurement" ColumnName="EndPointMeasurement" />
-                <ScalarProperty Name="IconID" ColumnName="IconID" />
-                <ScalarProperty Name="LastIOID" ColumnName="LastIOID" />
-                <ScalarProperty Name="LastIOValue" ColumnName="LastIOValue" />
-                <ScalarProperty Name="LastIOTimeStamp" ColumnName="LastIOTimeStamp" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
           <EntitySetMapping Name="AlertConditions">
             <EntityTypeMapping TypeName="DynThingsModel.AlertCondition">
               <MappingFragment StoreEntitySet="AlertConditions">
@@ -2842,6 +2828,7 @@ warning 6002: The table/view 'DynThings.dbo.VThingEnds' does not have a primary 
           <EntitySetMapping Name="Devices">
             <EntityTypeMapping TypeName="DynThingsModel.Device">
               <MappingFragment StoreEntitySet="Devices">
+                <ScalarProperty Name="LastConnectionTimeStamp" ColumnName="LastConnectionTimeStamp" />
                 <ScalarProperty Name="IsConnected" ColumnName="IsConnected" />
                 <ScalarProperty Name="IsConnectedDelay" ColumnName="IsConnectedDelay" />
                 <ScalarProperty Name="UTC_Diff" ColumnName="UTC_Diff" />
@@ -3107,6 +3094,28 @@ warning 6002: The table/view 'DynThings.dbo.VThingEnds' does not have a primary 
               <ScalarProperty Name="Id" ColumnName="RoleId" />
             </EndProperty>
           </AssociationSetMapping>
+          <FunctionImportMapping FunctionImportName="GetThingEnds" FunctionName="DynThingsModel.Store.GetThingEnds">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DynThingsModel.GetThingEnds_Result">
+                <ScalarProperty Name="LocationID" ColumnName="LocationID" />
+                <ScalarProperty Name="LocationTitle" ColumnName="LocationTitle" />
+                <ScalarProperty Name="ThingID" ColumnName="ThingID" />
+                <ScalarProperty Name="ThingTitle" ColumnName="ThingTitle" />
+                <ScalarProperty Name="ThingCategoryID" ColumnName="ThingCategoryID" />
+                <ScalarProperty Name="ThingCategoryTitle" ColumnName="ThingCategoryTitle" />
+                <ScalarProperty Name="EndPointTypeID" ColumnName="EndPointTypeID" />
+                <ScalarProperty Name="EndPointTypeTitle" ColumnName="EndPointTypeTitle" />
+                <ScalarProperty Name="EndPointMeasurement" ColumnName="EndPointMeasurement" />
+                <ScalarProperty Name="IconID" ColumnName="IconID" />
+                <ScalarProperty Name="DeviceID" ColumnName="DeviceID" />
+                <ScalarProperty Name="DeviceTitle" ColumnName="DeviceTitle" />
+                <ScalarProperty Name="IsConnected" ColumnName="IsConnected" />
+                <ScalarProperty Name="LastIOID" ColumnName="LastIOID" />
+                <ScalarProperty Name="LastIOValue" ColumnName="LastIOValue" />
+                <ScalarProperty Name="LastIOTimeStamp" ColumnName="LastIOTimeStamp" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

@@ -16,7 +16,9 @@
         <br />
         @Html.Label("Regional Time Zone")
         @Html.DropDownList("UTC_Diff", null, htmlAttributes: new { @class = "form-control" })
-
+        <br />
+        @Html.Label("Disconnection Delay (Seconds)")
+        @Html.EditorFor(model => model.IsConnectedDelay, new { htmlAttributes = new { @class = "form-control" } })
 
 
     </div>
