@@ -216,6 +216,18 @@ namespace DynThings.WebPortal.Controllers
 
 
         #region Get Partial Views :: Monitor
+
+        #region Left Panel
+        [HttpGet]
+        public PartialViewResult GetMonitorLocationsListPV(long locationViewID,string searchfor)
+        {
+            IPagedList locs = UnitOfWork_Repositories.repoLocationViews.Find(locationViewID).Locations.Where(l => l.Title.Contains(searchfor)).OrderBy(x => x.Title).ToPagedList(1,50);
+            return PartialView("_MonitorView_List_Location", locs);
+        }
+
+
+        #endregion //Details Panel
+
         #region Map
         [HttpGet]
         public PartialViewResult GetPVLocationViewMap(int id)
@@ -280,7 +292,7 @@ namespace DynThings.WebPortal.Controllers
 
         #endregion //Right Panel
 
-        #region Left Panel
+        #region Details Panel
         [HttpGet]
         public PartialViewResult GetThingEndDetailsPV(long thingID, long thingEndTypeID)
         {
@@ -289,7 +301,7 @@ namespace DynThings.WebPortal.Controllers
         }
 
 
-        #endregion //Left Panel
+        #endregion //Details Panel
 
         #endregion // Monitor
 

@@ -1,0 +1,122 @@
+﻿@model DynThings.Data.Models.LocationView
+<link href="~/Assets/Scripts/MidLayerScripts/BingMapsInfoboxStyles.css" rel="stylesheet" />
+
+<div id="myMapDiv" class="fullheight">
+    <div id='myMap' style="width: 100%; padding-top:50px"></div>
+</div>
+
+<img src="~/Assets/Imgs/pointer_shadow.png" />
+@*<script type="text/javascript" src="http://ecn.dev.virtualearth.net/mapcontrol/mapcontrol.ashx?v=7.0"></script>*@
+<script>
+    var map = null;
+    function getMap() {
+        map = new Microsoft.Maps.Map(document.getElementById('myMap')
+            , {
+                credentials: 'Aq96lGpMhTmC6x18TL2-qS4ccUYLNnc9IW6FSN5E1MW5O1td3LMyiYzEBi3w6S7f'
+                , enableClickableLogo: false
+                , enableSearchLogo: false
+                , showDashboard: true
+                , showMapTypeSelector: true
+                , useInertia: true
+                // ,disablePanning: true
+                //, disableZooming: true
+                ,mapTypeId: Microsoft.Maps.MapTypeId.birdseye
+                , center: new Microsoft.Maps.Location( @Model.X , @Model.Y),  zoom: @Model.Z });
+
+        @foreach (var loc in @Model.Locations)
+    {
+        <Text>
+        var contnt = 'Things :@loc.Things.Count.ToString() ';
+      
+            AddCustomPushPin('@loc.ID.ToString()','@loc.Title','@loc.LatitudeX','@loc.LongitudeY');
+            AddCustomInfobox('@loc.ID.ToString()','@loc.Title','@loc.LatitudeX','@loc.LongitudeY',contnt);
+        </Text>
+        }
+    }
+    // Create the infobox for the pushpin
+    //var pushpinOptions3 = { text: '3', visible: true, textOffset: offset };
+    //var pushpin3 = new Microsoft.Maps.Pushpin(new Microsoft.Maps.Location(23.592151, 58.382559), pushpinOptions3);
+    //pushpinClick3 = Microsoft.Maps.Events.addHandler(pushpin3, 'click', displayEventInfo);
+    //map.entities.push(pushpin3);
+
+    displayEventInfo = function (e) {
+        var obj = e.target;
+        SelectMonitorLocationsFromMap(e.target.getText());
+    }
+
+    function SelectMonitorLocationsFromMap(locationID){
+        LoadPart_MonitorLocation(locationID);
+        HideAllInfoBoxs();
+        eval("mapInfobox_" + locationID  +".setOptions({ visible:true });");
+    }
+
+    function HighlightMonitorLocationsFromMap(locationID){
+
+    }
+
+
+    displayMouseOverInfo = function (e) {
+        var obj = e.target;
+        //LoadPart_MonitorLocation(e.target.getText());
+        HideAllInfoBoxs();
+        eval("mapInfobox_" + obj.getText()  +".setOptions({ visible:true });");
+    }
+
+    $(document).ready(function () {
+        FixUI_MonitorView_Map();
+        getMap();
+        $(window).resize(function () {
+            FixUI_MonitorView_Map();
+        });
+    });
+
+
+    function FixUI_MonitorView_Map() {
+        $("#myMapDiv").height($(window).height() -45);
+    }
+
+    function HideAllInfoBoxs(){
+        @foreach (var loc in @Model.Locations)
+        {
+            <Text>
+        eval("mapInfobox_" + @loc.ID.ToString() + ".setOptions({ visible:false });");
+        </Text>
+        }
+    }
+
+    //function AddCustomPushPin(locationID,title,latitude,longitude){
+    //    var offset = new Microsoft.Maps.Point(0, 5);
+    //    this['pushpinOptions' + locationID]  = { text: locationID, visible: true, textOffset: offset };
+    //    this['pushpin_' + locationID] = new Microsoft.Maps.Pushpin(new Microsoft.Maps.Location(latitude, longitude), this['pushpinOptions' + locationID]);
+    //    this['pushpinClick_' + locationID] = Microsoft.Maps.Events.addHandler(this['pushpin_' + locationID], 'click', displayEventInfo);
+    //    map.entities.push(this['pushpin_' + locationID]);
+    //}
+    function AddCustomPushPin(locationID,title,latitude,longitude){
+        var offset = new Microsoft.Maps.Point(0, 3);
+        this['pushpinOptions' + locationID]  = { text: locationID, visible: true, textOffset: offset };
+        this['pushpin_' + locationID] = new Microsoft.Maps.Pushpin(new Microsoft.Maps.Location(latitude, longitude), this['pushpinOptions' + locationID]);
+        this['pushpinClick_' + locationID] = Microsoft.Maps.Events.addHandler(this['pushpin_' + locationID], 'click', displayEventInfo);
+        this['pushpinMouseOver_' + locationID] = Microsoft.Maps.Events.addHandler(this['pushpin_' + locationID], 'mouseover', displayMouseOverInfo);
+        //pushpinOver= Microsoft.Maps.Events.addHandler(pushpin, 'mouseover', displayEventInfo);
+        map.entities.push(this['pushpin_' + locationID]);
+    }
+
+    function AddCustomInfobox(locationID,title,latitude,longitude,content){
+        var html = "<div id=mapInfobox_" + locationID.toString() +" class='infobox' onclick='LoadPart_MonitorLocation('" + locationID + "')>";
+        html = html + "<strong> " + title + "</strong></br>";
+        //html = html + "22222222222222</br>";
+        html = html + "<div id='divBingMapInfobox_" + locationID +"' class='infobox_content'>" + content + "</div></div>";
+        html = html + "<div class='infobox_pointer'><img id='imgBingMapInfoboxPointer_" + locationID + "' src='http://cms/DynThings.WebPortal/assets/imgs/pointer_shadow.png'></div>" ;
+        this['mapInfoboxOptions' + locationID] = {width :100, height :100, showCloseButton: false, zIndex: 0, showPointer: true,visible:false};
+        this['mapInfobox_' + locationID] = new Microsoft.Maps.Infobox(new Microsoft.Maps.Location(latitude, longitude), this['mapInfoboxOptions' + locationID] );
+        map.entities.push(this['mapInfobox_' + locationID]);
+        this['mapInfobox_' + locationID].setHtmlContent(html);
+        this['mapInfobox_' + locationID].setOptions({
+            offset: new Microsoft.Maps.Point(-33, 30)
+        })
+
+
+    }
+
+
+</script>

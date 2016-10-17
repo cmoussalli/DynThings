@@ -24,7 +24,7 @@
                     @Html.DisplayFor(modelItem => item.StartTimeStamp)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.StartByAspNetUser.FullName)
+                    @Html.DisplayFor(modelItem => item.AspNetUser1.FullName)
                 </td>
                 <td>
                     @if (!String.IsNullOrEmpty( item.EndByUser) )
@@ -35,7 +35,7 @@
                 <td>
                     @if (!String.IsNullOrEmpty(item.EndByUser))
                     {
-                        @Html.DisplayFor(modelItem => item.EndByAspNetUser.FullName)
+                        @Html.DisplayFor(modelItem => item.AspNetUser.FullName)
                     }
                 </td>
                 <td>

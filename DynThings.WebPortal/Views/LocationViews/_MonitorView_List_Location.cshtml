@@ -1,0 +1,31 @@
+﻿ @model IPagedList<DynThings.Data.Models.Location>
+
+<div style="overflow-y:auto;">
+
+    <div class="list-group" >
+        @foreach (var item in Model)
+        {
+            <div class="list-group-item">
+                <div class="row" style="cursor:pointer" onclick="SelectMonitorLocationsFromList(@item.ID);">
+                    <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
+                        <h5><span>@item.ID <strong>@item.Title</strong></span></h5>
+                     
+
+                    </div>
+                    <div id="divMonitorLocationsListDet_@item.ID" class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
+                        
+                    </div>
+                </div>
+            </div> 
+        }
+    </div>
+
+</div>
+
+<script>
+    function SelectMonitorLocationsFromList(locationID)
+    {
+        LoadPart_MonitorLocation(locationID);
+        SelectMonitorLocationsFromMap(locationID);
+    }
+</script>

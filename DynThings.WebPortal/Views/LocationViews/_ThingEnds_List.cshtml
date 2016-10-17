@@ -68,15 +68,15 @@
 
 
     function showEndDetails(thingID,typeID){
-        $('#divMonitorMap').hide();
+        $('#divMonitorView').hide();
         $('#divMonitorDetails').show();
-        $('#divMapContrainer').removeClass('hidden-xs');
+        $('#divMonitorPrimaryContrainer').removeClass('hidden-xs');
         LoadPart_MonitorThingEndDetails(thingID,typeID);
     };
 
     function ClosedivMonitorDetailsDiv() {
         $('#divMonitorDetails').hide();
-        $('#divMonitorMap').show();
+        $('#divMonitorView').show();
     };
 
 </script>

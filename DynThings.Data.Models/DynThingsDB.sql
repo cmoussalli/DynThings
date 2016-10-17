@@ -1,6 +1,5 @@
 --DB Version 0.134
-USE [master]
-GO
+
 /****** Object:  Database [DynThings]    Script Date: 2/8/2016 12:47:48 PM ******/
 CREATE DATABASE [DynThings]
  GO
@@ -4755,9 +4754,3 @@ end
 
 
 
-
-GO
-USE [master]
-GO
-ALTER DATABASE [DynThings] SET  READ_WRITE 
-GO

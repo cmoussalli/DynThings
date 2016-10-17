@@ -3,6 +3,7 @@ var selectedLocationThingListView = "Inputs";
 var selectedLocation = "";
 
 
+
 //Get EndPoint MainTab
 function LoadPart_MonitorEndPointMain(endPointID) {
     var loadingpart = LoadDivLoading();
@@ -45,7 +46,19 @@ function LoadPart_MonitorEndPointCommands(endPointID) {
     });
 }
 
-
+//#region LeftPanel
+function divMonitorLocationsList(locationViewID) {
+    var loadingpart = LoadDivLoading();
+    $("#divMonitorLocationList").html(loadingpart);
+    $.ajax({
+        url: getRootURL() + '/LocationViews/GetMonitorLocationsListPV?locationViewID=' + locationViewID + '&searchfor=' + $(txtMonitorLocationListSearch).val(),
+        type: "GET",
+    })
+    .done(function (partialViewResult) {
+        $("#divMonitorLocationList").html(partialViewResult);
+    });
+};
+//#endregion
 
 //#region RightPanel
 //#region Main
@@ -164,7 +177,7 @@ function LoadPart_MonitorThingLogsList() {
 
 //#endregion
 
-//#region Left Panel
+//#region Details Panel
 function Load_ThingsEnd_Details() {
     Load_ThingEnd_InputsMinutesDiv();
     Load_ThingEnd_HistoryDiv();

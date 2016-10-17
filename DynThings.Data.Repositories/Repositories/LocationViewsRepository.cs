@@ -50,6 +50,8 @@ namespace DynThings.Data.Repositories
             LocationView locView = db.LocationViews.Find(ID);
             return locView;
         }
+
+
         #endregion
 
         #region Add

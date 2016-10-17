@@ -15,7 +15,7 @@ namespace DynThings.Data.Models
             {
                 DynThingsEntities db = new DynThingsEntities();
                 List<Endpoint> ends = new List<Endpoint>();
-                List<LinkDevicesLocation> lnks = db.LinkDevicesLocations.Where(l => l.LocationID == this.ID).ToList();
+                List<LinkDevicesLocation> lnks = db.LinkDevicesLocations.Where(l => l.LocationID == this.ID && l.EndByUser == null).ToList();
                 foreach (LinkDevicesLocation lnk in lnks)
                 {
                     Device dev = db.Devices.Find(lnk.DeviceID);

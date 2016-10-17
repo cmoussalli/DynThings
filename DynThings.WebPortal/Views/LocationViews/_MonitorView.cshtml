@@ -1,0 +1,34 @@
+﻿@model DynThings.Data.Models.LocationView
+@switch (Model.LocationViewTypeID)
+{
+    case 1://Single Location
+
+        break;
+    case 2://Thumbnails
+
+        break;
+    case 3://Map
+        @Html.Partial("_MonitorView_Map", Model)
+        break;
+    case 4://List
+
+        break;
+
+    case 5://List & Map (Mobile: List only)
+        <div>
+            <div class="col-lg-3 nopadding">
+                @Html.Partial("_MonitorView_List", Model)
+
+            </div>
+            <div class="col-lg-9">
+                @Html.Partial("_MonitorView_Map", Model)
+
+            </div>
+        </div>
+        break;
+
+    case 6://List & Map (Mobile: Map only)
+        break;
+
+}
+

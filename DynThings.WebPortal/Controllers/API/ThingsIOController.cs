@@ -410,11 +410,7 @@ namespace DynThings.WebAPI.Controllers
         #endregion
 
 
-        //public void Post([FromBody]string value)
-        //{
-        //    var hubContext = GlobalHost.ConnectionManager.GetHubContext<>();
-        //    hubContext.Clients.Group("TestGroup").send("TestGroup", "Called from Controller");
-        //}
+      
 
     }
 }
