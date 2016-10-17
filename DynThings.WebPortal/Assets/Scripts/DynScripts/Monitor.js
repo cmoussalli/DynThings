@@ -79,18 +79,18 @@ function LoadPart_MonitorThingEndDetails(thingID, thingEndTypeID) {
 function LoadPart_MonitorLocation(id) {
     //Validate MobileMode
     if (window.innerWidth < 768) {
-        $('#divMapContrainer').addClass('hidden-xs');
+        $('#divMonitorPrimaryContrainer').addClass('hidden-xs');
     }
 
     $("#SelectedLocationID").val(id);
     var loadingpart = LoadDivLoading();
-    $("#divMonitorLocation").html(loadingpart);
+    $("#divMonitorSecondaryContainer").html(loadingpart);
     $.ajax({
         url: getRootURL() + '/LocationViews/GetPVLocationViewLocation?id=' + id,
         type: "GET",
     })
     .done(function (partialViewResult) {
-        $("#divMonitorLocation").html(partialViewResult);
+        $("#divMonitorSecondaryContainer").html(partialViewResult);
     });
 }
 
@@ -205,11 +205,11 @@ function SelectThingEndDetailsView_History() {
 
 //#region Mobile Extra Functionality
 function btnBacktoMap() {
-    $('#divMapContrainer').removeClass('hidden-xs');
+    $('#divMonitorPrimaryContrainer').removeClass('hidden-xs');
 };
 
 function btnBackThingEnds() {
-    $('#divMapContrainer').addClass('hidden-xs');
+    $('#divMonitorPrimaryContrainer').addClass('hidden-xs');
     ClosedivMonitorDetailsDiv();
 };
 

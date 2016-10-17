@@ -16,11 +16,11 @@
 
     case 5://List & Map (Mobile: List only)
         <div>
-            <div class="col-lg-3 nopadding">
+            <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 nopadding">
                 @Html.Partial("_MonitorView_List", Model)
 
             </div>
-            <div class="col-lg-9">
+            <div class="col-lg-9 col-md-9 hidden-sm hidden-xs">
                 @Html.Partial("_MonitorView_Map", Model)
 
             </div>
@@ -28,6 +28,16 @@
         break;
 
     case 6://List & Map (Mobile: Map only)
+        <div>
+            <div class="col-lg-3 col-md-3 hidden-sm hidden-xs nopadding">
+                @Html.Partial("_MonitorView_List", Model)
+
+            </div>
+            <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12 ">
+                @Html.Partial("_MonitorView_Map", Model)
+
+            </div>
+        </div>
         break;
 
 }
