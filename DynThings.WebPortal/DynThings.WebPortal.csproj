@@ -229,6 +229,7 @@
     <Compile Include="Controllers\EndpointTypesController.cs" />
     <Compile Include="Controllers\MediaFilesController.cs" />
     <Compile Include="Controllers\NotificationsController.cs" />
+    <Compile Include="Controllers\ReportsController.cs" />
     <Compile Include="Controllers\ThingCategorysController.cs" />
     <Compile Include="Controllers\ThingsController.cs" />
     <Compile Include="Controllers\EndpointsController.cs" />
@@ -258,6 +259,7 @@
     <Content Include="Views\LocationViews\_MonitorView_List_Location.cshtml" />
     <Content Include="Views\LocationViews\_MonitorView_List.cshtml" />
     <Content Include="Views\LocationViews\_MonitorView.cshtml" />
+    <Content Include="Views\Reports\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Assets\Imgs\Wizard.png" />

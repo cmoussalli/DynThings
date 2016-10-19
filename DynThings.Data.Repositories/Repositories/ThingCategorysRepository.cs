@@ -74,12 +74,13 @@ namespace DynThings.Data.Repositories
         #endregion
 
         #region Add
-        public ResultInfo.Result Add(string Title)
+        public ResultInfo.Result Add(string Title,long IconID)
         {
             try
             {
                 ThingCategory cat = new ThingCategory();
                 cat.Title = Title;
+                cat.IconID = IconID;
                 db.ThingCategorys.Add(cat);
                 db.SaveChanges();
                 return ResultInfo.GenerateOKResult("Saved", cat.ID);
@@ -93,12 +94,13 @@ namespace DynThings.Data.Repositories
         #endregion
 
         #region Edit
-        public ResultInfo.Result Edit(long ID,string Title)
+        public ResultInfo.Result Edit(long ID,string Title, long IconID)
         {
             try
             {
                 ThingCategory cat = db.ThingCategorys.Find(ID);
                 cat.Title = Title;
+                cat.IconID = IconID;
                 db.SaveChanges();
                 return ResultInfo.GenerateOKResult("Saved", cat.ID);
             }

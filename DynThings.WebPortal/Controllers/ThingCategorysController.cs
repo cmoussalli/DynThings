@@ -67,17 +67,18 @@ namespace DynThings.WebPortal.Controllers
         [HttpGet]
         public PartialViewResult AddPV()
         {
+            ViewBag.IconID = new SelectList(UnitOfWork_Repositories.repoMediaFiles.GetList(), "ID", "Title", 1);
             return PartialView("_Add");
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult AddPV([Bind(Include = "Title")] ThingCategory thingCategory)
+        public ActionResult AddPV([Bind(Include = "Title,IconID")] ThingCategory thingCategory)
         {
             ResultInfo.Result res = ResultInfo.GetResultByID(1);
             if (ModelState.IsValid)
             {
-                res = UnitOfWork_Repositories.repoThingCategorys.Add(thingCategory.Title);
+                res = UnitOfWork_Repositories.repoThingCategorys.Add(thingCategory.Title,(long)thingCategory.IconID);
                 return Json(res);
             }
             return Json(res);
@@ -88,18 +89,19 @@ namespace DynThings.WebPortal.Controllers
         [HttpGet]
         public PartialViewResult EditPV(long id)
         {
+            ViewBag.IconID = new SelectList(UnitOfWork_Repositories.repoMediaFiles.GetList(), "ID", "Title", 1);
             ThingCategory thingCategory = UnitOfWork_Repositories.repoThingCategorys.Find(id);
             return PartialView("_Edit", thingCategory);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult EditPV([Bind(Include = "ID,Title")] ThingCategory thingCategory)
+        public ActionResult EditPV([Bind(Include = "ID,Title,IconID")] ThingCategory thingCategory)
         {
             ResultInfo.Result res = ResultInfo.GetResultByID(1);
             if (ModelState.IsValid)
             {
-                res = UnitOfWork_Repositories.repoThingCategorys.Edit(thingCategory.ID, thingCategory.Title);
+                res = UnitOfWork_Repositories.repoThingCategorys.Edit(thingCategory.ID, thingCategory.Title, (long)thingCategory.IconID);
                 return Json(res);
             }
             return Json(res);

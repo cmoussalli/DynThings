@@ -4,6 +4,7 @@
     <thead>
         <tr>
             <th>Title</th>
+            <th>Icon</th>
             <th></th>
         </tr>
     </thead>
@@ -14,6 +15,9 @@
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.Title)
+            </td>
+            <td>
+                <img src="~/Imgs/@(item.IconID.ToString() + ".png")" />
             </td>
            
             <td>

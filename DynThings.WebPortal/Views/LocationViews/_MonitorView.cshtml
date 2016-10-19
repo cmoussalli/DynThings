@@ -11,7 +11,10 @@
         @Html.Partial("_MonitorView_Map", Model)
         break;
     case 4://List
+        <div class="col-lg-12 col-md-12  nopadding">
+            @Html.Partial("_MonitorView_List", Model)
 
+        </div>
         break;
 
     case 5://List & Map (Mobile: List only)

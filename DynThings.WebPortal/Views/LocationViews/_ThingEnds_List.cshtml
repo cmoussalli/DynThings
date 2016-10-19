@@ -1,31 +1,36 @@
 ﻿@model IPagedList<DynThings.Data.Models.ViewModels.ThingEnd>
-<div >
+<div>
     <div class="list-group">
         @foreach (var item in Model)
         {
             <div id="Thing_@item.Thing.ID.ToString()_EndPointType_@item.EndPoint.TypeID.ToString()" class="list-group-item">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h5><span><strong>@item.Thing.Title</strong></span></h5>
+                    </div>
+                </div>
                 <div class="row" onclick="showEndDetails(@item.Thing.ID.ToString(),@item.EndPoint.TypeID.ToString())" style="cursor:pointer">
                     <div class="col-md-6 col-sm-6 col-xs-6">
-                        <h5><span><strong>@item.Thing.Title</strong></span></h5>
+                        
                         <img id="imgThingEndImage_@item.Thing.ID.ToString()_@item.EndPoint.TypeID.ToString()" />
                         <h5><span>@item.Thing.CategoryTitle</span></h5>
 
                         @if (@item.Device.IsConnected == true)
                         {
-                        <h5><span class="label label-success">Connected</span></h5>
+                            <h5><span class="label label-success">Connected</span></h5>
                         }
                         else
                         {
                             <h5><span class="label label-danger">Disconnected</span></h5>
                         }
-                        
+
                     </div>
 
                     <div class="col-md-6 col-sm-6 col-xs-6">
-                        <div id="gauge_@item.Location.ID.ToString()_@item.Thing.ID.ToString()_@item.EndPoint.TypeID.ToString()"></div>
+                        <div id="gauge_@item.Location.ID.ToString()_@item.Thing.ID.ToString()_@item.EndPoint.TypeID.ToString()" style="height:110px"></div>
                     </div>
                 </div>
-                
+
                 <div class="row" onclick="showEndDetails(@item.Thing.ID.ToString(),@item.EndPoint.TypeID.ToString())" style="cursor:pointer">
                     <div class="col-md-12">
                         <h6><span>Last update: @item.LastSubmitTimeStamp</span></h6>
@@ -34,15 +39,15 @@
             </div>
 
             <script>
-            var g = new JustGage({
-                id: "gauge_@item.Location.ID.ToString()_@item.Thing.ID.ToString()_@item.EndPoint.TypeID.ToString()",
-                value: @item.LastSubmitValue,
-                min: 0,
-                max: 85,
-                title: "@item.EndPoint.TypeTitle",
-                label:"@item.EndPoint.Measurement"
+                var g = new JustGage({
+                    id: "gauge_@item.Location.ID.ToString()_@item.Thing.ID.ToString()_@item.EndPoint.TypeID.ToString()",
+                    value: @item.LastSubmitValue,
+                    min: 0,
+                    max: 85,
+                    title: "@item.EndPoint.TypeTitle",
+                    label:"@item.EndPoint.Measurement"
 
-            });
+                });
 
                 $('#imgThingEndImage_@item.Thing.ID.ToString()_@item.EndPoint.TypeID.ToString()').attr('src',getRootURL() + "/imgs/@(item.EndPoint.IconID.ToString() + ".png")" );
             </script>
