@@ -11,7 +11,7 @@
         @if (Model.Endpoints.Count > 0)
         {
             <div class="alert alert-danger alert-dismissable">
-                <h3>Warning</h3><h5> you have @Model.Endpoints.Count Thing(s) associated with the selected EndPoint Type.</h5>
+                <h3>Warning</h3><h5> you have @Model.Endpoints.Count EndPoint(s) associated with the selected EndPoint Type.</h5>
                 <h5>You must delete all associated Endpoint(s) to able to delete this category.</h5>
             </div><br />
         }
@@ -23,35 +23,16 @@
         <span>Are you sure you want to delete the following object?</span><br /><br />
         <span>Type: EndPoint Type</span><br />
         <span>Title: @Model.Title</span><br />
-
     </div>
     <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        @if (Model.Endpoints.Count == 0)
-        {
         <button type="submit" class="btn btn-danger">Delete</button>
-        }
+
     </div>
 }
 
 <script>
-    //Attach : Delete Form Submit
     $(document).ready(function () {
-        $("#EndPointTypeDeleteForm").on("submit", function (event) {
-            event.preventDefault();
-            var url = $(this).attr("action");
-            var formData = $(this).serialize();
-            $.ajax({
-                url: url,
-                type: "POST",
-                data: formData,
-                dataType: "json",
-                success: function (resp) {
-                    window.location = getRootURL() + "EndPointTypes";
-                }
-            })
-            LoadPart_EndPointTypeListDiv();
-            $('#mdl').modal('hide');
-        });
+        AttachEventEndPointTypeDeleteForm();
     });
 </script>

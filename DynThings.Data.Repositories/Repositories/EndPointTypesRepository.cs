@@ -1,7 +1,7 @@
 ﻿/////////////////////////////////////////////////////////////////
 // Created by : Caesar Moussalli                               //
 // TimeStamp  : 10-2-2016                                      //
-// Content    : Handle EndpointTypes CRUD                           //
+// Content    : Handle EndpointTypes CRUD                      //
 // Notes      :                                                //
 /////////////////////////////////////////////////////////////////
 
@@ -107,7 +107,6 @@ namespace DynThings.Data.Repositories
                     endTypes[0].measurement = measurment;
                     endTypes[0].TypeCategoryID = TypeCategoryID;
                     endTypes[0].IconID = IconID;
-                    db.EndPointTypes.Add(endTypes[0]);
                     db.SaveChanges();
                     return ResultInfo.GenerateOKResult("Saved", endTypes[0].ID);
                 }

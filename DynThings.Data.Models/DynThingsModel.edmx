@@ -562,7 +562,9 @@ warning 6002: The table/view 'DynThings.dbo.VThingEnds' does not have a primary 
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__Endpoints__TypeI__45F365D3">
-          <End Role="EndPointTypes" Type="Self.EndPointTypes" Multiplicity="1" />
+          <End Role="EndPointTypes" Type="Self.EndPointTypes" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Endpoints" Type="Self.Endpoints" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="EndPointTypes">
@@ -1073,9 +1075,6 @@ warning 6002: The table/view 'DynThings.dbo.VThingEnds' does not have a primary 
           <EntitySet Name="DynSettings" EntityType="DynThingsModel.DynSetting" />
           <EntitySet Name="EndPointCommands" EntityType="DynThingsModel.EndPointCommand" />
           <EntitySet Name="EndPointIOs" EntityType="DynThingsModel.EndPointIO" />
-          <EntitySet Name="Endpoints" EntityType="DynThingsModel.Endpoint" />
-          <EntitySet Name="EndPointTypeCategorys" EntityType="DynThingsModel.EndPointTypeCategory" />
-          <EntitySet Name="EndPointTypes" EntityType="DynThingsModel.EndPointType" />
           <EntitySet Name="IOTypes" EntityType="DynThingsModel.IOType" />
           <EntitySet Name="LinkDevicesLocations" EntityType="DynThingsModel.LinkDevicesLocation" />
           <EntitySet Name="LinkLocationsLocationViews" EntityType="DynThingsModel.LinkLocationsLocationView" />
@@ -1097,10 +1096,6 @@ warning 6002: The table/view 'DynThings.dbo.VThingEnds' does not have a primary 
           </AssociationSet>
           <AssociationSet Name="FK__AlertCond__Condi__74444068" Association="DynThingsModel.FK__AlertCond__Condi__74444068">
             <End Role="AlertConditionType" EntitySet="AlertConditionTypes" />
-            <End Role="AlertCondition" EntitySet="AlertConditions" />
-          </AssociationSet>
-          <AssociationSet Name="FK__AlertCond__EndPo__0662F0A3" Association="DynThingsModel.FK__AlertCond__EndPo__0662F0A3">
-            <End Role="EndPointType" EntitySet="EndPointTypes" />
             <End Role="AlertCondition" EntitySet="AlertConditions" />
           </AssociationSet>
           <AssociationSet Name="FK__AlertCond__IOTyp__056ECC6A" Association="DynThingsModel.FK__AlertCond__IOTyp__056ECC6A">
@@ -1151,21 +1146,9 @@ warning 6002: The table/view 'DynThings.dbo.VThingEnds' does not have a primary 
             <End Role="DeviceStatu" EntitySet="DeviceStatus" />
             <End Role="Device" EntitySet="Devices" />
           </AssociationSet>
-          <AssociationSet Name="FK__Endpoints__Devic__00DF2177" Association="DynThingsModel.FK__Endpoints__Devic__00DF2177">
-            <End Role="Device" EntitySet="Devices" />
-            <End Role="Endpoint" EntitySet="Endpoints" />
-          </AssociationSet>
           <AssociationSet Name="FK__LinkDevic__Devic__48CFD27E" Association="DynThingsModel.FK__LinkDevic__Devic__48CFD27E">
             <End Role="Device" EntitySet="Devices" />
             <End Role="LinkDevicesLocation" EntitySet="LinkDevicesLocations" />
-          </AssociationSet>
-          <AssociationSet Name="FK__EndPointC__EndPo__4222D4EF" Association="DynThingsModel.FK__EndPointC__EndPo__4222D4EF">
-            <End Role="Endpoint" EntitySet="Endpoints" />
-            <End Role="EndPointCommand" EntitySet="EndPointCommands" />
-          </AssociationSet>
-          <AssociationSet Name="FK__EndPointI__EndPo__29572725" Association="DynThingsModel.FK__EndPointI__EndPo__29572725">
-            <End Role="Endpoint" EntitySet="Endpoints" />
-            <End Role="EndPointIO" EntitySet="EndPointIOs" />
           </AssociationSet>
           <AssociationSet Name="FK__EndPointI__IOTyp__440B1D61" Association="DynThingsModel.FK__EndPointI__IOTyp__440B1D61">
             <End Role="IOType" EntitySet="IOTypes" />
@@ -1174,18 +1157,6 @@ warning 6002: The table/view 'DynThings.dbo.VThingEnds' does not have a primary 
           <AssociationSet Name="FK__EndPointI__Thing__7E02B4CC" Association="DynThingsModel.FK__EndPointI__Thing__7E02B4CC">
             <End Role="Thing" EntitySet="Things" />
             <End Role="EndPointIO" EntitySet="EndPointIOs" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Endpoints__Thing__7EF6D905" Association="DynThingsModel.FK__Endpoints__Thing__7EF6D905">
-            <End Role="Thing" EntitySet="Things" />
-            <End Role="Endpoint" EntitySet="Endpoints" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Endpoints__TypeI__45F365D3" Association="DynThingsModel.FK__Endpoints__TypeI__45F365D3">
-            <End Role="EndPointType" EntitySet="EndPointTypes" />
-            <End Role="Endpoint" EntitySet="Endpoints" />
-          </AssociationSet>
-          <AssociationSet Name="FK__EndPointT__TypeC__47DBAE45" Association="DynThingsModel.FK__EndPointT__TypeC__47DBAE45">
-            <End Role="EndPointTypeCategory" EntitySet="EndPointTypeCategorys" />
-            <End Role="EndPointType" EntitySet="EndPointTypes" />
           </AssociationSet>
           <AssociationSet Name="FK__LinkDevic__Locat__49C3F6B7" Association="DynThingsModel.FK__LinkDevic__Locat__49C3F6B7">
             <End Role="Location" EntitySet="Locations" />
@@ -1230,6 +1201,37 @@ warning 6002: The table/view 'DynThings.dbo.VThingEnds' does not have a primary 
             <Parameter Name="EndPointID" Mode="In" Type="Int64" />
             <Parameter Name="EndPointTypeID" Mode="In" Type="Int64" />
           </FunctionImport>
+          <EntitySet Name="Endpoints" EntityType="DynThingsModel.Endpoint" />
+          <EntitySet Name="EndPointTypeCategorys" EntityType="DynThingsModel.EndPointTypeCategory" />
+          <EntitySet Name="EndPointTypes" EntityType="DynThingsModel.EndPointType" />
+          <AssociationSet Name="FK__AlertCond__EndPo__0662F0A3" Association="DynThingsModel.FK__AlertCond__EndPo__0662F0A3">
+            <End Role="EndPointType" EntitySet="EndPointTypes" />
+            <End Role="AlertCondition" EntitySet="AlertConditions" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Endpoints__Devic__00DF2177" Association="DynThingsModel.FK__Endpoints__Devic__00DF2177">
+            <End Role="Device" EntitySet="Devices" />
+            <End Role="Endpoint" EntitySet="Endpoints" />
+          </AssociationSet>
+          <AssociationSet Name="FK__EndPointC__EndPo__4222D4EF" Association="DynThingsModel.FK__EndPointC__EndPo__4222D4EF">
+            <End Role="Endpoint" EntitySet="Endpoints" />
+            <End Role="EndPointCommand" EntitySet="EndPointCommands" />
+          </AssociationSet>
+          <AssociationSet Name="FK__EndPointI__EndPo__29572725" Association="DynThingsModel.FK__EndPointI__EndPo__29572725">
+            <End Role="Endpoint" EntitySet="Endpoints" />
+            <End Role="EndPointIO" EntitySet="EndPointIOs" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Endpoints__Thing__7EF6D905" Association="DynThingsModel.FK__Endpoints__Thing__7EF6D905">
+            <End Role="Thing" EntitySet="Things" />
+            <End Role="Endpoint" EntitySet="Endpoints" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Endpoints__TypeI__45F365D3" Association="DynThingsModel.FK__Endpoints__TypeI__45F365D3">
+            <End Role="EndPointType" EntitySet="EndPointTypes" />
+            <End Role="Endpoint" EntitySet="Endpoints" />
+          </AssociationSet>
+          <AssociationSet Name="FK__EndPointT__TypeC__47DBAE45" Association="DynThingsModel.FK__EndPointT__TypeC__47DBAE45">
+            <End Role="EndPointTypeCategory" EntitySet="EndPointTypeCategorys" />
+            <End Role="EndPointType" EntitySet="EndPointTypes" />
+          </AssociationSet>
           </EntityContainer>
         <ComplexType Name="Rpt_EndPoint_IOs_Months_Result">
           <Property Type="Int64" Name="ID" Nullable="false" />
@@ -1537,9 +1539,9 @@ warning 6002: The table/view 'DynThings.dbo.VThingEnds' does not have a primary 
           <Property Name="IsMust" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="Alert" Relationship="DynThingsModel.FK__AlertCond__Alert__7720AD13" FromRole="AlertCondition" ToRole="Alert" />
           <NavigationProperty Name="AlertConditionType" Relationship="DynThingsModel.FK__AlertCond__Condi__74444068" FromRole="AlertCondition" ToRole="AlertConditionType" />
-          <NavigationProperty Name="EndPointType" Relationship="DynThingsModel.FK__AlertCond__EndPo__0662F0A3" FromRole="AlertCondition" ToRole="EndPointType" />
           <NavigationProperty Name="IOType" Relationship="DynThingsModel.FK__AlertCond__IOTyp__056ECC6A" FromRole="AlertCondition" ToRole="IOType" />
           <NavigationProperty Name="Thing" Relationship="DynThingsModel.FK__AlertCond__Thing__762C88DA" FromRole="AlertCondition" ToRole="Thing" />
+          <NavigationProperty Name="EndPointType" Relationship="DynThingsModel.FK__AlertCond__EndPo__0662F0A3" FromRole="AlertCondition" ToRole="EndPointType" />
         </EntityType>
         <EntityType Name="AlertConditionType">
           <Key>
@@ -1671,9 +1673,9 @@ warning 6002: The table/view 'DynThings.dbo.VThingEnds' does not have a primary 
           <NavigationProperty Name="DeviceCommands" Relationship="DynThingsModel.FK__Commands__Device__4D94879B" FromRole="Device" ToRole="DeviceCommand" />
           <NavigationProperty Name="DeviceIOs" Relationship="DynThingsModel.FK__DeviceIOs__Devic__19AACF41" FromRole="Device" ToRole="DeviceIO" />
           <NavigationProperty Name="DeviceStatu" Relationship="DynThingsModel.FK__Devices__StatusI__01D345B0" FromRole="Device" ToRole="DeviceStatu" />
-          <NavigationProperty Name="Endpoints" Relationship="DynThingsModel.FK__Endpoints__Devic__00DF2177" FromRole="Device" ToRole="Endpoint" />
           <NavigationProperty Name="LinkDevicesLocations" Relationship="DynThingsModel.FK__LinkDevic__Devic__48CFD27E" FromRole="Device" ToRole="LinkDevicesLocation" />
           <Property Name="LastConnectionTimeStamp" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Endpoints" Relationship="DynThingsModel.FK__Endpoints__Devic__00DF2177" FromRole="Device" ToRole="Endpoint" />
         </EntityType>
         <EntityType Name="DeviceStatu">
           <Key>
@@ -1723,53 +1725,9 @@ warning 6002: The table/view 'DynThings.dbo.VThingEnds' does not have a primary 
           <Property Name="ExecTimeStamp" Type="DateTime" Precision="3" />
           <Property Name="ScheduleTimeStamp" Type="DateTime" Precision="3" />
           <Property Name="ThingID" Type="Int64" Nullable="false" />
-          <NavigationProperty Name="Endpoint" Relationship="DynThingsModel.FK__EndPointI__EndPo__29572725" FromRole="EndPointIO" ToRole="Endpoint" />
           <NavigationProperty Name="IOType" Relationship="DynThingsModel.FK__EndPointI__IOTyp__440B1D61" FromRole="EndPointIO" ToRole="IOType" />
           <NavigationProperty Name="Thing" Relationship="DynThingsModel.FK__EndPointI__Thing__7E02B4CC" FromRole="EndPointIO" ToRole="Thing" />
-        </EntityType>
-        <EntityType Name="Endpoint">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="GUID" Type="Guid" Nullable="false" />
-          <Property Name="KeyPass" Type="Guid" Nullable="false" />
-          <Property Name="PinCode" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Title" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="DeviceID" Type="Int64" Nullable="false" />
-          <Property Name="TypeID" Type="Int64" Nullable="false" />
-          <Property Name="ThingID" Type="Int64" Nullable="false" />
-          <Property Name="IsNumericOnly" Type="Boolean" />
-          <Property Name="MinValue" Type="Single" />
-          <Property Name="MaxValue" Type="Single" />
-          <Property Name="LowRange" Type="Single" />
-          <Property Name="HighRange" Type="Single" />
-          <NavigationProperty Name="Device" Relationship="DynThingsModel.FK__Endpoints__Devic__00DF2177" FromRole="Endpoint" ToRole="Device" />
-          <NavigationProperty Name="EndPointCommands" Relationship="DynThingsModel.FK__EndPointC__EndPo__4222D4EF" FromRole="Endpoint" ToRole="EndPointCommand" />
-          <NavigationProperty Name="EndPointIOs" Relationship="DynThingsModel.FK__EndPointI__EndPo__29572725" FromRole="Endpoint" ToRole="EndPointIO" />
-          <NavigationProperty Name="Thing" Relationship="DynThingsModel.FK__Endpoints__Thing__7EF6D905" FromRole="Endpoint" ToRole="Thing" />
-          <NavigationProperty Name="EndPointType" Relationship="DynThingsModel.FK__Endpoints__TypeI__45F365D3" FromRole="Endpoint" ToRole="EndPointType" />
-        </EntityType>
-        <EntityType Name="EndPointTypeCategory">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Title" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="EndPointTypes" Relationship="DynThingsModel.FK__EndPointT__TypeC__47DBAE45" FromRole="EndPointTypeCategory" ToRole="EndPointType" />
-        </EntityType>
-        <EntityType Name="EndPointType">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="measurement" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="TypeCategoryID" Type="Int64" />
-          <Property Name="IconID" Type="Int64" />
-          <NavigationProperty Name="AlertConditions" Relationship="DynThingsModel.FK__AlertCond__EndPo__0662F0A3" FromRole="EndPointType" ToRole="AlertCondition" />
-          <NavigationProperty Name="Endpoints" Relationship="DynThingsModel.FK__Endpoints__TypeI__45F365D3" FromRole="EndPointType" ToRole="Endpoint" />
-          <NavigationProperty Name="EndPointTypeCategory" Relationship="DynThingsModel.FK__EndPointT__TypeC__47DBAE45" FromRole="EndPointType" ToRole="EndPointTypeCategory" />
+          <NavigationProperty Name="Endpoint" Relationship="DynThingsModel.FK__EndPointI__EndPo__29572725" FromRole="EndPointIO" ToRole="Endpoint" />
         </EntityType>
         <EntityType Name="IOType">
           <Key>
@@ -1907,9 +1865,9 @@ warning 6002: The table/view 'DynThings.dbo.VThingEnds' does not have a primary 
           <Property Name="UTC_Diff" Type="Int32" Nullable="false" />
           <NavigationProperty Name="AlertConditions" Relationship="DynThingsModel.FK__AlertCond__Thing__762C88DA" FromRole="Thing" ToRole="AlertCondition" />
           <NavigationProperty Name="EndPointIOs" Relationship="DynThingsModel.FK__EndPointI__Thing__7E02B4CC" FromRole="Thing" ToRole="EndPointIO" />
-          <NavigationProperty Name="Endpoints" Relationship="DynThingsModel.FK__Endpoints__Thing__7EF6D905" FromRole="Thing" ToRole="Endpoint" />
           <NavigationProperty Name="LinkThingsLocations" Relationship="DynThingsModel.FK__LinkThing__Thing__0697FACD" FromRole="Thing" ToRole="LinkThingsLocation" />
           <NavigationProperty Name="ThingCategory" Relationship="DynThingsModel.FK__Things__Category__662B2B3B" FromRole="Thing" ToRole="ThingCategory" />
+          <NavigationProperty Name="Endpoints" Relationship="DynThingsModel.FK__Endpoints__Thing__7EF6D905" FromRole="Thing" ToRole="Endpoint" />
         </EntityType>
         <EntityType Name="UserNotification">
           <Key>
@@ -1962,18 +1920,6 @@ warning 6002: The table/view 'DynThings.dbo.VThingEnds' does not have a primary 
             </Principal>
             <Dependent Role="AlertCondition">
               <PropertyRef Name="ConditionTypeID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__AlertCond__EndPo__0662F0A3">
-          <End Type="DynThingsModel.EndPointType" Role="EndPointType" Multiplicity="1" />
-          <End Type="DynThingsModel.AlertCondition" Role="AlertCondition" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="EndPointType">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="AlertCondition">
-              <PropertyRef Name="EndPointTypeID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -2131,20 +2077,6 @@ warning 6002: The table/view 'DynThings.dbo.VThingEnds' does not have a primary 
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Endpoints__Devic__00DF2177">
-          <End Type="DynThingsModel.Device" Role="Device" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Type="DynThingsModel.Endpoint" Role="Endpoint" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Device">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="Endpoint">
-              <PropertyRef Name="DeviceID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK__LinkDevic__Devic__48CFD27E">
           <End Type="DynThingsModel.Device" Role="Device" Multiplicity="0..1">
             <OnDelete Action="Cascade" />
@@ -2156,34 +2088,6 @@ warning 6002: The table/view 'DynThings.dbo.VThingEnds' does not have a primary 
             </Principal>
             <Dependent Role="LinkDevicesLocation">
               <PropertyRef Name="DeviceID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__EndPointC__EndPo__4222D4EF">
-          <End Type="DynThingsModel.Endpoint" Role="Endpoint" Multiplicity="0..1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Type="DynThingsModel.EndPointCommand" Role="EndPointCommand" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Endpoint">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="EndPointCommand">
-              <PropertyRef Name="EndPointID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__EndPointI__EndPo__29572725">
-          <End Type="DynThingsModel.Endpoint" Role="Endpoint" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Type="DynThingsModel.EndPointIO" Role="EndPointIO" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Endpoint">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="EndPointIO">
-              <PropertyRef Name="EndPointID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -2210,42 +2114,6 @@ warning 6002: The table/view 'DynThings.dbo.VThingEnds' does not have a primary 
             </Principal>
             <Dependent Role="EndPointIO">
               <PropertyRef Name="ThingID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__Endpoints__Thing__7EF6D905">
-          <End Type="DynThingsModel.Thing" Role="Thing" Multiplicity="1" />
-          <End Type="DynThingsModel.Endpoint" Role="Endpoint" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Thing">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="Endpoint">
-              <PropertyRef Name="ThingID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__Endpoints__TypeI__45F365D3">
-          <End Type="DynThingsModel.EndPointType" Role="EndPointType" Multiplicity="1" />
-          <End Type="DynThingsModel.Endpoint" Role="Endpoint" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="EndPointType">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="Endpoint">
-              <PropertyRef Name="TypeID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__EndPointT__TypeC__47DBAE45">
-          <End Type="DynThingsModel.EndPointTypeCategory" Role="EndPointTypeCategory" Multiplicity="0..1" />
-          <End Type="DynThingsModel.EndPointType" Role="EndPointType" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="EndPointTypeCategory">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="EndPointType">
-              <PropertyRef Name="TypeCategoryID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -2375,6 +2243,142 @@ warning 6002: The table/view 'DynThings.dbo.VThingEnds' does not have a primary 
           <Property Type="String" Name="LastIOValue" Nullable="true" MaxLength="50" />
           <Property Type="DateTime" Name="LastIOTimeStamp" Nullable="true" Precision="23" />
         </ComplexType>
+        <EntityType Name="Endpoint">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="GUID" Type="Guid" Nullable="false" />
+          <Property Name="KeyPass" Type="Guid" Nullable="false" />
+          <Property Name="PinCode" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Title" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DeviceID" Type="Int64" Nullable="false" />
+          <Property Name="TypeID" Type="Int64" Nullable="false" />
+          <Property Name="ThingID" Type="Int64" Nullable="false" />
+          <Property Name="IsNumericOnly" Type="Boolean" />
+          <Property Name="MinValue" Type="Single" />
+          <Property Name="MaxValue" Type="Single" />
+          <Property Name="LowRange" Type="Single" />
+          <Property Name="HighRange" Type="Single" />
+          <NavigationProperty Name="Device" Relationship="DynThingsModel.FK__Endpoints__Devic__00DF2177" FromRole="Endpoint" ToRole="Device" />
+          <NavigationProperty Name="EndPointCommands" Relationship="DynThingsModel.FK__EndPointC__EndPo__4222D4EF" FromRole="Endpoint" ToRole="EndPointCommand" />
+          <NavigationProperty Name="EndPointIOs" Relationship="DynThingsModel.FK__EndPointI__EndPo__29572725" FromRole="Endpoint" ToRole="EndPointIO" />
+          <NavigationProperty Name="Thing" Relationship="DynThingsModel.FK__Endpoints__Thing__7EF6D905" FromRole="Endpoint" ToRole="Thing" />
+          <NavigationProperty Name="EndPointType" Relationship="DynThingsModel.FK__Endpoints__TypeI__45F365D3" FromRole="Endpoint" ToRole="EndPointType" />
+        </EntityType>
+        <EntityType Name="EndPointTypeCategory">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="EndPointTypes" Relationship="DynThingsModel.FK__EndPointT__TypeC__47DBAE45" FromRole="EndPointTypeCategory" ToRole="EndPointType" />
+        </EntityType>
+        <EntityType Name="EndPointType">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="measurement" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TypeCategoryID" Type="Int64" />
+          <Property Name="IconID" Type="Int64" />
+          <NavigationProperty Name="AlertConditions" Relationship="DynThingsModel.FK__AlertCond__EndPo__0662F0A3" FromRole="EndPointType" ToRole="AlertCondition" />
+          <NavigationProperty Name="Endpoints" Relationship="DynThingsModel.FK__Endpoints__TypeI__45F365D3" FromRole="EndPointType" ToRole="Endpoint" />
+          <NavigationProperty Name="EndPointTypeCategory" Relationship="DynThingsModel.FK__EndPointT__TypeC__47DBAE45" FromRole="EndPointType" ToRole="EndPointTypeCategory" />
+        </EntityType>
+        <Association Name="FK__AlertCond__EndPo__0662F0A3">
+          <End Type="DynThingsModel.EndPointType" Role="EndPointType" Multiplicity="1" />
+          <End Type="DynThingsModel.AlertCondition" Role="AlertCondition" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EndPointType">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="AlertCondition">
+              <PropertyRef Name="EndPointTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Endpoints__Devic__00DF2177">
+          <End Type="DynThingsModel.Device" Role="Device" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="DynThingsModel.Endpoint" Role="Endpoint" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Device">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Endpoint">
+              <PropertyRef Name="DeviceID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__EndPointC__EndPo__4222D4EF">
+          <End Type="DynThingsModel.Endpoint" Role="Endpoint" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="DynThingsModel.EndPointCommand" Role="EndPointCommand" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Endpoint">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="EndPointCommand">
+              <PropertyRef Name="EndPointID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__EndPointI__EndPo__29572725">
+          <End Type="DynThingsModel.Endpoint" Role="Endpoint" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="DynThingsModel.EndPointIO" Role="EndPointIO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Endpoint">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="EndPointIO">
+              <PropertyRef Name="EndPointID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Endpoints__Thing__7EF6D905">
+          <End Type="DynThingsModel.Thing" Role="Thing" Multiplicity="1" />
+          <End Type="DynThingsModel.Endpoint" Role="Endpoint" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Thing">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Endpoint">
+              <PropertyRef Name="ThingID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Endpoints__TypeI__45F365D3">
+          <End Type="DynThingsModel.EndPointType" Role="EndPointType" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="DynThingsModel.Endpoint" Role="Endpoint" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EndPointType">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Endpoint">
+              <PropertyRef Name="TypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__EndPointT__TypeC__47DBAE45">
+          <End Type="DynThingsModel.EndPointTypeCategory" Role="EndPointTypeCategory" Multiplicity="0..1" />
+          <End Type="DynThingsModel.EndPointType" Role="EndPointType" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EndPointTypeCategory">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="EndPointType">
+              <PropertyRef Name="TypeCategoryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -2892,44 +2896,6 @@ warning 6002: The table/view 'DynThings.dbo.VThingEnds' does not have a primary 
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Endpoints">
-            <EntityTypeMapping TypeName="DynThingsModel.Endpoint">
-              <MappingFragment StoreEntitySet="Endpoints">
-                <ScalarProperty Name="HighRange" ColumnName="HighRange" />
-                <ScalarProperty Name="LowRange" ColumnName="LowRange" />
-                <ScalarProperty Name="MaxValue" ColumnName="MaxValue" />
-                <ScalarProperty Name="MinValue" ColumnName="MinValue" />
-                <ScalarProperty Name="IsNumericOnly" ColumnName="IsNumericOnly" />
-                <ScalarProperty Name="ThingID" ColumnName="ThingID" />
-                <ScalarProperty Name="TypeID" ColumnName="TypeID" />
-                <ScalarProperty Name="DeviceID" ColumnName="DeviceID" />
-                <ScalarProperty Name="Title" ColumnName="Title" />
-                <ScalarProperty Name="PinCode" ColumnName="PinCode" />
-                <ScalarProperty Name="KeyPass" ColumnName="KeyPass" />
-                <ScalarProperty Name="GUID" ColumnName="GUID" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="EndPointTypeCategorys">
-            <EntityTypeMapping TypeName="DynThingsModel.EndPointTypeCategory">
-              <MappingFragment StoreEntitySet="EndPointTypeCategorys">
-                <ScalarProperty Name="Title" ColumnName="Title" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="EndPointTypes">
-            <EntityTypeMapping TypeName="DynThingsModel.EndPointType">
-              <MappingFragment StoreEntitySet="EndPointTypes">
-                <ScalarProperty Name="IconID" ColumnName="IconID" />
-                <ScalarProperty Name="TypeCategoryID" ColumnName="TypeCategoryID" />
-                <ScalarProperty Name="measurement" ColumnName="measurement" />
-                <ScalarProperty Name="Title" ColumnName="Title" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="IOTypes">
             <EntityTypeMapping TypeName="DynThingsModel.IOType">
               <MappingFragment StoreEntitySet="IOTypes">
@@ -3116,6 +3082,44 @@ warning 6002: The table/view 'DynThings.dbo.VThingEnds' does not have a primary 
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <EntitySetMapping Name="Endpoints">
+            <EntityTypeMapping TypeName="DynThingsModel.Endpoint">
+              <MappingFragment StoreEntitySet="Endpoints">
+                <ScalarProperty Name="HighRange" ColumnName="HighRange" />
+                <ScalarProperty Name="LowRange" ColumnName="LowRange" />
+                <ScalarProperty Name="MaxValue" ColumnName="MaxValue" />
+                <ScalarProperty Name="MinValue" ColumnName="MinValue" />
+                <ScalarProperty Name="IsNumericOnly" ColumnName="IsNumericOnly" />
+                <ScalarProperty Name="ThingID" ColumnName="ThingID" />
+                <ScalarProperty Name="TypeID" ColumnName="TypeID" />
+                <ScalarProperty Name="DeviceID" ColumnName="DeviceID" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="PinCode" ColumnName="PinCode" />
+                <ScalarProperty Name="KeyPass" ColumnName="KeyPass" />
+                <ScalarProperty Name="GUID" ColumnName="GUID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EndPointTypeCategorys">
+            <EntityTypeMapping TypeName="DynThingsModel.EndPointTypeCategory">
+              <MappingFragment StoreEntitySet="EndPointTypeCategorys">
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EndPointTypes">
+            <EntityTypeMapping TypeName="DynThingsModel.EndPointType">
+              <MappingFragment StoreEntitySet="EndPointTypes">
+                <ScalarProperty Name="IconID" ColumnName="IconID" />
+                <ScalarProperty Name="TypeCategoryID" ColumnName="TypeCategoryID" />
+                <ScalarProperty Name="measurement" ColumnName="measurement" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

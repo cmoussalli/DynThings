@@ -198,7 +198,7 @@
   <ItemGroup>
     <Content Include="Assets\Imgs\pointer_shadow.png" />
     <Content Include="Assets\Scripts\DynScripts\Monitor_SignalR.js" />
-    <Content Include="Assets\Scripts\DynScripts\EndPointType.js" />
+    <Content Include="Assets\Scripts\DynScripts\EndPointTypes.js" />
     <Content Include="Assets\Scripts\MidLayerScripts\BingMapsInfoboxStyles.css" />
     <Content Include="Scripts\jquery.signalR-2.2.1.js" />
     <Content Include="Scripts\jquery.signalR-2.2.1.min.js" />

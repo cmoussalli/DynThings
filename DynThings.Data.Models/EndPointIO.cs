@@ -36,11 +36,11 @@ public partial class EndPointIO
 
 
 
-    public virtual Endpoint Endpoint { get; set; }
-
     public virtual IOType IOType { get; set; }
 
     public virtual Thing Thing { get; set; }
+
+    public virtual Endpoint Endpoint { get; set; }
 
 }
 

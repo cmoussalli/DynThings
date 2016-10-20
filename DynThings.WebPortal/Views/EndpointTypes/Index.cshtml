@@ -7,10 +7,10 @@
         <h1>EndPoint Types</h1>
     </div>
     <div class="row">
-        <div class="col-md-6">
+        <div class="col-md-6 col-sm-2 col-xs-3">
             <button type="button" class="btn btn-info" onclick="LoadPart_DialogEndPointTypeAdd()" data-toggle="modal" data-target="#mdl">Add</button>
         </div>
-        <div class="col-md-6">
+        <div class="col-md-6 col-sm-10 col-xs-9">
             <div class="input-group">
                 <input type="search" id="txtEndPointTypeSearch" class="form-control" onkeydown="if (event.keyCode == 13) { LoadPart_EndPointTypeListDiv(); return false; }" />
                 <div class="input-group-btn">
@@ -26,7 +26,7 @@
     </div>
 </div>
 @section scriptfiles{
-    <script src="~/Assets/Scripts/DynScripts/ThingCategories.js"></script>
+    <script src="~/Assets/Scripts/DynScripts/EndPointTypes.js"></script>
 }
 @section scripts{
     <script>

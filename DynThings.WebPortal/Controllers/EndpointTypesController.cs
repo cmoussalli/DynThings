@@ -60,6 +60,7 @@ namespace DynThings.WebPortal.Controllers
         public PartialViewResult AddPV()
         {
             ViewBag.IconID = new SelectList(UnitOfWork_Repositories.repoMediaFiles.GetList(), "ID", "Title", 1);
+            ViewBag.TypeCategoryID = new SelectList(UnitOfWork_Repositories.repoEndpointTypeCategorys.GetList(), "ID", "Title", 1);
             return PartialView("_Add");
         }
 
@@ -83,6 +84,7 @@ namespace DynThings.WebPortal.Controllers
         {
             EndPointType endPointType = UnitOfWork_Repositories.repoEndpointTypes.Find(id);
             ViewBag.IconID = new SelectList(UnitOfWork_Repositories.repoMediaFiles.GetList(), "ID", "Title", endPointType.IconID);
+            ViewBag.TypeCategoryID = new SelectList(UnitOfWork_Repositories.repoEndpointTypeCategorys.GetList(), "ID", "Title", endPointType.TypeCategoryID);
             return PartialView("_Edit", endPointType);
         }
 

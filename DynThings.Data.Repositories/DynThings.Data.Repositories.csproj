@@ -60,6 +60,7 @@
   <ItemGroup>
     <Compile Include="Reports\EndPointsReport.cs" />
     <Compile Include="Repositories\AlertsRepository.cs" />
+    <Compile Include="Repositories\EndPointTypeCategorysRepository.cs" />
     <Compile Include="Repositories\MediaFilesRepository.cs" />
     <Compile Include="Repositories\AlertConditionTypesRepository.cs" />
     <Compile Include="Repositories\ThingCategorysRepository.cs" />

@@ -65,7 +65,6 @@ function AttachEventEndPointTypeAddForm() {
             error: function () {
                 ServerResponse(resp);
             }
-
         })
 
         LoadPart_EndPointTypeListDiv();
@@ -87,7 +86,7 @@ function LoadPart_DialogEndPointTypeEdit(id) {
 }
 
 //Attach : Edit Form Submit
-function AttachEventEndPointTypeEditForm(EndPointTypeID) {
+function AttachEventEndPointTypeEditForm() {
     $("#EndPointTypeEditForm").on("submit", function (event) {
         event.preventDefault();
         var url = $(this).attr("action");
@@ -100,7 +99,7 @@ function AttachEventEndPointTypeEditForm(EndPointTypeID) {
             success: function (resp) {
                 ServerResponse(resp);
             },
-            error: function () {
+            error: function (resp) {
                 ServerResponse(resp);
             }
         })
@@ -120,5 +119,32 @@ function LoadPart_DialogEndPointTypeDelete(id) {
     })
     .done(function (partialViewResult) {
         $("#modal").html(partialViewResult);
+    });
+}
+
+//Attach : Delete Form Submit
+function AttachEventEndPointTypeDeleteForm() {
+    $("#EndPointTypeDeleteForm").on("submit", function (event) {
+        event.preventDefault();
+        var url = $(this).attr("action");
+        var formData = $(this).serialize();
+        $.ajax({
+            url: url,
+            type: "POST",
+            data: formData,
+            dataType: "json",
+            success: function (resp) {
+                ServerResponse(resp);
+                LoadPart_EndPointTypeListDiv();
+            },
+            error: function (resp) {
+                ServerResponse(resp);
+            }
+            //success: function (resp) {
+            //    window.location = getRootURL() + "EndPointTypes";
+            //}
+        })
+        LoadPart_EndPointTypeListDiv();
+        $('#mdl').modal('hide');
     });
 }
