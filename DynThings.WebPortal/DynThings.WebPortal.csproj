@@ -198,6 +198,7 @@
   <ItemGroup>
     <Content Include="Assets\Imgs\pointer_shadow.png" />
     <Content Include="Assets\Scripts\DynScripts\Monitor_SignalR.js" />
+    <Content Include="Assets\Scripts\DynScripts\EndPointType.js" />
     <Content Include="Assets\Scripts\MidLayerScripts\BingMapsInfoboxStyles.css" />
     <Content Include="Scripts\jquery.signalR-2.2.1.js" />
     <Content Include="Scripts\jquery.signalR-2.2.1.min.js" />
@@ -260,6 +261,11 @@
     <Content Include="Views\LocationViews\_MonitorView_List.cshtml" />
     <Content Include="Views\LocationViews\_MonitorView.cshtml" />
     <Content Include="Views\Reports\Index.cshtml" />
+    <Content Include="Views\EndpointTypes\_Add.cshtml" />
+    <Content Include="Views\EndpointTypes\_Delete.cshtml" />
+    <Content Include="Views\EndpointTypes\_Edit.cshtml" />
+    <Content Include="Views\EndpointTypes\_List.cshtml" />
+    <Content Include="Views\EndpointTypes\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Assets\Imgs\Wizard.png" />
@@ -732,7 +738,6 @@
     <Folder Include="Imgs\ThingCategorys\" />
     <Folder Include="Views\Base\" />
     <Folder Include="Views\DynSettings\" />
-    <Folder Include="Views\EndpointTypes\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

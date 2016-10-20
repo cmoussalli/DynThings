@@ -1,0 +1,39 @@
+﻿@model PagedList.IPagedList<DynThings.Data.Models.EndPointType>
+
+<table class="table striped hovered border bordered">
+    <thead>
+        <tr>
+            <th>Title</th>
+            <th>Icon</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+            <td>
+                <img src="~/Imgs/@(item.IconID.ToString() + ".png")" />
+            </td>
+           
+            <td>
+                <button class="btn btn-warning pull-right" onclick="LoadPart_DialogEndPointTypeEdit(@item.ID)" data-toggle="modal" data-target="#mdl">Edit</button>
+                <button class="btn btn-danger pull-right" onclick="LoadPart_DialogEndPointTypeDelete(@item.ID)" data-toggle="modal" data-target="#mdl">Delete</button>
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>
+
+
+<div id="EndPointTypesListPager">
+    <input id="EndPointTypeCurrentPage" value="@Model.PageNumber.ToString()" hidden />
+   
+
+    @Html.PagedListPager(Model, page => Url.Action("ListPV", new { page }))
+</div>
+

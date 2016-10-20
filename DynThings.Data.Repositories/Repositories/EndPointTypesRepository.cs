@@ -12,6 +12,7 @@ using System.Text;
 using System.Threading.Tasks;
 using DynThings.Data.Models;
 using DynThings.Core;
+using PagedList;
 
 namespace DynThings.Data.Repositories
 {
@@ -25,6 +26,16 @@ namespace DynThings.Data.Repositories
         }
         #endregion
 
+        #region Get PagedList
+        public IPagedList GetPagedList(string search, int pageNumber, int recordsPerPage)
+        {
+            IPagedList typs = db.EndPointTypes
+              .Where(e => e.ID > 0 && search == null || e.ID > 0 && e.Title.Contains(search))
+              .OrderBy(e => e.Title).ToList()
+              .ToPagedList(pageNumber, recordsPerPage);
+            return typs;
+        }
+        #endregion
 
         #region GetList
         /// <summary>
@@ -62,7 +73,7 @@ namespace DynThings.Data.Repositories
 
         #endregion
 
-        #region Create
+        #region Add
         public ResultInfo.Result Add(string Title, string measurment, long TypeCategoryID, long IconID)
         {
             try
@@ -75,6 +86,60 @@ namespace DynThings.Data.Repositories
                 db.EndPointTypes.Add(epType);
                 db.SaveChanges();
                 return ResultInfo.GenerateOKResult("Saved", epType.ID);
+            }
+            catch
+            {
+                return ResultInfo.GetResultByID(1);
+            }
+        }
+
+        #endregion
+
+        #region Edit
+        public ResultInfo.Result Edit(long ID, string Title, string measurment, long TypeCategoryID, long IconID)
+        {
+            try
+            {
+                List<EndPointType> endTypes = db.EndPointTypes.Where(et => et.ID == ID).ToList();
+                if (endTypes.Count == 1)
+                {
+                    endTypes[0].Title = Title;
+                    endTypes[0].measurement = measurment;
+                    endTypes[0].TypeCategoryID = TypeCategoryID;
+                    endTypes[0].IconID = IconID;
+                    db.EndPointTypes.Add(endTypes[0]);
+                    db.SaveChanges();
+                    return ResultInfo.GenerateOKResult("Saved", endTypes[0].ID);
+                }
+                else
+                {
+                    return ResultInfo.GetResultByID(1);
+                }
+            }
+            catch
+            {
+                return ResultInfo.GetResultByID(1);
+            }
+        }
+
+        #endregion
+
+        #region Delete
+        public ResultInfo.Result Delete(long ID)
+        {
+            try
+            {
+                List<EndPointType> endTypes = db.EndPointTypes.Where(et => et.ID == ID).ToList();
+                if (endTypes.Count == 1)
+                {
+                    db.EndPointTypes.Remove(endTypes[0]);
+                    db.SaveChanges();
+                    return ResultInfo.GenerateOKResult("Deleted", endTypes[0].ID);
+                }
+                else
+                {
+                    return ResultInfo.GetResultByID(1);
+                }
             }
             catch
             {

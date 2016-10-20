@@ -89,8 +89,8 @@ namespace DynThings.WebPortal.Controllers
         [HttpGet]
         public PartialViewResult EditPV(long id)
         {
-            ViewBag.IconID = new SelectList(UnitOfWork_Repositories.repoMediaFiles.GetList(), "ID", "Title", 1);
             ThingCategory thingCategory = UnitOfWork_Repositories.repoThingCategorys.Find(id);
+            ViewBag.IconID = new SelectList(UnitOfWork_Repositories.repoMediaFiles.GetList(), "ID", "Title", thingCategory.IconID);
             return PartialView("_Edit", thingCategory);
         }
 
