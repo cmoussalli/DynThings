@@ -81,5 +81,25 @@ namespace DynThings.Data.Repositories
             return ResultInfo.GenerateOKResult("Saved");
         }
         #endregion
+
+        #region Update: Reset PlatformKey
+        public ResultInfo.Result ResetPlatform()
+        {
+            List<DynSetting> cons = db.DynSettings.Where(l => l.ID == 1).ToList();
+            if (cons.Count == 1)
+            {
+
+                cons[0].PlatformKey = Guid.NewGuid();
+                cons[0].PlatformTitle = "";
+                db.SaveChanges();
+                Core.Config.Refresh();
+            }
+            else
+            {
+                return ResultInfo.GetResultByID(1);
+            }
+            return ResultInfo.GenerateOKResult("Reset Ok");
+        }
+        #endregion
     }
 }

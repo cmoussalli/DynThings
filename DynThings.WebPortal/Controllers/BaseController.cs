@@ -18,15 +18,33 @@ namespace DynThings.WebPortal.Controllers
 
         #endregion
 
+        #region Overrides
         #region Initialize
         protected override void Initialize(RequestContext requestContext)
         {
             base.Initialize(requestContext);
+
+            //Get the current User Info
             currentUser = UnitOfWork_Repositories.repoDynUsers.Find(User.Identity.GetUserId());
         }
 
         #endregion
 
+        #region OnActionExecuting
+        protected override void OnActionExecuting(ActionExecutingContext filterContext)
+        {
+            if (Core.Config.PlatformTitle == "")
+            {
+                filterContext.Result = new RedirectToRouteResult(
+                    new RouteValueDictionary {{ "Controller", "Setup" },
+                                      { "Action", "Index" } });
+            }
+
+            base.OnActionExecuting(filterContext);
+        }
+        #endregion
+
+        #endregion
 
         public bool ValidateUserPermissions( bool monitorAndControlIsAllowed,bool monitorOnlyIsAllowed)
         {

@@ -73,6 +73,20 @@ namespace DynThings.WebPortal.Controllers
             ViewBag.TimeZone = new SelectList(StaticMenus.GetRegionalTimeOptions(), 0);
             return PartialView("_Config");
         }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult PlatformConfigPV([Bind(Include = "Title,DevelopmentMode,PublicAccess,PublicSignUp,TimeZone")] Core.SetupModels.PlatformConfig config)
+        {
+            ResultInfo.Result res = ResultInfo.GenerateErrorResult("Binding Error");
+            if (ModelState.IsValid)
+            {
+                Core.Config.Setup(config.Title, config.PublicAccess, config.PublicSignUp, config.TimeZone, config.DevelopmentMode);
+                res = ResultInfo.GenerateOKResult("Saved");
+                return Json(res);
+            }
+            return Json(res);
+        }
         #endregion
 
         #region Publish

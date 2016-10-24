@@ -1,4 +1,5 @@
-﻿
+﻿@model DynThings.Data.Models.DynSetting
+
 @{
     ViewBag.Title = "Config";
 }
@@ -16,6 +17,7 @@
                 <li><a data-toggle="tab" href="#tabConfigsecurity">Security</a></li>
                 <li><a data-toggle="tab" href="#tabConfigDevMode">Dev Mode</a></li>
                 <li><a data-toggle="tab" href="#tabConfigDevkeys">Dev Keys</a></li>
+                <li><a data-toggle="tab" href="#tabConfigReset">Reset</a></li>
             </ul>
             <div class="panel panel-default">
                 <div class="panel-body">
@@ -44,6 +46,11 @@
                         </div>
                         <div id="tabConfigDevkeys" class="tab-pane fade">
                             <div id="divConfigDevkeys">
+                            </div>
+                        </div>
+                        <div id="tabConfigReset" class="tab-pane fade">
+                            <div id="divConfigReset">
+                                @Html.Partial("_Reset",Model)
                             </div>
                         </div>
                     </div>

@@ -12,39 +12,79 @@
         @Html.AntiForgeryToken()
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
-        <span>Platform Title</span>
-        @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control" } })
-        @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
+        <div class="row">
+            <div class="col-md-3">
+                <h5>Platform Title</h5>
+            </div>
+            <div class="col-md-9">
+                @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
+            </div>
+        </div>
         <br />
 
-        <span>Public Access</span>
-        @Html.EditorFor(model => model.PublicAccess, new { htmlAttributes = new { @class = "form-control" } })
-        @Html.ValidationMessageFor(model => model.PublicAccess, "", new { @class = "text-danger" })
+        <div class="row">
+            <div class="col-md-3">
+                <h5>Public Access</h5>
+            </div>
+            <div class="col-md-9">
+                @Html.EditorFor(model => model.PublicAccess, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.PublicAccess, "", new { @class = "text-danger" })
+            </div>
+        </div>
         <br />
 
-        <span>Public SignUp</span>
-        @Html.EditorFor(model => model.PublicSignUp, new { htmlAttributes = new { @class = "form-control" } })
-        @Html.ValidationMessageFor(model => model.PublicSignUp, "", new { @class = "text-danger" })
+        <div class="row">
+            <div class="col-md-3">
+                <h5>Public Sign UP</h5>
+            </div>
+            <div class="col-md-9">
+                @Html.EditorFor(model => model.PublicSignUp, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.PublicSignUp, "", new { @class = "text-danger" })
+            </div>
+        </div>
         <br />
 
-        <span>Local Time Zone</span>
-        @Html.DropDownList("TimeZone", null, htmlAttributes: new { @class = "form-control" })
-        @Html.ValidationMessageFor(model => model.TimeZone, "", new { @class = "text-danger" })
+        <div class="row">
+            <div class="col-md-3">
+                <h5>Local Time Zone</h5>
+            </div>
+            <div class="col-md-9">
+                @Html.DropDownList("TimeZone", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.TimeZone, "", new { @class = "text-danger" })
+            </div>
+        </div>
         <br />
 
-        <span>Development Mode</span>
-        @Html.EditorFor(model => model.DevelopmentMode, new { htmlAttributes = new { @class = "form-control" } })
-        @Html.ValidationMessageFor(model => model.DevelopmentMode, "", new { @class = "text-danger" })
-        <br />
-
+        <div class="row">
+            <div class="col-md-3">
+                <h5>Development Mode</h5>
+            </div>
+            <div class="col-md-9">
+                @Html.EditorFor(model => model.DevelopmentMode, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.DevelopmentMode, "", new { @class = "text-danger" })
+            </div>
+        </div>
     }
-    @*<div class="modal-footer">
-        <button type="button" class="btn btn-default" onclick="btnTestDatabaseConnection()">Test Connection</button>
-        <button type="button" class="btn btn-primary" onclick="btnSaveDatabaseConnection()">Save</button>
-    </div>*@
-</div>
-
-
+  </div>
 
 <script>
+    function SubmitSetupConfigForm() {
+        var url = getRootURL() + 'Setup/PlatformConfigPV'
+        var formData = $('#SetupPlatformConfigForm').serialize();
+        $.ajax({
+            url: url,
+            type: "POST",
+            data: formData,
+            dataType: "json",
+            success: function (resp) {
+                ServerResponse(resp);
+                IPublishSwitch = 3;
+                PublishSwitch();
+            },
+            error: function (resp) {
+                ServerResponse(resp);
+            }
+        })
+    };
 </script>

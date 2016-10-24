@@ -30,6 +30,17 @@ namespace DynThings.Core
             db = new DynThingsEntities();
 
         }
+        public static void Setup(string title, bool publicAccess, bool publicSignUp, int appLocalTime, bool developmentMode)
+        {
+            DynSetting dset = db.DynSettings.First();
+            dset.PlatformTitle = title;
+            dset.PublicAccess = publicAccess;
+            dset.PublicSignUP = PublicSignUP;
+            dset.App_TimeZone = appLocalTime;
+            dset.DevelopmentMode = developmentMode;
+            db.SaveChanges();
+        }
+
 
         public static float DBVersion
         {
@@ -146,10 +157,10 @@ namespace DynThings.Core
             dset.PlatformKey = newKey;
             db.SaveChanges();
         }
-        public static void SetApp_TimeZone(int recordsCount)
+        public static void SetApp_TimeZone(int timeZone)
         {
             DynSetting dset = db.DynSettings.First();
-            dset.App_TimeZone = recordsCount;
+            dset.App_TimeZone = timeZone;
             db.SaveChanges();
         }
         public static void SetPlatformTitle(string title)

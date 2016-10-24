@@ -266,6 +266,8 @@
     <Content Include="Views\EndpointTypes\_Edit.cshtml" />
     <Content Include="Views\EndpointTypes\_List.cshtml" />
     <Content Include="Views\EndpointTypes\Index.cshtml" />
+    <Content Include="Views\Config\_Reset.cshtml" />
+    <Content Include="Views\Setup\Complete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Assets\Imgs\Wizard.png" />

@@ -66,7 +66,6 @@ namespace DynThings.WebPortal.Controllers
         [HttpGet]
         public PartialViewResult AddPV()
         {
-
             ViewBag.TypeID = new SelectList(UnitOfWork_Repositories.repoEndpointTypes.GetList(), "ID", "Title", 1);
             ViewBag.DeviceID = new SelectList(UnitOfWork_Repositories.repoDevices.GetList(), "ID", "Title", 1);
             ViewBag.ThingID = new SelectList(UnitOfWork_Repositories.repoThings.GetList(false), "ID", "Title", 1);

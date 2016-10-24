@@ -17,7 +17,7 @@ namespace DynThings.WebPortal.Controllers
         public ActionResult Index()
         {
             DynSetting config = UnitOfWork_Repositories.repoDynSettings.GetConfig();
-            return View();
+            return View("Index", config);
         }
 
 
@@ -73,5 +73,28 @@ namespace DynThings.WebPortal.Controllers
             return Json(res);
         }
         #endregion
+
+        #region ResetPV
+        [HttpGet]
+        public PartialViewResult ResetPV()
+        {
+            DynSetting config = UnitOfWork_Repositories.repoDynSettings.GetConfig();
+            return PartialView("_Reset", config);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult ResetPV([Bind(Include = "PlatformKey")] DynSetting config)
+        {
+            ResultInfo.Result res = ResultInfo.GetResultByID(1);
+            if (ModelState.IsValid)
+            {
+                res = UnitOfWork_Repositories.repoDynSettings.ResetPlatform();
+                return Json(res);
+            }
+            return Json(res);
+        }
+        #endregion
+
     }
 }
