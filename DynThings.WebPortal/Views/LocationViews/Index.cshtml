@@ -3,28 +3,41 @@
 @{
     ViewBag.Title = "Location Views";
 }
-<div class="container">
-    <div class="page-header">
-        <h1>Location Views</h1>
-    </div>
-    <div class="row">
-        <div class="col-md-6">
-            <button type="button" class="btn btn-info" onclick="LoadPart_DialogLocationViewAdd()" data-toggle="modal" data-target="#mdl">Add</button>
+
+<!--Page Title-->
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<div id="page-title">
+    <h1 class="page-header text-overflow">Location Views</h1>
+    <!--Searchbox-->
+    <div class="searchbox">
+        <div class="input-group custom-search-form">
+            <input type="search" id="txtLocationViewSearch" class="form-control" onkeydown="if (event.keyCode == 13) { LoadPart_LocationViewListDiv(); return false; }" />
+            <span class="input-group-btn">
+                <button class="text-muted" type="button" ><i class="demo-pli-magnifi-glass"></i></button>
+            </span>
         </div>
-        <div class="col-md-6">
-            <div class="input-group">
-                <input type="search" id="txtLocationViewSearch" class="form-control" onkeydown="if (event.keyCode == 13) { LoadPart_LocationViewListDiv(); return false; }" />
-                <div class="input-group-btn">
-                    <button type="button" class="btn btn-primary" onclick="LoadPart_LocationViewListDiv()">Search</button>
-                </div>
-            </div>
-        </div>
-    </div>
-    <br />
-<br />
-    <div id="divLocationViewsList">
     </div>
 </div>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--End page title-->
+<!--Page content-->
+<!--===================================================-->
+<div id="page-content">
+
+        <div class="row">
+            <div class="col-xs-3 col-sm-2 col-md-6">
+                <button type="button" class="btn btn-info" onclick="LoadPart_DialogLocationViewAdd()" data-toggle="modal" data-target="#mdl">Add</button>
+            </div>
+       
+        </div>
+        <br />
+        <br />
+        <div id="divLocationViewsList">
+        </div>
+
+
+</div>
+
 @section scriptfiles{
     <script src="~/Assets/Scripts/DynScripts/LocationViews.js"></script>
 }
@@ -32,6 +45,7 @@
     $(document).ready(function () {
         LoadPart_LocationViewListDiv();
         AttachEventLocationViewsListPager();
+        
     });
 
 </script>

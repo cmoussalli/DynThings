@@ -5,7 +5,7 @@
     @Html.AntiForgeryToken()
     <div class="form-group">
         @Html.LabelFor(model => model.DevelopmentMode, htmlAttributes: new { @class = "" })
-        @Html.EditorFor(model => model.DevelopmentMode, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.EditorFor(model => model.DevelopmentMode, new { htmlAttributes = new { @class = "" } })
         @Html.ValidationMessageFor(model => model.DevelopmentMode, "", new { @class = "text-danger" })
     </div>
     <br />

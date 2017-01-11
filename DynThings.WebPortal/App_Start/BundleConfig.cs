@@ -19,9 +19,10 @@ namespace DynThings.WebPortal
             bundles.Add(new ScriptBundle("~/bundles/modernizr").Include(
                         "~/Scripts/modernizr-*"));
 
-            bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
+            bundles.Add(new ScriptBundle("~/bundles/bootstrapjs").Include(
                 "~/Scripts/bootstraps.js",
                       "~/Scripts/bootstrap.js",
+                      "~/Scripts/nifty.min.js",
                       "~/Scripts/respond.js"));
 
             //bootstrap-notify
@@ -39,8 +40,8 @@ namespace DynThings.WebPortal
                     "~/Scripts/bootstrap-wizard/jquery.bootstrap.wizard.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
-                      "~/Content/bootstrap.css",
-                      "~/Content/site.css"));
+                      "~/Content/css/bootstrap.min.css",
+                      "~/Content/css/nifty.min.css"));
 
          
         }

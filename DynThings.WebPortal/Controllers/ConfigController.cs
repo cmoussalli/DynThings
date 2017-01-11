@@ -89,6 +89,7 @@ namespace DynThings.WebPortal.Controllers
             ResultInfo.Result res = ResultInfo.GetResultByID(1);
             if (ModelState.IsValid)
             {
+                Session.Clear();
                 res = UnitOfWork_Repositories.repoDynSettings.ResetPlatform();
                 return Json(res);
             }

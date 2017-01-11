@@ -25,6 +25,12 @@ namespace DynThings.Data.Repositories
         }
         #endregion
 
+        #region GetCount
+        public int GetCount()
+        {
+            return db.Endpoints.Count();
+        }
+        #endregion
 
         #region GetList
         public List<Endpoint> GetList(bool EnableUnspecified)

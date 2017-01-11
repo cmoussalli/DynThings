@@ -1,26 +1,20 @@
 ﻿@model DynThings.Core.SetupModels.DatabaseSetup
 
-<div class="modal-header">
-    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-    <h4 class="modal-title" id="myModalLabel">Database</h4>
-</div>
+@using (Html.BeginForm("DatabaseConfigPV", "Setup", FormMethod.Post, new { id = "SetupDatabaseForm" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
-<div class="modal-body">
-    @using (Html.BeginForm("DatabaseConfigPV", "Setup", FormMethod.Post, new { id = "SetupDatabaseForm" }))
-    {
-        @Html.AntiForgeryToken()
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-
-        <div class="row">
-            <div class="col-md-3">
-                <h5>Server</h5>
-            </div>
-            <div class="col-md-9">
-                @Html.EditorFor(model => model.Server, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Server, "", new { @class = "text-danger" })
-            </div>
+    <div class="row">
+        <div class="col-md-3">
+            <h5>Server</h5>
         </div>
-       <br />
+        <div class="col-md-9">
+            @Html.EditorFor(model => model.Server, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Server, "", new { @class = "text-danger" })
+        </div>
+    </div>
+        <br />
         <div class="row">
             <div class="col-md-3">
                 <h5>Database</h5>
@@ -33,7 +27,7 @@
         <br />
         <div class="row">
             <div class="col-md-3">
-                <h5>Database</h5>
+                <h5>User</h5>
             </div>
             <div class="col-md-9">
                 @Html.EditorFor(model => model.User, new { htmlAttributes = new { @class = "form-control" } })
@@ -43,7 +37,7 @@
         <br />
         <div class="row">
             <div class="col-md-3">
-                <h5>Database</h5>
+                <h5>Password</h5>
             </div>
             <div class="col-md-9">
                 @Html.EditorFor(model => model.Password)
@@ -51,15 +45,15 @@
             </div>
         </div>
 
-    }
-    <div class="modal-footer">
-        <div id="divSetupDabaseStatus" class="pull-left alert">
-            <span id="lblSetupDabaseStatus"></span>
-        </div>
-        <button type="button" class="btn btn-default" onclick="btnTestDatabaseConnection()">Test Connection</button>
-        <button type="button" class="btn btn-primary" onclick="btnSaveDatabaseConnection()">Save</button>
+}
+<div class="modal-footer">
+    <div id="divSetupDabaseStatus" class="pull-left alert">
+        <span id="lblSetupDabaseStatus"></span>
     </div>
+    <button type="button" class="btn btn-default" onclick="btnTestDatabaseConnection()">Test Connection</button>
+    <button type="button" class="btn btn-primary" onclick="btnSaveDatabaseConnection()">Save</button>
 </div>
+
 
 
 
@@ -69,7 +63,19 @@
         $('#Password').addClass('form-control text-box single-line');
     });
 
+
+
+    function btnSaveDatabaseConnection() {
+        SaveDatabaseConnection();
+    };
+
     function btnTestDatabaseConnection() {
+        isPublish = 0;
+        TestDatabaseConnection();
+    };
+
+
+    function TestDatabaseConnection() {
         var url = getRootURL() + 'Setup/DatabaseConfigTest';
         var formData = $("#SetupDatabaseForm").serialize();
         $('#divSetupDabaseStatus').text('Testing Database Connection ...');
@@ -85,28 +91,28 @@
                     $('#divSetupDabaseStatus').text('Database Connection Ok');
                     ClearLblConnectionTestStatusStyles();
                     $('#divSetupDabaseStatus').addClass('alert-success');
-                    IPublishSwitch = 1;
-                    PublishSwitch();
+                    if (isPublish == 1) {
+                        IPublishSwitch = 1;
+                        PublishSwitch();
+                    }
                 } else {
                     $('#divSetupDabaseStatus').text('Database Connection Failed');
                     ClearLblConnectionTestStatusStyles();
                     $('#divSetupDabaseStatus').addClass('alert-danger');
-                    ServerResponse(resp);
+                    //ServerResponse(resp);
+                    alert('4');
                 }
 
             },
             error: function () {
-                ServerResponse(resp);
+                //ServerResponse(resp);
+                alert('3');
                 ClearLblConnectionTestStatusStyles();
                 $('#divSetupDabaseStatus').addClass('alert-danger');
             }
 
         })
 
-    };
-
-    function btnSaveDatabaseConnection() {
-        SaveDatabaseConnection();
     };
 
     function SaveDatabaseConnection() {
@@ -124,17 +130,19 @@
                 PublishSwitch();
             },
             error: function () {
-                ServerResponse(resp);
+                alert('2');
+                //ServerResponse(resp);
                 IPublishSwitch = 99;
                 PublishSwitch();
             }
         })
     };
 
-
     function ClearLblConnectionTestStatusStyles() {
         $('#divSetupDabaseStatus').removeClass('alert-success');
         $('#divSetupDabaseStatus').removeClass('alert-info');
         $('#divSetupDabaseStatus').removeClass('alert-danger');
     };
+
+
 </script>

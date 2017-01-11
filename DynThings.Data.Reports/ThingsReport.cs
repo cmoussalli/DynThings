@@ -530,7 +530,6 @@ namespace DynThings.Data.Reports
             resultMin.Add(rpt1.C10.GetValueOrDefault());
             resultMin.Add(rpt1.C11.GetValueOrDefault());
             resultMin.Add(rpt1.C12.GetValueOrDefault());
-            resultMin.Reverse();
             s1.Data = resultMin;
             hc.series.Add(s1);
             #endregion
@@ -552,7 +551,6 @@ namespace DynThings.Data.Reports
             resultMax.Add(rpt2.C10.GetValueOrDefault());
             resultMax.Add(rpt2.C11.GetValueOrDefault());
             resultMax.Add(rpt2.C12.GetValueOrDefault());
-            resultMax.Reverse();
             s2.Data = resultMax;
             hc.series.Add(s2);
             #endregion
@@ -574,7 +572,6 @@ namespace DynThings.Data.Reports
             resultAvg.Add(rpt3.C10.GetValueOrDefault());
             resultAvg.Add(rpt3.C11.GetValueOrDefault());
             resultAvg.Add(rpt3.C12.GetValueOrDefault());
-            resultAvg.Reverse();
             s3.Data = resultAvg;
             hc.series.Add(s3);
             #endregion

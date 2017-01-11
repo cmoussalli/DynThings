@@ -17,7 +17,7 @@
         <br />
 
         @Html.LabelFor(model => model.isActive, htmlAttributes: new { @class = "" })
-        @Html.EditorFor(model => model.isActive, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.EditorFor(model => model.isActive, new { htmlAttributes = new { @class = "" } })
         @Html.ValidationMessageFor(model => model.isActive, "", new { @class = "text-danger" })
     </div>
 

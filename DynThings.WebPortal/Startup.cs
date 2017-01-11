@@ -1,5 +1,7 @@
 ﻿using Owin;
 using Microsoft.Owin;
+using System.Web.Mvc;
+
 [assembly: OwinStartup(typeof(DynThings.WebPortal.Startup))]
 [assembly: OwinStartupAttribute(typeof(DynThings.WebPortal.Startup))]
 
@@ -11,6 +13,7 @@ namespace DynThings.WebPortal
         {
             app.MapSignalR();
             ConfigureAuth(app);
+            //AreaRegistration.RegisterAllAreas();
         }
     }
 }

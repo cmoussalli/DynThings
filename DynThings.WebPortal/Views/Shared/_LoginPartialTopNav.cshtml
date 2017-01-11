@@ -1,0 +1,81 @@
+﻿@using DynThings.Data.Repositories;
+@using Microsoft.AspNet.Identity
+
+@if (Request.IsAuthenticated)
+{
+    <li><a href="#" data-toggle="modal" data-target="#mdlNotifications">Notifications <span id="lblNotificationsCount" class="badge badge-danger">0</span></a></li>
+    <li id="dropdown-user" class="dropdown">
+        @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+        {
+        @Html.AntiForgeryToken()
+        <a href="#" data-toggle="dropdown" class="dropdown-toggle text-right">
+            <span class="pull-right">
+                @*<i class="demo-pli-male ic-user"></i>*@
+            </span>
+            <div class="username hidden-xs" style="color:white;">@UnitOfWork_Repositories.repoDynUsers.GetUserName(User.Identity.GetUserId())</div>
+        </a>
+
+        <div class="dropdown-menu dropdown-menu-md dropdown-menu-right panel-default">
+            <!-- Dropdown heading  -->
+            @*<div class="pad-all bord-btm">
+                    <p class="text-main mar-btm"><span class="text-bold">750GB</span> of 1,000GB Used</p>
+                    <div class="progress progress-sm">
+                        <div class="progress-bar" style="width: 70%;">
+                            <span class="sr-only">70%</span>
+                        </div>
+                    </div>
+                </div>*@
+
+            <!-- User dropdown menu -->
+            @*<ul class="head-list">
+                <li>
+                    <a href="#" data-toggle="modal" data-target="#mdlNotifications">
+                        <span id="lblNotificationsCount" class="badge badge-danger pull-right">0</span>
+                        <i class="demo-pli-mail icon-lg icon-fw"></i> Notifications
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <i class="demo-pli-male icon-lg icon-fw"></i> Profile
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <span class="badge badge-danger pull-right">9</span>
+                        <i class="demo-pli-mail icon-lg icon-fw"></i> Messages
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <span class="label label-success pull-right">New</span>
+                        <i class="demo-pli-gear icon-lg icon-fw"></i> Settings
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <i class="demo-pli-information icon-lg icon-fw"></i> Help
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <i class="demo-pli-computer-secure icon-lg icon-fw"></i> Lock screen
+                    </a>
+                </li>
+            </ul>*@
+            <!-- Dropdown footer -->
+            <div class="pad-all text-right">
+                <a href="javascript:document.getElementById('logoutForm').submit()" class="btn btn-primary">
+                    <i class="demo-pli-unlock"></i> Logout
+                </a>
+            </div>
+        </div>
+        }
+    </li>
+
+    @Html.Partial("_SignalRClient");
+}
+else
+{
+    <li>@Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
+    <li>@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+}

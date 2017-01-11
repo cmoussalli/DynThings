@@ -14,7 +14,7 @@
     </RootPath>
     <RootNamespace>DynThings.DataBase</RootNamespace>
     <AssemblyName>DynThings.DataBase</AssemblyName>
-    <ModelCollation>1033, CI</ModelCollation>
+    <ModelCollation>1033,CI</ModelCollation>
     <DefaultFileStructure>BySchemaAndSchemaType</DefaultFileStructure>
     <DeployToDatabase>True</DeployToDatabase>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
@@ -23,6 +23,8 @@
     <SqlServerVerification>False</SqlServerVerification>
     <IncludeCompositeObjects>True</IncludeCompositeObjects>
     <TargetDatabaseSet>True</TargetDatabaseSet>
+    <DefaultCollation>SQL_Latin1_General_CP1_CI_AS</DefaultCollation>
+    <DefaultFilegroup>PRIMARY</DefaultFilegroup>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <OutputPath>bin\Release\</OutputPath>
@@ -57,59 +59,9 @@
   <Import Condition="'$(SQLDBExtensionsRefPath)' == ''" Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\SSDT\Microsoft.Data.Tools.Schema.SqlTasks.targets" />
   <ItemGroup>
     <Folder Include="Properties" />
-    <Folder Include="dbo\" />
-    <Folder Include="dbo\Tables\" />
-    <Folder Include="dbo\Views\" />
-    <Folder Include="dbo\Stored Procedures\" />
     <Folder Include="Scripts" />
   </ItemGroup>
   <ItemGroup>
-    <Build Include="dbo\Tables\UserNotificationTypes.sql" />
-    <Build Include="dbo\Tables\UserNotifications.sql" />
-    <Build Include="dbo\Tables\Things.sql" />
-    <Build Include="dbo\Tables\ThingCategorys.sql" />
-    <Build Include="dbo\Tables\ResultMessages.sql" />
-    <Build Include="dbo\Tables\MediaFiles.sql" />
-    <Build Include="dbo\Tables\LocationViewTypes.sql" />
-    <Build Include="dbo\Tables\LocationViews.sql" />
-    <Build Include="dbo\Tables\Locations.sql" />
-    <Build Include="dbo\Tables\LinkUsersAlerts.sql" />
-    <Build Include="dbo\Tables\LinkThingsLocations.sql" />
-    <Build Include="dbo\Tables\LinkLocationsLocationViews.sql" />
-    <Build Include="dbo\Tables\LinkDevicesLocations.sql" />
-    <Build Include="dbo\Tables\IOTypes.sql" />
-    <Build Include="dbo\Tables\EndPointTypes.sql" />
-    <Build Include="dbo\Tables\EndPointTypeCategorys.sql" />
-    <Build Include="dbo\Tables\Endpoints.sql" />
-    <Build Include="dbo\Tables\EndPointIOs.sql" />
-    <Build Include="dbo\Tables\EndPointCommands.sql" />
-    <Build Include="dbo\Tables\DynSettings.sql" />
-    <Build Include="dbo\Tables\DeviceStatus.sql" />
-    <Build Include="dbo\Tables\Devices.sql" />
-    <Build Include="dbo\Tables\DeviceIOs.sql" />
-    <Build Include="dbo\Tables\DeviceCommands.sql" />
-    <Build Include="dbo\Tables\AspNetUsers.sql" />
-    <Build Include="dbo\Tables\AspNetUserRoles.sql" />
-    <Build Include="dbo\Tables\AspNetUserLogins.sql" />
-    <Build Include="dbo\Tables\AspNetUserClaims.sql" />
-    <Build Include="dbo\Tables\AspNetRoles.sql" />
-    <Build Include="dbo\Tables\Alerts.sql" />
-    <Build Include="dbo\Tables\AlertLevels.sql" />
-    <Build Include="dbo\Tables\AlertConditionTypes.sql" />
-    <Build Include="dbo\Tables\AlertConditions.sql" />
-    <Build Include="dbo\Views\VThingEnds.sql" />
-    <Build Include="dbo\Stored Procedures\Rpt_ThingEnd_IOs_Months.sql" />
-    <Build Include="dbo\Stored Procedures\Rpt_ThingEnd_IOs_Minutes.sql" />
-    <Build Include="dbo\Stored Procedures\Rpt_ThingEnd_IOs_Hours.sql" />
-    <Build Include="dbo\Stored Procedures\Rpt_ThingEnd_IOs_Days.sql" />
-    <Build Include="dbo\Stored Procedures\Rpt_EndPoint_IOs_Months.sql" />
-    <Build Include="dbo\Stored Procedures\Rpt_EndPoint_IOs_MonthMAX.sql" />
-    <Build Include="dbo\Stored Procedures\Rpt_EndPoint_IOs_MonthAVG.sql" />
-    <Build Include="dbo\Stored Procedures\Rpt_EndPoint_IOs_Minutes.sql" />
-    <Build Include="dbo\Stored Procedures\Rpt_EndPoint_IOs_HOURs.sql" />
-    <Build Include="dbo\Stored Procedures\Rpt_EndPoint_IOs_Days.sql" />
-    <Build Include="dbo\Stored Procedures\ResetDB.sql" />
-    <Build Include="dbo\Stored Procedures\GetThingEnds.sql" />
     <PostDeploy Include="Scripts\Script.DefaultData.sql" />
   </ItemGroup>
   <ItemGroup>

@@ -26,6 +26,12 @@ namespace DynThings.Data.Repositories
         }
         #endregion
 
+        #region GetCount
+        public int GetCount()
+        {
+            return db.Things.Count();
+        }
+        #endregion
 
         #region GetList
         public List<Thing> GetList(bool EnableUnspecified)

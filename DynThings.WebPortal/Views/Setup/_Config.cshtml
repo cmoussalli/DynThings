@@ -1,10 +1,6 @@
 ﻿
 @model DynThings.Core.SetupModels.PlatformConfig
 
-<div class="modal-header">
-    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-    <h4 class="modal-title" id="myModalLabel">Configurations</h4>
-</div>
 
 <div class="modal-body">
     @using (Html.BeginForm("PlatformConfigPV", "Setup", FormMethod.Post, new { id = "SetupPlatformConfigForm" }))
@@ -18,29 +14,6 @@
             </div>
             <div class="col-md-9">
                 @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
-            </div>
-        </div>
-        <br />
-
-        <div class="row">
-            <div class="col-md-3">
-                <h5>Public Access</h5>
-            </div>
-            <div class="col-md-9">
-                @Html.EditorFor(model => model.PublicAccess, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.PublicAccess, "", new { @class = "text-danger" })
-            </div>
-        </div>
-        <br />
-
-        <div class="row">
-            <div class="col-md-3">
-                <h5>Public Sign UP</h5>
-            </div>
-            <div class="col-md-9">
-                @Html.EditorFor(model => model.PublicSignUp, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.PublicSignUp, "", new { @class = "text-danger" })
             </div>
         </div>
         <br />
@@ -58,15 +31,39 @@
 
         <div class="row">
             <div class="col-md-3">
+                <h5>Public Access</h5>
+            </div>
+            <div class="col-md-9">
+                @Html.EditorFor(model => model.PublicAccess, new { htmlAttributes = new { @class = "" } })
+            </div>
+        </div>
+        <br />
+
+        <div class="row">
+            <div class="col-md-3">
+                <h5>Public Sign UP</h5>
+            </div>
+            <div class="col-md-9">
+                @Html.EditorFor(model => model.PublicSignUp, new { htmlAttributes = new { @class = "" } })
+            </div>
+        </div>
+        <br />
+
+        <div class="row">
+            <div class="col-md-3">
                 <h5>Development Mode</h5>
             </div>
             <div class="col-md-9">
-                @Html.EditorFor(model => model.DevelopmentMode, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.DevelopmentMode, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => model.DevelopmentMode, new { htmlAttributes = new { @class = "" } })
             </div>
         </div>
+        <br />
+
     }
-  </div>
+</div>
+
+
+
 
 <script>
     function SubmitSetupConfigForm() {
@@ -78,12 +75,12 @@
             data: formData,
             dataType: "json",
             success: function (resp) {
-                ServerResponse(resp);
+                //ServerResponse(resp);
                 IPublishSwitch = 3;
                 PublishSwitch();
             },
             error: function (resp) {
-                ServerResponse(resp);
+                //ServerResponse(resp);
             }
         })
     };

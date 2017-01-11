@@ -11,6 +11,6 @@
 */
 
 select 
-	'0.134' as [DBVersion]
+	'0.135' as [DBVersion]
 	,NEWID() as [PlatformKey]
 into #ConfigTable 

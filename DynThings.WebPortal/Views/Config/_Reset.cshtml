@@ -11,16 +11,13 @@
                 <h3>Warning</h3><h5>Reset the Platform will remove all objects,data and customizations. All the IOs from devices will be ignored until you reconfig the devices with the suitable DevKeys.</h5>
             </div><br />
 
-
             <div class="modal-body">
-
                 @Html.AntiForgeryToken()
                 @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                 @Html.HiddenFor(model => model.ID)
                 @Html.HiddenFor(model => model.PlatformKey)
                 <span>Are you sure you want to reset the entire Platform ?</span><br /><br />
                 <span>Title: @Model.PlatformTitle</span><br />
-
             </div>
             <div class="modal-footer">
                 <button type="submit" class="btn btn-danger">Reset</button>
@@ -30,7 +27,8 @@
 </div>
 
 <script>
-    //Attach : Delete Form Submit
+
+    //Attach : Reset Form Submit
     $(document).ready(function () {
         $("#ConfigResetForm").on("submit", function (event) {
             event.preventDefault();

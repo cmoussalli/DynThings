@@ -1,30 +1,39 @@
-﻿ @model IPagedList<DynThings.Data.Models.Location>
+﻿@model IPagedList<DynThings.Data.Models.Location>
 
-<div style="overflow-y:auto;">
+<div class="panel">
+    <div class="panel-body">
+        <table class="table table-hover table-vcenter">
+            @*<thead>
+                    <tr>
+                        <th class="min-width">Device</th>
+                        <th>Name</th>
+                        <th class="text-center">Value</th>
+                    </tr>
+                </thead>*@
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td><h3>@item.ID</h3></td>
+                        @*<td class="text-center"><i class="demo-pli-smartphone-3 icon-2x"></i></td>*@
+                        <td style="cursor:pointer" onclick="SelectMonitorLocationsFromList(@item.ID);">
+                            <span class="text-main text-semibold">@item.Title</span>
+                            <br>
+                            <small class="text-muted">@item.Things.Count Endpoint(s)</small>
+                        </td>
+                        @*<td class="text-center"><span class="text-success text-semibold">+ 35.76%</span></td>*@
+                    </tr>
+                    @*<div id="divMonitorLocationsListDet_@item.ID" class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
 
-    <div class="list-group" >
-        @foreach (var item in Model)
-        {
-            <div class="list-group-item">
-                <div class="row" style="cursor:pointer" onclick="SelectMonitorLocationsFromList(@item.ID);">
-                    <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
-                        <h5><span>@item.ID <strong>@item.Title</strong></span></h5>
-                     
-
-                    </div>
-                    <div id="divMonitorLocationsListDet_@item.ID" class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
-                        
-                    </div>
-                </div>
-            </div> 
-        }
+                        </div>*@
+                }
+            </tbody>
+        </table>
     </div>
-
 </div>
 
 <script>
-    function SelectMonitorLocationsFromList(locationID)
-    {
+    function SelectMonitorLocationsFromList(locationID) {
         LoadPart_MonitorLocation(locationID);
         SelectMonitorLocationsFromMap(locationID);
     }

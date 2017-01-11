@@ -25,6 +25,12 @@ namespace DynThings.Data.Repositories
         }
         #endregion
 
+        #region GetCount
+        public int GetCount()
+        {
+            return db.Locations.Count();
+        }
+        #endregion
 
         #region GetList
         /// <summary>

@@ -1,6 +1,9 @@
 ﻿@model DynThings.Data.Models.LocationView
+
 @{
     ViewBag.Title = "Monitor";
+    Layout = "~/Views/Shared/_LayoutMonitor.cshtml";
+
 }
 
 <div hidden="hidden">
@@ -8,19 +11,19 @@
     <input id="SelectedEndPointID" type="text" />
 </div>
 
-<div class="container-fluid fullHeight" >
-    <div class="row fullHeight" >
+<div class="container-fluid fullHeight">
+    <div class="row fullHeight">
         <div id="divMonitorPrimaryContrainer" class="col-lg-9 col-md-9 col-sm-8 col-sm-12 nopadding" style="height:100%">
-            <div id="divMonitorView"  style="height:100%">
+            <div id="divMonitorView" style="height:100%">
                 @Html.Partial("_MonitorView", Model)
             </div>
             <div id="divMonitorDetails" style="height:100%; display:none">
 
             </div>
         </div>
-       
+
         <div id="divMonitorSecondaryContainer" class="col-lg-3 col-md-3 col-sm-4 col-xs-12 nopadding">
-            <div  id="divMonitorLocation"></div>
+            <div id="divMonitorLocation"></div>
         </div>
     </div>
 </div>
@@ -31,7 +34,7 @@
     <script src="~/Scripts/Gauges/raphael-2.1.4.min.js"></script>
     <script src="~/Scripts/MsMaps/mapcontrol.js"></script>
     <script src="~/Assets/Scripts/DynScripts/Monitor.js"></script>
-<script src="~/Assets/Scripts/DynScripts/Monitor_SignalR.js"></script>
+    <script src="~/Assets/Scripts/DynScripts/Monitor_SignalR.js"></script>
     <script src="~/Assets/Scripts/DynScripts/Things.js"></script>
     <script src="~/Assets/Scripts/DynScripts/EndPointCommands.js"></script>
 
@@ -50,10 +53,10 @@
 
 <style type="text/css">
     html, body {
-        overflow-y:hidden;
+        overflow-y: hidden;
         height: 100%;
         margin: 0px;
         padding: 0px;
-        padding-top: 12px;
+        padding-top: 0px;
     }
 </style>

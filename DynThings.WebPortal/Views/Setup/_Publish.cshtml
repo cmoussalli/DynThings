@@ -1,29 +1,20 @@
 ﻿@model DynThings.Core.SetupModels.DatabaseSetup
 
-<div class="modal-header">
-    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-    <h4 class="modal-title" id="myModalLabel">Finish</h4>
+<span id="lblDBSummary"></span>
+<br />
+<div id="divPublishStatus" class="pull-left alert">
+    <span id="lblPublishStatus"></span>
 </div>
-
-<div class="modal-body">
-
-    <span>Database Connection :</span>
-    <br />
-
-    <span id="lblDBSummary"></span>
-    <br />
-
-
-    <div id="divPublishStatus" class="pull-left alert">
-        <span id="lblPublishStatus"></span>
+<br />
+<br />
+<div class="progress progress-striped">
+    <div id="progPublishStatus" class="progress-bar progress-bar-blue  active" role="progressbar" style="width: 0%">
     </div>
-    <div class="progress">
-        <div id="progPublishStatus" class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%">
-            <span id="lblprogPublishStatus" class="sr-only"></span>
-        </div>
-    </div>
-
 </div>
+<br />
+<br />
+<span id="lblprogPublishStatus" class="sr-only"></span>
+
 
 <script>
 

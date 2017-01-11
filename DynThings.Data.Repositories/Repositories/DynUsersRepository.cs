@@ -19,6 +19,12 @@ namespace DynThings.Data.Repositories
         }
         #endregion
 
+        #region GetCount
+        public int GetCount()
+        {
+            return db.AspNetUsers.Count();
+        }
+        #endregion
 
         #region Get PagedList
         public IPagedList GetPagedList(string search, int pageNumber, int recordsPerPage)
@@ -83,7 +89,7 @@ namespace DynThings.Data.Repositories
         #endregion
 
 
-        #region Methods
+        #region Extra Methods
         #region Get User Name
         public string GetUserName(string ID)
         {
@@ -91,6 +97,21 @@ namespace DynThings.Data.Repositories
             return usr.FullName;
         }
         #endregion
+
+        #region IsAdminitratorsExists
+        public bool IsAdminitratorsExists()
+        {
+            bool result = false;
+
+            List<AspNetUser> usrs = db.AspNetUsers.Where(u => u.AspNetRoles.Any(r => r.Id == "1")).ToList();
+            if (usrs.Count > 0)
+            {
+                result = true;
+            }
+            return result ;
+        }
+        #endregion
+
 
         #endregion
 

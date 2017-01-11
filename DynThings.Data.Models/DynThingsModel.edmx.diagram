@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="153eea3d35a046aa8fab5470a9c25b99" Name="Diagram1" ZoomLevel="97">
+      <Diagram DiagramId="153eea3d35a046aa8fab5470a9c25b99" Name="Diagram1" ZoomLevel="63">
         <EntityTypeShape EntityType="DynThingsModel.AlertCondition" Width="1.5" PointX="14.5" PointY="8.5" />
         <EntityTypeShape EntityType="DynThingsModel.AlertConditionType" Width="1.5" PointX="12.25" PointY="9.625" />
         <EntityTypeShape EntityType="DynThingsModel.AlertLevel" Width="1.5" PointX="8.75" PointY="1.5" />
@@ -71,7 +71,14 @@
         <AssociationConnector Association="DynThingsModel.FK__Endpoints__Thing__7EF6D905" />
         <AssociationConnector Association="DynThingsModel.FK__Endpoints__TypeI__45F365D3" />
         <AssociationConnector Association="DynThingsModel.FK__EndPointT__TypeC__47DBAE45" />
-      </Diagram>
+        <EntityTypeShape EntityType="DynThingsModel.AppStatuss" Width="1.5" PointX="14.375" PointY="25" />
+        <EntityTypeShape EntityType="DynThingsModel.AppAPIEntity" Width="1.5" PointX="18.875" PointY="24.75" />
+        <EntityTypeShape EntityType="DynThingsModel.App" Width="1.5" PointX="16.625" PointY="24" />
+        <EntityTypeShape EntityType="DynThingsModel.SystemEntity" Width="1.5" PointX="16.625" PointY="21" />
+        <AssociationConnector Association="DynThingsModel.FK__AppEntity__AppID__5EDF0F2E" />
+        <AssociationConnector Association="DynThingsModel.FK__AppEntity__Entit__5FD33367" />
+        <AssociationConnector Association="DynThingsModel.FK__Apps__StatusID__4F9CCB9E" />
+        </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
 </edmx:Edmx>

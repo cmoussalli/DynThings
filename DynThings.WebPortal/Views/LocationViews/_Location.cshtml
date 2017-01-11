@@ -1,7 +1,7 @@
 ﻿@model DynThings.Data.Models.Location
 <div class="fullHeight">
 
-    <nav class="navbar navbar-default">
+    <nav class="navbar">
         <div class="container-fluid">
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
@@ -12,7 +12,7 @@
                             <li><a href="#">Devices</a></li>
                             <li><a href="#">EndPoints</a></li>
                             <li role="separator" class="divider"></li>
-                            <li><a id="btnAlert1" href="#" onclick="AndroidFixLayout();">Alerts</a></li>
+                            <li><a id="btnAlert1" href="#" onclick="AndroidMode();">Alerts</a></li>
                         </ul>
                     </li>
                     <li><a href="#" onclick="LoadPart_MonitorThingView();">Refresh</a></li>
@@ -22,22 +22,34 @@
         <div class="panel panel-default">
             <div class="panel-heading">
                 <div class="row">
-                    <div class="col-xs-1 hidden-sm hidden-md hidden-lg">
-                        <button id="btnBackToMap" class="btn" onclick="btnBacktoMap()"><</button>
+                    <div class="col-lg-6">
+                        <h2 class="panel-title"><span id="lblLocationTitle" onclick="btnBacktoMap()">@Model.Title</span></h2>
                     </div>
-                    <div class="col-xs-11 col-sm-12 col-md-12 col-lg-12">
-                        <h2 class="panel-title"><span id="lblLocationTitle">@Model.Title</span></h2>
+                    <div class="col-lg-6">
+                        <div class="searchbox">
+                            <div class="input-group custom-search-form">
+                                <input id="txtSearch" type="text" class="form-control" placeholder="Locations" onkeydown="if (event.keyCode == 13) { LoadPart_MonitorThingView(); return false; }">
+                                <span class="input-group-btn">
+                                    <button class="text-muted" type="button"><i class="demo-pli-magnifi-glass"></i></button>
+                                </span>
+                            </div>
+                        </div>
                     </div>
+
                 </div>
-                <br />
+               
+                
                 @Html.DropDownList("Thing", new SelectList(Model.Things, "ID", "Title"), "<All Things>", new { @class = "form-control" })
             </div>
             <div class="panel-body">
-                <form class="">
-                    <div class="form-group">
-                        <input type="text" id="txtSearch" onkeydown="if (event.keyCode == 13) { LoadPart_MonitorThingView(); return false; }" class="form-control" placeholder="Search">
-                    </div>
-                </form>
+                <br />
+                <br />
+                <div class="row">
+                   
+                </div>
+
+                @*<input type="text" id="txtSearch" onkeydown="if (event.keyCode == 13) { LoadPart_MonitorThingView(); return false; }" class="form-control" placeholder="Search">*@
+                <br />
                 <div id="DivThingContent" style="overflow-y:auto;">
                 </div>
             </div>
@@ -53,7 +65,7 @@
                         <button id="btnLogs" type="button" onclick="selectedLocationThingListView='Logs';LoadPart_MonitorThingView();" class="btn btn-info btn-lg">Log</button>
                     </div>
                 </div>
-                <span id="lblLocationThingEndsListFooter"></span>
+                @*<span id="lblLocationThingEndsListFooter"></span>*@
             </div>
         </div>
     </nav>
@@ -62,10 +74,7 @@
 <script>
     $(document).ready(function () {
         $(window).resize(function () {
-            //if ($("#divMonitorMap").height() - 290 > 50)
-            //{
-            //$("#DivThingContent").height($("#divMonitorMap").height() - 290);000
-            //}
+
             selectedLocation = @Model.ID.ToString();
             FixUI_MonitorLocation();
         });
@@ -81,11 +90,16 @@
     function FixUI_MonitorLocation() {
         if ($("#divMonitorView").height() - 290 > 50)
         {
-            $("#DivThingContent").height($("#divMonitorView").height() - 290);
+            $("#DivThingContent").height($("#divMonitorView").height() - 308);
         }
         else
         {
-            $("#DivThingContent").height(window.innerHeight - 290);
+            $("#DivThingContent").height(window.innerHeight - 308);
+        }
+        if (mobileMode == 'true')
+        {
+            $('#DivThingContent').height(window.innerHeight - 240);
+            $("#divMonitorView").height(window.innerHeight - 240)
         }
 
     }

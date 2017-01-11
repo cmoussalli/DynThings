@@ -38,7 +38,6 @@ namespace DynThings.Core
                 string con2 = "metadata=res://*/;provider=System.Data.SqlClient;provider connection string='data source=" + dbModel.Server + ";initial catalog=" + dbModel.DatabaseName + ";user id=" + dbModel.User + ";password=" + dbModel.Password + ";multipleactiveresultsets=True;application name=EntityFramework'";
                 section.ConnectionStrings["DynThingsEntities"].ConnectionString = con2;
                 //section.ConnectionStrings["DynThingsEntities"].ConnectionString = "metadata=res://*/;provider=System.Data.SqlClient;provider connection string=&quot;data source=" + dbModel.Server + ";initial catalog=" + dbModel.DatabaseName + ";user id=" + dbModel.User + ";password=" + dbModel.Password + ";multipleactiveresultsets=True;application name=EntityFramework&quot;";
-
                 configuration.Save();
                 return ResultInfo.GenerateOKResult("Saved");
             }
@@ -55,10 +54,8 @@ namespace DynThings.Core
                 SqlConnection con = new SqlConnection("Data Source=" + dbModel.Server + ";Initial Catalog=" + dbModel.DatabaseName + ";user id=" + dbModel.User + ";password=" + dbModel.Password + ";multipleactiveresultsets=True;application name=EntityFramework");
                 con.Open();
                 SqlCommand command = new SqlCommand("select * from DynSettings", con);
-                     command.ExecuteScalar();
-
+                command.ExecuteScalar();
                 con.Close();
-
                 return ResultInfo.GenerateOKResult();
             }
             catch (Exception ex)

@@ -110,14 +110,17 @@ namespace DynThings.Data.Repositories
             try
             {
                 //Check if the requested Category is used
-                List<MediaFile> medias = db.MediaFiles.Where(t => t.ID == ID).ToList();
-                if (medias.Count() > 0)
+                List<ThingCategory> thingCategorys = db.ThingCategorys.Where(t => t.IconID == ID).ToList();
+                List<EndPointType> endPointTypes = db.EndPointTypes.Where(t => t.IconID == ID).ToList();
+
+                if (thingCategorys.Count + endPointTypes.Count > 0)
                 {// Used
                     return ResultInfo.GetResultByID(1);
                 }
 
                 //Execute Delete and return result
                 MediaFile media = db.MediaFiles.Find(ID);
+                db.MediaFiles.Remove(media);
                 db.SaveChanges();
                 return ResultInfo.GenerateOKResult("Saved", media.ID);
             }

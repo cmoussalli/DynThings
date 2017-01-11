@@ -61,5 +61,11 @@ namespace DynThings.Simulator
         {
 
         }
+
+        private void connectToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Login l = new Login();
+            l.Show();
+        }
     }
 }

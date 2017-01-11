@@ -1,7 +1,0 @@
-﻿CREATE TABLE [dbo].[IOTypes] (
-    [ID]    BIGINT         NOT NULL,
-    [IO]    NVARCHAR (12)  NULL,
-    [Title] NVARCHAR (128) NULL,
-    CONSTRAINT [PK_IO] PRIMARY KEY CLUSTERED ([ID] ASC)
-);
-

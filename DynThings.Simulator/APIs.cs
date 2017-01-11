@@ -22,7 +22,6 @@ namespace DynThings.Simulator
             //await returnedTask;
 
         }
-
         public static async Task RunAsync()
         {
             using (var client = new HttpClient())
@@ -53,6 +52,26 @@ namespace DynThings.Simulator
             ShowAllDevicesInTreeView();
 
         }
+
+        public static async Task Connect(string webAppUrl, string key)
+        {
+            if (webAppUrl.Substring(webAppUrl.Length - 1, 1) != "/")
+            {
+                webAppUrl = webAppUrl + "/";
+            }
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(webAppUrl);
+                client.DefaultRequestHeaders.Accept.Clear();
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+                string response = await client.GetStringAsync("api/ThingsIO/PlatformInfo");
+                C.frmMain.textBox1.Text = response;
+            }
+
+        }
+
+
 
         public static void ShowAllDevicesInTreeView()
         {
@@ -112,7 +131,7 @@ namespace DynThings.Simulator
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
                 SubmissionDeviceIO data = new SubmissionDeviceIO();
-              
+
                 data.KeyPass = deviceKeyPass.ToString();
                 data.Value = input;
 
@@ -165,7 +184,7 @@ namespace DynThings.Simulator
                 {
                 }
                 IEnumerable<APIDeviceIO> cmds = response.Content.ReadAsAsync<IEnumerable<APIDeviceIO>>().Result;
-                
+
                 return cmds.ToList();
             }
         }
@@ -221,7 +240,7 @@ namespace DynThings.Simulator
 
         }
 
-        
+
         #endregion
 
 

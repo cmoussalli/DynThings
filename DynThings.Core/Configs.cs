@@ -113,7 +113,20 @@ namespace DynThings.Core
                 return db.DynSettings.First().PlatformTitle;
             }
         }
-        
+        public static DateTime LastCentralSync
+        {
+            get
+            {
+                return db.DynSettings.First().LastCentralSync;
+            }
+        }
+        public static DateTime DeploymentTimeStamp
+        {
+            get
+            {
+                return db.DynSettings.First().DeploymentTimeStamp;
+            }
+        }
 
         public static void SetDevelopmentMode(bool activation)
         {
@@ -170,7 +183,14 @@ namespace DynThings.Core
             db.SaveChanges();
         }
 
-        
+        public static void SetLastCentralSync()
+        {
+            DynSetting dset = db.DynSettings.First();
+            dset.LastCentralSync = DateTime.UtcNow;
+            db.SaveChanges();
+        }
+
+
 
 
     }

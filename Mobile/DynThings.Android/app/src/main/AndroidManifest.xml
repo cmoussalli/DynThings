@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.majidalnaamani.webviewdynthings">
+    package="com.majidalnaamani.DynThings">
 
     <uses-permission android:name="android.permission.INTERNET" />
 
@@ -11,13 +11,12 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".MainActivity"
+            android:name="com.majidalnaamani.DynThings.MainActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
         </activity>
         <activity
-            android:name=".urlName"
-            android:configChanges="keyboard|keyboardHidden|orientation|screenSize">
+            android:name="com.majidalnaamani.DynThings.urlName">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

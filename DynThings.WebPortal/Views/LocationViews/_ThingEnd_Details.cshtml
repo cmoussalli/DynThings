@@ -1,84 +1,43 @@
 ﻿@model DynThings.Data.Models.ViewModels.ThingEnd
 
-<nav class="navbar navbar-default navbar-inverse nopadding">
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-xs-1 hidden-sm hidden-md hidden-lg">
-                <button id="btnBackThingEnds" class="btn btn bg-primary navbar-btn" onclick="btnBackThingEnds()"><strong><</strong></button>
-            </div>
-            <div class="col-xs-11 col-sm-12 col-md-12 col-lg-12">
-                <a href="#" class="navbar-brand">@Model.Thing.Title (@Model.EndPoint.TypeTitle)</a>
-            </div>
-        </div>
+<div class="panel panel-info">
+    <!--Panel heading-->
+    <div class="panel-heading">
+        <div class="panel-control">
 
-        <!-- Collect the nav links, forms, and other content for toggling -->
-        <div class="navbar-collapse collapse" >
-            <ul class="nav navbar-nav navbar-left">
-                <li id="liThingEndDashboard" class="active"><a href="#" onclick="SelectThingEndDetailsView_Dashboard()">Dashboard</a></li>
-                <li id="liThingEndHistory"><a href="#" onclick="SelectThingEndDetailsView_History()">History</a></li>
+            <!--Nav tabs-->
+            <ul class="nav nav-tabs">
+                <li class="active"><a data-toggle="tab" href="#divThingEndDetailsView_Dashboard" onclick="SelectThingEndDetailsView_Dashboard()">Dashboard</a></li>
+                <li><a data-toggle="tab" href="#divThingEndDetailsView_History" onclick="SelectThingEndDetailsView_History()">History</a></li>
+            <li><button class="btn btn-default" data-dismiss="panel" onclick="ClosedivMonitorDetailsDiv()"><i class="demo-pli-cross"></i></button></li>
             </ul>
-            <div class="nav navbar-nav navbar-right">
-                <ul class="nav navbar-nav">
-                    <li><a href="#" onclick="Load_ThingsEnd_Details()">Refresh</a></li>
-                    <li><a href="#" onclick="ClosedivMonitorDetailsDiv()">Close</a></li>
-                </ul>
-            </div>
-        </div><!-- /.navbar-collapse -->
 
-    <div class="row">
-        <div class="col-xs-12 hidden-sm hidden-md hidden-lg">
-            <ul class="nav navbar-nav navbar-left">
-                <li id="liThingEndDashboard" class="active"><a href="#" onclick="SelectThingEndDetailsView_Dashboard()">Dashboard</a></li>
-                <li id="liThingEndHistory"><a href="#" onclick="SelectThingEndDetailsView_History()">History</a></li>
-            </ul>
         </div>
+        <h3 class="panel-title">@Model.Thing.Title (@Model.EndPoint.TypeTitle)</h3>
     </div>
-    </div><!-- /.container-fluid -->
-</nav>
 
-<div id="divThingEndDetailsView_Dashboard">
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-lg-12">
-                <br />
+    <!--Panel body-->
+    <div class="panel-body">
+
+            <div id="divThingEndDetailsView_Dashboard" class="fade in active">
                 <div id="divThingEndChart_Inputs"></div>
-
             </div>
-        </div>
-    </div>
-</div>
-
-<div id="divThingEndDetailsView_History" class="nopadding">
-    <div class="row">
-        <div class="col-lg-6 col-md-4 col-sm-1">
-
-        </div>
-        <div class="col-lg-6 col-md-8 col-sm-11">
-            @*<div class="panel panel-default">*@
-            @*<div class="panel-heading">*@
-            <div class="well" style="width:auto">
-
+        <br />
+            <div id="divThingEndDetailsView_History" class="fade in">
                 <div class="btn-group pull-right nopadding" style="padding-top:0px;margin-top:0px; top:-15px">
                     <a href="#" class="btn btn-default btn-sm pull-right" onclick="Load_ThingEnd_HistoryDiv();" style="padding-top:0px;margin-top:0px;">Filter</a>
                     <input id="drpHistoryIOsFromDate" type="date" value="@string.Format("{0:yyyy-MM-dd}", @DateTime.Now)" />
                     <input id="drpHistoryIOsToDate" type="date" value="@string.Format("{0:yyyy-MM-dd}", @DateTime.Now)" />
                 </div>
-            </div>
-            @*</div>*@
-            @*</div>*@
-        </div>
-    </div>
 
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-lg-12">
 
                 <div id="divThingEndHistory_Inputs"></div>
-
             </div>
-        </div>
+
     </div>
 </div>
+
+
 
 <script>
     $(document).ready(function () {

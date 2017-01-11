@@ -9,7 +9,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>DynThings.Data.Models</RootNamespace>
     <AssemblyName>DynThings.Data.Models</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
   </PropertyGroup>
@@ -39,7 +39,10 @@
       <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL" />
+    <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
@@ -64,6 +67,15 @@
       <DependentUpon>DynThingsModel.tt</DependentUpon>
     </Compile>
     <Compile Include="AlertLevel.cs">
+      <DependentUpon>DynThingsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="App.cs">
+      <DependentUpon>DynThingsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AppAPIEntity.cs">
+      <DependentUpon>DynThingsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AppStatuss.cs">
       <DependentUpon>DynThingsModel.tt</DependentUpon>
     </Compile>
     <Compile Include="AspNetRole.cs">
@@ -178,6 +190,9 @@
       <DependentUpon>DynThingsModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Rpt_ThingEnd_IOs_Months_Result.cs">
+      <DependentUpon>DynThingsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SystemEntity.cs">
       <DependentUpon>DynThingsModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Thing.cs">

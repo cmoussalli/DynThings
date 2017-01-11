@@ -58,7 +58,7 @@ namespace DynThings.WebPortal.Controllers
         [HttpGet]
         public PartialViewResult ListPV(string searchfor = null, int page = 1, int recordsperpage = 0)
         {
-            PagedList.IPagedList thingCategorys = Data.Repositories.UnitOfWork_Repositories.repoThingCategorys.GetPagedList(searchfor, page, Helpers.Configs.validateRecordsPerMaster(recordsperpage));
+            IPagedList thingCategorys = UnitOfWork_Repositories.repoThingCategorys.GetPagedList(searchfor, page, Helpers.Configs.validateRecordsPerMaster(recordsperpage));
             return PartialView("_List", thingCategorys);
         }
         #endregion
@@ -138,6 +138,8 @@ namespace DynThings.WebPortal.Controllers
 
 
         #endregion
+
+
 
         [HttpPost]
         public ActionResult UploadImage(HttpPostedFileBase file,long ThingCategoryID)

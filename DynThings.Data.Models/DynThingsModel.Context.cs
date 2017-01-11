@@ -101,6 +101,14 @@ public partial class DynThingsEntities : DbContext
 
     public virtual DbSet<EndPointType> EndPointTypes { get; set; }
 
+    public virtual DbSet<AppStatuss> AppStatusses { get; set; }
+
+    public virtual DbSet<AppAPIEntity> AppAPIEntitys { get; set; }
+
+    public virtual DbSet<App> Apps { get; set; }
+
+    public virtual DbSet<SystemEntity> SystemEntitys { get; set; }
+
 
     public virtual ObjectResult<Rpt_EndPoint_IOs_Months_Result> Rpt_EndPoint_IOs_Months(Nullable<long> ePID, string year)
     {

@@ -41,8 +41,29 @@ namespace DynThings.Data.Repositories
             }
             return con;
         }
-        #endregion
 
+        public SetupModels.PlatformConfig GetSetupPlatformConfig()
+        {
+            SetupModels.PlatformConfig conf = new SetupModels.PlatformConfig();
+            DynSetting con = new DynSetting();
+            List<DynSetting> cons = db.DynSettings.Where(l => l.ID == 1).ToList();
+            if (cons.Count == 1)
+            {
+                con = cons[0];
+                conf.Title = con.PlatformTitle;
+                conf.DevelopmentMode = con.DevelopmentMode;
+                conf.PublicAccess = con.PublicAccess;
+                conf.PublicSignUp = con.PublicSignUP;
+                conf.TimeZone = con.App_TimeZone;
+            }
+            else
+            {
+                throw new Exception("Not Found");
+            }
+            return conf;
+        }
+
+        #endregion
 
         #region Update: Grids
         public ResultInfo.Result SetGridRowsCount(int masterGridRowsCount, int childGridRowsCount)
@@ -82,14 +103,14 @@ namespace DynThings.Data.Repositories
         }
         #endregion
 
-        #region Update: Reset PlatformKey
+        #region Update: Reset Platform
         public ResultInfo.Result ResetPlatform()
         {
             List<DynSetting> cons = db.DynSettings.Where(l => l.ID == 1).ToList();
             if (cons.Count == 1)
             {
-
                 cons[0].PlatformKey = Guid.NewGuid();
+                cons[0].DeploymentTimeStamp = DateTime.UtcNow;
                 cons[0].PlatformTitle = "";
                 db.SaveChanges();
                 Core.Config.Refresh();

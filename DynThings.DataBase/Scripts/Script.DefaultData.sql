@@ -11,7 +11,13 @@ Post-Deployment Script Template
 */
 
 
+SET IDENTITY_INSERT [dbo].[DynSettings] ON
+GO
 
+INSERT [dbo].[DynSettings] ([ID], [DBVersion], [DevelopmentMode], [DefaultRecordsPerMaster], [DefaultRecordsPerChild], [PlatformKey], [PublicAccess], [PublicSignUP], [EnableSystemLogger], [App_TimeZone], [PlatformTitle],[DeploymentTimeStamp],[LastCentralSync]) VALUES (1, 0.157, 0, 25, 5, newID(), 0, 0, 0, 4,N'',getutcdate(),getdate())
+GO
+SET IDENTITY_INSERT [dbo].[DynSettings] OFF
+GO
 
 
 SET IDENTITY_INSERT [dbo].[MediaFiles] ON 
@@ -114,6 +120,7 @@ GO
 INSERT [dbo].[AspNetRoles] ([Id], [Name]) VALUES (N'3', N'Monitor Only')
 GO
 
+
 SET IDENTITY_INSERT [dbo].[LocationViewTypes] ON 
 GO
 INSERT [dbo].[LocationViewTypes] ([ID], [Title]) VALUES (1, N'Single Location')
@@ -144,18 +151,7 @@ GO
 SET IDENTITY_INSERT [dbo].[AlertLevels] OFF
 GO
 
-SET IDENTITY_INSERT [dbo].[DynSettings] ON
-GO
-declare @DBVersion real
-	select @DBVersion = [DBVersion] from #ConfigTable
-declare @PlatformKey uniqueidentifier
-	select @PlatformKey = [PlatformKey] from #ConfigTable
 
-INSERT [dbo].[DynSettings] ([ID], [DBVersion], [DevelopmentMode], [DefaultRecordsPerMaster], [DefaultRecordsPerChild], [PlatformKey], [PublicAccess], [PublicSignUP], [EnableSystemLogger], [App_TimeZone], [PlatformTitle]) VALUES (1, @DBVersion, 0, 25, 5, @PlatformKey, 0, 0, 0, 4,N'')
-GO
-
-SET IDENTITY_INSERT [dbo].[DynSettings] OFF
-GO
 
 INSERT [dbo].[ResultMessages] ([ID], [Message], [IsError]) VALUES (0, N'Ok', 0)
 GO

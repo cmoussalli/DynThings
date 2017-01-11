@@ -40,6 +40,10 @@ public partial class DynSetting
 
     public string PlatformTitle { get; set; }
 
+    public System.DateTime LastCentralSync { get; set; }
+
+    public System.DateTime DeploymentTimeStamp { get; set; }
+
 }
 
 }

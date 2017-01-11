@@ -1,4 +1,13 @@
-﻿using DynThings.Core;
+﻿/////////////////////////////////////////////////////////////////
+// Created by : Caesar Moussalli                               //
+// TimeStamp  : 14-07-2016                                     //
+// Content    : IO submition APIs                              //
+// Notes      : Use HTTPGet to send data in URL                //
+//              Or, use HTTPPost to send data in body          //
+//                                                             //
+/////////////////////////////////////////////////////////////////
+
+using DynThings.Core;
 using DynThings.Data.Models;
 using DynThings.Data.Repositories;
 using DynThings.WebAPI;
@@ -359,7 +368,6 @@ namespace DynThings.WebAPI.Controllers
         [HttpPost]
         public ApiResponse SubmitEndPointInput(Models.SubmissionEndPointIO endPointInput)
         {
-            
             return CoreSubmitEndPointInput(endPointInput);
         }
 
@@ -409,8 +417,6 @@ namespace DynThings.WebAPI.Controllers
         #endregion
         #endregion
 
-
-      
 
     }
 }

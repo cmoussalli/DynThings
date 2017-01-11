@@ -3,25 +3,25 @@
 
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/nav_camera"
+            android:id="@+id/nav_dashboard"
             android:icon="@drawable/ic_menu_camera"
-            android:title="DynThings" />
+            android:title="Dashboard" />
         <item
-            android:id="@+id/nav_gallery"
+            android:id="@+id/nav_views"
             android:icon="@drawable/ic_menu_gallery"
-            android:title="Google" />
+            android:title="Views" />
         <item
-            android:id="@+id/nav_slideshow"
-            android:icon="@drawable/ic_menu_slideshow"
-            android:title="Ev-Center" />
-        <item
-            android:id="@+id/nav_manage"
+            android:id="@+id/nav_alerts"
             android:icon="@drawable/ic_menu_manage"
-            android:title="Tools" />
+            android:title="Alerts" />
     </group>
 
     <item android:title="Communicate">
         <menu>
+            <item
+            android:id="@+id/nav_manage"
+            android:icon="@drawable/ic_menu_manage"
+            android:title="Manage" />
             <item
                 android:id="@+id/nav_share"
                 android:icon="@drawable/ic_menu_share"

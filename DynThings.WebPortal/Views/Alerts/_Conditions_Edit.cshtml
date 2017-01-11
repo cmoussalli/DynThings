@@ -41,7 +41,7 @@
         <br />
 
         <span>Is Required</span>
-        @Html.EditorFor(model => model.IsMust, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.EditorFor(model => model.IsMust, new { htmlAttributes = new { @class = "" } })
         @Html.ValidationMessageFor(model => model.IsMust, "", new { @class = "text-danger" })
 
     </div>

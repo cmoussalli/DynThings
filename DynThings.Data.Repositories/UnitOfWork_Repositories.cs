@@ -17,7 +17,7 @@ namespace DynThings.Data.Repositories
     public static class UnitOfWork_Repositories
     {
 
-        private static DynThingsEntities dynDB = new DynThingsEntities();
+        public static DynThingsEntities dynDB = new DynThingsEntities();
 
         //public static ResultInfo resultInfo = new ResultInfo(db);
 
@@ -43,6 +43,9 @@ namespace DynThings.Data.Repositories
         public static AlertsRepository repoAlerts = new AlertsRepository(dynDB);
         public static AlertConditionTypesRepository repoAlertConditionTypes = new AlertConditionTypesRepository(dynDB);
         public static UserNotificationsRepository repoUserNotification = new UserNotificationsRepository(dynDB);
+        public static DynThingsAppsRepository repoApps = new DynThingsAppsRepository();
+        public static SystemEntitysRepository repoEntitys = new SystemEntitysRepository();
+
         #endregion
 
 

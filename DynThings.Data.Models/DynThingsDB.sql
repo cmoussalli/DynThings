@@ -1,4 +1,4 @@
---DB Version 0.134
+--DB Version 0.135
 
 /****** Object:  Database [DynThings]    Script Date: 2/8/2016 12:47:48 PM ******/
 CREATE DATABASE [DynThings]
@@ -752,7 +752,7 @@ GO
 SET IDENTITY_INSERT [dbo].[DynSettings] ON 
 
 GO
-INSERT [dbo].[DynSettings] ([ID], [DBVersion], [DevelopmentMode], [DefaultRecordsPerMaster], [DefaultRecordsPerChild], [PlatformKey], [PublicAccess], [PublicSignUP], [EnableSystemLogger], [App_TimeZone], [PlatformTitle]) VALUES (1, 0.134, 1, 5, 5, N'a86bb826-988d-4f9a-9f43-169045506194', 0, 1, 1, 4, N'My IoT Platform')
+INSERT [dbo].[DynSettings] ([ID], [DBVersion], [DevelopmentMode], [DefaultRecordsPerMaster], [DefaultRecordsPerChild], [PlatformKey], [PublicAccess], [PublicSignUP], [EnableSystemLogger], [App_TimeZone], [PlatformTitle]) VALUES (1, 0.135, 1, 5, 5, N'a86bb826-988d-4f9a-9f43-169045506194', 0, 1, 1, 4, N'My IoT Platform')
 GO
 SET IDENTITY_INSERT [dbo].[DynSettings] OFF
 GO

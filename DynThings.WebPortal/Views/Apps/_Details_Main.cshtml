@@ -1,0 +1,14 @@
+﻿@model DynThings.Data.Models.App
+<div class="right">
+    <button type="button" class="btn btn-info pull-right" onclick="LoadAppEditor(@Model.ID)" data-toggle="modal" data-target="#mdl">Edit</button>
+</div>
+
+<strong>Title</strong><br>
+@Model.Title<br><br>
+
+<strong>Description</strong><br>
+@Model.Description<br><br>
+
+<strong>Status</strong><br>
+@Model.AppStatuss.Title<br><br>
+<br>

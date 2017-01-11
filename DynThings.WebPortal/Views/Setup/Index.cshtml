@@ -1,88 +1,113 @@
 ﻿
 @{
     ViewBag.Title = "Index";
-    Layout = "~/Views/Shared/_EmptyLayout.cshtml";
+    Layout = "~/Views/Shared/_LayoutEmpty.cshtml";
 }
 
 <br />
-<div class="container">
-    <div class="page-header">
-        <h1>Setup</h1>
+<div class="panel-body">
+    <div class="mar-ver pad-btm">
+        <h3 class="h4 mar-no">Setup</h3>
+        <p class="text-muted">Prepare your DynThings IoT Platform.</p>
     </div>
 
+    <div class="col-md-12 eq-box-md eq-no-panel">
 
-    <div class="row">
-        <div class="col-lg-4 col-md-4 hidden-sm hidden-xs">
-            <img src="~/Assets/Imgs/Wizard.png" width="100%" />
-        </div>
-        <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
-            <div id="rootwizard">
-                <div class="navbar">
-                    <div class="navbar-inner">
-                        <div class="container">
-                            <ul>
-                                <li><a href="#tab1" data-toggle="tab">Welcome</a></li>
-                                <li><a href="#tab2" data-toggle="tab">DataBase</a></li>
-                                <li><a href="#tab3" data-toggle="tab">Config</a></li>
-                                <li><a href="#tab7" data-toggle="tab">Publish</a></li>
-                            </ul>
+        <!-- Main Form Wizard -->
+        <!--===================================================-->
+        <div id="demo-main-wz">
+
+            <!--nav-->
+            <ul class="row wz-step wz-icon-bw wz-nav-off mar-top wz-steps">
+                <li class="col-xs-3">
+                    <a data-toggle="tab" href="#demo-main-tab1" aria-expanded="false">
+                        <span class="text-danger"><i class="demo-pli-home icon-2x"></i></span>
+                        <p class="text-semibold mar-no">Welcome</p>
+                    </a>
+                </li>
+                <li class="col-xs-3">
+                    <a data-toggle="tab" href="#demo-main-tab2" aria-expanded="true">
+                        <span class="text-warning"><i class="demo-pli-medal-2 icon-2x"></i></span>
+                        <p class="text-semibold mar-no">Database</p>
+                    </a>
+                </li>
+                <li class="col-xs-3">
+                    <a data-toggle="tab" href="#demo-main-tab3" aria-expanded="false">
+                        <span class="text-info"><i class="demo-pli-home icon-2x"></i></span>
+                        <p class="text-semibold mar-no">Configurations</p>
+                    </a>
+                </li>
+                <li class="col-xs-3">
+                    <a data-toggle="tab" href="#demo-main-tab4">
+                        <span class="text-success"><i class="demo-pli-medal-2 icon-2x"></i></span>
+                        <p class="text-semibold mar-no">Finish</p>
+                    </a>
+                </li>
+            </ul>
+
+            <!--progress bar-->
+            <div class="progress progress-xs">
+                <div class="progress-bar progress-bar-primary" style="width: 25%; left: 25%; position: relative; transition: all 0.5s;"></div>
+            </div>
+
+
+            <!--form-->
+            <div class="form-horizontal">
+                <div class="panel-body">
+                    <div class="tab-content">
+
+                        <!--First tab-->
+                        <div id="demo-main-tab1" class="tab-pane fade active in">
+                         @Html.Action("GetWelcomePV")
+                        </div>
+
+                        <!--Second tab-->
+                        <div id="demo-main-tab2" class="tab-pane ">
+                          @Html.Action("DatabaseConfigPV")
+                        </div>
+
+                        <!--Third tab-->
+                        <div id="demo-main-tab3" class="tab-pane">
+                           @Html.Action("PlatformConfigPV")
+                        </div>
+
+                        <!--Fourth tab-->
+                        <div id="demo-main-tab4" class="tab-pane">
+                           @Html.Action("PublishPV")
                         </div>
                     </div>
                 </div>
-                <div class="tab-content">
-                    <div class="tab-pane" id="tab1">
-                        @Html.Action("GetWelcomePV")
-                    </div>
-                    <div class="tab-pane" id="tab2">
-                        @Html.Action("DatabaseConfigPV")
-                    </div>
-                    <div class="tab-pane" id="tab3">
-                        @Html.Action("PlatformConfigPV")
-                    </div>
-                    <div class="tab-pane" id="tab7">
-                        @Html.Action("PublishPV")
-                    </div>
+
+
+                <!--Footer buttons-->
+                <div class="pull-right pad-rgt mar-btm">
+                    <button type="button" class="previous btn btn-primary">Previous</button>
+                    <button type="button" class="next btn btn-primary" onclick="FixProgressBar();">Next</button>
+                    <button type="button" class="finish btn btn-success" onclick="Publish();" disabled="" style="display: none;">Finish</button>
                 </div>
 
-                <ul class="pager wizard">
-                    <li class="next btn btn-primary pull-right">Next > </li>
-                    <li class="next finish btn btn-primary pull-right" style="display:none;">Finish</li>
-                    <li class="previous btn btn-primary pull-right">< Previous</li>
-                </ul>
+            </div>
+        </div>
+        <!--===================================================-->
+        <!-- End of Main Form Wizard -->
 
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-12">
-                
-            </div>
-        </div>
     </div>
+
+
+
 </div>
 
 <script>
+    function FixProgressBar() {
+
+    };
+
+    var isPublish = 0;
     var IPublishSwitch = 0;
     $(document).ready(function () {
-        $('#rootwizard').bootstrapWizard({
-            onTabShow: function (tab, navigation, index) {
-                var $total = navigation.find('li').length;
-                var $current = index + 1;
-
-                // If it's the last tab then hide the last button and show the finish instead
-                if ($current >= $total) {
-                    $('#rootwizard').find('.pager .next').hide();
-                    $('#rootwizard').find('.pager .finish').show();
-                    $('#rootwizard').find('.pager .finish').removeClass('disabled');
-                } else {
-                    $('#rootwizard').find('.pager .next').show();
-                    $('#rootwizard').find('.pager .finish').hide();
-                }
-
-            }
-        });
+       
         $('#rootwizard .finish').click(function () {
-            //alert('Finished!, Starting over!');
-            //$('#rootwizard').find("a[href*='tab1']").trigger('click');
+            isPublish = 1;
             IpublishSwitch = 0;
             Publish();
         });
@@ -90,34 +115,40 @@
 
     function Publish() {
         IPublishSwitch = 0;
+        isPublish = 1;
         PublishSwitch();
+
     };
 
     function PublishSwitch() {
-        switch (IPublishSwitch)
-        {
-            case 0:
-                $('#lblPublishStatus').text('Testing Database Connection.');
-                btnTestDatabaseConnection();
-                $('#progPublishStatus').width('20%');
-                break;
-            case 1:
-                $('#lblPublishStatus').text('Saving Database Configuration.');
-                SaveDatabaseConnection();
-                $('#progPublishStatus').width('40%');
-                break;
-            case 2:
-                $('#lblPublishStatus').text('Saving Platform Configuration.');
-                SubmitSetupConfigForm();
-                $('#progPublishStatus').width('60%');
-                break;
-            case 3:
-                $('#lblPublishStatus').text('Saving Platform Configuration.');
-                $('#progPublishStatus').width('100%');
-                break;
+        if (isPublish == 1) {
 
+            switch (IPublishSwitch) {
+                case 0:
+                    $('#lblPublishStatus').text('Testing Database Connection.');
+                    TestDatabaseConnection();
+                    $('#progPublishStatus').width('20%');
+                    break;
+                case 1:
+                    $('#lblPublishStatus').text('Saving Database Configuration.');
+                    SaveDatabaseConnection();
+                    $('#progPublishStatus').width('40%');
+                    break;
+                case 2:
+                    $('#lblPublishStatus').text('Saving Platform Configuration.');
+                    SubmitSetupConfigForm();
+                    $('#progPublishStatus').width('60%');
+                    break;
+                case 3:
+                    $('#lblPublishStatus').text('');
+                    $('#progPublishStatus').width('Saving Platform Configuration.');
+                    setTimeout(SetupComplete(), 1000)
+                    break;
+            }
         }
+    };
 
-
+    function SetupComplete() {
+        window.location = getRootURL() + 'Setup/Complete';
     };
 </script>

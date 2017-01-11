@@ -9,7 +9,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>DynThings.Data.Repositories</RootNamespace>
     <AssemblyName>DynThings.Data.Repositories</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
   </PropertyGroup>
@@ -59,8 +59,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Reports\EndPointsReport.cs" />
+    <Compile Include="Repositories\AppsRepository.cs" />
+    <Compile Include="Repositories\AppStatussRepository.cs" />
     <Compile Include="Repositories\AlertsRepository.cs" />
     <Compile Include="Repositories\EndPointTypeCategorysRepository.cs" />
+    <Compile Include="Repositories\EntitysRepository.cs" />
     <Compile Include="Repositories\MediaFilesRepository.cs" />
     <Compile Include="Repositories\AlertConditionTypesRepository.cs" />
     <Compile Include="Repositories\ThingCategorysRepository.cs" />
