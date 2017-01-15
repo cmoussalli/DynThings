@@ -23,7 +23,7 @@ namespace DynThings.WebPortal.Controllers
 {
     public class DevicesController : BaseController
     {
-        private DynThingsEntities db = new DynThingsEntities();
+        UnitOfWork_Repositories uof_repos = new UnitOfWork_Repositories();
 
         #region ActionResult: Views
         public ActionResult Index()
@@ -41,7 +41,7 @@ namespace DynThings.WebPortal.Controllers
             {
                 return RedirectToAction("Login", "Account");
             }
-            Device device = UnitOfWork_Repositories.repoDevices.Find(id);
+            Device device = uof_repos.repoDevices.Find(id);
             return View("Details", device);
         }
 
@@ -53,7 +53,7 @@ namespace DynThings.WebPortal.Controllers
       
         public PartialViewResult DetailsPV(int id)
         {
-            Device device = UnitOfWork_Repositories.repoDevices.Find(id);
+            Device device = uof_repos.repoDevices.Find(id);
             return PartialView("_Details_Main", device);
         }
         #endregion
@@ -62,10 +62,11 @@ namespace DynThings.WebPortal.Controllers
         [HttpGet]
         public PartialViewResult GetListPV(string searchfor = null, int page = 1, int recordsperpage = 2)
         {
-            PagedList.IPagedList devs = db.Devices
-                .Where(e => searchfor == null || e.Title.Contains(searchfor))
-                .OrderBy(e => e.Title).ToList()
-                .ToPagedList(page, Helpers.Configs.validateRecordsPerMaster(recordsperpage));
+            //PagedList.IPagedList devs = db.Devices
+            //    .Where(e => searchfor == null || e.Title.Contains(searchfor))
+            //    .OrderBy(e => e.Title).ToList()
+            //    .ToPagedList(page, Helpers.Configs.validateRecordsPerMaster(recordsperpage));
+            PagedList.IPagedList devs = uof_repos.repoDevices.GetPagedList(searchfor,  page, Helpers.Configs.validateRecordsPerMaster(recordsperpage));
             return PartialView("_List", devs);
         }
         #endregion
@@ -85,7 +86,7 @@ namespace DynThings.WebPortal.Controllers
             ResultInfo.Result res = ResultInfo.GetResultByID(1);
             if (ModelState.IsValid)
             {
-                res = UnitOfWork_Repositories.repoDevices.Add(device.Title,device.UTC_Diff, device.IsConnectedDelay);
+                res = uof_repos.repoDevices.Add(device.Title,device.UTC_Diff, device.IsConnectedDelay);
                 return Json(res);
             }
             return Json(res);
@@ -96,7 +97,7 @@ namespace DynThings.WebPortal.Controllers
         [HttpGet]
         public PartialViewResult EditPV(long id)
         {
-            Device device = UnitOfWork_Repositories.repoDevices.Find(id);
+            Device device = uof_repos.repoDevices.Find(id);
             ViewBag.UTC_Diff = new SelectList(StaticMenus.GetRegionalTimeOptions(), device.UTC_Diff);
             return PartialView("_Edit", device);
         }
@@ -108,7 +109,7 @@ namespace DynThings.WebPortal.Controllers
             ResultInfo.Result res = ResultInfo.GetResultByID(1);
             if (ModelState.IsValid)
             {
-                res = UnitOfWork_Repositories.repoDevices.Edit(device.ID, device.Title,int.Parse(device.UTC_Diff.ToString()), device.IsConnectedDelay);
+                res = uof_repos.repoDevices.Edit(device.ID, device.Title,int.Parse(device.UTC_Diff.ToString()), device.IsConnectedDelay);
                 return Json(res);
             }
             return Json(res);
@@ -119,7 +120,7 @@ namespace DynThings.WebPortal.Controllers
         [HttpGet]
         public PartialViewResult DeletePV(long id)
         {
-            Device device = UnitOfWork_Repositories.repoDevices.Find(id);
+            Device device = uof_repos.repoDevices.Find(id);
             return PartialView("_Delete", device);
         }
 
@@ -130,7 +131,7 @@ namespace DynThings.WebPortal.Controllers
             ResultInfo.Result res = ResultInfo.GetResultByID(1);
             if (ModelState.IsValid)
             {
-                res = UnitOfWork_Repositories.repoDevices.Delete(device.ID);
+                res = uof_repos.repoDevices.Delete(device.ID);
                 return Json(res);
             }
             return Json(res);
@@ -145,7 +146,7 @@ namespace DynThings.WebPortal.Controllers
         [HttpGet]
         public PartialViewResult LookupPV(string searchfor = null, int page = 1, int recordsperpage = 0)
         {
-            PagedList.IPagedList locs = UnitOfWork_Repositories.repoDevices.GetPagedList("", 1, 10);
+            PagedList.IPagedList locs = uof_repos.repoDevices.GetPagedList("", 1, 10);
             return PartialView("lookup/Index", locs);
         }
         #endregion
@@ -153,7 +154,7 @@ namespace DynThings.WebPortal.Controllers
         [HttpGet]
         public PartialViewResult LookupListPV(string searchfor = null, int page = 1, int recordsperpage = 0)
         {
-            PagedList.IPagedList locs = UnitOfWork_Repositories.repoDevices.GetPagedList(searchfor, page, Config.DefaultRecordsPerChild);
+            PagedList.IPagedList locs = uof_repos.repoDevices.GetPagedList(searchfor, page, Config.DefaultRecordsPerChild);
             return PartialView("lookup/List", locs);
         }
         #endregion

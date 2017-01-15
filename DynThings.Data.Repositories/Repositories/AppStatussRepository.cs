@@ -12,14 +12,16 @@ namespace DynThings.Data.Repositories
 {
     public class AppStatussRepository
     {
-        #region Props
-        public DynThingsEntities db
+        #region Constructor
+        public AppStatussRepository(DynThingsEntities dbSource)
         {
-            get
-            {
-                return UnitOfWork_Repositories.dynDB;
-            }
+            db = dbSource;
         }
+
+        #endregion
+
+        #region props
+        public DynThingsEntities db;
         #endregion
 
 

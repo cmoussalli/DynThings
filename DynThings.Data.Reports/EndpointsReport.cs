@@ -14,16 +14,22 @@ namespace DynThings.Data.Reports
     public class EndpointsReport
     {
         #region Constructor
-        public DynThingsEntities db { get; set; }
-        public EndpointsReport(DynThingsEntities dynThingsEntities)
+        public EndpointsReport(DynThingsEntities dbSource)
         {
-            this.db = dynThingsEntities;
+            db = dbSource;
+            repoEndpoints = new EndpointsRepository(dbSource);
         }
+
+        #endregion
+
+        #region props
+        DynThingsEntities db;
+        EndpointsRepository repoEndpoints;
         #endregion
 
         public Chart IOs_Monthly(long endPointID,string year)
         {
-            Endpoint ep = UnitOfWork_Repositories.repoEndpoints.Find(endPointID);
+            Endpoint ep = repoEndpoints.Find(endPointID);
 
             Chart hc = new Chart("HC_" + "EndPoint" + endPointID + "Inputs");
             hc.title.Text = "Monthly Average";
@@ -101,7 +107,7 @@ namespace DynThings.Data.Reports
 
         public Chart IOs_Daily(long endPointID)
         {
-            Endpoint ep = UnitOfWork_Repositories.repoEndpoints.Find(endPointID);
+            Endpoint ep = repoEndpoints.Find(endPointID);
 
             Chart hc = new Chart("HC_" + "EndPoint" + endPointID + "Inputs");
             hc.title.Text = "Endpoint Daily Report";
@@ -238,7 +244,7 @@ namespace DynThings.Data.Reports
 
         public Chart IOs_Hour(long endPointID)
         {
-            Endpoint ep = UnitOfWork_Repositories.repoEndpoints.Find(endPointID);
+            Endpoint ep =repoEndpoints.Find(endPointID);
             Chart hc = new Chart("HC_" + "EndPoint" + endPointID + "Inputs");
             hc.title.Text = "Endpoint Hourly Report";
             hc.subTitle.Text = ep.Title;
@@ -354,7 +360,7 @@ namespace DynThings.Data.Reports
 
         public Chart IOs_Minute(long endPointID)
         {
-            Endpoint ep = UnitOfWork_Repositories.repoEndpoints.Find(endPointID);
+            Endpoint ep = repoEndpoints.Find(endPointID);
             Chart hc = new Chart("HC_" + "EndPoint" + endPointID + "Inputs");
             hc.title.Text = "Endpoint Minutes Report";
             hc.subTitle.Text = ep.Title;

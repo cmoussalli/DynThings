@@ -14,11 +14,14 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using DynThings.WebAPI.Models;
+using DynThings.Data.Repositories;
 
 namespace DynThings.WebPortal.Controllers.API
 {
     public class AppAccountController : ApiController
     {
+        UnitOfWork_Repositories uof_repos = new UnitOfWork_Repositories();
+
         /// <summary>
         /// Validate the AppKey registration.
         /// </summary>

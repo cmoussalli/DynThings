@@ -488,13 +488,6 @@
             <param name="appKey">The AppKey to be validated.</param>
             <returns>APIRespone includes the result.</returns>
         </member>
-        <member name="M:DynThings.WebPortal.Controllers.AppsController.DetailsPV(System.Int32)">
-            <summary>
-            Return App main details
-            </summary>
-            <param name="id">App ID</param>
-            <returns>App Object</returns>
-        </member>
         <member name="M:DynThings.WebPortal.Controllers.AppsController.ListPV(System.String,System.Int32,System.Int32)">
             <summary>
             Return list of apps in partial view
@@ -503,6 +496,20 @@
             <param name="page">Page Number</param>
             <param name="recordsperpage">Apps records per page</param>
             <returns></returns>
+        </member>
+        <member name="M:DynThings.WebPortal.Controllers.AppsController.DetailsPV(System.Int32)">
+            <summary>
+            Return App main details
+            </summary>
+            <param name="id">App ID</param>
+            <returns>App Object</returns>
+        </member>
+        <member name="M:DynThings.WebPortal.Controllers.AppsController.APIPermissionsPV(System.Int32)">
+            <summary>
+            Return App API Permissions List
+            </summary>
+            <param name="id">App ID</param>
+            <returns>Permissions list Partial View</returns>
         </member>
     </members>
 </doc>

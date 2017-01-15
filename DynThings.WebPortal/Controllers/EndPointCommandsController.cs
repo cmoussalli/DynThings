@@ -11,6 +11,8 @@ namespace DynThings.WebPortal.Controllers
 {
     public class EndPointCommandsController : BaseController
     {
+        UnitOfWork_Repositories uof_repos = new UnitOfWork_Repositories();
+
         #region ActionResult: Views
         public ActionResult Index()
         {
@@ -27,7 +29,7 @@ namespace DynThings.WebPortal.Controllers
             {
                 return RedirectToAction("Login", "Account");
             }
-            EndPointCommand cmd = UnitOfWork_Repositories.repoEndPointCommands.Find(id);
+            EndPointCommand cmd = uof_repos.repoEndPointCommands.Find(id);
             return View(cmd);
         }
         #endregion
@@ -37,7 +39,7 @@ namespace DynThings.WebPortal.Controllers
         #region DetailsPV
         public PartialViewResult DetailsPV(long id)
         {
-            EndPointCommand command = UnitOfWork_Repositories.repoEndPointCommands.Find(id);
+            EndPointCommand command = uof_repos.repoEndPointCommands.Find(id);
             return PartialView("_Details_Main", command);
         }
 
@@ -48,7 +50,7 @@ namespace DynThings.WebPortal.Controllers
         [HttpGet]
         public PartialViewResult ListPV(string searchfor = null, int page = 1, int recordsperpage = 0)
         {
-            PagedList.IPagedList cmds = UnitOfWork_Repositories.repoEndPointCommands.GetPagedList(searchfor, page, Helpers.Configs.validateRecordsPerMaster(recordsperpage));
+            PagedList.IPagedList cmds = uof_repos.repoEndPointCommands.GetPagedList(searchfor, page, Helpers.Configs.validateRecordsPerMaster(recordsperpage));
             return PartialView("_List", cmds);
         }
 
@@ -56,7 +58,7 @@ namespace DynThings.WebPortal.Controllers
         [HttpGet]
         public PartialViewResult ListByEndPointIDPV(string searchfor = null, long EndPointID = 0, int page = 1, int recordsperpage = 0)
         {
-            PagedList.IPagedList cmds = UnitOfWork_Repositories.repoEndPointCommands.GetPagedListByEndPointID(searchfor, EndPointID, page, Helpers.Configs.validateRecordsPerMaster(recordsperpage));
+            PagedList.IPagedList cmds = uof_repos.repoEndPointCommands.GetPagedListByEndPointID(searchfor, EndPointID, page, Helpers.Configs.validateRecordsPerMaster(recordsperpage));
             return PartialView("_List", cmds);
         }
         #endregion
@@ -65,7 +67,7 @@ namespace DynThings.WebPortal.Controllers
         [HttpGet]
         public PartialViewResult AddPV()
         {
-            ViewBag.EndPointID = new SelectList(UnitOfWork_Repositories.repoEndpoints.GetList(), "ID", "Title");
+            ViewBag.EndPointID = new SelectList(uof_repos.repoEndpoints.GetList(), "ID", "Title");
             return PartialView("_Add");
         }
 
@@ -77,7 +79,7 @@ namespace DynThings.WebPortal.Controllers
             if (ModelState.IsValid)
             {
                 long cmd = long.Parse(command.EndPointID.ToString());
-                res = UnitOfWork_Repositories.repoEndPointCommands.Add(command.Title, long.Parse(command.EndPointID.ToString()), command.Description, command.CommandCode, "1");
+                res = uof_repos.repoEndPointCommands.Add(command.Title, long.Parse(command.EndPointID.ToString()), command.Description, command.CommandCode, "1");
                 return Json(res);
             }
             return Json(res);
@@ -88,8 +90,8 @@ namespace DynThings.WebPortal.Controllers
         [HttpGet]
         public PartialViewResult EditPV(long id)
         {
-            EndPointCommand Command = UnitOfWork_Repositories.repoEndPointCommands.Find(id);
-            ViewBag.EndPointID = new SelectList(UnitOfWork_Repositories.repoEndpoints.GetList(), "ID", "Title", Command.EndPointID);
+            EndPointCommand Command = uof_repos.repoEndPointCommands.Find(id);
+            ViewBag.EndPointID = new SelectList(uof_repos.repoEndpoints.GetList(), "ID", "Title", Command.EndPointID);
             return PartialView("_Edit", Command);
         }
 
@@ -100,7 +102,7 @@ namespace DynThings.WebPortal.Controllers
             ResultInfo.Result res = ResultInfo.GetResultByID(1);
             if (ModelState.IsValid)
             {
-                res = UnitOfWork_Repositories.repoEndPointCommands.Edit(Command.ID, Command.Title, Command.Description, long.Parse(Command.EndPointID.ToString()), Command.CommandCode);
+                res = uof_repos.repoEndPointCommands.Edit(Command.ID, Command.Title, Command.Description, long.Parse(Command.EndPointID.ToString()), Command.CommandCode);
                 return Json(res);
             }
             return Json(res);
@@ -111,8 +113,8 @@ namespace DynThings.WebPortal.Controllers
         [HttpGet]
         public PartialViewResult DeletePV(long id)
         {
-            EndPointCommand Command = UnitOfWork_Repositories.repoEndPointCommands.Find(id);
-            ViewBag.EndPointID = new SelectList(UnitOfWork_Repositories.repoEndpoints.GetList(), "ID", "Title", Command.EndPointID);
+            EndPointCommand Command = uof_repos.repoEndPointCommands.Find(id);
+            ViewBag.EndPointID = new SelectList(uof_repos.repoEndpoints.GetList(), "ID", "Title", Command.EndPointID);
             return PartialView("_Delete", Command);
         }
 
@@ -123,7 +125,7 @@ namespace DynThings.WebPortal.Controllers
             ResultInfo.Result res = ResultInfo.GetResultByID(1);
             if (ModelState.IsValid)
             {
-                res = UnitOfWork_Repositories.repoEndPointCommands.Detele(Command.ID);
+                res = uof_repos.repoEndPointCommands.Detele(Command.ID);
                 return Json(res);
             }
             return Json(res);
@@ -134,7 +136,7 @@ namespace DynThings.WebPortal.Controllers
         [HttpGet]
         public PartialViewResult ExecutePV(long id)
         {
-            EndPointCommand Command = UnitOfWork_Repositories.repoEndPointCommands.Find(id);
+            EndPointCommand Command = uof_repos.repoEndPointCommands.Find(id);
             return PartialView("_Execute", Command);
         }
 
@@ -145,8 +147,8 @@ namespace DynThings.WebPortal.Controllers
             ResultInfo.Result res = ResultInfo.GetResultByID(1);
             if (ModelState.IsValid)
             {
-                Endpoint end = UnitOfWork_Repositories.repoEndpoints.Find((long)Command.EndPointID);
-                res = UnitOfWork_Repositories.repoEndPointCommands.Execute(Command.ID, Guid.Parse(end.KeyPass.ToString()), User.Identity.ToString());
+                Endpoint end = uof_repos.repoEndpoints.Find((long)Command.EndPointID);
+                res = uof_repos.repoEndPointCommands.Execute(Command.ID, Guid.Parse(end.KeyPass.ToString()), User.Identity.ToString());
                 return Json(res);
             }
             return Json(res);

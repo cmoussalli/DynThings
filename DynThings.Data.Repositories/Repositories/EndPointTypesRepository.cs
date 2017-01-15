@@ -19,11 +19,15 @@ namespace DynThings.Data.Repositories
     public class EndPointTypesRepository
     {
         #region Constructor
-        public DynThingsEntities db { get; set; }
-        public EndPointTypesRepository(DynThingsEntities dynThingsEntities)
+        public EndPointTypesRepository(DynThingsEntities dbSource)
         {
-            db = dynThingsEntities;
+            db = dbSource;
         }
+
+        #endregion
+
+        #region props
+        public DynThingsEntities db;
         #endregion
 
         #region Get PagedList

@@ -12,11 +12,15 @@ namespace DynThings.Data.Repositories
     public class RolesRepository
     {
         #region Constructor
-        public DynThingsEntities db { get; set; }
-        public RolesRepository(DynThingsEntities dynThingsEntities)
+        public RolesRepository(DynThingsEntities dbSource)
         {
-            db = dynThingsEntities;
+            db = dbSource;
         }
+
+        #endregion
+
+        #region props
+        public DynThingsEntities db;
         #endregion
 
 

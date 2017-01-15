@@ -10,7 +10,7 @@
     <ul class="nav navbar-nav navbar-right">
         <li><a href="#" data-toggle="modal" data-target="#mdlNotifications">Notifictions <span id="lblNotificationsCount" class="badge">0</span></a></li>
         <li>
-            @Html.ActionLink("Hello " + UnitOfWork_Repositories.repoDynUsers.GetUserName(User.Identity.GetUserId()) + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
+            @Html.ActionLink("Hello " + uof_repos.repoDynUsers.GetUserName(User.Identity.GetUserId()) + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
         </li>
         <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
     </ul>

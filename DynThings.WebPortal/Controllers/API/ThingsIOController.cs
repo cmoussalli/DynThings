@@ -32,6 +32,7 @@ namespace DynThings.WebAPI.Controllers
 {
     public class ThingsIOController : ApiController
     {
+        UnitOfWork_Repositories uof_repos = new UnitOfWork_Repositories();
 
         #region Validate
         [HttpGet]
@@ -70,7 +71,7 @@ namespace DynThings.WebAPI.Controllers
                 if (Guid.TryParse(oEndPointInput.KeyPass, out endPointKeyPass))
                 {
                     //endPoint keyPass Validation
-                    DynThings.Data.Models.Endpoint oEndpoint = UnitOfWork_Repositories.repoEndpoints.FindByKeyPass(endPointKeyPass);
+                    DynThings.Data.Models.Endpoint oEndpoint = uof_repos.repoEndpoints.FindByKeyPass(endPointKeyPass);
 
                     if (oEndpoint != null)
                     {
@@ -91,14 +92,14 @@ namespace DynThings.WebAPI.Controllers
                         }
 
                         //Submit Data to Database
-                        ResultInfo.Result repoResult = UnitOfWork_Repositories.repoEndpointIOs.Add(oEndpoint.ID, oEndPointInput.Value.ToString(), EndpointIOsRepository.EndPointIOType.Input, execTime);
+                        ResultInfo.Result repoResult = uof_repos.repoEndpointIOs.Add(oEndpoint.ID, oEndPointInput.Value.ToString(), EndpointIOsRepository.EndPointIOType.Input, execTime);
 
                         //Validate Result
                         if (repoResult.ResultType == ResultInfo.ResultType.Ok)
                         {//Submited
                             ResultInfo.Result result = ResultInfo.GenerateOKResult();
                             oApiResponse = ApiResponseAdapter.fromResult(result);
-                            SignalRServices.ThingEnd_Input(oEndpoint.ThingID , oEndpoint.EndPointType.ID);
+                            SignalRServices.ThingEnd_Input(oEndpoint.ThingID, oEndpoint.EndPointType.ID);
                             return oApiResponse;
                         }
                         else
@@ -144,7 +145,7 @@ namespace DynThings.WebAPI.Controllers
                 if (Guid.TryParse(oEndPointLog.KeyPass, out endPointKeyPass))
                 {
                     //endPoint keyPass Validation
-                    DynThings.Data.Models.Endpoint oEndpoint = UnitOfWork_Repositories.repoEndpoints.FindByKeyPass(endPointKeyPass);
+                    DynThings.Data.Models.Endpoint oEndpoint = uof_repos.repoEndpoints.FindByKeyPass(endPointKeyPass);
 
                     if (oEndpoint != null)
                     {
@@ -165,7 +166,7 @@ namespace DynThings.WebAPI.Controllers
                         }
 
                         //Submit Data to Database
-                        ResultInfo.Result repoResult = UnitOfWork_Repositories.repoEndpointIOs.Add(oEndpoint.ID, oEndPointLog.Value.ToString(), EndpointIOsRepository.EndPointIOType.Log, execTime);
+                        ResultInfo.Result repoResult = uof_repos.repoEndpointIOs.Add(oEndpoint.ID, oEndPointLog.Value.ToString(), EndpointIOsRepository.EndPointIOType.Log, execTime);
 
                         //Validate Result
                         if (repoResult.ResultType == ResultInfo.ResultType.Ok)
@@ -224,7 +225,7 @@ namespace DynThings.WebAPI.Controllers
                 if (Guid.TryParse(deviceInput.KeyPass, out deviceGuid))
                 {
                     //Device keyPass Validation
-                    DynThings.Data.Models.Device device = UnitOfWork_Repositories.repoDevices.FindByKeyPass(deviceGuid);
+                    DynThings.Data.Models.Device device = uof_repos.repoDevices.FindByKeyPass(deviceGuid);
                     if (device != null)
                     {
                         //Try Parse ExecutionTimeStamp to DateTime
@@ -239,7 +240,7 @@ namespace DynThings.WebAPI.Controllers
                         }
 
                         //Submit Data to Database
-                        ResultInfo.Result repoResult = UnitOfWork_Repositories.repoDeviceIOs.Add(device.ID, deviceInput.Value.ToString(), DeviceIOsRepository.deviceIOType.Input, execTime);
+                        ResultInfo.Result repoResult = uof_repos.repoDeviceIOs.Add(device.ID, deviceInput.Value.ToString(), DeviceIOsRepository.deviceIOType.Input, execTime);
 
                         //Validate Result
                         if (repoResult.ResultType == ResultInfo.ResultType.Ok)
@@ -294,7 +295,7 @@ namespace DynThings.WebAPI.Controllers
                 if (Guid.TryParse(deviceInput.KeyPass, out deviceGuid))
                 {
                     //Device keyPass Validation
-                    DynThings.Data.Models.Device device = UnitOfWork_Repositories.repoDevices.FindByKeyPass(deviceGuid);
+                    DynThings.Data.Models.Device device = uof_repos.repoDevices.FindByKeyPass(deviceGuid);
                     if (device != null)
                     {
                         //Try Parse ExecutionTimeStamp to DateTime
@@ -309,7 +310,7 @@ namespace DynThings.WebAPI.Controllers
                         }
 
                         //Submit Data to Database
-                        ResultInfo.Result repoResult = UnitOfWork_Repositories.repoDeviceIOs.Add(device.ID, deviceInput.Value.ToString(), DeviceIOsRepository.deviceIOType.Log, execTime);
+                        ResultInfo.Result repoResult = uof_repos.repoDeviceIOs.Add(device.ID, deviceInput.Value.ToString(), DeviceIOsRepository.deviceIOType.Log, execTime);
 
                         //Validate Result
                         if (repoResult.ResultType == ResultInfo.ResultType.Ok)
@@ -348,7 +349,7 @@ namespace DynThings.WebAPI.Controllers
         public List<APIDeviceIO> GetDevicePendingCommands(Guid deviceKeyPass)
         {
             List<APIDeviceIO> apiCmds = new List<APIDeviceIO>();
-            List<DeviceIO> cmds = UnitOfWork_Repositories.repoDeviceIOs.GetPendingCommandsList(deviceKeyPass);
+            List<DeviceIO> cmds = uof_repos.repoDeviceIOs.GetPendingCommandsList(deviceKeyPass);
             foreach (DeviceIO cmd in cmds)
             {
                 APIDeviceIO apiCmd = new APIDeviceIO();
@@ -404,7 +405,7 @@ namespace DynThings.WebAPI.Controllers
         public List<APIEndPointIO> GetEndPointPendingCommands(Guid endPointKeyPass)
         {
             List<APIEndPointIO> apiCmds = new List<APIEndPointIO>();
-            List<EndPointIO> cmds = UnitOfWork_Repositories.repoEndpointIOs.GetPendingCommandsList(endPointKeyPass);
+            List<EndPointIO> cmds = uof_repos.repoEndpointIOs.GetPendingCommandsList(endPointKeyPass);
             foreach (EndPointIO cmd in cmds)
             {
                 APIEndPointIO apiCmd = new APIEndPointIO();

@@ -12,12 +12,19 @@ namespace DynThings.Data.Repositories
     public class DynUsersRepository
     {
         #region Constructor
-        public DynThingsEntities db { get; set; }
-        public DynUsersRepository(DynThingsEntities dynThingsEntities)
+        public DynUsersRepository(DynThingsEntities dbSource)
         {
-            db = dynThingsEntities;
+            db = dbSource;
+            repoRoles = new RolesRepository(dbSource);
         }
+
         #endregion
+
+        #region props
+        DynThingsEntities db;
+        RolesRepository repoRoles;
+        #endregion
+
 
         #region GetCount
         public int GetCount()
@@ -128,7 +135,7 @@ namespace DynThings.Data.Repositories
             }
             else
             {//Role not exist, must attach role to user
-                AspNetRole rol = UnitOfWork_Repositories.repoRoles.Find(roleID);
+                AspNetRole rol = repoRoles.Find(roleID);
                 usr.AspNetRoles.Add(rol);
                 db.SaveChanges();
             }

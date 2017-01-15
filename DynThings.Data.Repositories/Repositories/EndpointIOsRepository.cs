@@ -18,11 +18,15 @@ namespace DynThings.Data.Repositories
     public class EndpointIOsRepository
     {
         #region Constructor
-        public DynThingsEntities db { get; set; }
-        public EndpointIOsRepository(DynThingsEntities dynThingsEntities)
+        public EndpointIOsRepository(DynThingsEntities dbSource)
         {
-            db = dynThingsEntities;
+            db = dbSource;
         }
+
+        #endregion
+
+        #region props
+        public DynThingsEntities db;
         #endregion
 
 

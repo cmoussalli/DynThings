@@ -12,11 +12,15 @@ namespace DynThings.Data.Repositories
     public class MediaFilesRepository
     {
         #region Constructor
-        public DynThingsEntities db { get; set; }
-        public MediaFilesRepository(DynThingsEntities dynThingsEntities)
+        public MediaFilesRepository(DynThingsEntities dbSource)
         {
-            db = dynThingsEntities;
+            db = dbSource;
         }
+
+        #endregion
+
+        #region props
+        public DynThingsEntities db;
         #endregion
 
 

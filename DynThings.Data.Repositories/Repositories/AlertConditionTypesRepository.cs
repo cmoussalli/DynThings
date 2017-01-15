@@ -19,11 +19,15 @@ namespace DynThings.Data.Repositories
     public class AlertConditionTypesRepository
     {
         #region Constructor
-        public DynThingsEntities db { get; set; }
-        public AlertConditionTypesRepository(DynThingsEntities dynThingsEntities)
+        public AlertConditionTypesRepository(DynThingsEntities dbSource)
         {
-            db = dynThingsEntities;
+            db = dbSource;
         }
+
+        #endregion
+
+        #region props
+        public DynThingsEntities db;
         #endregion
 
 

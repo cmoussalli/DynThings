@@ -19,6 +19,8 @@ namespace DynThings.WebPortal.Controllers
 {
     public class MediaFilesController : BaseController
     {
+        UnitOfWork_Repositories uof_repos = new UnitOfWork_Repositories();
+
         #region ActionResult: Views
         public ActionResult Index()
         {
@@ -36,7 +38,7 @@ namespace DynThings.WebPortal.Controllers
         //    {
         //        return RedirectToAction("Login", "Account");
         //    }
-        //    MediaFile ThingCat = Data.Repositories.UnitOfWork_Repositories.repoMediaFiles.Find(id);
+        //    MediaFile ThingCat = uof_repos.repoMediaFiles.Find(id);
         //    return View(ThingCat);
         //}
 
@@ -47,7 +49,7 @@ namespace DynThings.WebPortal.Controllers
         [HttpGet]
         public PartialViewResult ListPV(string searchfor = null, int page = 1, int recordsperpage = 0)
         {
-            IPagedList mFiles = UnitOfWork_Repositories.repoMediaFiles.GetPagedList(searchfor, page, Helpers.Configs.validateRecordsPerMaster(recordsperpage));
+            IPagedList mFiles = uof_repos.repoMediaFiles.GetPagedList(searchfor, page, Helpers.Configs.validateRecordsPerMaster(recordsperpage));
             return PartialView("_List", mFiles);
         }
         #endregion
@@ -66,7 +68,7 @@ namespace DynThings.WebPortal.Controllers
             ResultInfo.Result res = ResultInfo.GetResultByID(1);
             if (ModelState.IsValid)
             {
-                res = UnitOfWork_Repositories.repoMediaFiles.Add(MediaFile.Title);
+                res = uof_repos.repoMediaFiles.Add(MediaFile.Title);
                 return Json(res);
             }
             return Json(res);
@@ -77,7 +79,7 @@ namespace DynThings.WebPortal.Controllers
         [HttpGet]
         public PartialViewResult EditPV(long id)
         {
-            MediaFile MediaFile = UnitOfWork_Repositories.repoMediaFiles.Find(id);
+            MediaFile MediaFile = uof_repos.repoMediaFiles.Find(id);
             return PartialView("_Edit", MediaFile);
         }
 
@@ -88,7 +90,7 @@ namespace DynThings.WebPortal.Controllers
             ResultInfo.Result res = ResultInfo.GetResultByID(1);
             if (ModelState.IsValid)
             {
-                res = UnitOfWork_Repositories.repoMediaFiles.Edit(MediaFile.ID, MediaFile.Title);
+                res = uof_repos.repoMediaFiles.Edit(MediaFile.ID, MediaFile.Title);
                 return Json(res);
             }
             return Json(res);
@@ -121,7 +123,7 @@ namespace DynThings.WebPortal.Controllers
                 ResultInfo.Result rm = Core.ResultInfo.GetResultByID(1);
                 return PartialView("_PVResult", rm);
             }
-            MediaFile media = UnitOfWork_Repositories.repoMediaFiles.Find(id);
+            MediaFile media = uof_repos.repoMediaFiles.Find(id);
             return PartialView("_Delete", media);
         }
 
@@ -133,7 +135,7 @@ namespace DynThings.WebPortal.Controllers
             ResultInfo.Result res = ResultInfo.GetResultByID(1);
             if (ModelState.IsValid)
             {
-                res = UnitOfWork_Repositories.repoMediaFiles.Delete(mediaFile.ID);
+                res = uof_repos.repoMediaFiles.Delete(mediaFile.ID);
                 return Json(res);
             }
             return Json(res);

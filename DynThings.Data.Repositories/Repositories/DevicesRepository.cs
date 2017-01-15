@@ -18,11 +18,15 @@ namespace DynThings.Data.Repositories
     public class DevicesRepository
     {
         #region Constructor
-        public DynThingsEntities db { get; set; }
-        public DevicesRepository(DynThingsEntities dynThingsEntities)
+        public DevicesRepository(DynThingsEntities dbSource)
         {
-            db = dynThingsEntities;
+            db = dbSource;
         }
+
+        #endregion
+
+        #region props
+        public DynThingsEntities db;
         #endregion
 
         #region GetCount

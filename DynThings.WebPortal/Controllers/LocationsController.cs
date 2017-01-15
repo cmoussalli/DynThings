@@ -23,6 +23,7 @@ namespace DynThings.WebPortal.Controllers
 {
     public class LocationsController : BaseController
     {
+        UnitOfWork_Repositories uof_repos = new UnitOfWork_Repositories();
 
         #region ActionResult: Views
         public ActionResult Index()
@@ -40,7 +41,7 @@ namespace DynThings.WebPortal.Controllers
             {
                 return RedirectToAction("Login", "Account");
             }
-            Location loc = UnitOfWork_Repositories.repoLocations.Find(id);
+            Location loc = uof_repos.repoLocations.Find(id);
             return View(loc);
         }
 
@@ -51,7 +52,7 @@ namespace DynThings.WebPortal.Controllers
         #region DetailsPV : Main
         public PartialViewResult DetailsMainPV(int id)
         {
-            Location locs = UnitOfWork_Repositories.repoLocations.Find(id);
+            Location locs = uof_repos.repoLocations.Find(id);
             return PartialView("_Details_Main", locs);
         }
         #endregion
@@ -59,7 +60,7 @@ namespace DynThings.WebPortal.Controllers
         #region DetailsPV : GeoLocation
         public PartialViewResult DetailsGeoLocationPV(int id)
         {
-            Location locs = UnitOfWork_Repositories.repoLocations.Find(id);
+            Location locs = uof_repos.repoLocations.Find(id);
             return PartialView("_Details_GeoLocation", locs);
         }
 
@@ -69,7 +70,7 @@ namespace DynThings.WebPortal.Controllers
         [HttpGet]
         public PartialViewResult ListPV(string searchfor = null, int page = 1, int recordsperpage = 0)
         {
-            PagedList.IPagedList locs = UnitOfWork_Repositories.repoLocations.GetPagedList(searchfor, page, Helpers.Configs.validateRecordsPerMaster(recordsperpage));
+            PagedList.IPagedList locs = uof_repos.repoLocations.GetPagedList(searchfor, page, Helpers.Configs.validateRecordsPerMaster(recordsperpage));
             return PartialView("_List", locs);
         }
         #endregion
@@ -88,7 +89,7 @@ namespace DynThings.WebPortal.Controllers
             ResultInfo.Result res = ResultInfo.GetResultByID(1);
             if (ModelState.IsValid)
             {
-                res = UnitOfWork_Repositories.repoLocations.Add(location.Title);
+                res = uof_repos.repoLocations.Add(location.Title);
                 return Json(res);
             }
             return Json(res);
@@ -100,7 +101,7 @@ namespace DynThings.WebPortal.Controllers
         [HttpGet]
         public PartialViewResult EditMainPV(int id)
         {
-            Location location = UnitOfWork_Repositories.repoLocations.Find(id);
+            Location location = uof_repos.repoLocations.Find(id);
             return PartialView("_EditMain", location);
         }
 
@@ -111,7 +112,7 @@ namespace DynThings.WebPortal.Controllers
             ResultInfo.Result res = ResultInfo.GetResultByID(1);
             if (ModelState.IsValid)
             {
-                res = UnitOfWork_Repositories.repoLocations.EditMain(location.ID, location.Title, location.isActive);
+                res = uof_repos.repoLocations.EditMain(location.ID, location.Title, location.isActive);
                 return Json(res);
             }
             return Json(res);
@@ -122,7 +123,7 @@ namespace DynThings.WebPortal.Controllers
         [HttpGet]
         public PartialViewResult EditGeoLocationPV(int id)
         {
-            Location location = UnitOfWork_Repositories.repoLocations.Find(id);
+            Location location = uof_repos.repoLocations.Find(id);
             return PartialView("_EditGeoLocation", location);
         }
 
@@ -133,7 +134,7 @@ namespace DynThings.WebPortal.Controllers
             ResultInfo.Result res = ResultInfo.GetResultByID(1);
             if (ModelState.IsValid)
             {
-                UnitOfWork_Repositories.repoLocations.EditGeoLocation(location.ID, location.LongitudeY, location.LatitudeX);
+                uof_repos.repoLocations.EditGeoLocation(location.ID, location.LongitudeY, location.LatitudeX);
                 return Json(res);
             }
             return Json(res);
@@ -146,7 +147,7 @@ namespace DynThings.WebPortal.Controllers
         [HttpGet]
         public PartialViewResult DeletePV(int id)
         {
-            Location location = UnitOfWork_Repositories.repoLocations.Find(id);
+            Location location = uof_repos.repoLocations.Find(id);
             return PartialView("_Delete", location);
         }
 
@@ -157,7 +158,7 @@ namespace DynThings.WebPortal.Controllers
             ResultInfo.Result res = ResultInfo.GetResultByID(1);
             if (ModelState.IsValid)
             {
-                res = UnitOfWork_Repositories.repoLocations.Delete(location.ID);
+                res = uof_repos.repoLocations.Delete(location.ID);
                 return Json(res);
             }
             return Json(res);
@@ -172,7 +173,7 @@ namespace DynThings.WebPortal.Controllers
         [HttpGet]
         public PartialViewResult LnkLocationDevicesListGridPV(string searchfor = null, long LocationID = 0, int page = 1, int recordsperpage = 0)
         {
-            IPagedList views = UnitOfWork_Repositories.repoLocations.GetLocationDevicesPagedList(searchfor, LocationID, page, Helpers.Configs.validateRecordsPerMaster(recordsperpage));
+            IPagedList views = uof_repos.repoLocations.GetLocationDevicesPagedList(searchfor, LocationID, page, Helpers.Configs.validateRecordsPerMaster(recordsperpage));
             return PartialView("_DevicesList", views);
         }
         #endregion
@@ -184,7 +185,7 @@ namespace DynThings.WebPortal.Controllers
             ResultInfo.Result res = ResultInfo.GetResultByID(1);
             if (ModelState.IsValid)
             {
-                res = UnitOfWork_Repositories.repoLocations.AttachDevice(LocationID, DeviceID,User.Identity.GetUserId());
+                res = uof_repos.repoLocations.AttachDevice(LocationID, DeviceID,User.Identity.GetUserId());
                 return Json(res);
             }
             return Json(res);
@@ -198,7 +199,7 @@ namespace DynThings.WebPortal.Controllers
             ResultInfo.Result res = ResultInfo.GetResultByID(1);
             if (ModelState.IsValid)
             {
-                res = UnitOfWork_Repositories.repoLocations.DeattachDevice(linkID,currentUser.Id);
+                res = uof_repos.repoLocations.DeattachDevice(linkID,currentUser.Id);
                 return Json(res);
             }
             return Json(res);
@@ -212,7 +213,7 @@ namespace DynThings.WebPortal.Controllers
         [HttpGet]
         public PartialViewResult LnkLocationThingsListGridPV(string searchfor = null, long LocationID = 0, int page = 1, int recordsperpage = 0)
         {
-            IPagedList views = UnitOfWork_Repositories.repoLocations.GetLocationThingsPagedList(searchfor, LocationID, page, Helpers.Configs.validateRecordsPerMaster(recordsperpage));
+            IPagedList views = uof_repos.repoLocations.GetLocationThingsPagedList(searchfor, LocationID, page, Helpers.Configs.validateRecordsPerMaster(recordsperpage));
             return PartialView("_ThingsList", views);
         }
         #endregion
@@ -224,7 +225,7 @@ namespace DynThings.WebPortal.Controllers
             ResultInfo.Result res = ResultInfo.GetResultByID(1);
             if (ModelState.IsValid)
             {
-                res = UnitOfWork_Repositories.repoLocations.AttachThing(LocationID, ThingID, User.Identity.GetUserId());
+                res = uof_repos.repoLocations.AttachThing(LocationID, ThingID, User.Identity.GetUserId());
                 return Json(res);
             }
             return Json(res);
@@ -238,7 +239,7 @@ namespace DynThings.WebPortal.Controllers
             ResultInfo.Result res = ResultInfo.GetResultByID(1);
             if (ModelState.IsValid)
             {
-                res = UnitOfWork_Repositories.repoLocations.DeattachThing(linkID, currentUser.Id);
+                res = uof_repos.repoLocations.DeattachThing(linkID, currentUser.Id);
                 return Json(res);
             }
             return Json(res);
@@ -255,7 +256,7 @@ namespace DynThings.WebPortal.Controllers
         [HttpGet]
         public PartialViewResult LookupPV(string searchfor = null, int page = 1, int recordsperpage = 0)
         {
-            PagedList.IPagedList locs = UnitOfWork_Repositories.repoLocations.GetPagedList("", 1, 10);
+            PagedList.IPagedList locs = uof_repos.repoLocations.GetPagedList("", 1, 10);
             return PartialView("lookup/Index", locs);
         }
         #endregion
@@ -263,7 +264,7 @@ namespace DynThings.WebPortal.Controllers
         [HttpGet]
         public PartialViewResult LookupListPV(string searchfor = null, int page = 1, int recordsperpage = 0)
         {
-            PagedList.IPagedList locs = UnitOfWork_Repositories.repoLocations.GetPagedList(searchfor, page, Config.DefaultRecordsPerChild);
+            PagedList.IPagedList locs = uof_repos.repoLocations.GetPagedList(searchfor, page, Config.DefaultRecordsPerChild);
             return PartialView("lookup/List", locs);
         }
         #endregion

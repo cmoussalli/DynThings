@@ -19,11 +19,15 @@ namespace DynThings.Data.Repositories
     public class UserNotificationsRepository
     {
         #region Constructor
-        public DynThingsEntities db { get; set; }
-        public UserNotificationsRepository(DynThingsEntities dynThingsEntities)
+        public UserNotificationsRepository(DynThingsEntities dbSource)
         {
-            db = dynThingsEntities;
+            db = dbSource;
         }
+
+        #endregion
+
+        #region props
+        public DynThingsEntities db;
         #endregion
 
 

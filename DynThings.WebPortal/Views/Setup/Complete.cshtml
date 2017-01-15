@@ -1,5 +1,9 @@
 ﻿@using DynThings.Data.Repositories;
 @{
+    UnitOfWork_Repositories uof_repos = new UnitOfWork_Repositories();
+}
+
+@{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_LayoutEmpty.cshtml";
 }
@@ -9,7 +13,7 @@
     <p>Welcome to DynThings, your Internet of Things Platform. To get started, you can easily follow the steps to start.</p>
     @*<p><a role="button" class="btn btn-primary btn-lg">Learn more</a></p>*@
 </div>
-@if (UnitOfWork_Repositories.repoDynUsers.IsAdminitratorsExists())
+@if (uof_repos.repoDynUsers.IsAdminitratorsExists())
 {
     <h2>1. Login</h2>
     <p>To get started, you should Login as one of the existing users in the selected database.</p>

@@ -12,18 +12,19 @@ namespace DynThings.WebPortal.Controllers
     [Authorize(Roles = "Admin")]
     public class ConfigController : Controller
     {
+        UnitOfWork_Repositories uof_repos = new UnitOfWork_Repositories();
 
         // GET: Config
         public ActionResult Index()
         {
-            DynSetting config = UnitOfWork_Repositories.repoDynSettings.GetConfig();
+            DynSetting config = uof_repos.repoDynSettings.GetConfig();
             return View("Index", config);
         }
 
 
         public PartialViewResult MainPV()
         {
-            DynSetting config = UnitOfWork_Repositories.repoDynSettings.GetConfig();
+            DynSetting config = uof_repos.repoDynSettings.GetConfig();
             return PartialView("_Main", config);
         }
 
@@ -32,7 +33,7 @@ namespace DynThings.WebPortal.Controllers
         [HttpGet]
         public PartialViewResult GridsPV()
         {
-            DynSetting config = UnitOfWork_Repositories.repoDynSettings.GetConfig();
+            DynSetting config = uof_repos.repoDynSettings.GetConfig();
             ViewBag.DefaultRecordsPerMaster = new SelectList(StaticMenus.GetGridRowsCount(),config.DefaultRecordsPerMaster.ToString());
             ViewBag.DefaultRecordsPerChild = new SelectList(StaticMenus.GetGridRowsCount(), config.DefaultRecordsPerChild.ToString());
             return PartialView("_Grids", config);
@@ -45,7 +46,7 @@ namespace DynThings.WebPortal.Controllers
             ResultInfo.Result res = ResultInfo.GetResultByID(1);
             if (ModelState.IsValid)
             {
-                res =  UnitOfWork_Repositories.repoDynSettings.SetGridRowsCount(config.DefaultRecordsPerMaster, config.DefaultRecordsPerChild);
+                res =  uof_repos.repoDynSettings.SetGridRowsCount(config.DefaultRecordsPerMaster, config.DefaultRecordsPerChild);
                 return Json(res);
             }
             return Json(res);
@@ -56,7 +57,7 @@ namespace DynThings.WebPortal.Controllers
         [HttpGet]
         public PartialViewResult DevModePV()
         {
-            DynSetting config = UnitOfWork_Repositories.repoDynSettings.GetConfig();
+            DynSetting config = uof_repos.repoDynSettings.GetConfig();
             return PartialView("_DevMode", config);
         }
 
@@ -67,7 +68,7 @@ namespace DynThings.WebPortal.Controllers
             ResultInfo.Result res = ResultInfo.GetResultByID(1);
             if (ModelState.IsValid)
             {
-                res = UnitOfWork_Repositories.repoDynSettings.SetDevelopmentMode(config.DevelopmentMode);
+                res = uof_repos.repoDynSettings.SetDevelopmentMode(config.DevelopmentMode);
                 return Json(res);
             }
             return Json(res);
@@ -78,7 +79,7 @@ namespace DynThings.WebPortal.Controllers
         [HttpGet]
         public PartialViewResult ResetPV()
         {
-            DynSetting config = UnitOfWork_Repositories.repoDynSettings.GetConfig();
+            DynSetting config = uof_repos.repoDynSettings.GetConfig();
             return PartialView("_Reset", config);
         }
 
@@ -90,7 +91,7 @@ namespace DynThings.WebPortal.Controllers
             if (ModelState.IsValid)
             {
                 Session.Clear();
-                res = UnitOfWork_Repositories.repoDynSettings.ResetPlatform();
+                res = uof_repos.repoDynSettings.ResetPlatform();
                 return Json(res);
             }
             return Json(res);

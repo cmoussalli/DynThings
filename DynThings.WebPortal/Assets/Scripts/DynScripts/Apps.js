@@ -68,7 +68,7 @@ function AttachEventAppEditForm(AppID) {
             }
         })
         $('#mdl').modal('hide');
-        LoadPart_AppDetailsDiv(AppID);
+        LoadPart_AppDetailsDiv(selectedAppID);
     });
 };
 

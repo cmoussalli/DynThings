@@ -4,6 +4,7 @@
 // Content    : Handle LocationViewTypes CRUD                  //
 // Notes      :                                                //
 /////////////////////////////////////////////////////////////////
+using DynThings.Core;
 using DynThings.Data.Models;
 using System;
 using System.Collections.Generic;
@@ -16,11 +17,15 @@ namespace DynThings.Data.Repositories
     public class LocationViewTypesRepository
     {
         #region Constructor
-        public DynThingsEntities db { get; set; }
-        public LocationViewTypesRepository(DynThingsEntities dynThingsEntities)
+        public LocationViewTypesRepository(DynThingsEntities dbSource)
         {
-            db = dynThingsEntities;
+            db = dbSource;
         }
+
+        #endregion
+
+        #region props
+        public DynThingsEntities db;
         #endregion
 
         #region GetList
@@ -34,7 +39,6 @@ namespace DynThings.Data.Repositories
             return locViewTypes;
         }
         #endregion
-
 
 
     }

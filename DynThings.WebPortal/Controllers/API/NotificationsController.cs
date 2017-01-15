@@ -17,6 +17,8 @@ namespace DynThings.WebAPI.Controllers.API
     //[Authorize()]
     public class NotificationsController : ApiController
     {
+        UnitOfWork_Repositories uof_repos = new UnitOfWork_Repositories();
+
 
         [HttpGet]
         public string Get()
@@ -40,7 +42,7 @@ namespace DynThings.WebAPI.Controllers.API
             try
             {
                 oApiResponse.Status = "Ok";
-                int notisCount = UnitOfWork_Repositories.repoUserNotification.GetUnseenNotifications( User.Identity.GetUserId(), lastNotificationID).Count;
+                int notisCount = uof_repos.repoUserNotification.GetUnseenNotifications( User.Identity.GetUserId(), lastNotificationID).Count;
                 oApiResponse.Message = notisCount.ToString();
             }
             catch (Exception ex)

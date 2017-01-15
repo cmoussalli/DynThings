@@ -17,11 +17,15 @@ namespace DynThings.Data.Repositories
     public class IOTypesRepository
     {
         #region Constructor
-        public DynThingsEntities db { get; set; }
-        public IOTypesRepository(DynThingsEntities dynThingsEntities)
+        public IOTypesRepository(DynThingsEntities dbSource)
         {
-            db = dynThingsEntities;
+            db = dbSource;
         }
+
+        #endregion
+
+        #region props
+        public DynThingsEntities db;
         #endregion
 
 

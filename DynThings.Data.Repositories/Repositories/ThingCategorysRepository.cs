@@ -19,11 +19,15 @@ namespace DynThings.Data.Repositories
     public class ThingCategorysRepository
     {
         #region Constructor
-        public DynThingsEntities db { get; set; }
-        public ThingCategorysRepository(DynThingsEntities dynThingsEntities)
+        public ThingCategorysRepository(DynThingsEntities dbSource)
         {
-            db = dynThingsEntities;
+            db = dbSource;
         }
+
+        #endregion
+
+        #region props
+        public DynThingsEntities db;
         #endregion
 
         #region Get PagedList

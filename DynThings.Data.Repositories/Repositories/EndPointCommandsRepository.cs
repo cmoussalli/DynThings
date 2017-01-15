@@ -19,11 +19,17 @@ namespace DynThings.Data.Repositories
     public class EndPointCommandsRepository
     {
         #region Constructor
-        public DynThingsEntities db { get; set; }
-        public EndPointCommandsRepository(DynThingsEntities dynThingsEntities)
+        public EndPointCommandsRepository(DynThingsEntities dbSource)
         {
-            db = dynThingsEntities;
+            db = dbSource;
+            repoEndpointIOs = new EndpointIOsRepository(dbSource);
         }
+
+        #endregion
+
+        #region props
+        DynThingsEntities db;
+        EndpointIOsRepository repoEndpointIOs;
         #endregion
 
 
@@ -181,7 +187,7 @@ namespace DynThings.Data.Repositories
                 if (cmd.Endpoint.KeyPass == endPointKeyPass)
                 {
                     
-                    return UnitOfWork_Repositories.repoEndpointIOs.Add(cmd.Endpoint.ID, cmd.CommandCode, EndpointIOsRepository.EndPointIOType.Command);
+                    return repoEndpointIOs.Add(cmd.Endpoint.ID, cmd.CommandCode, EndpointIOsRepository.EndPointIOType.Command);
                 }
                 else
                 {

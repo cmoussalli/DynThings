@@ -12,6 +12,8 @@ namespace DynThings.WebPortal.Controllers
 {
     public class DeviceCommandsController : BaseController
     {
+        UnitOfWork_Repositories uof_repos = new UnitOfWork_Repositories();
+
         #region ActionResult: Views
         public ActionResult Index()
         {
@@ -28,7 +30,7 @@ namespace DynThings.WebPortal.Controllers
             {
                 return RedirectToAction("Login", "Account");
             }
-            DeviceCommand cmd = UnitOfWork_Repositories.repoDeviceCommands.Find(id);
+            DeviceCommand cmd = uof_repos.repoDeviceCommands.Find(id);
             return View(cmd);
         }
         #endregion
@@ -38,7 +40,7 @@ namespace DynThings.WebPortal.Controllers
         #region DetailsPV
         public PartialViewResult DetailsPV(long id)
         {
-            DeviceCommand command = UnitOfWork_Repositories.repoDeviceCommands.Find(id);
+            DeviceCommand command = uof_repos.repoDeviceCommands.Find(id);
             return PartialView("_Details_Main", command);
         }
 
@@ -49,7 +51,7 @@ namespace DynThings.WebPortal.Controllers
         [HttpGet]
         public PartialViewResult ListPV(string searchfor = null, int page = 1, int recordsperpage = 0)
         {
-            PagedList.IPagedList cmds = UnitOfWork_Repositories.repoDeviceCommands.GetPagedList(searchfor, page, Helpers.Configs.validateRecordsPerMaster(recordsperpage));
+            PagedList.IPagedList cmds = uof_repos.repoDeviceCommands.GetPagedList(searchfor, page, Helpers.Configs.validateRecordsPerMaster(recordsperpage));
             return PartialView("_List", cmds);
         }
 
@@ -57,7 +59,7 @@ namespace DynThings.WebPortal.Controllers
         [HttpGet]
         public PartialViewResult ListByDeviceIDPV(string searchfor = null, long deviceID = 0, int page = 1, int recordsperpage = 0)
         {
-            PagedList.IPagedList cmds = UnitOfWork_Repositories.repoDeviceCommands.GetPagedListByDeviceID(searchfor, deviceID, page, Helpers.Configs.validateRecordsPerMaster(recordsperpage));
+            PagedList.IPagedList cmds = uof_repos.repoDeviceCommands.GetPagedListByDeviceID(searchfor, deviceID, page, Helpers.Configs.validateRecordsPerMaster(recordsperpage));
             return PartialView("_List", cmds);
         }
         #endregion
@@ -66,7 +68,7 @@ namespace DynThings.WebPortal.Controllers
         [HttpGet]
         public PartialViewResult AddPV()
         {
-            ViewBag.DeviceID = new SelectList(UnitOfWork_Repositories.repoDevices.GetList(), "ID", "Title");
+            ViewBag.DeviceID = new SelectList(uof_repos.repoDevices.GetList(), "ID", "Title");
             return PartialView("_Add");
         }
 
@@ -78,7 +80,7 @@ namespace DynThings.WebPortal.Controllers
             if (ModelState.IsValid)
             {
                 long cmd = long.Parse(command.DeviceID.ToString());
-                res = UnitOfWork_Repositories.repoDeviceCommands.Add(command.Title, long.Parse(command.DeviceID.ToString()), command.Description, command.CommandCode, "1");
+                res = uof_repos.repoDeviceCommands.Add(command.Title, long.Parse(command.DeviceID.ToString()), command.Description, command.CommandCode, "1");
             }
             return Json(res) ;
         }
@@ -88,8 +90,8 @@ namespace DynThings.WebPortal.Controllers
         [HttpGet]
         public PartialViewResult EditPV(long id)
         {
-            DeviceCommand Command = UnitOfWork_Repositories.repoDeviceCommands.Find(id);
-            ViewBag.DeviceID = new SelectList(UnitOfWork_Repositories.repoDevices.GetList(), "ID", "Title", Command.DeviceID);
+            DeviceCommand Command = uof_repos.repoDeviceCommands.Find(id);
+            ViewBag.DeviceID = new SelectList(uof_repos.repoDevices.GetList(), "ID", "Title", Command.DeviceID);
             return PartialView("_Edit", Command);
         }
 
@@ -100,7 +102,7 @@ namespace DynThings.WebPortal.Controllers
             ResultInfo.Result res = ResultInfo.GetResultByID(1);
             if (ModelState.IsValid)
             {
-                res = UnitOfWork_Repositories.repoDeviceCommands.Edit(Command.ID, Command.Title, Command.Description, long.Parse(Command.DeviceID.ToString()), Command.CommandCode);
+                res = uof_repos.repoDeviceCommands.Edit(Command.ID, Command.Title, Command.Description, long.Parse(Command.DeviceID.ToString()), Command.CommandCode);
                 return Json(res);
             }
             return Json(res);
@@ -111,8 +113,8 @@ namespace DynThings.WebPortal.Controllers
         [HttpGet]
         public PartialViewResult DeletePV(long id)
         {
-            DeviceCommand Command = UnitOfWork_Repositories.repoDeviceCommands.Find(id);
-            ViewBag.DeviceID = new SelectList(UnitOfWork_Repositories.repoEndpoints.GetList(), "ID", "Title", Command.DeviceID);
+            DeviceCommand Command = uof_repos.repoDeviceCommands.Find(id);
+            ViewBag.DeviceID = new SelectList(uof_repos.repoEndpoints.GetList(), "ID", "Title", Command.DeviceID);
             return PartialView("_Delete", Command);
         }
 
@@ -123,7 +125,7 @@ namespace DynThings.WebPortal.Controllers
             ResultInfo.Result res = ResultInfo.GetResultByID(1);
             if (ModelState.IsValid)
             {
-                res = UnitOfWork_Repositories.repoDeviceCommands.Detele(Command.ID);
+                res = uof_repos.repoDeviceCommands.Detele(Command.ID);
                 return Json(res);
             }
             return Json(res);
@@ -136,7 +138,7 @@ namespace DynThings.WebPortal.Controllers
         [HttpGet]
         public PartialViewResult ExecutePV(long id)
         {
-            DeviceCommand Command = UnitOfWork_Repositories.repoDeviceCommands.Find(id);
+            DeviceCommand Command = uof_repos.repoDeviceCommands.Find(id);
             return PartialView("_Execute", Command);
         }
 
@@ -147,8 +149,8 @@ namespace DynThings.WebPortal.Controllers
             ResultInfo.Result res = ResultInfo.GetResultByID(1);
             if (ModelState.IsValid)
             {
-                Device dev = UnitOfWork_Repositories.repoDevices.Find((long)Command.DeviceID);
-                res = UnitOfWork_Repositories.repoDeviceCommands.Execute(Command.ID, Guid.Parse(dev.KeyPass.ToString()), User.Identity.ToString());
+                Device dev = uof_repos.repoDevices.Find((long)Command.DeviceID);
+                res = uof_repos.repoDeviceCommands.Execute(Command.ID, Guid.Parse(dev.KeyPass.ToString()), User.Identity.ToString());
                 return Json(res);
             }
             return Json(res);

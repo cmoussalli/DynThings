@@ -14,18 +14,26 @@ namespace DynThings.Data.Reports
     public class ThingsReport
     {
         #region Constructor
-        public DynThingsEntities db { get; set; }
-        public ThingsReport(DynThingsEntities dynThingsEntities)
+        public ThingsReport(DynThingsEntities dbSource)
         {
-            this.db = dynThingsEntities;
+            db = dbSource;
+            repoEndpointTypes = new EndPointTypesRepository(dbSource);
+            repoThings = new ThingsRepository(dbSource);
         }
+
+        #endregion
+
+        #region props
+        public DynThingsEntities db;
+        EndPointTypesRepository repoEndpointTypes;
+        ThingsRepository repoThings;
         #endregion
 
 
         public Chart IOs_Minute(long ThingID,long EndPointTypeID)
         {
-            EndPointType endType = UnitOfWork_Repositories.repoEndpointTypes.Find(EndPointTypeID);
-            Thing th = UnitOfWork_Repositories.repoThings.Find(ThingID);
+            EndPointType endType = repoEndpointTypes.Find(EndPointTypeID);
+            Thing th = repoThings.Find(ThingID);
             Chart hc = new Chart("HC_" + "Thing" + ThingID + "EndPointType" + EndPointTypeID + "Inputs");
             hc.title.Text = "Last 60 Minutes";
             hc.subTitle.Text = th.Title + " - " + endType.Title ;
@@ -252,7 +260,7 @@ namespace DynThings.Data.Reports
 
         public Chart IOs_Hour(long ThingID,long EndPointTypeID)
         {
-            Thing ep = UnitOfWork_Repositories.repoThings.Find(ThingID);
+            Thing ep = repoThings.Find(ThingID);
             Chart hc = new Chart("HC_" + "Thing" + ThingID + "EndPointType" + EndPointTypeID + "Inputs");
             hc.title.Text = "Last 24 Hours";
             hc.subTitle.Text = ep.Title;
@@ -368,8 +376,8 @@ namespace DynThings.Data.Reports
 
         public Chart IOs_Days(long ThingID, long EndPointTypeID)
         {
-            EndPointType endType = UnitOfWork_Repositories.repoEndpointTypes.Find(EndPointTypeID);
-            Thing th = UnitOfWork_Repositories.repoThings.Find(ThingID);
+            EndPointType endType =repoEndpointTypes.Find(EndPointTypeID);
+            Thing th = repoThings.Find(ThingID);
             Chart hc = new Chart("HC_" + "Thing" + ThingID + "EndPointType" + EndPointTypeID + "Inputs");
             hc.title.Text = "Last 30 Days";
             hc.subTitle.Text = th.Title + " - " + endType.Title;
@@ -503,8 +511,8 @@ namespace DynThings.Data.Reports
 
         public Chart IOs_Months(long ThingID, long EndPointTypeID,long Year)
         {
-            EndPointType endType = UnitOfWork_Repositories.repoEndpointTypes.Find(EndPointTypeID);
-            Thing th = UnitOfWork_Repositories.repoThings.Find(ThingID);
+            EndPointType endType = repoEndpointTypes.Find(EndPointTypeID);
+            Thing th = repoThings.Find(ThingID);
             Chart hc = new Chart("HC_" + "Thing" + ThingID + "EndPointType" + EndPointTypeID + "Inputs");
             hc.title.Text = "Last 12 Months";
             hc.subTitle.Text = th.Title + " - " + endType.Title;

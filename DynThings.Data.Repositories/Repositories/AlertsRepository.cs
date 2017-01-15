@@ -13,11 +13,15 @@ namespace DynThings.Data.Repositories
     public class AlertsRepository
     {
         #region Constructor
-        public DynThingsEntities db { get; set; }
-        public AlertsRepository(DynThingsEntities dynThingsEntities)
+        public AlertsRepository(DynThingsEntities dbSource)
         {
-            this.db = dynThingsEntities;
+            db = dbSource;
         }
+
+        #endregion
+
+        #region props
+        public DynThingsEntities db;
         #endregion
 
         #region GetList

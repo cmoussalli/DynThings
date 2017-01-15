@@ -12,11 +12,15 @@ namespace DynThings.Data.Repositories
     public class EndPointTypeCategorysRepository
     {
         #region Constructor
-        public DynThingsEntities db { get; set; }
-        public EndPointTypeCategorysRepository(DynThingsEntities dynThingsEntities)
+        public EndPointTypeCategorysRepository(DynThingsEntities dbSource)
         {
-            db = dynThingsEntities;
+            db = dbSource;
         }
+
+        #endregion
+
+        #region props
+        public DynThingsEntities db;
         #endregion
 
 

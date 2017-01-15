@@ -14,14 +14,17 @@ using DynThings.Data.Models;
 
 namespace DynThings.Data.Reports
 {
-    public static class UnitOfWork_Reports
+    public class UnitOfWork_Reports
     {
-        private static DynThingsEntities dynDB = new DynThingsEntities();
+        private DynThingsEntities dynDB = new DynThingsEntities();
 
 
         #region Reports
-        public static EndpointsReport rptEndpoints = new EndpointsReport(dynDB);
-        public static ThingsReport rptThings = new ThingsReport(dynDB);
+        public EndpointsReport rptEndpoints
+        { get { return new EndpointsReport(dynDB); } }
+
+        public ThingsReport rptThings
+        { get { return new ThingsReport(dynDB); } }
 
 
         #endregion

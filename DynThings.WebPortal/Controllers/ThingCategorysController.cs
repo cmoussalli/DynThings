@@ -20,6 +20,7 @@ namespace DynThings.WebPortal.Controllers
 
     public class ThingCategorysController : BaseController
     {
+        UnitOfWork_Repositories uof_repos = new UnitOfWork_Repositories();
         #region ActionResult: Views
         public ActionResult Index()
         {
@@ -37,7 +38,7 @@ namespace DynThings.WebPortal.Controllers
             {
                 return RedirectToAction("Login", "Account");
             }
-            ThingCategory ThingCat = Data.Repositories.UnitOfWork_Repositories.repoThingCategorys.Find(id);
+            ThingCategory ThingCat = uof_repos.repoThingCategorys.Find(id);
             return View(ThingCat);
         }
 
@@ -48,7 +49,7 @@ namespace DynThings.WebPortal.Controllers
         #region DetailsPV
         public PartialViewResult DetailsPV(long id)
         {
-            ThingCategory thingCategory = Data.Repositories.UnitOfWork_Repositories.repoThingCategorys.Find(id);
+            ThingCategory thingCategory = uof_repos.repoThingCategorys.Find(id);
             return PartialView("_Details_Main", thingCategory);
         }
 
@@ -58,7 +59,7 @@ namespace DynThings.WebPortal.Controllers
         [HttpGet]
         public PartialViewResult ListPV(string searchfor = null, int page = 1, int recordsperpage = 0)
         {
-            IPagedList thingCategorys = UnitOfWork_Repositories.repoThingCategorys.GetPagedList(searchfor, page, Helpers.Configs.validateRecordsPerMaster(recordsperpage));
+            IPagedList thingCategorys = uof_repos.repoThingCategorys.GetPagedList(searchfor, page, Helpers.Configs.validateRecordsPerMaster(recordsperpage));
             return PartialView("_List", thingCategorys);
         }
         #endregion
@@ -67,7 +68,7 @@ namespace DynThings.WebPortal.Controllers
         [HttpGet]
         public PartialViewResult AddPV()
         {
-            ViewBag.IconID = new SelectList(UnitOfWork_Repositories.repoMediaFiles.GetList(), "ID", "Title", 1);
+            ViewBag.IconID = new SelectList(uof_repos.repoMediaFiles.GetList(), "ID", "Title", 1);
             return PartialView("_Add");
         }
 
@@ -78,7 +79,7 @@ namespace DynThings.WebPortal.Controllers
             ResultInfo.Result res = ResultInfo.GetResultByID(1);
             if (ModelState.IsValid)
             {
-                res = UnitOfWork_Repositories.repoThingCategorys.Add(thingCategory.Title,(long)thingCategory.IconID);
+                res = uof_repos.repoThingCategorys.Add(thingCategory.Title, (long)thingCategory.IconID);
                 return Json(res);
             }
             return Json(res);
@@ -89,8 +90,8 @@ namespace DynThings.WebPortal.Controllers
         [HttpGet]
         public PartialViewResult EditPV(long id)
         {
-            ThingCategory thingCategory = UnitOfWork_Repositories.repoThingCategorys.Find(id);
-            ViewBag.IconID = new SelectList(UnitOfWork_Repositories.repoMediaFiles.GetList(), "ID", "Title", thingCategory.IconID);
+            ThingCategory thingCategory = uof_repos.repoThingCategorys.Find(id);
+            ViewBag.IconID = new SelectList(uof_repos.repoMediaFiles.GetList(), "ID", "Title", thingCategory.IconID);
             return PartialView("_Edit", thingCategory);
         }
 
@@ -101,7 +102,7 @@ namespace DynThings.WebPortal.Controllers
             ResultInfo.Result res = ResultInfo.GetResultByID(1);
             if (ModelState.IsValid)
             {
-                res = UnitOfWork_Repositories.repoThingCategorys.Edit(thingCategory.ID, thingCategory.Title, (long)thingCategory.IconID);
+                res = uof_repos.repoThingCategorys.Edit(thingCategory.ID, thingCategory.Title, (long)thingCategory.IconID);
                 return Json(res);
             }
             return Json(res);
@@ -117,7 +118,7 @@ namespace DynThings.WebPortal.Controllers
                 ResultInfo.Result rm = Core.ResultInfo.GetResultByID(1);
                 return PartialView("_PVResult", rm);
             }
-            ThingCategory thingCategory = UnitOfWork_Repositories.repoThingCategorys.Find(id);
+            ThingCategory thingCategory = uof_repos.repoThingCategorys.Find(id);
             return PartialView("_Delete", thingCategory);
         }
 
@@ -129,7 +130,7 @@ namespace DynThings.WebPortal.Controllers
             ResultInfo.Result res = ResultInfo.GetResultByID(1);
             if (ModelState.IsValid)
             {
-                res = UnitOfWork_Repositories.repoThingCategorys.Delete(thingCategory.ID);
+                res = uof_repos.repoThingCategorys.Delete(thingCategory.ID);
                 return Json(res);
             }
             return Json(res);
@@ -142,7 +143,7 @@ namespace DynThings.WebPortal.Controllers
 
 
         [HttpPost]
-        public ActionResult UploadImage(HttpPostedFileBase file,long ThingCategoryID)
+        public ActionResult UploadImage(HttpPostedFileBase file, long ThingCategoryID)
         {
 
             if (file.ContentLength > 0)

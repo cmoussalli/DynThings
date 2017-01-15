@@ -11,6 +11,8 @@ namespace DynThings.WebPortal.Controllers
 {
     public class AppsController : BaseController
     {
+        UnitOfWork_Repositories uof_repos = new UnitOfWork_Repositories();
+
         #region ActionResult: Views
         public ActionResult Index()
         {
@@ -27,26 +29,13 @@ namespace DynThings.WebPortal.Controllers
             {
                 return RedirectToAction("Login", "Account");
             }
-            App app = UnitOfWork_Repositories.repoApps.Find(id);
+            App app = uof_repos.repoApps.Find(id);
             return View(app);
         }
 
         #endregion
 
         #region PartialViewResult: Partial Views
-        #region DetailsPV : Main
-        /// <summary>
-        /// Return App main details
-        /// </summary>
-        /// <param name="id">App ID</param>
-        /// <returns>App Object</returns>
-        public PartialViewResult DetailsPV(int id)
-        {
-            App app = UnitOfWork_Repositories.repoApps.Find(id);
-            return PartialView("_Details_Main", app);
-        }
-        #endregion
-
         #region ListPV
         /// <summary>
         /// Return list of apps in partial view
@@ -58,8 +47,34 @@ namespace DynThings.WebPortal.Controllers
         [HttpGet]
         public PartialViewResult ListPV(string searchfor = null, int page = 1, int recordsperpage = 0)
         {
-            PagedList.IPagedList apps = UnitOfWork_Repositories.repoApps.GetPagedList(searchfor, page, Helpers.Configs.validateRecordsPerMaster(recordsperpage));
+            PagedList.IPagedList apps = uof_repos.repoApps.GetPagedList(searchfor, page, Helpers.Configs.validateRecordsPerMaster(recordsperpage));
             return PartialView("_List", apps);
+        }
+        #endregion
+        
+        #region DetailsPV : Main
+        /// <summary>
+        /// Return App main details
+        /// </summary>
+        /// <param name="id">App ID</param>
+        /// <returns>App Object</returns>
+        public PartialViewResult DetailsPV(int id)
+        {
+            App app = uof_repos.repoApps.Find(id);
+            return PartialView("_Details_Main", app);
+        }
+        #endregion
+
+        #region APIPermissionsPV : Main
+        /// <summary>
+        /// Return App API Permissions List
+        /// </summary>
+        /// <param name="id">App ID</param>
+        /// <returns>Permissions list Partial View</returns>
+        public PartialViewResult APIPermissionsPV(int id)
+        {
+            App app = uof_repos.repoApps.Find(id);
+            return PartialView("_Details_APIPermissions", app);
         }
         #endregion
 
@@ -78,12 +93,42 @@ namespace DynThings.WebPortal.Controllers
             ResultInfo.Result res = ResultInfo.GetResultByID(1);
             if (ModelState.IsValid)
             {
-                res = UnitOfWork_Repositories.repoApps.Add(app.Title,app.Description,currentUser.Id);
+                res = uof_repos.repoApps.Add(app.Title,app.Description,currentUser.Id);
                 return Json(res);
             }
             return Json(res);
         }
         #endregion
+
+        #region EditPV
+        [HttpGet]
+        public PartialViewResult EditPV(long id)
+        {
+            App app = uof_repos.repoApps.Find(id);
+            return PartialView("_EditMain",app);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult EditPV([Bind(Include = "ID,Title,Description,StatusID,Version")] App app)
+        {
+            ResultInfo.Result res = ResultInfo.GetResultByID(1);
+            if (ModelState.IsValid)
+            {
+                res = uof_repos.repoApps.EditMain(app.ID,app.Title, app.Description, app.StatusID,app.Version);
+                return Json(res);
+            }
+            return Json(res);
+        }
         #endregion
+
+
+
+
+
+
+        #endregion
+
+       
     }
 }

@@ -11,6 +11,8 @@ namespace DynThings.WebPortal.Controllers
 {
     public class EndPointIOsController : BaseController
     {
+        UnitOfWork_Repositories uof_repos = new UnitOfWork_Repositories();
+
         #region ActionResult: Views
         public ActionResult Index()
         {
@@ -18,7 +20,7 @@ namespace DynThings.WebPortal.Controllers
             {
                 return RedirectToAction("Login", "Account");
             }
-            ViewBag.IOTypeID = new SelectList(UnitOfWork_Repositories.repoIOTypes.GetList(true), "ID", "Title",0);
+            ViewBag.IOTypeID = new SelectList(uof_repos.repoIOTypes.GetList(true), "ID", "Title",0);
             return View();
         }
 
@@ -28,7 +30,7 @@ namespace DynThings.WebPortal.Controllers
             {
                 return RedirectToAction("Login", "Account");
             }
-            EndPointIO io = UnitOfWork_Repositories.repoEndpointIOs.Find(id);
+            EndPointIO io = uof_repos.repoEndpointIOs.Find(id);
             return View(io);
         }
         #endregion
@@ -41,7 +43,7 @@ namespace DynThings.WebPortal.Controllers
         public PartialViewResult ListPV(string search, long endPointID, long ioTypeID, int page = 1, int recordsperpage = 0)
         {
          
-            PagedList.IPagedList ios = UnitOfWork_Repositories.repoEndpointIOs.GetPagedList(search, endPointID, ioTypeID, page, Helpers.Configs.validateRecordsPerMaster(recordsperpage));
+            PagedList.IPagedList ios = uof_repos.repoEndpointIOs.GetPagedList(search, endPointID, ioTypeID, page, Helpers.Configs.validateRecordsPerMaster(recordsperpage));
             return PartialView("_List", ios);
         }
 

@@ -11,11 +11,15 @@ namespace DynThings.Data.Repositories
     public class Lookups
     {
         #region Constructor
-        public DynThingsEntities db { get; set; }
-        public Lookups(DynThingsEntities dynThingsEntities)
+        public Lookups(DynThingsEntities dbSource)
         {
-            db = dynThingsEntities;
+            db = dbSource;
         }
+
+        #endregion
+
+        #region props
+        public DynThingsEntities db;
         #endregion
 
 

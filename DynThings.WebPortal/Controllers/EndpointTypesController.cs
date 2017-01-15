@@ -12,6 +12,8 @@ namespace DynThings.WebPortal.Controllers
 {
     public class EndPointTypesController : BaseController
     {
+        UnitOfWork_Repositories uof_repos = new UnitOfWork_Repositories();
+
         #region ActionResult: Views
         public ActionResult Index()
         {
@@ -29,7 +31,7 @@ namespace DynThings.WebPortal.Controllers
             {
                 return RedirectToAction("Login", "Account");
             }
-            EndPointType ThingCat = Data.Repositories.UnitOfWork_Repositories.repoEndpointTypes.Find(id);
+            EndPointType ThingCat = uof_repos.repoEndpointTypes.Find(id);
             return View(ThingCat);
         }
 
@@ -40,7 +42,7 @@ namespace DynThings.WebPortal.Controllers
         #region DetailsPV
         public PartialViewResult DetailsPV(long id)
         {
-            EndPointType EndPointType = Data.Repositories.UnitOfWork_Repositories.repoEndpointTypes.Find(id);
+            EndPointType EndPointType = uof_repos.repoEndpointTypes.Find(id);
             return PartialView("_Details_Main", EndPointType);
         }
 
@@ -50,7 +52,7 @@ namespace DynThings.WebPortal.Controllers
         [HttpGet]
         public PartialViewResult ListPV(string searchfor = null, int page = 1, int recordsperpage = 0)
         {
-            PagedList.IPagedList EndPointTypes = Data.Repositories.UnitOfWork_Repositories.repoEndpointTypes.GetPagedList(searchfor, page, Helpers.Configs.validateRecordsPerMaster(recordsperpage));
+            PagedList.IPagedList EndPointTypes = uof_repos.repoEndpointTypes.GetPagedList(searchfor, page, Helpers.Configs.validateRecordsPerMaster(recordsperpage));
             return PartialView("_List", EndPointTypes);
         }
         #endregion
@@ -59,8 +61,8 @@ namespace DynThings.WebPortal.Controllers
         [HttpGet]
         public PartialViewResult AddPV()
         {
-            ViewBag.IconID = new SelectList(UnitOfWork_Repositories.repoMediaFiles.GetList(), "ID", "Title", 1);
-            ViewBag.TypeCategoryID = new SelectList(UnitOfWork_Repositories.repoEndpointTypeCategorys.GetList(), "ID", "Title", 1);
+            ViewBag.IconID = new SelectList(uof_repos.repoMediaFiles.GetList(), "ID", "Title", 1);
+            ViewBag.TypeCategoryID = new SelectList(uof_repos.repoEndpointTypeCategorys.GetList(), "ID", "Title", 1);
             return PartialView("_Add");
         }
 
@@ -71,7 +73,7 @@ namespace DynThings.WebPortal.Controllers
             ResultInfo.Result res = ResultInfo.GetResultByID(1);
             if (ModelState.IsValid)
             {
-                res = UnitOfWork_Repositories.repoEndpointTypes.Add(endPointType.Title, endPointType.measurement, (long)endPointType.TypeCategoryID, (long)endPointType.IconID);
+                res = uof_repos.repoEndpointTypes.Add(endPointType.Title, endPointType.measurement, (long)endPointType.TypeCategoryID, (long)endPointType.IconID);
                 return Json(res);
             }
             return Json(res);
@@ -82,9 +84,9 @@ namespace DynThings.WebPortal.Controllers
         [HttpGet]
         public PartialViewResult EditPV(long id)
         {
-            EndPointType endPointType = UnitOfWork_Repositories.repoEndpointTypes.Find(id);
-            ViewBag.IconID = new SelectList(UnitOfWork_Repositories.repoMediaFiles.GetList(), "ID", "Title", endPointType.IconID);
-            ViewBag.TypeCategoryID = new SelectList(UnitOfWork_Repositories.repoEndpointTypeCategorys.GetList(), "ID", "Title", endPointType.TypeCategoryID);
+            EndPointType endPointType = uof_repos.repoEndpointTypes.Find(id);
+            ViewBag.IconID = new SelectList(uof_repos.repoMediaFiles.GetList(), "ID", "Title", endPointType.IconID);
+            ViewBag.TypeCategoryID = new SelectList(uof_repos.repoEndpointTypeCategorys.GetList(), "ID", "Title", endPointType.TypeCategoryID);
             return PartialView("_Edit", endPointType);
         }
 
@@ -95,7 +97,7 @@ namespace DynThings.WebPortal.Controllers
             ResultInfo.Result res = ResultInfo.GetResultByID(1);
             if (ModelState.IsValid)
             {
-                res = UnitOfWork_Repositories.repoEndpointTypes.Edit(endPointType.ID, endPointType.Title, endPointType.measurement, (long)endPointType.TypeCategoryID,(long)endPointType.IconID);
+                res = uof_repos.repoEndpointTypes.Edit(endPointType.ID, endPointType.Title, endPointType.measurement, (long)endPointType.TypeCategoryID,(long)endPointType.IconID);
                 return Json(res);
             }
             return Json(res);
@@ -111,7 +113,7 @@ namespace DynThings.WebPortal.Controllers
                 ResultInfo.Result rm = Core.ResultInfo.GetResultByID(1);
                 return PartialView("_PVResult", rm);
             }
-            EndPointType EndPointType = UnitOfWork_Repositories.repoEndpointTypes.Find(id);
+            EndPointType EndPointType = uof_repos.repoEndpointTypes.Find(id);
             return PartialView("_Delete", EndPointType);
         }
 
@@ -123,7 +125,7 @@ namespace DynThings.WebPortal.Controllers
             ResultInfo.Result res = ResultInfo.GetResultByID(1);
             if (ModelState.IsValid)
             {
-                res = UnitOfWork_Repositories.repoEndpointTypes.Delete(EndPointType.ID);
+                res = uof_repos.repoEndpointTypes.Delete(EndPointType.ID);
                 return Json(res);
             }
             return Json(res);

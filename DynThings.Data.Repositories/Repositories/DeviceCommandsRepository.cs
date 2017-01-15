@@ -19,12 +19,19 @@ namespace DynThings.Data.Repositories
     public class DeviceCommandsRepository
     {
         #region Constructor
-        public DynThingsEntities db { get; set; }
-        public DeviceCommandsRepository(DynThingsEntities dynThingsEntities)
+        public DeviceCommandsRepository(DynThingsEntities dbSource)
         {
-            db = dynThingsEntities;
+            db = dbSource;
+            repoDeviceIOs = new DeviceIOsRepository(dbSource);
         }
+
         #endregion
+
+        #region props
+        public DynThingsEntities db;
+        DeviceIOsRepository repoDeviceIOs;
+        #endregion
+
 
 
         #region Get List
@@ -148,7 +155,7 @@ namespace DynThings.Data.Repositories
                 DeviceCommand cmd = Find(commandID);
                 if (cmd.Device.KeyPass == deviceKeyPass)
                 {
-                    return  UnitOfWork_Repositories.repoDeviceIOs.Add(cmd.Device.ID, cmd.CommandCode, DeviceIOsRepository.deviceIOType.Command);
+                    return  repoDeviceIOs.Add(cmd.Device.ID, cmd.CommandCode, DeviceIOsRepository.deviceIOType.Command);
                 }
                 else
                 {

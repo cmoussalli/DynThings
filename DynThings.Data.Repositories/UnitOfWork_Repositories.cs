@@ -14,41 +14,84 @@ using DynThings.Data.Models;
 
 namespace DynThings.Data.Repositories
 {
-    public static class UnitOfWork_Repositories
+    public  class UnitOfWork_Repositories
     {
 
-        public static DynThingsEntities dynDB = new DynThingsEntities();
+        public DynThingsEntities dynDB = new DynThingsEntities();
 
-        //public static ResultInfo resultInfo = new ResultInfo(db);
 
         #region Repositories
-        public static DynSettingsRepository repoDynSettings = new DynSettingsRepository(dynDB);
-        public static LocationViewsRepository repoLocationViews = new LocationViewsRepository(dynDB);
-        public static LocationViewTypesRepository repoLocationViewTypes = new LocationViewTypesRepository(dynDB);
-        public static LocationsRepository repoLocations = new LocationsRepository(dynDB);
-        public static EndpointsRepository repoEndpoints = new EndpointsRepository(dynDB);
-        public static EndpointIOsRepository repoEndpointIOs = new EndpointIOsRepository(dynDB);
-        public static EndPointTypesRepository repoEndpointTypes = new EndPointTypesRepository(dynDB);
-        public static EndPointTypeCategorysRepository repoEndpointTypeCategorys = new EndPointTypeCategorysRepository(dynDB);
-        public static DevicesRepository repoDevices = new DevicesRepository(dynDB);
-        public static DeviceCommandsRepository repoDeviceCommands = new DeviceCommandsRepository(dynDB);
-        public static EndPointCommandsRepository repoEndPointCommands = new EndPointCommandsRepository(dynDB);
-        public static DeviceIOsRepository repoDeviceIOs = new DeviceIOsRepository(dynDB);
-        public static IOTypesRepository repoIOTypes = new IOTypesRepository(dynDB);
-        public static DynUsersRepository repoDynUsers = new DynUsersRepository(dynDB);
-        public static RolesRepository repoRoles = new RolesRepository(dynDB);
-        public static ThingsRepository repoThings = new ThingsRepository(dynDB);
-        public static ThingCategorysRepository repoThingCategorys = new ThingCategorysRepository(dynDB);
-        public static MediaFilesRepository repoMediaFiles = new MediaFilesRepository(dynDB);
-        public static AlertsRepository repoAlerts = new AlertsRepository(dynDB);
-        public static AlertConditionTypesRepository repoAlertConditionTypes = new AlertConditionTypesRepository(dynDB);
-        public static UserNotificationsRepository repoUserNotification = new UserNotificationsRepository(dynDB);
-        public static DynThingsAppsRepository repoApps = new DynThingsAppsRepository();
-        public static SystemEntitysRepository repoEntitys = new SystemEntitysRepository();
+        public AlertsRepository repoAlerts
+        { get { return new AlertsRepository(dynDB); } }
 
+        public AlertConditionTypesRepository repoAlertConditionTypes
+        { get { return new AlertConditionTypesRepository(dynDB); } }
+
+        public DynSettingsRepository repoDynSettings
+        { get { return new DynSettingsRepository(dynDB); } }
+
+        public LocationViewsRepository repoLocationViews
+        { get { return new LocationViewsRepository(dynDB); } }
+
+        public LocationViewTypesRepository repoLocationViewTypes
+        { get { return new LocationViewTypesRepository(dynDB); } }
+
+        public LocationsRepository repoLocations
+        { get { return new LocationsRepository(dynDB); } }
+
+        public EndpointsRepository repoEndpoints
+        { get { return new EndpointsRepository(dynDB); } }
+
+        public EndpointIOsRepository repoEndpointIOs
+        { get { return new EndpointIOsRepository(dynDB); } }
+
+        public EndPointTypesRepository repoEndpointTypes
+        { get { return new EndPointTypesRepository(dynDB); } }
+
+        public EndPointTypeCategorysRepository repoEndpointTypeCategorys
+        { get { return new EndPointTypeCategorysRepository(dynDB); } }
+
+        public DevicesRepository repoDevices
+        { get { return new DevicesRepository(dynDB); } }
+
+        public DeviceCommandsRepository repoDeviceCommands
+        { get { return new DeviceCommandsRepository(dynDB); } }
+
+        public EndPointCommandsRepository repoEndPointCommands
+        { get { return new EndPointCommandsRepository(dynDB); } }
+
+        public DeviceIOsRepository repoDeviceIOs
+        { get { return new DeviceIOsRepository(dynDB); } }
+
+        public IOTypesRepository repoIOTypes
+        { get { return new IOTypesRepository(dynDB); } }
+
+        public DynUsersRepository repoDynUsers
+        { get { return new DynUsersRepository(dynDB); } }
+
+        public RolesRepository repoRoles
+        { get { return new RolesRepository(dynDB); } }
+
+        public ThingsRepository repoThings
+        { get { return new ThingsRepository(dynDB); } }
+
+        public ThingCategorysRepository repoThingCategorys
+        { get { return new ThingCategorysRepository(dynDB); } }
+
+        public MediaFilesRepository repoMediaFiles
+        { get { return new MediaFilesRepository(dynDB); } }
+
+        public UserNotificationsRepository repoUserNotification
+        { get { return new UserNotificationsRepository(dynDB); } }
+
+        public DynThingsAppsRepository repoApps
+        { get { return new DynThingsAppsRepository(dynDB); } }
+
+        public SystemEntitysRepository repoEntitys
+        { get { return new SystemEntitysRepository(dynDB); } }
         #endregion
 
-
+        
 
 
     }

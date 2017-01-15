@@ -19,6 +19,9 @@ namespace DynThings.WebPortal.Controllers
 
     public class ThingsController : BaseController
     {
+        UnitOfWork_Repositories uof_repos = new UnitOfWork_Repositories();
+        UnitOfWork_Reports uof_reports = new UnitOfWork_Reports();
+
         #region ActionResult: Views
         public ActionResult Index()
         {
@@ -36,7 +39,7 @@ namespace DynThings.WebPortal.Controllers
             {
                 return RedirectToAction("Login", "Account");
             }
-            Thing Thing = Data.Repositories.UnitOfWork_Repositories.repoThings.Find(id);
+            Thing Thing = uof_repos.repoThings.Find(id);
             return View(Thing);
         }
 
@@ -47,7 +50,7 @@ namespace DynThings.WebPortal.Controllers
         #region DetailsPV
         public PartialViewResult DetailsPV(long id)
         {
-            Thing Thing = Data.Repositories.UnitOfWork_Repositories.repoThings.Find(id);
+            Thing Thing = uof_repos.repoThings.Find(id);
             return PartialView("_Details_Main", Thing);
         }
 
@@ -57,7 +60,7 @@ namespace DynThings.WebPortal.Controllers
         [HttpGet]
         public PartialViewResult ListPV(string searchfor = null, int page = 1, int recordsperpage = 0)
         {
-            PagedList.IPagedList tngs = Data.Repositories.UnitOfWork_Repositories.repoThings.GetPagedList(searchfor, page, Helpers.Configs.validateRecordsPerMaster(recordsperpage));
+            PagedList.IPagedList tngs = uof_repos.repoThings.GetPagedList(searchfor, page, Helpers.Configs.validateRecordsPerMaster(recordsperpage));
             return PartialView("_List", tngs);
         }
         #endregion
@@ -67,7 +70,7 @@ namespace DynThings.WebPortal.Controllers
         public PartialViewResult AddPV()
         {
             ViewBag.UTC_Diff = new SelectList(StaticMenus.GetRegionalTimeOptions(), Config.App_TimeZone);
-            ViewBag.CategoryID = new SelectList(UnitOfWork_Repositories.repoThingCategorys.GetList(), "ID", "Title", 0);
+            ViewBag.CategoryID = new SelectList(uof_repos.repoThingCategorys.GetList(), "ID", "Title", 0);
             return PartialView("_Add");
         }
 
@@ -78,7 +81,7 @@ namespace DynThings.WebPortal.Controllers
             ResultInfo.Result res = ResultInfo.GetResultByID(1);
             if (ModelState.IsValid)
             {
-                res = UnitOfWork_Repositories.repoThings.Add(Thing.Title, Thing.CategoryID, Thing.UTC_Diff, currentUser.Id);
+                res = uof_repos.repoThings.Add(Thing.Title, Thing.CategoryID, Thing.UTC_Diff, currentUser.Id);
                 return Json(res);
             }
             return Json(res);
@@ -89,9 +92,9 @@ namespace DynThings.WebPortal.Controllers
         [HttpGet]
         public PartialViewResult EditPV(long id)
         {
-            Thing Thing = UnitOfWork_Repositories.repoThings.Find(id);
+            Thing Thing = uof_repos.repoThings.Find(id);
             ViewBag.UTC_Diff = new SelectList(StaticMenus.GetRegionalTimeOptions(), Thing.UTC_Diff);
-            ViewBag.CategoryID = new SelectList(UnitOfWork_Repositories.repoThingCategorys.GetList(), "ID", "Title", Thing.CategoryID);
+            ViewBag.CategoryID = new SelectList(uof_repos.repoThingCategorys.GetList(), "ID", "Title", Thing.CategoryID);
             return PartialView("_Edit", Thing);
         }
 
@@ -102,7 +105,7 @@ namespace DynThings.WebPortal.Controllers
             ResultInfo.Result res = ResultInfo.GetResultByID(1);
             if (ModelState.IsValid)
             {
-                res = UnitOfWork_Repositories.repoThings.Edit(Thing.ID, Thing.Title, Thing.CategoryID, Thing.UTC_Diff);
+                res = uof_repos.repoThings.Edit(Thing.ID, Thing.Title, Thing.CategoryID, Thing.UTC_Diff);
                 return Json(res);
             }
             return Json(res);
@@ -118,7 +121,7 @@ namespace DynThings.WebPortal.Controllers
                 ResultInfo.Result rm = Core.ResultInfo.GetResultByID(1);
                 return PartialView("_PVResult", rm);
             }
-            Thing Thing = UnitOfWork_Repositories.repoThings.Find(id);
+            Thing Thing = uof_repos.repoThings.Find(id);
             return PartialView("_Delete", Thing);
         }
 
@@ -130,7 +133,7 @@ namespace DynThings.WebPortal.Controllers
             ResultInfo.Result res = ResultInfo.GetResultByID(1);
             if (ModelState.IsValid)
             {
-                res = UnitOfWork_Repositories.repoThings.Delete(Thing.ID);
+                res = uof_repos.repoThings.Delete(Thing.ID);
                 return Json(res);
             }
             return Json(res);
@@ -145,7 +148,7 @@ namespace DynThings.WebPortal.Controllers
         [HttpGet]
         public PartialViewResult LookupPV(string searchfor = null, int page = 1, int recordsperpage = 0)
         {
-            PagedList.IPagedList ends = Data.Repositories.UnitOfWork_Repositories.repoThings.GetPagedList("", 1, 10);
+            PagedList.IPagedList ends = uof_repos.repoThings.GetPagedList("", 1, 10);
             return PartialView("lookup/Index", ends);
         }
         #endregion
@@ -153,7 +156,7 @@ namespace DynThings.WebPortal.Controllers
         [HttpGet]
         public PartialViewResult LookupListPV(string searchfor = null, int page = 1, int recordsperpage = 0)
         {
-            PagedList.IPagedList ends = Data.Repositories.UnitOfWork_Repositories.repoThings.GetPagedList(searchfor, page, Config.DefaultRecordsPerChild);
+            PagedList.IPagedList ends = uof_repos.repoThings.GetPagedList(searchfor, page, Config.DefaultRecordsPerChild);
             return PartialView("lookup/List", ends);
         }
         #endregion
@@ -164,28 +167,28 @@ namespace DynThings.WebPortal.Controllers
         [HttpGet]
         public ActionResult Rpt_Minute(long ThingID, long endPointTypeID)
         {
-            Chart chrt = UnitOfWork_Reports.rptThings.IOs_Minute(ThingID, endPointTypeID);
+            Chart chrt = uof_reports.rptThings.IOs_Minute(ThingID, endPointTypeID);
             return PartialView("Reports/Charts/InputValues_BasicLine", chrt);
         }
 
         [HttpGet]
         public ActionResult Rpt_Hour(long ThingID, long endPointTypeID)
         {
-            Chart chrt = UnitOfWork_Reports.rptThings.IOs_Hour(ThingID, endPointTypeID);
+            Chart chrt = uof_reports.rptThings.IOs_Hour(ThingID, endPointTypeID);
             return PartialView("Reports/Charts/InputValues_BasicLine", chrt);
         }
 
         [HttpGet]
         public ActionResult Rpt_Day(long ThingID, long endPointTypeID)
         {
-            Chart chrt = UnitOfWork_Reports.rptThings.IOs_Days(ThingID, endPointTypeID);
+            Chart chrt = uof_reports.rptThings.IOs_Days(ThingID, endPointTypeID);
             return PartialView("Reports/Charts/InputValues_BasicLine", chrt);
         }
 
         [HttpGet]
         public ActionResult Rpt_Month(long ThingID, long endPointTypeID,long year)
         {
-            Chart chrt = UnitOfWork_Reports.rptThings.IOs_Months(ThingID, endPointTypeID,year);
+            Chart chrt = uof_reports.rptThings.IOs_Months(ThingID, endPointTypeID,year);
             return PartialView("Reports/Charts/InputValues_BasicLine", chrt);
         }
 
@@ -193,7 +196,7 @@ namespace DynThings.WebPortal.Controllers
         [HttpGet]
         public ActionResult Rpt_IOsHistory(long ThingID, long endPointTypeID, DateTime fromDate, DateTime toDate, int page = 1, int recordsperpage = 0)
         {
-            IPagedList IOs = UnitOfWork_Repositories.repoThings.GetThingEndIOs(ThingID, endPointTypeID, fromDate, toDate.AddDays(1), page, Helpers.Configs.validateRecordsPerMaster(recordsperpage));
+            IPagedList IOs = uof_repos.repoThings.GetThingEndIOs(ThingID, endPointTypeID, fromDate, toDate.AddDays(1), page, Helpers.Configs.validateRecordsPerMaster(recordsperpage));
             return PartialView("Reports/Grids/HistoryIOs", IOs);
 
 

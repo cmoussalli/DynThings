@@ -16,6 +16,8 @@ namespace DynThings.WebPortal.Controllers
 {
     public class AlertsController : BaseController
     {
+        UnitOfWork_Repositories uof_repos = new UnitOfWork_Repositories();
+
         #region ActionResult: Views
         public ActionResult Index()
         {
@@ -33,7 +35,7 @@ namespace DynThings.WebPortal.Controllers
             {
                 return RedirectToAction("Login", "Account");
             }
-            Alert Alert = Data.Repositories.UnitOfWork_Repositories.repoAlerts.Find(id);
+            Alert Alert = uof_repos.repoAlerts.Find(id);
             return View(Alert);
         }
 
@@ -44,13 +46,13 @@ namespace DynThings.WebPortal.Controllers
         #region DetailsPV
         public PartialViewResult DetailsMainPV(long id)
         {
-            Alert Alert = Data.Repositories.UnitOfWork_Repositories.repoAlerts.Find(id);
+            Alert Alert = uof_repos.repoAlerts.Find(id);
             return PartialView("_Details_Main", Alert);
         }
 
         public PartialViewResult DetailsSchedulePV(long id)
         {
-            Alert Alert = Data.Repositories.UnitOfWork_Repositories.repoAlerts.Find(id);
+            Alert Alert = uof_repos.repoAlerts.Find(id);
             return PartialView("_Details_Schedule", Alert);
         }
 
@@ -60,7 +62,7 @@ namespace DynThings.WebPortal.Controllers
         [HttpGet]
         public PartialViewResult ListPV(string searchfor = null, int page = 1, int recordsperpage = 0)
         {
-            PagedList.IPagedList ends = Data.Repositories.UnitOfWork_Repositories.repoAlerts.GetPagedList(searchfor, page, Helpers.Configs.validateRecordsPerMaster(recordsperpage));
+            PagedList.IPagedList ends = uof_repos.repoAlerts.GetPagedList(searchfor, page, Helpers.Configs.validateRecordsPerMaster(recordsperpage));
             return PartialView("_List", ends);
         }
         #endregion
@@ -77,7 +79,7 @@ namespace DynThings.WebPortal.Controllers
         public ActionResult AddPV([Bind(Include = "Title")] Alert Alert)
         {
             ResultInfo.Result res = ResultInfo.GetResultByID(1);
-            res = UnitOfWork_Repositories.repoAlerts.Add(Alert.Title);
+            res = uof_repos.repoAlerts.Add(Alert.Title);
             return Json(res);
         }
         #endregion
@@ -86,7 +88,7 @@ namespace DynThings.WebPortal.Controllers
         [HttpGet]
         public PartialViewResult EditMainPV(long id)
         {
-            Alert Alert = UnitOfWork_Repositories.repoAlerts.Find(id);
+            Alert Alert = uof_repos.repoAlerts.Find(id);
             return PartialView("_Edit_Main", Alert);
         }
 
@@ -97,7 +99,7 @@ namespace DynThings.WebPortal.Controllers
             ResultInfo.Result res = ResultInfo.GetResultByID(1);
             if (ModelState.IsValid)
             {
-                res = UnitOfWork_Repositories.repoAlerts.EditMain(alert.ID, alert.Title, alert.Message, (bool)alert.IsActive);
+                res = uof_repos.repoAlerts.EditMain(alert.ID, alert.Title, alert.Message, (bool)alert.IsActive);
                 return Json(res);
             }
             return Json(res);
@@ -108,7 +110,7 @@ namespace DynThings.WebPortal.Controllers
         [HttpGet]
         public PartialViewResult EditSchedulePV(long id)
         {
-            Alert Alert = UnitOfWork_Repositories.repoAlerts.Find(id);
+            Alert Alert = uof_repos.repoAlerts.Find(id);
             return PartialView("_Edit_Schedule", Alert);
         }
 
@@ -119,7 +121,7 @@ namespace DynThings.WebPortal.Controllers
             ResultInfo.Result res = ResultInfo.GetResultByID(1);
             if (ModelState.IsValid)
             {
-                res = UnitOfWork_Repositories.repoAlerts.EditSchedule(alert.ID,alert.Sunday,alert.Monday,alert.Tuesday,alert.Wednesday,alert.Thursday,alert.Friday,alert.Saturday,alert.StartTime,alert.EndTime);
+                res = uof_repos.repoAlerts.EditSchedule(alert.ID, alert.Sunday, alert.Monday, alert.Tuesday, alert.Wednesday, alert.Thursday, alert.Friday, alert.Saturday, alert.StartTime, alert.EndTime);
                 return Json(res);
             }
             return Json(res);
@@ -135,7 +137,7 @@ namespace DynThings.WebPortal.Controllers
                 ResultInfo.Result rm = Core.ResultInfo.GetResultByID(1);
                 return PartialView("_PVResult", rm);
             }
-            Alert Alert = UnitOfWork_Repositories.repoAlerts.Find(id);
+            Alert Alert = uof_repos.repoAlerts.Find(id);
             return PartialView("_Delete", Alert);
         }
 
@@ -147,7 +149,7 @@ namespace DynThings.WebPortal.Controllers
             ResultInfo.Result res = ResultInfo.GetResultByID(1);
             if (ModelState.IsValid)
             {
-                res = UnitOfWork_Repositories.repoAlerts.Delete(Alert.ID);
+                res = uof_repos.repoAlerts.Delete(Alert.ID);
                 return Json(res);
             }
             return Json(res);
@@ -160,7 +162,7 @@ namespace DynThings.WebPortal.Controllers
         [HttpGet]
         public PartialViewResult AlertConditionsListPV(long alertID, string searchfor = null, int page = 1, int recordsperpage = 0)
         {
-            PagedList.IPagedList cons = Data.Repositories.UnitOfWork_Repositories.repoAlerts.GetConditionsPagedList(alertID, searchfor, page, Helpers.Configs.validateRecordsPerMaster(recordsperpage));
+            PagedList.IPagedList cons = uof_repos.repoAlerts.GetConditionsPagedList(alertID, searchfor, page, Helpers.Configs.validateRecordsPerMaster(recordsperpage));
             return PartialView("_Conditions_List", cons);
         }
         #endregion
@@ -169,10 +171,10 @@ namespace DynThings.WebPortal.Controllers
         [HttpGet]
         public PartialViewResult AlertConditionAddPV()
         {
-            ViewBag.ThingID = new SelectList(UnitOfWork_Repositories.repoThings.GetList(false), "ID", "Title");
-            ViewBag.IOTypeID = new SelectList(UnitOfWork_Repositories.repoIOTypes.GetList(false), "ID", "Title");
-            ViewBag.EndPointTypeID = new SelectList(UnitOfWork_Repositories.repoEndpointTypes.GetList(), "ID", "Title");
-            ViewBag.ConditionTypeID = new SelectList(UnitOfWork_Repositories.repoAlertConditionTypes.GetList(), "ID", "Title");
+            ViewBag.ThingID = new SelectList(uof_repos.repoThings.GetList(false), "ID", "Title");
+            ViewBag.IOTypeID = new SelectList(uof_repos.repoIOTypes.GetList(false), "ID", "Title");
+            ViewBag.EndPointTypeID = new SelectList(uof_repos.repoEndpointTypes.GetList(), "ID", "Title");
+            ViewBag.ConditionTypeID = new SelectList(uof_repos.repoAlertConditionTypes.GetList(), "ID", "Title");
             return PartialView("_Conditions_Add");
         }
 
@@ -183,7 +185,7 @@ namespace DynThings.WebPortal.Controllers
             ResultInfo.Result res = ResultInfo.GetResultByID(1);
             if (ModelState.IsValid)
             {
-                res = UnitOfWork_Repositories.repoAlerts.AddCondition(alertCondition.AlertID
+                res = uof_repos.repoAlerts.AddCondition(alertCondition.AlertID
                     , alertCondition.ThingID
                     , alertCondition.IOTypeID
                     , alertCondition.EndPointTypeID
@@ -200,11 +202,11 @@ namespace DynThings.WebPortal.Controllers
         [HttpGet]
         public PartialViewResult AlertConditionEditPV(long id)
         {
-            AlertCondition con = UnitOfWork_Repositories.repoAlerts.FindCondition(id);
-            ViewBag.ThingID = new SelectList(UnitOfWork_Repositories.repoThings.GetList(false), "ID", "Title", con.ThingID);
-            ViewBag.IOTypeID = new SelectList(UnitOfWork_Repositories.repoIOTypes.GetList(false), "ID", "Title", con.IOTypeID);
-            ViewBag.EndPointTypeID = new SelectList(UnitOfWork_Repositories.repoEndpointTypes.GetList(), "ID", "Title", con.EndPointTypeID);
-            ViewBag.ConditionTypeID = new SelectList(UnitOfWork_Repositories.repoAlertConditionTypes.GetList(), "ID", "Title", con.ConditionTypeID);
+            AlertCondition con = uof_repos.repoAlerts.FindCondition(id);
+            ViewBag.ThingID = new SelectList(uof_repos.repoThings.GetList(false), "ID", "Title", con.ThingID);
+            ViewBag.IOTypeID = new SelectList(uof_repos.repoIOTypes.GetList(false), "ID", "Title", con.IOTypeID);
+            ViewBag.EndPointTypeID = new SelectList(uof_repos.repoEndpointTypes.GetList(), "ID", "Title", con.EndPointTypeID);
+            ViewBag.ConditionTypeID = new SelectList(uof_repos.repoAlertConditionTypes.GetList(), "ID", "Title", con.ConditionTypeID);
             return PartialView("_Conditions_Edit", con);
         }
 
@@ -215,7 +217,7 @@ namespace DynThings.WebPortal.Controllers
             ResultInfo.Result res = ResultInfo.GetResultByID(1);
             if (ModelState.IsValid)
             {
-                res = UnitOfWork_Repositories.repoAlerts.EditCondition(alertCondition.ID
+                res = uof_repos.repoAlerts.EditCondition(alertCondition.ID
                     , alertCondition.ThingID
                     , alertCondition.IOTypeID
                     , alertCondition.EndPointTypeID
@@ -237,7 +239,7 @@ namespace DynThings.WebPortal.Controllers
                 ResultInfo.Result rm = Core.ResultInfo.GetResultByID(1);
                 return PartialView("_PVResult", rm);
             }
-            AlertCondition con = UnitOfWork_Repositories.repoAlerts.FindCondition(id);
+            AlertCondition con = uof_repos.repoAlerts.FindCondition(id);
             return PartialView("_Conditions_Delete", con);
         }
 
@@ -249,7 +251,7 @@ namespace DynThings.WebPortal.Controllers
             ResultInfo.Result res = ResultInfo.GetResultByID(1);
             if (ModelState.IsValid)
             {
-                res = UnitOfWork_Repositories.repoAlerts.DeleteCondition(alertCondition.ID);
+                res = uof_repos.repoAlerts.DeleteCondition(alertCondition.ID);
                 return Json(res);
             }
             return Json(res);
@@ -263,7 +265,7 @@ namespace DynThings.WebPortal.Controllers
         [HttpGet]
         public PartialViewResult AlertUsersListPV(long alertID, string searchfor = null, int page = 1, int recordsperpage = 0)
         {
-            PagedList.IPagedList usrs = Data.Repositories.UnitOfWork_Repositories.repoAlerts.GetUsersPagedList(alertID, searchfor, page, Helpers.Configs.validateRecordsPerMaster(recordsperpage));
+            PagedList.IPagedList usrs = uof_repos.repoAlerts.GetUsersPagedList(alertID, searchfor, page, Helpers.Configs.validateRecordsPerMaster(recordsperpage));
             return PartialView("_AlertUsers_List", usrs);
         }
         #endregion
@@ -275,7 +277,7 @@ namespace DynThings.WebPortal.Controllers
         public ActionResult AlertUserDetach(long alertID, string userID)
         {
             ResultInfo.Result res = ResultInfo.GetResultByID(1);
-            res = UnitOfWork_Repositories.repoAlerts.DeattachUser(alertID,userID);
+            res = uof_repos.repoAlerts.DeattachUser(alertID, userID);
 
             return Json(res);
         }
@@ -288,7 +290,7 @@ namespace DynThings.WebPortal.Controllers
         public ActionResult AlertUserAttach(long alertID, string userID)
         {
             ResultInfo.Result res = ResultInfo.GetResultByID(1);
-            res = UnitOfWork_Repositories.repoAlerts.AttachUser(alertID, userID);
+            res = uof_repos.repoAlerts.AttachUser(alertID, userID);
 
             return Json(res);
         }

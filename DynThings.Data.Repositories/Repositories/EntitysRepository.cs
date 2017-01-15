@@ -11,14 +11,16 @@ namespace DynThings.Data.Repositories
 {
     public class SystemEntitysRepository
     {
-        #region Props
-        public DynThingsEntities db
+        #region Constructor
+        public SystemEntitysRepository(DynThingsEntities dbSource)
         {
-            get
-            {
-                return UnitOfWork_Repositories.dynDB;
-            }
+            db = dbSource;
         }
+
+        #endregion
+
+        #region props
+        public DynThingsEntities db;
         #endregion
 
 

@@ -11,14 +11,16 @@ namespace DynThings.Data.Repositories
 {
     public class DynThingsAppsRepository
     {
-        #region Props
-        public DynThingsEntities db
+        #region Constructor
+        public DynThingsAppsRepository(DynThingsEntities dbSource)
         {
-            get
-            {
-                return UnitOfWork_Repositories.dynDB;
-            }
+            db = dbSource;
         }
+
+        #endregion
+
+        #region props
+        public DynThingsEntities db;
         #endregion
 
 
@@ -95,7 +97,7 @@ namespace DynThings.Data.Repositories
         #endregion
 
         #region Edit
-        public ResultInfo.Result EditMain(long id, string title, string description, int statusID,float version )
+        public ResultInfo.Result EditMain(long id, string title, string description, int statusID,double version )
         {
             try
             {
@@ -113,7 +115,7 @@ namespace DynThings.Data.Repositories
             }
         }
 
-        public ResultInfo.Result EditMain(long id, string title, string description, int statusID, float version,bool isStoreApp, string developedByName,DateTime storeAppLastUpdate )
+        public ResultInfo.Result EditMain(long id, string title, string description, int statusID, double version,bool isStoreApp, string developedByName,DateTime storeAppLastUpdate )
         {
             try
             {

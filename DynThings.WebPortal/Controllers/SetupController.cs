@@ -16,6 +16,8 @@ namespace DynThings.WebPortal.Controllers
 {
     public class SetupController : Controller
     {
+        UnitOfWork_Repositories uof_repos = new UnitOfWork_Repositories();
+
         // GET: Setup
         public ActionResult Index()
         {
@@ -28,12 +30,12 @@ namespace DynThings.WebPortal.Controllers
                             , ""
                             , float.Parse("0.01")
                             , url
-                            , UnitOfWork_Repositories.repoLocationViews.GetCount()
-                            , UnitOfWork_Repositories.repoLocations.GetCount()
-                            , UnitOfWork_Repositories.repoThings.GetCount()
-                            , UnitOfWork_Repositories.repoDevices.GetCount()
-                            , UnitOfWork_Repositories.repoEndpoints.GetCount()
-                            , UnitOfWork_Repositories.repoDynUsers.GetCount()
+                            , uof_repos.repoLocationViews.GetCount()
+                            , uof_repos.repoLocations.GetCount()
+                            , uof_repos.repoThings.GetCount()
+                            , uof_repos.repoDevices.GetCount()
+                            , uof_repos.repoEndpoints.GetCount()
+                            , uof_repos.repoDynUsers.GetCount()
                             , Server.MachineName
                             , ""
                             , ""
@@ -128,7 +130,7 @@ namespace DynThings.WebPortal.Controllers
         [HttpGet]
         public PartialViewResult PlatformConfigPV()
         {
-            SetupModels.PlatformConfig conf = UnitOfWork_Repositories.repoDynSettings.GetSetupPlatformConfig();
+            SetupModels.PlatformConfig conf = uof_repos.repoDynSettings.GetSetupPlatformConfig();
             ViewBag.TimeZone = new SelectList(StaticMenus.GetRegionalTimeOptions(), conf.TimeZone);
             return PartialView("_Config",conf);
         }

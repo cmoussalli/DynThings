@@ -13,6 +13,8 @@ namespace DynThings.WebPortal.Controllers
 {
     public class BaseController : Controller
     {
+        UnitOfWork_Repositories uof_repos = new UnitOfWork_Repositories();
+
         #region Properties
         public AspNetUser currentUser { get; set; }
 
@@ -25,7 +27,7 @@ namespace DynThings.WebPortal.Controllers
             base.Initialize(requestContext);
 
             //Get the current User Info
-            currentUser = UnitOfWork_Repositories.repoDynUsers.Find(User.Identity.GetUserId());
+            currentUser = uof_repos.repoDynUsers.Find(User.Identity.GetUserId());
         }
 
         #endregion

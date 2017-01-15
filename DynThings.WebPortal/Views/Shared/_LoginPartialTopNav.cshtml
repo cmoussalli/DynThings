@@ -1,5 +1,10 @@
 ﻿@using DynThings.Data.Repositories;
 @using Microsoft.AspNet.Identity
+@using DynThings.Data.Repositories;
+@{ 
+    UnitOfWork_Repositories uof_repos = new UnitOfWork_Repositories();
+}
+
 
 @if (Request.IsAuthenticated)
 {
@@ -12,7 +17,9 @@
             <span class="pull-right">
                 @*<i class="demo-pli-male ic-user"></i>*@
             </span>
-            <div class="username hidden-xs" style="color:white;">@UnitOfWork_Repositories.repoDynUsers.GetUserName(User.Identity.GetUserId())</div>
+            <div class="username hidden-xs" style="color:white;">
+                @uof_repos.repoDynUsers.GetUserName(User.Identity.GetUserId())
+            </div>
         </a>
 
         <div class="dropdown-menu dropdown-menu-md dropdown-menu-right panel-default">

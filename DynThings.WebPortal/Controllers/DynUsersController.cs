@@ -16,6 +16,8 @@ namespace DynThings.WebPortal.Controllers
     [Authorize(Roles = "Admin")]
     public class DynUsersController : Controller
     {
+        UnitOfWork_Repositories uof_repos = new UnitOfWork_Repositories();
+
         #region ActionResult: Views
 
         #region Get LocationViews List
@@ -30,7 +32,7 @@ namespace DynThings.WebPortal.Controllers
         #region Details
         public ActionResult Details(string id)
         {
-            AspNetUser aspUser = UnitOfWork_Repositories.repoDynUsers.Find(id);
+            AspNetUser aspUser = uof_repos.repoDynUsers.Find(id);
             return View("Details", aspUser);
         }
         #endregion
@@ -43,14 +45,14 @@ namespace DynThings.WebPortal.Controllers
         [HttpGet]
         public PartialViewResult ListCardsPV(string searchfor = null, int page = 1, int recordsperpage = 0)
         {
-            IPagedList views = UnitOfWork_Repositories.repoDynUsers.GetPagedList(searchfor, page, Helpers.Configs.validateRecordsPerMaster(recordsperpage));
+            IPagedList views = uof_repos.repoDynUsers.GetPagedList(searchfor, page, Helpers.Configs.validateRecordsPerMaster(recordsperpage));
             return PartialView("_ListCards", views);
         }
 
         [HttpGet]
         public PartialViewResult ListGridPV(string searchfor = null, int page = 1, int recordsperpage = 0)
         {
-            IPagedList views = UnitOfWork_Repositories.repoDynUsers.GetPagedList(searchfor, page, Helpers.Configs.validateRecordsPerMaster(recordsperpage));
+            IPagedList views = uof_repos.repoDynUsers.GetPagedList(searchfor, page, Helpers.Configs.validateRecordsPerMaster(recordsperpage));
             return PartialView("_ListGrid", views);
         }
         #endregion
@@ -58,7 +60,7 @@ namespace DynThings.WebPortal.Controllers
         #region DetailsPV
         public PartialViewResult DetailsPV(string  id)
         {
-            AspNetUser usr = Data.Repositories.UnitOfWork_Repositories.repoDynUsers.Find(id);
+            AspNetUser usr = uof_repos.repoDynUsers.Find(id);
             return PartialView("_Details_Main", usr);
         }
 
@@ -68,7 +70,7 @@ namespace DynThings.WebPortal.Controllers
         [HttpGet]
         public PartialViewResult EditPV(string id)
         {
-            AspNetUser usr = UnitOfWork_Repositories.repoDynUsers.Find(id);
+            AspNetUser usr = uof_repos.repoDynUsers.Find(id);
             return PartialView("_Edit", usr);
         }
 
@@ -79,7 +81,7 @@ namespace DynThings.WebPortal.Controllers
             ResultInfo.Result res = ResultInfo.GetResultByID(1);
             if (ModelState.IsValid)
             {
-                res = UnitOfWork_Repositories.repoDynUsers.Edit(aspNetUser.Id,aspNetUser.FullName);
+                res = uof_repos.repoDynUsers.Edit(aspNetUser.Id,aspNetUser.FullName);
                 return Json(res);
             }
             return Json(res);
@@ -90,7 +92,7 @@ namespace DynThings.WebPortal.Controllers
         [HttpGet]
         public PartialViewResult DeletePV(string id)
         {
-            AspNetUser usr = UnitOfWork_Repositories.repoDynUsers.Find(id);
+            AspNetUser usr = uof_repos.repoDynUsers.Find(id);
             return PartialView("_Delete", usr);
         }
 
@@ -101,7 +103,7 @@ namespace DynThings.WebPortal.Controllers
             ResultInfo.Result res = ResultInfo.GetResultByID(1);
             if (ModelState.IsValid)
             {
-                res = UnitOfWork_Repositories.repoDynUsers.Delete(aspNetUser.Id);
+                res = uof_repos.repoDynUsers.Delete(aspNetUser.Id);
                 return Json(res);
             }
             return Json(res);
@@ -113,7 +115,7 @@ namespace DynThings.WebPortal.Controllers
         [HttpGet]
         public PartialViewResult GetDynUserRolesPV(string DynUserID)
         {
-            List<AspNetRole> rols = Data.Repositories.UnitOfWork_Repositories.repoRoles.GetListByUserID(DynUserID);
+            List<AspNetRole> rols = uof_repos.repoRoles.GetListByUserID(DynUserID);
             return PartialView("_Details_Roles", rols);
 
         }
@@ -124,8 +126,8 @@ namespace DynThings.WebPortal.Controllers
         [HttpGet]
         public PartialViewResult AttachRole(string userID)
         {
-            AspNetUser usr = UnitOfWork_Repositories.repoDynUsers.Find(userID);
-            ViewBag.RoleID = new SelectList(UnitOfWork_Repositories.repoRoles.GetList(), "ID", "Name", 1);
+            AspNetUser usr = uof_repos.repoDynUsers.Find(userID);
+            ViewBag.RoleID = new SelectList(uof_repos.repoRoles.GetList(), "ID", "Name", 1);
             return PartialView("_Details_Roles_ADD", usr);
 
         }
@@ -136,7 +138,7 @@ namespace DynThings.WebPortal.Controllers
             ResultInfo.Result res = ResultInfo.GetResultByID(1);
             if (ModelState.IsValid)
             {
-                res = UnitOfWork_Repositories.repoDynUsers.AttachRole(userID,roleID);
+                res = uof_repos.repoDynUsers.AttachRole(userID,roleID);
                 return Json(res);
             }
             return Json(res);
@@ -151,7 +153,7 @@ namespace DynThings.WebPortal.Controllers
             ResultInfo.Result res = ResultInfo.GetResultByID(1);
             if (ModelState.IsValid)
             {
-                res = UnitOfWork_Repositories.repoDynUsers.DeAttachRole(userID, roleID);
+                res = uof_repos.repoDynUsers.DeAttachRole(userID, roleID);
                 return Json(res);
             }
             return Json(res);
@@ -168,7 +170,7 @@ namespace DynThings.WebPortal.Controllers
         [HttpGet]
         public PartialViewResult LookupPV(string searchfor = null, int page = 1, int recordsperpage = 0)
         {
-            PagedList.IPagedList usrs = UnitOfWork_Repositories.repoDynUsers.GetPagedList("", 1, 10);
+            PagedList.IPagedList usrs = uof_repos.repoDynUsers.GetPagedList("", 1, 10);
             return PartialView("lookup/Index", usrs);
         }
         #endregion
@@ -176,7 +178,7 @@ namespace DynThings.WebPortal.Controllers
         [HttpGet]
         public PartialViewResult LookupListPV(string searchfor = null, int page = 1, int recordsperpage = 0)
         {
-            PagedList.IPagedList usrs = UnitOfWork_Repositories.repoDynUsers.GetPagedList(searchfor, page, Config.DefaultRecordsPerChild);
+            PagedList.IPagedList usrs = uof_repos.repoDynUsers.GetPagedList(searchfor, page, Config.DefaultRecordsPerChild);
             return PartialView("lookup/List", usrs);
         }
         #endregion
