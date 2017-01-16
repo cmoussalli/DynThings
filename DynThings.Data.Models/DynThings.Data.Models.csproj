@@ -238,7 +238,6 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="DynThingsDB.sql" />
     <Content Include="DynThingsModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>DynThingsModel.edmx</DependentUpon>

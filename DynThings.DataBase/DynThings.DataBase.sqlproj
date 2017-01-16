@@ -65,6 +65,6 @@
     <PostDeploy Include="Scripts\Script.DefaultData.sql" />
   </ItemGroup>
   <ItemGroup>
-    <PreDeploy Include="Scripts\Script.Configs.sql" />
+    <None Include="Scripts\FullDataBase.sql" />
   </ItemGroup>
 </Project>

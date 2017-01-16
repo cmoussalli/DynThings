@@ -71,12 +71,6 @@ GO
 SET IDENTITY_INSERT [dbo].[EndPointTypeCategorys] OFF
 GO
 
---SET IDENTITY_INSERT [dbo].[EndPointTypes] ON 
---GO
---INSERT [dbo].[EndPointTypes] ([ID], [Title], [measurement], [TypeCategoryID], [IconID]) VALUES (1, N'Temperature', N'C', 1, 3)
---GO
---SET IDENTITY_INSERT [dbo].[EndPointTypes] OFF
---GO
 
 SET IDENTITY_INSERT [dbo].[DeviceStatus] ON 
 GO
@@ -172,7 +166,3 @@ INSERT [dbo].[UserNotificationTypes] ([ID], [Title]) VALUES (1, N'Alert- EndPoin
 GO
 SET IDENTITY_INSERT [dbo].[UserNotificationTypes] OFF
 GO
-
-
-
-drop table #ConfigTable
