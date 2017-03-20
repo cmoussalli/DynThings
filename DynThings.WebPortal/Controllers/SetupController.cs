@@ -16,36 +16,41 @@ namespace DynThings.WebPortal.Controllers
 {
     public class SetupController : Controller
     {
-        UnitOfWork_Repositories uof_repos = new UnitOfWork_Repositories();
 
         // GET: Setup
         public ActionResult Index()
         {
-            if (Config.PlatformTitle != "")
+            try
             {
-                string url = FullyQualifiedApplicationPath();
-                CentralClient.Statistics.SubmitStatistics(Config.PlatformKey
-                            , Config.PlatformTitle
-                            , Config.DeploymentTimeStamp
-                            , ""
-                            , float.Parse("0.01")
-                            , url
-                            , uof_repos.repoLocationViews.GetCount()
-                            , uof_repos.repoLocations.GetCount()
-                            , uof_repos.repoThings.GetCount()
-                            , uof_repos.repoDevices.GetCount()
-                            , uof_repos.repoEndpoints.GetCount()
-                            , uof_repos.repoDynUsers.GetCount()
-                            , Server.MachineName
-                            , ""
-                            , ""
-                            , 0
-                            );
-                
-                return View("complete");
+                UnitOfWork_Repositories uof_repos = new UnitOfWork_Repositories();
+                if (Config.PlatformTitle != "")
+                {
+                    string url = FullyQualifiedApplicationPath();
+                    CentralClient.Statistics.SubmitStatistics(Config.PlatformKey
+                                , Config.PlatformTitle
+                                , Config.DeploymentTimeStamp
+                                , ""
+                                , float.Parse("0.01")
+                                , url
+                                , uof_repos.repoLocationViews.GetCount()
+                                , uof_repos.repoLocations.GetCount()
+                                , uof_repos.repoThings.GetCount()
+                                , uof_repos.repoDevices.GetCount()
+                                , uof_repos.repoEndpoints.GetCount()
+                                , uof_repos.repoDynUsers.GetCount()
+                                , Server.MachineName
+                                , ""
+                                , ""
+                                , 0
+                                );
+
+                    return View("complete");
+                }
             }
-            
-            
+            catch
+            {
+
+            }
             return View();
         }
 
@@ -94,7 +99,15 @@ namespace DynThings.WebPortal.Controllers
         [HttpGet]
         public PartialViewResult DatabaseConfigPV()
         {
-            SetupModels.DatabaseSetup dbMdl = Core.Database.DatabaseConnectionSetup;
+            SetupModels.DatabaseSetup dbMdl = new SetupModels.DatabaseSetup();
+
+            try
+            { 
+                dbMdl = Core.Database.DatabaseConnectionSetup;
+            }
+            catch
+            {
+            }
             return PartialView("_Database", dbMdl);
         }
 
@@ -130,9 +143,18 @@ namespace DynThings.WebPortal.Controllers
         [HttpGet]
         public PartialViewResult PlatformConfigPV()
         {
-            SetupModels.PlatformConfig conf = uof_repos.repoDynSettings.GetSetupPlatformConfig();
+            SetupModels.PlatformConfig conf = new SetupModels.PlatformConfig();
+            try
+            {
+            UnitOfWork_Repositories uof_repos = new UnitOfWork_Repositories();
+            conf = uof_repos.repoDynSettings.GetSetupPlatformConfig();
             ViewBag.TimeZone = new SelectList(StaticMenus.GetRegionalTimeOptions(), conf.TimeZone);
-            return PartialView("_Config",conf);
+            }
+            catch
+            {
+                ViewBag.TimeZone = new SelectList(StaticMenus.GetRegionalTimeOptions(), 0);
+            }
+            return PartialView("_Config", conf);
         }
 
         [HttpPost]

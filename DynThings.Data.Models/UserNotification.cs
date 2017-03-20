@@ -32,6 +32,12 @@ public partial class UserNotification
 
     public Nullable<System.DateTime> AlertTimeStamp { get; set; }
 
+    public Nullable<bool> IsEmailSent { get; set; }
+
+
+
+    public virtual AspNetUser AspNetUser { get; set; }
+
 }
 
 }

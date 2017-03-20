@@ -1,0 +1,31 @@
+﻿@model DynThings.Data.Models.AppAPIEntity
+<div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+    <h4 class="modal-title" id="myModalLabel">API Permissions Editor</h4>
+</div>
+<div class="modal-body">
+    @using (Html.BeginForm("AppApiEntityAttachPV", "Apps", FormMethod.Post, new { id = "AppApiEntityAttachForm" }))
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.ID)
+
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.AppID)
+
+        @Html.LabelFor(model => model.SystemEntityID, "SystemEntityID", htmlAttributes: new { @class = "" })
+        @Html.DropDownList("SystemEntityID", null, htmlAttributes: new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.SystemEntityID, "", new { @class = "text-danger" })
+
+        <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-primary">Attach</button>
+        </div>
+    }
+</div>
+<script>
+    $(document).ready(function () {
+        AttachEventAppApiEntityAttachForm(selectedAppID);
+    });
+
+</script>

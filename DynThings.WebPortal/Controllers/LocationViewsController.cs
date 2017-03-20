@@ -57,7 +57,7 @@ namespace DynThings.WebPortal.Controllers
         #region Details
         public ActionResult Details(long id)
         {
-            if (ValidateUserPermissions(true, true) == false)
+            if (ValidateUserPermissions(true, false) == false)
             {
                 return RedirectToAction("Login", "Account");
             }
@@ -90,6 +90,11 @@ namespace DynThings.WebPortal.Controllers
         [HttpGet]
         public PartialViewResult AddPV()
         {
+            if (ValidateUserPermissions(true, false) == false)
+            {
+                ResultInfo.Result result = ResultInfo.GenerateNotAuthorizedResult("Not Authorized", "Your account don't have the required security permission");
+                return PartialView("_PVResult",result);
+            }
             ViewBag.LocationViewTypeID = new SelectList(uof_repos.repoLocationViewTypes.GetList(), "ID", "Title", 1);
             return PartialView("_Add");
         }

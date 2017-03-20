@@ -157,14 +157,41 @@ namespace DynThings.Data.Repositories
         #endregion
 
 
+        #region Get AppAPIEntitys PagedList
+        public IPagedList GetAppAPIEntitysPagedList(string search, long appID, int pageNumber, int recordsPerPage)
+        {
+            IPagedList appAPIEntitys = db.AppAPIEntitys
+              .Where(e => search == null || e.SystemEntity.Title.Contains(search) && e.AppID == appID)
 
-        #region Attach APIEntity
-        public ResultInfo.Result AttachAPIEntity(long appID, long systemEntityID)
+              .OrderByDescending(e => e.SystemEntity.Title).ToList()
+              .ToPagedList(pageNumber, recordsPerPage);
+            return appAPIEntitys;
+        }
+        #endregion
+        #region Find AppApiEntity
+        public AppAPIEntity FindAppApiEntity(long appID,long appAPIEntity)
+        {
+            AppAPIEntity ent;
+            List<AppAPIEntity> ents = db.AppAPIEntitys.Include("SystemEntity").Include("App").Where(l => l.AppID == appID && l.SystemEntityID == appAPIEntity ).ToList();
+            if (ents.Count == 1)
+            {
+                ent = ents[0];
+            }
+            else
+            {
+                throw new Exception("Not Found");
+            }
+            return ent;
+        }
+
+        #endregion
+        #region Attach AppAPIEntity
+        public ResultInfo.Result AttachAppAPIEntity(long appID, long EntityID)
         {
             try
             {
                 //validate if associate already exists
-                List<AppAPIEntity> appAPIEntitys = db.AppAPIEntitys.Where(a => a.AppID == appID && a.SystemEntityID == systemEntityID).ToList();
+                List<AppAPIEntity> appAPIEntitys = db.AppAPIEntitys.Where(a => a.AppID == appID && a.SystemEntityID == EntityID).ToList();
                 if (appAPIEntitys.Count > 0)
                 {
                     return ResultInfo.GetResultByID(1);
@@ -173,7 +200,7 @@ namespace DynThings.Data.Repositories
                 //Add Link to Database
                 AppAPIEntity lnk = new AppAPIEntity();
                 lnk.AppID = appID;
-                lnk.SystemEntityID = systemEntityID;
+                lnk.SystemEntityID = EntityID;
                 db.AppAPIEntitys.Add(lnk);
                 db.SaveChanges();
                 return ResultInfo.GenerateOKResult("Saved");
@@ -184,14 +211,13 @@ namespace DynThings.Data.Repositories
             }
         }
         #endregion
-
-        #region DeAttachDevice
-        public ResultInfo.Result DeattachDevice(long appID, long systemEntityID)
+        #region DeAttach AppAPIEntity
+        public ResultInfo.Result DeAttachAppAPIEntity(long appID, long systemEntityID)
         {
             try
             {
                 List<AppAPIEntity> lnks = db.AppAPIEntitys.Where(l => l.AppID == appID && l.SystemEntityID == systemEntityID).ToList();
-                if (lnks.Count != 1)
+                if (lnks.Count ==0)
                 {
                     return ResultInfo.GetResultByID(1);
                 }

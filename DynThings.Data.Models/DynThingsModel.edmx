@@ -82,6 +82,17 @@
           <Property Name="ID" Type="int" Nullable="false" />
           <Property Name="Title" Type="nvarchar" MaxLength="128" />
         </EntityType>
+        <EntityType Name="AppUserTokens">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AppID" Type="bigint" />
+          <Property Name="AspNetUserID" Type="nvarchar" MaxLength="128" />
+          <Property Name="Token" Type="uniqueidentifier" />
+          <Property Name="ExpireDate" Type="smalldatetime" />
+          <Property Name="CreateDate" Type="smalldatetime" />
+        </EntityType>
         <EntityType Name="AspNetRoles">
           <Key>
             <PropertyRef Name="Id" />
@@ -156,6 +167,9 @@
           <Property Name="TimeStamp" Type="datetime" />
           <Property Name="ExecTimeStamp" Type="datetime" />
           <Property Name="ScheduleTimeStamp" Type="datetime" />
+          <Property Name="TimeStamp_UTC" Type="datetime" />
+          <Property Name="ExecTimeStamp_UTC" Type="datetime" />
+          <Property Name="ScheduleTimeStamp_UTC" Type="datetime" />
         </EntityType>
         <EntityType Name="Devices">
           <Key>
@@ -196,6 +210,9 @@
           <Property Name="PlatformTitle" Type="nvarchar" MaxLength="128" />
           <Property Name="LastCentralSync" Type="datetime" Nullable="false" />
           <Property Name="DeploymentTimeStamp" Type="datetime" Nullable="false" />
+          <Property Name="NotifcationMail" Type="nvarchar" MaxLength="50" />
+          <Property Name="SMTPAddress" Type="nvarchar" MaxLength="50" />
+          <Property Name="SMTPPort" Type="int" />
         </EntityType>
         <EntityType Name="EndPointCommands">
           <Key>
@@ -219,6 +236,9 @@
           <Property Name="TimeStamp" Type="datetime" Nullable="false" />
           <Property Name="ExecTimeStamp" Type="datetime" />
           <Property Name="ScheduleTimeStamp" Type="datetime" />
+          <Property Name="TimeStamp_UTC" Type="datetime" />
+          <Property Name="ExecTimeStamp_UTC" Type="datetime" />
+          <Property Name="ScheduleTimeStamp_UTC" Type="datetime" />
           <Property Name="ThingID" Type="bigint" Nullable="false" />
         </EntityType>
         <EntityType Name="Endpoints">
@@ -387,6 +407,7 @@
           <Property Name="NotificationTypeID" Type="bigint" />
           <Property Name="RefID" Type="bigint" />
           <Property Name="AlertTimeStamp" Type="datetime" />
+          <Property Name="IsEmailSent" Type="bit" />
         </EntityType>
         <EntityType Name="UserNotificationTypes">
           <Key>
@@ -400,12 +421,12 @@ warning 6002: The table/view 'DynThings.dbo.VThingEnds' does not have a primary 
         <EntityType Name="VThingEnds">
           <Key>
             <PropertyRef Name="ThingID" />
-            <PropertyRef Name="IOTypeID" />
             <PropertyRef Name="EndpointTypeID" />
+            <PropertyRef Name="IOTypeID" />
           </Key>
           <Property Name="ThingID" Type="bigint" Nullable="false" />
-          <Property Name="IOTypeID" Type="bigint" Nullable="false" />
           <Property Name="EndpointTypeID" Type="bigint" Nullable="false" />
+          <Property Name="IOTypeID" Type="bigint" Nullable="false" />
           <Property Name="LastValue" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <Association Name="FK__AlertCond__Alert__7720AD13">
@@ -468,6 +489,18 @@ warning 6002: The table/view 'DynThings.dbo.VThingEnds' does not have a primary 
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK__AppAPIEnt__Syste__284DF453">
+          <End Role="SystemEntitys" Type="Self.SystemEntitys" Multiplicity="1" />
+          <End Role="AppAPIEntitys" Type="Self.AppAPIEntitys" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SystemEntitys">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="AppAPIEntitys">
+              <PropertyRef Name="SystemEntityID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK__AppEntity__AppID__5EDF0F2E">
           <End Role="Apps" Type="Self.Apps" Multiplicity="1">
             <OnDelete Action="Cascade" />
@@ -506,6 +539,30 @@ warning 6002: The table/view 'DynThings.dbo.VThingEnds' does not have a primary 
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK__AppUserTo__AppID__338A9CD5">
+          <End Role="Apps" Type="Self.Apps" Multiplicity="0..1" />
+          <End Role="AppUserTokens" Type="Self.AppUserTokens" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Apps">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="AppUserTokens">
+              <PropertyRef Name="AppID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__AppUserTo__AspNe__347EC10E">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="0..1" />
+          <End Role="AppUserTokens" Type="Self.AppUserTokens" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AppUserTokens">
+              <PropertyRef Name="AspNetUserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK__Commands__Device__4D94879B">
           <End Role="Devices" Type="Self.Devices" Multiplicity="0..1">
             <OnDelete Action="Cascade" />
@@ -531,6 +588,18 @@ warning 6002: The table/view 'DynThings.dbo.VThingEnds' does not have a primary 
             </Principal>
             <Dependent Role="DeviceIOs">
               <PropertyRef Name="DeviceID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__DeviceIOs__IOTyp__2942188C">
+          <End Role="IOTypes" Type="Self.IOTypes" Multiplicity="0..1" />
+          <End Role="DeviceIOs" Type="Self.DeviceIOs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="IOTypes">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="DeviceIOs">
+              <PropertyRef Name="IOTypeID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -654,6 +723,18 @@ warning 6002: The table/view 'DynThings.dbo.VThingEnds' does not have a primary 
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK__EndPointT__TypeC__2A363CC5">
+          <End Role="EndPointTypeCategorys" Type="Self.EndPointTypeCategorys" Multiplicity="0..1" />
+          <End Role="EndPointTypes" Type="Self.EndPointTypes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EndPointTypeCategorys">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="EndPointTypes">
+              <PropertyRef Name="TypeCategoryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK__EndPointT__TypeC__47DBAE45">
           <End Role="EndPointTypeCategorys" Type="Self.EndPointTypeCategorys" Multiplicity="0..1" />
           <End Role="EndPointTypes" Type="Self.EndPointTypes" Multiplicity="*" />
@@ -680,6 +761,18 @@ warning 6002: The table/view 'DynThings.dbo.VThingEnds' does not have a primary 
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK__LinkDevic__EndBy__2B2A60FE">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="0..1" />
+          <End Role="LinkDevicesLocations" Type="Self.LinkDevicesLocations" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="LinkDevicesLocations">
+              <PropertyRef Name="EndByUser" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK__LinkDevic__EndBy__6166761E">
           <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="0..1" />
           <End Role="LinkDevicesLocations" Type="Self.LinkDevicesLocations" Multiplicity="*" />
@@ -703,6 +796,18 @@ warning 6002: The table/view 'DynThings.dbo.VThingEnds' does not have a primary 
             </Principal>
             <Dependent Role="LinkDevicesLocations">
               <PropertyRef Name="LocationID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__LinkDevic__Start__2C1E8537">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="0..1" />
+          <End Role="LinkDevicesLocations" Type="Self.LinkDevicesLocations" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="LinkDevicesLocations">
+              <PropertyRef Name="StartByUser" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -758,6 +863,18 @@ warning 6002: The table/view 'DynThings.dbo.VThingEnds' does not have a primary 
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK__LinkThing__Locat__2D12A970">
+          <End Role="Locations" Type="Self.Locations" Multiplicity="0..1" />
+          <End Role="LinkThingsLocations" Type="Self.LinkThingsLocations" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Locations">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="LinkThingsLocations">
+              <PropertyRef Name="LocationID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK__LinkThing__Thing__0697FACD">
           <End Role="Things" Type="Self.Things" Multiplicity="0..1">
             <OnDelete Action="Cascade" />
@@ -781,6 +898,18 @@ warning 6002: The table/view 'DynThings.dbo.VThingEnds' does not have a primary 
             </Principal>
             <Dependent Role="LinkUsersAlerts">
               <PropertyRef Name="AlertID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__LinkUsers__UserI__2E06CDA9">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
+          <End Role="LinkUsersAlerts" Type="Self.LinkUsersAlerts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="LinkUsersAlerts">
+              <PropertyRef Name="UserID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -820,6 +949,18 @@ warning 6002: The table/view 'DynThings.dbo.VThingEnds' does not have a primary 
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK__ThingCate__IconI__2EFAF1E2">
+          <End Role="MediaFiles" Type="Self.MediaFiles" Multiplicity="0..1" />
+          <End Role="ThingCategorys" Type="Self.ThingCategorys" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MediaFiles">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ThingCategorys">
+              <PropertyRef Name="IconID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK__Things__Category__662B2B3B">
           <End Role="ThingCategorys" Type="Self.ThingCategorys" Multiplicity="1" />
           <End Role="Things" Type="Self.Things" Multiplicity="*" />
@@ -829,6 +970,18 @@ warning 6002: The table/view 'DynThings.dbo.VThingEnds' does not have a primary 
             </Principal>
             <Dependent Role="Things">
               <PropertyRef Name="CategoryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__UserNotif__UserI__2FBA0BF1">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="0..1" />
+          <End Role="UserNotifications" Type="Self.UserNotifications" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserNotifications">
+              <PropertyRef Name="UserID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -908,6 +1061,7 @@ warning 6002: The table/view 'DynThings.dbo.VThingEnds' does not have a primary 
           <Parameter Name="EPID" Type="bigint" Mode="In" />
           <Parameter Name="Year" Type="nvarchar" Mode="In" />
         </Function>
+        <Function Name="Rpt_EndPointAndDevices_IOsCount_Minutes" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="Rpt_ThingEnd_IOs_Days" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="ThingID" Type="bigint" Mode="In" />
           <Parameter Name="TypeID" Type="bigint" Mode="In" />
@@ -933,6 +1087,7 @@ warning 6002: The table/view 'DynThings.dbo.VThingEnds' does not have a primary 
           <EntitySet Name="AppAPIEntitys" EntityType="Self.AppAPIEntitys" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Apps" EntityType="Self.Apps" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AppStatuss" EntityType="Self.AppStatuss" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AppUserTokens" EntityType="Self.AppUserTokens" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRoles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaims" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogins" Schema="dbo" store:Type="Tables" />
@@ -966,8 +1121,8 @@ warning 6002: The table/view 'DynThings.dbo.VThingEnds' does not have a primary 
           <EntitySet Name="VThingEnds" EntityType="Self.VThingEnds" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [VThingEnds].[ThingID] AS [ThingID], 
-    [VThingEnds].[IOTypeID] AS [IOTypeID], 
     [VThingEnds].[EndpointTypeID] AS [EndpointTypeID], 
+    [VThingEnds].[IOTypeID] AS [IOTypeID], 
     [VThingEnds].[LastValue] AS [LastValue]
     FROM [dbo].[VThingEnds] AS [VThingEnds]</DefiningQuery>
           </EntitySet>
@@ -991,6 +1146,10 @@ warning 6002: The table/view 'DynThings.dbo.VThingEnds' does not have a primary 
             <End Role="Things" EntitySet="Things" />
             <End Role="AlertConditions" EntitySet="AlertConditions" />
           </AssociationSet>
+          <AssociationSet Name="FK__AppAPIEnt__Syste__284DF453" Association="Self.FK__AppAPIEnt__Syste__284DF453">
+            <End Role="SystemEntitys" EntitySet="SystemEntitys" />
+            <End Role="AppAPIEntitys" EntitySet="AppAPIEntitys" />
+          </AssociationSet>
           <AssociationSet Name="FK__AppEntity__AppID__5EDF0F2E" Association="Self.FK__AppEntity__AppID__5EDF0F2E">
             <End Role="Apps" EntitySet="Apps" />
             <End Role="AppAPIEntitys" EntitySet="AppAPIEntitys" />
@@ -1003,12 +1162,24 @@ warning 6002: The table/view 'DynThings.dbo.VThingEnds' does not have a primary 
             <End Role="AppStatuss" EntitySet="AppStatuss" />
             <End Role="Apps" EntitySet="Apps" />
           </AssociationSet>
+          <AssociationSet Name="FK__AppUserTo__AppID__338A9CD5" Association="Self.FK__AppUserTo__AppID__338A9CD5">
+            <End Role="Apps" EntitySet="Apps" />
+            <End Role="AppUserTokens" EntitySet="AppUserTokens" />
+          </AssociationSet>
+          <AssociationSet Name="FK__AppUserTo__AspNe__347EC10E" Association="Self.FK__AppUserTo__AspNe__347EC10E">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AppUserTokens" EntitySet="AppUserTokens" />
+          </AssociationSet>
           <AssociationSet Name="FK__Commands__Device__4D94879B" Association="Self.FK__Commands__Device__4D94879B">
             <End Role="Devices" EntitySet="Devices" />
             <End Role="DeviceCommands" EntitySet="DeviceCommands" />
           </AssociationSet>
           <AssociationSet Name="FK__DeviceIOs__Devic__19AACF41" Association="Self.FK__DeviceIOs__Devic__19AACF41">
             <End Role="Devices" EntitySet="Devices" />
+            <End Role="DeviceIOs" EntitySet="DeviceIOs" />
+          </AssociationSet>
+          <AssociationSet Name="FK__DeviceIOs__IOTyp__2942188C" Association="Self.FK__DeviceIOs__IOTyp__2942188C">
+            <End Role="IOTypes" EntitySet="IOTypes" />
             <End Role="DeviceIOs" EntitySet="DeviceIOs" />
           </AssociationSet>
           <AssociationSet Name="FK__DeviceIOs__IOTyp__403A8C7D" Association="Self.FK__DeviceIOs__IOTyp__403A8C7D">
@@ -1047,6 +1218,10 @@ warning 6002: The table/view 'DynThings.dbo.VThingEnds' does not have a primary 
             <End Role="EndPointTypes" EntitySet="EndPointTypes" />
             <End Role="Endpoints" EntitySet="Endpoints" />
           </AssociationSet>
+          <AssociationSet Name="FK__EndPointT__TypeC__2A363CC5" Association="Self.FK__EndPointT__TypeC__2A363CC5">
+            <End Role="EndPointTypeCategorys" EntitySet="EndPointTypeCategorys" />
+            <End Role="EndPointTypes" EntitySet="EndPointTypes" />
+          </AssociationSet>
           <AssociationSet Name="FK__EndPointT__TypeC__47DBAE45" Association="Self.FK__EndPointT__TypeC__47DBAE45">
             <End Role="EndPointTypeCategorys" EntitySet="EndPointTypeCategorys" />
             <End Role="EndPointTypes" EntitySet="EndPointTypes" />
@@ -1055,12 +1230,20 @@ warning 6002: The table/view 'DynThings.dbo.VThingEnds' does not have a primary 
             <End Role="Devices" EntitySet="Devices" />
             <End Role="LinkDevicesLocations" EntitySet="LinkDevicesLocations" />
           </AssociationSet>
+          <AssociationSet Name="FK__LinkDevic__EndBy__2B2A60FE" Association="Self.FK__LinkDevic__EndBy__2B2A60FE">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="LinkDevicesLocations" EntitySet="LinkDevicesLocations" />
+          </AssociationSet>
           <AssociationSet Name="FK__LinkDevic__EndBy__6166761E" Association="Self.FK__LinkDevic__EndBy__6166761E">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="LinkDevicesLocations" EntitySet="LinkDevicesLocations" />
           </AssociationSet>
           <AssociationSet Name="FK__LinkDevic__Locat__49C3F6B7" Association="Self.FK__LinkDevic__Locat__49C3F6B7">
             <End Role="Locations" EntitySet="Locations" />
+            <End Role="LinkDevicesLocations" EntitySet="LinkDevicesLocations" />
+          </AssociationSet>
+          <AssociationSet Name="FK__LinkDevic__Start__2C1E8537" Association="Self.FK__LinkDevic__Start__2C1E8537">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="LinkDevicesLocations" EntitySet="LinkDevicesLocations" />
           </AssociationSet>
           <AssociationSet Name="FK__LinkDevic__Start__607251E5" Association="Self.FK__LinkDevic__Start__607251E5">
@@ -1079,12 +1262,20 @@ warning 6002: The table/view 'DynThings.dbo.VThingEnds' does not have a primary 
             <End Role="Locations" EntitySet="Locations" />
             <End Role="LinkThingsLocations" EntitySet="LinkThingsLocations" />
           </AssociationSet>
+          <AssociationSet Name="FK__LinkThing__Locat__2D12A970" Association="Self.FK__LinkThing__Locat__2D12A970">
+            <End Role="Locations" EntitySet="Locations" />
+            <End Role="LinkThingsLocations" EntitySet="LinkThingsLocations" />
+          </AssociationSet>
           <AssociationSet Name="FK__LinkThing__Thing__0697FACD" Association="Self.FK__LinkThing__Thing__0697FACD">
             <End Role="Things" EntitySet="Things" />
             <End Role="LinkThingsLocations" EntitySet="LinkThingsLocations" />
           </AssociationSet>
           <AssociationSet Name="FK__LinkUsers__Alert__7EC1CEDB" Association="Self.FK__LinkUsers__Alert__7EC1CEDB">
             <End Role="Alerts" EntitySet="Alerts" />
+            <End Role="LinkUsersAlerts" EntitySet="LinkUsersAlerts" />
+          </AssociationSet>
+          <AssociationSet Name="FK__LinkUsers__UserI__2E06CDA9" Association="Self.FK__LinkUsers__UserI__2E06CDA9">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="LinkUsersAlerts" EntitySet="LinkUsersAlerts" />
           </AssociationSet>
           <AssociationSet Name="FK__LinkUsers__UserI__7DCDAAA2" Association="Self.FK__LinkUsers__UserI__7DCDAAA2">
@@ -1099,9 +1290,17 @@ warning 6002: The table/view 'DynThings.dbo.VThingEnds' does not have a primary 
             <End Role="MediaFiles" EntitySet="MediaFiles" />
             <End Role="ThingCategorys" EntitySet="ThingCategorys" />
           </AssociationSet>
+          <AssociationSet Name="FK__ThingCate__IconI__2EFAF1E2" Association="Self.FK__ThingCate__IconI__2EFAF1E2">
+            <End Role="MediaFiles" EntitySet="MediaFiles" />
+            <End Role="ThingCategorys" EntitySet="ThingCategorys" />
+          </AssociationSet>
           <AssociationSet Name="FK__Things__Category__662B2B3B" Association="Self.FK__Things__Category__662B2B3B">
             <End Role="ThingCategorys" EntitySet="ThingCategorys" />
             <End Role="Things" EntitySet="Things" />
+          </AssociationSet>
+          <AssociationSet Name="FK__UserNotif__UserI__2FBA0BF1" Association="Self.FK__UserNotif__UserI__2FBA0BF1">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="UserNotifications" EntitySet="UserNotifications" />
           </AssociationSet>
           <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
@@ -1167,7 +1366,6 @@ warning 6002: The table/view 'DynThings.dbo.VThingEnds' does not have a primary 
           <EntitySet Name="DeviceIOs" EntityType="DynThingsModel.DeviceIO" />
           <EntitySet Name="Devices" EntityType="DynThingsModel.Device" />
           <EntitySet Name="DeviceStatus" EntityType="DynThingsModel.DeviceStatu" />
-          <EntitySet Name="DynSettings" EntityType="DynThingsModel.DynSetting" />
           <EntitySet Name="EndPointCommands" EntityType="DynThingsModel.EndPointCommand" />
           <EntitySet Name="EndPointIOs" EntityType="DynThingsModel.EndPointIO" />
           <EntitySet Name="IOTypes" EntityType="DynThingsModel.IOType" />
@@ -1342,6 +1540,21 @@ warning 6002: The table/view 'DynThings.dbo.VThingEnds' does not have a primary 
           <AssociationSet Name="FK__Apps__StatusID__4F9CCB9E" Association="DynThingsModel.FK__Apps__StatusID__4F9CCB9E">
             <End Role="AppStatuss" EntitySet="AppStatusses" />
             <End Role="App" EntitySet="Apps" />
+          </AssociationSet>
+          <FunctionImport Name="Rpt_EndPointAndDevices_IOsCount_Minutes" ReturnType="Collection(DynThingsModel.Rpt_EndPointAndDevices_IOsCount_Minutes_Result)" />
+          <EntitySet Name="DynSettings" EntityType="DynThingsModel.DynSetting" />
+          <AssociationSet Name="FK__UserNotif__UserI__2FBA0BF1" Association="DynThingsModel.FK__UserNotif__UserI__2FBA0BF1">
+            <End Role="AspNetUser" EntitySet="AspNetUsers" />
+            <End Role="UserNotification" EntitySet="UserNotifications" />
+          </AssociationSet>
+          <EntitySet Name="AppUserTokens" EntityType="DynThingsModel.AppUserToken" />
+          <AssociationSet Name="FK__AppUserTo__AppID__338A9CD5" Association="DynThingsModel.FK__AppUserTo__AppID__338A9CD5">
+            <End Role="App" EntitySet="Apps" />
+            <End Role="AppUserToken" EntitySet="AppUserTokens" />
+          </AssociationSet>
+          <AssociationSet Name="FK__AppUserTo__AspNe__347EC10E" Association="DynThingsModel.FK__AppUserTo__AspNe__347EC10E">
+            <End Role="AspNetUser" EntitySet="AspNetUsers" />
+            <End Role="AppUserToken" EntitySet="AppUserTokens" />
           </AssociationSet>
           </EntityContainer>
         <ComplexType Name="Rpt_EndPoint_IOs_Months_Result">
@@ -1741,6 +1954,8 @@ warning 6002: The table/view 'DynThings.dbo.VThingEnds' does not have a primary 
           <NavigationProperty Name="LinkDevicesLocations1" Relationship="DynThingsModel.FK__LinkDevic__Start__607251E5" FromRole="AspNetUser" ToRole="LinkDevicesLocation" />
           <NavigationProperty Name="LinkUsersAlerts" Relationship="DynThingsModel.FK__LinkUsers__UserI__7DCDAAA2" FromRole="AspNetUser" ToRole="LinkUsersAlert" />
           <NavigationProperty Name="AspNetRoles" Relationship="DynThingsModel.AspNetUserRoles" FromRole="AspNetUser" ToRole="AspNetRole" />
+          <NavigationProperty Name="UserNotifications" Relationship="DynThingsModel.FK__UserNotif__UserI__2FBA0BF1" FromRole="AspNetUser" ToRole="UserNotification" />
+          <NavigationProperty Name="AppUserTokens" Relationship="DynThingsModel.FK__AppUserTo__AspNe__347EC10E" FromRole="AspNetUser" ToRole="AppUserToken" />
         </EntityType>
         <EntityType Name="DeviceCommand">
           <Key>
@@ -1767,6 +1982,9 @@ warning 6002: The table/view 'DynThings.dbo.VThingEnds' does not have a primary 
           <Property Name="ScheduleTimeStamp" Type="DateTime" Precision="3" />
           <NavigationProperty Name="Device" Relationship="DynThingsModel.FK__DeviceIOs__Devic__19AACF41" FromRole="DeviceIO" ToRole="Device" />
           <NavigationProperty Name="IOType" Relationship="DynThingsModel.FK__DeviceIOs__IOTyp__403A8C7D" FromRole="DeviceIO" ToRole="IOType" />
+          <Property Name="TimeStamp_UTC" Type="DateTime" Precision="3" />
+          <Property Name="ExecTimeStamp_UTC" Type="DateTime" Precision="3" />
+          <Property Name="ScheduleTimeStamp_UTC" Type="DateTime" Precision="3" />
         </EntityType>
         <EntityType Name="Device">
           <Key>
@@ -1796,24 +2014,6 @@ warning 6002: The table/view 'DynThings.dbo.VThingEnds' does not have a primary 
           <Property Name="Title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Devices" Relationship="DynThingsModel.FK__Devices__StatusI__01D345B0" FromRole="DeviceStatu" ToRole="Device" />
         </EntityType>
-        <EntityType Name="DynSetting">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="DBVersion" Type="Single" Nullable="false" />
-          <Property Name="DevelopmentMode" Type="Boolean" Nullable="false" />
-          <Property Name="DefaultRecordsPerMaster" Type="Int32" Nullable="false" />
-          <Property Name="DefaultRecordsPerChild" Type="Int32" Nullable="false" />
-          <Property Name="PlatformKey" Type="Guid" Nullable="false" />
-          <Property Name="PublicAccess" Type="Boolean" Nullable="false" />
-          <Property Name="PublicSignUP" Type="Boolean" Nullable="false" />
-          <Property Name="EnableSystemLogger" Type="Boolean" Nullable="false" />
-          <Property Name="App_TimeZone" Type="Int32" Nullable="false" />
-          <Property Name="PlatformTitle" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="LastCentralSync" Type="DateTime" Precision="3" Nullable="false" />
-          <Property Name="DeploymentTimeStamp" Type="DateTime" Nullable="false" Precision="3" />
-        </EntityType>
         <EntityType Name="EndPointCommand">
           <Key>
             <PropertyRef Name="ID" />
@@ -1841,6 +2041,9 @@ warning 6002: The table/view 'DynThings.dbo.VThingEnds' does not have a primary 
           <NavigationProperty Name="IOType" Relationship="DynThingsModel.FK__EndPointI__IOTyp__440B1D61" FromRole="EndPointIO" ToRole="IOType" />
           <NavigationProperty Name="Thing" Relationship="DynThingsModel.FK__EndPointI__Thing__7E02B4CC" FromRole="EndPointIO" ToRole="Thing" />
           <NavigationProperty Name="Endpoint" Relationship="DynThingsModel.FK__EndPointI__EndPo__29572725" FromRole="EndPointIO" ToRole="Endpoint" />
+          <Property Name="TimeStamp_UTC" Type="DateTime" Precision="3" />
+          <Property Name="ExecTimeStamp_UTC" Type="DateTime" Precision="3" />
+          <Property Name="ScheduleTimeStamp_UTC" Type="DateTime" Precision="3" />
         </EntityType>
         <EntityType Name="IOType">
           <Key>
@@ -1993,6 +2196,8 @@ warning 6002: The table/view 'DynThings.dbo.VThingEnds' does not have a primary 
           <Property Name="NotificationTypeID" Type="Int64" />
           <Property Name="RefID" Type="Int64" />
           <Property Name="AlertTimeStamp" Type="DateTime" Precision="3" />
+          <Property Name="IsEmailSent" Type="Boolean" />
+          <NavigationProperty Name="AspNetUser" Relationship="DynThingsModel.FK__UserNotif__UserI__2FBA0BF1" FromRole="UserNotification" ToRole="AspNetUser" />
         </EntityType>
         <EntityType Name="UserNotificationType">
           <Key>
@@ -2528,6 +2733,7 @@ warning 6002: The table/view 'DynThings.dbo.VThingEnds' does not have a primary 
           <Property Name="Version" Type="Double" Nullable="false" />
           <NavigationProperty Name="AppAPIEntitys" Relationship="DynThingsModel.FK__AppEntity__AppID__5EDF0F2E" FromRole="App" ToRole="AppAPIEntity" />
           <NavigationProperty Name="AppStatuss" Relationship="DynThingsModel.FK__Apps__StatusID__4F9CCB9E" FromRole="App" ToRole="AppStatuss" />
+          <NavigationProperty Name="AppUserTokens" Relationship="DynThingsModel.FK__AppUserTo__AppID__338A9CD5" FromRole="App" ToRole="AppUserToken" />
         </EntityType>
         <EntityType Name="SystemEntity">
           <Key>
@@ -2572,6 +2778,140 @@ warning 6002: The table/view 'DynThings.dbo.VThingEnds' does not have a primary 
             </Principal>
             <Dependent Role="App">
               <PropertyRef Name="StatusID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <ComplexType Name="Rpt_EndPointAndDevices_IOsCount_Minutes_Result">
+          <Property Type="String" Name="ObjectCode" Nullable="false" MaxLength="1" />
+          <Property Type="String" Name="Object" Nullable="false" MaxLength="9" />
+          <Property Type="Int32" Name="C1" Nullable="true" />
+          <Property Type="Int32" Name="C2" Nullable="true" />
+          <Property Type="Int32" Name="C3" Nullable="true" />
+          <Property Type="Int32" Name="C4" Nullable="true" />
+          <Property Type="Int32" Name="C5" Nullable="true" />
+          <Property Type="Int32" Name="C6" Nullable="true" />
+          <Property Type="Int32" Name="C7" Nullable="true" />
+          <Property Type="Int32" Name="C8" Nullable="true" />
+          <Property Type="Int32" Name="C9" Nullable="true" />
+          <Property Type="Int32" Name="C10" Nullable="true" />
+          <Property Type="Int32" Name="C11" Nullable="true" />
+          <Property Type="Int32" Name="C12" Nullable="true" />
+          <Property Type="Int32" Name="C13" Nullable="true" />
+          <Property Type="Int32" Name="C14" Nullable="true" />
+          <Property Type="Int32" Name="C15" Nullable="true" />
+          <Property Type="Int32" Name="C16" Nullable="true" />
+          <Property Type="Int32" Name="C17" Nullable="true" />
+          <Property Type="Int32" Name="C18" Nullable="true" />
+          <Property Type="Int32" Name="C19" Nullable="true" />
+          <Property Type="Int32" Name="C20" Nullable="true" />
+          <Property Type="Int32" Name="C21" Nullable="true" />
+          <Property Type="Int32" Name="C22" Nullable="true" />
+          <Property Type="Int32" Name="C23" Nullable="true" />
+          <Property Type="Int32" Name="C24" Nullable="true" />
+          <Property Type="Int32" Name="C25" Nullable="true" />
+          <Property Type="Int32" Name="C26" Nullable="true" />
+          <Property Type="Int32" Name="C27" Nullable="true" />
+          <Property Type="Int32" Name="C28" Nullable="true" />
+          <Property Type="Int32" Name="C29" Nullable="true" />
+          <Property Type="Int32" Name="C30" Nullable="true" />
+          <Property Type="Int32" Name="C31" Nullable="true" />
+          <Property Type="Int32" Name="C32" Nullable="true" />
+          <Property Type="Int32" Name="C33" Nullable="true" />
+          <Property Type="Int32" Name="C34" Nullable="true" />
+          <Property Type="Int32" Name="C35" Nullable="true" />
+          <Property Type="Int32" Name="C36" Nullable="true" />
+          <Property Type="Int32" Name="C37" Nullable="true" />
+          <Property Type="Int32" Name="C38" Nullable="true" />
+          <Property Type="Int32" Name="C39" Nullable="true" />
+          <Property Type="Int32" Name="C40" Nullable="true" />
+          <Property Type="Int32" Name="C41" Nullable="true" />
+          <Property Type="Int32" Name="C42" Nullable="true" />
+          <Property Type="Int32" Name="C43" Nullable="true" />
+          <Property Type="Int32" Name="C44" Nullable="true" />
+          <Property Type="Int32" Name="C45" Nullable="true" />
+          <Property Type="Int32" Name="C46" Nullable="true" />
+          <Property Type="Int32" Name="C47" Nullable="true" />
+          <Property Type="Int32" Name="C48" Nullable="true" />
+          <Property Type="Int32" Name="C49" Nullable="true" />
+          <Property Type="Int32" Name="C50" Nullable="true" />
+          <Property Type="Int32" Name="C51" Nullable="true" />
+          <Property Type="Int32" Name="C52" Nullable="true" />
+          <Property Type="Int32" Name="C53" Nullable="true" />
+          <Property Type="Int32" Name="C54" Nullable="true" />
+          <Property Type="Int32" Name="C55" Nullable="true" />
+          <Property Type="Int32" Name="C56" Nullable="true" />
+          <Property Type="Int32" Name="C57" Nullable="true" />
+          <Property Type="Int32" Name="C58" Nullable="true" />
+          <Property Type="Int32" Name="C59" Nullable="true" />
+          <Property Type="Int32" Name="C60" Nullable="true" />
+        </ComplexType>
+        <EntityType Name="DynSetting">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DBVersion" Type="Single" Nullable="false" />
+          <Property Name="DevelopmentMode" Type="Boolean" Nullable="false" />
+          <Property Name="DefaultRecordsPerMaster" Type="Int32" Nullable="false" />
+          <Property Name="DefaultRecordsPerChild" Type="Int32" Nullable="false" />
+          <Property Name="PlatformKey" Type="Guid" Nullable="false" />
+          <Property Name="PublicAccess" Type="Boolean" Nullable="false" />
+          <Property Name="PublicSignUP" Type="Boolean" Nullable="false" />
+          <Property Name="EnableSystemLogger" Type="Boolean" Nullable="false" />
+          <Property Name="App_TimeZone" Type="Int32" Nullable="false" />
+          <Property Name="PlatformTitle" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="LastCentralSync" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="DeploymentTimeStamp" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="NotifcationMail" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SMTPAddress" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SMTPPort" Type="Int32" />
+        </EntityType>
+        <Association Name="FK__UserNotif__UserI__2FBA0BF1">
+          <End Type="DynThingsModel.AspNetUser" Role="AspNetUser" Multiplicity="0..1" />
+          <End Type="DynThingsModel.UserNotification" Role="UserNotification" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserNotification">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="AppUserToken">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AppID" Type="Int64" />
+          <Property Name="AspNetUserID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="Token" Type="Guid" />
+          <Property Name="ExpireDate" Type="DateTime" Precision="0" />
+          <Property Name="CreateDate" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="App" Relationship="DynThingsModel.FK__AppUserTo__AppID__338A9CD5" FromRole="AppUserToken" ToRole="App" />
+          <NavigationProperty Name="AspNetUser" Relationship="DynThingsModel.FK__AppUserTo__AspNe__347EC10E" FromRole="AppUserToken" ToRole="AspNetUser" />
+        </EntityType>
+        <Association Name="FK__AppUserTo__AppID__338A9CD5">
+          <End Type="DynThingsModel.App" Role="App" Multiplicity="0..1" />
+          <End Type="DynThingsModel.AppUserToken" Role="AppUserToken" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="App">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="AppUserToken">
+              <PropertyRef Name="AppID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__AppUserTo__AspNe__347EC10E">
+          <End Type="DynThingsModel.AspNetUser" Role="AspNetUser" Multiplicity="0..1" />
+          <End Type="DynThingsModel.AppUserToken" Role="AppUserToken" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AppUserToken">
+              <PropertyRef Name="AspNetUserID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -3015,6 +3355,9 @@ warning 6002: The table/view 'DynThings.dbo.VThingEnds' does not have a primary 
           <EntitySetMapping Name="DeviceIOs">
             <EntityTypeMapping TypeName="DynThingsModel.DeviceIO">
               <MappingFragment StoreEntitySet="DeviceIOs">
+                <ScalarProperty Name="ScheduleTimeStamp_UTC" ColumnName="ScheduleTimeStamp_UTC" />
+                <ScalarProperty Name="ExecTimeStamp_UTC" ColumnName="ExecTimeStamp_UTC" />
+                <ScalarProperty Name="TimeStamp_UTC" ColumnName="TimeStamp_UTC" />
                 <ScalarProperty Name="ScheduleTimeStamp" ColumnName="ScheduleTimeStamp" />
                 <ScalarProperty Name="ExecTimeStamp" ColumnName="ExecTimeStamp" />
                 <ScalarProperty Name="TimeStamp" ColumnName="TimeStamp" />
@@ -3049,25 +3392,6 @@ warning 6002: The table/view 'DynThings.dbo.VThingEnds' does not have a primary 
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="DynSettings">
-            <EntityTypeMapping TypeName="DynThingsModel.DynSetting">
-              <MappingFragment StoreEntitySet="DynSettings">
-                <ScalarProperty Name="DeploymentTimeStamp" ColumnName="DeploymentTimeStamp" />
-                <ScalarProperty Name="LastCentralSync" ColumnName="LastCentralSync" />
-                <ScalarProperty Name="PlatformTitle" ColumnName="PlatformTitle" />
-                <ScalarProperty Name="App_TimeZone" ColumnName="App_TimeZone" />
-                <ScalarProperty Name="EnableSystemLogger" ColumnName="EnableSystemLogger" />
-                <ScalarProperty Name="PublicSignUP" ColumnName="PublicSignUP" />
-                <ScalarProperty Name="PublicAccess" ColumnName="PublicAccess" />
-                <ScalarProperty Name="PlatformKey" ColumnName="PlatformKey" />
-                <ScalarProperty Name="DefaultRecordsPerChild" ColumnName="DefaultRecordsPerChild" />
-                <ScalarProperty Name="DefaultRecordsPerMaster" ColumnName="DefaultRecordsPerMaster" />
-                <ScalarProperty Name="DevelopmentMode" ColumnName="DevelopmentMode" />
-                <ScalarProperty Name="DBVersion" ColumnName="DBVersion" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="EndPointCommands">
             <EntityTypeMapping TypeName="DynThingsModel.EndPointCommand">
               <MappingFragment StoreEntitySet="EndPointCommands">
@@ -3083,6 +3407,9 @@ warning 6002: The table/view 'DynThings.dbo.VThingEnds' does not have a primary 
           <EntitySetMapping Name="EndPointIOs">
             <EntityTypeMapping TypeName="DynThingsModel.EndPointIO">
               <MappingFragment StoreEntitySet="EndPointIOs">
+                <ScalarProperty Name="ScheduleTimeStamp_UTC" ColumnName="ScheduleTimeStamp_UTC" />
+                <ScalarProperty Name="ExecTimeStamp_UTC" ColumnName="ExecTimeStamp_UTC" />
+                <ScalarProperty Name="TimeStamp_UTC" ColumnName="TimeStamp_UTC" />
                 <ScalarProperty Name="ThingID" ColumnName="ThingID" />
                 <ScalarProperty Name="ScheduleTimeStamp" ColumnName="ScheduleTimeStamp" />
                 <ScalarProperty Name="ExecTimeStamp" ColumnName="ExecTimeStamp" />
@@ -3222,6 +3549,7 @@ warning 6002: The table/view 'DynThings.dbo.VThingEnds' does not have a primary 
           <EntitySetMapping Name="UserNotifications">
             <EntityTypeMapping TypeName="DynThingsModel.UserNotification">
               <MappingFragment StoreEntitySet="UserNotifications">
+                <ScalarProperty Name="IsEmailSent" ColumnName="IsEmailSent" />
                 <ScalarProperty Name="AlertTimeStamp" ColumnName="AlertTimeStamp" />
                 <ScalarProperty Name="RefID" ColumnName="RefID" />
                 <ScalarProperty Name="NotificationTypeID" ColumnName="NotificationTypeID" />
@@ -3357,6 +3685,108 @@ warning 6002: The table/view 'DynThings.dbo.VThingEnds' does not have a primary 
             <EntityTypeMapping TypeName="DynThingsModel.SystemEntity">
               <MappingFragment StoreEntitySet="SystemEntitys">
                 <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="Rpt_EndPointAndDevices_IOsCount_Minutes" FunctionName="DynThingsModel.Store.Rpt_EndPointAndDevices_IOsCount_Minutes">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DynThingsModel.Rpt_EndPointAndDevices_IOsCount_Minutes_Result">
+                <ScalarProperty Name="ObjectCode" ColumnName="ObjectCode" />
+                <ScalarProperty Name="Object" ColumnName="Object" />
+                <ScalarProperty Name="C1" ColumnName="1" />
+                <ScalarProperty Name="C2" ColumnName="2" />
+                <ScalarProperty Name="C3" ColumnName="3" />
+                <ScalarProperty Name="C4" ColumnName="4" />
+                <ScalarProperty Name="C5" ColumnName="5" />
+                <ScalarProperty Name="C6" ColumnName="6" />
+                <ScalarProperty Name="C7" ColumnName="7" />
+                <ScalarProperty Name="C8" ColumnName="8" />
+                <ScalarProperty Name="C9" ColumnName="9" />
+                <ScalarProperty Name="C10" ColumnName="10" />
+                <ScalarProperty Name="C11" ColumnName="11" />
+                <ScalarProperty Name="C12" ColumnName="12" />
+                <ScalarProperty Name="C13" ColumnName="13" />
+                <ScalarProperty Name="C14" ColumnName="14" />
+                <ScalarProperty Name="C15" ColumnName="15" />
+                <ScalarProperty Name="C16" ColumnName="16" />
+                <ScalarProperty Name="C17" ColumnName="17" />
+                <ScalarProperty Name="C18" ColumnName="18" />
+                <ScalarProperty Name="C19" ColumnName="19" />
+                <ScalarProperty Name="C20" ColumnName="20" />
+                <ScalarProperty Name="C21" ColumnName="21" />
+                <ScalarProperty Name="C22" ColumnName="22" />
+                <ScalarProperty Name="C23" ColumnName="23" />
+                <ScalarProperty Name="C24" ColumnName="24" />
+                <ScalarProperty Name="C25" ColumnName="25" />
+                <ScalarProperty Name="C26" ColumnName="26" />
+                <ScalarProperty Name="C27" ColumnName="27" />
+                <ScalarProperty Name="C28" ColumnName="28" />
+                <ScalarProperty Name="C29" ColumnName="29" />
+                <ScalarProperty Name="C30" ColumnName="30" />
+                <ScalarProperty Name="C31" ColumnName="31" />
+                <ScalarProperty Name="C32" ColumnName="32" />
+                <ScalarProperty Name="C33" ColumnName="33" />
+                <ScalarProperty Name="C34" ColumnName="34" />
+                <ScalarProperty Name="C35" ColumnName="35" />
+                <ScalarProperty Name="C36" ColumnName="36" />
+                <ScalarProperty Name="C37" ColumnName="37" />
+                <ScalarProperty Name="C38" ColumnName="38" />
+                <ScalarProperty Name="C39" ColumnName="39" />
+                <ScalarProperty Name="C40" ColumnName="40" />
+                <ScalarProperty Name="C41" ColumnName="41" />
+                <ScalarProperty Name="C42" ColumnName="42" />
+                <ScalarProperty Name="C43" ColumnName="43" />
+                <ScalarProperty Name="C44" ColumnName="44" />
+                <ScalarProperty Name="C45" ColumnName="45" />
+                <ScalarProperty Name="C46" ColumnName="46" />
+                <ScalarProperty Name="C47" ColumnName="47" />
+                <ScalarProperty Name="C48" ColumnName="48" />
+                <ScalarProperty Name="C49" ColumnName="49" />
+                <ScalarProperty Name="C50" ColumnName="50" />
+                <ScalarProperty Name="C51" ColumnName="51" />
+                <ScalarProperty Name="C52" ColumnName="52" />
+                <ScalarProperty Name="C53" ColumnName="53" />
+                <ScalarProperty Name="C54" ColumnName="54" />
+                <ScalarProperty Name="C55" ColumnName="55" />
+                <ScalarProperty Name="C56" ColumnName="56" />
+                <ScalarProperty Name="C57" ColumnName="57" />
+                <ScalarProperty Name="C58" ColumnName="58" />
+                <ScalarProperty Name="C59" ColumnName="59" />
+                <ScalarProperty Name="C60" ColumnName="60" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <EntitySetMapping Name="DynSettings">
+            <EntityTypeMapping TypeName="DynThingsModel.DynSetting">
+              <MappingFragment StoreEntitySet="DynSettings">
+                <ScalarProperty Name="SMTPPort" ColumnName="SMTPPort" />
+                <ScalarProperty Name="SMTPAddress" ColumnName="SMTPAddress" />
+                <ScalarProperty Name="NotifcationMail" ColumnName="NotifcationMail" />
+                <ScalarProperty Name="DeploymentTimeStamp" ColumnName="DeploymentTimeStamp" />
+                <ScalarProperty Name="LastCentralSync" ColumnName="LastCentralSync" />
+                <ScalarProperty Name="PlatformTitle" ColumnName="PlatformTitle" />
+                <ScalarProperty Name="App_TimeZone" ColumnName="App_TimeZone" />
+                <ScalarProperty Name="EnableSystemLogger" ColumnName="EnableSystemLogger" />
+                <ScalarProperty Name="PublicSignUP" ColumnName="PublicSignUP" />
+                <ScalarProperty Name="PublicAccess" ColumnName="PublicAccess" />
+                <ScalarProperty Name="PlatformKey" ColumnName="PlatformKey" />
+                <ScalarProperty Name="DefaultRecordsPerChild" ColumnName="DefaultRecordsPerChild" />
+                <ScalarProperty Name="DefaultRecordsPerMaster" ColumnName="DefaultRecordsPerMaster" />
+                <ScalarProperty Name="DevelopmentMode" ColumnName="DevelopmentMode" />
+                <ScalarProperty Name="DBVersion" ColumnName="DBVersion" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AppUserTokens">
+            <EntityTypeMapping TypeName="DynThingsModel.AppUserToken">
+              <MappingFragment StoreEntitySet="AppUserTokens">
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="ExpireDate" ColumnName="ExpireDate" />
+                <ScalarProperty Name="Token" ColumnName="Token" />
+                <ScalarProperty Name="AspNetUserID" ColumnName="AspNetUserID" />
+                <ScalarProperty Name="AppID" ColumnName="AppID" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>

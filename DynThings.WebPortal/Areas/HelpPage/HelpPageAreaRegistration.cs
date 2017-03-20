@@ -9,7 +9,7 @@ namespace DynThings.WebPortal.Areas.HelpPage
         {
             get
             {
-                return "WEB API Help";
+                return "HelpPage";
             }
         }
 
@@ -17,7 +17,7 @@ namespace DynThings.WebPortal.Areas.HelpPage
         {
             context.MapRoute(
                 "HelpPage_Default",
-                "APIHelp/{action}/{apiId}",
+                "Help/{action}/{apiId}",
                 new { controller = "Help", action = "Index", apiId = UrlParameter.Optional });
 
             HelpPageConfig.Register(GlobalConfiguration.Configuration);

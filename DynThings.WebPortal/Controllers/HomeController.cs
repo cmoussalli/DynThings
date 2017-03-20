@@ -13,6 +13,7 @@ using System.Web.Mvc;
 using DynThings.Data.Repositories;
 namespace DynThings.WebPortal.Controllers
 {
+    [Authorize]
     public class HomeController : Controller
     {
         UnitOfWork_Repositories uof_repos = new UnitOfWork_Repositories();
@@ -20,6 +21,7 @@ namespace DynThings.WebPortal.Controllers
         //TODO: Design a Main Page with review 4
         public ActionResult Index()
         {
+            
             return View();
         }
 

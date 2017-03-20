@@ -2,11 +2,35 @@
 
     <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel">Error</h4>
+        <h4 class="modal-title" id="myModalLabel">Message</h4>
     </div>
     <div class="modal-body">
-   
-        <span>@Model.Message</span><br /><br />
+        @if (Model.ResultType == DynThings.Core.ResultInfo.ResultType.NotAuthorized)
+        {
+            <div class="alert alert-danger alert-dismissable">
+                <h3>@Model.Title</h3>
+                <h5>@Model.Message</h5>
+            </div><br />
+           <span>You can switch to another user account who have the requierd permission.</span>
+           <br />
+            <button onclick="window.location.href = '../account/login';" class="btn btn-primary">Switch User</button>
+        }
+        @if ((Model.ResultType == DynThings.Core.ResultInfo.ResultType.Failed_DevelopmentMode) || (Model.ResultType == DynThings.Core.ResultInfo.ResultType.Failed_ProductionMode))
+        {
+            <div class="alert alert-danger alert-dismissable">
+                <h3>@Model.Title</h3>
+                <h5>@Model.Message</h5>
+            </div><br />
+        }
+        @if (Model.ResultType == DynThings.Core.ResultInfo.ResultType.Ok)
+        {
+            <div class="alert alert-success alert-dismissable">
+                <h3>@Model.Title</h3>
+                <h5>@Model.Message</h5>
+            </div><br />
+        }
+
+<br />
 
     </div>
     <div class="modal-footer">

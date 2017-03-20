@@ -139,6 +139,9 @@ namespace DynThings.Data.Repositories
                 endIO.TimeStamp = executionTime;
                 endIO.ExecTimeStamp = executionTime;
                 endIO.ScheduleTimeStamp = executionTime;
+                endIO.TimeStamp_UTC = executionTime.AddHours(-double.Parse(end.Device.UTC_Diff.ToString()));
+                endIO.ExecTimeStamp_UTC = executionTime.AddHours(-double.Parse(end.Device.UTC_Diff.ToString()));
+                endIO.ScheduleTimeStamp_UTC = executionTime.AddHours(-double.Parse(end.Device.UTC_Diff.ToString()));
                 endIO.ThingID = end.ThingID;
                 db.EndPointIOs.Add(endIO);
                 db.SaveChanges();
@@ -162,6 +165,9 @@ namespace DynThings.Data.Repositories
                 endIO.TimeStamp = executionTime;
                 endIO.ExecTimeStamp = executionTime;
                 endIO.ScheduleTimeStamp = scheduleTimeStamp;
+                endIO.TimeStamp_UTC = executionTime.AddHours(-double.Parse(end.Device.UTC_Diff.ToString()));
+                endIO.ExecTimeStamp_UTC = executionTime.AddHours(-double.Parse(end.Device.UTC_Diff.ToString()));
+                endIO.ScheduleTimeStamp_UTC = scheduleTimeStamp.AddHours(-double.Parse(end.Device.UTC_Diff.ToString()));
                 endIO.ThingID = end.ThingID;
                 db.EndPointIOs.Add(endIO);
                 db.SaveChanges();
@@ -185,6 +191,7 @@ namespace DynThings.Data.Repositories
             endIO.IOTypeID = long.Parse(ioType.GetHashCode().ToString());
             DateTime execTime = DateTime.UtcNow.AddHours(double.Parse(ep.Device.UTC_Diff.ToString()));
             endIO.TimeStamp = execTime;
+
             endIO.ThingID = ep.ThingID;
             db.EndPointIOs.Add(endIO);
             db.SaveChanges();

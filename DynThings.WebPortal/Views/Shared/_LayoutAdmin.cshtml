@@ -43,8 +43,8 @@
     <!--JAVASCRIPT-->
     <!--=================================================-->
     <!--Pace - Page Load Progress Par [OPTIONAL]-->
-    <link href="~/Content/plugins/pace/pace.min.css" rel="stylesheet">
-    <script src="~/Content/plugins/pace/pace.min.js"></script>
+    @*<link href="~/Content/plugins/pace/pace.min.css" rel="stylesheet">
+    <script src="~/Content/plugins/pace/pace.min.js"></script>*@
 
     <!--jQuery [ REQUIRED ]-->
     <script src="~/Content/js/jquery-2.2.4.min.js"></script>
@@ -653,7 +653,7 @@
                             <div class="nano-content">
                                 <!--Profile Widget-->
                                 <!--================================-->
-                                @*<div id="mainnav-profile" class="mainnav-profile">
+                                <div id="mainnav-profile" class="mainnav-profile">
                                     <div class="profile-wrap">
                                         <div class="pad-btm">
                                             <span class="label label-success pull-right">Online</span>
@@ -663,11 +663,11 @@
                                             <span class="pull-right dropdown-toggle">
                                                 <i class="dropdown-caret"></i>
                                             </span>
-                                            <p class="mnp-name">Caesar Moussalli</p>
+                                            <p class="mnp-name"></p>
                                             <span class="mnp-desc">cmoussalli@gmail.com</span>
                                         </a>
                                     </div>
-                                    <div id="profile-nav" class="collapse list-group bg-trans">
+                                    @*<div id="profile-nav" class="collapse list-group bg-trans">
                                         <a href="#" class="list-group-item">
                                             <i class="demo-pli-male icon-lg icon-fw"></i> View Profile
                                         </a>
@@ -680,8 +680,8 @@
                                         <a href="#" class="list-group-item">
                                             <i class="demo-pli-unlock icon-lg icon-fw"></i> Logout
                                         </a>
-                                    </div>
-                                </div>*@
+                                    </div>*@
+                                </div>
 
                                 <!--Shortcut buttons-->
                                 <!--================================-->
@@ -823,8 +823,22 @@
                                     </li>
 
                                     <li class="list-divider"></li>
-                                    <li class="list-header">Administration</li>
+                                    <li class="list-header">Categories</li>
+                                    <li>
+                                        <a href="~/EndpointTypes">
+                                            <i class="demo-psi-bar-chart"></i>
+                                            <span class="menu-title">Endpoint Types</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="~/ThingCategorys">
+                                            <i class="demo-psi-bar-chart"></i>
+                                            <span class="menu-title">Thing Categorys</span>
+                                        </a>
+                                    </li>
 
+                                    <li class="list-divider"></li>
+                                    <li class="list-header">Administration</li>
                                     <li>
                                         <a href="~/config">
                                             <i class="demo-psi-bar-chart"></i>
@@ -843,12 +857,9 @@
                                             <span class="menu-title">Media Files</span>
                                         </a>
                                     </li>
-                                    @*<li>
-                                        <a href="~/apps/">
-                                            <i class="demo-psi-bar-chart"></i>
-                                            <span class="menu-title">Apps</span>
-                                        </a>
-                                    </li>*@
+
+
+                                   
                                 </ul>
 
                                 <!--Widget-->

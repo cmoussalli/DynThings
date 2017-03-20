@@ -62,10 +62,6 @@ namespace DynThings.WebPortal.Controllers
         [HttpGet]
         public PartialViewResult GetListPV(string searchfor = null, int page = 1, int recordsperpage = 2)
         {
-            //PagedList.IPagedList devs = db.Devices
-            //    .Where(e => searchfor == null || e.Title.Contains(searchfor))
-            //    .OrderBy(e => e.Title).ToList()
-            //    .ToPagedList(page, Helpers.Configs.validateRecordsPerMaster(recordsperpage));
             PagedList.IPagedList devs = uof_repos.repoDevices.GetPagedList(searchfor,  page, Helpers.Configs.validateRecordsPerMaster(recordsperpage));
             return PartialView("_List", devs);
         }

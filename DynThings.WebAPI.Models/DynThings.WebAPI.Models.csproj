@@ -45,16 +45,24 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="APIApp.cs" />
+    <Compile Include="APIAppUserToken.cs" />
+    <Compile Include="APIDeviceCommand.cs" />
     <Compile Include="APIDeviceIO.cs" />
+    <Compile Include="APIDeviceStatus.cs" />
     <Compile Include="APIEndPointIO.cs" />
     <Compile Include="APIEndPoint.cs" />
     <Compile Include="APIDevice.cs" />
+    <Compile Include="APILocationView.cs" />
     <Compile Include="APIPlatformInfo.cs" />
     <Compile Include="ApiResponse.cs" />
     <Compile Include="CommandEnitity.cs" />
     <Compile Include="SubmissionDeviceIO.cs" />
     <Compile Include="SubmissionEndPointIO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TypesMapper\APIAppAdapter.cs" />
+    <Compile Include="TypesMapper\APITokenAdapter.cs" />
+    <Compile Include="TypesMapper\APILocationViewAdapter.cs" />
     <Compile Include="TypesMapper\APIDeviceCommandAdapter.cs" />
     <Compile Include="TypesMapper\APIDeviceIOAdapter.cs" />
     <Compile Include="TypesMapper\APIEndPointIOAdapter.cs" />

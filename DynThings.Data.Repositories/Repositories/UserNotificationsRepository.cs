@@ -30,6 +30,23 @@ namespace DynThings.Data.Repositories
         public DynThingsEntities db;
         #endregion
 
+        #region Edit
+        public ResultInfo.Result SetMailIsSent(long id)
+        {
+            try
+            {
+                UserNotification noti = db.UserNotifications.Find(id);
+                noti.IsEmailSent = true;
+                db.SaveChanges();
+                return ResultInfo.GenerateOKResult("Saved",noti.ID);
+            }
+            catch
+            {
+                return ResultInfo.GetResultByID(1);
+            }
+        }
+
+        #endregion
 
         #region Get PagedList
         public IPagedList GetPagedList(string search, string userID, int pageNumber, int recordsPerPage)
@@ -40,6 +57,8 @@ namespace DynThings.Data.Repositories
               .ToPagedList(pageNumber, recordsPerPage);
             return notis;
         }
+        #endregion
+
 
         public List<UserNotification> GetUnreadNotifications( string userID, long lastReceivedID)
         {
@@ -77,7 +96,13 @@ namespace DynThings.Data.Repositories
             return res;
         }
 
-        #endregion
+        public List<UserNotification> GetPendingEmails(int recordsCount)
+        {
+            List<UserNotification> result = db.UserNotifications.Where(n => n.IsEmailSent == false).Take(recordsCount).ToList();
+
+            return result;
+                
+        }
 
 
 

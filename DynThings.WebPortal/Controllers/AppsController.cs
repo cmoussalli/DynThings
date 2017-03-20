@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using DynThings.Core;
 using DynThings.Data.Models;
 using DynThings.Data.Repositories;
+using PagedList;
 
 namespace DynThings.WebPortal.Controllers
 {
@@ -51,7 +52,7 @@ namespace DynThings.WebPortal.Controllers
             return PartialView("_List", apps);
         }
         #endregion
-        
+
         #region DetailsPV : Main
         /// <summary>
         /// Return App main details
@@ -62,19 +63,6 @@ namespace DynThings.WebPortal.Controllers
         {
             App app = uof_repos.repoApps.Find(id);
             return PartialView("_Details_Main", app);
-        }
-        #endregion
-
-        #region APIPermissionsPV : Main
-        /// <summary>
-        /// Return App API Permissions List
-        /// </summary>
-        /// <param name="id">App ID</param>
-        /// <returns>Permissions list Partial View</returns>
-        public PartialViewResult APIPermissionsPV(int id)
-        {
-            App app = uof_repos.repoApps.Find(id);
-            return PartialView("_Details_APIPermissions", app);
         }
         #endregion
 
@@ -93,7 +81,7 @@ namespace DynThings.WebPortal.Controllers
             ResultInfo.Result res = ResultInfo.GetResultByID(1);
             if (ModelState.IsValid)
             {
-                res = uof_repos.repoApps.Add(app.Title,app.Description,currentUser.Id);
+                res = uof_repos.repoApps.Add(app.Title, app.Description, currentUser.Id);
                 return Json(res);
             }
             return Json(res);
@@ -105,7 +93,7 @@ namespace DynThings.WebPortal.Controllers
         public PartialViewResult EditPV(long id)
         {
             App app = uof_repos.repoApps.Find(id);
-            return PartialView("_EditMain",app);
+            return PartialView("_EditMain", app);
         }
 
         [HttpPost]
@@ -115,7 +103,7 @@ namespace DynThings.WebPortal.Controllers
             ResultInfo.Result res = ResultInfo.GetResultByID(1);
             if (ModelState.IsValid)
             {
-                res = uof_repos.repoApps.EditMain(app.ID,app.Title, app.Description, app.StatusID,app.Version);
+                res = uof_repos.repoApps.EditMain(app.ID, app.Title, app.Description, app.StatusID, app.Version);
                 return Json(res);
             }
             return Json(res);
@@ -123,12 +111,55 @@ namespace DynThings.WebPortal.Controllers
         #endregion
 
 
-
-
-
-
+        #region ApiEntitysListPV
+        [HttpGet]
+        public PartialViewResult AppApiEntitysListGridPV(string searchfor = null, long appID = 0, int page = 1, int recordsperpage = 0)
+        {
+            IPagedList views = uof_repos.repoApps.GetAppAPIEntitysPagedList(searchfor, appID, page, Helpers.Configs.validateRecordsPerMaster(recordsperpage));
+            return PartialView("_ApiEntitysList", views);
+        }
         #endregion
 
-       
+        #region Attach AppApiEntity
+        [HttpGet]
+        public PartialViewResult AppApiEntityAttachPV(long appID)
+        {
+            ViewBag.SystemEntityID = new SelectList(uof_repos.repoEntitys.GetList(), "ID", "Title", 1);
+            AppAPIEntity appAPIEntity = new AppAPIEntity();
+            appAPIEntity.AppID = appID;
+            return PartialView("_ApiEntityAttach", appAPIEntity);
+        }
+
+        [HttpPost]
+        public ActionResult AppApiEntityAttachPV([Bind(Include = "AppID,SystemEntityID")] AppAPIEntity appAPIEntity)
+        {
+            ResultInfo.Result res = ResultInfo.GetResultByID(1);
+            res = uof_repos.repoApps.AttachAppAPIEntity(appAPIEntity.AppID, appAPIEntity.SystemEntityID);
+            return Json(res);
+        }
+        #endregion
+        #region Deattach AppApiEntity
+        [HttpGet]
+        public PartialViewResult AppApiEntityDeattachPV(long appID, long systemEntityID)
+        {
+            AppAPIEntity appApiEntity = uof_repos.repoApps.FindAppApiEntity(appID, systemEntityID);
+            return PartialView("_ApiEntityDeAttach", appApiEntity);
+        }
+
+        [HttpPost]
+        public ActionResult AppApiEntityDeattachPV([Bind(Include = "AppID,SystemEntityID")] AppAPIEntity appAPIEntity)
+        {
+            ResultInfo.Result res = ResultInfo.GetResultByID(1);
+            if (ModelState.IsValid)
+            {
+                res = uof_repos.repoApps.DeAttachAppAPIEntity(appAPIEntity.AppID, appAPIEntity.SystemEntityID);
+                return Json(res);
+            }
+            return Json(res);
+        }
+        #endregion
+        #endregion
+
+
     }
 }

@@ -220,10 +220,10 @@
     </div>
 
     <div class="row">
-        <div class="col-lg-12">
+        <div class="col-lg-7">
             <ul class="nav nav-tabs">
                 <li class="active"><a data-toggle="tab" href="#tabAppmain">Main</a></li>
-                <li><a data-toggle="tab" href="#tabAppApi">API Permissions</a></li>
+                <li><a data-toggle="tab" href="#tabAppApiEntity">API Permissions</a></li>
                 <li><a data-toggle="tab" href="#tabAppDelete">Delete</a></li>
             </ul>
             <div class="panel panel-default">
@@ -233,11 +233,21 @@
                             <div id="divAppMain">
                             </div>
                         </div>
-                        <div id="tabAppApi" class="tab-pane fade">
+                        <div id="tabAppApiEntity" class="tab-pane fade">
                             <div class="right">
-                                <button type="button" class="btn btn-info pull-right" onclick="LoadPart_AppHistoryDiv('@Model.ID')">Refresh</button>
+                                <div class="input-group">
+                                    <input type="text" id="txtApiEntitySearch" class="form-control" placeholder="Search.." onkeydown="if (event.keyCode == 13) { LoadPart_AppApiEntitysByAppIDDiv('@Model.ID'); return false; }">
+                                    <div class="input-group-btn">
+                                        <button type="button" class="btn btn-info" onclick="LoadPart_AppApiEntitysByAppIDDiv('@Model.ID')">Refresh</button>
+                                        <button type="button" class="btn btn-info" onclick="LoadPart_DialogAppApiEntityAttach()" data-toggle="modal" data-target="#mdl">Add</button>
+                                    </div>
+                                </div>
+
+                                
+                                
                             </div>
-                            <div id="divAppHistory">
+                            <br />
+                            <div id="divAppApiEntitysList">
                             </div>
                         </div>
 
@@ -256,13 +266,13 @@
 
 
 
-@section scripts{
+@*@section scripts{*@
     <script src="~/Assets/Scripts/DynScripts/Apps.js"></script>
-
     <script>
         $(document).ready(function () {
-            LoadPart_AppDetailsDiv('@Model.ID');
             selectedAppID = @Model.ID;
+            LoadPart_AppDetailsDiv('@Model.ID');
+            LoadPart_AppApiEntitysByAppIDDiv('@Model.ID');
         });
     </script>
-}
+@*}*@

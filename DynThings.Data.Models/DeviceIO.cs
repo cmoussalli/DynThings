@@ -32,6 +32,12 @@ public partial class DeviceIO
 
     public Nullable<System.DateTime> ScheduleTimeStamp { get; set; }
 
+    public Nullable<System.DateTime> TimeStamp_UTC { get; set; }
+
+    public Nullable<System.DateTime> ExecTimeStamp_UTC { get; set; }
+
+    public Nullable<System.DateTime> ScheduleTimeStamp_UTC { get; set; }
+
 
 
     public virtual Device Device { get; set; }

@@ -24,6 +24,8 @@ public partial class App
 
         this.AppAPIEntitys = new HashSet<AppAPIEntity>();
 
+        this.AppUserTokens = new HashSet<AppUserToken>();
+
     }
 
 
@@ -58,6 +60,10 @@ public partial class App
     public virtual ICollection<AppAPIEntity> AppAPIEntitys { get; set; }
 
     public virtual AppStatuss AppStatuss { get; set; }
+
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+
+    public virtual ICollection<AppUserToken> AppUserTokens { get; set; }
 
 }
 

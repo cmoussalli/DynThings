@@ -1,0 +1,36 @@
+﻿@using Microsoft.AspNet.Identity;
+@model IPagedList<DynThings.Data.Models.AppAPIEntity>
+
+<table class="table striped hovered border bordered">
+    <thead>
+        <tr>
+            <th>Entity</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SystemEntity.Title)
+                </td>
+
+                <td>
+                    <button class="btn btn-danger btn-sm" onclick="LoadPart_DialogAppApiEntityDeAttach(@item.AppID,@item.SystemEntityID)" data-toggle="modal" data-target="#mdl">Remove</button>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<div id="AppAPIEntitysListPager">
+    <input id="AppAPIEntitysCurrentPage" value="@Model.PageNumber.ToString()" hidden />
+    @Html.PagedListPager(Model, page => Url.Action("AppApiEntitysListGridPV", "Apps", new { page }) )
+</div>
+
+<script>
+    function EventSelectAPIEntity() {
+        AttachAPIEntityToApp(selectedApp, selectedEntity);
+    }
+</script>

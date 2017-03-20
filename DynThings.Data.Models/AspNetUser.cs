@@ -34,6 +34,10 @@ public partial class AspNetUser
 
         this.AspNetRoles = new HashSet<AspNetRole>();
 
+        this.UserNotifications = new HashSet<UserNotification>();
+
+        this.AppUserTokens = new HashSet<AppUserToken>();
+
     }
 
 
@@ -88,6 +92,14 @@ public partial class AspNetUser
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
 
     public virtual ICollection<AspNetRole> AspNetRoles { get; set; }
+
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+
+    public virtual ICollection<UserNotification> UserNotifications { get; set; }
+
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+
+    public virtual ICollection<AppUserToken> AppUserTokens { get; set; }
 
 }
 

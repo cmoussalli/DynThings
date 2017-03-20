@@ -113,7 +113,6 @@ namespace DynThings.Data.Repositories
             }
         }
         #endregion
-
         #region Edit : LocationType
         /// <summary>
         /// Edit a specific LocationView
@@ -143,7 +142,6 @@ namespace DynThings.Data.Repositories
             }
         }
         #endregion
-
         #region Edit : IsActive
         /// <summary>
         /// Enable or Disable a locationView
@@ -185,6 +183,8 @@ namespace DynThings.Data.Repositories
 
         #endregion
 
+
+
         #region AttachLocation
         public ResultInfo.Result AttachLocation(long locationViewID, long locationID, string userID)
         {
@@ -201,7 +201,6 @@ namespace DynThings.Data.Repositories
             return ResultInfo.GenerateOKResult();
         }
         #endregion
-
         #region DeAttachLocation
         public ResultInfo.Result DeattachLocation(long locationViewID, long locationID, string userID)
         {

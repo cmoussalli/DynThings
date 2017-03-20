@@ -504,12 +504,5 @@
             <param name="id">App ID</param>
             <returns>App Object</returns>
         </member>
-        <member name="M:DynThings.WebPortal.Controllers.AppsController.APIPermissionsPV(System.Int32)">
-            <summary>
-            Return App API Permissions List
-            </summary>
-            <param name="id">App ID</param>
-            <returns>Permissions list Partial View</returns>
-        </member>
     </members>
 </doc>

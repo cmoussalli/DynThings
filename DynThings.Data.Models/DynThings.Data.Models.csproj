@@ -78,6 +78,9 @@
     <Compile Include="AppStatuss.cs">
       <DependentUpon>DynThingsModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="AppUserToken.cs">
+      <DependentUpon>DynThingsModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="AspNetRole.cs">
       <DependentUpon>DynThingsModel.tt</DependentUpon>
     </Compile>
@@ -166,6 +169,9 @@
       <DependentUpon>DynThingsModel.tt</DependentUpon>
     </Compile>
     <Compile Include="ResultMessage.cs">
+      <DependentUpon>DynThingsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Rpt_EndPointAndDevices_IOsCount_Minutes_Result.cs">
       <DependentUpon>DynThingsModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Rpt_EndPoint_IOs_Days_Result.cs">

@@ -27,6 +27,8 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using DynThings.WebPortal.Helpers;
+using System.Net.Mail;
+
 
 namespace DynThings.WebAPI.Controllers
 {
@@ -100,6 +102,7 @@ namespace DynThings.WebAPI.Controllers
                             ResultInfo.Result result = ResultInfo.GenerateOKResult();
                             oApiResponse = ApiResponseAdapter.fromResult(result);
                             SignalRServices.ThingEnd_Input(oEndpoint.ThingID, oEndpoint.EndPointType.ID);
+                            //TODO:SendMail
                             return oApiResponse;
                         }
                         else
@@ -418,6 +421,6 @@ namespace DynThings.WebAPI.Controllers
         #endregion
         #endregion
 
-
+     
     }
 }

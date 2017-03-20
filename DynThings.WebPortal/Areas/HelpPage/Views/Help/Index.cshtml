@@ -6,12 +6,11 @@
 @model Collection<ApiDescription>
 
 @{
-    ViewBag.Title = "DynTHings WebAPI Help Page";
+    ViewBag.Title = "DnThings WebAPI help";
 
     // Group APIs by controller
     ILookup<HttpControllerDescriptor, ApiDescription> apiGroups = Model.ToLookup(api => api.ActionDescriptor.ControllerDescriptor);
 }
-
 <link type="text/css" href="~/Areas/HelpPage/HelpPage.css" rel="stylesheet" />
 <header class="help-page">
     <div class="content-wrapper">

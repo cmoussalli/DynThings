@@ -26,6 +26,8 @@ namespace DynThings.Data.Reports
         public ThingsReport rptThings
         { get { return new ThingsReport(dynDB); } }
 
+        public ConnectivityReport rptConnectivity
+        { get { return new ConnectivityReport(dynDB); } }
 
         #endregion
 

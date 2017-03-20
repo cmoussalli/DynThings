@@ -44,6 +44,12 @@ public partial class DynSetting
 
     public System.DateTime DeploymentTimeStamp { get; set; }
 
+    public string NotifcationMail { get; set; }
+
+    public string SMTPAddress { get; set; }
+
+    public Nullable<int> SMTPPort { get; set; }
+
 }
 
 }
