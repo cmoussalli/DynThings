@@ -607,6 +607,7 @@
     <Compile Include="Controllers\AlertsController.cs" />
     <Compile Include="Controllers\APIEndPointIOsController.cs" />
     <Compile Include="Controllers\API\3rdParty\AppsController.cs" />
+    <Compile Include="Controllers\API\3rdParty\LocationsController.cs" />
     <Compile Include="Controllers\API\3rdParty\LocationViewsController.cs" />
     <Compile Include="Controllers\API\3rdParty\LocationViewsTController.cs" />
     <Compile Include="Controllers\API\AppAccountController.cs" />
