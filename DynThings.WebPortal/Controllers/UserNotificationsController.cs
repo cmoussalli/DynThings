@@ -22,7 +22,7 @@ namespace DynThings.WebPortal.Controllers
         public PartialViewResult GetUnread(long lastRecievedID)
         {
             List<UserNotification> notis = uof_repos.repoUserNotification.GetUnreadNotifications(currentUser.Id, lastRecievedID);
-            return PartialView("_List",notis);
+            return PartialView("_List", notis);
         }
 
         #region Set Notification as Unread

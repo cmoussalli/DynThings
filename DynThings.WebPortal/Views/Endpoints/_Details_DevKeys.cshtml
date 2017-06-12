@@ -1,10 +1,30 @@
 ﻿@model DynThings.Data.Models.Endpoint
 
-<div class="right">
-    <button type="button" class="btn btn-info pull-right" onclick="LoadPart_EndPointDevKeysDiv(@Model.ID)">Refresh</button>
-    <button type="button" class="btn btn-info pull-right" onclick="LoadPart_DialogEndPointDevKeysEdit(@Model.ID)" data-toggle="modal" data-target="#mdl">Edit</button>
+
+<div class="panel">
+    <div class="panel-heading">
+        <div class="panel-control">
+            <button class="btn btn-default" onclick="LoadPart_EndpointDeveloperDiv();">
+                <i class="demo-psi-repeat-2 icon-fw"></i> Refresh
+            </button>
+        </div>
+        <h3 class="panel-title">Developer Area</h3>
+    </div>
+
+    <div class="panel-body">
+        <div class="pad-btm form-inline">
+            <div class="row">
+                <div class="col-sm-6 table-toolbar-left">
+                <button type="button" class="btn btn-warning" onclick="LoadPart_DialogEndPointDevKeysEdit(@Model.ID)" data-toggle="modal" data-target="#mdl">Edit</button>
+                </div>
+            </div>
+        </div>
+
+
+        <strong>GUID</strong><br>
+        @Model.GUID<br><br>
+        <strong>Key Pass</strong><br>
+        @Model.KeyPass<br><br>
+
+    </div>
 </div>
-<strong>GUID</strong><br>
-@Model.GUID<br><br>
-<strong>Key Pass</strong><br>
-@Model.KeyPass<br><br>

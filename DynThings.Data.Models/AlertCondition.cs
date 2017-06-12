@@ -40,11 +40,11 @@ public partial class AlertCondition
 
     public virtual AlertConditionType AlertConditionType { get; set; }
 
+    public virtual EndPointType EndPointType { get; set; }
+
     public virtual IOType IOType { get; set; }
 
     public virtual Thing Thing { get; set; }
-
-    public virtual EndPointType EndPointType { get; set; }
 
 }
 

@@ -72,6 +72,10 @@
       <Project>{3eb80ea4-99d5-4db4-bd84-2370dce356d0}</Project>
       <Name>DynThings.Data.Repositories</Name>
     </ProjectReference>
+    <ProjectReference Include="..\DynThings.Data.WidgetModels\DynThings.Data.WidgetModels.csproj">
+      <Project>{b180614c-fa0c-4676-80cc-35cfb32e016b}</Project>
+      <Name>DynThings.Data.WidgetModels</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

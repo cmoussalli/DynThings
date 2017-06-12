@@ -91,6 +91,19 @@ function LoadPart_DialogDynUserEdit(id) {
     });
 }
 
+//Get Delete
+function LoadPart_DialogDynUserDelete(id) {
+    var loadingpart = LoadDivLoading();
+    $("#modal").html(loadingpart);
+    $.ajax({
+        url: getRootURL() + '/DynUsers/deletepv?id=' + id,
+        type: "GET",
+    })
+    .done(function (partialViewResult) {
+        $("#modal").html(partialViewResult);
+    });
+}
+
 
 function AttachRoleToDynUser(UserID, RoleID) {
     $.ajax({

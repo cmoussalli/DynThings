@@ -38,6 +38,10 @@ public partial class LinkDevicesLocation
 
     public virtual AspNetUser AspNetUser1 { get; set; }
 
+    public virtual AspNetUser AspNetUser2 { get; set; }
+
+    public virtual AspNetUser AspNetUser3 { get; set; }
+
     public virtual Device Device { get; set; }
 
     public virtual Location Location { get; set; }

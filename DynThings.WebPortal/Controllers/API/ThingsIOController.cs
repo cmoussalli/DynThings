@@ -12,7 +12,7 @@ using DynThings.Data.Models;
 using DynThings.Data.Repositories;
 using DynThings.WebAPI;
 using DynThings.WebAPI.Models;
-using DynThings.WebAPI.Models.TypesMapper;
+using DynThings.WebAPI.TypesMapper;
 using DynThings.WebPortal;
 using Microsoft.AspNet.SignalR;
 using Microsoft.AspNet.SignalR.Hubs;
@@ -59,12 +59,12 @@ namespace DynThings.WebAPI.Controllers
         private ApiResponse CoreSubmitEndPointInput(Models.SubmissionEndPointIO oEndPointInput)
         {
             ApiResponse oApiResponse = new ApiResponse();
-            //Validate KeyPass
             try
             {
+                //Validate KeyPass
                 if (string.IsNullOrEmpty(oEndPointInput.KeyPass))
                 {
-                    ResultInfo.Result result = ResultInfo.GetResultByID(1);
+                    ResultInfo.Result result = ResultInfo.GenerateErrorResult("Keypass is missing");
                     oApiResponse = ApiResponseAdapter.fromResult(result);
                     return oApiResponse;
                 }
@@ -88,34 +88,20 @@ namespace DynThings.WebAPI.Controllers
                         }
                         else
                         {//DateTime Parse Failed
-                            ResultInfo.Result result = ResultInfo.GetResultByID(1);
+                            ResultInfo.Result result = ResultInfo.GenerateErrorResult("DateTime is not in correct format");
                             oApiResponse = ApiResponseAdapter.fromResult(result);
                             return oApiResponse;
                         }
 
                         //Submit Data to Database
-                        ResultInfo.Result repoResult = uof_repos.repoEndpointIOs.Add(oEndpoint.ID, oEndPointInput.Value.ToString(), EndpointIOsRepository.EndPointIOType.Input, execTime);
+                        ResultInfo.Result repoResult = uof_repos.repoEndpointIOs.SubmitInput(endPointKeyPass, oEndPointInput.Value.ToString(), execTime);
 
-                        //Validate Result
-                        if (repoResult.ResultType == ResultInfo.ResultType.Ok)
-                        {//Submited
-                            ResultInfo.Result result = ResultInfo.GenerateOKResult();
-                            oApiResponse = ApiResponseAdapter.fromResult(result);
-                            SignalRServices.ThingEnd_Input(oEndpoint.ThingID, oEndpoint.EndPointType.ID);
-                            //TODO:SendMail
-                            return oApiResponse;
-                        }
-                        else
-                        {//Submition Failed
-                            ResultInfo.Result result = ResultInfo.GetResultByID(1);
-                            oApiResponse = ApiResponseAdapter.fromResult(result);
-                            return oApiResponse;
-                        }
+                        oApiResponse = ApiResponseAdapter.fromResult(repoResult);
                     }
                 }
                 else
                 {// KeyPass Parse Failed
-                    ResultInfo.Result result = ResultInfo.GetResultByID(1);
+                    ResultInfo.Result result = ResultInfo.GenerateErrorResult("Keypass is not valid");
                     oApiResponse = ApiResponseAdapter.fromResult(result);
                     return oApiResponse;
                 }
@@ -169,22 +155,9 @@ namespace DynThings.WebAPI.Controllers
                         }
 
                         //Submit Data to Database
-                        ResultInfo.Result repoResult = uof_repos.repoEndpointIOs.Add(oEndpoint.ID, oEndPointLog.Value.ToString(), EndpointIOsRepository.EndPointIOType.Log, execTime);
+                        ResultInfo.Result repoResult = uof_repos.repoEndpointIOs.SubmitLog(endPointKeyPass, oEndPointLog.Value.ToString(), execTime);
+                        oApiResponse = ApiResponseAdapter.fromResult(repoResult);
 
-                        //Validate Result
-                        if (repoResult.ResultType == ResultInfo.ResultType.Ok)
-                        {//Submited
-                            ResultInfo.Result result = ResultInfo.GenerateOKResult();
-                            oApiResponse = ApiResponseAdapter.fromResult(result);
-                            SignalRServices.ThingEnd_Log();
-                            return oApiResponse;
-                        }
-                        else
-                        {//Submition Failed
-                            ResultInfo.Result result = ResultInfo.GetResultByID(1);
-                            oApiResponse = ApiResponseAdapter.fromResult(result);
-                            return oApiResponse;
-                        }
                     }
                 }
                 else
@@ -199,6 +172,22 @@ namespace DynThings.WebAPI.Controllers
             {
                 ResultInfo.Result result = ResultInfo.GetResultByID(1);
                 oApiResponse = ApiResponseAdapter.fromResult(result);
+            }
+            return oApiResponse;
+        }
+        #endregion
+
+        #region Command Executed
+        private ApiResponse CoreSetEndPointPendingCommandAsExecuted(SubmissionEndPointCommandExecuted submission)
+        {
+            ApiResponse oApiResponse = ApiResponseAdapter.fromResult(ResultInfo.GenerateErrorResult());
+            try
+            {
+                return ApiResponseAdapter.fromResult(uof_repos.repoEndpointIOs.SetCommandAsExecuted(submission.EndPointCommandIOID, submission.ExectionTimeStamp));
+            }
+            catch
+            {
+
             }
             return oApiResponse;
         }
@@ -347,22 +336,22 @@ namespace DynThings.WebAPI.Controllers
         }
         #endregion
 
-        #region :: Get device pending :: Commands
-        [HttpGet]
-        public List<APIDeviceIO> GetDevicePendingCommands(Guid deviceKeyPass)
-        {
-            List<APIDeviceIO> apiCmds = new List<APIDeviceIO>();
-            List<DeviceIO> cmds = uof_repos.repoDeviceIOs.GetPendingCommandsList(deviceKeyPass);
-            foreach (DeviceIO cmd in cmds)
-            {
-                APIDeviceIO apiCmd = new APIDeviceIO();
-                apiCmd = APIDeviceIOAdapter.FromDeviceIO(cmd);
-                apiCmds.Add(apiCmd);
-            }
+        //#region :: Get device pending :: Commands
+        //[HttpGet]
+        //public List<APIDeviceIO> GetDevicePendingCommands(Guid deviceKeyPass)
+        //{
+        //    List<APIDeviceIO> apiCmds = new List<APIDeviceIO>();
+        //    List<DeviceIO> cmds = uof_repos.repoDeviceIOs.GetPendingCommandsList(deviceKeyPass);
+        //    foreach (DeviceIO cmd in cmds)
+        //    {
+        //        APIDeviceIO apiCmd = new APIDeviceIO();
+        //        apiCmd = APIDeviceIOAdapter.FromDeviceIO(cmd);
+        //        apiCmds.Add(apiCmd);
+        //    }
 
-            return apiCmds;
-        }
-        #endregion
+        //    return apiCmds;
+        //}
+        //#endregion
 
 
         #endregion
@@ -403,24 +392,41 @@ namespace DynThings.WebAPI.Controllers
         }
         #endregion
 
-        #region :: Get endpoint pending Commands ::
-        [HttpGet]
-        public List<APIEndPointIO> GetEndPointPendingCommands(Guid endPointKeyPass)
-        {
-            List<APIEndPointIO> apiCmds = new List<APIEndPointIO>();
-            List<EndPointIO> cmds = uof_repos.repoEndpointIOs.GetPendingCommandsList(endPointKeyPass);
-            foreach (EndPointIO cmd in cmds)
-            {
-                APIEndPointIO apiCmd = new APIEndPointIO();
-                apiCmd = APIEndPointIOAdapter.FromEndPointIO(cmd);
-                apiCmds.Add(apiCmd);
-            }
+        //#region :: Get endpoint pending Commands ::
+        //[HttpGet]
+        //public List<APIEndPointIO> GetEndPointPendingCommands(Guid endPointKeyPass)
+        //{
+        //    List<APIEndPointIO> apiCmds = new List<APIEndPointIO>();
+        //    List<EndPointIO> cmds = uof_repos.repoEndpointIOs.GetPendingCommandsList(endPointKeyPass);
+        //    foreach (EndPointIO cmd in cmds)
+        //    {
+        //        APIEndPointIO apiCmd = new APIEndPointIO();
+        //        apiCmd = APIEndPointIOAdapter.FromEndPointIO(cmd);
+        //        apiCmds.Add(apiCmd);
+        //    }
 
-            return apiCmds;
+        //    return apiCmds;
+        //}
+        //#endregion
+
+        #region :: Set endpoint pending Command as Executed ::
+        [HttpPost]
+        public ApiResponse SetEndPointCommandAsExecuted(SubmissionEndPointCommandExecuted submission)
+        {
+            return CoreSetEndPointPendingCommandAsExecuted(submission);
+        }
+
+        [HttpGet]
+        public ApiResponse SetEndPointCommandAsExecuted(long commandIOID, DateTime? execTimeStamp)
+        {
+            SubmissionEndPointCommandExecuted submission = new SubmissionEndPointCommandExecuted();
+            submission.EndPointCommandIOID = commandIOID;
+            submission.ExectionTimeStamp = execTimeStamp;
+            return CoreSetEndPointPendingCommandAsExecuted(submission);
         }
         #endregion
         #endregion
 
-     
+
     }
 }

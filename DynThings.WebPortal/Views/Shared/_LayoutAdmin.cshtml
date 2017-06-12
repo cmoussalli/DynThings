@@ -656,7 +656,7 @@
                                 <div id="mainnav-profile" class="mainnav-profile">
                                     <div class="profile-wrap">
                                         <div class="pad-btm">
-                                            <span class="label label-success pull-right">Online</span>
+                                            @*<span class="label label-success pull-right">Online</span>*@
                                             <img class="img-circle img-sm img-border" src="~/Content/img/profile-photos/1.png" alt="Profile Picture">
                                         </div>
                                         <a href="#profile-nav" class="box-block" data-toggle="collapse" aria-expanded="false">
@@ -957,6 +957,7 @@
         @Scripts.Render("~/bundles/bootstrapnotify")
         @Scripts.Render("~/bundles/bootstrapwizard")*@
     @Scripts.Render("~/bundles/highcharts")
+    @Scripts.Render("~/bundles/bootstrapnotify")
     <link href="~/Content/css/docs.min.css" rel="stylesheet" />
 
     <script src="~/Assets/Scripts/MidLayerScripts/Notify.js"></script>
@@ -1006,16 +1007,7 @@
             NotifyWithTitle(Ntyp, Ntitle, response.Message);
         };
 
-        function AndroidMode() {
-            ActivateMobileMode();
-
-
-        };
-
-        function ActivateMobileMode() {
-            mobileMode = 'true';
-            $('#divMainNav').remove();
-        };
+       
     </script>
 
 

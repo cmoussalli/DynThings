@@ -17,7 +17,6 @@ using DynThings.Data.Models;
 using DynThings.Data.Repositories;
 using PagedList;
 using DynThings.Core;
-using DynThings.Data.Models.ViewModels;
 using Microsoft.AspNet.SignalR;
 using Microsoft.AspNet.SignalR.Hubs;
 using DynThings.WebPortal;
@@ -266,14 +265,14 @@ namespace DynThings.WebPortal.Controllers
         [HttpGet]
         public PartialViewResult GetLocationThingEndsListPV(string searchfor = "", long? locationID = null, long? thingID = null, long? thingTypeID = null, long? endpointTypeID = null, long? endpointID = null, int page = 1, int recordsperpage = 0)
         {
-            IPagedList things = uof_repos.repoThings.GetThingEndsList(searchfor, locationID, thingID, null, null, null, page, Helpers.Configs.validateRecordsPerMaster(recordsperpage));
+            IPagedList things = uof_repos.repoThingEnds.GetThingEndsList(searchfor, locationID, thingID, null, null, null, page, Helpers.Configs.validateRecordsPerMaster(recordsperpage));
             return PartialView("_ThingEnds_List", things);
         }
 
         [HttpGet]
         public PartialViewResult GetLocationThingEndPV( long thingID,  long endpointTypeID)
         {
-            ThingEnd thingend = uof_repos.repoThings.GetThingEnd(thingID,endpointTypeID);
+            ThingEnd thingend = uof_repos.repoThingEnds.GetThingEnd(thingID,endpointTypeID);
             return PartialView("_ThingEnd", thingend);
         }
 
@@ -303,7 +302,7 @@ namespace DynThings.WebPortal.Controllers
         [HttpGet]
         public PartialViewResult GetThingEndDetailsPV(long thingID, long thingEndTypeID)
         {
-            ThingEnd thingEnd = uof_repos.repoThings.GetThingEnd(thingID, thingEndTypeID);
+            ThingEnd thingEnd = uof_repos.repoThingEnds.GetThingEnd(thingID, thingEndTypeID);
             return PartialView("_ThingEnd_Details", thingEnd);
         }
 

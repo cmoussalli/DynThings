@@ -30,11 +30,10 @@
         {
             this.serviceProcessInstaller1 = new System.ServiceProcess.ServiceProcessInstaller();
             this.serviceInstaller1 = new System.ServiceProcess.ServiceInstaller();
-            this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
             // 
             // serviceProcessInstaller1
             // 
-            this.serviceProcessInstaller1.Account = System.ServiceProcess.ServiceAccount.LocalService;
+            this.serviceProcessInstaller1.Account = System.ServiceProcess.ServiceAccount.LocalSystem;
             this.serviceProcessInstaller1.Password = null;
             this.serviceProcessInstaller1.Username = null;
             // 
@@ -42,6 +41,7 @@
             // 
             this.serviceInstaller1.DisplayName = "DynThings Background Service";
             this.serviceInstaller1.ServiceName = "DynThings Background Service";
+            this.serviceInstaller1.StartType = System.ServiceProcess.ServiceStartMode.Automatic;
             // 
             // ProjectInstaller
             // 
@@ -55,6 +55,5 @@
 
         private System.ServiceProcess.ServiceProcessInstaller serviceProcessInstaller1;
         private System.ServiceProcess.ServiceInstaller serviceInstaller1;
-        private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog1;
     }
 }

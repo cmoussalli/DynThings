@@ -3,7 +3,7 @@ using DynThings.Data.Models;
 using DynThings.Data.Repositories;
 using DynThings.WebAPI;
 using DynThings.WebAPI.Models;
-using DynThings.WebAPI.Models.TypesMapper;
+using DynThings.WebAPI.TypesMapper;
 using DynThings.WebPortal;
 using Microsoft.AspNet.SignalR;
 using Microsoft.AspNet.SignalR.Hubs;

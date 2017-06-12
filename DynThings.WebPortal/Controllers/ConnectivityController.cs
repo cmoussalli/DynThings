@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-
+using static DynThings.Data.WidgetModels.InfoBoxs;
 
 namespace DynThings.WebPortal.Controllers
 {
@@ -22,11 +22,26 @@ namespace DynThings.WebPortal.Controllers
         }
 
         #region Reports
+        /// <summary>
+        /// Return HighChart object, represent the connections per minutes in the last hour
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         public ActionResult Rpt_LastHourConnectionsPerMinutes()
         {
-            Chart chrt = uof_reports.rptConnectivity.LastHourConnectionsPerMinutes();
-            return PartialView("_HighChart", chrt);
+            Chart chart = uof_reports.rptConnectivity.LastHourConnectionsPerMinutes();
+            return PartialView("_HighChart", chart);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        public ActionResult Widget_LastHourConnectionsCount()
+        {
+            InfoBox infobox = uof_reports.rptConnectivity.LastHourConnectionsStatistics();
+            return PartialView("Widgets/_InfoBox", infobox);
         }
 
         #endregion

@@ -1,0 +1,22 @@
+﻿@using DynThings.Data.WidgetModels;
+@model DynThings.Data.WidgetModels.InfoBoxs.InfoBox
+
+
+<div class="panel panel-@Model.Color panel-colorful">
+    <div class="pad-all">
+        <p class="text-lg text-semibold"><i class="demo-pli-data-storage icon-fw"></i> @Model.Title</p>
+        @foreach(InfoBoxs.InfoBoxEntry entry in Model.Entries )
+        {
+        <p class="mar-no">
+            <span class="pull-right text-bold">@entry.Value</span>
+            @entry.Title
+        </p>
+
+        }
+      
+    </div>
+    <div class="pad-all text-center">
+        <!--Placeholder-->
+        <div id="demo-sparkline-area"></div>
+    </div>
+</div>

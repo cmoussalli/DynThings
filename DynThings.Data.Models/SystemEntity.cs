@@ -24,6 +24,8 @@ public partial class SystemEntity
 
         this.AppAPIEntitys = new HashSet<AppAPIEntity>();
 
+        this.AppAPIEntitys1 = new HashSet<AppAPIEntity>();
+
     }
 
 
@@ -36,6 +38,10 @@ public partial class SystemEntity
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
 
     public virtual ICollection<AppAPIEntity> AppAPIEntitys { get; set; }
+
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+
+    public virtual ICollection<AppAPIEntity> AppAPIEntitys1 { get; set; }
 
 }
 

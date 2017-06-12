@@ -30,6 +30,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AutoMapper, Version=6.0.2.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\packages\AutoMapper.6.0.2\lib\net45\AutoMapper.dll</HintPath>
+    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
       <Private>True</Private>
@@ -66,8 +69,8 @@
       <HintPath>..\packages\Microsoft.Owin.Security.OAuth.2.1.0\lib\net45\Microsoft.Owin.Security.OAuth.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.4.5.11\lib\net40\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.10.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Owin, Version=1.0.0.0, Culture=neutral, PublicKeyToken=f0ebd12fd5e55cc5, processorArchitecture=MSIL">
@@ -95,9 +98,33 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Repositories\APIAppRepository.cs" />
+    <Compile Include="Repositories\APIDeviceCommandsRepository.cs" />
+    <Compile Include="Repositories\APIEndPointsRepository.cs" />
+    <Compile Include="Repositories\APIDevicesRepository.cs" />
+    <Compile Include="Repositories\APIEndPointCommandsRepository.cs" />
+    <Compile Include="Repositories\APILocationsRepository.cs" />
+    <Compile Include="Repositories\APIThingEndsRepository.cs" />
+    <Compile Include="Repositories\APIThingsRepository.cs" />
+    <Compile Include="Repositories\APIUtilizationsRepository.cs" />
     <Compile Include="Repositories\APIUserAppTokensRepository.cs" />
     <Compile Include="Repositories\APILocationViewsRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TypesMapper\APIAppAdapter.cs" />
+    <Compile Include="TypesMapper\APIDeviceAdapter.cs" />
+    <Compile Include="TypesMapper\APIDeviceCommandAdapter.cs" />
+    <Compile Include="TypesMapper\APIEndPointAdapter.cs" />
+    <Compile Include="TypesMapper\APIEndPointCommandAdapter.cs" />
+    <Compile Include="TypesMapper\APIEndPointTypeAdapter.cs" />
+    <Compile Include="TypesMapper\APIEndPointTypeCategoryAdapter.cs" />
+    <Compile Include="TypesMapper\APILocationAdapter.cs" />
+    <Compile Include="TypesMapper\APILocationViewAdapter.cs" />
+    <Compile Include="TypesMapper\APIDeviceStatusAdapter.cs" />
+    <Compile Include="TypesMapper\APILocationViewTypeAdapter.cs" />
+    <Compile Include="TypesMapper\ApiResponseAdapter.cs" />
+    <Compile Include="TypesMapper\APIThingAdapter.cs" />
+    <Compile Include="TypesMapper\APIThingCategoryAdapter.cs" />
+    <Compile Include="TypesMapper\APIThingEndAdapter.cs" />
+    <Compile Include="TypesMapper\APITokenAdapter.cs" />
     <Compile Include="UnitOfWork_WebAPI.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -121,6 +148,7 @@
   <ItemGroup>
     <Content Include="Content\PagedList.css" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

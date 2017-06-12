@@ -267,7 +267,10 @@ namespace DynThings.Data.Repositories
         public IPagedList GetLocationThingsPagedList(string search, long LocationID, int pageNumber, int recordsPerPage)
         {
             IPagedList locs = db.LinkThingsLocations
-              .Where(e => search == null || e.Thing.Title.Contains(search))
+              .Where(e => 
+              (search == null || e.Thing.Title.Contains(search))
+              && (LocationID == null || LocationID == 0 || LocationID == e.LocationID)
+              )
               .OrderByDescending(e => e.Thing.Title).ToList()
               .ToPagedList(pageNumber, recordsPerPage);
             return locs;

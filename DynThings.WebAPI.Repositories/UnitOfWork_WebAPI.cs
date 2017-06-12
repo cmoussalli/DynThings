@@ -35,7 +35,29 @@ namespace DynThings.WebAPI.Repositories
         public APILocationViewsRepository repoAPILocationViews
         { get { return new APILocationViewsRepository(dynDB); } }
 
-       
+        public APILocationsRepository repoAPILocations
+        { get { return new APILocationsRepository(dynDB); } }
+
+        public APIUtilizationsRepository repoAPIUtilizations
+        { get { return new APIUtilizationsRepository(dynDB); } }
+
+        public APIDevicesRepository repoAPIDevices
+        { get { return new APIDevicesRepository(dynDB); } }
+
+        public APIDeviceCommandsRepository repoAPIDeviceCommands
+        { get { return new APIDeviceCommandsRepository(dynDB); } }
+
+        public APIThingEndsRepository repoAPIThingEnds
+        { get { return new APIThingEndsRepository(dynDB); } }
+
+        public APIEndPointsRepository repoAPIEndPoints
+        { get { return new APIEndPointsRepository(dynDB); } }
+
+        public APIEndPointCommandsRepository repoAPIEndPointCommands
+        { get { return new APIEndPointCommandsRepository(dynDB); } }
+
+        public APIThingsRepository repoAPIThings
+        { get { return new APIThingsRepository(dynDB); } }
 
 
         #endregion

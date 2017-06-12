@@ -1,4 +1,4 @@
-﻿@model DynThings.Data.Models.ViewModels.ThingEnd
+﻿@model DynThings.Data.Models.ThingEnd
 
 <div class="panel panel-info">
     <!--Panel heading-->
@@ -13,7 +13,7 @@
             </ul>
 
         </div>
-        <h3 class="panel-title">@Model.Thing.Title (@Model.EndPoint.TypeTitle)</h3>
+        <h3 class="panel-title">@Model.Thing.Title (@Model.EndPointType.Title)</h3>
     </div>
 
     <!--Panel body-->
@@ -50,23 +50,22 @@
 
 
     function Load_ThingEnd_InputsMinutesDiv() {
-        LoadChart_ThingEnd_InputsMinutesDiv('@Model.Thing.ID', '@Model.EndPoint.TypeID');
+        LoadChart_ThingEnd_InputsMinutesDiv('@Model.Thing.ID', '@Model.EndPointTypeID');
     };
 
     function Load_ThingEnd_InputsHoursDiv() {
-        LoadChart_ThingEnd_InputsHoursDiv('@Model.Thing.ID', '@Model.EndPoint.TypeID');
+        LoadChart_ThingEnd_InputsHoursDiv('@Model.Thing.ID', '@Model.EndPointTypeID');
     };
 
     function Load_ThingEnd_InputsDaysDiv() {
-        LoadChart_ThingEnd_InputsDaysDiv('@Model.Thing.ID', '@Model.EndPoint.TypeID');
+        LoadChart_ThingEnd_InputsDaysDiv('@Model.Thing.ID', '@Model.EndPointTypeID');
     };
 
     function Load_ThingEnd_InputsMonthsDiv() {
-        LoadChart_ThingEnd_InputsMonthsDiv('@Model.Thing.ID', '@Model.EndPoint.TypeID','@DateTime.Now.Year.ToString()');
+        LoadChart_ThingEnd_InputsMonthsDiv('@Model.Thing.ID', '@Model.EndPointTypeID', '@DateTime.Now.Year.ToString()');
     };
 
-
     function Load_ThingEnd_HistoryDiv() {
-        LoadGrid_ThingEnd_HistoryDiv('@Model.Thing.ID', '@Model.EndPoint.TypeID', $('#drpHistoryIOsFromDate').val(), $('#drpHistoryIOsToDate').val());
+        LoadGrid_ThingEnd_HistoryDiv('@Model.Thing.ID', '@Model.EndPointTypeID', $('#drpHistoryIOsFromDate').val(), $('#drpHistoryIOsToDate').val());
     };
 </script>

@@ -22,6 +22,8 @@ public partial class ThingCategory
     public ThingCategory()
     {
 
+        this.ThingExtenstions = new HashSet<ThingExtenstion>();
+
         this.Things = new HashSet<Thing>();
 
     }
@@ -33,9 +35,17 @@ public partial class ThingCategory
 
     public Nullable<long> IconID { get; set; }
 
+    public Nullable<System.Guid> GUID { get; set; }
+
 
 
     public virtual MediaFile MediaFile { get; set; }
+
+    public virtual MediaFile MediaFile1 { get; set; }
+
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+
+    public virtual ICollection<ThingExtenstion> ThingExtenstions { get; set; }
 
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
 

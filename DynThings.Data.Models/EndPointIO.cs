@@ -32,21 +32,25 @@ public partial class EndPointIO
 
     public Nullable<System.DateTime> ScheduleTimeStamp { get; set; }
 
-    public long ThingID { get; set; }
-
     public Nullable<System.DateTime> TimeStamp_UTC { get; set; }
 
     public Nullable<System.DateTime> ExecTimeStamp_UTC { get; set; }
 
     public Nullable<System.DateTime> ScheduleTimeStamp_UTC { get; set; }
 
+    public long ThingID { get; set; }
 
+    public long EndPointTypeID { get; set; }
+
+
+
+    public virtual Endpoint Endpoint { get; set; }
 
     public virtual IOType IOType { get; set; }
 
     public virtual Thing Thing { get; set; }
 
-    public virtual Endpoint Endpoint { get; set; }
+    public virtual EndPointType EndPointType { get; set; }
 
 }
 

@@ -22,6 +22,8 @@ public partial class AspNetUser
     public AspNetUser()
     {
 
+        this.AppUserTokens = new HashSet<AppUserToken>();
+
         this.AspNetUserClaims = new HashSet<AspNetUserClaim>();
 
         this.AspNetUserLogins = new HashSet<AspNetUserLogin>();
@@ -30,13 +32,17 @@ public partial class AspNetUser
 
         this.LinkDevicesLocations1 = new HashSet<LinkDevicesLocation>();
 
+        this.LinkDevicesLocations2 = new HashSet<LinkDevicesLocation>();
+
+        this.LinkDevicesLocations3 = new HashSet<LinkDevicesLocation>();
+
         this.LinkUsersAlerts = new HashSet<LinkUsersAlert>();
 
-        this.AspNetRoles = new HashSet<AspNetRole>();
+        this.LinkUsersAlerts1 = new HashSet<LinkUsersAlert>();
 
         this.UserNotifications = new HashSet<UserNotification>();
 
-        this.AppUserTokens = new HashSet<AppUserToken>();
+        this.AspNetRoles = new HashSet<AspNetRole>();
 
     }
 
@@ -67,7 +73,13 @@ public partial class AspNetUser
 
     public string FullName { get; set; }
 
+    public Nullable<int> LanguageID { get; set; }
 
+
+
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+
+    public virtual ICollection<AppUserToken> AppUserTokens { get; set; }
 
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
 
@@ -87,11 +99,19 @@ public partial class AspNetUser
 
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
 
+    public virtual ICollection<LinkDevicesLocation> LinkDevicesLocations2 { get; set; }
+
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+
+    public virtual ICollection<LinkDevicesLocation> LinkDevicesLocations3 { get; set; }
+
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+
     public virtual ICollection<LinkUsersAlert> LinkUsersAlerts { get; set; }
 
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
 
-    public virtual ICollection<AspNetRole> AspNetRoles { get; set; }
+    public virtual ICollection<LinkUsersAlert> LinkUsersAlerts1 { get; set; }
 
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
 
@@ -99,7 +119,7 @@ public partial class AspNetUser
 
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
 
-    public virtual ICollection<AppUserToken> AppUserTokens { get; set; }
+    public virtual ICollection<AspNetRole> AspNetRoles { get; set; }
 
 }
 

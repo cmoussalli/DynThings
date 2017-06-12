@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using DynThings.Core;
 using DynThings.Data.Models;
 using DynThings.WebAPI.Models;
+using DynThings.WebAPI.TypesMapper;
 using DynThings.WebAPI.Repositories;
 using PagedList;
 using System.Security.Cryptography;
@@ -42,7 +43,7 @@ namespace DynThings.WebAPI.Repositories
                 }
                 else
                 {//App is Exist
-                    result = Models.TypesMapper.APIAppAdapter.fromApp(apps[0]);
+                    result = TypesMapper. APIAppAdapter.fromApp(apps[0]);
                 }
             }
             catch (Exception ex)

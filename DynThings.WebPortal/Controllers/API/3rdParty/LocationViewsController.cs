@@ -19,114 +19,29 @@ namespace DynThings.WebPortal.Controllers.API
     {
         #region Props
         UnitOfWork_WebAPI uow_APIs = new UnitOfWork_WebAPI();
-        long entityID = 8;
+        long entityID;
 
         #endregion
 
-        //GET: api/LocationViews/GetLocationViews
-        public List<APILocationView> GetLocationViews(Guid token,string searchFor,int page,int pageSize)
+        #region Constructors
+        public LocationViewsController()
         {
-            ResultInfo.Result tokenValidation = uow_APIs.repoAPIUserAppTokens.ValidateTokenEntityPermission(token,entityID);
+            entityID = uow_APIs.repoAPILocationViews.EntityID;
+        }
+        #endregion
+
+        public List<APILocationView> GetLocationViews(Guid token,int pageNumber, int pageSize, string searchFor="", bool loadParents = false,bool loadChilds =false)
+        {
+            int methodID = 1;
+            ResultInfo.Result tokenValidation = uow_APIs.repoAPIUserAppTokens.ValidateTokenEntityPermission(token,entityID,methodID);
             if (tokenValidation.ResultType != ResultInfo.ResultType.Ok)
             {
                 var msg = new HttpResponseMessage(HttpStatusCode.Unauthorized) { ReasonPhrase = tokenValidation.Message };
-                throw new HttpResponseException(new HttpResponseMessage(HttpStatusCode.NotFound));
+                throw new HttpResponseException(new HttpResponseMessage(HttpStatusCode.Forbidden));
             }
-            return uow_APIs.repoAPILocationViews.GetLocationViews(searchFor, page, pageSize);
+            return uow_APIs.repoAPILocationViews.GetLocationViews(pageNumber, pageSize,loadParents,loadChilds,searchFor);
         }
 
 
-        //// GET: api/LocationViewsT/5
-        //[ResponseType(typeof(LocationView))]
-        //public IHttpActionResult GetLocationView(long id)
-        //{
-        //    LocationView locationView = db.LocationViews.Find(id);
-        //    if (locationView == null)
-        //    {
-        //        return NotFound();
-        //    }
-
-        //    return Ok(locationView);
-        //}
-
-        //// PUT: api/LocationViewsT/5
-        //[ResponseType(typeof(void))]
-        //public IHttpActionResult PutLocationView(long id, LocationView locationView)
-        //{
-        //    if (!ModelState.IsValid)
-        //    {
-        //        return BadRequest(ModelState);
-        //    }
-
-        //    if (id != locationView.ID)
-        //    {
-        //        return BadRequest();
-        //    }
-
-        //    db.Entry(locationView).State = EntityState.Modified;
-
-        //    try
-        //    {
-        //        db.SaveChanges();
-        //    }
-        //    catch (DbUpdateConcurrencyException)
-        //    {
-        //        if (!LocationViewExists(id))
-        //        {
-        //            return NotFound();
-        //        }
-        //        else
-        //        {
-        //            throw;
-        //        }
-        //    }
-
-        //    return StatusCode(HttpStatusCode.NoContent);
-        //}
-
-        //// POST: api/LocationViewsT
-        //[ResponseType(typeof(LocationView))]
-        //public IHttpActionResult PostLocationView(LocationView locationView)
-        //{
-        //    if (!ModelState.IsValid)
-        //    {
-        //        return BadRequest(ModelState);
-        //    }
-
-        //    db.LocationViews.Add(locationView);
-        //    db.SaveChanges();
-
-        //    return CreatedAtRoute("DefaultApi", new { id = locationView.ID }, locationView);
-        //}
-
-        //// DELETE: api/LocationViewsT/5
-        //[ResponseType(typeof(LocationView))]
-        //public IHttpActionResult DeleteLocationView(long id)
-        //{
-        //    LocationView locationView = db.LocationViews.Find(id);
-        //    if (locationView == null)
-        //    {
-        //        return NotFound();
-        //    }
-
-        //    db.LocationViews.Remove(locationView);
-        //    db.SaveChanges();
-
-        //    return Ok(locationView);
-        //}
-
-        //protected override void Dispose(bool disposing)
-        //{
-        //    if (disposing)
-        //    {
-        //        db.Dispose();
-        //    }
-        //    base.Dispose(disposing);
-        //}
-
-        //private bool LocationViewExists(long id)
-        //{
-        //    return db.LocationViews.Count(e => e.ID == id) > 0;
-        //}
     }
 }

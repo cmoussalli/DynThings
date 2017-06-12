@@ -26,9 +26,9 @@ public partial class Device
 
         this.DeviceIOs = new HashSet<DeviceIO>();
 
-        this.LinkDevicesLocations = new HashSet<LinkDevicesLocation>();
-
         this.Endpoints = new HashSet<Endpoint>();
+
+        this.LinkDevicesLocations = new HashSet<LinkDevicesLocation>();
 
     }
 
@@ -67,11 +67,11 @@ public partial class Device
 
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
 
-    public virtual ICollection<LinkDevicesLocation> LinkDevicesLocations { get; set; }
+    public virtual ICollection<Endpoint> Endpoints { get; set; }
 
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
 
-    public virtual ICollection<Endpoint> Endpoints { get; set; }
+    public virtual ICollection<LinkDevicesLocation> LinkDevicesLocations { get; set; }
 
 }
 

@@ -2,6 +2,10 @@
 var selectedAppID = 0;
 var selectedAppTitle = 0;
 
+//#region
+
+
+//#endregion
 
 //Attach : Pager
 function AttachEventAppsListPager() {
@@ -108,17 +112,44 @@ function LoadPart_AppListDiv() {
 };
 
 //Get Details
-function LoadPart_AppDetailsDiv(id) {
+function LoadPart_AppDetailsDiv() {
     var loadingpart = LoadDivLoading();
-    $("#divAppMain").html(loadingpart);
+    $("#divPageDetails").html(loadingpart);
     $.ajax({
-        url: getRootURL() + '/Apps/DetailsPV?id=' + id,
+        url: getRootURL() + '/Apps/DetailsPV?id=' + selectedAppID,
         type: "GET",
     })
     .success(function (partialViewResult) {
-        $("#divAppMain").html(partialViewResult);
+        $("#divPageDetails").html(partialViewResult);
     });
 }
+
+//Get APIEntities
+function LoadPart_AppAPIEntitiesDiv() {
+    var loadingpart = LoadDivLoading();
+    $("#divPageDetails").html(loadingpart);
+    $.ajax({
+        url: getRootURL() + '/apps/AppApiEntitysListGridPV?searchfor=' + '&appID=' + selectedAppID + '&recordsperpage=25',
+        type: "GET",
+    })
+    .success(function (partialViewResult) {
+        $("#divPageDetails").html(partialViewResult);
+    });
+}
+
+//Get Publish
+function LoadPart_AppDetailsDiv() {
+    var loadingpart = LoadDivLoading();
+    $("#divPageDetails").html(loadingpart);
+    $.ajax({
+        url: getRootURL() + '/Apps/DetailsPV?id=' + selectedAppID,
+        type: "GET",
+    })
+    .success(function (partialViewResult) {
+        $("#divPageDetails").html(partialViewResult);
+    });
+}
+
 
 //Get Add
 function LoadPart_DialogAppAdd() {
@@ -148,11 +179,11 @@ function LoadPart_DialogAppEdit(id) {
 }
 
 //Get Delete
-function LoadPart_DialogAppDelete(id) {
+function LoadPart_DialogAppDelete() {
     var loadingpart = LoadDivLoading();
     $("#modal").html(loadingpart);
     $.ajax({
-        url: getRootURL() + '/Apps/DeletePV?id=' + id,
+        url: getRootURL() + '/Apps/DeletePV?id=' + selectedAppID,
         //page=" + $("#DynConfigCurrentPage").html,
         type: "GET",
     })
@@ -167,11 +198,11 @@ function LoadAppEditor(id) {
 }
 
 //Get ApiEntitys List
-function LoadPart_AppApiEntitysByAppIDDiv(appID) {
+function LoadPart_AppApiEntitysByAppIDDiv() {
     var loadingpart = LoadDivLoading();
     $("#divAppApiEntitysList").html(loadingpart);
     $.ajax({
-        url: getRootURL() + '/apps/AppApiEntitysListGridPV?searchfor=' + $(txtApiEntitySearch).val() + '&appID=' + appID + '&recordsperpage=0',
+        url: getRootURL() + '/apps/AppApiEntitysListGridPV?searchfor=' + '&appID=' + selectedAppID + '&recordsperpage=25',
         type: "GET",
     })
         .done(function (partialViewResult) {
@@ -186,7 +217,7 @@ function AttachEventAppApiEntitysListPager() {
         var loadingpart = LoadDivLoading();
         $("#divAppApiEntitysList").html(loadingpart);
         $.ajax({
-            url: $(this).attr("href") + "&searchfor=" + $(txtAppSearch).val() + '&appID=' + selectedAppID + '&recordsperpage=0',
+            url: $(this).attr("href") + "&searchfor=" + '&appID=' + selectedAppID + '&recordsperpage=0',
             type: 'GET',
             cache: false,
             success: function (result) {
@@ -209,6 +240,9 @@ function LoadPart_DialogAppApiEntityAttach() {
         $("#modal").html(partialViewResult);
     });
 }
+
+
+
 //Post Attach ApiEntitys
 function AttachEventAppApiEntityAttachForm() {
     $("#AppApiEntityAttachForm").on("submit", function (event) {
@@ -222,16 +256,18 @@ function AttachEventAppApiEntityAttachForm() {
             dataType: "json",
             success: function (resp) {
                 ServerResponse(resp);
-                LoadPart_AppApiEntitysByAppIDDiv(selectedAppID);
+                LoadPart_AppAPIEntitiesDiv();
             },
             error: function () {
                 ServerResponse(resp);
+                LoadPart_AppAPIEntitiesDiv();
             }
         })
-        LoadPart_AppApiEntitysByAppIDDiv(selectedAppID);
+        LoadPart_AppAPIEntitiesDiv();
         $('#mdl').modal('hide');
     });
 };
+
 //Get DeAttach ApiEntitys
 function LoadPart_DialogAppApiEntityDeAttach(appID, systemEntityID) {
     var loadingpart = LoadDivLoading();
@@ -244,9 +280,10 @@ function LoadPart_DialogAppApiEntityDeAttach(appID, systemEntityID) {
         $("#modal").html(partialViewResult);
     });
 }
+
 //Post DeAttach ApiEntitys
-$(document).ready(function () {
-    $("#EndPointDeleteForm").on("submit", function (event) {
+function DeAttachEventAppApiEntityAttachForm() {
+    $("#AppApiEntityDeAttachForm").on("submit", function (event) {
         event.preventDefault();
         var url = $(this).attr("action");
         var formData = $(this).serialize();
@@ -256,10 +293,15 @@ $(document).ready(function () {
             data: formData,
             dataType: "json",
             success: function (resp) {
-                window.location = getRootURL() + "EndPoints";
+                ServerResponse(resp);
+                LoadPart_AppAPIEntitiesDiv();
+            },
+            error: function () {
+                ServerResponse(resp);
+                LoadPart_AppAPIEntitiesDiv();
             }
         })
-        LoadPart_EndPointListDiv();
+        LoadPart_AppAPIEntitiesDiv();
         $('#mdl').modal('hide');
     });
-});
+};

@@ -110,10 +110,32 @@ namespace DynThings.WebPortal.Controllers
         }
         #endregion
 
+        #region DeletePV
+        [HttpGet]
+        public PartialViewResult DeletePV(long id)
+        {
+            App app = uof_repos.repoApps.Find(id);
+            return PartialView("_Delete", app);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeletePV([Bind(Include = "ID")] App app)
+        {
+            ResultInfo.Result res = ResultInfo.GetResultByID(1);
+            if (ModelState.IsValid)
+            {
+                res = uof_repos.repoApps.Delete(app.ID);
+                return Json(res);
+            }
+            return Json(res);
+        }
+        #endregion
+
 
         #region ApiEntitysListPV
         [HttpGet]
-        public PartialViewResult AppApiEntitysListGridPV(string searchfor = null, long appID = 0, int page = 1, int recordsperpage = 0)
+        public PartialViewResult AppApiEntitysListGridPV(string searchfor = null, long appID = 0, int page = 1, int recordsperpage = 25)
         {
             IPagedList views = uof_repos.repoApps.GetAppAPIEntitysPagedList(searchfor, appID, page, Helpers.Configs.validateRecordsPerMaster(recordsperpage));
             return PartialView("_ApiEntitysList", views);

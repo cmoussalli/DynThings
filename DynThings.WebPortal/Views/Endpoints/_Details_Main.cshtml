@@ -1,18 +1,42 @@
 ﻿@model DynThings.Data.Models.Endpoint
-<div class="right">
-    <button type="button" class="btn btn-info pull-right" onclick="LoadEndpointEditor(@Model.ID)" data-toggle="modal" data-target="#mdl">Edit</button>
+
+<div class="panel">
+    <div class="panel-heading">
+        <div class="panel-control">
+            <button class="btn btn-default" onclick="LoadPart_EndpointMainDiv();">
+                <i class="demo-psi-repeat-2 icon-fw"></i> Refresh
+            </button>
+        </div>
+        <h3 class="panel-title">Main Info</h3>
+    </div>
+
+    <div class="panel-body">
+        <div class="pad-btm form-inline">
+            <div class="row">
+                <div class="col-sm-6 table-toolbar-left">
+                    <button class="btn btn-warning" onclick="LoadEndpointEditor()" data-toggle="modal" data-target="#mdl">Edit</button>
+                    @*<button class="btn btn-default"><i class="demo-pli-printer"></i></button>
+                        <div class="btn-group">
+                            <button class="btn btn-default"><i class="demo-pli-information"></i></button>
+                            <button class="btn btn-default"><i class="demo-pli-recycling"></i></button>
+                        </div>*@
+                </div>
+
+            </div>
+        </div>
+
+
+        <strong>Title</strong><br>
+        @Model.Title<br><br>
+        <strong>Type</strong><br>
+        <img src="~/Imgs/@(Model.EndPointType.IconID.ToString() + ".png")" />
+        @Model.EndPointType.Title<br><br>
+        <strong>Device</strong><br>
+        <a href="~/devices/details?id=@Model.DeviceID">@Model.Device.Title</a><br>
+        <br>
+        <strong>Thing</strong><br>
+        <img src="~/Imgs/@(Model.Thing.ThingCategory.IconID.ToString() + ".png")" />
+        <a href="~/things/details?id=@Model.ThingID">@Model.Thing.Title</a><br>
+        <br>
+    </div>
 </div>
-
-<strong>Title</strong><br>
-@Model.Title<br><br>
-
-<strong>Type</strong><br>
-@Model.EndPointType.Title<br><br>
-
-<strong>Device</strong><br>
-<a href="~/devices/details?id=@Model.DeviceID">@Model.Device.Title</a><br>
-<br>
-
-<strong>Thing</strong><br>
-<a href="~/things/details?id=@Model.ThingID">@Model.Thing.Title</a><br>
-<br>

@@ -26,14 +26,14 @@
                         <div id="tabDynUserRoles" class="tab-pane fade">
                             <div class="right">
                                 <button type="button" class="btn btn-info btn-sm pull-right" onclick="LoadPart_DynUserRolesDiv('@Model.Id')" >Refresh</button>
-                                <button type="button" class="btn btn-info btn-sm pull-right" onclick="LoadPart_DialogDynUserRoleAdd()" data-toggle="modal" data-target="#mdl">Add</button>
+                                <button type="button" class="btn btn-info btn-sm pull-right" onclick="LoadPart_DialogDynUserRoleAdd();" data-toggle="modal" data-target="#mdl">Add</button>
                             </div>
                             <div id="divDynUserRoles">
                             </div>
                         </div>
                         <div id="tabDynUserDelete" class="tab-pane fade">
                             <div id="divDynUserDelete">
-                                <button type="button" class="btn btn-danger" onclick="LoadPart_DialogDynUserDelete(@Model.Id)" data-toggle="modal" data-target="#mdl">Delete</button>
+                                <button type="button" class="btn btn-danger" onclick="LoadPart_DialogDynUserDelete('@Model.Id')" data-toggle="modal" data-target="#mdl">Delete</button>
                             </div>
                         </div>
                     </div>

@@ -28,6 +28,8 @@ public partial class Location
 
         this.LinkThingsLocations = new HashSet<LinkThingsLocation>();
 
+        this.LinkThingsLocations1 = new HashSet<LinkThingsLocation>();
+
     }
 
 
@@ -60,6 +62,10 @@ public partial class Location
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
 
     public virtual ICollection<LinkThingsLocation> LinkThingsLocations { get; set; }
+
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+
+    public virtual ICollection<LinkThingsLocation> LinkThingsLocations1 { get; set; }
 
 }
 

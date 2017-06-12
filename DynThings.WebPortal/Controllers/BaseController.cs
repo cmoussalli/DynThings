@@ -17,7 +17,8 @@ namespace DynThings.WebPortal.Controllers
 
         #region Properties
         public AspNetUser currentUser { get; set; }
-
+        public string PageTitle { get; set; }
+        public string PageDescription { get; set; }
         #endregion
 
         #region Overrides

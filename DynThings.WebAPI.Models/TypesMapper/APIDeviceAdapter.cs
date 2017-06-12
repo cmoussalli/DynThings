@@ -20,23 +20,29 @@ namespace DynThings.WebAPI.Models.TypesMapper
             result.Title = sourceDevice.Title;
             result.PinCode = sourceDevice.PinCode;
             result.StatusID = (long)sourceDevice.StatusID;
-
+            result.StatusTitle = sourceDevice.DeviceStatu.Title;
+            result.IsConnected = sourceDevice.IsConnected0;
+            result.IsConnectedDelay = sourceDevice.IsConnectedDelay;
+            result.LastConnectionTimeStamp = sourceDevice.LastConnectionTimeStamp;
+            result.UTC_Diff = sourceDevice.UTC_Diff;
+            //Get Endpoints
             List<APIEndPoint> ens = new List<APIEndPoint>();
             foreach (Endpoint end in sourceDevice.Endpoints)
             {
-                APIEndPoint apiEnd = new APIEndPoint();
-                apiEnd.ID = end.ID;
-                apiEnd.GUID = end.GUID;
-                apiEnd.KeyPass = end.KeyPass;
-                apiEnd.PinCode = end.PinCode;
-                apiEnd.Title = end.Title;
-                apiEnd.TypeID = end.TypeID;
-                apiEnd.DeviceID = end.DeviceID;
-
+                APIEndPoint apiEnd = APIEndPointAdapter.fromEndpoint(end);
                 ens.Add(apiEnd);
             }
+            result.EndPoints = ens;
 
-            result.APIEndPoints = ens;
+            //Get Commands
+            List<APIDeviceCommand> cmds = new List<APIDeviceCommand>();
+            foreach(DeviceCommand cmd in sourceDevice.DeviceCommands)
+            {
+                APIDeviceCommand apiCmd = APIDeviceCommandAdapter.fromDeviceCommand(cmd);
+                cmds.Add(apiCmd);
+            }
+            result.DeviceCommands = cmds;
+
             return result;
         }
     }
@@ -54,7 +60,7 @@ namespace DynThings.WebAPI.Models.TypesMapper
             result.StatusID = (long)sourceAPIDevice.StatusID;
 
             List<Endpoint> ens = new List<Endpoint>();
-            foreach (APIEndPoint end in sourceAPIDevice.APIEndPoints)
+            foreach (APIEndPoint end in sourceAPIDevice.EndPoints)
             {
                 Endpoint End = new Endpoint();
                 End.ID = end.ID;

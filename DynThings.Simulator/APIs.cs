@@ -9,7 +9,6 @@ using Newtonsoft.Json;
 using System.Web.Script.Serialization;
 using System.Windows.Forms;
 using DynThings.WebAPI.Models;
-using DynThings.WebAPI.Models.TypesMapper;
 
 namespace DynThings.Simulator
 {
@@ -40,7 +39,7 @@ namespace DynThings.Simulator
                 List<APIEndPoint> ends = new List<APIEndPoint>();
                 foreach (APIDevice dev in C.apiDevices)
                 {
-                    foreach (APIEndPoint end in dev.APIEndPoints)
+                    foreach (APIEndPoint end in dev.EndPoints)
                     {
                         ends.Add(end);
                     }
@@ -86,7 +85,7 @@ namespace DynThings.Simulator
                 newNode0.SelectedImageIndex = 0;
 
                 //Add Endpoints
-                foreach (APIEndPoint end in dev.APIEndPoints)
+                foreach (APIEndPoint end in dev.EndPoints)
                 {
                     TreeNode newNode1 = new TreeNode();
                     newNode1.Name = "End" + end.ID.ToString();

@@ -1,15 +1,32 @@
-﻿@*@model IEnumerable<DynThings.Data.Models.App>*@
-@{
+﻿@{
     ViewBag.Title = "Apps";
-    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
-<div class="container">
-    <div class="page-header">
-        <h1>Apps</h1>
-    </div>
+<!--Page Title-->
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<div id="page-title">
     <div class="row">
-        <div class="col-md-6">
-            <button type="button" class="btn btn-info" onclick="LoadPart_DialogAppAdd()" data-toggle="modal" data-target="#mdl">Add</button>
+        <div class="col-lg-9">
+            <h1 class="page-header text-overflow">Customization Apps</h1>
+            <h5>Manage the platform customizations using apps, and publish your app to DynThings store.</h5>
+        </div>
+
+        <div class="col-lg-3">
+            <div class="pull-right">
+                @*<br />
+                <a href="~/Apps"> < Back to Apps List</a>*@
+            </div>
+        </div>
+    </div>
+</div>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--End page title-->
+
+
+<div id="page-content">
+
+    <div class="row">
+        <div class="col-xs-3 col-sm-2 col-md-6">
+            <button type="button" class="btn btn-purple" onclick="LoadPart_DialogAppAdd()" data-toggle="modal" data-target="#mdl">Add</button>
         </div>
         <div class="col-md-6">
             <div class="input-group">
@@ -21,13 +38,17 @@
         </div>
     </div>
     <br />
-    <div class="well well-lg">
-        <div id="divAppsList">
-        </div>
+    <br />
+    <div id="divAppsList">
     </div>
+    <button onclick="test();">Test</button>
+
 </div>
+
+
 @section scriptfiles{
     <script src="~/Assets/Scripts/DynScripts/Apps.js"></script>
+
 }
 @section scripts{
     <script>
@@ -35,7 +56,19 @@
             LoadPart_AppListDiv();
             AttachEventAppsListPager();
         });
-
-
+ 
     </script>
 }
+
+<script>
+    function test() {
+        $.notify({
+            // options
+            message: 'Hello World'
+        }, {
+            // settings
+            type: 'danger'
+        });
+
+    };
+</script>

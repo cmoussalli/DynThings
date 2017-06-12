@@ -48,9 +48,10 @@ namespace DynThings.WebPortal.Controllers.API
         [HttpGet]
         public ResultInfo.Result ValidateTokenEntityPermission(Guid token,long entityID)
         {
+            int methodID = 5;
             try
             {
-                return uow_APIs.repoAPIUserAppTokens.ValidateTokenEntityPermission(token,entityID);
+                return uow_APIs.repoAPIUserAppTokens.ValidateTokenEntityPermission(token,entityID,methodID);
             }
             catch
             {

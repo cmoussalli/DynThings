@@ -26,6 +26,8 @@ public partial class App
 
         this.AppUserTokens = new HashSet<AppUserToken>();
 
+        this.ThingExtenstions = new HashSet<ThingExtenstion>();
+
     }
 
 
@@ -64,6 +66,10 @@ public partial class App
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
 
     public virtual ICollection<AppUserToken> AppUserTokens { get; set; }
+
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+
+    public virtual ICollection<ThingExtenstion> ThingExtenstions { get; set; }
 
 }
 

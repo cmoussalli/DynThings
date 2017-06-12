@@ -1,33 +1,84 @@
 ﻿@using Microsoft.AspNet.Identity;
 @model IPagedList<DynThings.Data.Models.AppAPIEntity>
 
-<table class="table striped hovered border bordered">
-    <thead>
-        <tr>
-            <th>Entity</th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.SystemEntity.Title)
-                </td>
 
-                <td>
-                    <button class="btn btn-danger btn-sm" onclick="LoadPart_DialogAppApiEntityDeAttach(@item.AppID,@item.SystemEntityID)" data-toggle="modal" data-target="#mdl">Remove</button>
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>
+<div class="panel">
+    <div class="panel-heading">
+        <div class="panel-control">
+            <button class="btn btn-default" onclick="LoadPart_AppAPIEntitiesDiv();"><i class="demo-psi-repeat-2 icon-fw"></i>Refresh</button>
+        </div>
+        <h3 class="panel-title">System Entities</h3>
+    </div>
 
-<div id="AppAPIEntitysListPager">
-    <input id="AppAPIEntitysCurrentPage" value="@Model.PageNumber.ToString()" hidden />
-    @Html.PagedListPager(Model, page => Url.Action("AppApiEntitysListGridPV", "Apps", new { page }) )
+    <div class="panel-body">
+        <div class="pad-btm form-inline">
+            <div class="row">
+                <div class="col-sm-6 table-toolbar-left">
+                    <button class="btn btn-purple" onclick="LoadPart_DialogAppApiEntityAttach();" data-toggle="modal" data-target="#mdl"><i class="demo-pli-add icon-fw"></i>Add</button>
+                    @*<button class="btn btn-default"><i class="demo-pli-printer"></i></button>
+                    <div class="btn-group">
+                        <button class="btn btn-default"><i class="demo-pli-information"></i></button>
+                        <button class="btn btn-default"><i class="demo-pli-recycling"></i></button>
+                    </div>*@
+                </div>
+                <div class="col-sm-6 table-toolbar-right">
+                    <div class="form-group">
+                        <input type="text" id="txtApiEntitySearch" autocomplete="off" class="form-control" placeholder="Search" >
+                    </div>
+                    <div class="btn-group">
+                        @*<button class="btn btn-default"><i class="demo-pli-download-from-cloud"></i></button>*@
+                        <div class="btn-group">
+                            <button class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                                <i class="demo-pli-gear"></i>
+                                <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu dropdown-menu-right" role="menu">
+                                <li><a href="#">Remove all</a></li>
+                                <li><a href="#">Add all</a></li>
+                                @*<li class="divider"></li>
+                                <li><a href="#">Separated link</a></li>*@
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="table-responsive">
+            <table class="table table-striped hovered border bordered">
+                <thead>
+                    <tr>
+                        <th>Entity</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.SystemEntity.Title)
+                            </td>
+
+                            <td>
+                                <button class="btn btn-danger btn-sm" onclick="LoadPart_DialogAppApiEntityDeAttach(@item.AppID,@item.SystemEntityID)" data-toggle="modal" data-target="#mdl">Remove</button>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+
+        </div>
+        @*<hr>
+
+        <div id="AppAPIEntitysListPager">
+            <input id="AppAPIEntitysCurrentPage" value="@Model.PageNumber.ToString()" hidden />
+            @Html.PagedListPager(Model, page => Url.Action("AppApiEntitysListGridPV", "Apps", new { page }))
+        </div>*@
+    </div>
 </div>
+
+
+
 
 <script>
     function EventSelectAPIEntity() {

@@ -11,7 +11,6 @@ using DynThings.Core;
 using DynThings.Data.Models;
 using DynThings.Data.Repositories;
 using DynThings.Data.Reports;
-using DynThings.Data.Models.ReportsModels;
 using DynHighCharts;
 using System.IO;
 

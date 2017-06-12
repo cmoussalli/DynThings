@@ -11,18 +11,35 @@ namespace DynThings.WebAPI.Models.TypesMapper
 
     public static class APILocationViewAdapter
     {
-        public static APILocationView fromLocationView(LocationView sourceLocationView)
+        public static APILocationView fromLocationView(LocationView sourceLocationView,bool loadParents = true,bool loadChilds = true)
         {
             APILocationView result = new APILocationView();
             result.ID = sourceLocationView.ID;
             result.IsActive = sourceLocationView.IsActive;
-            result.LocationsCount = sourceLocationView.LinkLocationsLocationViews.Count;
-            result.LocationViewTypeID = sourceLocationView.LocationViewTypeID;
             result.OwnerID = sourceLocationView.OwnerID;
+            result.LocationViewTypeID = sourceLocationView.LocationViewTypeID;
             result.Title = sourceLocationView.Title;
             result.X = sourceLocationView.X;
             result.Y = sourceLocationView.Y;
             result.Z = sourceLocationView.Z;
+            result.LocationsCount = sourceLocationView.LinkLocationsLocationViews.Count;
+
+            #region Load Parents
+            if (loadParents)
+            {
+            result.LocationViewType = TypesMapper.APILocationViewTypeAdapter.fromLocationViewType(sourceLocationView.LocationViewType);
+
+            }
+
+            #endregion
+
+            #region Load Childs
+            if (loadChilds)
+            {
+                List<Location> locs = 
+                result.Locations = 
+            } 
+            #endregion
 
             return result;
         }

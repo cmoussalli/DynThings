@@ -32,6 +32,8 @@ public partial class LinkThingsLocation
 
     public virtual Location Location { get; set; }
 
+    public virtual Location Location1 { get; set; }
+
     public virtual Thing Thing { get; set; }
 
 }

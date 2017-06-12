@@ -26,9 +26,13 @@ public partial class Thing
 
         this.EndPointIOs = new HashSet<EndPointIO>();
 
+        this.Endpoints = new HashSet<Endpoint>();
+
         this.LinkThingsLocations = new HashSet<LinkThingsLocation>();
 
-        this.Endpoints = new HashSet<Endpoint>();
+        this.ThingExtenstionValues = new HashSet<ThingExtenstionValue>();
+
+        this.ThingEnds = new HashSet<ThingEnd>();
 
     }
 
@@ -57,13 +61,21 @@ public partial class Thing
 
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
 
+    public virtual ICollection<Endpoint> Endpoints { get; set; }
+
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+
     public virtual ICollection<LinkThingsLocation> LinkThingsLocations { get; set; }
 
     public virtual ThingCategory ThingCategory { get; set; }
 
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
 
-    public virtual ICollection<Endpoint> Endpoints { get; set; }
+    public virtual ICollection<ThingExtenstionValue> ThingExtenstionValues { get; set; }
+
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+
+    public virtual ICollection<ThingEnd> ThingEnds { get; set; }
 
 }
 

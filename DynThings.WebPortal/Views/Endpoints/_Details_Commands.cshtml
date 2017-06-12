@@ -1,34 +1,61 @@
 ﻿
 @model PagedList.IPagedList<DynThings.Data.Models.EndPointCommand>
 
-<table class="table striped hovered border bordered">
-    <thead>
-        <tr>
-            <th>Title</th>
-            <th></th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Title)
-                </td>
-                <td>
-                    <button class="btn btn-info pull-right" >Details</button>
-                </td>
-                <td>
-                    <button type="button" class="btn btn-info pull-right" data-toggle="modal" onclick="LoadPart_DialogEndPointCommandExecute(@item.ID)" data-target="#mdl">Execute</button>
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>
+<div class="panel">
+    <div class="panel-heading">
+        <div class="panel-control">
+            <button class="btn btn-default" onclick="LoadPart_EndpointCommandsDiv('');">
+                <i class="demo-psi-repeat-2 icon-fw"></i> Refresh
+            </button>
+        </div>
+        <h3 class="panel-title">Commands</h3>
+    </div>
 
-<div id="CommandsListPager">
-    <input id="CommandCurrentPage" value="@Model.PageNumber.ToString()" hidden />
+    <div class="panel-body">
+        <div class="pad-btm form-inline">
+            <div class="row">
+                <div class="col-sm-6 table-toolbar-left">
+                </div>
+                <div class="col-sm-6 table-toolbar-right">
+                    <div class="form-group">
+                        <input type="text" id="txtEndpointCommandSearch" autocomplete="off" class="form-control" placeholder="Search" onkeydown="if (event.keyCode == 13) { LoadPart_EndpointCommandsDiv($('#txtEndpointCommandSearch').val()); return false; }">
+                    </div>
+                </div>
 
-    @Html.PagedListPager(Model, page => Url.Action("ListPV", new { page }))
+            </div>
+        </div>
+        <table class="table striped hovered border table-bordered">
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th width="50"></th>
+                    <th width="50"></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Title)
+                        </td>
+                        <td>
+                            <button class="btn btn-info pull-right">Details</button>
+                        </td>
+                        <td>
+                            <button type="button" class="btn btn-info pull-right" data-toggle="modal" onclick="LoadPart_DialogEndPointCommandExecute(@item.ID)" data-target="#mdl">Execute</button>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+        <div id="CommandsListPager">
+            <input id="CommandCurrentPage" value="@Model.PageNumber.ToString()" hidden />
+            @if (Model.PageCount > 1)
+            {
+            @Html.PagedListPager(Model, page => Url.Action("ListPV", new { page }))
+            }
+        </div>
+    </div>
 </div>

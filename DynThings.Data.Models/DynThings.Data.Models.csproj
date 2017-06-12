@@ -39,8 +39,8 @@
       <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.10.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
@@ -69,6 +69,12 @@
     <Compile Include="AlertLevel.cs">
       <DependentUpon>DynThingsModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="APIMethod.cs">
+      <DependentUpon>DynThingsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="APIUtilisation.cs">
+      <DependentUpon>DynThingsModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="App.cs">
       <DependentUpon>DynThingsModel.tt</DependentUpon>
     </Compile>
@@ -91,6 +97,9 @@
       <DependentUpon>DynThingsModel.tt</DependentUpon>
     </Compile>
     <Compile Include="AspNetUserLogin.cs">
+      <DependentUpon>DynThingsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataType.cs">
       <DependentUpon>DynThingsModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Device.cs">
@@ -138,6 +147,7 @@
     <Compile Include="EndPointTypeCategory.cs">
       <DependentUpon>DynThingsModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="ExtensionProperty.cs" />
     <Compile Include="GetThingEnds_Result.cs">
       <DependentUpon>DynThingsModel.tt</DependentUpon>
     </Compile>
@@ -168,6 +178,7 @@
     <Compile Include="MediaFile.cs">
       <DependentUpon>DynThingsModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="ModelsExtensions\Thing.cs" />
     <Compile Include="ResultMessage.cs">
       <DependentUpon>DynThingsModel.tt</DependentUpon>
     </Compile>
@@ -184,6 +195,9 @@
       <DependentUpon>DynThingsModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Rpt_EndPoint_IOs_Months_Result.cs">
+      <DependentUpon>DynThingsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Rpt_LastHoursConnections_Result.cs">
       <DependentUpon>DynThingsModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Rpt_ThingEnd_IOs_Days_Result.cs">
@@ -207,6 +221,15 @@
     <Compile Include="ThingCategory.cs">
       <DependentUpon>DynThingsModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="ThingEnd.cs">
+      <DependentUpon>DynThingsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ThingExtenstion.cs">
+      <DependentUpon>DynThingsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ThingExtenstionValue.cs">
+      <DependentUpon>DynThingsModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="UserNotification.cs">
       <DependentUpon>DynThingsModel.tt</DependentUpon>
     </Compile>
@@ -223,10 +246,6 @@
     <Compile Include="ModelsExtensions\LocationView.cs" />
     <Compile Include="ModelsExtensions\LocationViewTypes.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ReportsModels\EndPointCharts.cs" />
-    <Compile Include="VThingEnd.cs">
-      <DependentUpon>DynThingsModel.tt</DependentUpon>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
     <EntityDeploy Include="DynThingsModel.edmx">
@@ -258,7 +277,9 @@
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="ReportsModels\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

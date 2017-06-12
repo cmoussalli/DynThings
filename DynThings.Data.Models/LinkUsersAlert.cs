@@ -30,6 +30,8 @@ public partial class LinkUsersAlert
 
     public virtual AspNetUser AspNetUser { get; set; }
 
+    public virtual AspNetUser AspNetUser1 { get; set; }
+
 }
 
 }

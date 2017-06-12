@@ -26,6 +26,10 @@ public partial class EndPointType
 
         this.Endpoints = new HashSet<Endpoint>();
 
+        this.ThingEnds = new HashSet<ThingEnd>();
+
+        this.EndPointIOs = new HashSet<EndPointIO>();
+
     }
 
 
@@ -50,6 +54,16 @@ public partial class EndPointType
     public virtual ICollection<Endpoint> Endpoints { get; set; }
 
     public virtual EndPointTypeCategory EndPointTypeCategory { get; set; }
+
+    public virtual EndPointTypeCategory EndPointTypeCategory1 { get; set; }
+
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+
+    public virtual ICollection<ThingEnd> ThingEnds { get; set; }
+
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+
+    public virtual ICollection<EndPointIO> EndPointIOs { get; set; }
 
 }
 

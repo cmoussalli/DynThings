@@ -43,6 +43,18 @@ public partial class DynThingsEntities : DbContext
 
     public virtual DbSet<Alert> Alerts { get; set; }
 
+    public virtual DbSet<APIMethod> APIMethods { get; set; }
+
+    public virtual DbSet<APIUtilisation> APIUtilisations { get; set; }
+
+    public virtual DbSet<AppAPIEntity> AppAPIEntitys { get; set; }
+
+    public virtual DbSet<App> Apps { get; set; }
+
+    public virtual DbSet<AppStatuss> AppStatusses { get; set; }
+
+    public virtual DbSet<AppUserToken> AppUserTokens { get; set; }
+
     public virtual DbSet<AspNetRole> AspNetRoles { get; set; }
 
     public virtual DbSet<AspNetUserClaim> AspNetUserClaims { get; set; }
@@ -50,6 +62,8 @@ public partial class DynThingsEntities : DbContext
     public virtual DbSet<AspNetUserLogin> AspNetUserLogins { get; set; }
 
     public virtual DbSet<AspNetUser> AspNetUsers { get; set; }
+
+    public virtual DbSet<DataType> DataTypes { get; set; }
 
     public virtual DbSet<DeviceCommand> DeviceCommands { get; set; }
 
@@ -59,9 +73,17 @@ public partial class DynThingsEntities : DbContext
 
     public virtual DbSet<DeviceStatu> DeviceStatus { get; set; }
 
+    public virtual DbSet<DynSetting> DynSettings { get; set; }
+
     public virtual DbSet<EndPointCommand> EndPointCommands { get; set; }
 
     public virtual DbSet<EndPointIO> EndPointIOs { get; set; }
+
+    public virtual DbSet<Endpoint> Endpoints { get; set; }
+
+    public virtual DbSet<EndPointTypeCategory> EndPointTypeCategorys { get; set; }
+
+    public virtual DbSet<EndPointType> EndPointTypes { get; set; }
 
     public virtual DbSet<IOType> IOTypes { get; set; }
 
@@ -83,7 +105,13 @@ public partial class DynThingsEntities : DbContext
 
     public virtual DbSet<ResultMessage> ResultMessages { get; set; }
 
+    public virtual DbSet<SystemEntity> SystemEntitys { get; set; }
+
     public virtual DbSet<ThingCategory> ThingCategorys { get; set; }
+
+    public virtual DbSet<ThingExtenstion> ThingExtenstions { get; set; }
+
+    public virtual DbSet<ThingExtenstionValue> ThingExtenstionValues { get; set; }
 
     public virtual DbSet<Thing> Things { get; set; }
 
@@ -91,25 +119,7 @@ public partial class DynThingsEntities : DbContext
 
     public virtual DbSet<UserNotificationType> UserNotificationTypes { get; set; }
 
-    public virtual DbSet<VThingEnd> VThingEnds { get; set; }
-
-    public virtual DbSet<Endpoint> Endpoints { get; set; }
-
-    public virtual DbSet<EndPointTypeCategory> EndPointTypeCategorys { get; set; }
-
-    public virtual DbSet<EndPointType> EndPointTypes { get; set; }
-
-    public virtual DbSet<AppStatuss> AppStatusses { get; set; }
-
-    public virtual DbSet<AppAPIEntity> AppAPIEntitys { get; set; }
-
-    public virtual DbSet<App> Apps { get; set; }
-
-    public virtual DbSet<SystemEntity> SystemEntitys { get; set; }
-
-    public virtual DbSet<DynSetting> DynSettings { get; set; }
-
-    public virtual DbSet<AppUserToken> AppUserTokens { get; set; }
+    public virtual DbSet<ThingEnd> ThingEnds { get; set; }
 
 
     public virtual ObjectResult<Rpt_EndPoint_IOs_Months_Result> Rpt_EndPoint_IOs_Months(Nullable<long> ePID, string year)
@@ -274,6 +284,96 @@ public partial class DynThingsEntities : DbContext
     {
 
         return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Rpt_EndPointAndDevices_IOsCount_Minutes_Result>("Rpt_EndPointAndDevices_IOsCount_Minutes");
+    }
+
+
+    public virtual ObjectResult<Rpt_LastHoursConnections_Result> Rpt_LastHoursConnections()
+    {
+
+        return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Rpt_LastHoursConnections_Result>("Rpt_LastHoursConnections");
+    }
+
+
+    public virtual int SubmitEndPointInput(Nullable<System.Guid> passKey, string value, Nullable<System.DateTime> execTimeStamp)
+    {
+
+        var passKeyParameter = passKey.HasValue ?
+            new ObjectParameter("PassKey", passKey) :
+            new ObjectParameter("PassKey", typeof(System.Guid));
+
+
+        var valueParameter = value != null ?
+            new ObjectParameter("Value", value) :
+            new ObjectParameter("Value", typeof(string));
+
+
+        var execTimeStampParameter = execTimeStamp.HasValue ?
+            new ObjectParameter("ExecTimeStamp", execTimeStamp) :
+            new ObjectParameter("ExecTimeStamp", typeof(System.DateTime));
+
+
+        return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SubmitEndPointInput", passKeyParameter, valueParameter, execTimeStampParameter);
+    }
+
+
+    public virtual int SubmitEndPointLog(Nullable<System.Guid> passKey, string value, Nullable<System.DateTime> execTimeStamp)
+    {
+
+        var passKeyParameter = passKey.HasValue ?
+            new ObjectParameter("PassKey", passKey) :
+            new ObjectParameter("PassKey", typeof(System.Guid));
+
+
+        var valueParameter = value != null ?
+            new ObjectParameter("Value", value) :
+            new ObjectParameter("Value", typeof(string));
+
+
+        var execTimeStampParameter = execTimeStamp.HasValue ?
+            new ObjectParameter("ExecTimeStamp", execTimeStamp) :
+            new ObjectParameter("ExecTimeStamp", typeof(System.DateTime));
+
+
+        return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SubmitEndPointLog", passKeyParameter, valueParameter, execTimeStampParameter);
+    }
+
+
+    public virtual int SubmitEndpointCommand(Nullable<long> commandID, string value, Nullable<System.DateTime> scheduleTimeStamp)
+    {
+
+        var commandIDParameter = commandID.HasValue ?
+            new ObjectParameter("CommandID", commandID) :
+            new ObjectParameter("CommandID", typeof(long));
+
+
+        var valueParameter = value != null ?
+            new ObjectParameter("Value", value) :
+            new ObjectParameter("Value", typeof(string));
+
+
+        var scheduleTimeStampParameter = scheduleTimeStamp.HasValue ?
+            new ObjectParameter("ScheduleTimeStamp", scheduleTimeStamp) :
+            new ObjectParameter("ScheduleTimeStamp", typeof(System.DateTime));
+
+
+        return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SubmitEndpointCommand", commandIDParameter, valueParameter, scheduleTimeStampParameter);
+    }
+
+
+    public virtual int SubmitEndpointCommandExecuted(Nullable<long> commandID, Nullable<System.DateTime> execTimeStamp)
+    {
+
+        var commandIDParameter = commandID.HasValue ?
+            new ObjectParameter("CommandID", commandID) :
+            new ObjectParameter("CommandID", typeof(long));
+
+
+        var execTimeStampParameter = execTimeStamp.HasValue ?
+            new ObjectParameter("ExecTimeStamp", execTimeStamp) :
+            new ObjectParameter("ExecTimeStamp", typeof(System.DateTime));
+
+
+        return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SubmitEndpointCommandExecuted", commandIDParameter, execTimeStampParameter);
     }
 
 }

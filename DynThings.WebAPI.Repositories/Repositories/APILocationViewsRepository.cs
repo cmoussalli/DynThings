@@ -27,7 +27,7 @@ namespace DynThings.WebAPI.Repositories
 
         #region props
         private DynThingsEntities db;
-        private long EntityID = 8;
+        public long EntityID = 8;
         private APIUserAppTokensRepository repoUserAppTokensRepository
         {
             get
@@ -36,20 +36,44 @@ namespace DynThings.WebAPI.Repositories
                 return result;
             }
         }
+        private APIUtilizationsRepository repoAPIUtilizations
+        {
+            get
+            {
+                APIUtilizationsRepository result = new APIUtilizationsRepository(db);
+                return result;
+            }
+        }
         #endregion
 
 
         #region Methods 
-        public List<APILocationView> GetLocationViews(string searchFor, int page, int pageSize)
+        /// <summary>
+        /// Get List of LocationViews.
+        /// </summary>
+        /// <param name="pageNumber">Page Number.</param>
+        /// <param name="pageSize">Items count per page.</param>
+        /// <param name="loadParents">Enable or Disable loading the Parents objects.</param>
+        /// <param name="loadChilds">Enable or Disable loading the Childs objects.</param>
+        /// <param name="searchFor">Search text as per the 'Title' field.</param>
+        /// <returns></returns>
+        public List<APILocationView> GetLocationViews( int pageNumber, int pageSize,bool loadParents, bool loadChilds, string searchFor)
         {
             List <APILocationView> viewsPageList = new List<APILocationView>();
-            IPagedList<LocationView> viewsList = db.LocationViews.Include("LocationViewType")
-                .Where(v => searchFor == null || v.Title.Contains(searchFor)).ToList().ToPagedList(page, pageSize);
+            List<LocationView> viewsList = db.LocationViews.Include("LocationViewType")
+                .Where(v => 
+                ((searchFor == null || searchFor == "") || v.Title.Contains(searchFor))
+                )
+                .OrderBy(o => o.Title)
+                .Skip((pageNumber - 1)* pageSize)
+                .Take(pageSize)
+                .ToList();
             foreach (LocationView item in viewsList)
             {
-                APILocationView apiLocationView = Models.TypesMapper.APILocationViewAdapter.fromLocationView(item);
+                APILocationView apiLocationView = TypesMapper.APILocationViewAdapter.fromLocationView(item, loadChilds);
                 viewsPageList.Add(apiLocationView);
             }
+            
             return viewsPageList;
         }
         #endregion

@@ -120,7 +120,7 @@ namespace DynThings.Data.Repositories
         #endregion
 
         #region Add
-        public ResultInfo.Result Add(string title, long typeID, long deviceID,long thingID)
+        public ResultInfo.Result Add(string title, long typeID, long deviceID,long thingID,bool isNumericOnly,float? minValue,float? maxValue,float? lowRange,float? highRange)
         {
             Endpoint end = new Endpoint();
             try
@@ -132,6 +132,12 @@ namespace DynThings.Data.Repositories
                 end.DeviceID = deviceID;
                 end.TypeID = typeID;
                 end.ThingID = thingID;
+                end.IsNumericOnly = isNumericOnly;
+                end.MinValue = minValue;
+                end.MaxValue = maxValue;
+                end.LowRange = lowRange;
+                end.HighRange =highRange;
+
                 db.Endpoints.Add(end);
                 db.SaveChanges();
                 return ResultInfo.GenerateOKResult("Saved", end.ID);
@@ -145,7 +151,7 @@ namespace DynThings.Data.Repositories
         #endregion
 
         #region Edit
-        public ResultInfo.Result Edit(long id, string title, long typeID,long thingID)
+        public ResultInfo.Result Edit(long id, string title, long typeID,long thingID, bool isNumericOnly, float? minValue, float? maxValue, float? lowRange, float? highRange)
         {
             try
             {
@@ -153,6 +159,11 @@ namespace DynThings.Data.Repositories
                 end.Title = title;
                 end.TypeID = typeID;
                 end.ThingID = thingID;
+                end.IsNumericOnly = isNumericOnly;
+                end.MinValue = minValue;
+                end.MaxValue = maxValue;
+                end.LowRange = lowRange;
+                end.HighRange = highRange;
                 db.SaveChanges();
                 return ResultInfo.GenerateOKResult("Saved", end.ID);
             }

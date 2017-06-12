@@ -74,7 +74,7 @@ namespace DynThings.Data.Repositories
             return cmds;
         }
 
-        public IPagedList GetPagedListByLocationID(string search, long LocationID,long ThingID, int pageNumber, int recordsPerPage)
+        public IPagedList GetPagedListByLocationID(string search, long LocationID, long ThingID, int pageNumber, int recordsPerPage)
         {
             List<LinkThingsLocation> lnks = db.LinkThingsLocations.Where(l => l.LocationID == LocationID).ToList();
             db = new DynThingsEntities();
@@ -82,12 +82,12 @@ namespace DynThings.Data.Repositories
               .Where(e => search == null || e.Title.Contains(search) && e.Endpoint.Thing.LinkThingsLocations.Any(l => l.LocationID == LocationID))
               .OrderBy(e => e.Title).ToList();
 
-            if (ThingID != 0 )
+            if (ThingID != 0)
             {
                 cmds = cmds.Where(c => c.Endpoint.ThingID == ThingID).ToList();
             }
 
-             IPagedList plCmds = cmds.ToPagedList(pageNumber, recordsPerPage);
+            IPagedList plCmds = cmds.ToPagedList(pageNumber, recordsPerPage);
             return plCmds;
         }
 
@@ -179,26 +179,19 @@ namespace DynThings.Data.Repositories
         #endregion
 
         #region Execute
-        public ResultInfo.Result Execute(long commandID, Guid endPointKeyPass, string ownerID)
+        public ResultInfo.Result Execute(long commandID,string command, string userID)
         {
             try
             {
                 EndPointCommand cmd = Find(commandID);
-                if (cmd.Endpoint.KeyPass == endPointKeyPass)
-                {
-                    
-                    return repoEndpointIOs.Add(cmd.Endpoint.ID, cmd.CommandCode, EndpointIOsRepository.EndPointIOType.Command);
-                }
-                else
-                {
-                    return ResultInfo.GetResultByID(1);
-                }
+                db.SubmitEndpointCommand(cmd.ID, command, null);
             }
             catch
             {
                 return ResultInfo.GetResultByID(1);
             }
 
+            return ResultInfo.GenerateOKResult();
         }
         #endregion
 

@@ -142,13 +142,13 @@ namespace DynThings.WebPortal.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult ExecutePV([Bind(Include = "ID,EndPointID")] EndPointCommand Command)
+        public ActionResult ExecutePV([Bind(Include = "ID,EndPointID,CommandCode")] EndPointCommand Command)
         {
             ResultInfo.Result res = ResultInfo.GetResultByID(1);
             if (ModelState.IsValid)
             {
                 Endpoint end = uof_repos.repoEndpoints.Find((long)Command.EndPointID);
-                res = uof_repos.repoEndPointCommands.Execute(Command.ID, Guid.Parse(end.KeyPass.ToString()), User.Identity.ToString());
+                res = uof_repos.repoEndPointCommands.Execute(Command.ID,Command.CommandCode, User.Identity.ToString());
                 return Json(res);
             }
             return Json(res);

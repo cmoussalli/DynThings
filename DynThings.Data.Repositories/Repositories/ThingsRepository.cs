@@ -53,7 +53,7 @@ namespace DynThings.Data.Repositories
         public IPagedList GetPagedList(string search, int pageNumber, int recordsPerPage)
         {
             IPagedList devs = db.Things
-              .Where(e => search == null || e.Title.Contains(search) && e.ID>0 )
+              .Where(e => search == null || e.Title.Contains(search) && e.ID > 0)
               .OrderBy(e => e.Title).ToList()
               .ToPagedList(pageNumber, recordsPerPage);
             return devs;
@@ -96,7 +96,7 @@ namespace DynThings.Data.Repositories
         #endregion
 
         #region Add
-        public ResultInfo.Result Add(string title, long categoryID, int utc_Diff,string userID)
+        public ResultInfo.Result Add(string title, long categoryID, int utc_Diff, string userID)
         {
             Thing thing = new Thing();
             try
@@ -157,61 +157,63 @@ namespace DynThings.Data.Repositories
         #endregion
 
 
-        public IPagedList GetThingEndsList(string searchFor ="" ,long ?locationID = null, long ?thingID = null,long ?thingCategoryID = null, long ?endpointTypeID = null,long ?endPointID = null, int pageNumber = 1, int recordsPerPage = 0)
-        {
-            
-            List<GetThingEnds_Result> queryResult = db.GetThingEnds(locationID,thingID,thingCategoryID,endPointID,endpointTypeID).Where(x => x.ThingTitle.Contains(searchFor)).ToList();
-            List<ThingEnd> thingEnds = new List<ThingEnd>();
+        //public IPagedList GetThingEndsList(string searchFor = "", long? locationID = null, long? thingID = null, long? thingCategoryID = null, long? endpointTypeID = null, long? endPointID = null, int pageNumber = 1, int recordsPerPage = 0)
+        //{
+        //    List<GetThingEnds_Result> queryResult = db.GetThingEnds(locationID, thingID, thingCategoryID, endPointID, endpointTypeID).Where(x => x.ThingTitle.Contains(searchFor)).ToList();
+        //    List<ThingEnd> thingEnds = new List<ThingEnd>();
 
+        //    foreach (GetThingEnds_Result res in queryResult)
+        //    {
+        //        ThingEnd thingEnd = new ThingEnd();
+        //        thingEnd.ConvertFromQuery_GetThingEndsList(res);
+        //        thingEnds.Add(thingEnd);
+        //    }
 
-            foreach (GetThingEnds_Result res in queryResult)
-            {
-                ThingEnd thingEnd = new ThingEnd();
-                thingEnd.ConvertFromQuery_GetThingEndsList(res);
-                thingEnds.Add(thingEnd);
-            }
+        //    return thingEnds.ToPagedList(pageNumber, recordsPerPage);
+        //}
 
-            return thingEnds.ToPagedList(pageNumber, recordsPerPage);
-        }
+        //public ThingEnd GetThingEnd(long thingID, long thingEndpointTypeID)
+        //{
+        //    ThingEnd tngEnd = new ThingEnd();
+        //    List<GetThingEnds_Result> queryResult = db.GetThingEnds(null, thingID, null, null, thingEndpointTypeID).ToList();
 
-        public ThingEnd GetThingEnd(long thingID, long thingEndpointTypeID)
-        {
-            ThingEnd tngEnd = new ThingEnd();
-            List<GetThingEnds_Result> queryResult = db.GetThingEnds(null, thingID, null, null, thingEndpointTypeID).ToList();
+        //    ThingEnd thingEnd = new ThingEnd();
+        //    thingEnd.ConvertFromQuery_GetThingEndsList(queryResult[0]);
+        //    return thingEnd;
+        //    //    Models.ThingEnd tngEnd = new Models.ThingEnd();
+        //    //    List<Models.ThingEnd> thingEnds = new List<Models.ThingEnd>();
+        //    //    if ()
+        //    //    return GetThingEnd()
+        //}
 
-            ThingEnd thingEnd = new ThingEnd();
-            thingEnd.ConvertFromQuery_GetThingEndsList(queryResult[0]);
-            return thingEnd;
-        }
+        //public IPagedList GetThingEndIOs(long thingID, long thingEndpointTypeID, DateTime fromDate, DateTime toDate, int pageNumber = 1, int recordsPerPage = 0)
+        //{
+        //    IPagedList result = db.EndPointIOs.Where
+        //        (i => i.ThingID == thingID
+        //        && i.Endpoint.TypeID == thingEndpointTypeID
+        //        && i.ExecTimeStamp > fromDate
+        //        && i.ExecTimeStamp < toDate
+        //        && i.IOTypeID < 3)
+        //        .OrderByDescending(i => i.ExecTimeStamp)
+        //        .Take(1000)
+        //        .ToPagedList(pageNumber, recordsPerPage);
 
-        public IPagedList GetThingEndIOs(long thingID,long thingEndpointTypeID,DateTime fromDate,DateTime toDate, int pageNumber = 1, int recordsPerPage = 0)
-        {
-            IPagedList result = db.EndPointIOs.Where
-                (i => i.ThingID == thingID
-                && i.Endpoint.TypeID == thingEndpointTypeID
-                && i.ExecTimeStamp > fromDate
-                && i.ExecTimeStamp < toDate
-                && i.IOTypeID < 3)
-                .OrderByDescending(i=>i.ExecTimeStamp)
-                .Take(1000)
-                .ToPagedList(pageNumber, recordsPerPage);
+        //    return result;
+        //}
 
-            return result;
-        }
+        //public IPagedList GetThingEndLogs(long thingID, long thingEndpointTypeID, DateTime fromDate, DateTime toDate, int pageNumber = 1, int recordsPerPage = 0)
+        //{
+        //    IPagedList result = db.EndPointIOs.Where
+        //        (i => i.ThingID == thingID
+        //        && i.Endpoint.TypeID == thingEndpointTypeID
+        //        && i.ExecTimeStamp > fromDate
+        //        && i.ExecTimeStamp < toDate
+        //        && i.IOTypeID == 3)
+        //        .OrderByDescending(i => i.ExecTimeStamp)
+        //        .Take(1000)
+        //        .ToPagedList(pageNumber, recordsPerPage);
 
-        public IPagedList GetThingEndLogs(long thingID, long thingEndpointTypeID, DateTime fromDate, DateTime toDate, int pageNumber = 1, int recordsPerPage = 0)
-        {
-            IPagedList result = db.EndPointIOs.Where
-                (i => i.ThingID == thingID
-                && i.Endpoint.TypeID == thingEndpointTypeID
-                && i.ExecTimeStamp > fromDate
-                && i.ExecTimeStamp < toDate
-                && i.IOTypeID == 3)
-                .OrderByDescending(i => i.ExecTimeStamp)
-                .Take(1000)
-                .ToPagedList(pageNumber, recordsPerPage);
-
-            return result;
-        }
+        //    return result;
+        //}
     }
 }

@@ -360,7 +360,7 @@ function SubmitAlertUserAttach(alertID,userID ) {
         type: 'POST',
         cache: false,
         success: function (result) {
-            ServerResponse(result);
+            //ServerResponse(result);
             LoadPart_AlertUsersListDiv(alertID);
             $('#mdl').modal('hide');
             return false;
@@ -376,7 +376,7 @@ function SubmitAlertUserDetach(alertID, userID) {
         type: 'POST',
         cache: false,
         success: function (result) {
-            ServerResponse(result);
+            //ServerResponse(result);
             LoadPart_AlertUsersListDiv(alertID);
             return false;
         }

@@ -504,5 +504,17 @@
             <param name="id">App ID</param>
             <returns>App Object</returns>
         </member>
+        <member name="M:DynThings.WebPortal.Controllers.ConnectivityController.Rpt_LastHourConnectionsPerMinutes">
+            <summary>
+            Return HighChart object, represent the connections per minutes in the last hour
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:DynThings.WebPortal.Controllers.ConnectivityController.Widget_LastHourConnectionsCount">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
     </members>
 </doc>

@@ -31,7 +31,7 @@
     <SccProvider>
     </SccProvider>
     <TargetFrameworkProfile />
-    <TypeScriptToolsVersion>1.8</TypeScriptToolsVersion>
+    <TypeScriptToolsVersion>2.1</TypeScriptToolsVersion>
     <ApplicationInsightsResourceId>/subscriptions/1ebfca6e-efcb-4343-9ca1-6fe72d0b1e17/resourcegroups/Default-ApplicationInsights-CentralUS/providers/microsoft.insights/components/DynThings.WebPortal</ApplicationInsightsResourceId>
     <ApplicationInsightsAnnotationResourceId>/subscriptions/1ebfca6e-efcb-4343-9ca1-6fe72d0b1e17/resourcegroups/Default-ApplicationInsights-CentralUS/providers/microsoft.insights/components/DynThings.WebPortal</ApplicationInsightsAnnotationResourceId>
   </PropertyGroup>
@@ -58,9 +58,13 @@
       <HintPath>..\packages\Antlr.3.5.0.2\lib\Antlr3.Runtime.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="AutoMapper, Version=6.0.2.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\packages\AutoMapper.6.0.2\lib\net45\AutoMapper.dll</HintPath>
+    </Reference>
     <Reference Include="DynHighCharts, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\_Libraries\_Libs\DynHighCharts.dll</HintPath>
+      <HintPath>..\packages\DynHighCharts.1.0.0\lib\DynHighCharts.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="DynThingsCentral.WebAPI.Client, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -103,8 +107,8 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
-    <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.10.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="PagedList, Version=1.17.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
@@ -251,6 +255,10 @@
     <Content Include="Content\css\nifty.min.css" />
     <Content Include="Content\css\PagedList.css" />
     <Content Include="Content\css\theme-ocean.min.css" />
+    <Content Include="Content\fonts\font-awesome-4.7.0\css\font-awesome.css" />
+    <Content Include="Content\fonts\font-awesome-4.7.0\css\font-awesome.min.css" />
+    <Content Include="Content\fonts\font-awesome-4.7.0\fonts\fontawesome-webfont.svg" />
+    <Content Include="Content\fonts\font-awesome-4.7.0\HELP-US-OUT.txt" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Content\img\bg-img\1.jpg" />
     <Content Include="Content\img\bg-img\2.jpg" />
@@ -498,6 +506,7 @@
     <Content Include="Imgs\7.png" />
     <Content Include="Imgs\8.png" />
     <Content Include="Imgs\9.png" />
+    <Content Include="Imgs\Apps\0.jpg" />
     <Content Include="Scripts\jquery-ui-1.12.1.js" />
     <Content Include="Scripts\jquery-ui-1.12.1.min.js" />
     <Content Include="Scripts\jquery.signalR-2.2.1.js" />
@@ -555,6 +564,39 @@
     <Content Include="Areas\HelpPage\Views\Help\Api.cshtml" />
     <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\TestClientReferences.cshtml" />
     <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\TestClientDialogs.cshtml" />
+    <Content Include="Content\fonts\font-awesome-4.7.0\fonts\fontawesome-webfont.eot" />
+    <Content Include="Content\fonts\font-awesome-4.7.0\fonts\fontawesome-webfont.ttf" />
+    <Content Include="Content\fonts\font-awesome-4.7.0\fonts\fontawesome-webfont.woff" />
+    <Content Include="Content\fonts\font-awesome-4.7.0\fonts\fontawesome-webfont.woff2" />
+    <Content Include="Content\fonts\font-awesome-4.7.0\fonts\FontAwesome.otf" />
+    <Content Include="Content\fonts\font-awesome-4.7.0\less\animated.less" />
+    <Content Include="Content\fonts\font-awesome-4.7.0\less\bordered-pulled.less" />
+    <Content Include="Content\fonts\font-awesome-4.7.0\less\core.less" />
+    <Content Include="Content\fonts\font-awesome-4.7.0\less\fixed-width.less" />
+    <Content Include="Content\fonts\font-awesome-4.7.0\less\font-awesome.less" />
+    <Content Include="Content\fonts\font-awesome-4.7.0\less\icons.less" />
+    <Content Include="Content\fonts\font-awesome-4.7.0\less\larger.less" />
+    <Content Include="Content\fonts\font-awesome-4.7.0\less\list.less" />
+    <Content Include="Content\fonts\font-awesome-4.7.0\less\mixins.less" />
+    <Content Include="Content\fonts\font-awesome-4.7.0\less\path.less" />
+    <Content Include="Content\fonts\font-awesome-4.7.0\less\rotated-flipped.less" />
+    <Content Include="Content\fonts\font-awesome-4.7.0\less\screen-reader.less" />
+    <Content Include="Content\fonts\font-awesome-4.7.0\less\stacked.less" />
+    <Content Include="Content\fonts\font-awesome-4.7.0\less\variables.less" />
+    <Content Include="Content\fonts\font-awesome-4.7.0\scss\font-awesome.scss" />
+    <Content Include="Content\fonts\font-awesome-4.7.0\scss\_animated.scss" />
+    <Content Include="Content\fonts\font-awesome-4.7.0\scss\_bordered-pulled.scss" />
+    <Content Include="Content\fonts\font-awesome-4.7.0\scss\_core.scss" />
+    <Content Include="Content\fonts\font-awesome-4.7.0\scss\_fixed-width.scss" />
+    <Content Include="Content\fonts\font-awesome-4.7.0\scss\_icons.scss" />
+    <Content Include="Content\fonts\font-awesome-4.7.0\scss\_larger.scss" />
+    <Content Include="Content\fonts\font-awesome-4.7.0\scss\_list.scss" />
+    <Content Include="Content\fonts\font-awesome-4.7.0\scss\_mixins.scss" />
+    <Content Include="Content\fonts\font-awesome-4.7.0\scss\_path.scss" />
+    <Content Include="Content\fonts\font-awesome-4.7.0\scss\_rotated-flipped.scss" />
+    <Content Include="Content\fonts\font-awesome-4.7.0\scss\_screen-reader.scss" />
+    <Content Include="Content\fonts\font-awesome-4.7.0\scss\_stacked.scss" />
+    <Content Include="Content\fonts\font-awesome-4.7.0\scss\_variables.scss" />
     <None Include="Properties\PublishProfiles\PublishTest.pubxml" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\jquery.validate.js" />
@@ -607,9 +649,12 @@
     <Compile Include="Controllers\AlertsController.cs" />
     <Compile Include="Controllers\APIEndPointIOsController.cs" />
     <Compile Include="Controllers\API\3rdParty\AppsController.cs" />
+    <Compile Include="Controllers\API\3rdParty\DeviceCommandsController.cs" />
+    <Compile Include="Controllers\API\3rdParty\EndPointCommandsController.cs" />
     <Compile Include="Controllers\API\3rdParty\LocationsController.cs" />
     <Compile Include="Controllers\API\3rdParty\LocationViewsController.cs" />
-    <Compile Include="Controllers\API\3rdParty\LocationViewsTController.cs" />
+    <Compile Include="Controllers\API\3rdParty\ThingEndsController.cs" />
+    <Compile Include="Controllers\API\3rdParty\ThingsController.cs" />
     <Compile Include="Controllers\API\AppAccountController.cs" />
     <Compile Include="Controllers\API\3rdParty\APPTokensController.cs" />
     <Compile Include="Controllers\API\NotificationsController.cs" />
@@ -633,7 +678,6 @@
     <Compile Include="Controllers\LocationsController.cs" />
     <Compile Include="Controllers\LocationViewsController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
-    <Compile Include="Controllers\API\APISimulatorServicesController.cs" />
     <Compile Include="Controllers\SetupController.cs" />
     <Compile Include="Controllers\API\ThingsIOController.cs" />
     <Compile Include="Controllers\UserNotificationsController.cs" />
@@ -682,6 +726,9 @@
     <Content Include="Views\Apps\_ApiEntityAttach.cshtml" />
     <Content Include="Views\Apps\_ApiEntityDeAttach.cshtml" />
     <Content Include="Views\Shared\_Delete.cshtml" />
+    <Content Include="Views\Shared\Widgets\_HighChart.cshtml" />
+    <Content Include="Views\Shared\Widgets\_InfoBox.cshtml" />
+    <Content Include="Views\Endpoints\_Details_Connectivity.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Assets\Imgs\Wizard.png" />
@@ -1030,6 +1077,10 @@
     <ProjectReference Include="..\DynThings.Data.Repositories\DynThings.Data.Repositories.csproj">
       <Project>{3eb80ea4-99d5-4db4-bd84-2370dce356d0}</Project>
       <Name>DynThings.Data.Repositories</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DynThings.Data.WidgetModels\DynThings.Data.WidgetModels.csproj">
+      <Project>{B180614C-FA0C-4676-80CC-35CFB32E016B}</Project>
+      <Name>DynThings.Data.WidgetModels</Name>
     </ProjectReference>
     <ProjectReference Include="..\DynThings.WebAPI.Models\DynThings.WebAPI.Models.csproj">
       <Project>{c5987efa-b632-406f-9934-0c6a924e05c7}</Project>

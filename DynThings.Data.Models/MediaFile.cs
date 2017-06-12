@@ -24,6 +24,8 @@ public partial class MediaFile
 
         this.ThingCategorys = new HashSet<ThingCategory>();
 
+        this.ThingCategorys1 = new HashSet<ThingCategory>();
+
     }
 
 
@@ -36,6 +38,10 @@ public partial class MediaFile
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
 
     public virtual ICollection<ThingCategory> ThingCategorys { get; set; }
+
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+
+    public virtual ICollection<ThingCategory> ThingCategorys1 { get; set; }
 
 }
 

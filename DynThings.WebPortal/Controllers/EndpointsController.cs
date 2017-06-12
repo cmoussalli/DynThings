@@ -11,7 +11,6 @@ using DynThings.Core;
 using DynThings.Data.Models;
 using DynThings.Data.Repositories;
 using DynThings.Data.Reports;
-using DynThings.Data.Models.ReportsModels;
 using DynHighCharts;
 
 namespace DynThings.WebPortal.Controllers
@@ -48,14 +47,7 @@ namespace DynThings.WebPortal.Controllers
 
         #region PartialViewResult: Partial Views
 
-        #region DetailsPV
-        public PartialViewResult DetailsPV(long id)
-        {
-            Endpoint endpoint = uof_repos.repoEndpoints.Find(id);
-            return PartialView("_Details_Main", endpoint);
-        }
-
-        #endregion
+        
 
         #region ListPV
         [HttpGet]
@@ -78,12 +70,12 @@ namespace DynThings.WebPortal.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult AddPV([Bind(Include = "Title,TypeID,DeviceID,ThingID")] Endpoint endpoint)
+        public ActionResult AddPV([Bind(Include = "Title,TypeID,DeviceID,ThingID,IsNumericOnly,MinValue,MaxValue,LowRange,HighRange")] Endpoint endpoint)
         {
             ResultInfo.Result res = ResultInfo.GetResultByID(1);
             if (ModelState.IsValid)
             {
-                res = uof_repos.repoEndpoints.Add(endpoint.Title, endpoint.TypeID, endpoint.DeviceID,endpoint.ThingID);
+                res = uof_repos.repoEndpoints.Add(endpoint.Title, endpoint.TypeID, endpoint.DeviceID,endpoint.ThingID, endpoint.IsNumericOnly, endpoint.MinValue, endpoint.MaxValue, endpoint.LowRange, endpoint.HighRange);
                 return Json(res);
             }
             return Json(res);
@@ -103,12 +95,12 @@ namespace DynThings.WebPortal.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult EditPV([Bind(Include = "ID,Title,TypeID,DeviceID,ThingID")] Endpoint endpoint)
+        public ActionResult EditPV([Bind(Include = "ID,Title,TypeID,DeviceID,ThingID,IsNumericOnly,MinValue,MaxValue,LowRange,HighRange")] Endpoint endpoint)
         {
             ResultInfo.Result res = ResultInfo.GetResultByID(1);
             if (ModelState.IsValid)
             {
-                res = uof_repos.repoEndpoints.Edit(endpoint.ID, endpoint.Title, endpoint.TypeID,endpoint.ThingID);
+                res = uof_repos.repoEndpoints.Edit(endpoint.ID, endpoint.Title, endpoint.TypeID,endpoint.ThingID,endpoint.IsNumericOnly,endpoint.MinValue,endpoint.MaxValue,endpoint.LowRange,endpoint.HighRange);
                 return Json(res);
             }
             return Json(res);
@@ -143,6 +135,23 @@ namespace DynThings.WebPortal.Controllers
         }
         #endregion
 
+        #region EndPoint MainDetails
+        public PartialViewResult DetailsPV(long id)
+        {
+            Endpoint endpoint = uof_repos.repoEndpoints.Find(id);
+            return PartialView("_Details_Main", endpoint);
+        }
+
+        #endregion
+
+        #region EndPoint Connectivity
+        public PartialViewResult EndPointConnectivityPV(long id)
+        {
+            Endpoint endpoint = uof_repos.repoEndpoints.Find(id);
+            return PartialView("_Details_Connectivity", endpoint);
+        }
+
+        #endregion
 
         #region EndPoint History
         [HttpGet]

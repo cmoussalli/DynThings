@@ -31,8 +31,11 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="AutoMapper, Version=6.0.2.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\packages\AutoMapper.6.0.2\lib\net45\AutoMapper.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.10.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
@@ -45,31 +48,29 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="APIApp.cs" />
-    <Compile Include="APIAppUserToken.cs" />
-    <Compile Include="APIDeviceCommand.cs" />
-    <Compile Include="APIDeviceIO.cs" />
-    <Compile Include="APIDeviceStatus.cs" />
-    <Compile Include="APIEndPointIO.cs" />
-    <Compile Include="APIEndPoint.cs" />
-    <Compile Include="APIDevice.cs" />
-    <Compile Include="APILocation.cs" />
-    <Compile Include="APILocationView.cs" />
-    <Compile Include="APIPlatformInfo.cs" />
-    <Compile Include="ApiResponse.cs" />
-    <Compile Include="CommandEnitity.cs" />
-    <Compile Include="SubmissionDeviceIO.cs" />
-    <Compile Include="SubmissionEndPointIO.cs" />
+    <Compile Include="Models\APIApp.cs" />
+    <Compile Include="Models\APIAppUserToken.cs" />
+    <Compile Include="Models\APILocationViewType.cs" />
+    <Compile Include="Models\APIThingsType.cs" />
+    <Compile Include="Models\APIEndPointTypeCategory.cs" />
+    <Compile Include="Models\APIEndPointType.cs" />
+    <Compile Include="Models\APIThing.cs" />
+    <Compile Include="Models\APIDeviceCommand.cs" />
+    <Compile Include="Models\APIDeviceIO.cs" />
+    <Compile Include="Models\APIDeviceStatus.cs" />
+    <Compile Include="Models\APIEndPointIO.cs" />
+    <Compile Include="Models\APIEndPoint.cs" />
+    <Compile Include="Models\APIDevice.cs" />
+    <Compile Include="Models\APILocation.cs" />
+    <Compile Include="Models\APILocationView.cs" />
+    <Compile Include="Models\APIPlatformInfo.cs" />
+    <Compile Include="Models\ApiResponse.cs" />
+    <Compile Include="Models\APIEndPointCommand.cs" />
+    <Compile Include="Models\APIThingEnd.cs" />
+    <Compile Include="Models\SubmissionDeviceIO.cs" />
+    <Compile Include="Models\SubmissionEndPointCommandExecuted.cs" />
+    <Compile Include="Models\SubmissionEndPointIO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TypesMapper\APIAppAdapter.cs" />
-    <Compile Include="TypesMapper\APILocationAdapter.cs" />
-    <Compile Include="TypesMapper\APITokenAdapter.cs" />
-    <Compile Include="TypesMapper\APILocationViewAdapter.cs" />
-    <Compile Include="TypesMapper\APIDeviceCommandAdapter.cs" />
-    <Compile Include="TypesMapper\APIDeviceIOAdapter.cs" />
-    <Compile Include="TypesMapper\APIEndPointIOAdapter.cs" />
-    <Compile Include="TypesMapper\APIDeviceAdapter.cs" />
-    <Compile Include="TypesMapper\ApiResponseAdapter.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DynThings.Core\DynThings.Core.csproj">
@@ -87,6 +88,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Readme.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

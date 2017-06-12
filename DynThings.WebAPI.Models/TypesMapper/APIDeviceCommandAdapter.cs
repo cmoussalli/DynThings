@@ -10,17 +10,17 @@ namespace DynThings.WebAPI.Models.TypesMapper
 {
     public static class APIDeviceCommandAdapter
     {
-        //public static APIDeviceIO fromDeviceCommand(DeviceCommand sourceDeviceCommand)
-        //{
-        //    APIDeviceIO result = new APIDeviceIO();
-        //    result.ID = sourceDeviceCommand.ID;
-        //    result. = sourceDeviceCommand.CommandCode;
-        //    result.Description = sourceDeviceCommand.Description;
-        //    result.OwnerID = sourceDeviceCommand.OwnerID;
-        //    result.Title = sourceDeviceCommand.Title;
-        //    result.DeviceID = sourceDeviceCommand.DeviceID;
-        //    return result;
-        //}
+        public static APIDeviceCommand fromDeviceCommand(DeviceCommand sourceDeviceCommand)
+        {
+            APIDeviceCommand apiCmd = new APIDeviceCommand();
+            apiCmd.ID = sourceDeviceCommand.ID;
+            apiCmd.Title = sourceDeviceCommand.Title;
+            apiCmd.Description = sourceDeviceCommand.Description;
+            apiCmd.CommandCode = sourceDeviceCommand.CommandCode;
+            apiCmd.DeviceID = sourceDeviceCommand.DeviceID;
+            apiCmd.OwnerID = sourceDeviceCommand.OwnerID;
+            return apiCmd;
+        }
     }
 
    

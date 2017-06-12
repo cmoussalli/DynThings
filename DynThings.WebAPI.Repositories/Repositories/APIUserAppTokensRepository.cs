@@ -24,6 +24,14 @@ namespace DynThings.WebAPI.Repositories
 
         #region props
         private DynThingsEntities db;
+        private APIUtilizationsRepository repoAPIUtilizations
+        {
+            get
+            {
+                APIUtilizationsRepository result = new APIUtilizationsRepository(db);
+                return result;
+            }
+        }
         #endregion
 
         #region Helpers
@@ -89,7 +97,7 @@ namespace DynThings.WebAPI.Repositories
                         token.Token = Guid.NewGuid();
                         db.AppUserTokens.Add(token);
                         db.SaveChanges();
-                        apiToken = Models.TypesMapper.APITokenAdapter.fromToken(token);
+                        apiToken = TypesMapper.APITokenAdapter.fromToken(token);
 
                     }
                 }
@@ -154,7 +162,7 @@ namespace DynThings.WebAPI.Repositories
                     }
                     else
                     {//Token is Valid
-                        result = Models.TypesMapper.APITokenAdapter.fromToken(appUserToken);
+                        result = TypesMapper.APITokenAdapter.fromToken(appUserToken);
                     }
                 }
                 else
@@ -172,39 +180,50 @@ namespace DynThings.WebAPI.Repositories
         #endregion
 
         #region Validate Token Entity Permission
-        public ResultInfo.Result ValidateTokenEntityPermission(Guid token, long entityID)
+        public ResultInfo.Result ValidateTokenEntityPermission(Guid token, long entityID,int methodID)
         {
             ResultInfo.Result result = ResultInfo.GenerateErrorResult();
             try
             {
                 AppUserToken appUserToken = db.AppUserTokens.First(t => t.Token == token);
-                if (appUserToken != null)
+                if (appUserToken == null)
+                {//Token is not Exist
+                    string message = "Token is not exist";
+                    repoAPIUtilizations.AddUnAuthorized(token, methodID, message);
+                    result = ResultInfo.GenerateErrorResult(message);
+                }
+                else
                 {//Token is Exist
                     if (appUserToken.ExpireDate < DateTime.Now)
                     {//Token is Expired
-                        result = ResultInfo.GenerateErrorResult("Token is Expired");
+                        string message = "Token is Expired";
+                        repoAPIUtilizations.AddUnAuthorized(token, methodID, message);
+                        result = ResultInfo.GenerateErrorResult(message);
                     }
                     else
                     {//Token is Valid
                         List<AppAPIEntity> tokEntities = db.AppAPIEntitys.Where(a => a.AppID == (long)appUserToken.AppID && a.SystemEntityID == entityID).ToList();
                         if (tokEntities.Count == 0)
                         {//Token don't have access to Entity
-                            result = ResultInfo.GenerateNotAuthorizedResult("Token is not allowed to access the requested entity");
+                            string message = "Token is not allowed to access the requested entity";
+                            repoAPIUtilizations.AddUnAuthorized(token, methodID, message);
+                            result = ResultInfo.GenerateNotAuthorizedResult(message);
                         }
                         else
                         {//Token is allowed to access the Entity
-                            result = result = ResultInfo.GenerateOKResult("Token is active and have access to " + tokEntities[0].SystemEntity.Title + " entity");
+                            string message = "Token is active and have access to " + tokEntities[0].SystemEntity.Title + " entity";
+                            repoAPIUtilizations.AddSuccess((long)appUserToken.AppID, token, methodID, message);
+                            result = result = ResultInfo.GenerateOKResult(message);
                         }
                     }
                 }
-                else
-                {//Token is not Exist
-                    result = ResultInfo.GenerateErrorResult("Token is not exist");
-                }
+
             }
             catch (Exception ex)
             {
-                result = ResultInfo.GenerateErrorResult("Token is not exist");
+                string message = "Token is not exist";
+                repoAPIUtilizations.AddUnAuthorized( token, methodID, message);
+                result = ResultInfo.GenerateErrorResult(message);
             }
             return result;
         }

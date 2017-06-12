@@ -26,6 +26,8 @@ public partial class IOType
 
         this.DeviceIOs = new HashSet<DeviceIO>();
 
+        this.DeviceIOs1 = new HashSet<DeviceIO>();
+
         this.EndPointIOs = new HashSet<EndPointIO>();
 
     }
@@ -46,6 +48,10 @@ public partial class IOType
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
 
     public virtual ICollection<DeviceIO> DeviceIOs { get; set; }
+
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+
+    public virtual ICollection<DeviceIO> DeviceIOs1 { get; set; }
 
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
 

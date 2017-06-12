@@ -50,7 +50,7 @@ function AttachEventEndPointAddForm() {
 
 
 //Attach : Edit Form Submit
-function AttachEventEndPointEditForm(endPointID) {
+function AttachEventEndPointEditForm() {
     $("#EndPointEditForm").on("submit", function (event) {
         event.preventDefault();
         var url = $(this).attr("action");
@@ -68,11 +68,11 @@ function AttachEventEndPointEditForm(endPointID) {
             }
         })
         $('#mdl').modal('hide');
-        LoadPart_EndPointDetailsDiv(endPointID);
+        LoadPart_EndpointMainDiv();
     });
 };
 
-function AttachEventEndPointDevKeysEditForm(endPointID) {
+function AttachEventEndPointDevKeysEditForm() {
     $("#EndPointDevKeysEditForm").on("submit", function (event) {
         event.preventDefault();
         var url = $(this).attr("action");
@@ -90,7 +90,7 @@ function AttachEventEndPointDevKeysEditForm(endPointID) {
             }
         })
         $('#mdl').modal('hide');
-        LoadPart_EndPointDevKeysDiv(endPointID);
+        LoadPart_EndPointDevKeysDiv(selectedEndPointID);
     });
 };
 
@@ -110,15 +110,15 @@ function LoadPart_EndPointListDiv() {
 };
 
 //Get Details
-function LoadPart_EndPointDetailsDiv(id) {
+function LoadPart_EndpointMainDiv() {
     var loadingpart = LoadDivLoading();
-    $("#divEndPointMain").html(loadingpart);
+    $("#divPageDetails").html(loadingpart);
     $.ajax({
-        url: getRootURL() + '/EndPoints/DetailsPV?id=' + id,
+        url: getRootURL() + '/EndPoints/DetailsPV?id=' + selectedEndPointID,
         type: "GET",
     })
     .success(function (partialViewResult) {
-        $("#divEndPointMain").html(partialViewResult);
+        $("#divPageDetails").html(partialViewResult);
     });
 }
 
@@ -128,7 +128,6 @@ function LoadPart_DialogEndPointAdd() {
     $("#modal").html(loadingpart);
     $.ajax({
         url: getRootURL() + '/EndPoints/addpv',
-        //page=" + $("#DynConfigCurrentPage").html,
         type: "GET",
     })
     .success(function (partialViewResult) {
@@ -137,11 +136,11 @@ function LoadPart_DialogEndPointAdd() {
 }
 
 //Get Edit
-function LoadPart_DialogEndPointEdit(id) {
+function LoadPart_DialogEndPointEdit() {
     var loadingpart = LoadDivLoading();
     $("#modal").html(loadingpart);
     $.ajax({
-        url: getRootURL() + '/EndPoints/editpv?id=' + id,
+        url: getRootURL() + '/EndPoints/editpv?id=' + selectedEndPointID,
         type: "GET",
     })
     .success(function (partialViewResult) {
@@ -150,11 +149,11 @@ function LoadPart_DialogEndPointEdit(id) {
 }
 
 //Get Delete
-function LoadPart_DialogEndPointDelete(id) {
+function LoadPart_EndpointDelete() {
     var loadingpart = LoadDivLoading();
     $("#modal").html(loadingpart);
     $.ajax({
-        url: getRootURL() + '/EndPoints/DeletePV?id=' + id,
+        url: getRootURL() + '/EndPoints/DeletePV?id=' + selectedEndPointID,
         //page=" + $("#DynConfigCurrentPage").html,
         type: "GET",
     })
@@ -163,59 +162,58 @@ function LoadPart_DialogEndPointDelete(id) {
     });
 }
 
-function LoadEndpointEditor(id) {
-    LoadPart_DialogEndPointEdit(id);
-    LoadPart_EndPointDetailsDiv(id);
+function LoadEndpointEditor() {
+    LoadPart_DialogEndPointEdit();
+    LoadPart_EndpointMainDiv();
 }
 
 //Get History IOs
-function LoadPart_EndPointHistoryDiv(endPointID) {
+function LoadPart_EndpointHistoryDiv() {
     var loadingpart = LoadDivLoading();
-    $("#SelectedEndPointID").val(endPointID);
-    $("#divEndPointHistory").html(loadingpart);
+    $("#divPageDetails").html(loadingpart);
     $.ajax({
-        url: getRootURL() + '/EndPoints/GetPVEndPointHistory?endPointID=' + endPointID + '&page=1&recordsPerPage=0',
+        url: getRootURL() + '/EndPoints/GetPVEndPointHistory?endPointID=' + selectedEndPointID + '&page=1&recordsPerPage=0',
         type: "GET",
     })
     .success(function (partialViewResult) {
-        $("#divEndPointHistory").html(partialViewResult);
+        $("#divPageDetails").html(partialViewResult);
     });
 }
 
 //Get Commands
-function LoadPart_EndPointCommandListByEndPointIDDiv(endPointID, search) {
+function LoadPart_EndpointCommandsDiv(search) {
     var loadingpart = LoadDivLoading();
-    $("#divEndPointCommandsList").html(loadingpart);
+    $("#divPageDetails").html(loadingpart);
     $.ajax({
-        url: getRootURL() + '/EndPoints/EndPointCommandsListByEndPointIDPV?searchfor=' + search + '&EndPointID=' + endPointID + '&recordsperpage=0',
+        url: getRootURL() + '/EndPoints/EndPointCommandsListByEndPointIDPV?searchfor=' + search + '&EndPointID=' + selectedEndPointID + '&recordsperpage=0',
         type: "GET",
     })
         .success(function (partialViewResult) {
-            $("#divEndPointCommandsList").html(partialViewResult);
+            $("#divPageDetails").html(partialViewResult);
         });
     return false;
 }
 
 //Get DevKeys
-function LoadPart_EndPointDevKeysDiv(endPointID) {
+function LoadPart_EndpointDeveloperDiv() {
     var loadingpart = LoadDivLoading();
-    $("#divEndPointDevkeys").html(loadingpart);
+    $("#divPageDetails").html(loadingpart);
     $.ajax({
-        url: getRootURL() + '/EndPoints/DevKeysPV?ID=' + endPointID,
+        url: getRootURL() + '/EndPoints/DevKeysPV?ID=' + selectedEndPointID,
         type: "GET",
     })
         .success(function (partialViewResult) {
-            $("#divEndPointDevkeys").html(partialViewResult);
+            $("#divPageDetails").html(partialViewResult);
         });
     return false;
 }
 
 //Get Edit DevKeys
-function LoadPart_DialogEndPointDevKeysEdit(id) {
+function LoadPart_DialogEndPointDevKeysEdit() {
     var loadingpart = LoadDivLoading();
     $("#modal").html(loadingpart);
     $.ajax({
-        url: getRootURL() + '/EndPoints/EditDevKeysPV?id=' + id,
+        url: getRootURL() + '/EndPoints/EditDevKeysPV?id=' + selectedEndPointID,
         type: "GET",
     })
     .success(function (partialViewResult) {
@@ -298,11 +296,24 @@ function drpReport_Select(endPointID,year) {
 
 
 //HighChart
-function LoadChart_EndPoint_MonthDiv(endPointID,year) {
+function LoadChart_EndPoint_ConnectivityDiv() {
+    var loadingpart = LoadDivLoading();
+    $("#divPageDetails").html(loadingpart);
+    $.ajax({
+        url: getRootURL() + '/EndPoints/EndPointConnectivityPV?ID=' + selectedEndPointID ,
+        type: "GET",
+    })
+        .success(function (partialViewResult) {
+            $("#divPageDetails").html(partialViewResult);
+        });
+    return false;
+}
+
+function LoadChart_EndPoint_MonthDiv(year) {
     var loadingpart = LoadDivLoading();
     $("#EndPointChartDiv").html(loadingpart);
     $.ajax({
-        url: getRootURL() + '/EndPoints/Rpt_Month?EndPointID=' + endPointID + '&year=2016',
+        url: getRootURL() + '/EndPoints/Rpt_Month?EndPointID=' + selectedEndPointID + '&year=' + Date().getFullYear() ,
         type: "GET",
     })
         .success(function (partialViewResult) {
@@ -311,11 +322,11 @@ function LoadChart_EndPoint_MonthDiv(endPointID,year) {
     return false;
 }
 
-function LoadChart_EndPoint_DayDiv(endPointID) {
+function LoadChart_EndPoint_DayDiv() {
     var loadingpart = LoadDivLoading();
     $("#EndPointChartDiv").html(loadingpart);
     $.ajax({
-        url: getRootURL() + '/EndPoints/Rpt_Day?EndPointID=' + endPointID,
+        url: getRootURL() + '/EndPoints/Rpt_Day?EndPointID=' + selectedEndPointID,
         type: "GET",
     })
         .success(function (partialViewResult) {
@@ -324,11 +335,11 @@ function LoadChart_EndPoint_DayDiv(endPointID) {
     return false;
 }
 
-function LoadChart_EndPoint_HourDiv(endPointID) {
+function LoadChart_EndPoint_HourDiv() {
     var loadingpart = LoadDivLoading();
     $("#EndPointChartDiv").html(loadingpart);
     $.ajax({
-        url: getRootURL() + '/EndPoints/Rpt_Hour?EndPointID=' + endPointID,
+        url: getRootURL() + '/EndPoints/Rpt_Hour?EndPointID=' + selectedEndPointID,
         type: "GET",
     })
         .success(function (partialViewResult) {
@@ -337,11 +348,11 @@ function LoadChart_EndPoint_HourDiv(endPointID) {
     return false;
 }
 
-function LoadChart_EndPoint_MinuteDiv(endPointID) {
+function LoadChart_EndPoint_MinuteDiv() {
     var loadingpart = LoadDivLoading();
     $("#EndPointChartDiv").html(loadingpart);
     $.ajax({
-        url: getRootURL() + '/EndPoints/Rpt_Minute?EndPointID=' + endPointID,
+        url: getRootURL() + '/EndPoints/Rpt_Minute?EndPointID=' + selectedEndPointID,
         type: "GET",
     })
         .success(function (partialViewResult) {

@@ -26,9 +26,11 @@ public partial class AppAPIEntity
 
 
 
+    public virtual SystemEntity SystemEntity { get; set; }
+
     public virtual App App { get; set; }
 
-    public virtual SystemEntity SystemEntity { get; set; }
+    public virtual SystemEntity SystemEntity1 { get; set; }
 
 }
 

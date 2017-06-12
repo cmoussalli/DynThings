@@ -2,277 +2,79 @@
 @{
     ViewBag.Title = "App Details";
 }
-<div id="page-title">
-    <h1 class="page-header text-overflow">@ViewBag.Title</h1>
 
-    <!--Searchbox-->
-    <div class="searchbox">
-        <div class="input-group custom-search-form">
-            <input type="text" class="form-control" placeholder="Search..">
-            <span class="input-group-btn">
-                <button class="text-muted" type="button"><i class="demo-pli-magnifi-glass"></i></button>
-            </span>
+<div id="page-title">
+    <div class="row">
+
+        <div class="col-lg-9">
+            <h1 class="page-header text-overflow">App Details: @Model.Title</h1>
+            <h5>Manage the platform customizations using apps, and publish your app to DynThings store.</h5>
+        </div>
+
+        <div class="col-lg-3">
+            <div class="pull-right">
+                <br />
+                <a href="~/Apps"> < Back to Apps List</a>
+            </div>
         </div>
     </div>
 </div>
 
 <div id="page-content">
-    <div class="row">
-        <div class="col-lg-7">
-            <!--Network Line Chart-->
-            <!--===================================================-->
-            <div id="demo-panel-network" class="panel">
-                <div class="panel-heading">
-                    <div class="panel-control">
-                        <button id="demo-panel-network-refresh" data-toggle="panel-overlay" data-target="#demo-panel-network" class="btn"><i class="demo-pli-repeat-2 icon-lg"></i></button>
-                        <div class="btn-group">
-                            <button class="dropdown-toggle btn" data-toggle="dropdown" aria-expanded="false"><i class="demo-pli-gear icon-lg"></i></button>
-                            <ul class="dropdown-menu dropdown-menu-right">
-                                <li><a href="#">Action</a></li>
-                                <li><a href="#">Another action</a></li>
-                                <li><a href="#">Something else here</a></li>
-                                <li class="divider"></li>
-                                <li><a href="#">Separated link</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <h3 class="panel-title">Network</h3>
-                </div>
-
-                <!--Morris line chart placeholder-->
-                <div id="morris-chart-network" class="morris-full-content" style="position: relative; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
-                    <svg height="200" version="1.1" width="673" xmlns="http://www.w3.org/2000/svg" style="overflow: hidden; position: relative;"><desc style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">Created with Raphaël 2.1.2</desc><defs style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></defs><path fill="none" stroke="#000000" d="M25,175H648" stroke-opacity="0" stroke-width="0.5" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path><path fill="none" stroke="#000000" d="M25,137.5H648" stroke-opacity="0" stroke-width="0.5" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path><path fill="none" stroke="#000000" d="M25,100H648" stroke-opacity="0" stroke-width="0.5" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path><path fill="none" stroke="#000000" d="M25,62.5H648" stroke-opacity="0" stroke-width="0.5" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path><path fill="none" stroke="#000000" d="M25,25H648" stroke-opacity="0" stroke-width="0.5" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path><path fill="#cce5f9" stroke="none" d="M25,157C27.995192307692307,155.125,33.98557692307692,150.34375,36.980769230769226,149.5C39.97596153846153,148.65625,45.96634615384615,149.125,48.96153846153846,150.25C51.95673076923077,151.375,57.94711538461539,158.03125,60.94230769230769,158.5C63.9375,158.96875,69.92788461538461,157.5625,72.92307692307692,154C75.91826923076923,150.4375,81.90865384615384,133,84.90384615384615,130C87.89903846153845,127,93.88942307692308,130.9375,96.88461538461539,130C99.8798076923077,129.0625,105.8701923076923,123.15625,108.86538461538461,122.5C111.86057692307692,121.84375,117.85096153846153,126.25,120.84615384615384,124.75C123.84134615384615,123.25,129.83173076923077,112.28125,132.82692307692307,110.5C135.82211538461536,108.71875,141.8125,113.03125,144.8076923076923,110.5C147.80288461538458,107.96875,153.79326923076923,94.375,156.78846153846152,90.25C159.78365384615384,86.125,165.77403846153845,77.59375,168.76923076923077,77.5C171.7644230769231,77.40625,177.75480769230768,84.8125,180.75,89.5C183.74519230769232,94.1875,189.7355769230769,114.53125,192.73076923076923,115C195.72596153846155,115.46875,201.71634615384613,95.125,204.71153846153845,93.25C207.70673076923077,91.375,213.69711538461536,99.625,216.69230769230768,100C219.6875,100.375,225.67788461538458,97.1875,228.6730769230769,96.25C231.66826923076923,95.3125,237.6586538461538,92.21875,240.65384615384613,92.5C243.64903846153845,92.78125,249.63942307692304,98.21875,252.63461538461536,98.5C255.62980769230768,98.78125,261.62019230769226,90.8125,264.6153846153846,94.75C267.6105769230769,98.6875,273.6009615384615,126.25,276.5961538461538,130C279.59134615384613,133.75,285.5817307692307,126.25,288.57692307692304,124.75C291.57211538461536,123.25,297.56249999999994,118.5625,300.55769230769226,118C303.5528846153846,117.4375,309.5432692307692,121.9375,312.53846153846155,120.25C315.53365384615387,118.5625,321.52403846153845,110.3125,324.5192307692308,104.5C327.5144230769231,98.6875,333.5048076923077,79.375,336.5,73.75C339.4951923076923,68.125,345.4855769230769,58.09375,348.4807692307692,59.5C351.47596153846155,60.90625,357.46634615384613,79.9375,360.46153846153845,85C363.4567307692308,90.0625,369.44711538461536,100.9375,372.4423076923077,100C375.4375,99.0625,381.4278846153846,77.5,384.4230769230769,77.5C387.4182692307692,77.5,393.4086538461538,93.4375,396.40384615384613,100C399.39903846153845,106.5625,405.38942307692304,127.1875,408.38461538461536,130C411.3798076923077,132.8125,417.37019230769226,123.15625,420.3653846153846,122.5C423.3605769230769,121.84375,429.3509615384615,126.25,432.3461538461538,124.75C435.34134615384613,123.25,441.3317307692307,112.28125,444.32692307692304,110.5C447.32211538461536,108.71875,453.31249999999994,113.03125,456.30769230769226,110.5C459.3028846153846,107.96875,465.29326923076917,94.375,468.2884615384615,90.25C471.2836538461538,86.125,477.2740384615384,77.59375,480.2692307692307,77.5C483.26442307692304,77.40625,489.2548076923076,84.8125,492.24999999999994,89.5C495.24519230769226,94.1875,501.23557692307685,114.53125,504.23076923076917,115C507.2259615384615,115.46875,513.2163461538462,95.12500000000001,516.2115384615385,93.25C519.2067307692307,91.37500000000001,525.1971153846154,99.625,528.1923076923076,100C531.1875,100.375,537.1778846153845,97.1875,540.1730769230769,96.25C543.1682692307692,95.3125,549.1586538461538,92.21875,552.1538461538461,92.5C555.1490384615383,92.78125,561.1394230769231,98.21875,564.1346153846154,98.5C567.1298076923076,98.78125,573.1201923076923,90.81250000000001,576.1153846153845,94.75C579.1105769230769,98.68750000000001,585.1009615384614,126.25,588.0961538461538,130C591.0913461538462,133.75,597.0817307692307,126.25,600.0769230769231,124.75C603.0721153846154,123.25,609.0625,118.5625,612.0576923076923,118C615.0528846153845,117.4375,621.0432692307693,121.93750000000001,624.0384615384615,120.25C627.0336538461538,118.56250000000001,633.0240384615385,105.0625,636.0192307692307,104.5C639.0144230769231,103.9375,645.0048076923076,112.9375,648,115.75L648,175L25,175Z" fill-opacity="1" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); fill-opacity: 1;"></path><path fill="none" stroke="#82c4f8" d="M25,157C27.995192307692307,155.125,33.98557692307692,150.34375,36.980769230769226,149.5C39.97596153846153,148.65625,45.96634615384615,149.125,48.96153846153846,150.25C51.95673076923077,151.375,57.94711538461539,158.03125,60.94230769230769,158.5C63.9375,158.96875,69.92788461538461,157.5625,72.92307692307692,154C75.91826923076923,150.4375,81.90865384615384,133,84.90384615384615,130C87.89903846153845,127,93.88942307692308,130.9375,96.88461538461539,130C99.8798076923077,129.0625,105.8701923076923,123.15625,108.86538461538461,122.5C111.86057692307692,121.84375,117.85096153846153,126.25,120.84615384615384,124.75C123.84134615384615,123.25,129.83173076923077,112.28125,132.82692307692307,110.5C135.82211538461536,108.71875,141.8125,113.03125,144.8076923076923,110.5C147.80288461538458,107.96875,153.79326923076923,94.375,156.78846153846152,90.25C159.78365384615384,86.125,165.77403846153845,77.59375,168.76923076923077,77.5C171.7644230769231,77.40625,177.75480769230768,84.8125,180.75,89.5C183.74519230769232,94.1875,189.7355769230769,114.53125,192.73076923076923,115C195.72596153846155,115.46875,201.71634615384613,95.125,204.71153846153845,93.25C207.70673076923077,91.375,213.69711538461536,99.625,216.69230769230768,100C219.6875,100.375,225.67788461538458,97.1875,228.6730769230769,96.25C231.66826923076923,95.3125,237.6586538461538,92.21875,240.65384615384613,92.5C243.64903846153845,92.78125,249.63942307692304,98.21875,252.63461538461536,98.5C255.62980769230768,98.78125,261.62019230769226,90.8125,264.6153846153846,94.75C267.6105769230769,98.6875,273.6009615384615,126.25,276.5961538461538,130C279.59134615384613,133.75,285.5817307692307,126.25,288.57692307692304,124.75C291.57211538461536,123.25,297.56249999999994,118.5625,300.55769230769226,118C303.5528846153846,117.4375,309.5432692307692,121.9375,312.53846153846155,120.25C315.53365384615387,118.5625,321.52403846153845,110.3125,324.5192307692308,104.5C327.5144230769231,98.6875,333.5048076923077,79.375,336.5,73.75C339.4951923076923,68.125,345.4855769230769,58.09375,348.4807692307692,59.5C351.47596153846155,60.90625,357.46634615384613,79.9375,360.46153846153845,85C363.4567307692308,90.0625,369.44711538461536,100.9375,372.4423076923077,100C375.4375,99.0625,381.4278846153846,77.5,384.4230769230769,77.5C387.4182692307692,77.5,393.4086538461538,93.4375,396.40384615384613,100C399.39903846153845,106.5625,405.38942307692304,127.1875,408.38461538461536,130C411.3798076923077,132.8125,417.37019230769226,123.15625,420.3653846153846,122.5C423.3605769230769,121.84375,429.3509615384615,126.25,432.3461538461538,124.75C435.34134615384613,123.25,441.3317307692307,112.28125,444.32692307692304,110.5C447.32211538461536,108.71875,453.31249999999994,113.03125,456.30769230769226,110.5C459.3028846153846,107.96875,465.29326923076917,94.375,468.2884615384615,90.25C471.2836538461538,86.125,477.2740384615384,77.59375,480.2692307692307,77.5C483.26442307692304,77.40625,489.2548076923076,84.8125,492.24999999999994,89.5C495.24519230769226,94.1875,501.23557692307685,114.53125,504.23076923076917,115C507.2259615384615,115.46875,513.2163461538462,95.12500000000001,516.2115384615385,93.25C519.2067307692307,91.37500000000001,525.1971153846154,99.625,528.1923076923076,100C531.1875,100.375,537.1778846153845,97.1875,540.1730769230769,96.25C543.1682692307692,95.3125,549.1586538461538,92.21875,552.1538461538461,92.5C555.1490384615383,92.78125,561.1394230769231,98.21875,564.1346153846154,98.5C567.1298076923076,98.78125,573.1201923076923,90.81250000000001,576.1153846153845,94.75C579.1105769230769,98.68750000000001,585.1009615384614,126.25,588.0961538461538,130C591.0913461538462,133.75,597.0817307692307,126.25,600.0769230769231,124.75C603.0721153846154,123.25,609.0625,118.5625,612.0576923076923,118C615.0528846153845,117.4375,621.0432692307693,121.93750000000001,624.0384615384615,120.25C627.0336538461538,118.56250000000001,633.0240384615385,105.0625,636.0192307692307,104.5C639.0144230769231,103.9375,645.0048076923076,112.9375,648,115.75" stroke-width="0" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path><circle cx="25" cy="157" r="0" fill="#82c4f8" stroke="#ffffff" stroke-width="1" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></circle><circle cx="36.980769230769226" cy="149.5" r="0" fill="#82c4f8" stroke="#ffffff" stroke-width="1" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></circle><circle cx="48.96153846153846" cy="150.25" r="0" fill="#82c4f8" stroke="#ffffff" stroke-width="1" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></circle><circle cx="60.94230769230769" cy="158.5" r="0" fill="#82c4f8" stroke="#ffffff" stroke-width="1" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></circle><circle cx="72.92307692307692" cy="154" r="0" fill="#82c4f8" stroke="#ffffff" stroke-width="1" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></circle><circle cx="84.90384615384615" cy="130" r="0" fill="#82c4f8" stroke="#ffffff" stroke-width="1" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></circle><circle cx="96.88461538461539" cy="130" r="0" fill="#82c4f8" stroke="#ffffff" stroke-width="1" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></circle><circle cx="108.86538461538461" cy="122.5" r="0" fill="#82c4f8" stroke="#ffffff" stroke-width="1" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></circle><circle cx="120.84615384615384" cy="124.75" r="0" fill="#82c4f8" stroke="#ffffff" stroke-width="1" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></circle><circle cx="132.82692307692307" cy="110.5" r="0" fill="#82c4f8" stroke="#ffffff" stroke-width="1" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></circle><circle cx="144.8076923076923" cy="110.5" r="0" fill="#82c4f8" stroke="#ffffff" stroke-width="1" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></circle><circle cx="156.78846153846152" cy="90.25" r="0" fill="#82c4f8" stroke="#ffffff" stroke-width="1" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></circle><circle cx="168.76923076923077" cy="77.5" r="0" fill="#82c4f8" stroke="#ffffff" stroke-width="1" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></circle><circle cx="180.75" cy="89.5" r="0" fill="#82c4f8" stroke="#ffffff" stroke-width="1" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></circle><circle cx="192.73076923076923" cy="115" r="0" fill="#82c4f8" stroke="#ffffff" stroke-width="1" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></circle><circle cx="204.71153846153845" cy="93.25" r="0" fill="#82c4f8" stroke="#ffffff" stroke-width="1" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></circle><circle cx="216.69230769230768" cy="100" r="0" fill="#82c4f8" stroke="#ffffff" stroke-width="1" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></circle><circle cx="228.6730769230769" cy="96.25" r="0" fill="#82c4f8" stroke="#ffffff" stroke-width="1" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></circle><circle cx="240.65384615384613" cy="92.5" r="0" fill="#82c4f8" stroke="#ffffff" stroke-width="1" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></circle><circle cx="252.63461538461536" cy="98.5" r="0" fill="#82c4f8" stroke="#ffffff" stroke-width="1" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></circle><circle cx="264.6153846153846" cy="94.75" r="0" fill="#82c4f8" stroke="#ffffff" stroke-width="1" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></circle><circle cx="276.5961538461538" cy="130" r="0" fill="#82c4f8" stroke="#ffffff" stroke-width="1" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></circle><circle cx="288.57692307692304" cy="124.75" r="0" fill="#82c4f8" stroke="#ffffff" stroke-width="1" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></circle><circle cx="300.55769230769226" cy="118" r="0" fill="#82c4f8" stroke="#ffffff" stroke-width="1" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></circle><circle cx="312.53846153846155" cy="120.25" r="0" fill="#82c4f8" stroke="#ffffff" stroke-width="1" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></circle><circle cx="324.5192307692308" cy="104.5" r="0" fill="#82c4f8" stroke="#ffffff" stroke-width="1" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></circle><circle cx="336.5" cy="73.75" r="0" fill="#82c4f8" stroke="#ffffff" stroke-width="1" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></circle><circle cx="348.4807692307692" cy="59.5" r="0" fill="#82c4f8" stroke="#ffffff" stroke-width="1" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></circle><circle cx="360.46153846153845" cy="85" r="0" fill="#82c4f8" stroke="#ffffff" stroke-width="1" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></circle><circle cx="372.4423076923077" cy="100" r="0" fill="#82c4f8" stroke="#ffffff" stroke-width="1" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></circle><circle cx="384.4230769230769" cy="77.5" r="0" fill="#82c4f8" stroke="#ffffff" stroke-width="1" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></circle><circle cx="396.40384615384613" cy="100" r="0" fill="#82c4f8" stroke="#ffffff" stroke-width="1" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></circle><circle cx="408.38461538461536" cy="130" r="0" fill="#82c4f8" stroke="#ffffff" stroke-width="1" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></circle><circle cx="420.3653846153846" cy="122.5" r="0" fill="#82c4f8" stroke="#ffffff" stroke-width="1" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></circle><circle cx="432.3461538461538" cy="124.75" r="0" fill="#82c4f8" stroke="#ffffff" stroke-width="1" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></circle><circle cx="444.32692307692304" cy="110.5" r="0" fill="#82c4f8" stroke="#ffffff" stroke-width="1" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></circle><circle cx="456.30769230769226" cy="110.5" r="0" fill="#82c4f8" stroke="#ffffff" stroke-width="1" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></circle><circle cx="468.2884615384615" cy="90.25" r="0" fill="#82c4f8" stroke="#ffffff" stroke-width="1" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></circle><circle cx="480.2692307692307" cy="77.5" r="0" fill="#82c4f8" stroke="#ffffff" stroke-width="1" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></circle><circle cx="492.24999999999994" cy="89.5" r="0" fill="#82c4f8" stroke="#ffffff" stroke-width="1" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></circle><circle cx="504.23076923076917" cy="115" r="0" fill="#82c4f8" stroke="#ffffff" stroke-width="1" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></circle><circle cx="516.2115384615385" cy="93.25" r="0" fill="#82c4f8" stroke="#ffffff" stroke-width="1" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></circle><circle cx="528.1923076923076" cy="100" r="0" fill="#82c4f8" stroke="#ffffff" stroke-width="1" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></circle><circle cx="540.1730769230769" cy="96.25" r="0" fill="#82c4f8" stroke="#ffffff" stroke-width="1" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></circle><circle cx="552.1538461538461" cy="92.5" r="0" fill="#82c4f8" stroke="#ffffff" stroke-width="1" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></circle><circle cx="564.1346153846154" cy="98.5" r="0" fill="#82c4f8" stroke="#ffffff" stroke-width="1" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></circle><circle cx="576.1153846153845" cy="94.75" r="0" fill="#82c4f8" stroke="#ffffff" stroke-width="1" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></circle><circle cx="588.0961538461538" cy="130" r="0" fill="#82c4f8" stroke="#ffffff" stroke-width="1" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></circle><circle cx="600.0769230769231" cy="124.75" r="0" fill="#82c4f8" stroke="#ffffff" stroke-width="1" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></circle><circle cx="612.0576923076923" cy="118" r="0" fill="#82c4f8" stroke="#ffffff" stroke-width="1" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></circle><circle cx="624.0384615384615" cy="120.25" r="0" fill="#82c4f8" stroke="#ffffff" stroke-width="1" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></circle><circle cx="636.0192307692307" cy="104.5" r="0" fill="#82c4f8" stroke="#ffffff" stroke-width="1" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></circle><circle cx="648" cy="115.75" r="0" fill="#82c4f8" stroke="#ffffff" stroke-width="1" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></circle><path fill="#4aa8f3" stroke="none" d="M25,173.5C27.995192307692307,169.75,33.98557692307692,158.96875,36.980769230769226,158.5C39.97596153846153,158.03125,45.96634615384615,168.25,48.96153846153846,169.75C51.95673076923077,171.25,57.94711538461539,171.4375,60.94230769230769,170.5C63.9375,169.5625,69.92788461538461,163.09375,72.92307692307692,162.25C75.91826923076923,161.40625,81.90865384615384,163.75,84.90384615384615,163.75C87.89903846153845,163.75,93.88942307692308,161.5,96.88461538461539,162.25C99.8798076923077,163,105.8701923076923,169.84375,108.86538461538461,169.75C111.86057692307692,169.65625,117.85096153846153,162.53125,120.84615384615384,161.5C123.84134615384615,160.46875,129.83173076923077,161.5,132.82692307692307,161.5C135.82211538461536,161.5,141.8125,162.53125,144.8076923076923,161.5C147.80288461538458,160.46875,153.79326923076923,153.71875,156.78846153846152,153.25C159.78365384615384,152.78125,165.77403846153845,155.96875,168.76923076923077,157.75C171.7644230769231,159.53125,177.75480769230768,167.40625,180.75,167.5C183.74519230769232,167.59375,189.7355769230769,158.21875,192.73076923076923,158.5C195.72596153846155,158.78125,201.71634615384613,168.25,204.71153846153845,169.75C207.70673076923077,171.25,213.69711538461536,171.4375,216.69230769230768,170.5C219.6875,169.5625,225.67788461538458,163.09375,228.6730769230769,162.25C231.66826923076923,161.40625,237.6586538461538,163.75,240.65384615384613,163.75C243.64903846153845,163.75,249.63942307692304,161.5,252.63461538461536,162.25C255.62980769230768,163,261.62019230769226,169.84375,264.6153846153846,169.75C267.6105769230769,169.65625,273.6009615384615,162.53125,276.5961538461538,161.5C279.59134615384613,160.46875,285.5817307692307,161.5,288.57692307692304,161.5C291.57211538461536,161.5,297.56249999999994,162.53125,300.55769230769226,161.5C303.5528846153846,160.46875,309.5432692307692,152.78125,312.53846153846155,153.25C315.53365384615387,153.71875,321.52403846153845,162.71875,324.5192307692308,165.25C327.5144230769231,167.78125,333.5048076923077,174.34375,336.5,173.5C339.4951923076923,172.65625,345.4855769230769,158.96875,348.4807692307692,158.5C351.47596153846155,158.03125,357.46634615384613,168.25,360.46153846153845,169.75C363.4567307692308,171.25,369.44711538461536,171.4375,372.4423076923077,170.5C375.4375,169.5625,381.4278846153846,163.09375,384.4230769230769,162.25C387.4182692307692,161.40625,393.4086538461538,163.75,396.40384615384613,163.75C399.39903846153845,163.75,405.38942307692304,161.5,408.38461538461536,162.25C411.3798076923077,163,417.37019230769226,169.84375,420.3653846153846,169.75C423.3605769230769,169.65625,429.3509615384615,162.53125,432.3461538461538,161.5C435.34134615384613,160.46875,441.3317307692307,161.5,444.32692307692304,161.5C447.32211538461536,161.5,453.31249999999994,162.53125,456.30769230769226,161.5C459.3028846153846,160.46875,465.29326923076917,153.71875,468.2884615384615,153.25C471.2836538461538,152.78125,477.2740384615384,155.96875,480.2692307692307,157.75C483.26442307692304,159.53125,489.2548076923076,167.40625,492.24999999999994,167.5C495.24519230769226,167.59375,501.23557692307685,158.21875,504.23076923076917,158.5C507.2259615384615,158.78125,513.2163461538462,168.25,516.2115384615385,169.75C519.2067307692307,171.25,525.1971153846154,171.4375,528.1923076923076,170.5C531.1875,169.5625,537.1778846153845,163.09375,540.1730769230769,162.25C543.1682692307692,161.40625,549.1586538461538,163.75,552.1538461538461,163.75C555.1490384615383,163.75,561.1394230769231,161.5,564.1346153846154,162.25C567.1298076923076,163,573.1201923076923,169.84375,576.1153846153845,169.75C579.1105769230769,169.65625,585.1009615384614,162.53125,588.0961538461538,161.5C591.0913461538462,160.46875,597.0817307692307,161.5,600.0769230769231,161.5C603.0721153846154,161.5,609.0625,162.53125,612.0576923076923,161.5C615.0528846153845,160.46875,621.0432692307693,152.78125,624.0384615384615,153.25C627.0336538461538,153.71875,633.0240384615385,164.78125,636.0192307692307,165.25C639.0144230769231,165.71875,645.0048076923076,159.0625,648,157L648,175L25,175Z" fill-opacity="1" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); fill-opacity: 1;"></path><path fill="none" stroke="#0d92fc" d="M25,173.5C27.995192307692307,169.75,33.98557692307692,158.96875,36.980769230769226,158.5C39.97596153846153,158.03125,45.96634615384615,168.25,48.96153846153846,169.75C51.95673076923077,171.25,57.94711538461539,171.4375,60.94230769230769,170.5C63.9375,169.5625,69.92788461538461,163.09375,72.92307692307692,162.25C75.91826923076923,161.40625,81.90865384615384,163.75,84.90384615384615,163.75C87.89903846153845,163.75,93.88942307692308,161.5,96.88461538461539,162.25C99.8798076923077,163,105.8701923076923,169.84375,108.86538461538461,169.75C111.86057692307692,169.65625,117.85096153846153,162.53125,120.84615384615384,161.5C123.84134615384615,160.46875,129.83173076923077,161.5,132.82692307692307,161.5C135.82211538461536,161.5,141.8125,162.53125,144.8076923076923,161.5C147.80288461538458,160.46875,153.79326923076923,153.71875,156.78846153846152,153.25C159.78365384615384,152.78125,165.77403846153845,155.96875,168.76923076923077,157.75C171.7644230769231,159.53125,177.75480769230768,167.40625,180.75,167.5C183.74519230769232,167.59375,189.7355769230769,158.21875,192.73076923076923,158.5C195.72596153846155,158.78125,201.71634615384613,168.25,204.71153846153845,169.75C207.70673076923077,171.25,213.69711538461536,171.4375,216.69230769230768,170.5C219.6875,169.5625,225.67788461538458,163.09375,228.6730769230769,162.25C231.66826923076923,161.40625,237.6586538461538,163.75,240.65384615384613,163.75C243.64903846153845,163.75,249.63942307692304,161.5,252.63461538461536,162.25C255.62980769230768,163,261.62019230769226,169.84375,264.6153846153846,169.75C267.6105769230769,169.65625,273.6009615384615,162.53125,276.5961538461538,161.5C279.59134615384613,160.46875,285.5817307692307,161.5,288.57692307692304,161.5C291.57211538461536,161.5,297.56249999999994,162.53125,300.55769230769226,161.5C303.5528846153846,160.46875,309.5432692307692,152.78125,312.53846153846155,153.25C315.53365384615387,153.71875,321.52403846153845,162.71875,324.5192307692308,165.25C327.5144230769231,167.78125,333.5048076923077,174.34375,336.5,173.5C339.4951923076923,172.65625,345.4855769230769,158.96875,348.4807692307692,158.5C351.47596153846155,158.03125,357.46634615384613,168.25,360.46153846153845,169.75C363.4567307692308,171.25,369.44711538461536,171.4375,372.4423076923077,170.5C375.4375,169.5625,381.4278846153846,163.09375,384.4230769230769,162.25C387.4182692307692,161.40625,393.4086538461538,163.75,396.40384615384613,163.75C399.39903846153845,163.75,405.38942307692304,161.5,408.38461538461536,162.25C411.3798076923077,163,417.37019230769226,169.84375,420.3653846153846,169.75C423.3605769230769,169.65625,429.3509615384615,162.53125,432.3461538461538,161.5C435.34134615384613,160.46875,441.3317307692307,161.5,444.32692307692304,161.5C447.32211538461536,161.5,453.31249999999994,162.53125,456.30769230769226,161.5C459.3028846153846,160.46875,465.29326923076917,153.71875,468.2884615384615,153.25C471.2836538461538,152.78125,477.2740384615384,155.96875,480.2692307692307,157.75C483.26442307692304,159.53125,489.2548076923076,167.40625,492.24999999999994,167.5C495.24519230769226,167.59375,501.23557692307685,158.21875,504.23076923076917,158.5C507.2259615384615,158.78125,513.2163461538462,168.25,516.2115384615385,169.75C519.2067307692307,171.25,525.1971153846154,171.4375,528.1923076923076,170.5C531.1875,169.5625,537.1778846153845,163.09375,540.1730769230769,162.25C543.1682692307692,161.40625,549.1586538461538,163.75,552.1538461538461,163.75C555.1490384615383,163.75,561.1394230769231,161.5,564.1346153846154,162.25C567.1298076923076,163,573.1201923076923,169.84375,576.1153846153845,169.75C579.1105769230769,169.65625,585.1009615384614,162.53125,588.0961538461538,161.5C591.0913461538462,160.46875,597.0817307692307,161.5,600.0769230769231,161.5C603.0721153846154,161.5,609.0625,162.53125,612.0576923076923,161.5C615.0528846153845,160.46875,621.0432692307693,152.78125,624.0384615384615,153.25C627.0336538461538,153.71875,633.0240384615385,164.78125,636.0192307692307,165.25C639.0144230769231,165.71875,645.0048076923076,159.0625,648,157" stroke-width="0" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path><circle cx="25" cy="173.5" r="0" fill="#0d92fc" stroke="#ffffff" stroke-width="1" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></circle><circle cx="36.980769230769226" cy="158.5" r="0" fill="#0d92fc" stroke="#ffffff" stroke-width="1" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></circle><circle cx="48.96153846153846" cy="169.75" r="0" fill="#0d92fc" stroke="#ffffff" stroke-width="1" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></circle><circle cx="60.94230769230769" cy="170.5" r="0" fill="#0d92fc" stroke="#ffffff" stroke-width="1" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></circle><circle cx="72.92307692307692" cy="162.25" r="0" fill="#0d92fc" stroke="#ffffff" stroke-width="1" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></circle><circle cx="84.90384615384615" cy="163.75" r="0" fill="#0d92fc" stroke="#ffffff" stroke-width="1" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></circle><circle cx="96.88461538461539" cy="162.25" r="0" fill="#0d92fc" stroke="#ffffff" stroke-width="1" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></circle><circle cx="108.86538461538461" cy="169.75" r="0" fill="#0d92fc" stroke="#ffffff" stroke-width="1" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></circle><circle cx="120.84615384615384" cy="161.5" r="0" fill="#0d92fc" stroke="#ffffff" stroke-width="1" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></circle><circle cx="132.82692307692307" cy="161.5" r="0" fill="#0d92fc" stroke="#ffffff" stroke-width="1" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></circle><circle cx="144.8076923076923" cy="161.5" r="0" fill="#0d92fc" stroke="#ffffff" stroke-width="1" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></circle><circle cx="156.78846153846152" cy="153.25" r="0" fill="#0d92fc" stroke="#ffffff" stroke-width="1" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></circle><circle cx="168.76923076923077" cy="157.75" r="0" fill="#0d92fc" stroke="#ffffff" stroke-width="1" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></circle><circle cx="180.75" cy="167.5" r="0" fill="#0d92fc" stroke="#ffffff" stroke-width="1" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></circle><circle cx="192.73076923076923" cy="158.5" r="0" fill="#0d92fc" stroke="#ffffff" stroke-width="1" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></circle><circle cx="204.71153846153845" cy="169.75" r="0" fill="#0d92fc" stroke="#ffffff" stroke-width="1" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></circle><circle cx="216.69230769230768" cy="170.5" r="0" fill="#0d92fc" stroke="#ffffff" stroke-width="1" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></circle><circle cx="228.6730769230769" cy="162.25" r="0" fill="#0d92fc" stroke="#ffffff" stroke-width="1" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></circle><circle cx="240.65384615384613" cy="163.75" r="0" fill="#0d92fc" stroke="#ffffff" stroke-width="1" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></circle><circle cx="252.63461538461536" cy="162.25" r="0" fill="#0d92fc" stroke="#ffffff" stroke-width="1" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></circle><circle cx="264.6153846153846" cy="169.75" r="0" fill="#0d92fc" stroke="#ffffff" stroke-width="1" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></circle><circle cx="276.5961538461538" cy="161.5" r="0" fill="#0d92fc" stroke="#ffffff" stroke-width="1" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></circle><circle cx="288.57692307692304" cy="161.5" r="0" fill="#0d92fc" stroke="#ffffff" stroke-width="1" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></circle><circle cx="300.55769230769226" cy="161.5" r="0" fill="#0d92fc" stroke="#ffffff" stroke-width="1" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></circle><circle cx="312.53846153846155" cy="153.25" r="0" fill="#0d92fc" stroke="#ffffff" stroke-width="1" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></circle><circle cx="324.5192307692308" cy="165.25" r="0" fill="#0d92fc" stroke="#ffffff" stroke-width="1" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></circle><circle cx="336.5" cy="173.5" r="0" fill="#0d92fc" stroke="#ffffff" stroke-width="1" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></circle><circle cx="348.4807692307692" cy="158.5" r="0" fill="#0d92fc" stroke="#ffffff" stroke-width="1" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></circle><circle cx="360.46153846153845" cy="169.75" r="0" fill="#0d92fc" stroke="#ffffff" stroke-width="1" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></circle><circle cx="372.4423076923077" cy="170.5" r="0" fill="#0d92fc" stroke="#ffffff" stroke-width="1" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></circle><circle cx="384.4230769230769" cy="162.25" r="0" fill="#0d92fc" stroke="#ffffff" stroke-width="1" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></circle><circle cx="396.40384615384613" cy="163.75" r="0" fill="#0d92fc" stroke="#ffffff" stroke-width="1" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></circle><circle cx="408.38461538461536" cy="162.25" r="0" fill="#0d92fc" stroke="#ffffff" stroke-width="1" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></circle><circle cx="420.3653846153846" cy="169.75" r="0" fill="#0d92fc" stroke="#ffffff" stroke-width="1" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></circle><circle cx="432.3461538461538" cy="161.5" r="0" fill="#0d92fc" stroke="#ffffff" stroke-width="1" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></circle><circle cx="444.32692307692304" cy="161.5" r="0" fill="#0d92fc" stroke="#ffffff" stroke-width="1" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></circle><circle cx="456.30769230769226" cy="161.5" r="0" fill="#0d92fc" stroke="#ffffff" stroke-width="1" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></circle><circle cx="468.2884615384615" cy="153.25" r="0" fill="#0d92fc" stroke="#ffffff" stroke-width="1" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></circle><circle cx="480.2692307692307" cy="157.75" r="0" fill="#0d92fc" stroke="#ffffff" stroke-width="1" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></circle><circle cx="492.24999999999994" cy="167.5" r="0" fill="#0d92fc" stroke="#ffffff" stroke-width="1" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></circle><circle cx="504.23076923076917" cy="158.5" r="0" fill="#0d92fc" stroke="#ffffff" stroke-width="1" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></circle><circle cx="516.2115384615385" cy="169.75" r="0" fill="#0d92fc" stroke="#ffffff" stroke-width="1" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></circle><circle cx="528.1923076923076" cy="170.5" r="0" fill="#0d92fc" stroke="#ffffff" stroke-width="1" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></circle><circle cx="540.1730769230769" cy="162.25" r="0" fill="#0d92fc" stroke="#ffffff" stroke-width="1" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></circle><circle cx="552.1538461538461" cy="163.75" r="0" fill="#0d92fc" stroke="#ffffff" stroke-width="1" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></circle><circle cx="564.1346153846154" cy="162.25" r="0" fill="#0d92fc" stroke="#ffffff" stroke-width="1" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></circle><circle cx="576.1153846153845" cy="169.75" r="0" fill="#0d92fc" stroke="#ffffff" stroke-width="1" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></circle><circle cx="588.0961538461538" cy="161.5" r="0" fill="#0d92fc" stroke="#ffffff" stroke-width="1" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></circle><circle cx="600.0769230769231" cy="161.5" r="0" fill="#0d92fc" stroke="#ffffff" stroke-width="1" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></circle><circle cx="612.0576923076923" cy="161.5" r="0" fill="#0d92fc" stroke="#ffffff" stroke-width="1" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></circle><circle cx="624.0384615384615" cy="153.25" r="0" fill="#0d92fc" stroke="#ffffff" stroke-width="1" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></circle><circle cx="636.0192307692307" cy="165.25" r="0" fill="#0d92fc" stroke="#ffffff" stroke-width="1" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></circle><circle cx="648" cy="157" r="0" fill="#0d92fc" stroke="#ffffff" stroke-width="1" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></circle></svg><div class="morris-hover morris-default-style" style="left: 0px; top: 87px; display: none;">
-                        <div class="morris-hover-row-label">Oct-14</div><div class="morris-hover-point" style="color: #82c4f8">
-                            Download Speed:
-                            33 Mb/s
-                        </div><div class="morris-hover-point" style="color: #0d92fc">
-                            Upload Speed:
-                            7 Mb/s
-                        </div>
-                    </div>
-                </div>
-
-                <!--Chart information-->
-                <div class="panel-body">
-                    <div class="row pad-top">
-                        <div class="col-lg-8">
-                            <div class="media">
-                                <div class="media-left">
-                                    <div class="media">
-                                        <p class="text-semibold text-main">Temperature</p>
-                                        <div class="media-left pad-no">
-                                            <span class="text-2x text-semibold text-nowrap text-main">
-                                                <i class="demo-pli-temperature"></i> 43.7
-                                            </span>
-                                        </div>
-                                        <div class="media-body">
-                                            <p class="mar-no">°C</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="media-body pad-lft">
-                                    <div class="pad-btm">
-                                        <p class="text-semibold text-main mar-no">Today Tips</p>
-                                        <small>A wonderful serenity has taken possession of my entire soul, like these sweet mornings of spring which I enjoy with my whole heart.</small>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-lg-4">
-                            <p class="text-semibold text-main">Bandwidth Usage</p>
-                            <ul class="list-unstyled">
-                                <li>
-                                    <div class="media">
-                                        <div class="media-left">
-                                            <span class="text-2x text-semibold text-main">75.9</span>
-                                        </div>
-                                        <div class="media-body">
-                                            <p class="mar-no">Mbps</p>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="clearfix">
-                                        <p class="pull-left mar-no">Outcome</p>
-                                        <p class="pull-right mar-no">75%</p>
-                                    </div>
-                                    <div class="progress progress-xs">
-                                        <div class="progress-bar progress-bar-info" style="width: 75%;">
-                                            <span class="sr-only">75%</span>
-                                        </div>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-
-
-            </div>
-            <!--===================================================-->
-            <!--End network line chart-->
-
-        </div>
-        <div class="col-lg-5">
-            <div class="row">
-                <div class="col-sm-6 col-lg-6">
-
-                    <!--Sparkline Area Chart-->
-                    <div class="panel panel-success panel-colorful">
-                        <div class="pad-all">
-                            <p class="text-lg text-semibold"><i class="demo-pli-data-storage icon-fw"></i> HDD Usage</p>
-                            <p class="mar-no">
-                                <span class="pull-right text-bold">132Gb</span>
-                                Free Space
-                            </p>
-                            <p class="mar-no">
-                                <span class="pull-right text-bold">1,45Gb</span>
-                                Used space
-                            </p>
-                        </div>
-                        <div class="pad-all text-center">
-                            <!--Placeholder-->
-                            <div id="demo-sparkline-area"><canvas width="199" height="40" style="display: inline-block; width: 199px; height: 40px; vertical-align: top;"></canvas></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-6 col-lg-6">
-
-                    <!--Sparkline Line Chart-->
-                    <div class="panel panel-info panel-colorful">
-                        <div class="pad-all">
-                            <p class="text-lg text-semibold"><i class="demo-pli-wallet-2 icon-fw"></i> Earning</p>
-                            <p class="mar-no">
-                                <span class="pull-right text-bold">$764</span>
-                                Today
-                            </p>
-                            <p class="mar-no">
-                                <span class="pull-right text-bold">$1,332</span>
-                                Last 7 Day
-                            </p>
-                        </div>
-                        <div class="pad-all text-center">
-
-                            <!--Placeholder-->
-                            <div id="demo-sparkline-line"><canvas width="199" height="40" style="display: inline-block; width: 199px; height: 40px; vertical-align: top;"></canvas></div>
-
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-sm-6 col-lg-6">
-
-                    <!--Sparkline bar chart -->
-                    <div class="panel panel-purple panel-colorful">
-                        <div class="pad-all">
-                            <p class="text-lg text-semibold"><i class="demo-pli-bag-coins icon-fw"></i> Sales</p>
-                            <p class="mar-no">
-                                <span class="pull-right text-bold">$764</span>
-                                Today
-                            </p>
-                            <p class="mar-no">
-                                <span class="pull-right text-bold">$1,332</span>
-                                Last 7 Day
-                            </p>
-                        </div>
-                        <div class="pad-all text-center">
-
-                            <!--Placeholder-->
-                            <div id="demo-sparkline-bar" class="box-inline"><canvas width="184" height="55" style="display: inline-block; width: 184px; height: 55px; vertical-align: top;"></canvas></div>
-
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-6 col-lg-6">
-
-                    <!--Sparkline pie chart -->
-                    <div class="panel panel-warning panel-colorful">
-                        <div class="pad-all">
-                            <p class="text-lg text-semibold"><i class="demo-pli-check icon-fw"></i> Task Progress</p>
-                            <p class="mar-no">
-                                <span class="pull-right text-bold">34</span>
-                                Completed
-                            </p>
-                            <p class="mar-no">
-                                <span class="pull-right text-bold">79</span>
-                                Total
-                            </p>
-                        </div>
-                        <div class="pad-all">
-                            <ul class="list-group list-unstyled">
-                                <li class="mar-btm">
-                                    <span class="label label-warning pull-right">15%</span>
-                                    <p>Progress</p>
-                                    <div class="progress progress-md">
-                                        <div style="width: 15%;" class="progress-bar progress-bar-light">
-                                            <span class="sr-only">15%</span>
-                                        </div>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="row">
-        <div class="col-lg-7">
-            <ul class="nav nav-tabs">
-                <li class="active"><a data-toggle="tab" href="#tabAppmain">Main</a></li>
-                <li><a data-toggle="tab" href="#tabAppApiEntity">API Permissions</a></li>
-                <li><a data-toggle="tab" href="#tabAppDelete">Delete</a></li>
+    <div class="fixed-fluid">
+        <div class="fixed-sm-200 fixed-lg-250 pull-sm-left">
+            <div class="">
+                <div class="text-center bg-info">
+                    <img src="~/Imgs/Apps/0.jpg" style="height:100%;width:100%" />
+                    <ul class="list-unstyled text-center pad-top mar-no row">
+                <li class="col-xs-4">
+                    <span class="text-lg text-semibold">@Model.Title</span>
+                    <br /><br />
+                    <p class="text-sm mar-no"> </p>
+                </li>
+                @*<li class="col-xs-4">
+                    <span class="text-lg text-semibold">23K</span>
+                    <p class="text-sm mar-no">Followers</p>
+                </li>
+                <li class="col-xs-4">
+                    <span class="text-lg text-semibold">278</span>
+                    <p class="text-sm mar-no">Post</p>
+                </li>*@
             </ul>
-            <div class="panel panel-default">
-                <div class="panel-body">
-                    <div class="tab-content">
-                        <div id="tabAppmain" class="tab-pane fade in active">
-                            <div id="divAppMain">
-                            </div>
-                        </div>
-                        <div id="tabAppApiEntity" class="tab-pane fade">
-                            <div class="right">
-                                <div class="input-group">
-                                    <input type="text" id="txtApiEntitySearch" class="form-control" placeholder="Search.." onkeydown="if (event.keyCode == 13) { LoadPart_AppApiEntitysByAppIDDiv('@Model.ID'); return false; }">
-                                    <div class="input-group-btn">
-                                        <button type="button" class="btn btn-info" onclick="LoadPart_AppApiEntitysByAppIDDiv('@Model.ID')">Refresh</button>
-                                        <button type="button" class="btn btn-info" onclick="LoadPart_DialogAppApiEntityAttach()" data-toggle="modal" data-target="#mdl">Add</button>
-                                    </div>
-                                </div>
-
-                                
-                                
-                            </div>
-                            <br />
-                            <div id="divAppApiEntitysList">
-                            </div>
-                        </div>
-
-                        <div id="tabAppDelete" class="tab-pane fade">
-                            <div id="divAppDelete">
-                                <button type="button" class="btn btn-danger" onclick="LoadPart_DialogAppDelete(@Model.ID)" data-toggle="modal" data-target="#mdl">Delete</button>
-                            </div>
-                        </div>
-                    </div>
+                </div>
+                <div class="list-group bg-trans pad-btm">
+                    <a class="list-group-item" onclick="LoadPart_AppDetailsDiv();" style="cursor: pointer;">Main Info</a>
+                    <a class="list-group-item" onclick="LoadPart_AppAPIEntitiesDiv();" style="cursor: pointer;">API Security Permissions</a>
+                    <a class="list-group-item" onclick="LoadPart_AppAPIEntitiesDiv();" style="cursor: pointer;">Extended Properties</a>
+                    <a class="list-group-item" href="#" style="cursor: pointer;"><span class="label label-info pull-right">Local App</span>Publish to Store</a>
+                    <a class="list-group-item" onclick="LoadPart_DialogAppDelete();" style="cursor: pointer;">Delete App</a>
                 </div>
             </div>
         </div>
-      
+
+        <div class="fluid">
+            <div class="fixed-fluid">
+                <div id="divPageDetails">
+
+                </div>
+            </div>
+        </div>
     </div>
+
 </div>
 
+@section scriptfiles{
+<script src="~/Assets/Scripts/DynScripts/Apps.js"></script>
 
 
-@*@section scripts{*@
-    <script src="~/Assets/Scripts/DynScripts/Apps.js"></script>
-    <script>
-        $(document).ready(function () {
-            selectedAppID = @Model.ID;
-            LoadPart_AppDetailsDiv('@Model.ID');
-            LoadPart_AppApiEntitysByAppIDDiv('@Model.ID');
-        });
-    </script>
-@*}*@
+}
+
+@section scripts{
+<script>
+    $(document).ready(function () {
+        selectedAppID = @Model.ID;
+        LoadPart_AppDetailsDiv('@Model.ID');
+        LoadPart_AppApiEntitysByAppIDDiv('@Model.ID');
+    });
+</script>
+}

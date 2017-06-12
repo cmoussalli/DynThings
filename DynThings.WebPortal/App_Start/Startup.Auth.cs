@@ -6,6 +6,9 @@ using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.Google;
 using Owin;
 using DynThings.WebPortal.Models;
+using AutoMapper;
+using DynThings.WebAPI.Models;
+using DynThings.Data.Models.ViewModels;
 
 namespace DynThings.WebPortal
 {
@@ -63,6 +66,8 @@ namespace DynThings.WebPortal
             //    ClientId = "",
             //    ClientSecret = ""
             //});
+
+           
         }
     }
 }

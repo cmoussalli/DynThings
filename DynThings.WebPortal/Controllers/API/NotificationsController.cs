@@ -9,7 +9,7 @@ using DynThings.Data.Repositories;
 using DynThings.WebAPI;
 using DynThings.WebAPI.Models;
 using DynThings.Data.Models;
-using DynThings.WebAPI.Models.TypesMapper;
+using DynThings.WebAPI.TypesMapper;
 using Microsoft.AspNet.Identity;
 
 namespace DynThings.WebAPI.Controllers.API

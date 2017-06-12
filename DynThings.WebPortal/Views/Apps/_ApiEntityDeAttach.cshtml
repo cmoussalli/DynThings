@@ -13,36 +13,19 @@
         @Html.HiddenFor(model => model.ID)
         @Html.HiddenFor(model => model.AppID)
         @Html.HiddenFor(model => model.SystemEntityID)
-        <span>Are you sure you want to deattach the following object from @Model.App.Title app?</span><br /><br />
-        <span>Type: System Entity</span><br />
-        <span>Title: @Model.SystemEntity.Title</span><br />
+        <span>Are you sure you want to remove the access permissions (both read &amp; write) of '@Model.App.Title' entity?</span><br /><br />
 
     </div>
     <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="submit" class="btn btn-danger">Deattach</button>
+        <button type="submit" class="btn btn-danger">Remove</button>
     </div>
 }
 
 <script>
     //Attach : Delete Form Submit
     $(document).ready(function () {
-        $("#AppApiEntityDeAttachForm").on("submit", function (event) {
-            event.preventDefault();
-            var url = $(this).attr("action");
-            var formData = $(this).serialize();
-            $.ajax({
-                url: url,
-                type: "POST",
-                data: formData,
-                dataType: "json",
-                success: function (resp) {
-                    LoadPart_AppApiEntitysByAppIDDiv(selectedAppID);
-                }
-            })
-            LoadPart_AppApiEntitysByAppIDDiv(selectedAppID);
-            $('#mdl').modal('hide');
-        });
+        DeAttachEventAppApiEntityAttachForm();
     });
 </script>
 

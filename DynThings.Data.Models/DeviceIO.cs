@@ -44,6 +44,8 @@ public partial class DeviceIO
 
     public virtual IOType IOType { get; set; }
 
+    public virtual IOType IOType1 { get; set; }
+
 }
 
 }
