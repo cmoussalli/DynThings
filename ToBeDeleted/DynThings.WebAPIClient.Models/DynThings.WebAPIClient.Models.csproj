@@ -1,0 +1,19 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard1.0</TargetFramework>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <Version>1.0.2</Version>
+    <Authors>Caesar Moussalli</Authors>
+    <Company>DynThings</Company>
+    <Description>This class library includes all the requierd models to communicate with DynThings API.</Description>
+    <Copyright>DynThings 2017</Copyright>
+    <PackageProjectUrl>http://www.dynthings.com</PackageProjectUrl>
+    <PackageTags>DynThings CLient API</PackageTags>
+  </PropertyGroup>
+
+  <Target Name="CopyPackage" AfterTargets="Pack">
+    <Copy SourceFiles="$(ProjectDir)\Bin\Debug\$(PackageId).$(PackageVersion).nupkg" DestinationFolder="D:\OneDrive\Projects\_Libraries\_Nuget" />
+    
+  </Target>
+</Project>

@@ -141,7 +141,7 @@
       <Name>DynThings.Data.Models</Name>
     </ProjectReference>
     <ProjectReference Include="..\DynThings.WebAPI.Models\DynThings.WebAPI.Models.csproj">
-      <Project>{c5987efa-b632-406f-9934-0c6a924e05c7}</Project>
+      <Project>{24070c47-6058-4270-8dcd-4be8d4c710a3}</Project>
       <Name>DynThings.WebAPI.Models</Name>
     </ProjectReference>
   </ItemGroup>

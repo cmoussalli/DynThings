@@ -33,7 +33,7 @@ namespace DynThings.WebPortal.Controllers.API
         }
 
         [HttpGet]
-        public ResultInfo.Result ValidateToken(Guid token)
+        public ApiResponse ValidateToken(Guid token)
         {
             try
             {

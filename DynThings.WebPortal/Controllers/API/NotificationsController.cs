@@ -41,7 +41,7 @@ namespace DynThings.WebAPI.Controllers.API
 
             try
             {
-                oApiResponse.Status = "Ok";
+                oApiResponse.StatusTitle = "Ok";
                 int notisCount = uof_repos.repoUserNotification.GetUnseenNotifications( User.Identity.GetUserId(), lastNotificationID).Count;
                 oApiResponse.Message = notisCount.ToString();
             }

@@ -14,17 +14,17 @@ namespace DynThings.WebAPI.TypesMapper
         public static ApiResponse fromResult(ResultInfo.Result sourceResult)
         {
             ApiResponse result = new ApiResponse();
-            result.resultID = sourceResult.ResultID;
+            result.ResultID = sourceResult.ResultID;
             result.Message = sourceResult.Message;
             result.Reference = sourceResult.Reference;
-
+            result.StatusID = sourceResult.ResultType.GetHashCode();
             if (sourceResult.ResultType.GetHashCode().ToString() == "0")
             {
-                result.Status = "OK";
+                result.StatusTitle = "OK";
             }
             else
             {
-                result.Status = "Error";
+                result.StatusTitle = "Error";
             }
             return result;
         }

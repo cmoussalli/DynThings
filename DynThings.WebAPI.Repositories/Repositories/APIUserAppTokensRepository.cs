@@ -115,9 +115,10 @@ namespace DynThings.WebAPI.Repositories
         #endregion
 
         #region Validate Token
-        public ResultInfo.Result ValidateToken(Guid token)
+        public ApiResponse ValidateToken(Guid token)
         {
             ResultInfo.Result result = ResultInfo.GenerateErrorResult();
+
             try
             {
                 AppUserToken appUserToken = db.AppUserTokens.First(t => t.Token == token);
@@ -142,8 +143,8 @@ namespace DynThings.WebAPI.Repositories
             {
                 result = ResultInfo.GenerateErrorResult("Token is not exist");
             }
-
-            return result;
+            ApiResponse apiResponse =  TypesMapper.ApiResponseAdapter.fromResult(result);
+            return apiResponse;
         }
         #endregion
 

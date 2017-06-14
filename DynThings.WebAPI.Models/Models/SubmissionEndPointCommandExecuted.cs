@@ -1,14 +1,5 @@
-﻿/////////////////////////////////////////////////////////////////
-// Created by :  Caesar Moussalli                              //
-// TimeStamp  :  18-04-2017                                    //
-// Content    :  EndPoint Command IO Properties                //
-// Notes      :                                                //
-/////////////////////////////////////////////////////////////////
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using DynThings.Data.Repositories;
 
 namespace DynThings.WebAPI.Models
 {

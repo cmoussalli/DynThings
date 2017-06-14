@@ -108,7 +108,7 @@ namespace DynThings.Simulator
 
         private void button1_Click(object sender, EventArgs e)
         {
-            MessageBox.Show(C.response.Status);
+            MessageBox.Show(C.response.StatusTitle);
         }
 
         private void timer1_Tick(object sender, EventArgs e)

@@ -1,103 +1,20 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{C5987EFA-B632-406F-9934-0C6A924E05C7}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>DynThings.WebAPI.Models</RootNamespace>
-    <AssemblyName>DynThings.WebAPI.Models</AssemblyName>
-    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>
-    <TargetFrameworkProfile />
+    <TargetFramework>netstandard1.0</TargetFramework>
+    <Authors>Caesar Moussalli</Authors>
+    <Company>DynThings</Company>
+    <Description>This package includes all the requierd models to communicate with DynThings API.</Description>
+    <Copyright>DynThings 2017</Copyright>
+    <PackageProjectUrl>http://www.dynthings.com</PackageProjectUrl>
+    <PackageTags>DynThings API Models Client</PackageTags>
+    <AssemblyVersion>1.0.0.0</AssemblyVersion>
+    <FileVersion>1.0.0.0</FileVersion>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
-  <ItemGroup>
-    <Reference Include="AutoMapper, Version=6.0.2.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
-      <HintPath>..\packages\AutoMapper.6.0.2\lib\net45\AutoMapper.dll</HintPath>
-    </Reference>
-    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.10.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="System" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Net.Http" />
-    <Reference Include="System.Xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="Models\APIApp.cs" />
-    <Compile Include="Models\APIAppUserToken.cs" />
-    <Compile Include="Models\APILocationViewType.cs" />
-    <Compile Include="Models\APIThingsType.cs" />
-    <Compile Include="Models\APIEndPointTypeCategory.cs" />
-    <Compile Include="Models\APIEndPointType.cs" />
-    <Compile Include="Models\APIThing.cs" />
-    <Compile Include="Models\APIDeviceCommand.cs" />
-    <Compile Include="Models\APIDeviceIO.cs" />
-    <Compile Include="Models\APIDeviceStatus.cs" />
-    <Compile Include="Models\APIEndPointIO.cs" />
-    <Compile Include="Models\APIEndPoint.cs" />
-    <Compile Include="Models\APIDevice.cs" />
-    <Compile Include="Models\APILocation.cs" />
-    <Compile Include="Models\APILocationView.cs" />
-    <Compile Include="Models\APIPlatformInfo.cs" />
-    <Compile Include="Models\ApiResponse.cs" />
-    <Compile Include="Models\APIEndPointCommand.cs" />
-    <Compile Include="Models\APIThingEnd.cs" />
-    <Compile Include="Models\SubmissionDeviceIO.cs" />
-    <Compile Include="Models\SubmissionEndPointCommandExecuted.cs" />
-    <Compile Include="Models\SubmissionEndPointIO.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\DynThings.Core\DynThings.Core.csproj">
-      <Project>{ca4e274c-2541-4221-819e-441e7c20feee}</Project>
-      <Name>DynThings.Core</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\DynThings.Data.Models\DynThings.Data.Models.csproj">
-      <Project>{946862be-8456-4882-9a11-09ed0afd407b}</Project>
-      <Name>DynThings.Data.Models</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\DynThings.Data.Repositories\DynThings.Data.Repositories.csproj">
-      <Project>{3eb80ea4-99d5-4db4-bd84-2370dce356d0}</Project>
-      <Name>DynThings.Data.Repositories</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Readme.txt" />
-  </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
-       Other similar extension points exist, see Microsoft.Common.targets.
-  <Target Name="BeforeBuild">
+
+  <Target Name="CopyPackage" AfterTargets="Pack">
+    <Copy SourceFiles="$(ProjectDir)\Bin\Debug\$(PackageId).$(PackageVersion).nupkg" DestinationFolder="D:\OneDrive\Projects\_Libraries\_Nuget" />
+
   </Target>
-  <Target Name="AfterBuild">
-  </Target>
-  -->
 </Project>

@@ -19,7 +19,8 @@ namespace DynThings.Core
             Failed_DevelopmentMode = 1,
             Failed_ProductionMode = 2,
             NotAuthorized = 3,
-            Info = 4
+            Info = 4,
+            Unknown =99
         }
         #endregion
 

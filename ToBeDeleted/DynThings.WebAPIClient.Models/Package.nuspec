@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>DynThings.WebAPIClient.Models</id>
+    <version>1.0.0</version>
+    <authors>Caesar Moussalli</authors>
+    <owners>DynThings</owners>
+    <licenseUrl></licenseUrl>
+    <projectUrl>http://www.dynthings.com</projectUrl>
+    <iconUrl></iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>This package includes the requierd models to comunicate with DynThings API.</description>
+    <releaseNotes></releaseNotes>
+    <copyright>DynThings 2017</copyright>
+    <tags>DynThings API Models</tags>
+  </metadata>
+</package>
