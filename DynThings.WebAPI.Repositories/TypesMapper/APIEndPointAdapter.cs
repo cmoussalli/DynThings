@@ -19,6 +19,17 @@ namespace DynThings.WebAPI.TypesMapper
             result.KeyPass = sourceEndpoint.KeyPass;
             result.Title = sourceEndpoint.Title;
 
+            result.IsNumericOnly = sourceEndpoint.IsNumericOnly;
+            result.MinValue = sourceEndpoint.MinValue;
+            result.MaxValue = sourceEndpoint.MaxValue;
+            result.LowRange = sourceEndpoint.LowRange;
+            result.HighRange = sourceEndpoint.HighRange;
+
+            result.LastIOID = sourceEndpoint.LastIOID;
+            result.LastIOValue = sourceEndpoint.LastIOValue;
+            result.LastIOTimeStamp = sourceEndpoint.LastIOTimeStamp;
+            result.LastIOTimeStampUTC = sourceEndpoint.LastIOTimeStampUTC;
+
             #region Load Master Types
             result.EndPointType = APIEndPointTypeAdapter.fromEndPointType(sourceEndpoint.EndPointType);
             #endregion
