@@ -17,7 +17,7 @@
         <EntityTypeShape EntityType="DynThingsModel.App" Width="1.5" PointX="6" PointY="0.75" />
         <EntityTypeShape EntityType="DynThingsModel.AppStatuss" Width="1.5" PointX="3.75" PointY="2.25" />
         <EntityTypeShape EntityType="DynThingsModel.AppThingCategory" Width="1.5" PointX="8.25" PointY="16.5" />
-        <EntityTypeShape EntityType="DynThingsModel.AppThingExtenstion" Width="1.5" PointX="18.25" PointY="1.25" />
+        <EntityTypeShape EntityType="DynThingsModel.AppThingExtenstion" Width="1.875" PointX="18.25" PointY="1.25" />
         <EntityTypeShape EntityType="DynThingsModel.AppUserToken" Width="1.5" PointX="8.25" PointY="5.75" />
         <EntityTypeShape EntityType="DynThingsModel.AspNetRole" Width="1.5" PointX="0.75" PointY="10.25" />
         <EntityTypeShape EntityType="DynThingsModel.AspNetUserClaim" Width="1.5" PointX="5.25" PointY="17.75" />
@@ -29,7 +29,7 @@
         <EntityTypeShape EntityType="DynThingsModel.Device" Width="1.5" PointX="3" PointY="15.125" />
         <EntityTypeShape EntityType="DynThingsModel.DeviceStatu" Width="1.5" PointX="0.75" PointY="16.25" />
         <EntityTypeShape EntityType="DynThingsModel.DynSetting" Width="1.5" PointX="10.75" PointY="14.875" />
-        <EntityTypeShape EntityType="DynThingsModel.EndPointCommand" Width="1.5" PointX="19.75" PointY="10.625" />
+        <EntityTypeShape EntityType="DynThingsModel.EndPointCommand" Width="1.5" PointX="20.625" PointY="10.75" />
         <EntityTypeShape EntityType="DynThingsModel.EndPointIO" Width="1.5" PointX="19.75" PointY="14.75" />
         <EntityTypeShape EntityType="DynThingsModel.Endpoint" Width="1.75" PointX="17.5" PointY="14.25" />
         <EntityTypeShape EntityType="DynThingsModel.EndPointTypeCategory" Width="1.5" PointX="15.25" PointY="6.25" />
@@ -47,8 +47,8 @@
         <EntityTypeShape EntityType="DynThingsModel.SystemEntity" Width="1.5" PointX="8.75" PointY="1.25" />
         <EntityTypeShape EntityType="DynThingsModel.ThingCategory" Width="1.5" PointX="13" PointY="11.5" />
         <EntityTypeShape EntityType="DynThingsModel.ThingEnd" Width="1.5" PointX="22" PointY="15.375" />
-        <EntityTypeShape EntityType="DynThingsModel.ThingExtenstion" Width="1.5" PointX="15.25" PointY="10.25" />
-        <EntityTypeShape EntityType="DynThingsModel.ThingExtenstionValue" Width="1.5" PointX="17.5" PointY="11.125" />
+        <EntityTypeShape EntityType="DynThingsModel.ThingExtenstion" Width="1.75" PointX="15.25" PointY="10.25" />
+        <EntityTypeShape EntityType="DynThingsModel.ThingExtenstionValue" Width="2" PointX="17.75" PointY="10.625" />
         <EntityTypeShape EntityType="DynThingsModel.Thing" Width="1.5" PointX="15.25" PointY="14.75" />
         <EntityTypeShape EntityType="DynThingsModel.UserNotification" Width="1.5" PointX="5.25" PointY="11.375" />
         <EntityTypeShape EntityType="DynThingsModel.UserNotificationType" Width="1.5" PointX="10.75" PointY="5.875" />
