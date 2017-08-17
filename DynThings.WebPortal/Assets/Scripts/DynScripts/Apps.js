@@ -37,8 +37,12 @@ function AttachEventAppAddForm() {
             data: formData,
             dataType: "json",
             success: function (resp) {
-                ServerResponse(resp);
-                LoadPart_AppListDiv();
+                alert('123');
+                window.location.href(getRootURL() + 'locationViews/details?id=' + resp.Reference)
+            },
+            done: function (resp){
+                alert('234');
+                window.location.href(getRootURL() + 'locationViews/details?id=' + resp.Reference)
             },
             error: function () {
                 ServerResponse(resp);

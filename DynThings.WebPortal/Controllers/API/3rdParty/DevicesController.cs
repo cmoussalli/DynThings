@@ -31,7 +31,7 @@ namespace DynThings.WebPortal.Controllers.API
         #endregion
 
         //GET: api/LocationViews/GetLocationViews
-        public List<APIDevice> GetDevices(Guid token, string searchFor, int page, int pageSize)
+        public List<APIDevice> GetDevices(Guid token, int pageNumber, int pageSize, bool loadParents = false, bool loadChilds = false, string searchFor = "")
         {
             int methodID = 8;
             ResultInfo.Result tokenValidation = uow_APIs.repoAPIUserAppTokens.ValidateTokenEntityPermission(token, entityID, methodID);
@@ -40,7 +40,7 @@ namespace DynThings.WebPortal.Controllers.API
                 var msg = new HttpResponseMessage(HttpStatusCode.Unauthorized) { ReasonPhrase = tokenValidation.Message };
                 throw new HttpResponseException(new HttpResponseMessage(HttpStatusCode.Forbidden));
             }
-            return uow_APIs.repoAPIDevices.GetDevices(searchFor, page, pageSize);
+            return uow_APIs.repoAPIDevices.GetDevices(pageNumber, pageSize, loadParents, loadChilds, searchFor);
         }
 
 

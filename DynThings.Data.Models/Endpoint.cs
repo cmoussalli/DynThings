@@ -45,7 +45,6 @@ public partial class Endpoint
 
     public long ThingID { get; set; }
 
-
     public bool IsNumericOnly { get; set; }
 
     public Nullable<float> MinValue { get; set; }
@@ -56,7 +55,6 @@ public partial class Endpoint
 
     public Nullable<float> HighRange { get; set; }
 
-
     public Nullable<long> LastIOID { get; set; }
 
     public string LastIOValue { get; set; }
@@ -64,6 +62,8 @@ public partial class Endpoint
     public Nullable<System.DateTime> LastIOTimeStamp { get; set; }
 
     public Nullable<System.DateTime> LastIOTimeStampUTC { get; set; }
+
+    public Nullable<float> LastIONumericValue { get; set; }
 
 
 

@@ -1,0 +1,20 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard1.0</TargetFramework>
+    <PackageRequireLicenseAcceptance>False</PackageRequireLicenseAcceptance>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <Version>0.0.1</Version>
+    <Authors>Caesar Moussalli</Authors>
+    <Company>DynThings</Company>
+    <Description>This package contains multi-languages data</Description>
+    <Copyright>DynThings 2017</Copyright>
+    <PackageProjectUrl>http://www.dynthings.com/</PackageProjectUrl>
+    <PackageTags>DynThings Language</PackageTags>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="CommandsData.cs" />
+  </ItemGroup>
+
+</Project>

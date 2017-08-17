@@ -11,19 +11,17 @@
                 </div>
                 <div class="row" onclick="showEndDetails(@item.Thing.ID.ToString(),@item.EndPointTypeID.ToString())" style="cursor:pointer">
                     <div class="col-md-6 col-sm-6 col-xs-6">
-                        
                         <img id="imgThingEndImage_@item.Thing.ID.ToString()_@item.EndPointTypeID.ToString()" />
                         <h5><span>@item.Thing.ThingCategory.Title</span></h5>
 
                         @*@if (@item.Device.IsConnected == true)
-                        {
-                            <h5><span class="label label-success">Connected</span></h5>
-                        }
-                        else
-                        {
-                            <h5><span class="label label-danger">Disconnected</span></h5>
-                        }*@
-
+                            {
+                                <h5><span class="label label-success">Connected</span></h5>
+                            }
+                            else
+                            {
+                                <h5><span class="label label-danger">Disconnected</span></h5>
+                            }*@
                     </div>
 
                     <div class="col-md-6 col-sm-6 col-xs-6">
@@ -38,19 +36,21 @@
                 </div>
             </div>
 
-            <script>
-                var g = new JustGage({
+            if (item.LastIOID != null)
+            {
+                <script>
+                    var g = new JustGage({
                     id: "gauge_@item.Thing.ID.ToString()_@item.EndPointTypeID.ToString()",
                     value: '@item.LastIOValue',
-                    min: 0,
-                    max: 85,
+                    min: @item.EndPointIO.Endpoint.MinValue,
+                    max: @item.EndPointIO.Endpoint.MaxValue,
                     title: "@item.EndPointType.Title",
                     label:"@item.EndPointType.measurement"
-
                 });
 
                 $('#imgThingEndImage_@item.Thing.ID.ToString()_@item.EndPointTypeID.ToString()').attr('src',getRootURL() + "/imgs/@(item.EndPointType.IconID.ToString() + ".png")" );
-            </script>
+                </script>
+            }
         }
     </div>
 
@@ -64,12 +64,10 @@
 </div>
 
 
-
 <script>
     $(document).ready(function () {
         FixUI_MonitorLocation();
     });
-
 
 
     function showEndDetails(thingID,typeID){

@@ -25,6 +25,30 @@
         @Html.LabelFor(model => model.ThingID, "ThingID", htmlAttributes: new { @class = "" })
         @Html.DropDownList("ThingID", null, htmlAttributes: new { @class = "form-control" })
         @Html.ValidationMessageFor(model => model.ThingID, "", new { @class = "text-danger" })
+
+        <br />
+        @Html.EditorFor(model => model.IsNumericOnly, new { htmlAttributes = new { @class = "" } })
+        @Html.LabelFor(model => model.IsNumericOnly, htmlAttributes: new { @class = "" })
+        @Html.ValidationMessageFor(model => model.IsNumericOnly, "", new { @class = "text-danger" })
+        <br />
+
+        @Html.LabelFor(model => model.MinValue, htmlAttributes: new { @class = "" })
+        @Html.EditorFor(model => model.MinValue, new { htmlAttributes = new { @class = "form-control", @type = "Number" } })
+        @Html.ValidationMessageFor(model => model.MinValue, "", new { @class = "text-danger" })
+
+        @Html.LabelFor(model => model.MaxValue, htmlAttributes: new { @class = "" })
+        @Html.EditorFor(model => model.MaxValue, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.ValidationMessageFor(model => model.MaxValue, "", new { @class = "text-danger" })
+
+        @Html.LabelFor(model => model.LowRange, htmlAttributes: new { @class = "" })
+        @Html.EditorFor(model => model.LowRange, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.ValidationMessageFor(model => model.LowRange, "", new { @class = "text-danger" })
+
+        @Html.LabelFor(model => model.HighRange, htmlAttributes: new { @class = "" })
+        @Html.EditorFor(model => model.HighRange, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.ValidationMessageFor(model => model.HighRange, "", new { @class = "text-danger" })
+
+
     </div>
     <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>

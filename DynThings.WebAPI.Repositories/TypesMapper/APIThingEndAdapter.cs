@@ -12,7 +12,7 @@ namespace DynThings.WebAPI.TypesMapper
 
     public static class APIThingEndAdapter
     {
-        public static APIThingEnd fromThingEnd(ThingEnd sourceThingEnd,bool loadParents,bool loadChilds)
+        public static APIThingEnd fromThingEnd(ThingEnd sourceThingEnd, bool loadParents, bool loadChilds)
         {
             APIThingEnd result = new APIThingEnd();
             result.ID = sourceThingEnd.ID;
@@ -27,13 +27,17 @@ namespace DynThings.WebAPI.TypesMapper
             #endregion
 
             #region Load Parents
-            result.Thing = TypesMapper.APIThingAdapter.fromThing(sourceThingEnd.Thing,false,false);
+            if (loadParents)
+            {
+                result.Thing = TypesMapper.APIThingAdapter.fromThing(sourceThingEnd.Thing, false, false);
+                result.LastIOEndPoint = TypesMapper.APIEndPointAdapter.fromEndpoint(sourceThingEnd.EndPointIO.Endpoint, false, false);
+            }
 
             #endregion
 
 
             #region Load Childs
-            
+
             #endregion
 
 

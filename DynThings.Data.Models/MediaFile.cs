@@ -31,6 +31,8 @@ public partial class MediaFile
 
     public long ID { get; set; }
 
+    public Nullable<System.Guid> GUID { get; set; }
+
     public string Title { get; set; }
 
 

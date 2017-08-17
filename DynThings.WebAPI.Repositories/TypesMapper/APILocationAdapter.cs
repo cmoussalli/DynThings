@@ -19,7 +19,7 @@ namespace DynThings.WebAPI.TypesMapper
             result.ID = sourceLocation.ID;
             result.isActive = sourceLocation.isActive;
             result.LatitudeX = sourceLocation.LatitudeX;
-            result.LongitudeY = sourceLocation.LatitudeX;
+            result.LongitudeY = sourceLocation.LongitudeY;
             result.Status = sourceLocation.Status;
             result.Title = sourceLocation.Title;
 

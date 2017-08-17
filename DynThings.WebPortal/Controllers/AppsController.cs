@@ -82,6 +82,10 @@ namespace DynThings.WebPortal.Controllers
             if (ModelState.IsValid)
             {
                 res = uof_repos.repoApps.Add(app.Title, app.Description, currentUser.Id);
+                App addedApp = uof_repos.repoApps.Find(res.Reference);
+                System.IO.Directory.CreateDirectory(Request.PhysicalApplicationPath + "Imgs/Apps/" + addedApp.GUID.ToString());
+                System.IO.Directory.CreateDirectory(Request.PhysicalApplicationPath + "Imgs/Apps/" + addedApp.GUID.ToString() + "/MediaFiles");
+                System.IO.File.Copy(Request.PhysicalApplicationPath + "Imgs/Apps/default.jpg", Request.PhysicalApplicationPath + "Imgs/Apps/" + addedApp.GUID.ToString() + "/logo.jpg");
                 return Json(res);
             }
             return Json(res);

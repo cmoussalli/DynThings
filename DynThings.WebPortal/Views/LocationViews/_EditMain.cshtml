@@ -1,5 +1,24 @@
 ﻿@model DynThings.Data.Models.LocationView
 
+<div class="panel">
+    <div class="panel-heading">
+        <div class="panel-control">
+            <button class="btn btn-default" onclick="LoadPart_LocationViewEditMainDiv();">
+                <i class="demo-psi-repeat-2 icon-fw"></i> Refresh
+            </button>
+        </div>
+        <h3 class="panel-title">Main</h3>
+    </div>
+
+    <div class="panel-body">
+        <div class="pad-btm form-inline">
+            <div class="row">
+                <div class="col-sm-6 table-toolbar-left">
+                 
+                </div>
+            </div>
+        </div>
+
         @using (Html.BeginForm("EditMainPV", "LocationViews", FormMethod.Post, new { id = "LocationViewEditForm" }))
             {
             @Html.AntiForgeryToken()
@@ -20,9 +39,13 @@
             </div>
         }
 
+    </div>
+</div>
+
+
 <script>
     $(document).ready(function () {
-        AttachEventLocationViewEditForm(@Model.ID);
+        AttachEventLocationViewEditForm();
 
     });
 

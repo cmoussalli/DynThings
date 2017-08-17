@@ -24,9 +24,15 @@ public partial class App
 
         this.AppAPIEntitys = new HashSet<AppAPIEntity>();
 
-        this.AppUserTokens = new HashSet<AppUserToken>();
+        this.AppEndpointTypes = new HashSet<AppEndpointType>();
 
-        this.ThingExtenstions = new HashSet<ThingExtenstion>();
+        this.AppMediaFiles = new HashSet<AppMediaFile>();
+
+        this.AppThingCategorys = new HashSet<AppThingCategory>();
+
+        this.AppThingExtenstions = new HashSet<AppThingExtenstion>();
+
+        this.AppUserTokens = new HashSet<AppUserToken>();
 
     }
 
@@ -61,15 +67,27 @@ public partial class App
 
     public virtual ICollection<AppAPIEntity> AppAPIEntitys { get; set; }
 
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+
+    public virtual ICollection<AppEndpointType> AppEndpointTypes { get; set; }
+
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+
+    public virtual ICollection<AppMediaFile> AppMediaFiles { get; set; }
+
     public virtual AppStatuss AppStatuss { get; set; }
 
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
 
-    public virtual ICollection<AppUserToken> AppUserTokens { get; set; }
+    public virtual ICollection<AppThingCategory> AppThingCategorys { get; set; }
 
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
 
-    public virtual ICollection<ThingExtenstion> ThingExtenstions { get; set; }
+    public virtual ICollection<AppThingExtenstion> AppThingExtenstions { get; set; }
+
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+
+    public virtual ICollection<AppUserToken> AppUserTokens { get; set; }
 
 }
 

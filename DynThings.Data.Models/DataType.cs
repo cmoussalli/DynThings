@@ -22,6 +22,8 @@ public partial class DataType
     public DataType()
     {
 
+        this.AppThingExtenstions = new HashSet<AppThingExtenstion>();
+
         this.ThingExtenstions = new HashSet<ThingExtenstion>();
 
     }
@@ -32,6 +34,10 @@ public partial class DataType
     public string Title { get; set; }
 
 
+
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+
+    public virtual ICollection<AppThingExtenstion> AppThingExtenstions { get; set; }
 
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
 

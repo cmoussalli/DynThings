@@ -30,9 +30,9 @@ public partial class Thing
 
         this.LinkThingsLocations = new HashSet<LinkThingsLocation>();
 
-        this.ThingExtenstionValues = new HashSet<ThingExtenstionValue>();
-
         this.ThingEnds = new HashSet<ThingEnd>();
+
+        this.ThingExtenstionValues = new HashSet<ThingExtenstionValue>();
 
     }
 
@@ -71,11 +71,11 @@ public partial class Thing
 
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
 
-    public virtual ICollection<ThingExtenstionValue> ThingExtenstionValues { get; set; }
+    public virtual ICollection<ThingEnd> ThingEnds { get; set; }
 
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
 
-    public virtual ICollection<ThingEnd> ThingEnds { get; set; }
+    public virtual ICollection<ThingExtenstionValue> ThingExtenstionValues { get; set; }
 
 }
 

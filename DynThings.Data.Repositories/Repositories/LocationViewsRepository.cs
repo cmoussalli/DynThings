@@ -95,7 +95,14 @@ namespace DynThings.Data.Repositories
         }
         #endregion
 
-        #region Edit : Title
+        #region Edit : Main
+        /// <summary>
+        /// Edit a specific LocationView's main info.
+        /// </summary>
+        /// <param name="locationViewID"></param>
+        /// <param name="title"></param>
+        /// <param name="TypeID"></param>
+        /// <returns></returns>
         public ResultInfo.Result Edit(long locationViewID, string title, long TypeID)
         {
             try
@@ -113,23 +120,21 @@ namespace DynThings.Data.Repositories
             }
         }
         #endregion
-        #region Edit : LocationType
+        #region Edit : Map
         /// <summary>
-        /// Edit a specific LocationView
+        /// Edit a specific LocationView's map info.
         /// </summary>
         /// <param name="locationViewID">The editable LocationView ID</param>
-        /// <param name="locationViewTypeID">The newLocationView type ID</param>
         /// <param name="x">X, Longitude</param>
         /// <param name="y">Y, Latitude</param>
         /// <param name="z">Map Zoom</param>
         /// <param name="userID">Edited by User ID</param>
         /// <returns></returns>
-        public ResultInfo.Result Edit(long locationViewID, long locationViewTypeID, string x, string y, string z, string userID)
+        public ResultInfo.Result Edit(long locationViewID, string x, string y, string z, string userID)
         {
             try
             {
                 LocationView loc = db.LocationViews.Find(locationViewID);
-                loc.LocationViewTypeID = locationViewID;
                 loc.X = x;
                 loc.Y = y;
                 loc.Z = z;

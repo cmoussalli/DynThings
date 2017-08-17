@@ -88,9 +88,9 @@ namespace DynThings.Data.Repositories
                 db.SaveChanges();
                 return ResultInfo.GenerateOKResult("Saved", app.ID);
             }
-            catch
+            catch (Exception ex)
             {
-                return ResultInfo.GetResultByID(1);
+                return ResultInfo.GenerateErrorResult("Error",ex.Message);
             }
         }
 

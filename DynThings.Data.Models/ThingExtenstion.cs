@@ -31,7 +31,7 @@ public partial class ThingExtenstion
 
     public System.Guid GUID { get; set; }
 
-    public long AppID { get; set; }
+    public string Code { get; set; }
 
     public long ThingCategoryID { get; set; }
 
@@ -42,8 +42,6 @@ public partial class ThingExtenstion
     public bool IsList { get; set; }
 
 
-
-    public virtual App App { get; set; }
 
     public virtual DataType DataType { get; set; }
 

@@ -81,7 +81,19 @@
     <Compile Include="AppAPIEntity.cs">
       <DependentUpon>DynThingsModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="AppEndpointType.cs">
+      <DependentUpon>DynThingsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AppMediaFile.cs">
+      <DependentUpon>DynThingsModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="AppStatuss.cs">
+      <DependentUpon>DynThingsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AppThingCategory.cs">
+      <DependentUpon>DynThingsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AppThingExtenstion.cs">
       <DependentUpon>DynThingsModel.tt</DependentUpon>
     </Compile>
     <Compile Include="AppUserToken.cs">

@@ -34,6 +34,8 @@ public partial class ThingEnd
 
 
 
+    public virtual EndPointIO EndPointIO { get; set; }
+
     public virtual EndPointType EndPointType { get; set; }
 
     public virtual Thing Thing { get; set; }

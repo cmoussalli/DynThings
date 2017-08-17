@@ -111,7 +111,7 @@ namespace DynThings.WebPortal.Controllers
         }
         #endregion
 
-        #region EditPV : Title
+        #region LocationView : Main
         [HttpGet]
         public PartialViewResult EditMainPV(long id)
         {
@@ -133,7 +133,7 @@ namespace DynThings.WebPortal.Controllers
         }
         #endregion
 
-        #region EditPV : MapInfo
+        #region LocationView : MapInfo
         [HttpGet]
         public PartialViewResult EditMapPV(long id)
         {
@@ -145,16 +145,22 @@ namespace DynThings.WebPortal.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult EditMapPV([Bind(Include = "ID,X,Y,Z")] LocationView locationView)
         {
-            ResultInfo.Result res = ResultInfo.GetResultByID(1);
+            ResultInfo.Result res = ResultInfo.GenerateErrorResult();
             if (ModelState.IsValid)
             {
-                res = uof_repos.repoLocationViews.Edit(locationView.ID, 3, locationView.X, locationView.Y, locationView.Z, "1");
+                res = uof_repos.repoLocationViews.Edit(locationView.ID, locationView.X, locationView.Y, locationView.Z, currentUser.Id);
             }
             return Json(res);
         }
         #endregion
 
-        #region EditComponents
+        #region LocationView : Locations
+        [HttpGet]
+        public PartialViewResult LocationsByLocationViewIDPV(long locationViewID = 0)
+        {
+            LocationView locationView = uof_repos.repoLocationViews.Find(locationViewID);
+            return PartialView("_Locations",locationView);
+        }
 
         #region LocationsListPV
         [HttpGet]

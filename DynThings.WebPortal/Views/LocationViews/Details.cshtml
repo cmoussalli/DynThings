@@ -3,70 +3,68 @@
     ViewBag.Title = "LocationView Details";
 }
 
-<div class="container">
-    <div class="page-header">
-        <h1>LocationView Details</h1>
-    </div>
-
+<div id="page-title">
     <div class="row">
-        <div class="col-md-12">
-            <ul class="nav nav-tabs">
-                <li class="active"><a data-toggle="tab" href="#tabLocationViewmain">Main</a></li>
-                <li><a data-toggle="tab" href="#tabLocationViewmap">Map</a></li>
-                <li><a data-toggle="tab" href="#tabLocationViewlocations">Locations</a></li>
-                @*<li><a data-toggle="tab" href="#tabLocationViewDevkeys">Dev Keys</a></li>*@
-                <li><a data-toggle="tab" href="#tabLocationViewDelete">Delete</a></li>
-            </ul>
-            <div class="panel panel-default">
-                <div class="panel-body">
-                    <div class="tab-content">
-                        <div id="tabLocationViewmain" class="tab-pane fade in active">
-                            <div id="divLocationViewMain">
+        <div class="col-lg-9">
+            <h1 class="page-header text-overflow">View: @Model.Title</h1>
+            <h5>Manage the View.</h5>
+        </div>
 
-                            </div>
-                        </div>
-                        <div id="tabLocationViewmap" class="tab-pane fade">
-                            <div id="divLocationViewMap">
-                                @Html.Partial("_EditMap", Model)
-                            </div>
-                        </div>
-                        <div id="tabLocationViewlocations" class="tab-pane fade">
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <button type="button" class="btn btn-info" onclick="LoadPart_LocationLookup('#modal')" data-toggle="modal" data-target="#mdl">Import</button>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="input-group">
-                                        <input type="search" id="txtLocationsSearch" class="form-control" onkeydown="if (event.keyCode == 13) { LoadPart_LocationsListByLocationViewIDDiv(@Model.ID); return false; }" />
-                                        <div class="input-group-btn">
-                                            <button type="button" class="btn btn-primary" onclick="LoadPart_LocationsListByLocationViewIDDiv(@Model.ID)">Search</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <br />
-                            <div class="well well-lg">
-                                <div id="divLocationsList">
-
-                                </div>
-                            </div>
-
-                        </div>
-                        @*<div id="tabLocationViewDevkeys" class="tab-pane fade">
-                            <div id="divLocationViewDevkeys">
-                            </div>
-                        </div>*@
-                        <div id="tabLocationViewDelete" class="tab-pane fade">
-                            <div id="divLocationViewDelete">
-                                <button type="button" class="btn btn-danger" onclick="LoadPart_DialogLocationViewDelete(@Model.ID)" data-toggle="modal" data-target="#mdl">Delete</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+        <div class="col-lg-3">
+            <div class="pull-right">
+                <br />
+                <a href="~/LocationViews/"> < Back to Views List</a>
             </div>
         </div>
     </div>
 </div>
+
+<div id="page-content">
+    <div class="fixed-fluid">
+        <div class="fixed-sm-200 fixed-lg-250 pull-sm-left">
+            <div class="">
+                <div class="text-center bg-info">
+                    <img src="~/Imgs/Views/Default.jpg" style="height:100%;width:100%" />
+                    <ul class="list-unstyled text-center pad-top mar-no row">
+                        <li class="col-xs-12">
+                            <span class="text-lg ">@Model.Title</span>
+                            <br /><br />
+
+                        </li>
+                        @*<li class="col-xs-4">
+                                <span class="text-lg text-semibold">23K</span>
+                                <p class="text-sm mar-no">Followers</p>
+                            </li>
+                            <li class="col-xs-4">
+                                <span class="text-lg text-semibold">278</span>
+                                <p class="text-sm mar-no">Post</p>
+                            </li>*@
+                    </ul>
+                </div>
+                <div class="list-group bg-trans pad-btm">
+                    <a class="list-group-item" onclick="LoadPart_LocationViewEditMainDiv();" style="cursor: pointer;">Main</a>
+                    <a class="list-group-item" onclick="LoadPart_LocationViewEditMapDiv();" style="cursor: pointer;">Map</a>
+                    <a class="list-group-item" onclick="LoadPart_LocationViewEditLocationsContainerDiv();" style="cursor: pointer;">Locations</a>
+                    <a class="list-group-item" onclick="LoadPart_DialogLocationViewDelete();" data-toggle="modal" data-target="#mdl" style="cursor: pointer;">Delete</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="fluid">
+            <div class="fixed-fluid">
+                <div id="divPageDetails">
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+
+
+
 
 <!-- Button trigger modal -->
 
@@ -79,9 +77,8 @@
 @section scripts{
     <script>
         $(document).ready(function () {
-            selectedLocationView = @Model.ID
-            LoadPart_DialogLocationViewEditMain(@Model.ID);
-            LoadPart_LocationsListByLocationViewIDDiv(@Model.ID);
+            selectedLocationViewID = @Model.ID;
+            LoadPart_LocationViewEditMainDiv(@Model.ID);
 
         });
 

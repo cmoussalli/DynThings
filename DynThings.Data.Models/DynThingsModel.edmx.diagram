@@ -5,48 +5,53 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="153eea3d35a046aa8fab5470a9c25b99" Name="Diagram1" ZoomLevel="94">
-        <EntityTypeShape EntityType="DynThingsModel.AlertCondition" Width="1.5" PointX="17.5" PointY="6" />
-        <EntityTypeShape EntityType="DynThingsModel.AlertConditionType" Width="1.5" PointX="15.25" PointY="0.75" />
+        <EntityTypeShape EntityType="DynThingsModel.AlertCondition" Width="1.5" PointX="20.5" PointY="21.125" />
+        <EntityTypeShape EntityType="DynThingsModel.AlertConditionType" Width="1.5" PointX="18.25" PointY="28.125" />
         <EntityTypeShape EntityType="DynThingsModel.AlertLevel" Width="1.5" PointX="0.75" PointY="0.875" />
-        <EntityTypeShape EntityType="DynThingsModel.Alert" Width="1.5" PointX="6" PointY="1.25" />
-        <EntityTypeShape EntityType="DynThingsModel.APIMethod" Width="1.5" PointX="21.75" PointY="13.5" />
-        <EntityTypeShape EntityType="DynThingsModel.APIUtilisation" Width="1.5" PointX="24" PointY="13.125" />
-        <EntityTypeShape EntityType="DynThingsModel.AppAPIEntity" Width="1.5" PointX="11" PointY="3.125" />
-        <EntityTypeShape EntityType="DynThingsModel.App" Width="1.5" PointX="3" PointY="3.125" />
-        <EntityTypeShape EntityType="DynThingsModel.AppStatuss" Width="1.5" PointX="0.75" PointY="4.375" />
-        <EntityTypeShape EntityType="DynThingsModel.AppUserToken" Width="1.5" PointX="5.25" PointY="5.875" />
-        <EntityTypeShape EntityType="DynThingsModel.AspNetRole" Width="1.5" PointX="0.75" PointY="10.375" />
-        <EntityTypeShape EntityType="DynThingsModel.AspNetUserClaim" Width="1.5" PointX="5.25" PointY="14.375" />
-        <EntityTypeShape EntityType="DynThingsModel.AspNetUserLogin" Width="1.5" PointX="5.25" PointY="23.875" />
-        <EntityTypeShape EntityType="DynThingsModel.AspNetUser" Width="1.5" PointX="3" PointY="8.25" />
-        <EntityTypeShape EntityType="DynThingsModel.DataType" Width="1.5" PointX="13" PointY="7.75" />
-        <EntityTypeShape EntityType="DynThingsModel.DeviceCommand" Width="1.5" PointX="5.25" PointY="26.875" />
-        <EntityTypeShape EntityType="DynThingsModel.DeviceIO" Width="1.5" PointX="20.5" PointY="4.625" />
+        <EntityTypeShape EntityType="DynThingsModel.Alert" Width="1.5" PointX="6" PointY="27.125" />
+        <EntityTypeShape EntityType="DynThingsModel.APIMethod" Width="1.5" PointX="7.75" PointY="20.375" />
+        <EntityTypeShape EntityType="DynThingsModel.APIUtilisation" Width="1.5" PointX="10" PointY="20" />
+        <EntityTypeShape EntityType="DynThingsModel.AppAPIEntity" Width="1.5" PointX="11" PointY="2" />
+        <EntityTypeShape EntityType="DynThingsModel.AppEndpointType" Width="1.5" PointX="20.5" PointY="3" />
+        <EntityTypeShape EntityType="DynThingsModel.AppMediaFile" Width="1.5" PointX="8.25" PointY="13.875" />
+        <EntityTypeShape EntityType="DynThingsModel.App" Width="1.5" PointX="6" PointY="0.75" />
+        <EntityTypeShape EntityType="DynThingsModel.AppStatuss" Width="1.5" PointX="3.75" PointY="2.25" />
+        <EntityTypeShape EntityType="DynThingsModel.AppThingCategory" Width="1.5" PointX="8.25" PointY="16.5" />
+        <EntityTypeShape EntityType="DynThingsModel.AppThingExtenstion" Width="1.5" PointX="18.25" PointY="1.25" />
+        <EntityTypeShape EntityType="DynThingsModel.AppUserToken" Width="1.5" PointX="8.25" PointY="5.75" />
+        <EntityTypeShape EntityType="DynThingsModel.AspNetRole" Width="1.5" PointX="0.75" PointY="10.25" />
+        <EntityTypeShape EntityType="DynThingsModel.AspNetUserClaim" Width="1.5" PointX="5.25" PointY="17.75" />
+        <EntityTypeShape EntityType="DynThingsModel.AspNetUserLogin" Width="1.5" PointX="5.25" PointY="23.75" />
+        <EntityTypeShape EntityType="DynThingsModel.AspNetUser" Width="1.5" PointX="3" PointY="8.125" />
+        <EntityTypeShape EntityType="DynThingsModel.DataType" Width="1.5" PointX="13" PointY="8.875" />
+        <EntityTypeShape EntityType="DynThingsModel.DeviceCommand" Width="1.5" PointX="5.25" PointY="31.875" />
+        <EntityTypeShape EntityType="DynThingsModel.DeviceIO" Width="1.5" PointX="22.75" PointY="19.375" />
         <EntityTypeShape EntityType="DynThingsModel.Device" Width="1.5" PointX="3" PointY="15.125" />
-        <EntityTypeShape EntityType="DynThingsModel.DeviceStatu" Width="1.5" PointX="0.75" PointY="16.375" />
-        <EntityTypeShape EntityType="DynThingsModel.DynSetting" Width="1.5" PointX="7.75" PointY="13.875" />
-        <EntityTypeShape EntityType="DynThingsModel.EndPointCommand" Width="1.5" PointX="19.75" PointY="17.875" />
-        <EntityTypeShape EntityType="DynThingsModel.EndPointIO" Width="1.5" PointX="19.75" PointY="12.375" />
-        <EntityTypeShape EntityType="DynThingsModel.Endpoint" Width="1.5" PointX="17.5" PointY="12.375" />
-        <EntityTypeShape EntityType="DynThingsModel.EndPointTypeCategory" Width="1.5" PointX="13" PointY="15.625" />
-        <EntityTypeShape EntityType="DynThingsModel.EndPointType" Width="1.5" PointX="15.25" PointY="15.125" />
-        <EntityTypeShape EntityType="DynThingsModel.IOType" Width="1.5" PointX="15.25" PointY="3.625" />
-        <EntityTypeShape EntityType="DynThingsModel.LinkDevicesLocation" Width="1.875" PointX="5.25" PointY="9.375" />
-        <EntityTypeShape EntityType="DynThingsModel.LinkLocationsLocationView" Width="1.5" PointX="12.25" PointY="20.125" />
-        <EntityTypeShape EntityType="DynThingsModel.LinkThingsLocation" Width="1.5" PointX="17.5" PointY="18.75" />
-        <EntityTypeShape EntityType="DynThingsModel.LinkUsersAlert" Width="1.5" PointX="8.25" PointY="10.125" />
-        <EntityTypeShape EntityType="DynThingsModel.Location" Width="1.5" PointX="3" PointY="19.875" />
-        <EntityTypeShape EntityType="DynThingsModel.LocationView" Width="1.5" PointX="10" PointY="19.125" />
-        <EntityTypeShape EntityType="DynThingsModel.LocationViewType" Width="1.5" PointX="7.75" PointY="19.75" />
+        <EntityTypeShape EntityType="DynThingsModel.DeviceStatu" Width="1.5" PointX="0.75" PointY="16.25" />
+        <EntityTypeShape EntityType="DynThingsModel.DynSetting" Width="1.5" PointX="10.75" PointY="14.875" />
+        <EntityTypeShape EntityType="DynThingsModel.EndPointCommand" Width="1.5" PointX="19.75" PointY="10.625" />
+        <EntityTypeShape EntityType="DynThingsModel.EndPointIO" Width="1.5" PointX="19.75" PointY="14.75" />
+        <EntityTypeShape EntityType="DynThingsModel.Endpoint" Width="1.75" PointX="17.5" PointY="14.25" />
+        <EntityTypeShape EntityType="DynThingsModel.EndPointTypeCategory" Width="1.5" PointX="15.25" PointY="6.25" />
+        <EntityTypeShape EntityType="DynThingsModel.EndPointType" Width="1.5" PointX="17.5" PointY="5.625" />
+        <EntityTypeShape EntityType="DynThingsModel.IOType" Width="1.5" PointX="17.5" PointY="24.75" />
+        <EntityTypeShape EntityType="DynThingsModel.LinkDevicesLocation" Width="1.5" PointX="5.25" PointY="6.375" />
+        <EntityTypeShape EntityType="DynThingsModel.LinkLocationsLocationView" Width="1.5" PointX="20.25" PointY="7.625" />
+        <EntityTypeShape EntityType="DynThingsModel.LinkThingsLocation" Width="1.5" PointX="17.5" PointY="21.125" />
+        <EntityTypeShape EntityType="DynThingsModel.LinkUsersAlert" Width="1.5" PointX="8.25" PointY="10" />
+        <EntityTypeShape EntityType="DynThingsModel.Location" Width="1.5" PointX="3" PointY="20.75" />
+        <EntityTypeShape EntityType="DynThingsModel.LocationView" Width="1.5" PointX="16" PointY="1" />
+        <EntityTypeShape EntityType="DynThingsModel.LocationViewType" Width="1.5" PointX="13.75" PointY="1.75" />
         <EntityTypeShape EntityType="DynThingsModel.MediaFile" Width="1.5" PointX="10.75" PointY="11.75" />
-        <EntityTypeShape EntityType="DynThingsModel.ResultMessage" Width="1.5" PointX="7.75" PointY="5.875" />
+        <EntityTypeShape EntityType="DynThingsModel.ResultMessage" Width="1.5" PointX="0.75" PointY="3.875" />
         <EntityTypeShape EntityType="DynThingsModel.SystemEntity" Width="1.5" PointX="8.75" PointY="1.25" />
-        <EntityTypeShape EntityType="DynThingsModel.ThingCategory" Width="1.5" PointX="13" PointY="11.375" />
-        <EntityTypeShape EntityType="DynThingsModel.ThingExtenstion" Width="1.5" PointX="15.25" PointY="6.875" />
-        <EntityTypeShape EntityType="DynThingsModel.ThingExtenstionValue" Width="1.5" PointX="20.5" PointY="9.5" />
-        <EntityTypeShape EntityType="DynThingsModel.Thing" Width="1.875" PointX="15.25" PointY="11" />
-        <EntityTypeShape EntityType="DynThingsModel.UserNotification" Width="1.5" PointX="5.25" PointY="20.375" />
-        <EntityTypeShape EntityType="DynThingsModel.UserNotificationType" Width="1.5" PointX="2.75" PointY="0.875" />
+        <EntityTypeShape EntityType="DynThingsModel.ThingCategory" Width="1.5" PointX="13" PointY="11.5" />
+        <EntityTypeShape EntityType="DynThingsModel.ThingEnd" Width="1.5" PointX="22" PointY="15.375" />
+        <EntityTypeShape EntityType="DynThingsModel.ThingExtenstion" Width="1.5" PointX="15.25" PointY="10.25" />
+        <EntityTypeShape EntityType="DynThingsModel.ThingExtenstionValue" Width="1.5" PointX="17.5" PointY="11.125" />
+        <EntityTypeShape EntityType="DynThingsModel.Thing" Width="1.5" PointX="15.25" PointY="14.75" />
+        <EntityTypeShape EntityType="DynThingsModel.UserNotification" Width="1.5" PointX="5.25" PointY="11.375" />
+        <EntityTypeShape EntityType="DynThingsModel.UserNotificationType" Width="1.5" PointX="10.75" PointY="5.875" />
         <AssociationConnector Association="DynThingsModel.FK__AlertCond__Alert__7720AD13" />
         <AssociationConnector Association="DynThingsModel.FK__AlertCond__Condi__74444068" />
         <AssociationConnector Association="DynThingsModel.FK__AlertCond__EndPo__0662F0A3" />
@@ -57,9 +62,14 @@
         <AssociationConnector Association="DynThingsModel.FK__AppAPIEnt__Syste__284DF453" />
         <AssociationConnector Association="DynThingsModel.FK__AppEntity__AppID__5EDF0F2E" />
         <AssociationConnector Association="DynThingsModel.FK__AppEntity__Entit__5FD33367" />
+        <AssociationConnector Association="DynThingsModel.FK__AppEndpoi__AppID__2101D846" />
+        <AssociationConnector Association="DynThingsModel.FK__AppEndpoi__TypeC__2F4FF79D" />
+        <AssociationConnector Association="DynThingsModel.FK__AppMediaF__AppID__2E5BD364" />
         <AssociationConnector Association="DynThingsModel.FK__Apps__StatusID__4F9CCB9E" />
+        <AssociationConnector Association="DynThingsModel.FK__AppThingC__AppID__1A54DAB7" />
+        <AssociationConnector Association="DynThingsModel.FK__AppThingE__AppID__1960B67E" />
         <AssociationConnector Association="DynThingsModel.FK__AppUserTo__AppID__338A9CD5" />
-        <AssociationConnector Association="DynThingsModel.FK__ThingExte__AppID__5AA469F6" />
+        <AssociationConnector Association="DynThingsModel.FK__AppThingE__DataT__25C68D63" />
         <AssociationConnector Association="DynThingsModel.FK__AppUserTo__AspNe__347EC10E" />
         <AssociationConnector Association="DynThingsModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" />
         <AssociationConnector Association="DynThingsModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" />
@@ -79,13 +89,16 @@
         <AssociationConnector Association="DynThingsModel.FK__Endpoints__Devic__00DF2177" />
         <AssociationConnector Association="DynThingsModel.FK__LinkDevic__Devic__48CFD27E" />
         <AssociationConnector Association="DynThingsModel.FK__EndPointC__EndPo__4222D4EF" />
-        <AssociationConnector Association="DynThingsModel.FK__EndPointI__EndPo__29572725" />
+        <AssociationConnector Association="DynThingsModel.FK__EndPointI__EndPo__0E391C95" />
+        <AssociationConnector Association="DynThingsModel.FK__EndPointI__EndPo__149C0161" />
         <AssociationConnector Association="DynThingsModel.FK__EndPointI__IOTyp__440B1D61" />
         <AssociationConnector Association="DynThingsModel.FK__EndPointI__Thing__7E02B4CC" />
+        <AssociationConnector Association="DynThingsModel.FK__ThingEnds__LastI__186C9245" />
         <AssociationConnector Association="DynThingsModel.FK__Endpoints__Thing__7EF6D905" />
         <AssociationConnector Association="DynThingsModel.FK__Endpoints__TypeI__45F365D3" />
         <AssociationConnector Association="DynThingsModel.FK__EndPointT__TypeC__2A363CC5" />
         <AssociationConnector Association="DynThingsModel.FK__EndPointT__TypeC__47DBAE45" />
+        <AssociationConnector Association="DynThingsModel.FK__ThingEnds__EndPo__5E3FF0B0" />
         <AssociationConnector Association="DynThingsModel.FK__LinkDevic__Locat__49C3F6B7" />
         <AssociationConnector Association="DynThingsModel.FK__LinkLocat__Locat__35BCFE0A" />
         <AssociationConnector Association="DynThingsModel.FK__LinkLocat__Locat__36B12243" />
@@ -97,13 +110,10 @@
         <AssociationConnector Association="DynThingsModel.FK__ThingCate__IconI__2EFAF1E2" />
         <AssociationConnector Association="DynThingsModel.FK__ThingExte__Thing__6339AFF7" />
         <AssociationConnector Association="DynThingsModel.FK__Things__Category__662B2B3B" />
+        <AssociationConnector Association="DynThingsModel.FK__ThingEnds__Thing__4C214075" />
         <AssociationConnector Association="DynThingsModel.FK__ThingExte__Thing__5D80D6A1" />
         <AssociationConnector Association="DynThingsModel.FK__ThingExte__Thing__670A40DB" />
         <AssociationConnector Association="DynThingsModel.AspNetUserRoles" />
-        <EntityTypeShape EntityType="DynThingsModel.ThingEnd" Width="1.5" PointX="22.5" PointY="17.125" />
-        <AssociationConnector Association="DynThingsModel.FK__ThingEnds__EndPo__5E3FF0B0" />
-        <AssociationConnector Association="DynThingsModel.FK__ThingEnds__Thing__4C214075" />
-        <AssociationConnector Association="DynThingsModel.FK__EndPointI__EndPo__0E391C95" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -24,16 +24,18 @@ public partial class EndPointType
 
         this.AlertConditions = new HashSet<AlertCondition>();
 
+        this.EndPointIOs = new HashSet<EndPointIO>();
+
         this.Endpoints = new HashSet<Endpoint>();
 
         this.ThingEnds = new HashSet<ThingEnd>();
-
-        this.EndPointIOs = new HashSet<EndPointIO>();
 
     }
 
 
     public long ID { get; set; }
+
+    public string Code { get; set; }
 
     public string Title { get; set; }
 
@@ -51,6 +53,10 @@ public partial class EndPointType
 
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
 
+    public virtual ICollection<EndPointIO> EndPointIOs { get; set; }
+
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+
     public virtual ICollection<Endpoint> Endpoints { get; set; }
 
     public virtual EndPointTypeCategory EndPointTypeCategory { get; set; }
@@ -60,10 +66,6 @@ public partial class EndPointType
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
 
     public virtual ICollection<ThingEnd> ThingEnds { get; set; }
-
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-
-    public virtual ICollection<EndPointIO> EndPointIOs { get; set; }
 
 }
 

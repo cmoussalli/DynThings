@@ -507,6 +507,8 @@
     <Content Include="Imgs\8.png" />
     <Content Include="Imgs\9.png" />
     <Content Include="Imgs\Apps\0.jpg" />
+    <Content Include="Imgs\Locations\Default.jpg" />
+    <Content Include="Imgs\Views\Default.jpg" />
     <Content Include="Scripts\jquery-ui-1.12.1.js" />
     <Content Include="Scripts\jquery-ui-1.12.1.min.js" />
     <Content Include="Scripts\jquery.signalR-2.2.1.js" />
@@ -650,7 +652,9 @@
     <Compile Include="Controllers\APIEndPointIOsController.cs" />
     <Compile Include="Controllers\API\3rdParty\AppsController.cs" />
     <Compile Include="Controllers\API\3rdParty\DeviceCommandsController.cs" />
+    <Compile Include="Controllers\API\3rdParty\DevicesController.cs" />
     <Compile Include="Controllers\API\3rdParty\EndPointCommandsController.cs" />
+    <Compile Include="Controllers\API\3rdParty\EndPointsController.cs" />
     <Compile Include="Controllers\API\3rdParty\LocationsController.cs" />
     <Compile Include="Controllers\API\3rdParty\LocationViewsController.cs" />
     <Compile Include="Controllers\API\3rdParty\ThingEndsController.cs" />
@@ -729,6 +733,7 @@
     <Content Include="Views\Shared\Widgets\_HighChart.cshtml" />
     <Content Include="Views\Shared\Widgets\_InfoBox.cshtml" />
     <Content Include="Views\Endpoints\_Details_Connectivity.cshtml" />
+    <Content Include="Views\LocationViews\_Locations.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Assets\Imgs\Wizard.png" />

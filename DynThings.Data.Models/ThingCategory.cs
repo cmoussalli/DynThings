@@ -35,7 +35,7 @@ public partial class ThingCategory
 
     public Nullable<long> IconID { get; set; }
 
-    public Nullable<System.Guid> GUID { get; set; }
+    public string Code { get; set; }
 
 
 

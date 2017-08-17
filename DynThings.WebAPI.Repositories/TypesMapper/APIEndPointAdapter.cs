@@ -41,6 +41,12 @@ namespace DynThings.WebAPI.TypesMapper
                 result.Device = TypesMapper.APIDeviceAdapter.fromDevice(sourceEndpoint.Device, false, false);
 
                 #endregion
+
+                #region Thing
+                result.Thing = TypesMapper.APIThingAdapter.fromThing(sourceEndpoint.Thing, false, false);
+
+                #endregion
+
             }
             #endregion
 

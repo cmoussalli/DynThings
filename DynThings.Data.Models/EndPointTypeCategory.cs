@@ -22,6 +22,8 @@ public partial class EndPointTypeCategory
     public EndPointTypeCategory()
     {
 
+        this.AppEndpointTypes = new HashSet<AppEndpointType>();
+
         this.EndPointTypes = new HashSet<EndPointType>();
 
         this.EndPointTypes1 = new HashSet<EndPointType>();
@@ -34,6 +36,10 @@ public partial class EndPointTypeCategory
     public string Title { get; set; }
 
 
+
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+
+    public virtual ICollection<AppEndpointType> AppEndpointTypes { get; set; }
 
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
 

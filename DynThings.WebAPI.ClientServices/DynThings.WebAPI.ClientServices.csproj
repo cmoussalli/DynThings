@@ -1,0 +1,25 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard1.1</TargetFramework>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <Version>0.1.10</Version>
+    <Description>This package includes all the requierd Methods to communicate with DynThings WebAPI services.
+Designed on top of Unit of Work &amp; Repositores architecture.</Description>
+    <Copyright>DynThings 2017</Copyright>
+    <PackageProjectUrl>http://www.dynthings.com/</PackageProjectUrl>
+    <PackageTags>DynThings API Models Repositories Unit of Work Client</PackageTags>
+    <Authors>Caesar Moussalli</Authors>
+    <Company>DynThings</Company>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="DynThings.WebAPI.Models" Version="1.0.2" />
+    <PackageReference Include="Newtonsoft.Json" Version="10.0.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\DynThings.WebAPI.Models\DynThings.WebAPI.Models.csproj" />
+  </ItemGroup>
+
+</Project>

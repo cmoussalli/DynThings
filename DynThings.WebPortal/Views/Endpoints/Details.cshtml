@@ -8,8 +8,8 @@
 <div id="page-title">
     <div class="row">
         <div class="col-lg-9">
-            <h1 class="page-header text-overflow">Endpoints</h1>
-            <h5>Manage the endpooints, and assign Things to them.</h5>
+            <h1 class="page-header text-overflow">Endpoint: @Model.Title</h1>
+            <h5>Manage the endpoint.</h5>
         </div>
 
         <div class="col-lg-3">
@@ -68,79 +68,6 @@
 
 </div>
 
-<div class="container">
-    <div class="page-header">
-    </div>
-    <div class="row">
-        <div class="col-lg-12">
-            <div class="input-group">
-                <select id="drpEndpointHighchartsView" class="form-control" onchange="drpReport_Select(@Model.ID,'@DateTime.Now.Year.ToString()')">
-                    <option value="1">Inputs: Minutes\Hour</option>
-                    <option value="2">Inputs: Hour\Day</option>
-                    <option value="3">Inputs: Day\Month</option>
-                    <option value="4">Inputs: Month\Year</option>
-                    <option value="5">Network: Connection drops\Months  (Count)</option>
-                </select>
-                <div class="input-group-btn">
-                    <button onclick="drpReport_Select(@Model.ID,'@DateTime.Now.Year.ToString()')" class="btn btn-primary">Refresh</button>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-lg-12">
-            <div id="EndPointChartDiv"></div>
-        </div>
-    </div>
-    <div class="row">
-       
-        <div class="col-md-6">
-            <ul class="nav nav-tabs">
-                <li class="active"><a data-toggle="tab" href="#tabEndPointmain">Main</a></li>
-                <li><a data-toggle="tab" href="#tabEndPointhistory">History</a></li>
-                <li><a data-toggle="tab" href="#tabEndPointcommands">Commands</a></li>
-                <li><a data-toggle="tab" href="#tabEndPointDevkeys">Dev Keys</a></li>
-                <li><a data-toggle="tab" href="#tabEndPointDelete">Delete</a></li>
-            </ul>
-            <div class="panel panel-default">
-                <div class="panel-body">
-                    <div class="tab-content">
-                        <div id="tabEndPointmain" class="tab-pane fade in active">
-                            <div id="divEndPointMain">
-                            </div>
-                        </div>
-                        <div id="tabEndPointhistory" class="tab-pane fade">
-                            <div class="right">
-                                <button type="button" class="btn btn-info pull-right" onclick="LoadPart_EndPointHistoryDiv('@Model.ID')">Refresh</button>
-                            </div>
-                            <div id="divEndPointHistory">
-                            </div>
-                        </div>
-                        <div id="tabEndPointcommands" class="tab-pane fade">
-                            <div class="right">
-                                <button type="button" class="btn btn-info pull-right" onclick="LoadPart_EndPointCommandListByEndPointIDDiv('@Model.ID','')">Refresh</button>
-                            </div>
-                            <div id="divEndPointCommandsList">
-                            </div>
-                        </div>
-                        <div id="tabEndPointDevkeys" class="tab-pane fade">
-                            <div id="divEndPointDevkeys">
-                                @*@Html.Partial("_Details_Keys", Model)*@
-                            </div>
-                        </div>
-                        <div id="tabEndPointDelete" class="tab-pane fade">
-                            <div id="divEndPointDelete">
-                                <button type="button" class="btn btn-danger" onclick="LoadPart_DialogEndPointDelete(@Model.ID)" data-toggle="modal" data-target="#mdl">Delete</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- Button trigger modal -->
 
 
 

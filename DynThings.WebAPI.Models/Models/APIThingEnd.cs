@@ -24,6 +24,7 @@ namespace DynThings.WebAPI.Models
 
         #region Parents
         public APIThing Thing { get; set; }
+        public APIEndPoint LastIOEndPoint { get; set; }
 
         #endregion
 

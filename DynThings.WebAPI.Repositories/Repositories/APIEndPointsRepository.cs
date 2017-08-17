@@ -48,6 +48,8 @@ namespace DynThings.WebAPI.Repositories
 
 
         #region Methods 
+        #region Get EndPoints
+
         /// <summary>
         /// Get list of EndPoints.
         /// </summary>
@@ -61,7 +63,7 @@ namespace DynThings.WebAPI.Repositories
         public List<APIEndPoint> GetEndPoints(int pageNumber, int pageSize,bool loadParents, bool loadChilds,string searchFor,long deviceID)
         {
             List <APIEndPoint> apiEndPoints = new List<APIEndPoint>();
-            List<Endpoint> endPoints = db.Endpoints.Include("EndPointStatu").Include("EndPointCommands")
+            List<Endpoint> endPoints = db.Endpoints.Include("EndPointCommands")
                 .Where(v => 
                 (searchFor == null || v.Title.Contains(searchFor))
                 && ((deviceID == null || deviceID == 0) || deviceID == v.DeviceID)
@@ -77,6 +79,35 @@ namespace DynThings.WebAPI.Repositories
             
             return apiEndPoints;
         }
+
+        #endregion
+
+        #region Get Warnings
+        public List<APIEndPoint> GetWarnings(int pageNumber, int pageSize, bool loadParents, bool loadChilds,long locationID, long viewID)
+        {
+            List<APIEndPoint> result = new List<APIEndPoint>();
+            List<Endpoint> endpointsLst = db.Endpoints.Include("Thing")
+                        .Where(e =>
+                        ((viewID == null || viewID == 0) || (e.Thing.LinkThingsLocations.Any(l => l.Location.LinkLocationsLocationViews.Any(v => v.LocationViewID == viewID))))
+                        && ((locationID == null || locationID == 0) || (e.Thing.LinkThingsLocations.Any(l => l.LocationID == locationID)))
+                        && (e.IsNumericOnly == true)
+                        &&( (e.LastIONumericValue <= e.LowRange) || (e.LastIONumericValue >= e.HighRange))
+                        )
+                        .OrderByDescending(e => e.LastIOTimeStamp).Skip(pageSize * (pageNumber - 1))
+                        .Skip(pageSize * (pageNumber - 1))
+                        .Take(pageSize)
+                        .ToList();
+            foreach (Endpoint endpoint in endpointsLst)
+            {
+                result.Add(TypesMapper.APIEndPointAdapter.fromEndpoint(endpoint, loadParents, loadChilds));
+            }
+            return result;
+        }
+
+        #endregion
+
+
+
         #endregion
 
     }

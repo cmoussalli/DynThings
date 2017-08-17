@@ -34,8 +34,8 @@
     var g = new JustGage({
         id: "gauge_@Model.Thing.ID.ToString()_@Model.EndPointTypeID.ToString()",
         value: '@Model.LastIOTimeStamp',
-        min: 0,
-        max: 85,
+        min: @Model.EndPointIO.Endpoint.MinValue,
+        max: @Model.EndPointIO.Endpoint.MaxValue,
         title: "@Model.EndPointType.Title",
         label:"@Model.EndPointType.measurement"
 

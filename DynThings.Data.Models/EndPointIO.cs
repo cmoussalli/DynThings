@@ -18,11 +18,22 @@ using System;
 public partial class EndPointIO
 {
 
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+    public EndPointIO()
+    {
+
+        this.ThingEnds = new HashSet<ThingEnd>();
+
+    }
+
+
     public long ID { get; set; }
 
     public long EndPointID { get; set; }
 
     public long IOTypeID { get; set; }
+
+    public long EndPointTypeID { get; set; }
 
     public string Valu { get; set; }
 
@@ -40,9 +51,9 @@ public partial class EndPointIO
 
     public long ThingID { get; set; }
 
-    public long EndPointTypeID { get; set; }
 
 
+    public virtual EndPointType EndPointType { get; set; }
 
     public virtual Endpoint Endpoint { get; set; }
 
@@ -50,7 +61,9 @@ public partial class EndPointIO
 
     public virtual Thing Thing { get; set; }
 
-    public virtual EndPointType EndPointType { get; set; }
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+
+    public virtual ICollection<ThingEnd> ThingEnds { get; set; }
 
 }
 

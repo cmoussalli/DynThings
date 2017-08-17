@@ -20,7 +20,7 @@
                 </td>
 
                 <td>
-                    <button onclick="DeattachLocationFromLocationView(selectedLocationView, @item.ID)">Delete</button>
+                    <button class="btn btn-danger" onclick="DeattachLocationFromLocationView(@item.ID)">Delete</button>
                 </td>
             </tr>
         }
@@ -34,6 +34,6 @@
 
 <script>
     function EventSelectLocation() {
-        AttachLocationToLocationView(selectedLocationView, selectedLocation);
+        AttachLocationToLocationView(selectedLocation);
     }
 </script>

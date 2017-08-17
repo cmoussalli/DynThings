@@ -1,9 +1,22 @@
 ﻿//Vars
-var selectedLocationView = 0;
+var selectedLocationViewID = 0;
 var map = null;
 var viewchangeend;
 
-
+//Get List
+function LoadPart_LocationViewListDiv() {
+    var loadingpart = LoadDivLoading();
+    $("#divLocationViewsList").html(loadingpart);
+    $.ajax({
+        url: getRootURL() + 'LocationViews/ListCardsPV?searchfor=' + $(txtLocationViewSearch).val() + '&recordsperpage=0',
+        //page=" + $("#DynConfigCurrentPage").html,
+        type: "GET",
+    })
+        .done(function (partialViewResult) {
+            $("#divLocationViewsList").html(partialViewResult);
+        });
+    return false;
+};
 //Attach : Pager
 function AttachEventLocationViewsListPager() {
     $(document).on("click", "#LocationViewsListPager a[href]", function () {
@@ -22,6 +35,18 @@ function AttachEventLocationViewsListPager() {
     });
 }
 
+//Get Add
+function LoadPart_DialogLocationViewAdd() {
+    var loadingpart = LoadDivLoading();
+    $("#modal").html(loadingpart);
+    $.ajax({
+        url: getRootURL() + '/LocationViews/addpv',
+        type: "GET",
+    })
+    .done(function (partialViewResult) {
+        $("#modal").html(partialViewResult);
+    });
+}
 //Attach : Add Form Submit
 function AttachEventLocationViewAddForm() {
     $("#LocationViewAddForm").on("submit", function (event) {
@@ -34,16 +59,28 @@ function AttachEventLocationViewAddForm() {
             data: formData,
             dataType: "json",
             success: function (resp) {
+                window.location.href =getRootURL() + '/locationViews/details?id=' + resp.Reference;
             }
         })
-
         LoadPart_LocationViewListDiv();
         $('#mdl').modal('hide');
     });
 }
 
+//Get Edit
+function LoadPart_LocationViewEditMainDiv() {
+    var loadingpart = LoadDivLoading();
+    $("#divPageDetails").html(loadingpart);
+    $.ajax({
+        url: getRootURL() + '/LocationViews/EditMainPV?id=' + selectedLocationViewID,
+        type: "GET",
+    })
+    .success(function (partialViewResult) {
+        $("#divPageDetails").html(partialViewResult);
+    });
+}
 //Attach : Edit Form Submit : Main
-function AttachEventLocationViewEditForm(locationViewID) {
+function AttachEventLocationViewEditForm() {
     $("#LocationViewEditForm").on("submit", function (event) {
         event.preventDefault();
         var url = $(this).attr("action");
@@ -60,12 +97,25 @@ function AttachEventLocationViewEditForm(locationViewID) {
                 ServerResponse(resp);
             }
         })
-        LoadPart_DialogLocationViewEditMain(locationViewID);
+        LoadPart_LocationViewEditMainDiv();
     });
 };
 
+
+//Get Edit : Map
+function LoadPart_LocationViewEditMapDiv() {
+    var loadingpart = LoadDivLoading();
+    $("#divPageDetails").html(loadingpart);
+    $.ajax({
+        url: getRootURL() + '/LocationViews/EditMapPV?id=' + selectedLocationViewID,
+        type: "GET",
+    })
+    .success(function (partialViewResult) {
+        $("#divPageDetails").html(partialViewResult);
+    });
+}
 //Attach : Edit Form Submit : Map
-function AttachEventLocationViewMapEditForm(locationViewID) {
+function AttachEventLocationViewMapEditForm() {
     $("#LocationViewMapEditForm").on("submit", function (event) {
         event.preventDefault();
         var url = $(this).attr("action");
@@ -75,78 +125,54 @@ function AttachEventLocationViewMapEditForm(locationViewID) {
             type: "POST",
             data: formData,
             dataType: "json",
-            success: function (resp) {
+             success: function (resp) {
+                ServerResponse(resp);
+            },
+            error: function () {
+                ServerResponse(resp);
             }
         })
 
     });
 }
 
-//Get List
-function LoadPart_LocationViewListDiv() {
+
+
+//Get Delete
+function LoadPart_DialogLocationViewDelete() {
     var loadingpart = LoadDivLoading();
-    $("#divLocationViewsList").html(loadingpart);
+    $("#modal").html(loadingpart);
     $.ajax({
-        url: getRootURL() + 'LocationViews/ListCardsPV?searchfor=' + $(txtLocationViewSearch).val() + '&recordsperpage=0',
+        url: getRootURL() + '/LocationViews/DeletePV?id=' + selectedLocationViewID,
+        //page=" + $("#DynConfigCurrentPage").html,
+        type: "GET",
+    })
+    .done(function (partialViewResult) {
+        $("#modal").html(partialViewResult);
+    });
+}
+
+//Get Locations Container
+function LoadPart_LocationViewEditLocationsContainerDiv() {
+    var loadingpart = LoadDivLoading();
+    $("#divPageDetails").html(loadingpart);
+    $.ajax({
+        url: getRootURL() + '/locationviews/LocationsByLocationViewIDPV?locationViewID=' + selectedLocationViewID,
         //page=" + $("#DynConfigCurrentPage").html,
         type: "GET",
     })
         .done(function (partialViewResult) {
-            $("#divLocationViewsList").html(partialViewResult);
+            $("#divPageDetails").html(partialViewResult);
+            AttachEventLocationsListPager();
         });
     return false;
 };
-
-//Get Details
-//TODO
-
-//Get Add
-function LoadPart_DialogLocationViewAdd() {
-    var loadingpart = LoadDivLoading();
-    $("#modal").html(loadingpart);
-    $.ajax({
-        url: getRootURL() + '/LocationViews/addpv',
-        type: "GET",
-    })
-    .done(function (partialViewResult) {
-        $("#modal").html(partialViewResult);
-    });
-}
-
-//Get Edit
-function LoadPart_DialogLocationViewEditMain(id) {
-    var loadingpart = LoadDivLoading();
-    $("#divLocationViewMain").html(loadingpart);
-    $.ajax({
-        url: getRootURL() + '/LocationViews/EditMainPV?id=' + id,
-        type: "GET",
-    })
-    .success(function (partialViewResult) {
-        $("#divLocationViewMain").html(partialViewResult);
-    });
-}
-
-//Get Delete
-function LoadPart_DialogLocationViewDelete(id) {
-    var loadingpart = LoadDivLoading();
-    $("#modal").html(loadingpart);
-    $.ajax({
-        url: getRootURL() + '/LocationViews/DeletePV?id=' + id,
-        //page=" + $("#DynConfigCurrentPage").html,
-        type: "GET",
-    })
-    .done(function (partialViewResult) {
-        $("#modal").html(partialViewResult);
-    });
-}
-
-
 //Get Locations List
-function LoadPart_LocationsListByLocationViewIDDiv(locationViewID) {
+function LoadPart_LocationViewEditLocationsDiv() {
     var loadingpart = LoadDivLoading();
     $("#divLocationsList").html(loadingpart);
     $.ajax({
-        url: getRootURL() + '/locationviews/LocationsByLocationViewIDListGridPV?searchfor=' + $(txtLocationsSearch).val() + '&locationViewID=' + locationViewID + '&recordsperpage=0',
+        url: getRootURL() + '/locationviews/LocationsByLocationViewIDListGridPV?searchfor=' + $(txtLocationsSearch).val() + '&locationViewID=' + selectedLocationViewID + '&recordsperpage=0',
         //page=" + $("#DynConfigCurrentPage").html,
         type: "GET",
     })
@@ -186,19 +212,19 @@ function onViewChangeEnd(e) {
 }
 
 
-function AttachLocationToLocationView(locationViewID,LocationID) {
+function AttachLocationToLocationView(LocationID) {
     $.ajax({
-        url: getRootURL() + '/LocationViews/AttachLocation?locationViewID=' + locationViewID + '&locationID=' + LocationID + '&userID=0',
+        url: getRootURL() + '/LocationViews/AttachLocation?locationViewID=' + selectedLocationViewID + '&locationID=' + LocationID + '&userID=0',
         type: "POST",
     })
     HideModal();
-    LoadPart_LocationsListByLocationViewIDDiv(locationViewID);
+    LoadPart_LocationViewEditLocationsDiv();
 }
 
-function DeattachLocationFromLocationView(locationViewID, LocationID) {
+function DeattachLocationFromLocationView(LocationID) {
     $.ajax({
-        url: getRootURL() + '/LocationViews/DeAttachLocation?locationViewID=' + locationViewID + '&locationID=' + LocationID + '&userID=0',
+        url: getRootURL() + '/LocationViews/DeAttachLocation?locationViewID=' + selectedLocationViewID + '&locationID=' + LocationID + '&userID=0',
         type: "POST",
     })
-    LoadPart_LocationsListByLocationViewIDDiv(locationViewID);
+    LoadPart_LocationViewEditLocationsDiv();
 }
