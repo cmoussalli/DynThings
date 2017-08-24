@@ -121,6 +121,9 @@
     <Compile Include="TypesMapper\APIDeviceStatusAdapter.cs" />
     <Compile Include="TypesMapper\APILocationViewTypeAdapter.cs" />
     <Compile Include="TypesMapper\ApiResponseAdapter.cs" />
+    <Compile Include="TypesMapper\APIDataTypeAdapter.cs" />
+    <Compile Include="TypesMapper\APIThingExtensionAdapter.cs" />
+    <Compile Include="TypesMapper\APIThingExtensionValueAdapter.cs" />
     <Compile Include="TypesMapper\APIThingAdapter.cs" />
     <Compile Include="TypesMapper\APIThingCategoryAdapter.cs" />
     <Compile Include="TypesMapper\APIThingEndAdapter.cs" />

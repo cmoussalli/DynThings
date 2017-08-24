@@ -12,7 +12,7 @@
         <EntityTypeShape EntityType="DynThingsModel.APIMethod" Width="1.5" PointX="7.75" PointY="20.375" />
         <EntityTypeShape EntityType="DynThingsModel.APIUtilisation" Width="1.5" PointX="10" PointY="20" />
         <EntityTypeShape EntityType="DynThingsModel.AppAPIEntity" Width="1.5" PointX="11" PointY="2" />
-        <EntityTypeShape EntityType="DynThingsModel.AppEndpointType" Width="1.5" PointX="20.5" PointY="3" />
+        <EntityTypeShape EntityType="DynThingsModel.AppEndpointType" Width="1.75" PointX="20.5" PointY="3" />
         <EntityTypeShape EntityType="DynThingsModel.AppMediaFile" Width="1.5" PointX="8.25" PointY="13.875" />
         <EntityTypeShape EntityType="DynThingsModel.App" Width="1.5" PointX="6" PointY="0.75" />
         <EntityTypeShape EntityType="DynThingsModel.AppStatuss" Width="1.5" PointX="3.75" PointY="2.25" />
@@ -32,7 +32,7 @@
         <EntityTypeShape EntityType="DynThingsModel.EndPointCommand" Width="1.5" PointX="20.625" PointY="10.75" />
         <EntityTypeShape EntityType="DynThingsModel.EndPointIO" Width="1.5" PointX="19.75" PointY="14.75" />
         <EntityTypeShape EntityType="DynThingsModel.Endpoint" Width="1.75" PointX="17.5" PointY="14.25" />
-        <EntityTypeShape EntityType="DynThingsModel.EndPointTypeCategory" Width="1.5" PointX="15.25" PointY="6.25" />
+        <EntityTypeShape EntityType="DynThingsModel.EndPointTypeCategory" Width="1.75" PointX="14.625" PointY="6.25" />
         <EntityTypeShape EntityType="DynThingsModel.EndPointType" Width="1.5" PointX="17.5" PointY="5.625" />
         <EntityTypeShape EntityType="DynThingsModel.IOType" Width="1.5" PointX="17.5" PointY="24.75" />
         <EntityTypeShape EntityType="DynThingsModel.LinkDevicesLocation" Width="1.5" PointX="5.25" PointY="6.375" />

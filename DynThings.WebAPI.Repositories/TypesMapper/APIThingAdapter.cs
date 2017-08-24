@@ -55,7 +55,18 @@ namespace DynThings.WebAPI.TypesMapper
                 }
                 result.ThingEnds = apiThingEnds;
                 #endregion
+
+                #region APIThingExtensionValues
+                List<APIThingExtensionValue> apiThingExtensionValues = new List<APIThingExtensionValue>();
+                foreach (ThingExtenstionValue thingExtenstionValue in sourceThing.ThingExtenstionValues)
+                {
+                    APIThingExtensionValue apiThingExtensionValue = TypesMapper.APIThingExtensionValueAdapter.fromThingExtensionValue(thingExtenstionValue, false, false);
+                    apiThingExtensionValues.Add(apiThingExtensionValue);
+                }
+                result.APIThingExtensionValues = apiThingExtensionValues;
+                #endregion
             }
+
             result.ThingEndsCount = sourceThing.ThingEnds.Count;
             #endregion
 
