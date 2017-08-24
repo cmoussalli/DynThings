@@ -75,6 +75,12 @@ namespace DynThings.Data.Repositories
         public ThingsRepository repoThings
         { get { return new ThingsRepository(dynDB); } }
 
+        public ThingExtensionsRepository repoThingExtensions
+        { get { return new ThingExtensionsRepository(dynDB); } }
+
+        public ThingExtensionValuesRepository repoThingExtensionValues
+        { get { return new ThingExtensionValuesRepository(dynDB); } }
+
         public ThingEndsRepository repoThingEnds
         { get { return new ThingEndsRepository(dynDB); } }
 

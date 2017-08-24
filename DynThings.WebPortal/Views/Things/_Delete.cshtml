@@ -7,8 +7,6 @@
         <h4 class="modal-title" id="myModalLabel">Delete Confirmation</h4>
     </div>
     <div class="modal-body">
-
-
         @Html.AntiForgeryToken()
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.ID)
@@ -16,7 +14,6 @@
         <span>Are you sure you want to delete the following object?</span><br /><br />
         <span>Type: Thing</span><br />
         <span>Title: @Model.Title</span><br />
-
     </div>
     <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>

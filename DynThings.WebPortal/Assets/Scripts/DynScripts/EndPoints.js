@@ -109,7 +109,7 @@ function LoadPart_EndPointListDiv() {
     return false;
 };
 
-//Get Details
+//Get Main
 function LoadPart_EndpointMainDiv() {
     var loadingpart = LoadDivLoading();
     $("#divPageDetails").html(loadingpart);

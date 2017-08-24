@@ -1,13 +1,11 @@
 ﻿@model PagedList.IPagedList<DynThings.Data.Models.Thing>
 
-
-
 <table class="table striped hovered border bordered">
     <thead>
         <tr>
             <th>Title</th>
             <th>Type</th>
-            <th>GUID</th>
+            <th>Regional Time Zone</th>
             <th></th>
         </tr>
     </thead>
@@ -19,6 +17,7 @@
                 @Html.DisplayFor(modelItem => item.Title)
             </td>
             <td>
+                <img src="~/Imgs/@(item.ThingCategory.IconID.ToString() + ".png")" />
                 @Html.DisplayFor(modelItem => item.ThingCategory.Title)
             </td>
             <td>
@@ -26,18 +25,18 @@
             </td>
 
             <td>
-                @Html.ActionLink("Details", "Details", new { id = item.ID })
+                @Html.ActionLink("Details", "Details", new { id = item.ID },new { @class= "btn btn-info pull-right" })
             </td>
         </tr>
     }
     </tbody>
 </table>
 
-
+@if (Model.PageCount > 1)
+{
 <div id="ThingsListPager">
     <input id="ThingCurrentPage" value="@Model.PageNumber.ToString()" hidden />
-   
-
     @Html.PagedListPager(Model, page => Url.Action("ListPV", new { page }))
 </div>
+}
 

@@ -157,63 +157,98 @@ namespace DynThings.Data.Repositories
         #endregion
 
 
-        //public IPagedList GetThingEndsList(string searchFor = "", long? locationID = null, long? thingID = null, long? thingCategoryID = null, long? endpointTypeID = null, long? endPointID = null, int pageNumber = 1, int recordsPerPage = 0)
-        //{
-        //    List<GetThingEnds_Result> queryResult = db.GetThingEnds(locationID, thingID, thingCategoryID, endPointID, endpointTypeID).Where(x => x.ThingTitle.Contains(searchFor)).ToList();
-        //    List<ThingEnd> thingEnds = new List<ThingEnd>();
 
-        //    foreach (GetThingEnds_Result res in queryResult)
+
+        #region Properties
+        #region Get Properties
+        public List<ThingExtenstionProperty> GetProperties(long thingID,string searchFor)
+        {
+            List<ThingExtenstionProperty> props = new List<ThingExtenstionProperty>();
+            List<GetThingExtenstions_Result> dbRes = db.GetThingExtenstions(thingID,searchFor).ToList();
+            foreach (GetThingExtenstions_Result res in dbRes)
+            {
+                ThingExtenstionProperty prop0 = new ThingExtenstionProperty();
+                prop0.ConvertFromQuery_GetThingExtenstionsList(res);
+                props.Add(prop0);
+            }
+            return props;
+        }
+
+        public IPagedList GetPropertiesPagedList(long thingID,string searchFor, int pageNumber, int recordsPerPage)
+        {
+            IPagedList props = GetProperties(thingID,searchFor).ToPagedList(pageNumber, recordsPerPage);
+            return props;
+        }
+        #endregion
+
+        //#region Find Extenstion
+        //public List<ThingExtenstionProperty> FindProperty(long valueID)
+        //{
+        //    List<ThingExtenstionProperty> props = new List<ThingExtenstionProperty>();
+        //    List<GetThingExtenstions_Result> dbRes = db.GetThingExtenstions(thingID).ToList();
+        //    foreach (GetThingExtenstions_Result res in dbRes)
         //    {
-        //        ThingEnd thingEnd = new ThingEnd();
-        //        thingEnd.ConvertFromQuery_GetThingEndsList(res);
-        //        thingEnds.Add(thingEnd);
+        //        ThingExtenstionProperty prop0 = new ThingExtenstionProperty();
+        //        prop0.ConvertFromQuery_GetThingExtenstionsList(res);
+        //        props.Add(prop0);
         //    }
-
-        //    return thingEnds.ToPagedList(pageNumber, recordsPerPage);
+        //    return props;
         //}
 
-        //public ThingEnd GetThingEnd(long thingID, long thingEndpointTypeID)
+        //public IPagedList GetExtenstionsPagedList(long thingID, int pageNumber, int recordsPerPage)
         //{
-        //    ThingEnd tngEnd = new ThingEnd();
-        //    List<GetThingEnds_Result> queryResult = db.GetThingEnds(null, thingID, null, null, thingEndpointTypeID).ToList();
-
-        //    ThingEnd thingEnd = new ThingEnd();
-        //    thingEnd.ConvertFromQuery_GetThingEndsList(queryResult[0]);
-        //    return thingEnd;
-        //    //    Models.ThingEnd tngEnd = new Models.ThingEnd();
-        //    //    List<Models.ThingEnd> thingEnds = new List<Models.ThingEnd>();
-        //    //    if ()
-        //    //    return GetThingEnd()
+        //    IPagedList props = GetExtenstions(thingID).ToPagedList(pageNumber, recordsPerPage);
+        //    return props;
         //}
+        //#endregion
 
-        //public IPagedList GetThingEndIOs(long thingID, long thingEndpointTypeID, DateTime fromDate, DateTime toDate, int pageNumber = 1, int recordsPerPage = 0)
+        //#region Add Property
+        //public ResultInfo.Result AddProperty(long thingID, long thingExtenstionID,string value)
         //{
-        //    IPagedList result = db.EndPointIOs.Where
-        //        (i => i.ThingID == thingID
-        //        && i.Endpoint.TypeID == thingEndpointTypeID
-        //        && i.ExecTimeStamp > fromDate
-        //        && i.ExecTimeStamp < toDate
-        //        && i.IOTypeID < 3)
-        //        .OrderByDescending(i => i.ExecTimeStamp)
-        //        .Take(1000)
-        //        .ToPagedList(pageNumber, recordsPerPage);
-
-        //    return result;
+        //    try
+        //    {
+        //        db.ThingPropertyValueAdd(thingID, thingExtenstionID, value);
+        //        return ResultInfo.GenerateOKResult("Saved");
+        //    }
+        //    catch
+        //    {
+        //        return ResultInfo.GetResultByID(1);
+        //    }
         //}
+        //#endregion
 
-        //public IPagedList GetThingEndLogs(long thingID, long thingEndpointTypeID, DateTime fromDate, DateTime toDate, int pageNumber = 1, int recordsPerPage = 0)
+        //#region Edit Property
+        //public ResultInfo.Result EditProperty(long valueID, string newValue)
         //{
-        //    IPagedList result = db.EndPointIOs.Where
-        //        (i => i.ThingID == thingID
-        //        && i.Endpoint.TypeID == thingEndpointTypeID
-        //        && i.ExecTimeStamp > fromDate
-        //        && i.ExecTimeStamp < toDate
-        //        && i.IOTypeID == 3)
-        //        .OrderByDescending(i => i.ExecTimeStamp)
-        //        .Take(1000)
-        //        .ToPagedList(pageNumber, recordsPerPage);
-
-        //    return result;
+        //    try
+        //    {
+        //        db.ThingPropertyValueEdit(valueID, newValue);
+        //        return ResultInfo.GenerateOKResult("Saved");
+        //    }
+        //    catch
+        //    {
+        //        return ResultInfo.GetResultByID(1);
+        //    }
         //}
+        //#endregion
+
+        //#region Delete Property
+        //public ResultInfo.Result DeleteProperty(long valueID)
+        //{
+        //    try
+
+        //    {
+        //        db.ThingPropertyValueDelete(valueID);
+        //        return ResultInfo.GenerateOKResult("Saved");
+        //    }
+        //    catch
+        //    {
+        //        return ResultInfo.GetResultByID(1);
+        //    }
+        //}
+        //#endregion
+
+        #endregion
+
     }
 }

@@ -1329,6 +1329,10 @@
           <Parameter Name="EndPointID" Type="bigint" Mode="In" />
           <Parameter Name="EndPointTypeID" Type="bigint" Mode="In" />
         </Function>
+        <Function Name="GetThingExtenstions" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ThingID" Type="bigint" Mode="In" />
+          <Parameter Name="SearchFor" Type="nvarchar" Mode="In" />
+        </Function>
         <Function Name="Rpt_EndPoint_IOs_Days" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="EPID" Type="bigint" Mode="In" />
         </Function>
@@ -1379,6 +1383,18 @@
           <Parameter Name="PassKey" Type="uniqueidentifier" Mode="In" />
           <Parameter Name="Value" Type="nvarchar" Mode="In" />
           <Parameter Name="ExecTimeStamp" Type="datetime" Mode="In" />
+        </Function>
+        <Function Name="ThingPropertyValueAdd" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ThingID" Type="bigint" Mode="In" />
+          <Parameter Name="ThingExtenstionID" Type="bigint" Mode="In" />
+          <Parameter Name="Value" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="ThingPropertyValueDelete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ValueID" Type="bigint" Mode="In" />
+        </Function>
+        <Function Name="ThingPropertyValueEdit" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ValueID" Type="bigint" Mode="In" />
+          <Parameter Name="NewValue" Type="nvarchar" Mode="In" />
         </Function>
         <EntityContainer Name="DynThingsModelStoreContainer">
           <EntitySet Name="AlertConditions" EntityType="Self.AlertConditions" Schema="dbo" store:Type="Tables" />
@@ -2040,6 +2056,22 @@
             <End Role="AspNetRole" EntitySet="AspNetRoles" />
             <End Role="AspNetUser" EntitySet="AspNetUsers" />
           </AssociationSet>
+          <FunctionImport Name="ThingPropertyValueAdd">
+            <Parameter Name="ThingID" Mode="In" Type="Int64" />
+            <Parameter Name="ThingExtenstionID" Mode="In" Type="Int64" />
+            <Parameter Name="Value" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="ThingPropertyValueEdit">
+            <Parameter Name="ValueID" Mode="In" Type="Int64" />
+            <Parameter Name="NewValue" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="ThingPropertyValueDelete">
+          <Parameter Name="ValueID" Mode="In" Type="Int64" />
+          </FunctionImport>
+          <FunctionImport Name="GetThingExtenstions" ReturnType="Collection(DynThingsModel.GetThingExtenstions_Result)">
+            <Parameter Name="ThingID" Mode="In" Type="Int64" />
+            <Parameter Name="SearchFor" Mode="In" Type="String" />
+          </FunctionImport>
           </EntityContainer>
         <ComplexType Name="Rpt_EndPoint_IOs_Months_Result">
           <Property Type="Int64" Name="ID" Nullable="false" />
@@ -3829,6 +3861,21 @@
           <End Type="DynThingsModel.AspNetRole" Role="AspNetRole" Multiplicity="*" />
           <End Type="DynThingsModel.AspNetUser" Role="AspNetUser" Multiplicity="*" />
         </Association>
+        <ComplexType Name="GetThingExtenstions_Result">
+          <Property Type="Int64" Name="ThingID" Nullable="false" />
+          <Property Type="String" Name="ThingTitle" Nullable="false" MaxLength="128" />
+          <Property Type="Int64" Name="CategoryID" Nullable="false" />
+          <Property Type="String" Name="ThingCategoryTitle" Nullable="true" MaxLength="50" />
+          <Property Type="Int64" Name="ThingExtenstionID" Nullable="false" />
+          <Property Type="Guid" Name="ThingExtenstionGUID" Nullable="false" />
+          <Property Type="String" Name="ThingExtenstionCode" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="ThingExtenstionTitle" Nullable="false" MaxLength="128" />
+          <Property Type="Int32" Name="DataTypeID" Nullable="false" />
+          <Property Type="String" Name="DataTypeTitle" Nullable="false" MaxLength="50" />
+          <Property Type="Boolean" Name="IsList" Nullable="false" />
+          <Property Type="Int64" Name="ValueID" Nullable="false" />
+          <Property Type="String" Name="Value" Nullable="false" MaxLength="128" />
+        </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -4834,6 +4881,28 @@
               <ScalarProperty Name="Id" ColumnName="RoleId" />
             </EndProperty>
           </AssociationSetMapping>
+          <FunctionImportMapping FunctionImportName="ThingPropertyValueAdd" FunctionName="DynThingsModel.Store.ThingPropertyValueAdd" />
+          <FunctionImportMapping FunctionImportName="ThingPropertyValueEdit" FunctionName="DynThingsModel.Store.ThingPropertyValueEdit" />
+          <FunctionImportMapping FunctionImportName="ThingPropertyValueDelete" FunctionName="DynThingsModel.Store.ThingPropertyValueDelete" />
+          <FunctionImportMapping FunctionImportName="GetThingExtenstions" FunctionName="DynThingsModel.Store.GetThingExtenstions">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DynThingsModel.GetThingExtenstions_Result">
+                <ScalarProperty Name="ThingID" ColumnName="ThingID" />
+                <ScalarProperty Name="ThingTitle" ColumnName="ThingTitle" />
+                <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
+                <ScalarProperty Name="ThingCategoryTitle" ColumnName="ThingCategoryTitle" />
+                <ScalarProperty Name="ThingExtenstionID" ColumnName="ThingExtenstionID" />
+                <ScalarProperty Name="ThingExtenstionGUID" ColumnName="ThingExtenstionGUID" />
+                <ScalarProperty Name="ThingExtenstionCode" ColumnName="ThingExtenstionCode" />
+                <ScalarProperty Name="ThingExtenstionTitle" ColumnName="ThingExtenstionTitle" />
+                <ScalarProperty Name="DataTypeID" ColumnName="DataTypeID" />
+                <ScalarProperty Name="DataTypeTitle" ColumnName="DataTypeTitle" />
+                <ScalarProperty Name="IsList" ColumnName="IsList" />
+                <ScalarProperty Name="ValueID" ColumnName="ValueID" />
+                <ScalarProperty Name="Value" ColumnName="Value" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

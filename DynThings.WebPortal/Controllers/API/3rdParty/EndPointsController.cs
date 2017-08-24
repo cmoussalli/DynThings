@@ -15,7 +15,7 @@ using DynThings.WebAPI.Repositories;
 
 namespace DynThings.WebPortal.Controllers.API
 {
-    public class WarningsController : ApiController
+    public class EndPointsController : ApiController
     {
         #region Props
         UnitOfWork_WebAPI uow_APIs = new UnitOfWork_WebAPI();
@@ -24,25 +24,39 @@ namespace DynThings.WebPortal.Controllers.API
         #endregion
 
         #region Constructors
-        public WarningsController()
+        public EndPointsController()
         {
-            entityID = uow_APIs.repo.EntityID;
+            entityID = uow_APIs.repoAPIEndPoints.EntityID;
         }
         #endregion
 
-
-        public List<APILocation> GetLocations(Guid token, int pageNumber, int pageSize, bool loadParents = false, bool loadChilds = false, string searchFor="", long viewID=0)
+        public List<APIEndPoint> GetEndpoints(Guid token, int pageNumber, int pageSize, bool loadParents = false, bool loadChilds = false, string searchFor = "", long deviceID = 0)
         {
-            int methodID = 2;
+            int methodID = 11;
+            ResultInfo.Result tokenValidation = uow_APIs.repoAPIUserAppTokens.ValidateTokenEntityPermission(token, entityID, methodID);
+            if (tokenValidation.ResultType != ResultInfo.ResultType.Ok)
+            {
+                var msg = new HttpResponseMessage(HttpStatusCode.Unauthorized) { ReasonPhrase = tokenValidation.Message };
+                throw new HttpResponseException(new HttpResponseMessage(HttpStatusCode.Forbidden));
+            }
+            return uow_APIs.repoAPIEndPoints.GetEndPoints(pageNumber, pageSize, loadParents, loadChilds, searchFor, deviceID);
+
+        }
+
+        public List<APIEndPoint> GetWarnings(Guid token, int pageNumber, int pageSize, bool loadParents = false, bool loadChilds = false, string searchFor="",long locationID = 0 , long viewID=0)
+        {
+            int methodID = 14;
             ResultInfo.Result tokenValidation = uow_APIs.repoAPIUserAppTokens.ValidateTokenEntityPermission(token, entityID,methodID);
             if (tokenValidation.ResultType != ResultInfo.ResultType.Ok)
             {
                 var msg = new HttpResponseMessage(HttpStatusCode.Unauthorized) { ReasonPhrase = tokenValidation.Message };
                 throw new HttpResponseException(new HttpResponseMessage(HttpStatusCode.Forbidden));
             }
-            return uow_APIs.repoAPILocations.GetLocations(pageNumber, pageSize,loadParents,loadChilds,searchFor,viewID);
+            return uow_APIs.repoAPIEndPoints.GetWarnings(pageNumber,pageSize,loadParents,loadChilds,locationID,viewID);
+
         }
 
+       
 
     }
 }

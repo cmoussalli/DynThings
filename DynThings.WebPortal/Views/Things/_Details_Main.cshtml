@@ -1,13 +1,36 @@
 ﻿@model DynThings.Data.Models.Thing
-<div class="right">
-    <button type="button" class="btn btn-info pull-right" onclick="LoadThingEditor(@Model.ID)" data-toggle="modal" data-target="#mdl">Edit</button>
+
+<div class="panel">
+    <div class="panel-heading">
+        <div class="panel-control">
+            <button class="btn btn-default" onclick="LoadPart_ThingMainDiv();">
+                <i class="demo-psi-repeat-2 icon-fw"></i> Refresh
+            </button>
+        </div>
+        <h3 class="panel-title">Main</h3>
+    </div>
+
+    <div class="panel-body">
+        <div class="pad-btm form-inline">
+            <div class="row">
+                <div class="col-sm-6 table-toolbar-left">
+                    <button class="btn btn-warning" onclick="LoadThingEditor()" data-toggle="modal" data-target="#mdl">Edit</button>
+                    @*<button class="btn btn-default"><i class="demo-pli-printer"></i></button>
+                        <div class="btn-group">
+                            <button class="btn btn-default"><i class="demo-pli-information"></i></button>
+                            <button class="btn btn-default"><i class="demo-pli-recycling"></i></button>
+                        </div>*@
+                </div>
+            </div>
+        </div>
+
+        <strong>Title</strong><br>
+        @Model.Title<br><br>
+        <strong>Type</strong><br>
+        <img src="~/Imgs/@(Model.ThingCategory.IconID.ToString() + ".png")" />
+        @Model.ThingCategory.Title<br><br>
+        <strong>Regional Time Zone</strong><br>
+        @Model.UTC_Diff<br><br>
+        <br>
+    </div>
 </div>
-
-<strong>Title</strong><br>
-@Model.Title<br><br>
-
-<strong>Type</strong><br>
-@Model.ThingCategory.Title<br><br>
-
-<strong>Regional Time Zone</strong><br>
-@Model.UTC_Diff<br><br>

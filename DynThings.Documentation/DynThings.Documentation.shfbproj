@@ -26,6 +26,14 @@
       <Argument Key="logoAlignment" Value="left" xmlns="" />
       <Argument Key="maxVersionParts" Value="" xmlns="" />
     </TransformComponentArguments>
+    <DocumentationSources>
+      <DocumentationSource sourceFile="..\DynThings.Core\DynThings.Core.csproj" />
+      <DocumentationSource sourceFile="..\DynThings.Data.Models\DynThings.Data.Models.csproj" />
+      <DocumentationSource sourceFile="..\DynThings.WebAPI.Models\DynThings.WebAPI.Models.csproj" />
+      <DocumentationSource sourceFile="..\DynThings.Data.Reports\DynThings.Data.Reports.csproj" />
+      <DocumentationSource sourceFile="..\DynThings.Data.Repositories\DynThings.Data.Repositories.csproj" />
+      <DocumentationSource sourceFile="..\DynThings.Data.WidgetModels\DynThings.Data.WidgetModels.csproj" />
+    </DocumentationSources>
   </PropertyGroup>
   <!-- There are no properties for these groups.  AnyCPU needs to appear in order for Visual Studio to perform
 			 the build.  The others are optional common platform types that may appear. -->

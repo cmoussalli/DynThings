@@ -1,0 +1,26 @@
+﻿@model DynThings.Data.Models.ThingExtenstion
+
+<div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+    <h4 class="modal-title" id="myModalLabel">Property Editor</h4>
+</div>
+<div class="modal-body">
+
+    @Html.HiddenFor(model => model.ID)
+    <p>Thing type: @Model.ThingCategory.Title</p>
+        <p>Data type: @Model.DataType.Title</p><br />
+        <p>Value</p>
+        <input type="text" id="txtNewValue" class="form-control" />
+
+
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" onclick="DialogThingExtensionAdd();">Save changes</button>
+    </div>
+
+<script>
+    function DialogThingExtensionAdd(){
+    Post_DialogThingPropertyAdd('@Model.ID',$('#txtNewValue').val());
+    };
+</script>

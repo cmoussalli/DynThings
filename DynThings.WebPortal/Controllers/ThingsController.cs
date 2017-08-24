@@ -9,6 +9,7 @@ using PagedList;
 using System.Web.Mvc;
 using DynThings.Core;
 using DynThings.Data.Models;
+using DynThings.Data.Models.ViewModels;
 using DynThings.Data.Repositories;
 using DynThings.Data.Reports;
 //using DynThings.Data.Models.ReportsModels;
@@ -52,6 +53,13 @@ namespace DynThings.WebPortal.Controllers
         {
             Thing Thing = uof_repos.repoThings.Find(id);
             return PartialView("_Details_Main", Thing);
+        }
+
+        #region PropertiesPV
+        public PartialViewResult PropertiesPV(long thingID)
+        {
+            Thing Thing = uof_repos.repoThings.Find(thingID);
+            return PartialView("_Details_Properties", Thing);
         }
 
         #endregion
@@ -186,9 +194,9 @@ namespace DynThings.WebPortal.Controllers
         }
 
         [HttpGet]
-        public ActionResult Rpt_Month(long ThingID, long endPointTypeID,long year)
+        public ActionResult Rpt_Month(long ThingID, long endPointTypeID, long year)
         {
-            Chart chrt = uof_reports.rptThings.IOs_Months(ThingID, endPointTypeID,year);
+            Chart chrt = uof_reports.rptThings.IOs_Months(ThingID, endPointTypeID, year);
             return PartialView("Reports/Charts/InputValues_BasicLine", chrt);
         }
 
@@ -198,11 +206,69 @@ namespace DynThings.WebPortal.Controllers
         {
             IPagedList IOs = uof_repos.repoThingEnds.GetThingEndIOs(ThingID, endPointTypeID, fromDate, toDate.AddDays(1), page, Helpers.Configs.validateRecordsPerMaster(recordsperpage));
             return PartialView("Reports/Grids/HistoryIOs", IOs);
-
-
-            #endregion
-
-
         }
+        #endregion
+
+
+        #region Properties
+        #region Get Properties List
+        public PartialViewResult GetPVPropertiesList(long thingID,string searchFor, int page = 1, int recordsperpage = 0)
+        {
+            IPagedList props = uof_repos.repoThings.GetPropertiesPagedList(thingID,searchFor, page, Helpers.Configs.validateRecordsPerMaster(recordsperpage));
+            return PartialView("_Details_PropertiesList", props);
+        }
+        #endregion
+
+        #region Add Property
+        [HttpGet]
+        public PartialViewResult AddPVThingExtenstionProperty(long thingExtensionID, long thingID)
+        {
+            ThingExtenstion ext = uof_repos.repoThingExtensions.Find(thingExtensionID);
+            return PartialView("_Add_ThingExtenstionProperty", ext);
+        }
+
+        [HttpPost]
+        public ActionResult AddThingExtenstionProperty(long thingID, long thingExtensionID, string newValue)
+        {
+            ResultInfo.Result res = uof_repos.repoThingExtensionValues.Add(thingID, thingExtensionID, newValue, currentUser.Id);
+            return Json(res);
+        }
+        #endregion
+
+        #region Edit Property
+        [HttpGet]
+        public PartialViewResult EditPVThingExtenstionProperty(long valueID)
+        {
+            ThingExtenstionValue ext = uof_repos.repoThingExtensionValues.Find(valueID);
+            return PartialView("_Edit_ThingExtenstionProperty", ext);
+        }
+
+        [HttpPost]
+        public ActionResult EditThingExtenstionProperty(long valueID, string newValue)
+        {
+            ResultInfo.Result res = uof_repos.repoThingExtensionValues.Edit(valueID, newValue, currentUser.Id);
+            return Json(res);
+        }
+        #endregion
+
+        #region Delete Property
+        [HttpGet]
+        public PartialViewResult DeletePVThingExtenstionProperty(long valueID)
+        {
+            ThingExtenstionValue v = uof_repos.repoThingExtensionValues.Find(valueID);
+            return PartialView("_Delete_ThingExtenstionProperty", v);
+        }
+
+        [HttpPost]
+        public ActionResult DeleteThingExtenstionProperty(long valueID)
+        {
+            ResultInfo.Result res = uof_repos.repoThingExtensionValues.Delete(valueID,currentUser.Id);
+            return Json(res);
+        }
+        #endregion
+
+        #endregion
+
+        #endregion
     }
 }

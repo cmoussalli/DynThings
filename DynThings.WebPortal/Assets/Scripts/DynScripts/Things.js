@@ -89,16 +89,16 @@ function LoadPart_ThingListDiv() {
     return false;
 };
 
-//Get Details
-function LoadPart_ThingDetailsDiv(id) {
+//Get Main
+function LoadPart_ThingMainDiv() {
     var loadingpart = LoadDivLoading();
-    $("#divThingMain").html(loadingpart);
+    $("#divPageDetails").html(loadingpart);
     $.ajax({
-        url: getRootURL() + '/Things/DetailsPV?id=' + id,
+        url: getRootURL() + '/Things/DetailsPV?id=' + selectedThing,
         type: "GET",
     })
     .success(function (partialViewResult) {
-        $("#divThingMain").html(partialViewResult);
+        $("#divPageDetails").html(partialViewResult);
     });
 }
 
@@ -130,11 +130,11 @@ function LoadPart_DialogThingEdit(id) {
 }
 
 //Get Delete
-function LoadPart_DialogThingDelete(id) {
+function LoadPart_ThingDelete() {
     var loadingpart = LoadDivLoading();
     $("#modal").html(loadingpart);
     $.ajax({
-        url: getRootURL() + '/Things/DeletePV?id=' + id,
+        url: getRootURL() + '/Things/DeletePV?id=' + selectedThing,
         //page=" + $("#DynConfigCurrentPage").html,
         type: "GET",
     })
@@ -143,12 +143,127 @@ function LoadPart_DialogThingDelete(id) {
     });
 }
 
-function LoadThingEditor(id) {
-    LoadPart_DialogThingEdit(id);
-    LoadPart_ThingDetailsDiv(id);
+function LoadThingEditor() {
+    LoadPart_DialogThingEdit(selectedThing);
+    LoadPart_ThingDetailsDiv(selectedThing);
 }
 
+//Get Properties
+function LoadPart_ThingPropertiesDiv() {
+    var loadingpart = LoadDivLoading();
+    $("#divPageDetails").html(loadingpart);
+    $.ajax({
+        url: getRootURL() + '/Things/PropertiesPV?thingID=' + selectedThing,
+        type: "GET",
+    })
+    .success(function (partialViewResult) {
+        $("#divPageDetails").html(partialViewResult);
+    });
+}
+//Get Properties List
+function LoadPart_ThingPropertiesList() {
+    var loadingpart = LoadDivLoading();
+    $("#divPropertiesList").html(loadingpart);
+    $.ajax({
+        url: getRootURL() + '/Things/GetPVPropertiesList?thingID=' + selectedThing + '&searchFor=' + $('#txtThingPropertiesSearch').val(),
+        type: "GET",
+    })
+    .success(function (partialViewResult) {
+        $("#divPropertiesList").html(partialViewResult);
+    });
+}
+//Get Add Property
+function LoadPart_DialogThingPropertyAdd(thingExtensionID) {
+    var loadingpart = LoadDivLoading();
+    $("#modal").html(loadingpart);
+    $.ajax({
+        url: getRootURL() + '/Things/AddPVThingExtenstionProperty?thingExtensionID=' + thingExtensionID + '&thingID=' + selectedThing,
+        //page=" + $("#DynConfigCurrentPage").html,
+        type: "GET",
+    })
+    .success(function (partialViewResult) {
+        $("#modal").html(partialViewResult);
+    });
+}
+//Post Add Property
+function Post_DialogThingPropertyAdd(thingExtensionID,newValue) {
+  var url = getRootURL() + 'Things/AddThingExtenstionProperty?thingExtensionID=' + thingExtensionID + '&thingID=' + selectedThing + '&newValue=' + newValue;
+    $.ajax({
+        url: url,
+        type: "POST",
+        success: function (resp) {
+            ServerResponse(resp);
+            LoadPart_ThingPropertiesList();
+        },
+        error: function (resp) {
+            ServerResponse(resp);
+        }
+    })
 
+$('#mdl').modal('hide');
+}
+
+//Get Edit Property
+function LoadPart_DialogThingPropertyEdit(valueID) {
+    var loadingpart = LoadDivLoading();
+    $("#modal").html(loadingpart);
+    $.ajax({
+        url: getRootURL() + '/Things/EditPVThingExtenstionProperty?valueID=' + valueID,
+        //page=" + $("#DynConfigCurrentPage").html,
+        type: "GET",
+    })
+    .success(function (partialViewResult) {
+        $("#modal").html(partialViewResult);
+    });
+}
+//Post Edit Property
+function Post_DialogThingPropertyEdit(valueID,newValue) {
+  var url = getRootURL() + 'Things/EditThingExtenstionProperty?valueID=' + valueID + '&newValue=' + newValue;
+    $.ajax({
+        url: url,
+        type: "POST",
+        success: function (resp) {
+            ServerResponse(resp);
+LoadPart_ThingPropertiesList();
+        },
+        error: function (resp) {
+            ServerResponse(resp);
+        }
+    });
+
+$('#mdl').modal('hide');
+}
+
+//Get Delete Property
+function LoadPart_DialogThingPropertyDelete(valueID) {
+    var loadingpart = LoadDivLoading();
+    $("#modal").html(loadingpart);
+    $.ajax({
+        url: getRootURL() + '/Things/DeletePVThingExtenstionProperty?valueID=' + valueID,
+        //page=" + $("#DynConfigCurrentPage").html,
+        type: "GET",
+    })
+    .success(function (partialViewResult) {
+        $("#modal").html(partialViewResult);
+    });
+}
+//Post Delete Property
+function Post_DialogThingPropertyDelete(valueID) {
+  var url = getRootURL() + 'Things/DeleteThingExtenstionProperty?valueID=' + valueID;
+    $.ajax({
+        url: url,
+        type: "POST",
+        success: function (resp) {
+            ServerResponse(resp);
+LoadPart_ThingPropertiesList();
+        },
+        error: function (resp) {
+            ServerResponse(resp);
+        }
+    });
+
+$('#mdl').modal('hide');
+}
 
 //Lookup
 //LoadPart_Thing Lookup
@@ -176,7 +291,8 @@ function LoadPart_ThingListLookupDiv() {
             $("#divThingsLookupList").html(partialViewResult);
         });
     return false;
-};
+}
+
 //Attach : Pager
 function AttachEventThingsLookupListPager() {
     $(document).on("click", "#ThingsLookupListPager a[href]", function () {

@@ -734,6 +734,11 @@
     <Content Include="Views\Shared\Widgets\_InfoBox.cshtml" />
     <Content Include="Views\Endpoints\_Details_Connectivity.cshtml" />
     <Content Include="Views\LocationViews\_Locations.cshtml" />
+    <Content Include="Views\Things\_Details_PropertiesList.cshtml" />
+    <Content Include="Views\Things\_Add_ThingExtenstionProperty.cshtml" />
+    <Content Include="Views\Things\_Details_Properties.cshtml" />
+    <Content Include="Views\Things\_Delete_ThingExtenstionProperty.cshtml" />
+    <Content Include="Views\Things\_Edit_ThingExtenstionProperty.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Assets\Imgs\Wizard.png" />
