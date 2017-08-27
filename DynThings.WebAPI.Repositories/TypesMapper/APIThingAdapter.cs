@@ -71,10 +71,6 @@ namespace DynThings.WebAPI.TypesMapper
             #endregion
 
 
-
-
-
-
             List<APIEndPoint> apiEnds = new List<APIEndPoint>();
             //foreach(Endpoint end in sourceThing.Endpoints)
             //{

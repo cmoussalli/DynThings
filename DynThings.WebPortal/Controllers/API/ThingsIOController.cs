@@ -183,7 +183,7 @@ namespace DynThings.WebAPI.Controllers
             ApiResponse oApiResponse = ApiResponseAdapter.fromResult(ResultInfo.GenerateErrorResult());
             try
             {
-                return ApiResponseAdapter.fromResult(uof_repos.repoEndpointIOs.SetCommandAsExecuted(submission.EndPointCommandIOID, submission.ExectionTimeStamp));
+                return ApiResponseAdapter.fromResult(uof_repos.repoEndpointIOs.SetCommandAsExecuted(submission.EndPointCommandIOID,submission.EndPointKeyPass, submission.ExectionTimeStamp));
             }
             catch
             {
@@ -392,22 +392,22 @@ namespace DynThings.WebAPI.Controllers
         }
         #endregion
 
-        //#region :: Get endpoint pending Commands ::
-        //[HttpGet]
-        //public List<APIEndPointIO> GetEndPointPendingCommands(Guid endPointKeyPass)
-        //{
-        //    List<APIEndPointIO> apiCmds = new List<APIEndPointIO>();
-        //    List<EndPointIO> cmds = uof_repos.repoEndpointIOs.GetPendingCommandsList(endPointKeyPass);
-        //    foreach (EndPointIO cmd in cmds)
-        //    {
-        //        APIEndPointIO apiCmd = new APIEndPointIO();
-        //        apiCmd = APIEndPointIOAdapter.FromEndPointIO(cmd);
-        //        apiCmds.Add(apiCmd);
-        //    }
+        #region :: Get endpoint pending Commands ::
+        [HttpGet]
+        public List<APIEndPointIO> GetEndPointPendingCommands(Guid endPointKeyPass)
+        {
+            List<APIEndPointIO> apiCmds = new List<APIEndPointIO>();
+            List<EndPointIO> cmds = uof_repos.repoEndpointIOs.GetPendingCommandsList(endPointKeyPass);
+            foreach (EndPointIO cmd in cmds)
+            {
+                APIEndPointIO apiCmd = new APIEndPointIO();
+                apiCmd = APIEndPointIOAdapter.fromEndpointIO(cmd);
+                apiCmds.Add(apiCmd);
+            }
 
-        //    return apiCmds;
-        //}
-        //#endregion
+            return apiCmds;
+        }
+        #endregion
 
         #region :: Set endpoint pending Command as Executed ::
         [HttpPost]

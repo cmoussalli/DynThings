@@ -1372,6 +1372,7 @@
         </Function>
         <Function Name="SubmitEndpointCommandExecuted" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="CommandID" Type="bigint" Mode="In" />
+          <Parameter Name="EndPointKeyPass" Type="uniqueidentifier" Mode="In" />
           <Parameter Name="ExecTimeStamp" Type="datetime" Mode="In" />
         </Function>
         <Function Name="SubmitEndPointInput" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
@@ -1752,15 +1753,6 @@
             <Parameter Name="Value" Mode="In" Type="String" />
             <Parameter Name="ExecTimeStamp" Mode="In" Type="DateTime" />
           </FunctionImport>
-          <FunctionImport Name="SubmitEndpointCommand">
-            <Parameter Name="CommandID" Mode="In" Type="Int64" />
-            <Parameter Name="Value" Mode="In" Type="String" />
-            <Parameter Name="ScheduleTimeStamp" Mode="In" Type="DateTime" />
-          </FunctionImport>
-          <FunctionImport Name="SubmitEndpointCommandExecuted">
-            <Parameter Name="CommandID" Mode="In" Type="Int64" />
-            <Parameter Name="ExecTimeStamp" Mode="In" Type="DateTime" />
-          </FunctionImport>
           <EntitySet Name="AlertConditions" EntityType="DynThingsModel.AlertCondition" />
           <EntitySet Name="AlertConditionTypes" EntityType="DynThingsModel.AlertConditionType" />
           <EntitySet Name="AlertLevels" EntityType="DynThingsModel.AlertLevel" />
@@ -2071,6 +2063,16 @@
           <FunctionImport Name="GetThingExtenstions" ReturnType="Collection(DynThingsModel.GetThingExtenstions_Result)">
             <Parameter Name="ThingID" Mode="In" Type="Int64" />
             <Parameter Name="SearchFor" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="SubmitEndpointCommand">
+            <Parameter Name="CommandID" Mode="In" Type="Int64" />
+            <Parameter Name="Value" Mode="In" Type="String" />
+            <Parameter Name="ScheduleTimeStamp" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="SubmitEndpointCommandExecuted">
+            <Parameter Name="CommandID" Mode="In" Type="Int64" />
+            <Parameter Name="EndPointKeyPass" Mode="In" Type="Guid" />
+            <Parameter Name="ExecTimeStamp" Mode="In" Type="DateTime" />
           </FunctionImport>
           </EntityContainer>
         <ComplexType Name="Rpt_EndPoint_IOs_Months_Result">
@@ -4307,8 +4309,6 @@
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="SubmitEndPointInput" FunctionName="DynThingsModel.Store.SubmitEndPointInput" />
           <FunctionImportMapping FunctionImportName="SubmitEndPointLog" FunctionName="DynThingsModel.Store.SubmitEndPointLog" />
-          <FunctionImportMapping FunctionImportName="SubmitEndpointCommand" FunctionName="DynThingsModel.Store.SubmitEndpointCommand" />
-          <FunctionImportMapping FunctionImportName="SubmitEndpointCommandExecuted" FunctionName="DynThingsModel.Store.SubmitEndpointCommandExecuted" />
           <EntitySetMapping Name="AlertConditions">
             <EntityTypeMapping TypeName="DynThingsModel.AlertCondition">
               <MappingFragment StoreEntitySet="AlertConditions">
@@ -4903,6 +4903,8 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SubmitEndpointCommand" FunctionName="DynThingsModel.Store.SubmitEndpointCommand" />
+          <FunctionImportMapping FunctionImportName="SubmitEndpointCommandExecuted" FunctionName="DynThingsModel.Store.SubmitEndpointCommandExecuted" />
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

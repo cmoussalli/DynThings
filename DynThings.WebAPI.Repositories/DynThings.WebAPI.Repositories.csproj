@@ -112,6 +112,7 @@
     <Compile Include="TypesMapper\APIAppAdapter.cs" />
     <Compile Include="TypesMapper\APIDeviceAdapter.cs" />
     <Compile Include="TypesMapper\APIDeviceCommandAdapter.cs" />
+    <Compile Include="TypesMapper\APIEndPointIOAdapter.cs" />
     <Compile Include="TypesMapper\APIEndPointAdapter.cs" />
     <Compile Include="TypesMapper\APIEndPointCommandAdapter.cs" />
     <Compile Include="TypesMapper\APIEndPointTypeAdapter.cs" />

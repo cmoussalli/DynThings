@@ -147,7 +147,6 @@ namespace DynThings.WebPortal.Controllers
             ResultInfo.Result res = ResultInfo.GetResultByID(1);
             if (ModelState.IsValid)
             {
-                Endpoint end = uof_repos.repoEndpoints.Find((long)Command.EndPointID);
                 res = uof_repos.repoEndPointCommands.Execute(Command.ID,Command.CommandCode, User.Identity.ToString());
                 return Json(res);
             }

@@ -9,6 +9,8 @@ namespace DynThings.WebAPI.Models
 
         public long EndPointCommandIOID { get; set; }
 
+        public Guid EndPointKeyPass { get; set; }
+
         public DateTime? ExectionTimeStamp { get; set; }
 
         #endregion

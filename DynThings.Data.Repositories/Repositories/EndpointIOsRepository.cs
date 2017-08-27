@@ -171,12 +171,12 @@ namespace DynThings.Data.Repositories
         #endregion
 
         #region Set Command as Executed
-        public ResultInfo.Result SetCommandAsExecuted(long endPointCommandID, DateTime? execTime)
+        public ResultInfo.Result SetCommandAsExecuted(long endPointCommandID,Guid endPointKeyPass, DateTime? execTime)
         {
             ResultInfo.Result result = ResultInfo.GenerateErrorResult();
             try
             {
-                db.SubmitEndpointCommandExecuted(endPointCommandID,execTime);
+                db.SubmitEndpointCommandExecuted(endPointCommandID,endPointKeyPass,execTime);
                 result = ResultInfo.GenerateOKResult();
             }
             catch { }

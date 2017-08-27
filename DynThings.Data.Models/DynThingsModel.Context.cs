@@ -346,45 +346,6 @@ public partial class DynThingsEntities : DbContext
     }
 
 
-    public virtual int SubmitEndpointCommand(Nullable<long> commandID, string value, Nullable<System.DateTime> scheduleTimeStamp)
-    {
-
-        var commandIDParameter = commandID.HasValue ?
-            new ObjectParameter("CommandID", commandID) :
-            new ObjectParameter("CommandID", typeof(long));
-
-
-        var valueParameter = value != null ?
-            new ObjectParameter("Value", value) :
-            new ObjectParameter("Value", typeof(string));
-
-
-        var scheduleTimeStampParameter = scheduleTimeStamp.HasValue ?
-            new ObjectParameter("ScheduleTimeStamp", scheduleTimeStamp) :
-            new ObjectParameter("ScheduleTimeStamp", typeof(System.DateTime));
-
-
-        return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SubmitEndpointCommand", commandIDParameter, valueParameter, scheduleTimeStampParameter);
-    }
-
-
-    public virtual int SubmitEndpointCommandExecuted(Nullable<long> commandID, Nullable<System.DateTime> execTimeStamp)
-    {
-
-        var commandIDParameter = commandID.HasValue ?
-            new ObjectParameter("CommandID", commandID) :
-            new ObjectParameter("CommandID", typeof(long));
-
-
-        var execTimeStampParameter = execTimeStamp.HasValue ?
-            new ObjectParameter("ExecTimeStamp", execTimeStamp) :
-            new ObjectParameter("ExecTimeStamp", typeof(System.DateTime));
-
-
-        return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SubmitEndpointCommandExecuted", commandIDParameter, execTimeStampParameter);
-    }
-
-
     public virtual int ThingPropertyValueAdd(Nullable<long> thingID, Nullable<long> thingExtenstionID, string value)
     {
 
@@ -450,6 +411,50 @@ public partial class DynThingsEntities : DbContext
 
 
         return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetThingExtenstions_Result>("GetThingExtenstions", thingIDParameter, searchForParameter);
+    }
+
+
+    public virtual int SubmitEndpointCommand(Nullable<long> commandID, string value, Nullable<System.DateTime> scheduleTimeStamp)
+    {
+
+        var commandIDParameter = commandID.HasValue ?
+            new ObjectParameter("CommandID", commandID) :
+            new ObjectParameter("CommandID", typeof(long));
+
+
+        var valueParameter = value != null ?
+            new ObjectParameter("Value", value) :
+            new ObjectParameter("Value", typeof(string));
+
+
+        var scheduleTimeStampParameter = scheduleTimeStamp.HasValue ?
+            new ObjectParameter("ScheduleTimeStamp", scheduleTimeStamp) :
+            new ObjectParameter("ScheduleTimeStamp", typeof(System.DateTime));
+
+
+        return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SubmitEndpointCommand", commandIDParameter, valueParameter, scheduleTimeStampParameter);
+    }
+
+
+    public virtual int SubmitEndpointCommandExecuted(Nullable<long> commandID, Nullable<System.Guid> endPointKeyPass, Nullable<System.DateTime> execTimeStamp)
+    {
+
+        var commandIDParameter = commandID.HasValue ?
+            new ObjectParameter("CommandID", commandID) :
+            new ObjectParameter("CommandID", typeof(long));
+
+
+        var endPointKeyPassParameter = endPointKeyPass.HasValue ?
+            new ObjectParameter("EndPointKeyPass", endPointKeyPass) :
+            new ObjectParameter("EndPointKeyPass", typeof(System.Guid));
+
+
+        var execTimeStampParameter = execTimeStamp.HasValue ?
+            new ObjectParameter("ExecTimeStamp", execTimeStamp) :
+            new ObjectParameter("ExecTimeStamp", typeof(System.DateTime));
+
+
+        return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SubmitEndpointCommandExecuted", commandIDParameter, endPointKeyPassParameter, execTimeStampParameter);
     }
 
 }
