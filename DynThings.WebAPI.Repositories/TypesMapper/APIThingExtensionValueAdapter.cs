@@ -18,7 +18,7 @@ namespace DynThings.WebAPI.TypesMapper
         {
             APIThingExtensionValue result = new APIThingExtensionValue();
             result.ID = sourceThingExtenstionValue.ID;
-            result.Valu = sourceThingExtenstionValue.Valu;
+            result.Value = sourceThingExtenstionValue.Valu;
 
             #region Load Master Types
            

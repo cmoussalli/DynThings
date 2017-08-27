@@ -7,7 +7,7 @@ namespace DynThings.WebAPI.Models
     {
         #region :: Public Properties ::
         public long ID { get; set; }
-        public string Valu { get; set; }
+        public string Value { get; set; }
 
         #region Master Types
         #endregion
@@ -27,7 +27,7 @@ namespace DynThings.WebAPI.Models
         public APIThingExtensionValue()
         {
             this.ID = 0;
-            this.Valu = "";
+            this.Value = "";
             this.Thing = new APIThing();
             this.ThingExtension = new APIThingExtension();
         }
