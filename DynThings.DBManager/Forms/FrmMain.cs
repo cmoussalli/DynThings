@@ -53,5 +53,10 @@ namespace DynThings.DBManager
             FrmConnect frmConnect = new FrmConnect();
             frmConnect.ShowDialog();
         }
+
+        private void FrmMain_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

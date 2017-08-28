@@ -57,15 +57,15 @@
             this.label11 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.label13 = new System.Windows.Forms.Label();
-            this.label14 = new System.Windows.Forms.Label();
-            this.label15 = new System.Windows.Forms.Label();
-            this.label16 = new System.Windows.Forms.Label();
-            this.lblMaxCPHToday = new System.Windows.Forms.Label();
-            this.lblLast24hCpH = new System.Windows.Forms.Label();
-            this.progDBUtilized = new System.Windows.Forms.ProgressBar();
             this.lblDBUtilized = new System.Windows.Forms.Label();
+            this.progDBUtilized = new System.Windows.Forms.ProgressBar();
+            this.lblLast24hCpH = new System.Windows.Forms.Label();
+            this.lblMaxCPHToday = new System.Windows.Forms.Label();
+            this.label16 = new System.Windows.Forms.Label();
+            this.label15 = new System.Windows.Forms.Label();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.label14 = new System.Windows.Forms.Label();
+            this.label13 = new System.Windows.Forms.Label();
             this.btnShrink = new System.Windows.Forms.Button();
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
@@ -152,7 +152,7 @@
             // mnuBtnConnect
             // 
             this.mnuBtnConnect.Name = "mnuBtnConnect";
-            this.mnuBtnConnect.Size = new System.Drawing.Size(119, 22);
+            this.mnuBtnConnect.Size = new System.Drawing.Size(152, 22);
             this.mnuBtnConnect.Text = "Connect";
             this.mnuBtnConnect.Click += new System.EventHandler(this.mnuBtnConnect_Click);
             // 
@@ -346,73 +346,25 @@
             this.panel1.Size = new System.Drawing.Size(732, 68);
             this.panel1.TabIndex = 31;
             // 
-            // panel2
+            // lblDBUtilized
             // 
-            this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(43)))), ((int)(((byte)(58)))), ((int)(((byte)(72)))));
-            this.panel2.Controls.Add(this.label14);
-            this.panel2.Controls.Add(this.label13);
-            this.panel2.Location = new System.Drawing.Point(0, 46);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(213, 68);
-            this.panel2.TabIndex = 0;
+            this.lblDBUtilized.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblDBUtilized.AutoSize = true;
+            this.lblDBUtilized.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblDBUtilized.ForeColor = System.Drawing.Color.White;
+            this.lblDBUtilized.Location = new System.Drawing.Point(281, 11);
+            this.lblDBUtilized.Name = "lblDBUtilized";
+            this.lblDBUtilized.Size = new System.Drawing.Size(81, 17);
+            this.lblDBUtilized.TabIndex = 33;
+            this.lblDBUtilized.Text = "lblDBUtilized";
             // 
-            // label13
+            // progDBUtilized
             // 
-            this.label13.AutoSize = true;
-            this.label13.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label13.ForeColor = System.Drawing.Color.White;
-            this.label13.Location = new System.Drawing.Point(12, 2);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(129, 32);
-            this.label13.TabIndex = 20;
-            this.label13.Text = "DynThings";
-            // 
-            // label14
-            // 
-            this.label14.AutoSize = true;
-            this.label14.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label14.ForeColor = System.Drawing.Color.White;
-            this.label14.Location = new System.Drawing.Point(39, 33);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(120, 17);
-            this.label14.TabIndex = 21;
-            this.label14.Text = "Database Manager";
-            // 
-            // label15
-            // 
-            this.label15.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label15.AutoSize = true;
-            this.label15.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label15.ForeColor = System.Drawing.Color.White;
-            this.label15.Location = new System.Drawing.Point(525, 11);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(104, 17);
-            this.label15.TabIndex = 22;
-            this.label15.Text = "Max CpH Today:";
-            // 
-            // label16
-            // 
-            this.label16.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label16.AutoSize = true;
-            this.label16.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label16.ForeColor = System.Drawing.Color.White;
-            this.label16.Location = new System.Drawing.Point(525, 35);
-            this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(88, 17);
-            this.label16.TabIndex = 23;
-            this.label16.Text = "Last 24h CpH:";
-            // 
-            // lblMaxCPHToday
-            // 
-            this.lblMaxCPHToday.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblMaxCPHToday.AutoSize = true;
-            this.lblMaxCPHToday.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblMaxCPHToday.ForeColor = System.Drawing.Color.White;
-            this.lblMaxCPHToday.Location = new System.Drawing.Point(635, 11);
-            this.lblMaxCPHToday.Name = "lblMaxCPHToday";
-            this.lblMaxCPHToday.Size = new System.Drawing.Size(106, 17);
-            this.lblMaxCPHToday.TabIndex = 24;
-            this.lblMaxCPHToday.Text = "lblMaxCPHToday";
+            this.progDBUtilized.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.progDBUtilized.Location = new System.Drawing.Point(284, 33);
+            this.progDBUtilized.Name = "progDBUtilized";
+            this.progDBUtilized.Size = new System.Drawing.Size(181, 21);
+            this.progDBUtilized.TabIndex = 32;
             // 
             // lblLast24hCpH
             // 
@@ -426,25 +378,73 @@
             this.lblLast24hCpH.TabIndex = 25;
             this.lblLast24hCpH.Text = "lblLast24hCpH";
             // 
-            // progDBUtilized
+            // lblMaxCPHToday
             // 
-            this.progDBUtilized.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.progDBUtilized.Location = new System.Drawing.Point(284, 33);
-            this.progDBUtilized.Name = "progDBUtilized";
-            this.progDBUtilized.Size = new System.Drawing.Size(181, 21);
-            this.progDBUtilized.TabIndex = 32;
+            this.lblMaxCPHToday.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblMaxCPHToday.AutoSize = true;
+            this.lblMaxCPHToday.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblMaxCPHToday.ForeColor = System.Drawing.Color.White;
+            this.lblMaxCPHToday.Location = new System.Drawing.Point(635, 11);
+            this.lblMaxCPHToday.Name = "lblMaxCPHToday";
+            this.lblMaxCPHToday.Size = new System.Drawing.Size(106, 17);
+            this.lblMaxCPHToday.TabIndex = 24;
+            this.lblMaxCPHToday.Text = "lblMaxCPHToday";
             // 
-            // lblDBUtilized
+            // label16
             // 
-            this.lblDBUtilized.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblDBUtilized.AutoSize = true;
-            this.lblDBUtilized.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblDBUtilized.ForeColor = System.Drawing.Color.White;
-            this.lblDBUtilized.Location = new System.Drawing.Point(281, 11);
-            this.lblDBUtilized.Name = "lblDBUtilized";
-            this.lblDBUtilized.Size = new System.Drawing.Size(81, 17);
-            this.lblDBUtilized.TabIndex = 33;
-            this.lblDBUtilized.Text = "lblDBUtilized";
+            this.label16.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label16.AutoSize = true;
+            this.label16.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label16.ForeColor = System.Drawing.Color.White;
+            this.label16.Location = new System.Drawing.Point(525, 35);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(88, 17);
+            this.label16.TabIndex = 23;
+            this.label16.Text = "Last 24h CpH:";
+            // 
+            // label15
+            // 
+            this.label15.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label15.AutoSize = true;
+            this.label15.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label15.ForeColor = System.Drawing.Color.White;
+            this.label15.Location = new System.Drawing.Point(525, 11);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(104, 17);
+            this.label15.TabIndex = 22;
+            this.label15.Text = "Max CpH Today:";
+            // 
+            // panel2
+            // 
+            this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(43)))), ((int)(((byte)(58)))), ((int)(((byte)(72)))));
+            this.panel2.Controls.Add(this.label14);
+            this.panel2.Controls.Add(this.label13);
+            this.panel2.Location = new System.Drawing.Point(0, 46);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(213, 68);
+            this.panel2.TabIndex = 0;
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label14.ForeColor = System.Drawing.Color.White;
+            this.label14.Location = new System.Drawing.Point(39, 33);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(120, 17);
+            this.label14.TabIndex = 21;
+            this.label14.Text = "Database Manager";
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label13.ForeColor = System.Drawing.Color.White;
+            this.label13.Location = new System.Drawing.Point(12, 2);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(129, 32);
+            this.label13.TabIndex = 20;
+            this.label13.Text = "DynThings";
             // 
             // btnShrink
             // 
@@ -543,6 +543,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "DynThings Database Manager";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FrmMain_FormClosing);
+            this.Load += new System.EventHandler(this.FrmMain_Load);
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
             this.menuStrip2.ResumeLayout(false);

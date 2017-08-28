@@ -46,6 +46,16 @@ namespace DynThings.WebAPI.TypesMapper
             #region Load Childs
             if (loadChilds)
             {
+                #region EndPoints
+                List<APIEndPoint> apiEndPoints = new List<APIEndPoint>();
+                foreach (Endpoint endpoint in sourceThing.Endpoints)
+                {
+                    APIEndPoint apiEndpoint = TypesMapper.APIEndPointAdapter.fromEndpoint(endpoint, false, false);
+                    apiEndPoints.Add(apiEndpoint);
+                }
+                result.EndPoints = apiEndPoints;
+                #endregion
+
                 #region ThingEnds
                 List<APIThingEnd> apiThingEnds = new List<APIThingEnd>();
                 foreach (ThingEnd thingEnd in sourceThing.ThingEnds)
@@ -65,6 +75,7 @@ namespace DynThings.WebAPI.TypesMapper
                 }
                 result.APIThingExtensionValues = apiThingExtensionValues;
                 #endregion
+
             }
 
             result.ThingEndsCount = sourceThing.ThingEnds.Count;

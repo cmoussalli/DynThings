@@ -18,7 +18,10 @@ namespace DynThings.WebAPI.TypesMapper
         {
             APIThingExtension result = new APIThingExtension();
             result.ID = sourceThingExtension.ID;
+            result.GUID = sourceThingExtension.GUID;
+            result.Code = sourceThingExtension.Code;
             result.Title = sourceThingExtension.Title;
+            result.IsList = sourceThingExtension.IsList;
 
             #region Load Master Types
             result.DataType = TypesMapper.APIDataTypeAdapter.fromDataType(sourceThingExtension.DataType);

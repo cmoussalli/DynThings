@@ -25,9 +25,11 @@ namespace DynThings.DBManager
         private void timer1_Tick(object sender, EventArgs e)
         {
             timer1.Enabled = false;
+
             FrmConnect frmConnect = new FrmConnect();
             frmConnect.ShowDialog();
-            
+
+
         }
     }
 }

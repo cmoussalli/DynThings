@@ -28,7 +28,7 @@ namespace DynThings.WebAPI.TypesMapper
             if (loadParents)
             {
                 #region ThingExtension
-                result.ThingExtension = TypesMapper.APIThingExtensionAdapter.fromThingExtension(sourceThingExtenstionValue.ThingExtenstion,false,false);
+                result.ThingExtension = TypesMapper.APIThingExtensionAdapter.fromThingExtension(sourceThingExtenstionValue.ThingExtenstion,true,false);
                 #endregion
 
                 #region Thing

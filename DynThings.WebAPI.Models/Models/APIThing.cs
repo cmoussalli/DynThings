@@ -20,10 +20,11 @@ namespace DynThings.WebAPI.Models
 
         #region Parents
         public List<APILocation> Locations { get; set; }
-        
+
         #endregion
 
         #region Childs
+        public List<APIEndPoint> EndPoints { get; set; }
         public List<APIThingEnd> ThingEnds { get; set; }
         public List<APIThingExtensionValue> APIThingExtensionValues { get; set; }
         public int ThingEndsCount { get; set; }
