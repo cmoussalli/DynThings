@@ -44,6 +44,7 @@
             this.btnGetLocationViews = new System.Windows.Forms.Button();
             this.btnGetLocation = new System.Windows.Forms.Button();
             this.btnThings = new System.Windows.Forms.Button();
+            this.btnSubmitEndPointInput = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.gv1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -100,7 +101,7 @@
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(15, 15);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(26, 13);
+            this.label1.Size = new System.Drawing.Size(29, 13);
             this.label1.TabIndex = 6;
             this.label1.Text = "URL";
             // 
@@ -109,7 +110,7 @@
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(15, 41);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(50, 13);
+            this.label2.Size = new System.Drawing.Size(53, 13);
             this.label2.TabIndex = 7;
             this.label2.Text = "APP Guid";
             // 
@@ -144,7 +145,7 @@
             this.label5.AutoSize = true;
             this.label5.Location = new System.Drawing.Point(15, 119);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(76, 13);
+            this.label5.Size = new System.Drawing.Size(75, 13);
             this.label5.TabIndex = 9;
             this.label5.Text = "Current Token";
             // 
@@ -188,11 +189,22 @@
             this.btnThings.UseVisualStyleBackColor = true;
             this.btnThings.Click += new System.EventHandler(this.btnThings_Click);
             // 
+            // btnSubmitEndPointInput
+            // 
+            this.btnSubmitEndPointInput.Location = new System.Drawing.Point(779, 154);
+            this.btnSubmitEndPointInput.Name = "btnSubmitEndPointInput";
+            this.btnSubmitEndPointInput.Size = new System.Drawing.Size(154, 23);
+            this.btnSubmitEndPointInput.TabIndex = 15;
+            this.btnSubmitEndPointInput.Text = "Submit EndPoint Input";
+            this.btnSubmitEndPointInput.UseVisualStyleBackColor = true;
+            this.btnSubmitEndPointInput.Click += new System.EventHandler(this.btnSubmitEndPointInput_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(945, 521);
+            this.Controls.Add(this.btnSubmitEndPointInput);
             this.Controls.Add(this.btnThings);
             this.Controls.Add(this.btnGetLocation);
             this.Controls.Add(this.btnGetLocationViews);
@@ -236,6 +248,7 @@
         private System.Windows.Forms.Button btnGetLocationViews;
         private System.Windows.Forms.Button btnGetLocation;
         private System.Windows.Forms.Button btnThings;
+        private System.Windows.Forms.Button btnSubmitEndPointInput;
     }
 }
 

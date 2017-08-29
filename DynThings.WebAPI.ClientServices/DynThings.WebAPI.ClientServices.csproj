@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netstandard1.1</TargetFramework>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-    <Version>1.0.4</Version>
+    <Version>1.0.6</Version>
     <Description>This package includes all the requierd Methods to communicate with DynThings WebAPI services.</Description>
     <Copyright>DynThings 2017</Copyright>
     <PackageProjectUrl>http://www.dynthings.com/</PackageProjectUrl>
@@ -13,12 +13,17 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="DynThings.WebAPI.Models" Version="1.0.2" />
+    <PackageReference Include="DynThings.WebAPI.Models" Version="$(PackageVersion)" />
     <PackageReference Include="Newtonsoft.Json" Version="10.0.3" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\DynThings.WebAPI.Models\DynThings.WebAPI.Models.csproj" />
   </ItemGroup>
+
+  <Target Name="CopyPackage" AfterTargets="Pack">
+    <Copy SourceFiles="$(ProjectDir)\Bin\Debug\$(PackageId).$(PackageVersion).nupkg" DestinationFolder="D:\OneDrive\Projects\_Libraries\_Nuget" />
+
+  </Target>
 
 </Project>

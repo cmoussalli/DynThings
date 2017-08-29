@@ -19,15 +19,16 @@ namespace DynThings.WebAPI.ClientServices
         #region Submit Input
         public async Task<ApiResponse> SubmitEndPointInput(Guid endPointKeyPass, string value)
         {
+            SubmissionEndPointIO sub = new SubmissionEndPointIO();
+            sub.KeyPass = endPointKeyPass.ToString();
+            sub.Value = value;
+            var content = new StringContent(JsonConvert.SerializeObject(sub));
+            content.Headers.ContentType.MediaType = "application/json";
             ApiResponse result = new ApiResponse();
             HttpClient client = new HttpClient();
-            string getStringTask = await client.GetStringAsync(hostconfig.URL + "/api/thingsIO/SubmitEndPointInput"
-                + "&KeyPass=" + endPointKeyPass.ToString()
-                + "Value=" + value
-                );
-            string resultstring = getStringTask;
+            HttpResponseMessage httpResponse = await client.PostAsync(hostconfig.URL + "/api/thingsIO/SubmitEndPointInput", content);
+            string resultstring = httpResponse.Content.ReadAsStringAsync().Result;
             result = JsonConvert.DeserializeObject<ApiResponse>(resultstring);
-
             return result;
         }
         #endregion
@@ -35,15 +36,16 @@ namespace DynThings.WebAPI.ClientServices
         #region Submit Log
         public async Task<ApiResponse> SubmitEndPointLog(Guid endPointKeyPass, string value)
         {
+            SubmissionEndPointIO sub = new SubmissionEndPointIO();
+            sub.KeyPass = endPointKeyPass.ToString();
+            sub.Value = value;
+            var content = new StringContent(JsonConvert.SerializeObject(sub));
+            content.Headers.ContentType.MediaType = "application/json";
             ApiResponse result = new ApiResponse();
             HttpClient client = new HttpClient();
-            string getStringTask = await client.GetStringAsync(hostconfig.URL + "/api/thingsIO/SubmitEndPointLog"
-                + "&KeyPass=" + endPointKeyPass.ToString()
-                + "Value=" + value
-                );
-            string resultstring = getStringTask;
+            HttpResponseMessage httpResponse = await client.PostAsync(hostconfig.URL + "/api/thingsIO/SubmitEndPointLog", content);
+            string resultstring = httpResponse.Content.ReadAsStringAsync().Result;
             result = JsonConvert.DeserializeObject<ApiResponse>(resultstring);
-
             return result;
         }
         #endregion

@@ -81,12 +81,18 @@ namespace DynThings.WebAPIClientServicesTester
             gv1.DataSource = views;
         }
 
-        private void btnThings_Click(object sender, EventArgs e)
+        private async void btnThings_Click(object sender, EventArgs e)
         {
             Initialize();
 
-            List<APIThing> things = await uow.;
-            gv1.DataSource = views;
+            List<APIThing> things = await uow.ThingsService.GetListAsync(1,100,true,true,"",0);
+            gv1.DataSource = things;
+        }
+
+        private async void btnSubmitEndPointInput_Click(object sender, EventArgs e)
+        {
+            ApiResponse result = await uow.IOService.SubmitEndPointInput(Guid.Parse("D5E4B5E6-C4E1-4E7B-A3E5-49FE3C251882"), "1");
+            MessageBox.Show(result.Message);
         }
     }
 }
