@@ -115,5 +115,33 @@ namespace DynThings.WebAPIClientServicesTester
             List<APILocation> locs = await uow.LocationsService.GetLocationsWithWarnings(1, 25, true, true, "", 0);
             gv1.DataSource = locs;
         }
+
+        private async void btnGetViewsWarnings_Click(object sender, EventArgs e)
+        {
+            Initialize();
+            List<APILocationView> views = await uow.LocationViewsService.GetLocationViewsWithWarnings(1, 25, true, true);
+            gv1.DataSource = views;
+        }
+
+        private async void btnSubmitEndPointLog_Click(object sender, EventArgs e)
+        {
+            ApiResponse result = await uow.IOService.SubmitEndPointLog(Guid.Parse("D5E4B5E6-C4E1-4E7B-A3E5-49FE3C251882"), "1");
+            MessageBox.Show(result.Message);
+        }
+
+        private async void btnGetEndPointPendingCommands_Click(object sender, EventArgs e)
+        {
+            Initialize();
+            List<APIEndPointIO> cmds = await uow.IOService.GetEndPointPendingCommands(Guid.Parse("D5E4B5E6-C4E1-4E7B-A3E5-49FE3C251882"));
+            gv1.DataSource = cmds;
+        }
+
+        private async  void btnSetEndpointCommandAsExecuted_Click(object sender, EventArgs e)
+        {
+            long commandID = 0;
+            commandID = long.Parse( gv1.SelectedRows[0].Cells[0].Value.ToString());
+            Initialize();
+            ApiResponse res = await uow.IOService.SetEndPointCommandAsExecuted(commandID,Guid.Parse("D5E4B5E6-C4E1-4E7B-A3E5-49FE3C251882"));
+        }
     }
 }

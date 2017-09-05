@@ -56,7 +56,7 @@ namespace DynThings.WebAPI.ClientServices
             List<APIEndPointIO> result = new List<APIEndPointIO>();
             HttpClient client = new HttpClient();
             string getStringTask = await client.GetStringAsync(hostconfig.URL + "/api/thingsIO/GetEndPointPendingCommands"
-                + "&endPointKeyPass=" + endPointKeyPass.ToString()
+                + "?endPointKeyPass=" + endPointKeyPass.ToString()
                 );
             string resultstring = getStringTask;
             result = JsonConvert.DeserializeObject<List<APIEndPointIO>>(resultstring);
@@ -70,7 +70,7 @@ namespace DynThings.WebAPI.ClientServices
             ApiResponse result = new ApiResponse();
             HttpClient client = new HttpClient();
             string getStringTask = await client.GetStringAsync(hostconfig.URL + "/api/thingsIO/SetEndPointCommandAsExecuted"
-                + "&EndPointCommandIOID=" + commandID.ToString()
+                + "?EndPointCommandIOID=" + commandID.ToString()
                 + "EndPointKeyPass=" + endPointKeyPass
                 );
             string resultstring = getStringTask;

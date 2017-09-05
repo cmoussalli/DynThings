@@ -34,6 +34,21 @@ namespace DynThings.WebAPI.ClientServices
             return result;
         }
 
+        public async Task<List<APILocationView>> GetLocationViewsWithWarnings(int pageNumber, int pageSize, bool loadParents = false, bool loadChilds = false)
+        {
+            List<APILocationView> result = new List<APILocationView>();
+            HttpClient client = new HttpClient();
+            string getStringTask = await client.GetStringAsync(hostconfig.URL + "/api/LocationViews/GetLocationViewsWithWarnings?token=" + hostconfig.Token
+                + "&pageNumber=" + pageNumber.ToString()
+                + "&pagesize=" + pageSize.ToString()
+                + "&loadParents=" + loadParents.ToString()
+                + "&loadChilds=" + loadChilds.ToString()
+                );
+            string resultstring = getStringTask;
+            result = JsonConvert.DeserializeObject<List<APILocationView>>(resultstring);
+
+            return result;
+        }
 
     }
 }

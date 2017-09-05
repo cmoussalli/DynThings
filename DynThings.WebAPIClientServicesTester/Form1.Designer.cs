@@ -49,6 +49,10 @@
             this.btnGetEndPoints = new System.Windows.Forms.Button();
             this.btnGetThingsWarnings = new System.Windows.Forms.Button();
             this.btnGetLocationsWarnings = new System.Windows.Forms.Button();
+            this.btnGetViewsWarnings = new System.Windows.Forms.Button();
+            this.btnSubmitEndPointLog = new System.Windows.Forms.Button();
+            this.btnGetEndPointPendingCommands = new System.Windows.Forms.Button();
+            this.btnSetEndpointCommandAsExecuted = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.gv1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -175,7 +179,7 @@
             // 
             // btnGetLocation
             // 
-            this.btnGetLocation.Location = new System.Drawing.Point(183, 583);
+            this.btnGetLocation.Location = new System.Drawing.Point(172, 583);
             this.btnGetLocation.Name = "btnGetLocation";
             this.btnGetLocation.Size = new System.Drawing.Size(154, 23);
             this.btnGetLocation.TabIndex = 13;
@@ -185,7 +189,7 @@
             // 
             // btnThings
             // 
-            this.btnThings.Location = new System.Drawing.Point(355, 583);
+            this.btnThings.Location = new System.Drawing.Point(332, 583);
             this.btnThings.Name = "btnThings";
             this.btnThings.Size = new System.Drawing.Size(154, 23);
             this.btnThings.TabIndex = 14;
@@ -195,9 +199,9 @@
             // 
             // btnSubmitEndPointInput
             // 
-            this.btnSubmitEndPointInput.Location = new System.Drawing.Point(527, 583);
+            this.btnSubmitEndPointInput.Location = new System.Drawing.Point(682, 583);
             this.btnSubmitEndPointInput.Name = "btnSubmitEndPointInput";
-            this.btnSubmitEndPointInput.Size = new System.Drawing.Size(154, 23);
+            this.btnSubmitEndPointInput.Size = new System.Drawing.Size(176, 23);
             this.btnSubmitEndPointInput.TabIndex = 15;
             this.btnSubmitEndPointInput.Text = "Submit EndPoint Input";
             this.btnSubmitEndPointInput.UseVisualStyleBackColor = true;
@@ -205,7 +209,7 @@
             // 
             // btnGetEndPointsWarnings
             // 
-            this.btnGetEndPointsWarnings.Location = new System.Drawing.Point(699, 612);
+            this.btnGetEndPointsWarnings.Location = new System.Drawing.Point(492, 612);
             this.btnGetEndPointsWarnings.Name = "btnGetEndPointsWarnings";
             this.btnGetEndPointsWarnings.Size = new System.Drawing.Size(154, 23);
             this.btnGetEndPointsWarnings.TabIndex = 16;
@@ -215,7 +219,7 @@
             // 
             // btnGetEndPoints
             // 
-            this.btnGetEndPoints.Location = new System.Drawing.Point(699, 583);
+            this.btnGetEndPoints.Location = new System.Drawing.Point(492, 583);
             this.btnGetEndPoints.Name = "btnGetEndPoints";
             this.btnGetEndPoints.Size = new System.Drawing.Size(154, 23);
             this.btnGetEndPoints.TabIndex = 17;
@@ -225,7 +229,7 @@
             // 
             // btnGetThingsWarnings
             // 
-            this.btnGetThingsWarnings.Location = new System.Drawing.Point(355, 612);
+            this.btnGetThingsWarnings.Location = new System.Drawing.Point(332, 612);
             this.btnGetThingsWarnings.Name = "btnGetThingsWarnings";
             this.btnGetThingsWarnings.Size = new System.Drawing.Size(154, 23);
             this.btnGetThingsWarnings.TabIndex = 18;
@@ -235,7 +239,7 @@
             // 
             // btnGetLocationsWarnings
             // 
-            this.btnGetLocationsWarnings.Location = new System.Drawing.Point(183, 612);
+            this.btnGetLocationsWarnings.Location = new System.Drawing.Point(172, 612);
             this.btnGetLocationsWarnings.Name = "btnGetLocationsWarnings";
             this.btnGetLocationsWarnings.Size = new System.Drawing.Size(154, 23);
             this.btnGetLocationsWarnings.TabIndex = 19;
@@ -243,11 +247,55 @@
             this.btnGetLocationsWarnings.UseVisualStyleBackColor = true;
             this.btnGetLocationsWarnings.Click += new System.EventHandler(this.btnGetLocationsWarnings_Click);
             // 
+            // btnGetViewsWarnings
+            // 
+            this.btnGetViewsWarnings.Location = new System.Drawing.Point(12, 612);
+            this.btnGetViewsWarnings.Name = "btnGetViewsWarnings";
+            this.btnGetViewsWarnings.Size = new System.Drawing.Size(154, 23);
+            this.btnGetViewsWarnings.TabIndex = 20;
+            this.btnGetViewsWarnings.Text = "Get Views Warnings";
+            this.btnGetViewsWarnings.UseVisualStyleBackColor = true;
+            this.btnGetViewsWarnings.Click += new System.EventHandler(this.btnGetViewsWarnings_Click);
+            // 
+            // btnSubmitEndPointLog
+            // 
+            this.btnSubmitEndPointLog.Location = new System.Drawing.Point(683, 612);
+            this.btnSubmitEndPointLog.Name = "btnSubmitEndPointLog";
+            this.btnSubmitEndPointLog.Size = new System.Drawing.Size(175, 23);
+            this.btnSubmitEndPointLog.TabIndex = 21;
+            this.btnSubmitEndPointLog.Text = "Submit EndPoint Log";
+            this.btnSubmitEndPointLog.UseVisualStyleBackColor = true;
+            this.btnSubmitEndPointLog.Click += new System.EventHandler(this.btnSubmitEndPointLog_Click);
+            // 
+            // btnGetEndPointPendingCommands
+            // 
+            this.btnGetEndPointPendingCommands.Location = new System.Drawing.Point(683, 641);
+            this.btnGetEndPointPendingCommands.Name = "btnGetEndPointPendingCommands";
+            this.btnGetEndPointPendingCommands.Size = new System.Drawing.Size(175, 23);
+            this.btnGetEndPointPendingCommands.TabIndex = 22;
+            this.btnGetEndPointPendingCommands.Text = "Get EndPoint Pending Commands";
+            this.btnGetEndPointPendingCommands.UseVisualStyleBackColor = true;
+            this.btnGetEndPointPendingCommands.Click += new System.EventHandler(this.btnGetEndPointPendingCommands_Click);
+            // 
+            // btnSetEndpointCommandAsExecuted
+            // 
+            this.btnSetEndpointCommandAsExecuted.Location = new System.Drawing.Point(683, 670);
+            this.btnSetEndpointCommandAsExecuted.Name = "btnSetEndpointCommandAsExecuted";
+            this.btnSetEndpointCommandAsExecuted.Size = new System.Drawing.Size(176, 23);
+            this.btnSetEndpointCommandAsExecuted.TabIndex = 23;
+            this.btnSetEndpointCommandAsExecuted.Text = "Set Command as Executed";
+            this.btnSetEndpointCommandAsExecuted.UseVisualStyleBackColor = true;
+            this.btnSetEndpointCommandAsExecuted.Click += new System.EventHandler(this.btnSetEndpointCommandAsExecuted_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(865, 677);
+            this.ClientSize = new System.Drawing.Size(870, 706);
+            this.Controls.Add(this.btnSetEndpointCommandAsExecuted);
+            this.Controls.Add(this.btnGetEndPointPendingCommands);
+            this.Controls.Add(this.btnSubmitEndPointLog);
+            this.Controls.Add(this.btnGetViewsWarnings);
             this.Controls.Add(this.btnGetLocationsWarnings);
             this.Controls.Add(this.btnGetThingsWarnings);
             this.Controls.Add(this.btnGetEndPoints);
@@ -301,6 +349,10 @@
         private System.Windows.Forms.Button btnGetEndPoints;
         private System.Windows.Forms.Button btnGetThingsWarnings;
         private System.Windows.Forms.Button btnGetLocationsWarnings;
+        private System.Windows.Forms.Button btnGetViewsWarnings;
+        private System.Windows.Forms.Button btnSubmitEndPointLog;
+        private System.Windows.Forms.Button btnGetEndPointPendingCommands;
+        private System.Windows.Forms.Button btnSetEndpointCommandAsExecuted;
     }
 }
 
