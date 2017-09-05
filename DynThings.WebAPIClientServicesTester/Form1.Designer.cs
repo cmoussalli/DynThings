@@ -53,12 +53,14 @@
             this.btnSubmitEndPointLog = new System.Windows.Forms.Button();
             this.btnGetEndPointPendingCommands = new System.Windows.Forms.Button();
             this.btnSetEndpointCommandAsExecuted = new System.Windows.Forms.Button();
+            this.btnGetIOsWarnings = new System.Windows.Forms.Button();
+            this.btnGenerateNewToken = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.gv1)).BeginInit();
             this.SuspendLayout();
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(699, 10);
+            this.button1.Location = new System.Drawing.Point(704, 83);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(154, 23);
             this.button1.TabIndex = 0;
@@ -80,7 +82,7 @@
             this.txtAppID.Name = "txtAppID";
             this.txtAppID.Size = new System.Drawing.Size(426, 20);
             this.txtAppID.TabIndex = 2;
-            this.txtAppID.Text = "dab4958b-d1ef-4357-81f5-d3d8ab64713d";
+            this.txtAppID.Text = "71852022-0E2E-48B9-A480-A6EFC97AE293";
             // 
             // gv1
             // 
@@ -146,7 +148,6 @@
             this.txtToken.Name = "txtToken";
             this.txtToken.Size = new System.Drawing.Size(426, 20);
             this.txtToken.TabIndex = 8;
-            this.txtToken.Text = "d6a8c51f-33f8-46c8-b5b6-4de5c7eb7e1b";
             // 
             // label5
             // 
@@ -159,7 +160,7 @@
             // 
             // btnGetTokenInfo
             // 
-            this.btnGetTokenInfo.Location = new System.Drawing.Point(699, 38);
+            this.btnGetTokenInfo.Location = new System.Drawing.Point(704, 111);
             this.btnGetTokenInfo.Name = "btnGetTokenInfo";
             this.btnGetTokenInfo.Size = new System.Drawing.Size(154, 23);
             this.btnGetTokenInfo.TabIndex = 11;
@@ -287,11 +288,33 @@
             this.btnSetEndpointCommandAsExecuted.UseVisualStyleBackColor = true;
             this.btnSetEndpointCommandAsExecuted.Click += new System.EventHandler(this.btnSetEndpointCommandAsExecuted_Click);
             // 
+            // btnGetIOsWarnings
+            // 
+            this.btnGetIOsWarnings.Location = new System.Drawing.Point(12, 671);
+            this.btnGetIOsWarnings.Name = "btnGetIOsWarnings";
+            this.btnGetIOsWarnings.Size = new System.Drawing.Size(634, 23);
+            this.btnGetIOsWarnings.TabIndex = 24;
+            this.btnGetIOsWarnings.Text = "Get IO Warnings";
+            this.btnGetIOsWarnings.UseVisualStyleBackColor = true;
+            this.btnGetIOsWarnings.Click += new System.EventHandler(this.btnGetIOsWarnings_Click);
+            // 
+            // btnGenerateNewToken
+            // 
+            this.btnGenerateNewToken.Location = new System.Drawing.Point(704, 9);
+            this.btnGenerateNewToken.Name = "btnGenerateNewToken";
+            this.btnGenerateNewToken.Size = new System.Drawing.Size(154, 23);
+            this.btnGenerateNewToken.TabIndex = 25;
+            this.btnGenerateNewToken.Text = "Generate New Token";
+            this.btnGenerateNewToken.UseVisualStyleBackColor = true;
+            this.btnGenerateNewToken.Click += new System.EventHandler(this.btnGenerateNewToken_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(870, 706);
+            this.Controls.Add(this.btnGenerateNewToken);
+            this.Controls.Add(this.btnGetIOsWarnings);
             this.Controls.Add(this.btnSetEndpointCommandAsExecuted);
             this.Controls.Add(this.btnGetEndPointPendingCommands);
             this.Controls.Add(this.btnSubmitEndPointLog);
@@ -318,6 +341,7 @@
             this.Controls.Add(this.txtURL);
             this.Controls.Add(this.button1);
             this.Name = "Form1";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.gv1)).EndInit();
@@ -353,6 +377,8 @@
         private System.Windows.Forms.Button btnSubmitEndPointLog;
         private System.Windows.Forms.Button btnGetEndPointPendingCommands;
         private System.Windows.Forms.Button btnSetEndpointCommandAsExecuted;
+        private System.Windows.Forms.Button btnGetIOsWarnings;
+        private System.Windows.Forms.Button btnGenerateNewToken;
     }
 }
 

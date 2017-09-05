@@ -17,6 +17,7 @@ namespace DynThings.WebAPI.ClientServices
             ThingEndsService = new ThingEndsServices(host);
             AppsService = new AppsServices(host);
             IOService = new IOServices(host);
+            WarningsService = new WarningsServices(host);
         }
 
         #endregion
@@ -32,6 +33,7 @@ namespace DynThings.WebAPI.ClientServices
         public ThingEndsServices ThingEndsService { get; set; }
         public AppsServices AppsService { get; set; }
         public IOServices IOService { get; set; }
+        public WarningsServices WarningsService { get; set; }
         #endregion
 
 

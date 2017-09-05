@@ -136,12 +136,49 @@ namespace DynThings.WebAPIClientServicesTester
             gv1.DataSource = cmds;
         }
 
-        private async  void btnSetEndpointCommandAsExecuted_Click(object sender, EventArgs e)
+        private async void btnSetEndpointCommandAsExecuted_Click(object sender, EventArgs e)
         {
             long commandID = 0;
-            commandID = long.Parse( gv1.SelectedRows[0].Cells[0].Value.ToString());
+            commandID = long.Parse(gv1.SelectedRows[0].Cells[0].Value.ToString());
             Initialize();
-            ApiResponse res = await uow.IOService.SetEndPointCommandAsExecuted(commandID,Guid.Parse("D5E4B5E6-C4E1-4E7B-A3E5-49FE3C251882"));
+            ApiResponse res = await uow.IOService.SetEndPointCommandAsExecuted(commandID, Guid.Parse("D5E4B5E6-C4E1-4E7B-A3E5-49FE3C251882"));
+        }
+
+        private async void btnGetIOsWarnings_Click(object sender, EventArgs e)
+        {
+            Initialize();
+            List<APIEndPointIOWarning> wars = await uow.WarningsService.GetListAsync(1, 100, true, true, "", 0);
+            gv1.DataSource = wars;
+        }
+
+        private async void btnGenerateNewToken_Click(object sender, EventArgs e)
+        {
+            appGUID = Guid.Parse(txtAppID.Text);
+
+            conf.URL = txtURL.Text;
+            conf.UserName = txtUser.Text;
+            conf.Password = txtPassword.Text;
+            conf.AppGUID = txtAppID.Text;
+            uow = new UnitOfWork(conf);
+            try
+            {
+                APIAppUserToken token = await uow.TokenService.GetNewToken();
+
+                conf.URL = txtURL.Text;
+                conf.UserName = txtUser.Text;
+                conf.Password = txtPassword.Text;
+                conf.AppGUID = txtAppID.Text;
+                conf.Token = token.Token.ToString();
+                uow = new UnitOfWork(conf);
+
+                txtToken.Text = token.Token.ToString();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+
+
         }
     }
 }
