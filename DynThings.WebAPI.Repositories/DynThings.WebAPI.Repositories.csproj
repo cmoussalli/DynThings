@@ -99,6 +99,7 @@
   <ItemGroup>
     <Compile Include="Repositories\APIAppRepository.cs" />
     <Compile Include="Repositories\APIDeviceCommandsRepository.cs" />
+    <Compile Include="Repositories\APIIOWarningsRepository.cs" />
     <Compile Include="Repositories\APIEndPointsRepository.cs" />
     <Compile Include="Repositories\APIDevicesRepository.cs" />
     <Compile Include="Repositories\APIEndPointCommandsRepository.cs" />
@@ -112,6 +113,7 @@
     <Compile Include="TypesMapper\APIAppAdapter.cs" />
     <Compile Include="TypesMapper\APIDeviceAdapter.cs" />
     <Compile Include="TypesMapper\APIDeviceCommandAdapter.cs" />
+    <Compile Include="TypesMapper\APIEndPointIOWarningAdapter.cs" />
     <Compile Include="TypesMapper\APIEndPointIOAdapter.cs" />
     <Compile Include="TypesMapper\APIEndPointAdapter.cs" />
     <Compile Include="TypesMapper\APIEndPointCommandAdapter.cs" />

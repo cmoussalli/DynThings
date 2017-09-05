@@ -16,17 +16,35 @@ namespace DynThings.WebAPI.ClientServices
             hostconfig = hostConf;
         }
 
-
-        public async Task<List<APIEndPoint>> GetWarnings(int pageNumber, int pageSize, bool loadParents = false, bool loadChilds = false, string searchFor = "", long locationID = 0, long viewID = 0)
+        public async Task<List<APIEndPoint>> GetListAsync(int pageNumber, int pageSize, bool loadParents = false, bool loadChilds = false, string searchFor = "", long deviceID = 0)
         {
             List<APIEndPoint> result = new List<APIEndPoint>();
             HttpClient client = new HttpClient();
-            string getStringTask = await client.GetStringAsync(hostconfig.URL + "/api/Endpoints/GetWarnings?token=" + hostconfig.Token
+            string getStringTask = await client.GetStringAsync(hostconfig.URL + "/api/Endpoints/GetEndpoints?token=" + hostconfig.Token
                 + "&pageNumber=" + pageNumber.ToString()
                 + "&pagesize=" + pageSize.ToString()
-                + "&searchfor=" + searchFor.ToString()
                 + "&loadParents=" + loadParents.ToString()
                 + "&loadChilds=" + loadChilds.ToString()
+                + "&searchfor=" + searchFor.ToString()
+                + "&deviceID=" + deviceID.ToString()
+                );
+            string resultstring = getStringTask;
+            result = JsonConvert.DeserializeObject<List<APIEndPoint>>(resultstring);
+
+            return result;
+        }
+
+
+        public async Task<List<APIEndPoint>> GetEndpointsWithWarnings(int pageNumber, int pageSize, bool loadParents = false, bool loadChilds = false, string searchFor = "", long locationID = 0, long viewID = 0)
+        {
+            List<APIEndPoint> result = new List<APIEndPoint>();
+            HttpClient client = new HttpClient();
+            string getStringTask = await client.GetStringAsync(hostconfig.URL + "/api/Endpoints/GetEndpointsWithWarnings?token=" + hostconfig.Token
+                + "&pageNumber=" + pageNumber.ToString()
+                + "&pagesize=" + pageSize.ToString()
+                + "&loadParents=" + loadParents.ToString()
+                + "&loadChilds=" + loadChilds.ToString()
+                + "&searchfor=" + searchFor.ToString()
                 + "&locationID=" + locationID.ToString()
                 + "&viewID=" + viewID.ToString()
                 );

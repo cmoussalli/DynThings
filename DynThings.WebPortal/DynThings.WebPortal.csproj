@@ -654,6 +654,7 @@
     <Compile Include="Controllers\API\3rdParty\DeviceCommandsController.cs" />
     <Compile Include="Controllers\API\3rdParty\DevicesController.cs" />
     <Compile Include="Controllers\API\3rdParty\EndPointCommandsController.cs" />
+    <Compile Include="Controllers\API\3rdParty\IOWarningsController.cs" />
     <Compile Include="Controllers\API\3rdParty\EndPointsController.cs" />
     <Compile Include="Controllers\API\3rdParty\LocationsController.cs" />
     <Compile Include="Controllers\API\3rdParty\LocationViewsController.cs" />

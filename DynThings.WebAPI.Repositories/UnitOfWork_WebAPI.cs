@@ -59,7 +59,9 @@ namespace DynThings.WebAPI.Repositories
         public APIThingsRepository repoAPIThings
         { get { return new APIThingsRepository(dynDB); } }
 
-       
+        public APIIOWarningsRepository repoAPIIOWarnings
+        { get { return new APIIOWarningsRepository(dynDB); } }
+
         #endregion
 
 

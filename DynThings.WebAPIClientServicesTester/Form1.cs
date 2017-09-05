@@ -37,7 +37,7 @@ namespace DynThings.WebAPIClientServicesTester
             conf.Password = txtPassword.Text;
             conf.AppGUID = txtAppID.Text;
             uow = new UnitOfWork(conf);
-            
+
         }
 
 
@@ -47,15 +47,11 @@ namespace DynThings.WebAPIClientServicesTester
             Initialize();
             ApiResponse resp = await uow.TokenService.Validate();
             MessageBox.Show(resp.StatusTitle);
-
-            
-
         }
 
         private async void btnGetTokenInfo_ClickAsync(object sender, EventArgs e)
         {
             Initialize();
-            
             APIAppUserToken token = await uow.TokenService.GetTokenInfo();
             MessageBox.Show("Expire Date: " + token.ExpireDate.ToShortDateString());
         }
@@ -65,10 +61,9 @@ namespace DynThings.WebAPIClientServicesTester
 
         }
 
-        private async  void btnGetLocationViews_Click(object sender, EventArgs e)
+        private async void btnGetLocationViews_Click(object sender, EventArgs e)
         {
             Initialize();
-
             List<APILocationView> views = await uow.LocationViewsService.GetListAsync(1, 10, "", true, true);
             gv1.DataSource = views;
         }
@@ -76,16 +71,14 @@ namespace DynThings.WebAPIClientServicesTester
         private async void btnGetLocation_Click(object sender, EventArgs e)
         {
             Initialize();
-
-            List<APILocation> views = await uow.LocationsService.GetListAsync(1,25,true,true,"",0);
+            List<APILocation> views = await uow.LocationsService.GetListAsync(1, 25, true, true, "", 0);
             gv1.DataSource = views;
         }
 
         private async void btnThings_Click(object sender, EventArgs e)
         {
             Initialize();
-
-            List<APIThing> things = await uow.ThingsService.GetListAsync(1,100,true,true,"",0);
+            List<APIThing> things = await uow.ThingsService.GetListAsync(1, 100, true, true, "", 0);
             gv1.DataSource = things;
         }
 
@@ -93,6 +86,27 @@ namespace DynThings.WebAPIClientServicesTester
         {
             ApiResponse result = await uow.IOService.SubmitEndPointInput(Guid.Parse("D5E4B5E6-C4E1-4E7B-A3E5-49FE3C251882"), "1");
             MessageBox.Show(result.Message);
+        }
+
+        private async void btnGetEndPointsWarnings_Click(object sender, EventArgs e)
+        {
+            Initialize();
+            List<APIEndPoint> ends = await uow.EndPointsService.GetEndpointsWithWarnings(1, 100, true, true, "", 0, 0);
+            gv1.DataSource = ends;
+        }
+
+        private async void btnGetEndPoints_Click(object sender, EventArgs e)
+        {
+            Initialize();
+            List<APIEndPoint> ends = await uow.EndPointsService.GetListAsync(1, 100, true, true, "", 0);
+            gv1.DataSource = ends;
+        }
+
+        private async void btnGetThingsWarnings_Click(object sender, EventArgs e)
+        {
+            Initialize();
+            List<APIThing> things = await uow.ThingsService.GetThingsWithWarnings(1, 100, true, true, 0);
+            gv1.DataSource = things;
         }
     }
 }

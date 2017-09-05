@@ -42,6 +42,19 @@ namespace DynThings.WebPortal.Controllers.API
             return uow_APIs.repoAPILocationViews.GetLocationViews(pageNumber, pageSize,loadParents,loadChilds,searchFor);
         }
 
+        public List<APILocationView> GetLocationViewsWithWarnings(Guid token, int pageNumber, int pageSize, bool loadParents = false, bool loadChilds = false)
+        {
+            int methodID = 17;
+            ResultInfo.Result tokenValidation = uow_APIs.repoAPIUserAppTokens.ValidateTokenEntityPermission(token, entityID, methodID);
+            if (tokenValidation.ResultType != ResultInfo.ResultType.Ok)
+            {
+                var msg = new HttpResponseMessage(HttpStatusCode.Unauthorized) { ReasonPhrase = tokenValidation.Message };
+                throw new HttpResponseException(new HttpResponseMessage(HttpStatusCode.Forbidden));
+            }
+            return uow_APIs.repoAPILocationViews.GetLocationViewsWithWarning(pageNumber, pageSize, loadParents, loadChilds);
+
+        }
+
 
     }
 }

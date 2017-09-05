@@ -59,7 +59,7 @@ namespace DynThings.WebAPI.Repositories
         /// <param name="loadChilds">Enable or Disable loading the Childs objects.</param>
         /// <param name="searchFor">Search text as per the 'Title' field.</param>
         /// <param name="DeviceID">Filter by Device ID. You can keep it null or empty to ignore this filter.</param>
-        /// <returns></returns>
+        /// <returns>List of EndPoints.</returns>
         public List<APIEndPoint> GetEndPoints(int pageNumber, int pageSize,bool loadParents, bool loadChilds,string searchFor,long deviceID)
         {
             List <APIEndPoint> apiEndPoints = new List<APIEndPoint>();
@@ -83,7 +83,17 @@ namespace DynThings.WebAPI.Repositories
         #endregion
 
         #region Get Warnings
-        public List<APIEndPoint> GetWarnings(int pageNumber, int pageSize, bool loadParents, bool loadChilds,long locationID, long viewID)
+        /// <summary>
+        /// Get list of EndPoints.
+        /// </summary>
+        /// <param name="pageNumber">Page Number.</param>
+        /// <param name="pageSize">Items count per page.</param>
+        /// <param name="loadParents">Enable or Disable loading the Parents objects.</param>
+        /// <param name="loadChilds">Enable or Disable loading the Childs objects.</param>
+        /// <param name="locationID">Filter by location ID. You can keep it null or empty to ignore this filter.</param>
+        /// <param name="viewID">Filter by View ID. You can keep it null or empty to ignore this filter.</param>
+        /// <returns>List of EndPoints that have one warning or more.</returns>
+        public List<APIEndPoint> GetEndPointsWithWarnings(int pageNumber, int pageSize, bool loadParents, bool loadChilds,long locationID, long viewID)
         {
             List<APIEndPoint> result = new List<APIEndPoint>();
             List<Endpoint> endpointsLst = db.Endpoints.Include("Thing")

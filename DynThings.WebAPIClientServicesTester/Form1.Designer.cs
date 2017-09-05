@@ -45,12 +45,15 @@
             this.btnGetLocation = new System.Windows.Forms.Button();
             this.btnThings = new System.Windows.Forms.Button();
             this.btnSubmitEndPointInput = new System.Windows.Forms.Button();
+            this.btnGetEndPointsWarnings = new System.Windows.Forms.Button();
+            this.btnGetEndPoints = new System.Windows.Forms.Button();
+            this.btnGetThingsWarnings = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.gv1)).BeginInit();
             this.SuspendLayout();
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(779, 10);
+            this.button1.Location = new System.Drawing.Point(699, 10);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(154, 23);
             this.button1.TabIndex = 0;
@@ -79,7 +82,7 @@
             this.gv1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.gv1.Location = new System.Drawing.Point(12, 142);
             this.gv1.Name = "gv1";
-            this.gv1.Size = new System.Drawing.Size(529, 367);
+            this.gv1.Size = new System.Drawing.Size(847, 415);
             this.gv1.TabIndex = 3;
             // 
             // txtUser
@@ -151,7 +154,7 @@
             // 
             // btnGetTokenInfo
             // 
-            this.btnGetTokenInfo.Location = new System.Drawing.Point(779, 38);
+            this.btnGetTokenInfo.Location = new System.Drawing.Point(699, 38);
             this.btnGetTokenInfo.Name = "btnGetTokenInfo";
             this.btnGetTokenInfo.Size = new System.Drawing.Size(154, 23);
             this.btnGetTokenInfo.TabIndex = 11;
@@ -161,7 +164,7 @@
             // 
             // btnGetLocationViews
             // 
-            this.btnGetLocationViews.Location = new System.Drawing.Point(779, 67);
+            this.btnGetLocationViews.Location = new System.Drawing.Point(12, 583);
             this.btnGetLocationViews.Name = "btnGetLocationViews";
             this.btnGetLocationViews.Size = new System.Drawing.Size(154, 23);
             this.btnGetLocationViews.TabIndex = 12;
@@ -171,7 +174,7 @@
             // 
             // btnGetLocation
             // 
-            this.btnGetLocation.Location = new System.Drawing.Point(779, 96);
+            this.btnGetLocation.Location = new System.Drawing.Point(183, 583);
             this.btnGetLocation.Name = "btnGetLocation";
             this.btnGetLocation.Size = new System.Drawing.Size(154, 23);
             this.btnGetLocation.TabIndex = 13;
@@ -181,7 +184,7 @@
             // 
             // btnThings
             // 
-            this.btnThings.Location = new System.Drawing.Point(779, 125);
+            this.btnThings.Location = new System.Drawing.Point(355, 583);
             this.btnThings.Name = "btnThings";
             this.btnThings.Size = new System.Drawing.Size(154, 23);
             this.btnThings.TabIndex = 14;
@@ -191,7 +194,7 @@
             // 
             // btnSubmitEndPointInput
             // 
-            this.btnSubmitEndPointInput.Location = new System.Drawing.Point(779, 154);
+            this.btnSubmitEndPointInput.Location = new System.Drawing.Point(527, 583);
             this.btnSubmitEndPointInput.Name = "btnSubmitEndPointInput";
             this.btnSubmitEndPointInput.Size = new System.Drawing.Size(154, 23);
             this.btnSubmitEndPointInput.TabIndex = 15;
@@ -199,11 +202,44 @@
             this.btnSubmitEndPointInput.UseVisualStyleBackColor = true;
             this.btnSubmitEndPointInput.Click += new System.EventHandler(this.btnSubmitEndPointInput_Click);
             // 
+            // btnGetEndPointsWarnings
+            // 
+            this.btnGetEndPointsWarnings.Location = new System.Drawing.Point(699, 612);
+            this.btnGetEndPointsWarnings.Name = "btnGetEndPointsWarnings";
+            this.btnGetEndPointsWarnings.Size = new System.Drawing.Size(154, 23);
+            this.btnGetEndPointsWarnings.TabIndex = 16;
+            this.btnGetEndPointsWarnings.Text = "Get EndPoints with Warnings";
+            this.btnGetEndPointsWarnings.UseVisualStyleBackColor = true;
+            this.btnGetEndPointsWarnings.Click += new System.EventHandler(this.btnGetEndPointsWarnings_Click);
+            // 
+            // btnGetEndPoints
+            // 
+            this.btnGetEndPoints.Location = new System.Drawing.Point(699, 583);
+            this.btnGetEndPoints.Name = "btnGetEndPoints";
+            this.btnGetEndPoints.Size = new System.Drawing.Size(154, 23);
+            this.btnGetEndPoints.TabIndex = 17;
+            this.btnGetEndPoints.Text = "Get EndPoints";
+            this.btnGetEndPoints.UseVisualStyleBackColor = true;
+            this.btnGetEndPoints.Click += new System.EventHandler(this.btnGetEndPoints_Click);
+            // 
+            // btnGetThingsWarnings
+            // 
+            this.btnGetThingsWarnings.Location = new System.Drawing.Point(355, 612);
+            this.btnGetThingsWarnings.Name = "btnGetThingsWarnings";
+            this.btnGetThingsWarnings.Size = new System.Drawing.Size(154, 23);
+            this.btnGetThingsWarnings.TabIndex = 18;
+            this.btnGetThingsWarnings.Text = "Get Things with Warnings";
+            this.btnGetThingsWarnings.UseVisualStyleBackColor = true;
+            this.btnGetThingsWarnings.Click += new System.EventHandler(this.btnGetThingsWarnings_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(945, 521);
+            this.ClientSize = new System.Drawing.Size(865, 677);
+            this.Controls.Add(this.btnGetThingsWarnings);
+            this.Controls.Add(this.btnGetEndPoints);
+            this.Controls.Add(this.btnGetEndPointsWarnings);
             this.Controls.Add(this.btnSubmitEndPointInput);
             this.Controls.Add(this.btnThings);
             this.Controls.Add(this.btnGetLocation);
@@ -249,6 +285,9 @@
         private System.Windows.Forms.Button btnGetLocation;
         private System.Windows.Forms.Button btnThings;
         private System.Windows.Forms.Button btnSubmitEndPointInput;
+        private System.Windows.Forms.Button btnGetEndPointsWarnings;
+        private System.Windows.Forms.Button btnGetEndPoints;
+        private System.Windows.Forms.Button btnGetThingsWarnings;
     }
 }
 

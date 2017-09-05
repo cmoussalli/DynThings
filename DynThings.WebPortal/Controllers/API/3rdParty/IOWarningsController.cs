@@ -15,34 +15,36 @@ using DynThings.WebAPI.Repositories;
 
 namespace DynThings.WebPortal.Controllers.API
 {
-    public class WarningsController : ApiController
+    public class IOWarningsController : ApiController
     {
         #region Props
         UnitOfWork_WebAPI uow_APIs = new UnitOfWork_WebAPI();
-        long entityID;
+        long entityID ;
 
         #endregion
 
         #region Constructors
-        public WarningsController()
+        public IOWarningsController()
         {
-            entityID = uow_APIs.repoAPIEndPoints.EntityID;
+            entityID = uow_APIs.repoAPIIOWarnings.EntityID;
         }
         #endregion
 
 
-        public List<APILocation> GetLocations(Guid token, int pageNumber, int pageSize, bool loadParents = false, bool loadChilds = false, string searchFor = "", long viewID = 0)
+        public List<APIEndPointIOWarning> GetEndPointIOWarnings(Guid token, int pageNumber, int pageSize, string searchFor="",long locationID = 0 , long viewID=0)
         {
-            int methodID = 2;
-            ResultInfo.Result tokenValidation = uow_APIs.repoAPIUserAppTokens.ValidateTokenEntityPermission(token, entityID, methodID);
+            int methodID = 16;
+            ResultInfo.Result tokenValidation = uow_APIs.repoAPIUserAppTokens.ValidateTokenEntityPermission(token, entityID,methodID);
             if (tokenValidation.ResultType != ResultInfo.ResultType.Ok)
             {
                 var msg = new HttpResponseMessage(HttpStatusCode.Unauthorized) { ReasonPhrase = tokenValidation.Message };
                 throw new HttpResponseException(new HttpResponseMessage(HttpStatusCode.Forbidden));
             }
-            return uow_APIs.repoAPILocations.GetLocations(pageNumber, pageSize, loadParents, loadChilds, searchFor, viewID);
+            return uow_APIs.repoAPIIOWarnings.GetEndPointIOWarnings(pageNumber,pageSize,locationID,viewID);
+
         }
 
+       
 
     }
 }

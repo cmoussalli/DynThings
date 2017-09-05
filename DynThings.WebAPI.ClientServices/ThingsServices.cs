@@ -30,9 +30,25 @@ namespace DynThings.WebAPI.ClientServices
                 );
             string resultstring = getStringTask;
             result = JsonConvert.DeserializeObject<List<APIThing>>(resultstring);
-
             return result;
         }
+
+        public async Task<List<APIThing>> GetThingsWithWarnings(int pageNumber, int pageSize, bool loadParents = false, bool loadChilds = false, int locationID = 0)
+        {
+            List<APIThing> result = new List<APIThing>();
+            HttpClient client = new HttpClient();
+            string getStringTask = await client.GetStringAsync(hostconfig.URL + "/api/Things/GetThingsWithWarnings?token=" + hostconfig.Token
+                + "&pageNumber=" + pageNumber.ToString()
+                + "&pagesize=" + pageSize.ToString()
+                + "&loadParents=" + loadParents.ToString()
+                + "&loadChilds=" + loadChilds.ToString()
+                + "&locationID=" + locationID.ToString()
+                );
+            string resultstring = getStringTask;
+            result = JsonConvert.DeserializeObject<List<APIThing>>(resultstring);
+            return result;
+        }
+
 
     }
 }

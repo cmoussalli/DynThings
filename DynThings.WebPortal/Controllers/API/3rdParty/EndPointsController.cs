@@ -43,7 +43,7 @@ namespace DynThings.WebPortal.Controllers.API
 
         }
 
-        public List<APIEndPoint> GetWarnings(Guid token, int pageNumber, int pageSize, bool loadParents = false, bool loadChilds = false, string searchFor="",long locationID = 0 , long viewID=0)
+        public List<APIEndPoint> GetEndpointsWithWarnings(Guid token, int pageNumber, int pageSize, bool loadParents = false, bool loadChilds = false, string searchFor="",long locationID = 0 , long viewID=0)
         {
             int methodID = 14;
             ResultInfo.Result tokenValidation = uow_APIs.repoAPIUserAppTokens.ValidateTokenEntityPermission(token, entityID,methodID);
@@ -52,7 +52,7 @@ namespace DynThings.WebPortal.Controllers.API
                 var msg = new HttpResponseMessage(HttpStatusCode.Unauthorized) { ReasonPhrase = tokenValidation.Message };
                 throw new HttpResponseException(new HttpResponseMessage(HttpStatusCode.Forbidden));
             }
-            return uow_APIs.repoAPIEndPoints.GetWarnings(pageNumber,pageSize,loadParents,loadChilds,locationID,viewID);
+            return uow_APIs.repoAPIEndPoints.GetEndPointsWithWarnings(pageNumber,pageSize,loadParents,loadChilds,locationID,viewID);
 
         }
 

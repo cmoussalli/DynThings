@@ -42,7 +42,18 @@ namespace DynThings.WebPortal.Controllers.API
             return uow_APIs.repoAPIThings.GetThings(pageNumber, pageSize,loadParents,loadChilds,searchFor,locationID);
         }
 
+        public List<APIThing> GetThingsWithWarnings(Guid token, int pageNumber, int pageSize, bool loadParents = false, bool loadChilds = false, int locationID = 0)
+        {
+            int methodID = 18;
+            ResultInfo.Result tokenValidation = uow_APIs.repoAPIUserAppTokens.ValidateTokenEntityPermission(token, entityID, methodID);
+            if (tokenValidation.ResultType != ResultInfo.ResultType.Ok)
+            {
+                var msg = new HttpResponseMessage(HttpStatusCode.Unauthorized) { ReasonPhrase = tokenValidation.Message };
+                throw new HttpResponseException(new HttpResponseMessage(HttpStatusCode.Forbidden));
+            }
+            return uow_APIs.repoAPIThings.GetThingsWithWarnings(pageNumber, pageSize, loadParents, loadChilds,locationID);
 
+        }
 
     }
 }
