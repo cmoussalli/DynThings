@@ -71,8 +71,8 @@ namespace DynThings.WebAPIClientServicesTester
         private async void btnGetLocation_Click(object sender, EventArgs e)
         {
             Initialize();
-            List<APILocation> views = await uow.LocationsService.GetListAsync(1, 25, true, true, "", 0);
-            gv1.DataSource = views;
+            List<APILocation> locs = await uow.LocationsService.GetListAsync(1, 25, true, true, "", 0);
+            gv1.DataSource = locs;
         }
 
         private async void btnThings_Click(object sender, EventArgs e)
@@ -107,6 +107,13 @@ namespace DynThings.WebAPIClientServicesTester
             Initialize();
             List<APIThing> things = await uow.ThingsService.GetThingsWithWarnings(1, 100, true, true, 0);
             gv1.DataSource = things;
+        }
+
+        private async void btnGetLocationsWarnings_Click(object sender, EventArgs e)
+        {
+            Initialize();
+            List<APILocation> locs = await uow.LocationsService.GetLocationsWithWarnings(1, 25, true, true, "", 0);
+            gv1.DataSource = locs;
         }
     }
 }

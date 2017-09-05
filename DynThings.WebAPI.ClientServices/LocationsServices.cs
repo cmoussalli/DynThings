@@ -34,5 +34,22 @@ namespace DynThings.WebAPI.ClientServices
             return result;
         }
 
+        public async Task<List<APILocation>> GetLocationsWithWarnings(int pageNumber, int pageSize, bool loadParents = false, bool loadChilds = false, string searchFor = "", long viewID = 0)
+        {
+            List<APILocation> result = new List<APILocation>();
+            HttpClient client = new HttpClient();
+            string getStringTask = await client.GetStringAsync(hostconfig.URL + "/api/Locations/GetLocationsWithWarnings?token=" + hostconfig.Token
+                + "&pageNumber=" + pageNumber.ToString()
+                + "&pagesize=" + pageSize.ToString()
+                + "&searchfor=" + searchFor.ToString()
+                + "&loadParents=" + loadParents.ToString()
+                + "&loadChilds=" + loadChilds.ToString()
+                + "&viewID=" + viewID.ToString()
+                );
+            string resultstring = getStringTask;
+            result = JsonConvert.DeserializeObject<List<APILocation>>(resultstring);
+
+            return result;
+        }
     }
 }

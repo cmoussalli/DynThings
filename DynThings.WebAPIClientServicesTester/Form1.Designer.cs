@@ -48,6 +48,7 @@
             this.btnGetEndPointsWarnings = new System.Windows.Forms.Button();
             this.btnGetEndPoints = new System.Windows.Forms.Button();
             this.btnGetThingsWarnings = new System.Windows.Forms.Button();
+            this.btnGetLocationsWarnings = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.gv1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -232,11 +233,22 @@
             this.btnGetThingsWarnings.UseVisualStyleBackColor = true;
             this.btnGetThingsWarnings.Click += new System.EventHandler(this.btnGetThingsWarnings_Click);
             // 
+            // btnGetLocationsWarnings
+            // 
+            this.btnGetLocationsWarnings.Location = new System.Drawing.Point(183, 612);
+            this.btnGetLocationsWarnings.Name = "btnGetLocationsWarnings";
+            this.btnGetLocationsWarnings.Size = new System.Drawing.Size(154, 23);
+            this.btnGetLocationsWarnings.TabIndex = 19;
+            this.btnGetLocationsWarnings.Text = "Get Locations Warnings";
+            this.btnGetLocationsWarnings.UseVisualStyleBackColor = true;
+            this.btnGetLocationsWarnings.Click += new System.EventHandler(this.btnGetLocationsWarnings_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(865, 677);
+            this.Controls.Add(this.btnGetLocationsWarnings);
             this.Controls.Add(this.btnGetThingsWarnings);
             this.Controls.Add(this.btnGetEndPoints);
             this.Controls.Add(this.btnGetEndPointsWarnings);
@@ -288,6 +300,7 @@
         private System.Windows.Forms.Button btnGetEndPointsWarnings;
         private System.Windows.Forms.Button btnGetEndPoints;
         private System.Windows.Forms.Button btnGetThingsWarnings;
+        private System.Windows.Forms.Button btnGetLocationsWarnings;
     }
 }
 
