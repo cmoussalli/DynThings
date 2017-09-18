@@ -71,7 +71,7 @@ namespace DynThings.WebPortal.Controllers
         public PartialViewResult EditPV(string id)
         {
             AspNetUser usr = uof_repos.repoDynUsers.Find(id);
-            return PartialView("_Edit", usr);
+            return PartialView("_Edit_Main", usr);
         }
 
         [HttpPost]
@@ -81,7 +81,7 @@ namespace DynThings.WebPortal.Controllers
             ResultInfo.Result res = ResultInfo.GetResultByID(1);
             if (ModelState.IsValid)
             {
-                res = uof_repos.repoDynUsers.Edit(aspNetUser.Id,aspNetUser.FullName);
+                res = uof_repos.repoDynUsers.Edit(aspNetUser.Id,aspNetUser.UserName, aspNetUser.FullName);
                 return Json(res);
             }
             return Json(res);

@@ -44,7 +44,7 @@ function LoadPart_LocationListDiv() {
     var loadingpart = LoadDivLoading();
     $("#divLocationsList").html(loadingpart);
     $.ajax({
-        url: getRootURL() + '/Locations/ListPV?searchfor=' + $(txtLocationsSearch).val() + '&recordsperpage=0',
+        url: getRootURL() + '/Locations/ListPV?searchfor=' + $('#txtLocationsSearch').val() + '&recordsperpage=0',
         //page=" + $("#DynConfigCurrentPage").html,
         type: "GET",
     })

@@ -1,12 +1,39 @@
 ﻿@model DynThings.Data.Models.AspNetUser
-<div class="right">
-    <button type="button" class="btn btn-info pull-right" onclick="LoadPart_DialogDynUserEdit('@Model.Id')" data-toggle="modal" data-target="#mdl">Edit</button>
+
+<div class="panel">
+    <div class="panel-heading">
+        <div class="panel-control">
+            <button class="btn btn-default" onclick="LoadPart_DynUserMainDiv();">
+                <i class="demo-psi-repeat-2 icon-fw"></i> Refresh
+            </button>
+        </div>
+        <h3 class="panel-title">Main Info</h3>
+    </div>
+
+    <div class="panel-body">
+        <div class="pad-btm form-inline">
+            <div class="row">
+                <div class="col-sm-6 table-toolbar-left">
+                    <button class="btn btn-warning" onclick="LoadPart_DialogDynUserEdit()" data-toggle="modal" data-target="#mdl">Edit</button>
+                    @*<button class="btn btn-default"><i class="demo-pli-printer"></i></button>
+                        <div class="btn-group">
+                            <button class="btn btn-default"><i class="demo-pli-information"></i></button>
+                            <button class="btn btn-default"><i class="demo-pli-recycling"></i></button>
+                        </div>*@
+                </div>
+
+            </div>
+        </div>
+
+
+        <strong>UserName\E-Mail</strong><br>
+        @Model.UserName<br><br>
+
+        <strong>Full Name</strong><br>
+        @Model.FullName<br><br>
+
+    </div>
 </div>
 
-<strong>UserName\E-Mail</strong><br>
-@Model.UserName<br><br>
-
-<strong>Full Name</strong><br>
-@Model.FullName<br><br>
 
 

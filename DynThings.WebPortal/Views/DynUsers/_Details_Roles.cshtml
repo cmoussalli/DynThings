@@ -1,28 +1,46 @@
 ﻿@model List<DynThings.Data.Models.AspNetRole>
+<div class="panel">
+    <div class="panel-heading">
+        <div class="panel-control">
+            <button class="btn btn-default" onclick="LoadPart_DynUserRolesDiv();">
+                <i class="demo-psi-repeat-2 icon-fw"></i> Refresh
+            </button>
+        </div>
+        <h3 class="panel-title">Roles</h3>
+    </div>
 
-<table class="table striped hovered border bordered">
-    <thead>
-        <tr>
-            <th>Title</th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Name)
-                </td>
-                <td>
-                    <button type="button" class="btn btn-danger pull-right" onclick="DeattachRoleFromUser(selectedDynUserID,@item.Id)" >Delete</button>
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>
+    <div class="panel-body">
+        <div class="pad-btm form-inline">
+            <div class="row">
+                <div class="col-sm-6 table-toolbar-left">
+                    <button type="button" class="btn btn-info" onclick="LoadPart_DialogDynUserRoleAdd();" data-toggle="modal" data-target="#mdl">Add</button>
+                </div>
+
+            </div>
+        </div>
 
 
+        <table class="table striped hovered border bordered">
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Name)
+                        </td>
+                        <td>
+                            <button type="button" class="btn btn-danger pull-right" onclick="DeattachRoleFromUser(selectedDynUserID,@item.Id)">Delete</button>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
 
-
-
+    </div>
+</div>

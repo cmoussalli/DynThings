@@ -606,6 +606,7 @@
     <Content Include="Scripts\knockout-3.2.0.debug.js" />
     <Content Include="Scripts\knockout-3.2.0.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Scripts\MsMaps\BingMaps2.js" />
     <Content Include="Scripts\nifty.min.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.matchmedia.addListener.js" />
@@ -740,6 +741,7 @@
     <Content Include="Views\Things\_Details_Properties.cshtml" />
     <Content Include="Views\Things\_Delete_ThingExtenstionProperty.cshtml" />
     <Content Include="Views\Things\_Edit_ThingExtenstionProperty.cshtml" />
+    <Content Include="Views\DynUsers\_Add_Role.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Assets\Imgs\Wizard.png" />

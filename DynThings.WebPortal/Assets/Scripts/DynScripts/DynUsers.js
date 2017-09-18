@@ -20,6 +20,34 @@ function AttachEventDynUsersListPager() {
     });
 }
 
+
+//Attach : Edit Form Submit
+function AttachEventDynUserEditForm() {
+    $("#DynUserEditForm").on("submit", function (event) {
+        event.preventDefault();
+        var url = $(this).attr("action");
+        var formData = $(this).serialize();
+        $.ajax({
+            url: url,
+            type: "POST",
+            data: formData,
+            dataType: "json",
+            success: function (resp) {
+                //ServerResponse(resp);
+                $('#mdl').modal('hide');
+                LoadPart_DynUserMainDiv();
+            },
+            error: function () {
+                $('#mdl').modal('hide');
+                LoadPart_DynUserMainDiv();
+            }
+        })
+        $('#mdl').modal('hide');
+        LoadPart_DynUserMainDiv();
+    });
+};
+
+
 //Get List
 function LoadPart_DynUserListDiv() {
     var loadingpart = LoadDivLoading();
@@ -35,30 +63,30 @@ function LoadPart_DynUserListDiv() {
     return false;
 };
 
-//Get Details
-function LoadPart_DynUserDetailsDiv(id) {
+//Get Main
+function LoadPart_DynUserMainDiv() {
     var loadingpart = LoadDivLoading();
-    $("#divDynUserMain").html(loadingpart);
+    $("#divPageDetails").html(loadingpart);
     $.ajax({
-        url: getRootURL() + '/DynUsers/DetailsPV?id=' + id,
+        url: getRootURL() + '/DynUsers/DetailsPV?id=' + selectedDynUserID,
         type: "GET",
     })
-    .done(function (partialViewResult) {
-        $("#divDynUserMain").html(partialViewResult);
+    .success(function (partialViewResult) {
+        $("#divPageDetails").html(partialViewResult);
     });
 }
 
 //Get User Roles
-function LoadPart_DynUserRolesDiv(DynUserID) {
+function LoadPart_DynUserRolesDiv() {
     var loadingpart = LoadDivLoading();
-    $("#SelectedDynUserID").val(DynUserID);
-    $("#divDynUserRoles").html(loadingpart);
+    $("#SelectedDynUserID").val(selectedDynUserID);
+    $("#divPageDetails").html(loadingpart);
     $.ajax({
-        url: getRootURL() + '/DynUsers/GetDynUserRolesPV?DynUserID=' + DynUserID,
+        url: getRootURL() + '/DynUsers/GetDynUserRolesPV?DynUserID=' + selectedDynUserID,
         type: "GET",
     })
     .done(function (partialViewResult) {
-        $("#divDynUserRoles").html(partialViewResult);
+        $("#divPageDetails").html(partialViewResult);
     });
 }
 
@@ -79,11 +107,11 @@ function LoadPart_DialogDynUserRoleAdd() {
 }
 
 //Get Edit
-function LoadPart_DialogDynUserEdit(id) {
+function LoadPart_DialogDynUserEdit() {
     var loadingpart = LoadDivLoading();
     $("#modal").html(loadingpart);
     $.ajax({
-        url: getRootURL() + '/DynUsers/editpv?id=' + id,
+        url: getRootURL() + '/DynUsers/editpv?id=' + selectedDynUserID,
         type: "GET",
     })
     .done(function (partialViewResult) {
@@ -92,11 +120,11 @@ function LoadPart_DialogDynUserEdit(id) {
 }
 
 //Get Delete
-function LoadPart_DialogDynUserDelete(id) {
+function LoadPart_DialogDynUserDelete() {
     var loadingpart = LoadDivLoading();
     $("#modal").html(loadingpart);
     $.ajax({
-        url: getRootURL() + '/DynUsers/deletepv?id=' + id,
+        url: getRootURL() + '/DynUsers/deletepv?id=' + selectedDynUserID,
         type: "GET",
     })
     .done(function (partialViewResult) {

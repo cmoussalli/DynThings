@@ -2,13 +2,29 @@
 @{
     ViewBag.Title = "Locations";
 }
-<div class="container">
-    <div class="page-header">
-        <h1>Locations</h1>
-    </div>
+<!--Page Title-->
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<div id="page-title">
     <div class="row">
-        <div class="col-md-6">
-            <button type="button" class="btn btn-info" onclick="LoadPart_DialogLocationAdd()" data-toggle="modal" data-target="#mdl">Add</button>
+        <div class="col-lg-9">
+            <h1 class="page-header text-overflow">Locations</h1>
+            <h5></h5>
+        </div>
+
+        <div class="col-lg-3">
+            <div class="pull-right">
+
+            </div>
+        </div>
+    </div>
+</div>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--End page title-->
+
+<div id="page-content">
+    <div class="row">
+        <div class="col-xs-3 col-sm-2 col-md-6">
+            <button type="button" class="btn btn-purple" onclick="LoadPart_DialogLocationAdd()" data-toggle="modal" data-target="#mdl">Add</button>
         </div>
         <div class="col-md-6">
             <div class="input-group">
@@ -20,11 +36,10 @@
         </div>
     </div>
     <br />
-    <div class="well well-lg">
-        <div id="divLocationsList">
-        </div>
+    <div id="divLocationsList">
     </div>
 </div>
+
 
 @section scripts{
 <script src="~/Assets/Scripts/DynScripts/Locations.js"></script>

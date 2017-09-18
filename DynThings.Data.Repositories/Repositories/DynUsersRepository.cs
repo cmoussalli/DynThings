@@ -59,7 +59,7 @@ namespace DynThings.Data.Repositories
         #endregion
 
         #region Edit
-        public ResultInfo.Result Edit(string id, string fullName)
+        public ResultInfo.Result Edit(string id,string userName, string fullName)
         {
             try
             {
@@ -68,9 +68,9 @@ namespace DynThings.Data.Repositories
                 db.SaveChanges();
                 return ResultInfo.GenerateOKResult("Saved", long.Parse(usr.Id));
             }
-            catch
+            catch (Exception ex)
             {
-                return ResultInfo.GetResultByID(1);
+                return ResultInfo.GenerateErrorResult(ex.Message);
             }
 
         }

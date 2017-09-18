@@ -1,66 +1,77 @@
 ﻿@model DynThings.Data.Models.AspNetUser
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "User Details";
 }
 
-<div class="container">
-    <div class="page-header">
-        <h1>User Details</h1>
-    </div>
-
+<!--Page Title-->
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<div id="page-title">
     <div class="row">
-        <div class="col-md-6">
-            <ul class="nav nav-tabs">
-                <li class="active"><a data-toggle="tab" href="#tabDynUsermain">Main</a></li>
-                <li><a data-toggle="tab" href="#tabDynUserRoles">Roles</a></li>
-                <li><a data-toggle="tab" href="#tabDynUserDelete">Delete</a></li>
-            </ul>
-            <div class="panel panel-default">
-                <div class="panel-body">
-                    <div class="tab-content">
-                        <div id="tabDynUsermain" class="tab-pane fade in active">
-                            <div id="divDynUserMain">
-                            </div>
-                        </div>
-                        <div id="tabDynUserRoles" class="tab-pane fade">
-                            <div class="right">
-                                <button type="button" class="btn btn-info btn-sm pull-right" onclick="LoadPart_DynUserRolesDiv('@Model.Id')" >Refresh</button>
-                                <button type="button" class="btn btn-info btn-sm pull-right" onclick="LoadPart_DialogDynUserRoleAdd();" data-toggle="modal" data-target="#mdl">Add</button>
-                            </div>
-                            <div id="divDynUserRoles">
-                            </div>
-                        </div>
-                        <div id="tabDynUserDelete" class="tab-pane fade">
-                            <div id="divDynUserDelete">
-                                <button type="button" class="btn btn-danger" onclick="LoadPart_DialogDynUserDelete('@Model.Id')" data-toggle="modal" data-target="#mdl">Delete</button>
-                            </div>
-                        </div>
-                    </div>
+        <div class="col-lg-9">
+            <h1 class="page-header text-overflow">User: @Model.FullName</h1>
+            <h5></h5>
+        </div>
+
+        <div class="col-lg-3">
+            <div class="pull-right">
+                <br />
+                <a href="~/dynusers"> < Back to Users List</a>
+            </div>
+        </div>
+    </div>
+</div>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--End page title-->
+
+<div id="page-content">
+    <div class="fixed-fluid">
+        <div class="fixed-sm-200 fixed-lg-250 pull-sm-left">
+            <div class="">
+                <div class="text-center bg-info">
+                    <img src="~/Imgs/Apps/0.jpg" style="height:100%;width:100%" />
+                    <ul class="list-unstyled text-center pad-top mar-no row">
+                        <li class="col-xs-12">
+                            <span class="text-lg ">@Model.FullName</span>
+                            <br /><br />
+                        </li>
+                        @*<li class="col-xs-4">
+                                <span class="text-lg text-semibold">23K</span>
+                                <p class="text-sm mar-no">Followers</p>
+                            </li>
+                            <li class="col-xs-4">
+                                <span class="text-lg text-semibold">278</span>
+                                <p class="text-sm mar-no">Post</p>
+                            </li>*@
+                    </ul>
+                </div>
+                <div class="list-group bg-trans pad-btm">
+                    <a class="list-group-item" onclick="LoadPart_DynUserMainDiv();" style="cursor: pointer;">Main</a>
+                    <a class="list-group-item" onclick="LoadPart_DynUserRolesDiv();" style="cursor: pointer;">Roles</a>
+                    <a class="list-group-item" onclick="LoadPart_DialogDynUserDelete();" data-toggle="modal" data-target="#mdl" style="cursor: pointer;">Delete</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="fluid">
+            <div class="fixed-fluid">
+                <div id="divPageDetails">
+
                 </div>
             </div>
         </div>
     </div>
 </div>
 
-<!-- Button trigger modal -->
-
-
-
-
 @section scripts{
     <script src="~/Assets/Scripts/DynScripts/DynUsers.js"></script>
-
     <script>
         $(document).ready(function () {
             selectedDynUserID = '@Model.Id';
-            LoadPart_DynUserDetailsDiv('@Model.Id');
-            LoadPart_DynUserRolesDiv('@Model.Id');
+            LoadPart_DynUserMainDiv('@Model.Id');
+            @*LoadPart_DynUserRolesDiv('@Model.Id');*@
         });
     </script>
-
-
-
 }
 
 
