@@ -99,14 +99,12 @@
                     $('#divSetupDabaseStatus').text('Database Connection Failed');
                     ClearLblConnectionTestStatusStyles();
                     $('#divSetupDabaseStatus').addClass('alert-danger');
-                    //ServerResponse(resp);
-                    alert('4');
+                    ServerResponse(resp);
                 }
 
             },
             error: function () {
-                //ServerResponse(resp);
-                alert('3');
+                ServerResponse(resp);
                 ClearLblConnectionTestStatusStyles();
                 $('#divSetupDabaseStatus').addClass('alert-danger');
             }

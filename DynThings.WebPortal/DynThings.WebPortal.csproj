@@ -34,6 +34,7 @@
     <TypeScriptToolsVersion>2.1</TypeScriptToolsVersion>
     <ApplicationInsightsResourceId>/subscriptions/1ebfca6e-efcb-4343-9ca1-6fe72d0b1e17/resourcegroups/Default-ApplicationInsights-CentralUS/providers/microsoft.insights/components/DynThings.WebPortal</ApplicationInsightsResourceId>
     <ApplicationInsightsAnnotationResourceId>/subscriptions/1ebfca6e-efcb-4343-9ca1-6fe72d0b1e17/resourcegroups/Default-ApplicationInsights-CentralUS/providers/microsoft.insights/components/DynThings.WebPortal</ApplicationInsightsAnnotationResourceId>
+    <Use64BitIISExpress />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
