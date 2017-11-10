@@ -33,17 +33,17 @@ namespace DynThings.Data.Repositories
         #region GetCount
         public int GetCount()
         {
-            return db.Things.Count();
+            return db.Things.Count(t => t.ObjectStatusID !=2);
         }
         #endregion
 
         #region GetList
         public List<Thing> GetList(bool EnableUnspecified)
         {
-            List<Thing> Things = db.Things.ToList();
+            List<Thing> Things = db.Things.Where(t => t.ObjectStatusID != 2).ToList();
             if (EnableUnspecified == false)
             {
-                Things = Things.Where(t => t.ID > 0).ToList();
+                Things = Things.Where(t => t.ID > 0 && t.ObjectStatusID != 2).ToList();
             }
             return Things;
         }
@@ -53,7 +53,9 @@ namespace DynThings.Data.Repositories
         public IPagedList GetPagedList(string search, int pageNumber, int recordsPerPage)
         {
             IPagedList devs = db.Things
-              .Where(e => search == null || e.Title.Contains(search) && e.ID > 0)
+              .Where(e => (search == null || e.Title.Contains(search) && e.ID > 0)
+               && e.ObjectStatusID != 2
+              )
               .OrderBy(e => e.Title).ToList()
               .ToPagedList(pageNumber, recordsPerPage);
             return devs;
@@ -65,6 +67,7 @@ namespace DynThings.Data.Repositories
               .Where(e => search == null || e.Title.Contains(search)
               && e.LinkThingsLocations.Any(l => l.LocationID == locationID)
               && e.ID > 0
+              && e.ObjectStatusID != 2
               )
               .OrderBy(e => e.Title).ToList()
               .ToPagedList(pageNumber, recordsPerPage);
@@ -82,7 +85,7 @@ namespace DynThings.Data.Repositories
         public Thing Find(long id)
         {
             Thing dev = new Thing();
-            List<Thing> devs = db.Things.Where(l => l.ID == id).ToList();
+            List<Thing> devs = db.Things.Where(l => l.ID == id && l.ObjectStatusID != 2).ToList();
             if (devs.Count == 1)
             {
                 dev = devs[0];
@@ -106,6 +109,7 @@ namespace DynThings.Data.Repositories
                 thing.UTC_Diff = utc_Diff;
                 thing.CreateByUser = userID;
                 thing.CreateTimeStamp = DateTime.UtcNow.AddHours(Config.App_TimeZone);
+                thing.ObjectStatusID = 1;
                 db.Things.Add(thing);
                 db.SaveChanges();
             }
@@ -144,7 +148,7 @@ namespace DynThings.Data.Repositories
             {
                 Thing thing = db.Things.Find(id);
 
-                db.Things.Remove(thing);
+                thing.ObjectStatusID = 2;
                 db.SaveChanges();
                 return ResultInfo.GenerateOKResult("Deleted", thing.ID);
             }

@@ -512,6 +512,7 @@
           <Property Name="CreateByUser" Type="nvarchar" MaxLength="50" />
           <Property Name="CreateTimeStamp" Type="datetime" />
           <Property Name="UTC_Diff" Type="int" Nullable="false" />
+          <Property Name="ObjectStatusID" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="UserNotifications">
           <Key>
@@ -3081,6 +3082,7 @@
           <NavigationProperty Name="ThingCategory" Relationship="DynThingsModel.FK__Things__Category__662B2B3B" FromRole="Thing" ToRole="ThingCategory" />
           <NavigationProperty Name="ThingEnds" Relationship="DynThingsModel.FK__ThingEnds__Thing__4C214075" FromRole="Thing" ToRole="ThingEnd" />
           <NavigationProperty Name="ThingExtenstionValues" Relationship="DynThingsModel.FK__ThingExte__Thing__670A40DB" FromRole="Thing" ToRole="ThingExtenstionValue" />
+          <Property Name="ObjectStatusID" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="UserNotification">
           <Key>
@@ -4849,6 +4851,7 @@
           <EntitySetMapping Name="Things">
             <EntityTypeMapping TypeName="DynThingsModel.Thing">
               <MappingFragment StoreEntitySet="Things">
+                <ScalarProperty Name="ObjectStatusID" ColumnName="ObjectStatusID" />
                 <ScalarProperty Name="UTC_Diff" ColumnName="UTC_Diff" />
                 <ScalarProperty Name="CreateTimeStamp" ColumnName="CreateTimeStamp" />
                 <ScalarProperty Name="CreateByUser" ColumnName="CreateByUser" />

@@ -220,6 +220,7 @@ CREATE TABLE [dbo].[Things](
 	[CreateByUser] [nvarchar](50) NULL,
 	[CreateTimeStamp] [datetime] NULL,
 	[UTC_Diff] [int] NOT NULL,
+	[ObjectStatusID] [int] NOT NULL,
  CONSTRAINT [PK_Things] PRIMARY KEY CLUSTERED 
 (
 	[ID] ASC

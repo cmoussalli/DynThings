@@ -49,6 +49,8 @@ public partial class Thing
 
     public int UTC_Diff { get; set; }
 
+    public int ObjectStatusID { get; set; }
+
 
 
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
