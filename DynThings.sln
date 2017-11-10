@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26730.16
+VisualStudioVersion = 15.0.27004.2005
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DynThings.Data.Models", "DynThings.Data.Models\DynThings.Data.Models.csproj", "{946862BE-8456-4882-9A11-09ED0AFD407B}"
 EndProject
@@ -58,6 +58,8 @@ EndProject
 Project("{7CF6DF6D-3B04-46F8-A40B-537D21BCA0B4}") = "DynThings.Documentation", "DynThings.Documentation\DynThings.Documentation.shfbproj", "{0AA5990D-6BC0-49B9-9268-3CB5A9E87D39}"
 EndProject
 Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "DynThings.Database", "DynThings.Database\DynThings.Database.sqlproj", "{FD693709-50C7-4FBA-A1FA-58BC2E9A5AE9}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{AEC19F41-D971-47AF-A669-AD5CC669E50A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

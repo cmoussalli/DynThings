@@ -40,7 +40,7 @@
             // serviceInstaller1
             // 
             this.serviceInstaller1.DisplayName = "DynThings Background Service";
-            this.serviceInstaller1.ServiceName = "DynThings Background Service";
+            this.serviceInstaller1.ServiceName = "DynThingsBackgroundService";
             this.serviceInstaller1.StartType = System.ServiceProcess.ServiceStartMode.Automatic;
             // 
             // ProjectInstaller

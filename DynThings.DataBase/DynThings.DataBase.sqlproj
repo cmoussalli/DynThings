@@ -151,5 +151,9 @@
     <Build Include="dbo\Stored Procedures\INFO_Server.sql" />
     <None Include="Custom Scripts\CreateFullDataBase.sql" />
     <None Include="Custom Scripts\InsertDemoData.sql" />
+    <Build Include="Custom Scripts\DropAndCreateNewDatabase.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="DynThings.Database.publish.xml" />
   </ItemGroup>
 </Project>

@@ -19,7 +19,7 @@ namespace DynThings.ServiceConfigurationManager
 
     public partial class Form1 : Form
     {
-        string ServiceName = "DynThings.Service";
+        string ServiceName = "DynThings Background Service";
 
         class ConnectionInfo
         {
@@ -52,23 +52,38 @@ namespace DynThings.ServiceConfigurationManager
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            SaveConfig();
-            MessageBox.Show("Configurations has been saved");
+            try
+            {
+                SaveConfig();
+                MessageBox.Show("Configurations has been saved, but you must stop and re-run the background service in order to get the latest configs.");
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
 
         }
 
         private void btnService_Click(object sender, EventArgs e)
         {
-            ServiceController sc = new ServiceController(ServiceName);
-            if (sc.Status == ServiceControllerStatus.Stopped)
+            try
             {
-                sc.Start();
+                ServiceController sc = new ServiceController(ServiceName);
+                if (sc.Status == ServiceControllerStatus.Stopped)
+                {
+                    sc.Start();
 
+                }
+                if (sc.Status == ServiceControllerStatus.Running)
+                {
+                    sc.Stop();
+
+                }
             }
-            if (sc.Status == ServiceControllerStatus.Running)
+            catch (Exception ex)
             {
-                sc.Stop();
-
+                MessageBox.Show("Error: " + ex.Message);
             }
         }
 
@@ -76,41 +91,56 @@ namespace DynThings.ServiceConfigurationManager
 
         private void LoadConfig()
         {
-            string connectionStr = System.Configuration.ConfigurationManager.ConnectionStrings["DynThingsEntities"].ConnectionString;
+            //string connectionStr = System.Configuration.ConfigurationManager.ConnectionStrings["DynThingsEntities"].ConnectionString;
 
-            EntityConnectionStringBuilder connectionEntity = new EntityConnectionStringBuilder(connectionStr);
-            string x = connectionEntity.ProviderConnectionString;
-            SqlConnection connectionSQL = new SqlConnection(x);
-            connectionInfo.Server = connectionSQL.DataSource;
-            connectionInfo.Database = connectionSQL.Database;
-            string tempString = "";
-            //GetUser
-            int userBegin = x.IndexOf("user id=");
-            tempString = x.Substring(userBegin + 8);
-            int userEnd = tempString.IndexOf(";");
-            connectionInfo.User = tempString.Substring(0, userEnd);
+            //EntityConnectionStringBuilder connectionEntity = new EntityConnectionStringBuilder(connectionStr);
+            //string x = connectionEntity.ProviderConnectionString;
+            //SqlConnection connectionSQL = new SqlConnection(x);
+            //connectionInfo.Server = connectionSQL.DataSource;
+            //connectionInfo.Database = connectionSQL.Database;
+            //string tempString = "";
+            ////GetUser
+            //int userBegin = x.IndexOf("user id=");
+            //tempString = x.Substring(userBegin + 8);
+            //int userEnd = tempString.IndexOf(";");
+            //connectionInfo.User = tempString.Substring(0, userEnd);
 
-            //GetPassword
-            int passwordBegin = x.IndexOf("password=");
-            tempString = x.Substring(passwordBegin + 9);
-            int passwordEnd = tempString.IndexOf(";");
-            connectionInfo.Password = tempString.Substring(0, passwordEnd);
+            ////GetPassword
+            //int passwordBegin = x.IndexOf("password=");
+            //tempString = x.Substring(passwordBegin + 9);
+            //int passwordEnd = tempString.IndexOf(";");
+            //connectionInfo.Password = tempString.Substring(0, passwordEnd);
+            try
+            {
+                string[] values = System.IO.File.ReadAllLines(AppDomain.CurrentDomain.BaseDirectory + @"DynThings.Service.exe.configs");
+                string serverStr = values[0].ToString();
+                string databaseStr = values[1].ToString();
+                string usernameStr = values[2].ToString();
+                string passwordStr = values[3].ToString();
 
-            txtServer.Text = connectionInfo.Server;
-            txtDatabase.Text = connectionInfo.Database;
-            txtUser.Text = connectionInfo.User;
-            txtPassword.Text = connectionInfo.Password;
+                txtServer.Text = serverStr;
+                txtDatabase.Text = databaseStr;
+                txtUser.Text = usernameStr;
+                txtPassword.Text = passwordStr;
+            }
+            catch (Exception ex)
+            {
 
+            }
         }
 
         private void SaveConfig()
         {
-            SetupModels.DatabaseSetup databaseModel = new SetupModels.DatabaseSetup();
-            databaseModel.Server = txtServer.Text;
-            databaseModel.DatabaseName = txtDatabase.Text;
-            databaseModel.User = txtUser.Text;
-            databaseModel.Password = txtPassword.Text;
-            DynThings.Core.Database.SetDatabaseConnection(databaseModel);
+            try
+            {
+                string[] values = { txtServer.Text, txtDatabase.Text, txtUser.Text, txtPassword.Text };
+                System.IO.File.WriteAllLines(AppDomain.CurrentDomain.BaseDirectory + @"DynThings.Service.exe.configs", values);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+
         }
 
         private void ValidateServiceStatus()
@@ -125,10 +155,10 @@ namespace DynThings.ServiceConfigurationManager
                 switch (sc.Status)
                 {
                     case ServiceControllerStatus.Running:
-                        lblServiceStatus.Text = "Runing";
+                        btnService.Text = "Stop";
                         break;
                     case ServiceControllerStatus.Stopped:
-
+                        btnService.Text = "Start";
                         break;
                     case ServiceControllerStatus.Paused:
 
@@ -170,6 +200,12 @@ namespace DynThings.ServiceConfigurationManager
             txtDatabase.Enabled = true;
             txtUser.Enabled = true;
             txtPassword.Enabled = true;
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            ValidateServiceStatus();
+
         }
     }
 }

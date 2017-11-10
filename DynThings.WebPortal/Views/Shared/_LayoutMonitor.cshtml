@@ -58,6 +58,9 @@
         window.appInsights = appInsights;
         appInsights.trackPageView();
     </script>
+
+    <script type='text/javascript' src='http://www.bing.com/api/maps/mapcontrol?callback=GetMap'></script>
+
 </head>
 <body>
     <div id="container" class="effect aside-float aside-bright mainnav-out">
@@ -917,12 +920,13 @@
     }
 
     <script>
+        var base_url;
         var mobileMode = 'false';
         @{
-            var baseurl = String.Format("{0}://{1}{2}", Request.Url.Scheme, Request.Url.Authority, Url.Content("~/"));
+            var baseurl = String.Format("{0}://{1}{2}", Request.Url.Scheme, Request.Url.DnsSafeHost.ToString(), Url.Content("~/"));
         }
         function getRootURL() {
-            var base_url = "@baseurl";
+            base_url = "@baseurl";
             return base_url;
         }
 

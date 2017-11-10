@@ -15,6 +15,18 @@ namespace DynThings.Core
             public string User { get; set; }
             public string Password { get; set; }
  
+
+            public DatabaseSetup()
+            {
+
+            }
+            public DatabaseSetup(string server,string database, string username,string password)
+            {
+                Server = server;
+                DatabaseName = database;
+                User = username;
+                Password = password;
+            }
         }
 
         public class PlatformConfig

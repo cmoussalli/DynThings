@@ -30,19 +30,25 @@
 
 
 @section scriptfiles{
+
+
+@*<script src="~/Scripts/MsMaps/mapcontrol.js"></script>
+<script src="~/Scripts/MsMaps/BingMaps2.js"></script>*@
     <script src="~/Scripts/Gauges/justgage.js"></script>
     <script src="~/Scripts/Gauges/raphael-2.1.4.min.js"></script>
-    <script src="~/Scripts/MsMaps/mapcontrol.js"></script>
-    <script src="~/Scripts/MsMaps/BingMaps2.js"></script>
+    
     <script src="~/Assets/Scripts/DynScripts/Monitor.js"></script>
     <script src="~/Assets/Scripts/DynScripts/Monitor_SignalR.js"></script>
     <script src="~/Assets/Scripts/DynScripts/Things.js"></script>
     <script src="~/Assets/Scripts/DynScripts/EndPointCommands.js"></script>
 
+
+       
 }
 
 @section scripts{
     <script>
+
         $(document).ready(function () {
             $.ajaxSetup({ cache: false });
             selectedLocationView = @Model.ID;
@@ -61,3 +67,4 @@
         padding-top: 0px;
     }
 </style>
+

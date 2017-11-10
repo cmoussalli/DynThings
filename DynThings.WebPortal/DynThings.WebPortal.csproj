@@ -497,6 +497,7 @@
     <Content Include="Content\themes\base\tabs.css" />
     <Content Include="Content\themes\base\theme.css" />
     <Content Include="Content\themes\base\tooltip.css" />
+    <Content Include="HtmlPage2.html" />
     <Content Include="Imgs\1.png" />
     <Content Include="Imgs\10.png" />
     <Content Include="Imgs\2.png" />
@@ -1127,7 +1128,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>23130</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost/DynThings.WebPortal</IISUrl>
+          <IISUrl>http://localhost:82/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

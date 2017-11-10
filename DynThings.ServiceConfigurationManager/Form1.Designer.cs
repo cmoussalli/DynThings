@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.label1 = new System.Windows.Forms.Label();
             this.lblServiceStatus = new System.Windows.Forms.Label();
             this.txtServer = new System.Windows.Forms.TextBox();
@@ -43,6 +44,7 @@
             this.btnSave = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.btnService = new System.Windows.Forms.Button();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
@@ -71,7 +73,6 @@
             this.txtServer.Name = "txtServer";
             this.txtServer.Size = new System.Drawing.Size(276, 20);
             this.txtServer.TabIndex = 3;
-            this.txtServer.Text = "txtServer";
             // 
             // txtDatabase
             // 
@@ -79,7 +80,6 @@
             this.txtDatabase.Name = "txtDatabase";
             this.txtDatabase.Size = new System.Drawing.Size(276, 20);
             this.txtDatabase.TabIndex = 4;
-            this.txtDatabase.Text = "txtDatabase";
             // 
             // txtUser
             // 
@@ -87,7 +87,6 @@
             this.txtUser.Name = "txtUser";
             this.txtUser.Size = new System.Drawing.Size(276, 20);
             this.txtUser.TabIndex = 5;
-            this.txtUser.Text = "txtUser";
             // 
             // txtPassword
             // 
@@ -96,7 +95,6 @@
             this.txtPassword.PasswordChar = '*';
             this.txtPassword.Size = new System.Drawing.Size(276, 20);
             this.txtPassword.TabIndex = 6;
-            this.txtPassword.Text = "txtPassword";
             // 
             // button2
             // 
@@ -188,6 +186,12 @@
             this.btnService.UseVisualStyleBackColor = true;
             this.btnService.Click += new System.EventHandler(this.btnService_Click);
             // 
+            // timer1
+            // 
+            this.timer1.Enabled = true;
+            this.timer1.Interval = 1000;
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -232,6 +236,7 @@
         private System.Windows.Forms.Button btnSave;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.Button btnService;
+        public System.Windows.Forms.Timer timer1;
     }
 }
 
