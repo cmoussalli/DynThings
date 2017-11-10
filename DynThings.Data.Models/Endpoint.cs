@@ -65,6 +65,8 @@ public partial class Endpoint
 
     public Nullable<float> LastIONumericValue { get; set; }
 
+    public int ObjectStatusID { get; set; }
+
 
 
     public virtual Device Device { get; set; }

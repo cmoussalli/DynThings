@@ -117,6 +117,7 @@ CREATE TABLE [dbo].[Endpoints](
 	[LastIOValue] [nvarchar](50) NULL,
 	[LastIOTimeStamp] [datetime] NULL,
 	[LastIOTimeStampUTC] [datetime] NULL,
+	[ObjectStatusID] [int] NOT NULL,
  CONSTRAINT [PK_Devices] PRIMARY KEY CLUSTERED 
 (
 	[ID] ASC

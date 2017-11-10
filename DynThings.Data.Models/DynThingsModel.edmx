@@ -338,6 +338,7 @@
           <Property Name="LastIOValue" Type="nvarchar" MaxLength="50" />
           <Property Name="LastIOTimeStamp" Type="datetime" />
           <Property Name="LastIOTimeStampUTC" Type="datetime" />
+          <Property Name="ObjectStatusID" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="EndPointTypeCategorys">
           <Key>
@@ -1158,8 +1159,10 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__ThingEnds__EndPo__5E3FF0B0">
-          <End Role="EndPointTypes" Type="Self.EndPointTypes" Multiplicity="0..1" />
+        <Association Name="FK__ThingEnds__EndPo__7F36D027">
+          <End Role="EndPointTypes" Type="Self.EndPointTypes" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="ThingEnds" Type="Self.ThingEnds" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="EndPointTypes">
@@ -1170,7 +1173,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__ThingEnds__LastI__186C9245">
+        <Association Name="FK__ThingEnds__LastI__002AF460">
           <End Role="EndPointIOs" Type="Self.EndPointIOs" Multiplicity="0..1" />
           <End Role="ThingEnds" Type="Self.ThingEnds" Multiplicity="*" />
           <ReferentialConstraint>
@@ -1182,8 +1185,10 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__ThingEnds__Thing__4C214075">
-          <End Role="Things" Type="Self.Things" Multiplicity="0..1" />
+        <Association Name="FK__ThingEnds__Thing__7E42ABEE">
+          <End Role="Things" Type="Self.Things" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="ThingEnds" Type="Self.ThingEnds" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Things">
@@ -1646,15 +1651,15 @@
             <End Role="MediaFiles" EntitySet="MediaFiles" />
             <End Role="ThingCategorys" EntitySet="ThingCategorys" />
           </AssociationSet>
-          <AssociationSet Name="FK__ThingEnds__EndPo__5E3FF0B0" Association="Self.FK__ThingEnds__EndPo__5E3FF0B0">
+          <AssociationSet Name="FK__ThingEnds__EndPo__7F36D027" Association="Self.FK__ThingEnds__EndPo__7F36D027">
             <End Role="EndPointTypes" EntitySet="EndPointTypes" />
             <End Role="ThingEnds" EntitySet="ThingEnds" />
           </AssociationSet>
-          <AssociationSet Name="FK__ThingEnds__LastI__186C9245" Association="Self.FK__ThingEnds__LastI__186C9245">
+          <AssociationSet Name="FK__ThingEnds__LastI__002AF460" Association="Self.FK__ThingEnds__LastI__002AF460">
             <End Role="EndPointIOs" EntitySet="EndPointIOs" />
             <End Role="ThingEnds" EntitySet="ThingEnds" />
           </AssociationSet>
-          <AssociationSet Name="FK__ThingEnds__Thing__4C214075" Association="Self.FK__ThingEnds__Thing__4C214075">
+          <AssociationSet Name="FK__ThingEnds__Thing__7E42ABEE" Association="Self.FK__ThingEnds__Thing__7E42ABEE">
             <End Role="Things" EntitySet="Things" />
             <End Role="ThingEnds" EntitySet="ThingEnds" />
           </AssociationSet>
@@ -2845,6 +2850,7 @@
           <NavigationProperty Name="Thing" Relationship="DynThingsModel.FK__Endpoints__Thing__7EF6D905" FromRole="Endpoint" ToRole="Thing" />
           <NavigationProperty Name="EndPointType" Relationship="DynThingsModel.FK__Endpoints__TypeI__45F365D3" FromRole="Endpoint" ToRole="EndPointType" />
           <Property Name="LastIONumericValue" Type="Single" />
+          <Property Name="ObjectStatusID" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="EndPointTypeCategory">
           <Key>
@@ -4639,6 +4645,7 @@
           <EntitySetMapping Name="Endpoints">
             <EntityTypeMapping TypeName="DynThingsModel.Endpoint">
               <MappingFragment StoreEntitySet="Endpoints">
+                <ScalarProperty Name="ObjectStatusID" ColumnName="ObjectStatusID" />
                 <ScalarProperty Name="LastIONumericValue" ColumnName="LastIONumericValue" />
                 <ScalarProperty Name="LastIOTimeStampUTC" ColumnName="LastIOTimeStampUTC" />
                 <ScalarProperty Name="LastIOTimeStamp" ColumnName="LastIOTimeStamp" />
