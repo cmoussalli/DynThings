@@ -151,8 +151,11 @@ namespace DynThings.Data.Repositories
             try
             {
                 Thing thing = db.Things.Find(id);
-
                 thing.ObjectStatusID = 2;
+                //DeAttach EndPoints
+                List<Endpoint> ends = db.Endpoints.Where(e => e.ThingID == id).ToList();
+                ends.ForEach(e => e.ThingID = 0);
+
                 db.SaveChanges();
                 return ResultInfo.GenerateOKResult("Deleted", thing.ID);
             }
