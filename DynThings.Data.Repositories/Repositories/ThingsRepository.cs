@@ -33,7 +33,7 @@ namespace DynThings.Data.Repositories
         #region GetCount
         public int GetCount()
         {
-            return db.Things.Count(t => t.ObjectStatusID !=2);
+            return db.Things.Count(t => t.ObjectStatusID != 2);
         }
         #endregion
 
@@ -44,6 +44,10 @@ namespace DynThings.Data.Repositories
             if (EnableUnspecified == false)
             {
                 Things = Things.Where(t => t.ID > 0 && t.ObjectStatusID != 2).ToList();
+            }
+            else
+            {
+
             }
             return Things;
         }
@@ -165,10 +169,10 @@ namespace DynThings.Data.Repositories
 
         #region Properties
         #region Get Properties
-        public List<ThingExtenstionProperty> GetProperties(long thingID,string searchFor)
+        public List<ThingExtenstionProperty> GetProperties(long thingID, string searchFor)
         {
             List<ThingExtenstionProperty> props = new List<ThingExtenstionProperty>();
-            List<GetThingExtenstions_Result> dbRes = db.GetThingExtenstions(thingID,searchFor).ToList();
+            List<GetThingExtenstions_Result> dbRes = db.GetThingExtenstions(thingID, searchFor).ToList();
             foreach (GetThingExtenstions_Result res in dbRes)
             {
                 ThingExtenstionProperty prop0 = new ThingExtenstionProperty();
@@ -178,9 +182,9 @@ namespace DynThings.Data.Repositories
             return props;
         }
 
-        public IPagedList GetPropertiesPagedList(long thingID,string searchFor, int pageNumber, int recordsPerPage)
+        public IPagedList GetPropertiesPagedList(long thingID, string searchFor, int pageNumber, int recordsPerPage)
         {
-            IPagedList props = GetProperties(thingID,searchFor).ToPagedList(pageNumber, recordsPerPage);
+            IPagedList props = GetProperties(thingID, searchFor).ToPagedList(pageNumber, recordsPerPage);
             return props;
         }
         #endregion

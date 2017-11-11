@@ -36,7 +36,7 @@ namespace DynThings.Data.Repositories
             return db.ThingEnds.Count();
         }
         #endregion        
-
+        
 
         public IPagedList GetThingEndsList(string searchFor = "", long? locationID = null, long? thingID = null, long? thingCategoryID = null, long? endpointTypeID = null, long? endPointID = null, int pageNumber = 1, int recordsPerPage = 0)
         {
@@ -46,6 +46,7 @@ namespace DynThings.Data.Repositories
                  && ((q.Thing.CategoryID == thingCategoryID) || thingCategoryID == null )
                  && ((q.Thing.LinkThingsLocations.Any(l => l.LocationID == locationID)) || locationID == null)
                  && ((q.EndPointTypeID == endpointTypeID) || endpointTypeID == null)
+                 && (q.Thing.ObjectStatusID == 1)
             );
           
             return query.ToList().ToPagedList(pageNumber, recordsPerPage);

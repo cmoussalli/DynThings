@@ -923,7 +923,7 @@
         var base_url;
         var mobileMode = 'false';
         @{
-            var baseurl = String.Format("{0}://{1}{2}", Request.Url.Scheme, Request.Url.DnsSafeHost.ToString(), Url.Content("~/"));
+            var baseurl = String.Format("{0}://{1}{2}", Request.Url.Scheme, Request.Url.Authority, Url.Content("~/"));
         }
         function getRootURL() {
             base_url = "@baseurl";
