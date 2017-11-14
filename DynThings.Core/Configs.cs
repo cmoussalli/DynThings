@@ -133,6 +133,14 @@ namespace DynThings.Core
                 return db.DynSettings.First().PlatformTitle;
             }
         }
+        public static string MapKey
+        {
+            get
+            {
+                DynThingsEntities db = new DynThingsEntities();
+                return db.DynSettings.First().MapKey;
+            }
+        }
         public static DateTime LastCentralSync
         {
             get
@@ -226,6 +234,13 @@ namespace DynThings.Core
             DynThingsEntities db = new DynThingsEntities();
             DynSetting dset = db.DynSettings.First();
             dset.PlatformTitle = title;
+            db.SaveChanges();
+        }
+        public static void SetKeyMap(string mapKey)
+        {
+            DynThingsEntities db = new DynThingsEntities();
+            DynSetting dset = db.DynSettings.First();
+            dset.MapKey = mapKey;
             db.SaveChanges();
         }
 

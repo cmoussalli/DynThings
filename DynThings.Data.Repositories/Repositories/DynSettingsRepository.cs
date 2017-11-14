@@ -88,14 +88,15 @@ namespace DynThings.Data.Repositories
         }
         #endregion
 
-        #region Update: DevelopmentMode
-        public ResultInfo.Result SetDevelopmentMode(bool DevelopmentMode)
+        #region Update: Development
+        public ResultInfo.Result SetDevelopmentMode(bool DevelopmentMode,string mapKey)
         {
             List<DynSetting> cons = db.DynSettings.Where(l => l.ID == 1).ToList();
             if (cons.Count == 1)
             {
                 
                 cons[0].DevelopmentMode = DevelopmentMode;
+                cons[0].MapKey = mapKey;
                 db.SaveChanges();
                 Core.Config.Refresh();
             }

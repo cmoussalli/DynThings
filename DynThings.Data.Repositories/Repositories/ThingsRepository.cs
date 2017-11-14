@@ -4,6 +4,7 @@
 // Content    : Handle Thing CRUD                             //
 // Notes      :                                                //
 /////////////////////////////////////////////////////////////////
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -145,7 +146,7 @@ namespace DynThings.Data.Repositories
 
         #endregion
 
-        #region Delete
+        #region Delete  
         public ResultInfo.Result Delete(long id)
         {
             try

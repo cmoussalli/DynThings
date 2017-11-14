@@ -50,6 +50,8 @@ public partial class DynSetting
 
     public Nullable<int> SMTPPort { get; set; }
 
+    public string MapKey { get; set; }
+
 }
 
 }

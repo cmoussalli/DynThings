@@ -287,6 +287,7 @@
           <Property Name="NotifcationMail" Type="nvarchar" MaxLength="50" />
           <Property Name="SMTPAddress" Type="nvarchar" MaxLength="50" />
           <Property Name="SMTPPort" Type="int" />
+          <Property Name="MapKey" Type="nvarchar" MaxLength="255" />
         </EntityType>
         <EntityType Name="EndPointCommands">
           <Key>
@@ -2789,6 +2790,7 @@
           <Property Name="NotifcationMail" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="SMTPAddress" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="SMTPPort" Type="Int32" />
+          <Property Name="MapKey" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="EndPointCommand">
           <Key>
@@ -4595,6 +4597,7 @@
           <EntitySetMapping Name="DynSettings">
             <EntityTypeMapping TypeName="DynThingsModel.DynSetting">
               <MappingFragment StoreEntitySet="DynSettings">
+                <ScalarProperty Name="MapKey" ColumnName="MapKey" />
                 <ScalarProperty Name="SMTPPort" ColumnName="SMTPPort" />
                 <ScalarProperty Name="SMTPAddress" ColumnName="SMTPAddress" />
                 <ScalarProperty Name="NotifcationMail" ColumnName="NotifcationMail" />

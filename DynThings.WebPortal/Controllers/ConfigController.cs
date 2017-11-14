@@ -63,12 +63,12 @@ namespace DynThings.WebPortal.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult DevModePV([Bind(Include = "DevelopmentMode")] DynSetting config)
+        public ActionResult DevModePV([Bind(Include = "DevelopmentMode,MapKey")] DynSetting config)
         {
             ResultInfo.Result res = ResultInfo.GetResultByID(1);
             if (ModelState.IsValid)
             {
-                res = uof_repos.repoDynSettings.SetDevelopmentMode(config.DevelopmentMode);
+                res = uof_repos.repoDynSettings.SetDevelopmentMode(config.DevelopmentMode,config.MapKey);
                 return Json(res);
             }
             return Json(res);
