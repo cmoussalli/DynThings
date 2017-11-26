@@ -167,6 +167,7 @@ namespace DynThings.WebPortal.Controllers
         public PartialViewResult LocationsByLocationViewIDListGridPV(string searchfor = null, long locationViewID = 0, int page = 1, int recordsperpage = 0)
         {
             IPagedList views = uof_repos.repoLocations.GetPagedList(searchfor, locationViewID, page, Helpers.Configs.validateRecordsPerMaster(recordsperpage));
+            ViewBag.locationviewID = locationViewID;
             return PartialView("_LocationsList", views);
         }
         #endregion

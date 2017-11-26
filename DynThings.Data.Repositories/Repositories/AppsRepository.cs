@@ -231,5 +231,21 @@ namespace DynThings.Data.Repositories
             }
         }
         #endregion
+
+
+        #region Get AppThingTypes PagedList
+        public IPagedList GetAppThingTypesPagedList(string search, long appID, int pageNumber, int recordsPerPage)
+        {
+            IPagedList appThingTypes = db.AppThingCategorys
+              .Where(e => search == null || (e.Title.Contains(search) || e.Code.Contains(search))
+              && e.AppID == appID)
+
+              .OrderBy(e => e.Title).ToList()
+              .ToPagedList(pageNumber, recordsPerPage);
+            return appThingTypes;
+        }
+        #endregion
+
+
     }
 }

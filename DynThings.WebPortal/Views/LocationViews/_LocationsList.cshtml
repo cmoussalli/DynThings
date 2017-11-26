@@ -29,7 +29,7 @@
 
 <div id="LocationsListPager">
     <input id="LocationCurrentPage" value="@Model.PageNumber.ToString()" hidden />
-    @Html.PagedListPager(Model, page => Url.Action("LocationsByLocationViewIDListGridPV", "locationViews", new { page }) + "&locationviewID=1")
+    @Html.PagedListPager(Model, page => Url.Action("LocationsByLocationViewIDListGridPV", "locationViews", new { page }) + "&locationviewID=" + ViewBag.locationviewID)
 </div>
 
 <script>

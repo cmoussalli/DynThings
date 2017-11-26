@@ -744,6 +744,11 @@
     <Content Include="Views\Things\_Delete_ThingExtenstionProperty.cshtml" />
     <Content Include="Views\Things\_Edit_ThingExtenstionProperty.cshtml" />
     <Content Include="Views\DynUsers\_Add_Role.cshtml" />
+    <Content Include="Views\Apps\_App_ThingTypesContainer.cshtml" />
+    <Content Include="Views\Apps\_App_ThingTypesList.cshtml" />
+    <Content Include="Views\Apps\_App_ThingTypesAdd.cshtml" />
+    <Content Include="Views\Apps\_App_ThingTypesEdit.cshtml" />
+    <Content Include="Views\Apps\_App_ThingTypesDelete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Assets\Imgs\Wizard.png" />
@@ -1128,7 +1133,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>23130</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:82/</IISUrl>
+          <IISUrl>http://localhost/dynthings.webportal</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

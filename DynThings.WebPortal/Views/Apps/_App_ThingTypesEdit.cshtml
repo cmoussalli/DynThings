@@ -1,0 +1,32 @@
+﻿@model DynThings.Data.Models.AppThingCategory
+<div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+    <h4 class="modal-title" id="myModalLabel">Thing Type Editor</h4>
+</div>
+@using (Html.BeginForm("EditAppThingTypePV", "Apps", FormMethod.Post, new { id = "AppThingCategoryEditForm" }))
+{
+    <div class="modal-body">
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.ID)
+
+        @Html.LabelFor(model => model.Title, htmlAttributes: new { @class = "" })
+        @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
+   
+        @Html.LabelFor(model => model.IconGUID, htmlAttributes: new { @class = "" })
+        @Html.DropDownList("IconGUID", null, htmlAttributes: new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.IconGUID, "", new { @class = "text-danger" })
+
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary">Save changes</button>
+    </div>
+}
+<script>
+    $(document).ready(function () {
+        AttachEventAppThingCategoryEditForm();
+    });
+
+</script>

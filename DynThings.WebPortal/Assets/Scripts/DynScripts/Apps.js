@@ -37,12 +37,10 @@ function AttachEventAppAddForm() {
             data: formData,
             dataType: "json",
             success: function (resp) {
-                alert('123');
-                window.location.href(getRootURL() + 'locationViews/details?id=' + resp.Reference)
+                window.location.href(getRootURL() + 'apps/details?id=' + resp.Reference)
             },
             done: function (resp){
-                alert('234');
-                window.location.href(getRootURL() + 'locationViews/details?id=' + resp.Reference)
+                window.location.href(getRootURL() + 'apps/details?id=' + resp.Reference)
             },
             error: function () {
                 ServerResponse(resp);
@@ -52,8 +50,6 @@ function AttachEventAppAddForm() {
         $('#mdl').modal('hide');
     });
 };
-
-
 
 //Attach : Edit Form Submit
 function AttachEventAppEditForm(AppID) {
@@ -306,6 +302,172 @@ function DeAttachEventAppApiEntityAttachForm() {
             }
         })
         LoadPart_AppAPIEntitiesDiv();
+        $('#mdl').modal('hide');
+    });
+};
+
+
+
+//Get App ThingTypes Container Div
+function LoadPart_AppThingTypesContaierDiv() {
+    var loadingpart = LoadDivLoading();
+    $("#divPageDetails").html(loadingpart);
+    $.ajax({
+        url: getRootURL() + '/Apps/ThingTypesContainerPV',
+        type: "GET",
+    })
+        .success(function (partialViewResult) {
+            $("#divPageDetails").html(partialViewResult);
+        });
+}
+//Get App ThingTypes List
+function LoadPart_AppThingTypesListDiv() {
+    var loadingpart = LoadDivLoading();
+    $("#divAppThingTypesList").html(loadingpart);
+    $.ajax({
+        url: getRootURL() + '/apps/ThingTypesByAppIDListPV?searchfor=' + $(txtAppThingTypesSearch).val() + '&appID=' + selectedAppID + '&recordsperpage=0',
+        type: "GET",
+    })
+        .done(function (partialViewResult) {
+            $("#divAppThingTypesList").html(partialViewResult);
+            AttachEventAppThingTypesListPager();
+        });
+    return false;
+};
+//Attach : Pager
+function AttachEventAppThingTypesListPager() {
+    $(document).on("click", "#AppThingTypesListPager a[href]", function () {
+        var loadingpart = LoadDivLoading();
+        $("#divAppThingTypesList").html(loadingpart);
+        $.ajax({
+            url: $(this).attr("href") + "&searchfor=" + $(txtAppThingTypesSearch).val() + '&appID=' + selectedAppID + '&recordsperpage=0',
+            type: 'GET',
+            cache: false,
+            success: function (result) {
+                $("#divAppThingTypesList").html(result);
+                return false;
+            }
+        });
+        return false;
+    });
+}
+//Get Add
+function LoadPart_DialogAppThingTypeAdd() {
+    var loadingpart = LoadDivLoading();
+    $("#modal").html(loadingpart);
+    $.ajax({
+        url: getRootURL() + '/apps/AddAppThingTypePV?appID=' + selectedAppID,
+        //page=" + $("#DynConfigCurrentPage").html,
+        type: "GET",
+    })
+        .success(function (partialViewResult) {
+            $("#modal").html(partialViewResult);
+        });
+}
+//Attach : Add Form Submit
+function AttachEventAppThingCategoryAddForm() {
+    $("#AppThingCategoryAddForm").on("submit", function (event) {
+        event.preventDefault();
+        var url = $(this).attr("action");
+        var formData = $(this).serialize();
+        $.ajax({
+            url: url,
+            type: "POST",
+            data: formData,
+            dataType: "json",
+            success: function (resp) {
+                ServerResponse(resp);
+                LoadPart_AppThingTypesListDiv();
+            },
+            done: function (resp) {
+                ServerResponse(resp);
+                LoadPart_AppThingTypesListDiv();
+            },
+            error: function () {
+                ServerResponse(resp);
+                LoadPart_AppThingTypesListDiv();
+            }
+        })
+        $('#mdl').modal('hide');
+    });
+};
+//Get Edit
+function LoadPart_DialogAppThingTypeEdit(appThingTypeID) {
+    var loadingpart = LoadDivLoading();
+    $("#modal").html(loadingpart);
+    $.ajax({
+        url: getRootURL() + '/apps/EditAppThingTypePV?appThingTypeID=' + appThingTypeID,
+        //page=" + $("#DynConfigCurrentPage").html,
+        type: "GET",
+    })
+        .success(function (partialViewResult) {
+            $("#modal").html(partialViewResult);
+        });
+}
+//Attach : Edit Form Submit
+function AttachEventAppThingCategoryEditForm() {
+    $("#AppThingCategoryEditForm").on("submit", function (event) {
+        event.preventDefault();
+        var url = $(this).attr("action");
+        var formData = $(this).serialize();
+        $.ajax({
+            url: url,
+            type: "POST",
+            data: formData,
+            dataType: "json",
+            success: function (resp) {
+                ServerResponse(resp);
+                LoadPart_AppThingTypesListDiv();
+            },
+            done: function (resp) {
+                ServerResponse(resp);
+                LoadPart_AppThingTypesListDiv();
+            },
+            error: function () {
+                ServerResponse(resp);
+                LoadPart_AppThingTypesListDiv();
+            }
+        })
+        $('#mdl').modal('hide');
+    });
+};
+//Get Delete
+function LoadPart_DialogAppThingTypeDelete(appThingTypeID) {
+    var loadingpart = LoadDivLoading();
+    $("#modal").html(loadingpart);
+    $.ajax({
+        url: getRootURL() + '/apps/DeleteAppThingTypePV?appThingTypeID=' + appThingTypeID,
+        //page=" + $("#DynConfigCurrentPage").html,
+        type: "GET",
+    })
+        .success(function (partialViewResult) {
+            $("#modal").html(partialViewResult);
+        });
+}
+//Attach : Delete Form Submit
+function AttachEventAppThingCategoryDeleteForm() {
+    $("#AppThingCategoryDeleteForm").on("submit", function (event) {
+        event.preventDefault();
+        var url = $(this).attr("action");
+        var formData = $(this).serialize();
+        $.ajax({
+            url: url,
+            type: "POST",
+            data: formData,
+            dataType: "json",
+            success: function (resp) {
+                ServerResponse(resp);
+                LoadPart_AppThingTypesListDiv();
+            },
+            done: function (resp) {
+                ServerResponse(resp);
+                LoadPart_AppThingTypesListDiv();
+            },
+            error: function () {
+                ServerResponse(resp);
+                LoadPart_AppThingTypesListDiv();
+            }
+        })
         $('#mdl').modal('hide');
     });
 };

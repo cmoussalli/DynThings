@@ -93,14 +93,19 @@ namespace DynThings.Data.Repositories
         public UserNotificationsRepository repoUserNotification
         { get { return new UserNotificationsRepository(dynDB); } }
 
+        public SystemEntitysRepository repoEntitys
+        { get { return new SystemEntitysRepository(dynDB); } }
+
         public DynThingsAppsRepository repoApps
         { get { return new DynThingsAppsRepository(dynDB); } }
 
-        public SystemEntitysRepository repoEntitys
-        { get { return new SystemEntitysRepository(dynDB); } }
+        public AppThingCategorysRepository repoAppThingCategorys
+        { get { return new AppThingCategorysRepository(dynDB); } }
+
+
         #endregion
 
-        
+
 
 
     }

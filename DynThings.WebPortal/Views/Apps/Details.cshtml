@@ -27,27 +27,32 @@
                 <div class="text-center bg-info">
                     <img src="~/Imgs/Apps/0.jpg" style="height:100%;width:100%" />
                     <ul class="list-unstyled text-center pad-top mar-no row">
-                <li class="col-xs-4">
-                    <span class="text-lg text-semibold">@Model.Title</span>
-                    <br /><br />
-                    <p class="text-sm mar-no"> </p>
-                </li>
-                @*<li class="col-xs-4">
-                    <span class="text-lg text-semibold">23K</span>
-                    <p class="text-sm mar-no">Followers</p>
-                </li>
-                <li class="col-xs-4">
-                    <span class="text-lg text-semibold">278</span>
-                    <p class="text-sm mar-no">Post</p>
-                </li>*@
-            </ul>
+                        <li class="col-xs-4">
+                            <span class="text-lg text-semibold">@Model.Title</span>
+                            <br /><br />
+                            <p class="text-sm mar-no"> </p>
+                        </li>
+                        @*<li class="col-xs-4">
+                                <span class="text-lg text-semibold">23K</span>
+                                <p class="text-sm mar-no">Followers</p>
+                            </li>
+                            <li class="col-xs-4">
+                                <span class="text-lg text-semibold">278</span>
+                                <p class="text-sm mar-no">Post</p>
+                            </li>*@
+                    </ul>
                 </div>
                 <div class="list-group bg-trans pad-btm">
+                    <H3 class="list-group-item">Main</H3>
                     <a class="list-group-item" onclick="LoadPart_AppDetailsDiv();" style="cursor: pointer;">Main Info</a>
                     <a class="list-group-item" onclick="LoadPart_AppAPIEntitiesDiv();" style="cursor: pointer;">API Security Permissions</a>
-                    <a class="list-group-item" onclick="LoadPart_AppAPIEntitiesDiv();" style="cursor: pointer;">Extended Properties</a>
                     <a class="list-group-item" href="#" style="cursor: pointer;"><span class="label label-info pull-right">Local App</span>Publish to Store</a>
                     <a class="list-group-item" onclick="LoadPart_DialogAppDelete();" style="cursor: pointer;">Delete App</a>
+
+                    <H3 class="list-group-item">Content</H3>
+                    <a class="list-group-item" onclick="LoadPart_AppThingTypesContaierDiv();" style="cursor: pointer;">Thing Types</a>
+                    <a class="list-group-item" onclick="LoadPart_AppThingExtenstionsDiv();" style="cursor: pointer;">Thing Extenstions</a>
+
                 </div>
             </div>
         </div>
@@ -64,17 +69,17 @@
 </div>
 
 @section scriptfiles{
-<script src="~/Assets/Scripts/DynScripts/Apps.js"></script>
+    <script src="~/Assets/Scripts/DynScripts/Apps.js"></script>
 
 
 }
 
 @section scripts{
-<script>
+    <script>
     $(document).ready(function () {
         selectedAppID = @Model.ID;
         LoadPart_AppDetailsDiv('@Model.ID');
         LoadPart_AppApiEntitysByAppIDDiv('@Model.ID');
     });
-</script>
+    </script>
 }

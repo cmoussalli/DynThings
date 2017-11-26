@@ -6,7 +6,7 @@ using System.Web.Mvc;
 using DynThings.Core;
 using DynThings.Data.Models;
 using DynThings.Data.Repositories;
-using PagedList;
+using PagedList; 
 
 namespace DynThings.WebPortal.Controllers
 {
@@ -145,7 +145,6 @@ namespace DynThings.WebPortal.Controllers
             return PartialView("_ApiEntitysList", views);
         }
         #endregion
-
         #region Attach AppApiEntity
         [HttpGet]
         public PartialViewResult AppApiEntityAttachPV(long appID)
@@ -184,6 +183,92 @@ namespace DynThings.WebPortal.Controllers
             return Json(res);
         }
         #endregion
+
+
+        #region AppThingTypes ContainerPV
+        [HttpGet]
+        public PartialViewResult ThingTypesContainerPV()
+        {
+            return PartialView("_APP_ThingTypesContainer");
+        }
+        #endregion
+        #region AppThingTypes ListPV
+        [HttpGet]
+        public PartialViewResult ThingTypesByAppIDListPV(string searchfor = null, long appID = 0, int page = 1, int recordsperpage = 0)
+        {
+            IPagedList appThingTypes = uof_repos.repoApps.GetAppThingTypesPagedList(searchfor, appID, page, Helpers.Configs.validateRecordsPerMaster(recordsperpage));
+            ViewBag.appID = appID;
+            ViewBag.searchFor = searchfor;
+            return PartialView("_APP_ThingTypesList", appThingTypes);
+        }
+        #endregion
+        #region AppThingTypes AddPV
+        [HttpGet]
+        public PartialViewResult AddAppThingTypePV(int appID)
+        {
+            AppThingCategory model = new AppThingCategory();
+            ViewBag.IconGUID = new SelectList(uof_repos.repoMediaFiles.GetList(), "GUID", "Title", uof_repos.repoMediaFiles.GetList()[0].GUID);
+            model.AppID = appID;
+            return PartialView("_App_ThingTypesAdd", model);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult AddAppThingTypePV(AppThingCategory model)
+        {
+            ResultInfo.Result res = ResultInfo.GetResultByID(1);
+            if (ModelState.IsValid)
+            {
+                res = uof_repos.repoAppThingCategorys.Add(model.Title,model.Code,Guid.NewGuid(),model.IconGUID,model.AppID,currentUser.Id);
+                return Json(res);
+            }
+            return Json(res);
+        }
+        #endregion
+        #region AppThingTypes EditPV
+        [HttpGet]
+        public PartialViewResult EditAppThingTypePV(int appThingTypeID)
+        {
+            AppThingCategory model = uof_repos.repoAppThingCategorys.Find(appThingTypeID);
+            ViewBag.IconGUID = new SelectList(uof_repos.repoMediaFiles.GetList(), "GUID", "Title", uof_repos.repoMediaFiles.GetList()[0].GUID);
+            return PartialView("_App_ThingTypesEdit", model);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult EditAppThingTypePV(AppThingCategory model)
+        {
+            ResultInfo.Result res = ResultInfo.GetResultByID(1);
+            if (ModelState.IsValid)
+            {
+                res = uof_repos.repoAppThingCategorys.Edit(model.ID,model.Title,model.IconGUID, currentUser.Id);
+                return Json(res);
+            }
+            return Json(res);
+        }
+        #endregion
+        #region AppThingTypes DeletePV
+        [HttpGet]
+        public PartialViewResult DeleteAppThingTypePV(int appThingTypeID)
+        {
+            AppThingCategory model = uof_repos.repoAppThingCategorys.Find(appThingTypeID);
+            return PartialView("_App_ThingTypesDelete", model);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteAppThingTypePV(AppThingCategory model)
+        {
+            ResultInfo.Result res = ResultInfo.GetResultByID(1);
+            if (ModelState.IsValid)
+            {
+                res = uof_repos.repoAppThingCategorys.Delete(model.ID, currentUser.Id);
+                return Json(res);
+            }
+            return Json(res);
+        }
+        #endregion
+
         #endregion
 
 
