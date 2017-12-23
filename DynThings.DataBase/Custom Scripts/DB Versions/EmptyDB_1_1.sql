@@ -1,7 +1,7 @@
-﻿USE [master]
+USE [master]
 GO
-/****** Object:  Database [DynThings_1_2_0]    Script Date: 2017-09-22 12:35:17 PM ******/
---Database Name:   <DataBase_Name, varChar(50) DynThingsDB>
+/****** Object:  Database [DynThings_1_1_0]    Script Date: 2017-09-22 12:35:17 PM ******/
+--<DataBase_Name, varChar(50) DynThingsDB>
 
 
 ALTER DATABASE [<DataBase_Name, varChar(50), DynThingsDB>] SET COMPATIBILITY_LEVEL = 120
@@ -117,7 +117,6 @@ CREATE TABLE [dbo].[Endpoints](
 	[LastIOValue] [nvarchar](50) NULL,
 	[LastIOTimeStamp] [datetime] NULL,
 	[LastIOTimeStampUTC] [datetime] NULL,
-	[ObjectStatusID] [int] NOT NULL,
  CONSTRAINT [PK_Devices] PRIMARY KEY CLUSTERED 
 (
 	[ID] ASC
@@ -220,7 +219,6 @@ CREATE TABLE [dbo].[Things](
 	[CreateByUser] [nvarchar](50) NULL,
 	[CreateTimeStamp] [datetime] NULL,
 	[UTC_Diff] [int] NOT NULL,
-	[ObjectStatusID] [int] NOT NULL,
  CONSTRAINT [PK_Things] PRIMARY KEY CLUSTERED 
 (
 	[ID] ASC
@@ -753,7 +751,6 @@ CREATE TABLE [dbo].[DynSettings](
 	[NotifcationMail] [nvarchar](50) NULL,
 	[SMTPAddress] [nvarchar](50) NULL,
 	[SMTPPort] [int] NULL,
-	[MapKey] [VARCHAR](255) null
  CONSTRAINT [PK_DynSettings] PRIMARY KEY CLUSTERED 
 (
 	[ID] ASC
@@ -1182,7 +1179,7 @@ GO
 SET IDENTITY_INSERT [dbo].[DynSettings] ON 
 
 GO
-INSERT [dbo].[DynSettings] ([ID], [DBVersion], [DevelopmentMode], [DefaultRecordsPerMaster], [DefaultRecordsPerChild], [PlatformKey], [PublicAccess], [PublicSignUP], [EnableSystemLogger], [App_TimeZone], [PlatformTitle], [LastCentralSync], [DeploymentTimeStamp], [NotifcationMail], [SMTPAddress], [SMTPPort]) VALUES (1, 1.2, 1, 25, 5, newID(), 0, 1, 1, 4, N'', getDate(), GetDate(), N'', N'', 25)
+INSERT [dbo].[DynSettings] ([ID], [DBVersion], [DevelopmentMode], [DefaultRecordsPerMaster], [DefaultRecordsPerChild], [PlatformKey], [PublicAccess], [PublicSignUP], [EnableSystemLogger], [App_TimeZone], [PlatformTitle], [LastCentralSync], [DeploymentTimeStamp], [NotifcationMail], [SMTPAddress], [SMTPPort]) VALUES (1, 1.1, 1, 25, 5, newID(), 0, 1, 1, 4, N'', getDate(), GetDate(), N'', N'', 25)
 GO
 SET IDENTITY_INSERT [dbo].[DynSettings] OFF
 GO
@@ -1225,9 +1222,9 @@ GO
 SET IDENTITY_INSERT [dbo].[MediaFiles] ON 
 
 GO
-INSERT [dbo].[MediaFiles] ([ID], [GUID], [Title]) VALUES (1, N'd7527c05-abdd-4f8c-a734-89a67462a3ba', N'EndPoint')
+INSERT [dbo].[MediaFiles] ([ID], [GUID], [Title]) VALUES (1, N'd7527c05-abdd-4f8c-a734-89a67462a3ba', N'Sensor')
 GO
-INSERT [dbo].[MediaFiles] ([ID], [GUID], [Title]) VALUES (2, N'643fef15-2ef5-448a-9611-b02e1cc17746', N'Thing')
+INSERT [dbo].[MediaFiles] ([ID], [GUID], [Title]) VALUES (2, N'643fef15-2ef5-448a-9611-b02e1cc17746', N'Actuator')
 GO
 SET IDENTITY_INSERT [dbo].[MediaFiles] OFF
 GO

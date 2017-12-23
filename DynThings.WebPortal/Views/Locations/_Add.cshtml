@@ -32,6 +32,8 @@
                 data: formData,
                 dataType: "json",
                 success: function (resp) {
+                    ServerResponse(resp);
+                    LoadPart_DeviceListDiv();
                 }
             })
 

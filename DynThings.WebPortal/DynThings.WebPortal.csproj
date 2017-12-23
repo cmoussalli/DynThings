@@ -499,15 +499,7 @@
     <Content Include="Content\themes\base\tooltip.css" />
     <Content Include="HtmlPage2.html" />
     <Content Include="Imgs\1.png" />
-    <Content Include="Imgs\10.png" />
     <Content Include="Imgs\2.png" />
-    <Content Include="Imgs\3.png" />
-    <Content Include="Imgs\4.png" />
-    <Content Include="Imgs\5.png" />
-    <Content Include="Imgs\6.png" />
-    <Content Include="Imgs\7.png" />
-    <Content Include="Imgs\8.png" />
-    <Content Include="Imgs\9.png" />
     <Content Include="Imgs\Apps\0.jpg" />
     <Content Include="Imgs\Locations\Default.jpg" />
     <Content Include="Imgs\Views\Default.jpg" />

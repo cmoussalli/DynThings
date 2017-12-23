@@ -1225,9 +1225,9 @@ GO
 SET IDENTITY_INSERT [dbo].[MediaFiles] ON 
 
 GO
-INSERT [dbo].[MediaFiles] ([ID], [GUID], [Title]) VALUES (1, N'd7527c05-abdd-4f8c-a734-89a67462a3ba', N'EndPoint')
+INSERT [dbo].[MediaFiles] ([ID], [GUID], [Title]) VALUES (1, N'd7527c05-abdd-4f8c-a734-89a67462a3ba', N'Sensor')
 GO
-INSERT [dbo].[MediaFiles] ([ID], [GUID], [Title]) VALUES (2, N'643fef15-2ef5-448a-9611-b02e1cc17746', N'Thing')
+INSERT [dbo].[MediaFiles] ([ID], [GUID], [Title]) VALUES (2, N'643fef15-2ef5-448a-9611-b02e1cc17746', N'Actuator')
 GO
 SET IDENTITY_INSERT [dbo].[MediaFiles] OFF
 GO

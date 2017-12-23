@@ -31,6 +31,8 @@ function AttachEventDeviceAddForm() {
             data: formData,
             dataType: "json",
             done: function (resp) {
+                ServerResponse(resp);
+                LoadPart_DeviceListDiv();
             }
         })
 

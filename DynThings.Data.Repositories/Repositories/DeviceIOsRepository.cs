@@ -119,5 +119,14 @@ namespace DynThings.Data.Repositories
             return ios;
         }
         #endregion
+
+        public int Calc(int x, int y)
+        {
+            int result = 0;
+            result = x + y;
+
+            return result;
+
+        }
     }
 }
