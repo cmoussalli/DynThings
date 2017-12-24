@@ -6,7 +6,7 @@ function AttachEventLocationsListPager() {
     $(document).on("click", "#LocationsListPager a[href]", function () {
         var loadingpart = LoadDivLoading();
         $("#divLocationsList").html(loadingpart);
-        
+
         $.ajax({
             url: $(this).attr("href") + "&searchfor=" + $(txtLocationsSearch).val() + '&recordsperpage=0',
             type: 'GET',
@@ -20,6 +20,81 @@ function AttachEventLocationsListPager() {
     });
 }
 
+
+
+//Get List
+function LoadPart_LocationListDiv() {
+    var loadingpart = LoadDivLoading();
+    $("#divLocationsList").html(loadingpart);
+    $.ajax({
+        url: getRootURL() + '/Locations/ListPV?searchfor=' + $('#txtLocationsSearch').val() + '&recordsperpage=0',
+        type: "GET",
+    })
+        .done(function (partialViewResult) {
+            $("#divLocationsList").html(partialViewResult);
+            AttachEventLocationsListPager();
+        });
+    return false;
+};
+
+
+//Get Add
+function LoadPart_DialogLocationAdd() {
+    var loadingpart = LoadDivLoading();
+    $("#modal").html(loadingpart);
+    $.ajax({
+        url: getRootURL() + '/Locations/addpv',
+        //page=" + $("#DynConfigCurrentPage").html,
+        type: "GET",
+    })
+        .done(function (partialViewResult) {
+            $("#modal").html(partialViewResult);
+        });
+}
+
+//Get Details : Main
+function LoadPart_LocationMainDiv() {
+    var loadingpart = LoadDivLoading();
+    $("#divPageDetails").html(loadingpart);
+    $.ajax({
+        url: getRootURL() + '/locations/DetailsMainpv?id=' + selectedLocation,
+        type: "GET",
+    })
+        .done(function (partialViewResult) {
+            $("#divPageDetails").html(partialViewResult);
+        });
+}
+//Attach : Edit Form Submit : Main
+function AttachEventLocationMainEditForm() {
+    $("#LocationEditMainForm").on("submit", function (event) {
+        event.preventDefault();
+        var url = $(this).attr("action");
+        var formData = $(this).serialize();
+        $.ajax({
+            url: url,
+            type: "POST",
+            data: formData,
+            dataType: "json",
+            success: function (resp) {
+                ServerResponse(resp);
+            }
+
+        })
+    });
+}
+
+//Get Details : Map
+function LoadPart_LocationMapDiv() {
+    var loadingpart = LoadDivLoading();
+    $("#divPageDetails").html(loadingpart);
+    $.ajax({
+        url: getRootURL() + '/Locations/DetailsGeoLocationPV?id=' + selectedLocation,
+        type: "GET",
+    })
+        .done(function (partialViewResult) {
+            $("#divPageDetails").html(partialViewResult);
+        });
+}
 //Attach : Edit Form Submit : Map
 function AttachEventLocationMapEditForm(locationID) {
     $("#LocationMapEditForm").on("submit", function (event) {
@@ -32,143 +107,115 @@ function AttachEventLocationMapEditForm(locationID) {
             data: formData,
             dataType: "json",
             success: function (resp) {
+                ServerResponse(resp);
             }
 
-    })
-        $.notify("Location Saved", "success");
-});
+        })
+    });
 }
 
-//Get List
-function LoadPart_LocationListDiv() {
+//Get Details : Things Container
+function LoadPart_LocationThingsContainerDiv() {
     var loadingpart = LoadDivLoading();
-    $("#divLocationsList").html(loadingpart);
+    $("#divPageDetails").html(loadingpart);
     $.ajax({
-        url: getRootURL() + '/Locations/ListPV?searchfor=' + $('#txtLocationsSearch').val() + '&recordsperpage=0',
-        //page=" + $("#DynConfigCurrentPage").html,
+        url: getRootURL() + '/locations/DetailsThingsContainerPV?locationID=' + selectedLocation,
         type: "GET",
     })
         .done(function (partialViewResult) {
-            $("#divLocationsList").html(partialViewResult);
-            AttachEventLocationsListPager();
+            $("#divPageDetails").html(partialViewResult);
         });
     return false;
 };
-
-//Get Details : Main
-function LoadPart_LocationDetailsMainDiv(id) {
+//Get Details : Things List
+function LoadPart_LocationThingsListDiv() {
     var loadingpart = LoadDivLoading();
-    $("#divLocationMain").html(loadingpart);
+    $("#divThingsList").html(loadingpart);
     $.ajax({
-        url: getRootURL() + '/Locations/DetailsMainPV?id=' + id,
-        type: "GET",
-    })
-    .done(function (partialViewResult) {
-        $("#divLocationMain").html(partialViewResult);
-    });
-}
-
-//Get Details : GeoLocation
-function LoadPart_LocationDetailsGeoLocationDiv(id) {
-    var loadingpart = LoadDivLoading();
-    $("#divLocationGeoLocation").html(loadingpart);
-    $.ajax({
-        url: getRootURL() + '/Locations/DetailsGeoLocationPV?id=' + id,
-        type: "GET",
-    })
-    .done(function (partialViewResult) {
-        $("#divLocationGeoLocation").html(partialViewResult);
-    });
-}
-
-//Get Add
-function LoadPart_DialogLocationAdd() {
-    var loadingpart = LoadDivLoading();
-    $("#modal").html(loadingpart);
-    $.ajax({
-        url: getRootURL() + '/Locations/addpv',
-        //page=" + $("#DynConfigCurrentPage").html,
-        type: "GET",
-    })
-    .done(function (partialViewResult) {
-        $("#modal").html(partialViewResult);
-    });
-}
-
-//Get Edit
-function LoadPart_DialogLocationMainEdit(id) {
-    var loadingpart = LoadDivLoading();
-    $("#modal").html(loadingpart);
-    $.ajax({
-        url: getRootURL() + '/locations/editMainpv?id=' + id,
-        type: "GET",
-    })
-    .done(function (partialViewResult) {
-        $("#modal").html(partialViewResult);
-    });
-}
-
-//Get Delete
-function LoadPart_DialogLocationDelete(id) {
-    var loadingpart = LoadDivLoading();
-    $("#modal").html(loadingpart);
-    $.ajax({
-        url: getRootURL() + '/Locations/DeletePV?id=' + id,
-        //page=" + $("#DynConfigCurrentPage").html,
-        type: "GET",
-    })
-    .done(function (partialViewResult) {
-        $("#modal").html(partialViewResult);
-    });
-}
-
-//Get Things List
-function LoadPart_LocationThingsByLocationIDDiv(locationID) {
-    var loadingpart = LoadDivLoading();
-    $("#divLnkLocationThingsList").html(loadingpart);
-    $.ajax({
-        url: getRootURL() + '/locations/LnkLocationThingsListGridPV?searchfor=' + $(txtThingsSearch).val() + '&locationID=' + locationID + '&recordsperpage=0',
+        url: getRootURL() + '/locations/DetailsThingsListPV?searchfor=' + $(txtThingsSearch).val() + '&locationID=' + selectedLocation + '&recordsperpage=0',
         type: "GET",
     })
         .done(function (partialViewResult) {
-            $("#divLnkLocationThingsList").html(partialViewResult);
-            //AttachEventLnkLocationThingsListPager();
+            $("#divThingsList").html(partialViewResult);
         });
     return false;
 };
-
-//Get Devices List
-function LoadPart_LocationDevicesByLocationIDDiv(locationID) {
-    var loadingpart = LoadDivLoading();
-    $("#divLnkLocationDevicesList").html(loadingpart);
-    $.ajax({
-        url: getRootURL() + '/locations/LnkLocationDevicesListGridPV?searchfor=' + $(txtDevicesSearch).val() + '&locationID=' + locationID + '&recordsperpage=0',
-        type: "GET",
-    })
-        .done(function (partialViewResult) {
-            $("#divLnkLocationDevicesList").html(partialViewResult);
-            AttachEventLnkLocationDevicesListPager();
-        });
-    return false;
-};
-
-//Attach :LnkLocationDevices Pager
-function AttachEventLnkLocationDevicesListPager() {
-    $(document).on("click", "#LnkLocationDevicesListPager a[href]", function () {
+//Attach : Things List Pager
+function AttachEventLocationThingsListPager() {
+    $(document).on("click", "#DetailsThingsListPager a[href]", function () {
         var loadingpart = LoadDivLoading();
-        $("#divLnkLocationDevicesList").html(loadingpart);
+        $("#divThingsList").html(loadingpart);
+
+        $.ajax({
+            url: $(this).attr("href") + "&searchfor=" + $(txtThingsSearch).val() + '&recordsperpage=0',
+            type: 'GET',
+            cache: false,
+            success: function (result) {
+                $("#divThingsList").html(result);
+                return false;
+            }
+        });
+        return false;
+    });
+}
+
+//Get Details : Devices Container
+function LoadPart_LocationDevicesContainerDiv() {
+    var loadingpart = LoadDivLoading();
+    $("#divPageDetails").html(loadingpart);
+    $.ajax({
+        url: getRootURL() + '/locations/DetailsDevicesContainerPV?locationID=' + selectedLocation,
+        type: "GET",
+    })
+        .done(function (partialViewResult) {
+            $("#divPageDetails").html(partialViewResult);
+        });
+    return false;
+};
+//Get Details : Devices List
+function LoadPart_LocationDevicesListDiv() {
+    var loadingpart = LoadDivLoading();
+    $("#divDevicesList").html(loadingpart);
+    $.ajax({
+        url: getRootURL() + '/locations/DetailsDevicesListPV?searchfor=' + $(txtDevicesSearch).val() + '&locationID=' + selectedLocation + '&recordsperpage=0',
+        type: "GET",
+    })
+        .done(function (partialViewResult) {
+            $("#divDevicesList").html(partialViewResult);
+        });
+    return false;
+};
+//Attach : Devices List Pager
+function AttachEventLocationDevicesListPager() {
+    $(document).on("click", "#DetailsDevicesListPager a[href]", function () {
+        var loadingpart = LoadDivLoading();
+        $("#divDevicesList").html(loadingpart);
 
         $.ajax({
             url: $(this).attr("href") + "&searchfor=" + $(txtDevicesSearch).val() + '&recordsperpage=0',
             type: 'GET',
             cache: false,
             success: function (result) {
-                $("#divLnkLocationDevicesList").html(result);
+                $("#divDevicesList").html(result);
                 return false;
             }
         });
         return false;
     });
+}
+
+//Get Delete
+function LoadPart_LocationDelete() {
+    var loadingpart = LoadDivLoading();
+    $("#modal").html(loadingpart);
+    $.ajax({
+        url: getRootURL() + '/Locations/DeletePV?id=' + selectedLocation,
+        //page=" + $("#DynConfigCurrentPage").html,
+        type: "GET",
+    })
+        .done(function (partialViewResult) {
+            $("#modal").html(partialViewResult);
+        });
 }
 
 
@@ -181,9 +228,9 @@ function LoadPart_LocationLookup(placeHolder) {
         url: getRootURL() + '/Locations/LookupPV',
         type: "GET",
     })
-    .done(function (partialViewResult) {
-        $(placeHolder).html(partialViewResult);
-    });
+        .done(function (partialViewResult) {
+            $(placeHolder).html(partialViewResult);
+        });
 }
 //Get Lookup List PV
 function LoadPart_LocationListLookupDiv() {
@@ -222,14 +269,15 @@ function SelectLocationFromLookUp(value) {
     EventSelectLocation();
 }
 
-
 function AttachDeviceToLocation(locationID, DeviceID) {
     $.ajax({
         url: getRootURL() + '/Locations/AttachDevice?locationID=' + locationID + '&DeviceID=' + DeviceID,
         type: "POST",
     })
-    HideModal();
-    LoadPart_LocationDevicesByLocationIDDiv(selectedLocation);
+        .done(function (partialViewResult) {
+            HideModal();
+            LoadPart_LocationDevicesListDiv();
+        });
 }
 
 function DeattachDeviceFromLocation(lnkID) {
@@ -237,17 +285,21 @@ function DeattachDeviceFromLocation(lnkID) {
         url: getRootURL() + '/Locations/DeAttachDevice?linkID=' + lnkID,
         type: "POST",
     })
-    LoadPart_LocationDevicesByLocationIDDiv(selectedLocation);
+        .done(function (partialViewResult) {
+            HideModal();
+            LoadPart_LocationDevicesListDiv();
+        });
 }
-
 
 function AttachThingToLocation(locationID, ThingID) {
     $.ajax({
         url: getRootURL() + '/Locations/AttachThing?locationID=' + locationID + '&ThingID=' + ThingID,
         type: "POST",
     })
-    HideModal();
-    LoadPart_LocationThingsByLocationIDDiv(selectedLocation);
+        .done(function (partialViewResult) {
+            HideModal();
+            LoadPart_LocationThingsListDiv();
+        });
 }
 
 function DeattachThingFromLocation(lnkID) {
@@ -255,6 +307,9 @@ function DeattachThingFromLocation(lnkID) {
         url: getRootURL() + '/Locations/DeAttachThing?linkID=' + lnkID,
         type: "POST",
     })
-    LoadPart_LocationThingsByLocationIDDiv(selectedLocation);
+        .done(function (partialViewResult) {
+            HideModal();
+            LoadPart_LocationThingsListDiv();
+        });
 }
 

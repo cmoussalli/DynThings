@@ -4,92 +4,72 @@
     ViewBag.Title = "Details";
 }
 
-<div class="container">
-    <div class="page-header">
-        <h1>Location Details</h1>
-    </div>
+<!--Page Title-->
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<div id="page-title">
     <div class="row">
-        <div class="col-lg-12">
+        <div class="col-lg-9">
+            <h1 class="page-header text-overflow">Location: @Model.Title</h1>
+            <h5>Manage the locations.</h5>
         </div>
-    </div>
-    <div class="row">
-        <div class="col-md-12">
-            <ul class="nav nav-tabs">
-                <li class="active"><a data-toggle="tab" href="#tabLocationmain">Main</a></li>
-                <li><a data-toggle="tab" href="#tabLocationGeoLocation">Geo Location</a></li>
-                <li><a data-toggle="tab" href="#tabLocationThings">Things</a></li>
-                <li><a data-toggle="tab" href="#tabLocationDevices">Devices</a></li>
-                <li><a data-toggle="tab" href="#tabLocationDelete">Delete</a></li>
-            </ul>
-            <div class="panel panel-default">
-                <div class="panel-body">
-                    <div class="tab-content">
-                        <div id="tabLocationmain" class="tab-pane fade in active">
-                            <div id="divLocationMain">
-                            </div>
-                        </div>
-                        <div id="tabLocationGeoLocation" class="tab-pane fade">
-                            <div id="divLocationGeoLocation">
-                            </div>
-                        </div>
-                        <div id="tabLocationThings" class="tab-pane fade">
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <button type="button" class="btn btn-info" onclick="LoadPart_ThingLookup('#modal')" data-toggle="modal" data-target="#mdl">Import</button>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="input-group">
-                                        <input type="search" id="txtThingsSearch" class="form-control" onkeydown="if (event.keyCode == 13) { alert(@Model.ID); return false; }" />
-                                        <div class="input-group-btn">
-                                            <button type="button" class="btn btn-primary" onclick="LoadPart_LocationThingsByLocationIDDiv(@Model.ID)">Search</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <br />
-                            <div class="well well-lg">
-                                <div id="divLnkLocationThingsList">
-                                </div>
-                            </div>
-                        </div>
-                        <div id="tabLocationDevices" class="tab-pane fade">
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <button type="button" class="btn btn-info" onclick="LoadPart_DeviceLookup('#modal')" data-toggle="modal" data-target="#mdl">Import</button>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="input-group">
-                                        <input type="search" id="txtDevicesSearch" class="form-control" onkeydown="if (event.keyCode == 13) { alert(@Model.ID); return false; }" />
-                                        <div class="input-group-btn">
-                                            <button type="button" class="btn btn-primary" onclick="LoadPart_LocationDevicesByLocationIDDiv(@Model.ID)">Search</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <br />
-                            <div class="well well-lg">
-                                <div id="divLnkLocationDevicesList">
-                                </div>
-                            </div>
-                        </div>
-                        @*<div id="tabLocationDevkeys" class="tab-pane fade">
-                                <div id="divLocationDevkeys">
-                                </div>
-                            </div>*@
-                        <div id="tabLocationDelete" class="tab-pane fade">
-                            <div id="divLocationDelete">
-                                <button type="button" class="btn btn-danger" onclick="LoadPart_DialogLocationDelete(@Model.ID)" data-toggle="modal" data-target="#mdl">Delete</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+
+        <div class="col-lg-3">
+            <div class="pull-right">
+                <br />
+                <a href="~/Locations"> < Back to Locations List</a>
             </div>
         </div>
     </div>
 </div>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--End page title-->
+
+<div id="page-content">
+    <div class="fixed-fluid">
+        <div class="fixed-sm-200 fixed-lg-250 pull-sm-left">
+            <div class="">
+                <div class="text-center bg-info">
+                    <img src="~/Imgs/Locations/Default.jpg" style="height:100%;width:100%" />
+                    <ul class="list-unstyled text-center pad-top mar-no row">
+                        <li class="col-xs-12">
+                            <span class="text-lg ">@Model.Title</span>
+                            <br /><br />
+
+                        </li>
+                        @*<li class="col-xs-4">
+                                <span class="text-lg text-semibold">23K</span>
+                                <p class="text-sm mar-no">Followers</p>
+                            </li>
+                            <li class="col-xs-4">
+                                <span class="text-lg text-semibold">278</span>
+                                <p class="text-sm mar-no">Post</p>
+                            </li>*@
+                    </ul>
+                </div>
+                <div class="list-group bg-trans pad-btm">
+                    <a class="list-group-item" onclick="LoadPart_LocationMainDiv();" style="cursor: pointer;">Main</a>
+                    <a class="list-group-item" onclick="LoadPart_LocationMapDiv();" style="cursor: pointer;">Geo Location</a>
+                    <a class="list-group-item" onclick="LoadPart_LocationDevicesContainerDiv();" style="cursor: pointer;">Devices</a>
+                    <a class="list-group-item" onclick="LoadPart_LocationThingsContainerDiv();" style="cursor: pointer;">Things</a>
+                    <a class="list-group-item" onclick="LoadPart_LocationDelete();" data-toggle="modal" data-target="#mdl" style="cursor: pointer;">Delete</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="fluid">
+            <div class="fixed-fluid">
+                <div id="divPageDetails">
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
 
 @section scriptfiles{
-    <script src="~/Scripts/MsMaps/mapcontrol.js"></script>
+    <script  src='http://www.bing.com/api/maps/mapcontrol?callback=GetMap'></script>
     <script src="~/Assets/Scripts/DynScripts/Locations.js"></script>
     <script src="~/Assets/Scripts/DynScripts/Devices.js"></script>
     <script src="~/Assets/Scripts/DynScripts/Things.js"></script>
@@ -99,10 +79,7 @@
     <script>
         $(document).ready(function () {
             selectedLocation = '@Model.ID'
-            LoadPart_LocationDetailsMainDiv('@Model.ID');
-            LoadPart_LocationDetailsGeoLocationDiv('@Model.ID');
-            LoadPart_LocationDevicesByLocationIDDiv('@Model.ID');
-            LoadPart_LocationThingsByLocationIDDiv('@Model.ID');
+            LoadPart_LocationMainDiv();
         });
     </script>
 }

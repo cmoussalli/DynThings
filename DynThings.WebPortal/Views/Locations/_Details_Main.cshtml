@@ -1,10 +1,49 @@
 ﻿@model DynThings.Data.Models.Location
-<div class="right">
-    <button type="button" class="btn btn-info pull-right" onclick="LoadPart_DialogLocationMainEdit(@Model.ID)" data-toggle="modal" data-target="#mdl">Edit</button>
+
+<div class="panel">
+    <div class="panel-heading">
+        <div class="panel-control">
+            <button class="btn btn-default" onclick="LoadPart_LocationMainDiv();">
+                <i class="demo-psi-repeat-2 icon-fw"></i> Refresh
+            </button>
+        </div>
+        <h3 class="panel-title">Main</h3>
+    </div>
+
+    <div class="panel-body">
+        <div class="pad-btm form-inline">
+            <div class="row">
+                <div class="col-sm-6 table-toolbar-left">
+
+                </div>
+            </div>
+        </div>
+
+        @using (Html.BeginForm("DetailsMainPV", "Locations", FormMethod.Post, new { id = "LocationEditMainForm" }))
+        {
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @Html.HiddenFor(model => model.ID)
+
+
+            @Html.LabelFor(model => model.Title, htmlAttributes: new { @class = "" })
+            @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
+            <br />
+
+                @Html.LabelFor(model => model.isActive, htmlAttributes: new { @class = "" })
+                @Html.EditorFor(model => model.isActive, new { htmlAttributes = new { @class = "" } })
+                @Html.ValidationMessageFor(model => model.isActive, "", new { @class = "text-danger" })
+
+
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">Save changes</button>
+                </div>
+        }
+    </div>
 </div>
-
-<strong>Title</strong><br>
-@Model.Title<br><br>
-
-<strong>Is Active</strong><br>
-@Model.isActive<br><br>
+<script>
+    $(document).ready(function () {
+        AttachEventLocationMainEditForm();
+    });
+</script>

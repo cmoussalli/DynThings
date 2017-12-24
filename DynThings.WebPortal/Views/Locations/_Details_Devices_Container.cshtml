@@ -1,0 +1,61 @@
+﻿
+<div class="panel">
+    <div class="panel-heading">
+        <div class="panel-control">
+            <button class="btn btn-default" onclick="LoadPart_LocationDevicesContainerDiv();">
+                <i class="demo-psi-repeat-2 icon-fw"></i> Refresh
+            </button>
+        </div>
+        <h3 class="panel-title">Devices</h3>
+    </div>
+
+    <div class="panel-body">
+        <div class="pad-btm form-inline">
+            <div class="row">
+                <div class="col-sm-6 table-toolbar-left">
+                    <button type="button" class="btn btn-info" onclick="LoadPart_DeviceLookup('#modal')" data-toggle="modal" data-target="#mdl">Import</button>
+                    @*<button class="btn btn-default"><i class="demo-pli-printer"></i></button>
+                        <div class="btn-group">
+                            <button class="btn btn-default"><i class="demo-pli-information"></i></button>
+                            <button class="btn btn-default"><i class="demo-pli-recycling"></i></button>
+                        </div>*@
+                </div>
+                <div class="col-sm-6 table-toolbar-right">
+                    <div class="form-group">
+                        <input type="search" id="txtDevicesSearch" class="form-control" onkeydown="if (event.keyCode == 13) { LoadPart_LocationDevicesListDiv(); return false; }" />
+                    </div>
+                    <div class="btn-group">
+
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-primary" onclick="LoadPart_LocationDevicesListDiv()">Search</button>
+                            <button class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                                <i class="demo-pli-gear"></i>
+                                <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu dropdown-menu-right" role="menu">
+                                <li><a href="#">Remove all</a></li>
+
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="divDevicesList" />
+
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        LoadPart_LocationDevicesListDiv();
+
+    });
+
+    function EventSelectDevice() {
+        AttachDeviceToLocation(selectedLocation, selectedDevice);
+
+    }
+
+</script>

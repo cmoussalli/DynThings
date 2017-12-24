@@ -10,7 +10,7 @@
             <th>Remove Time Stamp</th>
             <th>Removed by</th>
             <th>Status</th>
-            <th></th>>
+            <th></th>
         </tr>
     </thead>
     <tbody>
@@ -59,13 +59,15 @@
     </tbody>
 </table>
 
-<div id="LnkLocationDevicesListPager">
-    <input id="LnkLocationDevicesCurrentPage" value="@Model.PageNumber.ToString()" hidden />
-    @Html.PagedListPager(Model, page => Url.Action("LnkLocationDevicesListGridPV", "Locations", new { page }) + "&LocationID=1")
+<div id="DetailsDevicesListPager">
+    <input id="DetailsDevicesCurrentPage" value="@Model.PageNumber.ToString()" hidden />
+    @Html.PagedListPager(Model, page => Url.Action("DetailsDevicesListPV", "Locations", new { page }) + "&LocationID=" + Model[0].LocationID)
 </div>
 
 <script>
-    function EventSelectDevice() {
-        AttachDeviceToLocation(selectedLocation, selectedDevice);
-    }
+      $(document).ready(function () {
+        AttachEventLocationDevicesListPager();
+    });
+
+
 </script>

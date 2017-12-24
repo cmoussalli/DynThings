@@ -1,40 +1,62 @@
 ﻿@model DynThings.Data.Models.Location
-<div class="row">
-    <div class="col-md-9">
-        <div id='locationGeoLocationMap' style="position: relative; width: 100%; height: 100%; height: 400px"></div>
-    </div>
-    <div class="col-md-3">
-        @using (Html.BeginForm("EditGeoLocationPV", "Locations", FormMethod.Post, new { id = "LocationMapEditForm" }))
-        {
-            @Html.AntiForgeryToken()
-            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-            @Html.HiddenFor(model => model.ID)
-
-
-            <span>Latitude</span>
-            @Html.EditorFor(model => model.LatitudeX, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.LatitudeX, "", new { @class = "text-danger" })
-            <br />
-
-            <span>Longitude</span>
-            @Html.LabelFor(model => model.LongitudeY, htmlAttributes: new { @class = "" })
-            @Html.EditorFor(model => model.LongitudeY, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.LongitudeY, "", new { @class = "text-danger" })
-            <br />
-
-            <button type="button" class="btn btn-info" onclick="LocationGeoLocationMap();">Reload</button>
-            <button type="submit" class="btn btn-primary">Save changes</button>
-        }
+<div class="panel">
+    <div class="panel-heading">
+        <div class="panel-control">
+            <button class="btn btn-default" onclick="LoadPart_LocationMapDiv();">
+                <i class="demo-psi-repeat-2 icon-fw"></i> Refresh
+            </button>
+        </div>
+        <h3 class="panel-title">Geo Location</h3>
     </div>
 
+    <div class="panel-body">
+        <div class="pad-btm form-inline">
+            <div class="row">
+                <div class="col-sm-6 table-toolbar-left">
+
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-9">
+                <div id='locationGeoLocationMap' style="position: relative; width: 100%; height: 100%; height: 400px"></div>
+            </div>
+            <div class="col-md-3">
+                @using (Html.BeginForm("DetailsGeoLocationPV", "Locations", FormMethod.Post, new { id = "LocationMapEditForm" }))
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    @Html.HiddenFor(model => model.ID)
+
+
+                    <span>Latitude</span>
+                    @Html.EditorFor(model => model.LatitudeX, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.LatitudeX, "", new { @class = "text-danger" })
+                    <br />
+
+                    <span>Longitude</span>
+                    @Html.LabelFor(model => model.LongitudeY, htmlAttributes: new { @class = "" })
+                    @Html.EditorFor(model => model.LongitudeY, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.LongitudeY, "", new { @class = "text-danger" })
+                    <br />
+
+                    <button type="button" class="btn btn-info" onclick="LocationGeoLocationMap();">Reload</button>
+                    <button type="submit" class="btn btn-primary">Save changes</button>
+                }
+            </div>
+        </div>
+
+    </div>
 </div>
+
 
 <script>
     var locationMap = null;
     function LocationGeoLocationMap() {
         locationMap = new Microsoft.Maps.Map(document.getElementById('locationGeoLocationMap')
             , {
-                credentials: 'Aq96lGpMhTmC6x18TL2-qS4ccUYLNnc9IW6FSN5E1MW5O1td3LMyiYzEBi3w6S7f'
+                credentials: '@DynThings.Core.Config.MapKey'
                 , enableClickableLogo: false
                 , enableSearchLogo: false
                 , showDashboard: true
@@ -42,9 +64,10 @@
                 , useInertia: true
                 // ,disablePanning: true
                 //, disableZooming: true
-                ,mapTypeId: Microsoft.Maps.MapTypeId.birdseye
+                //,mapTypeId: Microsoft.Maps.MapTypeId.birdseye
                 , center: new Microsoft.Maps.Location( @Model.LatitudeX , @Model.LongitudeY),
-                zoom: 17 });
+                zoom: 17
+            });
 
         var offset = new Microsoft.Maps.Point(0, 5);
         var pushpinOptions = { text: '', visible: true, textOffset: offset };
@@ -73,7 +96,7 @@
             var pushpin= locationMap.entities.get(i);
             if (pushpin instanceof Microsoft.Maps.Pushpin) {
                 locationMap.entities.removeAt(i);
-              
+
             } ;
         }
     }

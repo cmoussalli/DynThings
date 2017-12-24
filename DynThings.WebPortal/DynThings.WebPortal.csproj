@@ -741,6 +741,9 @@
     <Content Include="Views\Apps\_App_ThingTypesAdd.cshtml" />
     <Content Include="Views\Apps\_App_ThingTypesEdit.cshtml" />
     <Content Include="Views\Apps\_App_ThingTypesDelete.cshtml" />
+    <Content Include="Views\Locations\_Details_Devices_Container.cshtml" />
+    <Content Include="Views\Locations\_Details_Things_Container.cshtml" />
+    <Content Include="Views\Locations\_Details_Things_List.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Assets\Imgs\Wizard.png" />
@@ -924,7 +927,7 @@
     <Content Include="Views\LocationViewTypes\Index.cshtml" />
     <Content Include="Views\Locations\Create.cshtml" />
     <Content Include="Views\Locations\Details.cshtml" />
-    <Content Include="Views\Locations\_EditMain.cshtml" />
+    <Content Include="Views\Locations\_Details_Main.cshtml" />
     <Content Include="Views\Locations\Index.cshtml" />
     <Content Include="Views\Endpoints\Details.cshtml" />
     <Content Include="Views\Endpoints\Index.cshtml" />
@@ -975,7 +978,6 @@
     <Content Include="Views\LocationViews\_LocationsList.cshtml" />
     <Content Include="Views\Locations\_List.cshtml" />
     <Content Include="Views\Locations\_Add.cshtml" />
-    <Content Include="Views\Locations\_Details_Main.cshtml" />
     <Content Include="Views\Locations\_Details_GeoLocation.cshtml" />
     <Content Include="Views\Locations\Lookup\List.cshtml" />
     <Content Include="Views\Locations\Lookup\Index.cshtml" />
@@ -986,7 +988,7 @@
     <Content Include="Views\Endpoints\Lookup\List.cshtml" />
     <Content Include="Views\Devices\Lookup\Index.cshtml" />
     <Content Include="Views\Devices\Lookup\List.cshtml" />
-    <Content Include="Views\Locations\_DevicesList.cshtml" />
+    <Content Include="Views\Locations\_Details_Devices_List.cshtml" />
     <Content Include="Views\Config\_Main.cshtml" />
     <Content Include="Views\Config\_Security.cshtml" />
     <Content Include="Views\Config\_Grids.cshtml" />

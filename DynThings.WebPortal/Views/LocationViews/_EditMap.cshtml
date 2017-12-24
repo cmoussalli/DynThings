@@ -60,12 +60,31 @@
 
 
 <script>
-    $(document).ready(function () {
-        getEditLocationViewMap(@Model.X,@Model.Y,@Model.Z);
+    var map = null;
+    function getEditLocationViewMap() {
+        map = new Microsoft.Maps.Map(document.getElementById('myMap')
+            , {
+                credentials: '@DynThings.Core.Config.MapKey'
+                , enableClickableLogo: false
+                , enableSearchLogo: false
+                , showDashboard: true
+                , showMapTypeSelector: true
+                , useInertia: true
+                // ,disablePanning: true
+                //, disableZooming: true
+                //, mapTypeId: Microsoft.Maps.MapTypeId.birdseye
+                , center: new Microsoft.Maps.Location(@Model.X,@Model.Y), zoom: @Model.Z
+            });
+
+        var viewchangeend = Microsoft.Maps.Events.addHandler(map, 'viewchangeend', function (e) {
+            onViewChangeEnd(e);
+        });
+    }
+
+     $(document).ready(function () {
+        getEditLocationViewMap();
         AttachEventLocationViewMapEditForm();
     });
-
-
 </script>
 
 
