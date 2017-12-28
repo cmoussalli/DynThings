@@ -7,11 +7,11 @@ using System.Threading.Tasks;
 
 namespace DynThings.Data.Models.ViewModels
 {
-    public class ThingExtenstionProperty
+    public class ThingExtensionProperty
     {
         public long ThingID { get; set; }
         public string ThingTitle { get; set; }
-        public VMThingExtenstion ThingExtenstion { get; set; }
+        public VMThingExtension ThingExtension { get; set; }
         public VMThingCategory ThingCategory { get; set; }
         public VMDataType DataType { get; set; }
         public long ValueID { get; set; }
@@ -19,7 +19,7 @@ namespace DynThings.Data.Models.ViewModels
 
         #region Converters
 
-        public void ConvertFromQuery_GetThingExtenstionsList(GetThingExtenstions_Result source)
+        public void ConvertFromQuery_GetThingExtensionsList(GetThingExtensions_Result source)
         {
             VMDataType vmdt = new VMDataType();
             vmdt.ID = source.DataTypeID;
@@ -31,14 +31,14 @@ namespace DynThings.Data.Models.ViewModels
             vmtc.Title = source.ThingCategoryTitle;
             this.ThingCategory = vmtc;
 
-            VMThingExtenstion vmte = new VMThingExtenstion();
-            vmte.ID = source.ThingExtenstionID;
-            vmte.Title = source.ThingExtenstionTitle;
-            vmte.Code = source.ThingExtenstionCode;
-            vmte.GUID = source.ThingExtenstionGUID;
+            VMThingExtension vmte = new VMThingExtension();
+            vmte.ID = source.ThingExtensionID;
+            vmte.Title = source.ThingExtensionTitle;
+            vmte.Code = source.ThingExtensionCode;
+            vmte.GUID = source.ThingExtensionGUID;
             vmte.ThingCategoryID = source.CategoryID;
             vmte.IsList = source.IsList;
-            this.ThingExtenstion = vmte;
+            this.ThingExtension = vmte;
 
             this.ThingID = source.ThingID;
             this.ThingTitle = source.ThingTitle;

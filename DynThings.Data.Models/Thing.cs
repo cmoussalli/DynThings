@@ -32,7 +32,7 @@ public partial class Thing
 
         this.ThingEnds = new HashSet<ThingEnd>();
 
-        this.ThingExtenstionValues = new HashSet<ThingExtenstionValue>();
+        this.ThingExtensionValues = new HashSet<ThingExtensionValue>();
 
     }
 
@@ -77,7 +77,7 @@ public partial class Thing
 
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
 
-    public virtual ICollection<ThingExtenstionValue> ThingExtenstionValues { get; set; }
+    public virtual ICollection<ThingExtensionValue> ThingExtensionValues { get; set; }
 
 }
 

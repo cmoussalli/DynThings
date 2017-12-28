@@ -9,7 +9,7 @@ namespace DynThings.Data.Models
 {
     public partial class Thing
     {
-        //public List<ExtensionProperty> GetExtenstionProperties()
+        //public List<ExtensionProperty> GetExtensionProperties()
         //{
         //    List<ExtensionProperty> result = new List<ExtensionProperty>();
 

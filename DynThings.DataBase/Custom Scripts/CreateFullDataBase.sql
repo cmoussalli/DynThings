@@ -188,12 +188,12 @@ FROM            dbo.EndPointIOs AS ios INNER JOIN
 GROUP BY ios.ThingID, e.TypeID, ios.IOTypeID, ios.EndPointTypeID
 
 GO
-/****** Object:  Table [dbo].[ThingExtenstions]    Script Date: 2017-09-22 12:35:17 PM ******/
+/****** Object:  Table [dbo].[ThingExtensions]    Script Date: 2017-09-22 12:35:17 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE TABLE [dbo].[ThingExtenstions](
+CREATE TABLE [dbo].[ThingExtensions](
 	[ID] [bigint] IDENTITY(1,1) NOT NULL,
 	[GUID] [uniqueidentifier] NOT NULL,
 	[Code] [nvarchar](50) NULL,
@@ -201,7 +201,7 @@ CREATE TABLE [dbo].[ThingExtenstions](
 	[Title] [nvarchar](128) NOT NULL,
 	[DataTypeID] [int] NOT NULL,
 	[IsList] [bit] NOT NULL,
- CONSTRAINT [PK_ThingExtenstions] PRIMARY KEY CLUSTERED 
+ CONSTRAINT [PK_ThingExtensions] PRIMARY KEY CLUSTERED 
 (
 	[ID] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
@@ -243,17 +243,17 @@ CREATE TABLE [dbo].[DataTypes](
 ) ON [PRIMARY]
 
 GO
-/****** Object:  Table [dbo].[ThingExtenstionValues]    Script Date: 2017-09-22 12:35:17 PM ******/
+/****** Object:  Table [dbo].[ThingExtensionValues]    Script Date: 2017-09-22 12:35:17 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE TABLE [dbo].[ThingExtenstionValues](
+CREATE TABLE [dbo].[ThingExtensionValues](
 	[ID] [bigint] IDENTITY(1,1) NOT NULL,
-	[ThingExtenstionID] [bigint] NOT NULL,
+	[ThingExtensionID] [bigint] NOT NULL,
 	[ThingID] [bigint] NULL,
 	[Valu] [nvarchar](128) NOT NULL,
- CONSTRAINT [PK_ThingExtenstionValues] PRIMARY KEY CLUSTERED 
+ CONSTRAINT [PK_ThingExtensionValues] PRIMARY KEY CLUSTERED 
 (
 	[ID] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
@@ -286,8 +286,8 @@ CREATE VIEW [dbo].[VThingExtensionValues]
 AS
 SELECT        v.ID, tc.ID AS ThingCategoryID, tc.Title AS ThingCategoryTitle, t.ID AS ThingID, t.Title AS ThingTitle, e.Title AS ValueTitle, e.DataTypeID, dt.Title AS DataTypeTitle, e.IsList, v.Valu AS Value
 FROM            dbo.ThingCategorys AS tc INNER JOIN
-                         dbo.ThingExtenstionValues AS v INNER JOIN
-                         dbo.ThingExtenstions AS e ON v.ThingExtenstionID = e.ID INNER JOIN
+                         dbo.ThingExtensionValues AS v INNER JOIN
+                         dbo.ThingExtensions AS e ON v.ThingExtensionID = e.ID INNER JOIN
                          dbo.Things AS t ON v.ThingID = t.ID INNER JOIN
                          dbo.DataTypes AS dt ON e.DataTypeID = dt.ID ON tc.ID = e.ThingCategoryID AND tc.ID = t.CategoryID
 
@@ -518,12 +518,12 @@ CREATE TABLE [dbo].[AppThingCategorys](
 ) ON [PRIMARY]
 
 GO
-/****** Object:  Table [dbo].[AppThingExtenstions]    Script Date: 2017-09-22 12:35:17 PM ******/
+/****** Object:  Table [dbo].[AppThingExtensions]    Script Date: 2017-09-22 12:35:17 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE TABLE [dbo].[AppThingExtenstions](
+CREATE TABLE [dbo].[AppThingExtensions](
 	[ID] [bigint] IDENTITY(1,1) NOT NULL,
 	[GUID] [uniqueidentifier] NOT NULL,
 	[Code] [nvarchar](50) NOT NULL,
@@ -532,7 +532,7 @@ CREATE TABLE [dbo].[AppThingExtenstions](
 	[Title] [nvarchar](128) NOT NULL,
 	[DataTypeID] [int] NOT NULL,
 	[IsList] [bit] NOT NULL,
- CONSTRAINT [PK_AppThingExtenstions] PRIMARY KEY CLUSTERED 
+ CONSTRAINT [PK_AppThingExtensions] PRIMARY KEY CLUSTERED 
 (
 	[ID] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
@@ -1399,15 +1399,15 @@ REFERENCES [dbo].[Apps] ([ID])
 GO
 ALTER TABLE [dbo].[AppThingCategorys] CHECK CONSTRAINT [FK__AppThingC__AppID__1A54DAB7]
 GO
-ALTER TABLE [dbo].[AppThingExtenstions]  WITH CHECK ADD  CONSTRAINT [FK__AppThingE__AppID__1960B67E] FOREIGN KEY([AppID])
+ALTER TABLE [dbo].[AppThingExtensions]  WITH CHECK ADD  CONSTRAINT [FK__AppThingE__AppID__1960B67E] FOREIGN KEY([AppID])
 REFERENCES [dbo].[Apps] ([ID])
 GO
-ALTER TABLE [dbo].[AppThingExtenstions] CHECK CONSTRAINT [FK__AppThingE__AppID__1960B67E]
+ALTER TABLE [dbo].[AppThingExtensions] CHECK CONSTRAINT [FK__AppThingE__AppID__1960B67E]
 GO
-ALTER TABLE [dbo].[AppThingExtenstions]  WITH CHECK ADD  CONSTRAINT [FK__AppThingE__DataT__25C68D63] FOREIGN KEY([DataTypeID])
+ALTER TABLE [dbo].[AppThingExtensions]  WITH CHECK ADD  CONSTRAINT [FK__AppThingE__DataT__25C68D63] FOREIGN KEY([DataTypeID])
 REFERENCES [dbo].[DataTypes] ([ID])
 GO
-ALTER TABLE [dbo].[AppThingExtenstions] CHECK CONSTRAINT [FK__AppThingE__DataT__25C68D63]
+ALTER TABLE [dbo].[AppThingExtensions] CHECK CONSTRAINT [FK__AppThingE__DataT__25C68D63]
 GO
 ALTER TABLE [dbo].[AppUserTokens]  WITH CHECK ADD FOREIGN KEY([AppID])
 REFERENCES [dbo].[Apps] ([ID])
@@ -1606,22 +1606,22 @@ ON DELETE CASCADE
 GO
 ALTER TABLE [dbo].[ThingEnds] CHECK CONSTRAINT [FK__ThingEnds__Thing__7E42ABEE]
 GO
-ALTER TABLE [dbo].[ThingExtenstions]  WITH CHECK ADD  CONSTRAINT [FK__ThingExte__DataT__5C8CB268] FOREIGN KEY([DataTypeID])
+ALTER TABLE [dbo].[ThingExtensions]  WITH CHECK ADD  CONSTRAINT [FK__ThingExte__DataT__5C8CB268] FOREIGN KEY([DataTypeID])
 REFERENCES [dbo].[DataTypes] ([ID])
 GO
-ALTER TABLE [dbo].[ThingExtenstions] CHECK CONSTRAINT [FK__ThingExte__DataT__5C8CB268]
+ALTER TABLE [dbo].[ThingExtensions] CHECK CONSTRAINT [FK__ThingExte__DataT__5C8CB268]
 GO
-ALTER TABLE [dbo].[ThingExtenstions]  WITH CHECK ADD  CONSTRAINT [FK__ThingExte__Thing__6339AFF7] FOREIGN KEY([ThingCategoryID])
+ALTER TABLE [dbo].[ThingExtensions]  WITH CHECK ADD  CONSTRAINT [FK__ThingExte__Thing__6339AFF7] FOREIGN KEY([ThingCategoryID])
 REFERENCES [dbo].[ThingCategorys] ([ID])
 GO
-ALTER TABLE [dbo].[ThingExtenstions] CHECK CONSTRAINT [FK__ThingExte__Thing__6339AFF7]
+ALTER TABLE [dbo].[ThingExtensions] CHECK CONSTRAINT [FK__ThingExte__Thing__6339AFF7]
 GO
-ALTER TABLE [dbo].[ThingExtenstionValues]  WITH CHECK ADD  CONSTRAINT [FK__ThingExte__Thing__5D80D6A1] FOREIGN KEY([ThingExtenstionID])
-REFERENCES [dbo].[ThingExtenstions] ([ID])
+ALTER TABLE [dbo].[ThingExtensionValues]  WITH CHECK ADD  CONSTRAINT [FK__ThingExte__Thing__5D80D6A1] FOREIGN KEY([ThingExtensionID])
+REFERENCES [dbo].[ThingExtensions] ([ID])
 GO
-ALTER TABLE [dbo].[ThingExtenstionValues] CHECK CONSTRAINT [FK__ThingExte__Thing__5D80D6A1]
+ALTER TABLE [dbo].[ThingExtensionValues] CHECK CONSTRAINT [FK__ThingExte__Thing__5D80D6A1]
 GO
-ALTER TABLE [dbo].[ThingExtenstionValues]  WITH CHECK ADD FOREIGN KEY([ThingID])
+ALTER TABLE [dbo].[ThingExtensionValues]  WITH CHECK ADD FOREIGN KEY([ThingID])
 REFERENCES [dbo].[Things] ([ID])
 GO
 ALTER TABLE [dbo].[Things]  WITH CHECK ADD  CONSTRAINT [FK__Things__Category__662B2B3B] FOREIGN KEY([CategoryID])
@@ -1775,13 +1775,13 @@ group by loc.ID
 	,d.UTC_Diff
 end
 GO
-/****** Object:  StoredProcedure [dbo].[GetThingExtenstions]    Script Date: 2017-09-22 12:35:17 PM ******/
+/****** Object:  StoredProcedure [dbo].[GetThingExtensions]    Script Date: 2017-09-22 12:35:17 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
 
-CREATE procedure [dbo].[GetThingExtenstions]
+CREATE procedure [dbo].[GetThingExtensions]
 @ThingID bigint,
 @SearchFor nvarchar(50)
 as
@@ -1795,10 +1795,10 @@ begin
 		t.Title as 'ThingTitle' ,
 		t.CategoryID,
 		tc.Title as 'ThingCategoryTitle',
-		te.ID as 'ThingExtenstionID',
-		te.GUID as 'ThingExtenstionGUID',
-		te.Code as 'ThingExtenstionCode',
-		te.Title as 'ThingExtenstionTitle',
+		te.ID as 'ThingExtensionID',
+		te.GUID as 'ThingExtensionGUID',
+		te.Code as 'ThingExtensionCode',
+		te.Title as 'ThingExtensionTitle',
 		te.DataTypeID,
 		dt.Title as 'DataTypeTitle',
 		te.IsList as 'IsList',
@@ -1806,14 +1806,14 @@ begin
 		v.Valu as 'Value'
 	from 
 		Things t,
-		ThingExtenstions te,
-		ThingExtenstionValues v,
+		ThingExtensions te,
+		ThingExtensionValues v,
 		DataTypes dt,
 		ThingCategorys tc
 
 	where 
 		t.CategoryID = te.ThingCategoryID
-		and te.ID = v.ThingExtenstionID
+		and te.ID = v.ThingExtensionID
 		and t.CategoryID = tc.ID
 		and t.ID = v.ThingID
 		and t.ID = @ThingID
@@ -1825,14 +1825,14 @@ begin
 	from 
 		ThingCategorys tc,
 		Things t,
-		ThingExtenstions te,
+		ThingExtensions te,
 		DataTypes dt
 
 	where 
 		t.CategoryID = te.ThingCategoryID
 		and t.CategoryID = tc.ID
 		and te.DataTypeID = dt.ID
-		and te.ID not in (select ThingExtenstionID from ThingExtenstionValues where ThingID = @ThingID)
+		and te.ID not in (select ThingExtensionID from ThingExtensionValues where ThingID = @ThingID)
 		and t.ID = @ThingID		
 		and ( (te.Title like '%' + @SearchFor +'%') or (te.Code like '%' + @SearchFor +'%') )	
 		)
@@ -1928,19 +1928,19 @@ update ThingCategorys set
 		inner join MediaFiles as mf on mf.GUID = appThnCat.IconGUID 
 		where appThnCat.AppID = @AppID
 
---Insert new ThingExtenstions
-insert into ThingExtenstions (GUID,ThingCategoryID,Title,DataTypeID,IsList)
+--Insert new ThingExtensions
+insert into ThingExtensions (GUID,ThingCategoryID,Title,DataTypeID,IsList)
 	(select appThnExt.GUID,  thnCat.ID    , appThnExt.Title,appThnExt.DataTypeID,appThnExt.IsList
-		from AppThingExtenstions appThnExt, ThingCategorys thnCat
-		where appThnExt.Code not in (select code from ThingExtenstions)
+		from AppThingExtensions appThnExt, ThingCategorys thnCat
+		where appThnExt.Code not in (select code from ThingExtensions)
 		 and appThnExt.AppID = @AppID
 		 and appThnExt.AppThingCategoryCode = thnCat.Code
 	)
---Update existing ThingExtenstions	
-update ThingExtenstions set
+--Update existing ThingExtensions	
+update ThingExtensions set
 	ThingCategoryID = thnCat.ID , Title = appThnExt.Title , DataTypeID = appThnExt.DataTypeID, IsList = appThnExt.IsList 
 	from ThingCategorys thnExt
-		inner join AppThingExtenstions as appThnExt on appThnExt.Code = thnExt.Code
+		inner join AppThingExtensions as appThnExt on appThnExt.Code = thnExt.Code
 		inner join ThingCategorys as thnCat on thnCat.Code = appThnExt.AppThingCategoryCode
 		where appThnExt.AppID = @AppID
 
@@ -6080,12 +6080,12 @@ GO
 
 CREATE procedure [dbo].[SetThingProperty]
 @ThingID bigint,
-@ThingExtenstionID bigint
+@ThingExtensionID bigint
 as
 begin
 	
 	declare @IsList bit
-	select @IsList = islist from ThingExtenstions where ID = @ThingExtenstionID
+	select @IsList = islist from ThingExtensions where ID = @ThingExtensionID
 
 	if (@IsList = 1)
 	begin
@@ -6339,21 +6339,21 @@ GO
 
 CREATE procedure [dbo].[ThingPropertyValueAdd]
 @ThingID bigint,
-@ThingExtenstionID bigint,
+@ThingExtensionID bigint,
 @Value NVarchar(128)
 as
 begin
 	declare @IsList bit
-	select @IsList = islist from ThingExtenstions where ID = @ThingExtenstionID
+	select @IsList = islist from ThingExtensions where ID = @ThingExtensionID
 	if (@IsList = 1)
 	begin
-		insert into ThingExtenstionValues (ThingExtenstionID,ThingID,Valu) values (@ThingExtenstionID,@ThingID,@Value)
+		insert into ThingExtensionValues (ThingExtensionID,ThingID,Valu) values (@ThingExtensionID,@ThingID,@Value)
 		print N'Property value has been added'
 	end
 	else
 	begin
-		delete from ThingExtenstionValues where ThingExtenstionID = @ThingExtenstionID and ThingID = @ThingID
-		insert into ThingExtenstionValues (ThingExtenstionID,ThingID,Valu) values (@ThingExtenstionID,@ThingID,@Value)
+		delete from ThingExtensionValues where ThingExtensionID = @ThingExtensionID and ThingID = @ThingID
+		insert into ThingExtensionValues (ThingExtensionID,ThingID,Valu) values (@ThingExtensionID,@ThingID,@Value)
 	print N'Property value has been updated'
 	end
 end
@@ -6370,7 +6370,7 @@ CREATE procedure [dbo].[ThingPropertyValueDelete]
 as
 begin
 	
-		delete from ThingExtenstionValues where ID = @ValueID
+		delete from ThingExtensionValues where ID = @ValueID
 	
 end
 
@@ -6386,7 +6386,7 @@ create procedure [dbo].[ThingPropertyValueDeleteAll]
 as
 begin
 
-	delete from ThingExtenstionValues where ThingID = @ThingID 
+	delete from ThingExtensionValues where ThingID = @ThingID 
 
 
 end
@@ -6402,14 +6402,14 @@ CREATE procedure [dbo].[ThingPropertyValueEdit]
 as
 begin
 	
-	declare @ThingExtenstionID bigint
+	declare @ThingExtensionID bigint
 	declare @ThingID nvarchar(128)
 
-	select @ThingID =  ThingID from ThingExtenstionValues where id = @ValueID
-	select @ThingExtenstionID =  ThingExtenstionID from ThingExtenstionValues where id = @ValueID
+	select @ThingID =  ThingID from ThingExtensionValues where id = @ValueID
+	select @ThingExtensionID =  ThingExtensionID from ThingExtensionValues where id = @ValueID
 
-	delete from ThingExtenstionValues where ID = @ValueID
-	insert into ThingExtenstionValues (ThingExtenstionID,ThingID,Valu) values (@ThingExtenstionID,@ThingID,@NewValue)
+	delete from ThingExtensionValues where ID = @ValueID
+	insert into ThingExtensionValues (ThingExtensionID,ThingID,Valu) values (@ThingExtensionID,@ThingID,@NewValue)
 	
 end
 GO

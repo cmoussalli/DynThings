@@ -14,7 +14,7 @@ namespace DynThings.Data.Models
 
 using System;
     
-public partial class GetThingExtenstions_Result
+public partial class GetThingExtensions_Result
 {
 
     public long ThingID { get; set; }
@@ -25,13 +25,13 @@ public partial class GetThingExtenstions_Result
 
     public string ThingCategoryTitle { get; set; }
 
-    public long ThingExtenstionID { get; set; }
+    public long ThingExtensionID { get; set; }
 
-    public System.Guid ThingExtenstionGUID { get; set; }
+    public System.Guid ThingExtensionGUID { get; set; }
 
-    public string ThingExtenstionCode { get; set; }
+    public string ThingExtensionCode { get; set; }
 
-    public string ThingExtenstionTitle { get; set; }
+    public string ThingExtensionTitle { get; set; }
 
     public int DataTypeID { get; set; }
 

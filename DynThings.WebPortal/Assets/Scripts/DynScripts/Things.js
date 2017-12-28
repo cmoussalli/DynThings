@@ -177,7 +177,7 @@ function LoadPart_DialogThingPropertyAdd(thingExtensionID) {
     var loadingpart = LoadDivLoading();
     $("#modal").html(loadingpart);
     $.ajax({
-        url: getRootURL() + '/Things/AddPVThingExtenstionProperty?thingExtensionID=' + thingExtensionID + '&thingID=' + selectedThing,
+        url: getRootURL() + '/Things/AddPVThingExtensionProperty?thingExtensionID=' + thingExtensionID + '&thingID=' + selectedThing,
         //page=" + $("#DynConfigCurrentPage").html,
         type: "GET",
     })
@@ -187,7 +187,7 @@ function LoadPart_DialogThingPropertyAdd(thingExtensionID) {
 }
 //Post Add Property
 function Post_DialogThingPropertyAdd(thingExtensionID,newValue) {
-  var url = getRootURL() + 'Things/AddThingExtenstionProperty?thingExtensionID=' + thingExtensionID + '&thingID=' + selectedThing + '&newValue=' + newValue;
+  var url = getRootURL() + 'Things/AddThingExtensionProperty?thingExtensionID=' + thingExtensionID + '&thingID=' + selectedThing + '&newValue=' + newValue;
     $.ajax({
         url: url,
         type: "POST",
@@ -208,7 +208,7 @@ function LoadPart_DialogThingPropertyEdit(valueID) {
     var loadingpart = LoadDivLoading();
     $("#modal").html(loadingpart);
     $.ajax({
-        url: getRootURL() + '/Things/EditPVThingExtenstionProperty?valueID=' + valueID,
+        url: getRootURL() + '/Things/EditPVThingExtensionProperty?valueID=' + valueID,
         //page=" + $("#DynConfigCurrentPage").html,
         type: "GET",
     })
@@ -218,7 +218,7 @@ function LoadPart_DialogThingPropertyEdit(valueID) {
 }
 //Post Edit Property
 function Post_DialogThingPropertyEdit(valueID,newValue) {
-  var url = getRootURL() + 'Things/EditThingExtenstionProperty?valueID=' + valueID + '&newValue=' + newValue;
+  var url = getRootURL() + 'Things/EditThingExtensionProperty?valueID=' + valueID + '&newValue=' + newValue;
     $.ajax({
         url: url,
         type: "POST",
@@ -239,7 +239,7 @@ function LoadPart_DialogThingPropertyDelete(valueID) {
     var loadingpart = LoadDivLoading();
     $("#modal").html(loadingpart);
     $.ajax({
-        url: getRootURL() + '/Things/DeletePVThingExtenstionProperty?valueID=' + valueID,
+        url: getRootURL() + '/Things/DeletePVThingExtensionProperty?valueID=' + valueID,
         //page=" + $("#DynConfigCurrentPage").html,
         type: "GET",
     })
@@ -249,7 +249,7 @@ function LoadPart_DialogThingPropertyDelete(valueID) {
 }
 //Post Delete Property
 function Post_DialogThingPropertyDelete(valueID) {
-  var url = getRootURL() + 'Things/DeleteThingExtenstionProperty?valueID=' + valueID;
+  var url = getRootURL() + 'Things/DeleteThingExtensionProperty?valueID=' + valueID;
     $.ajax({
         url: url,
         type: "POST",

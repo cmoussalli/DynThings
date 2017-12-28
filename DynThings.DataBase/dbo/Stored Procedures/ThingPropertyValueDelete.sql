@@ -3,6 +3,6 @@
 as
 begin
 	
-		delete from ThingExtenstionValues where ID = @ValueID
+		delete from ThingExtensionValues where ID = @ValueID
 	
 end

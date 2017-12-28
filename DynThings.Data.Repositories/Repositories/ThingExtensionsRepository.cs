@@ -26,22 +26,22 @@ namespace DynThings.Data.Repositories
 
         #region GetList
         /// <summary>
-        /// Get List of all defindes Thing Extenstions
+        /// Get List of all defindes Thing Extensions
         /// </summary>
-        /// <returns>List of all defindes Thing Extenstions</returns>
-        public List<ThingExtenstion> GetList()
+        /// <returns>List of all defindes Thing Extensions</returns>
+        public List<ThingExtension> GetList()
         {
-            List<ThingExtenstion> exts = db.ThingExtenstions.ToList();
+            List<ThingExtension> exts = db.ThingExtensions.ToList();
             return exts;
         }
         /// <summary>
-        /// Get List of Thing Extenstions Filtered by Thing Category
+        /// Get List of Thing Extensions Filtered by Thing Category
         /// </summary>
         /// <param name="thingCategoryID">Filter Thing Category ID</param>
-        /// <returns>List of defindes Thing Extenstions </returns>
-        public List<ThingExtenstion> GetList(long thingCategoryID)
+        /// <returns>List of defindes Thing Extensions </returns>
+        public List<ThingExtension> GetList(long thingCategoryID)
         {
-            List<ThingExtenstion> exts = db.ThingExtenstions.Where(e => e.ThingCategoryID == thingCategoryID).ToList();
+            List<ThingExtension> exts = db.ThingExtensions.Where(e => e.ThingCategoryID == thingCategoryID).ToList();
             return exts;
         }
 
@@ -49,15 +49,15 @@ namespace DynThings.Data.Repositories
 
         #region Get PagedList
         /// <summary>
-        /// Get paged list of definde Thing Extenstions
+        /// Get paged list of definde Thing Extensions
         /// </summary>
         /// <param name="search">Search text in the as per 'Title' field</param>
         /// <param name="pageNumber">Paging page number.</param>
         /// <param name="recordsPerPage">Paging items per page.</param>
-        /// <returns>Paged list of definde Thing Extenstions</returns>
+        /// <returns>Paged list of definde Thing Extensions</returns>
         public IPagedList GetPagedList(string search, int pageNumber, int recordsPerPage)
         {
-            IPagedList exts = db.ThingExtenstions
+            IPagedList exts = db.ThingExtensions
               .Where(e => search == null || e.Title.Contains(search))
               .OrderBy(e => e.Title).ToList()
               .ToPagedList(pageNumber, recordsPerPage);
@@ -65,16 +65,16 @@ namespace DynThings.Data.Repositories
         }
 
         /// <summary>
-        /// Get paged list of definde Thing Extenstions
+        /// Get paged list of definde Thing Extensions
         /// </summary>
         /// <param name="search">Search text in the as per 'Title' field</param>
         /// <param name="pageNumber">Paging page number.</param>
         /// <param name="recordsPerPage">Paging items per page.</param>
         /// <param name="thingCategoryID">Filter </param>
-        /// <returns>Paged list of definde Thing Extenstions</returns>
+        /// <returns>Paged list of definde Thing Extensions</returns>
         public IPagedList GetPagedList(string search, int pageNumber, int recordsPerPage, long thingCategoryID)
         {
-            IPagedList exts = db.ThingExtenstions
+            IPagedList exts = db.ThingExtensions
               .Where(e =>
               (search == null || e.Title.Contains(search))
               && (e.ThingCategoryID == thingCategoryID)
@@ -87,14 +87,14 @@ namespace DynThings.Data.Repositories
 
         #region Find
         /// <summary>
-        /// Get a specific Thing Extenstion Definition.
+        /// Get a specific Thing Extension Definition.
         /// </summary>
         /// <param name="id">The requested defeinition ID.</param>
-        /// <returns>Thing Extenstion definition.</returns>
-        public ThingExtenstion Find(long id)
+        /// <returns>Thing Extension definition.</returns>
+        public ThingExtension Find(long id)
         {
-            ThingExtenstion ext = new ThingExtenstion();
-            List<ThingExtenstion> exts = db.ThingExtenstions.Include("DataType").Include("ThingCategory").Include("ThingExtenstionValues").Where(l => l.ID == id).ToList();
+            ThingExtension ext = new ThingExtension();
+            List<ThingExtension> exts = db.ThingExtensions.Include("DataType").Include("ThingCategory").Include("ThingExtensionValues").Where(l => l.ID == id).ToList();
             if (exts.Count == 1)
             {
                 ext = exts[0];
@@ -107,14 +107,14 @@ namespace DynThings.Data.Repositories
         }
 
         /// <summary>
-        /// Get a specific Thing Extenstion Definition.
+        /// Get a specific Thing Extension Definition.
         /// </summary>
         /// <param name="code">The requested defeinition code.</param>
-        /// <returns>Thing Extenstion definition.</returns>
-        public ThingExtenstion Find(string code)
+        /// <returns>Thing Extension definition.</returns>
+        public ThingExtension Find(string code)
         {
-            ThingExtenstion ext = new ThingExtenstion();
-            List<ThingExtenstion> exts = db.ThingExtenstions.Include("DataType").Include("ThingCategory").Include("ThingExtenstionValues").Where(l => l.Code == code).ToList();
+            ThingExtension ext = new ThingExtension();
+            List<ThingExtension> exts = db.ThingExtensions.Include("DataType").Include("ThingCategory").Include("ThingExtensionValues").Where(l => l.Code == code).ToList();
             if (exts.Count == 1)
             {
                 ext = exts[0];
@@ -127,14 +127,14 @@ namespace DynThings.Data.Repositories
         }
 
         /// <summary>
-        /// Get a specific Thing Extenstion Definition.
+        /// Get a specific Thing Extension Definition.
         /// </summary>
         /// <param name="guid">The requested defeinition Guid.</param>
-        /// <returns>Thing Extenstion definition.</returns>
-        public ThingExtenstion Find(Guid guid)
+        /// <returns>Thing Extension definition.</returns>
+        public ThingExtension Find(Guid guid)
         {
-            ThingExtenstion ext = new ThingExtenstion();
-            List<ThingExtenstion> exts = db.ThingExtenstions.Include("DataType").Include("ThingCategory").Include("ThingExtenstionValues").Where(l => l.GUID == guid).ToList();
+            ThingExtension ext = new ThingExtension();
+            List<ThingExtension> exts = db.ThingExtensions.Include("DataType").Include("ThingCategory").Include("ThingExtensionValues").Where(l => l.GUID == guid).ToList();
             if (exts.Count == 1)
             {
                 ext = exts[0];
@@ -150,7 +150,7 @@ namespace DynThings.Data.Repositories
 
         #region Add
         /// <summary>
-        /// Create new Thing Extenstion Property.
+        /// Create new Thing Extension Property.
         /// </summary>
         /// <param name="title">Property Title.</param>
         /// <param name="code">Property Code, should not includes empty spaces.</param>
@@ -161,13 +161,13 @@ namespace DynThings.Data.Repositories
         /// <returns>Result status info.</returns>
         public ResultInfo.Result Add(string title,string code, long thingCategoryID,int dataTypeID,bool isList, string createdBy)
         {
-            ThingExtenstion ext = new ThingExtenstion();
+            ThingExtension ext = new ThingExtension();
             //Validate data before insert int odatabase
             if (code.Contains(" "))
             {
                 return ResultInfo.GenerateErrorResult("Code field should not includes empty spaces");
             }
-            List<ThingExtenstion> exts = db.ThingExtenstions.Where(u => 
+            List<ThingExtension> exts = db.ThingExtensions.Where(u => 
             u.Title == title
             || u.Code == code
             ).ToList();
@@ -175,7 +175,7 @@ namespace DynThings.Data.Repositories
             {
                 return ResultInfo.GenerateErrorResult("Record not found");
             }
-            //Save new ThingExtenstion to database 
+            //Save new ThingExtension to database 
             try
             {
                 ext.Title = title;
@@ -183,7 +183,7 @@ namespace DynThings.Data.Repositories
                 ext.ThingCategoryID = thingCategoryID;
                 ext.DataTypeID = dataTypeID;
                 ext.IsList = isList;
-                db.ThingExtenstions.Add(ext);
+                db.ThingExtensions.Add(ext);
                 db.SaveChanges();
                 return ResultInfo.GenerateOKResult("Saved", ext.ID);
             }
@@ -197,7 +197,7 @@ namespace DynThings.Data.Repositories
 
         #region Edit
         /// <summary>
-        /// Modify and existing Thing Extenstion Property.
+        /// Modify and existing Thing Extension Property.
         /// </summary>
         /// <param name="id">ID of the modified Property.</param>
         /// <param name="title">Property Title.</param>
@@ -215,7 +215,7 @@ namespace DynThings.Data.Repositories
             {
                 return ResultInfo.GenerateErrorResult("Code field should not includes empty spaces");
             }
-            List<ThingExtenstion> exts = db.ThingExtenstions.Where(u =>
+            List<ThingExtension> exts = db.ThingExtensions.Where(u =>
             u.Title == title
             || u.Code == code
             ).ToList();
@@ -223,16 +223,16 @@ namespace DynThings.Data.Repositories
             {
                 return ResultInfo.GenerateErrorResult("Record not found");
             }
-            //Save new ThingExtenstion to database 
+            //Save new ThingExtension to database 
             try
             {
-                ThingExtenstion ext = db.ThingExtenstions.Find(id);
+                ThingExtension ext = db.ThingExtensions.Find(id);
                 ext.Title = title;
                 ext.Code = code;
                 ext.ThingCategoryID = thingCategoryID;
                 ext.DataTypeID = dataTypeID;
                 ext.IsList = isList;
-                db.ThingExtenstions.Add(ext);
+                db.ThingExtensions.Add(ext);
                 db.SaveChanges();
                 return ResultInfo.GenerateOKResult("Saved", ext.ID);
             }
@@ -246,16 +246,16 @@ namespace DynThings.Data.Repositories
 
         #region Delete
         /// <summary>
-        /// Delete a specific Thing Extenstion Property, also will delete all assigned related values.
+        /// Delete a specific Thing Extension Property, also will delete all assigned related values.
         /// </summary>
-        /// <param name="id">Thing Extenstion Property ID to delete it.</param>
+        /// <param name="id">Thing Extension Property ID to delete it.</param>
         /// <returns>Result Status Info.</returns>
         public ResultInfo.Result Delete(long id)
         {
             try
             {
-                ThingExtenstion ext = db.ThingExtenstions.Find(id);
-                db.ThingExtenstions.Remove(ext);
+                ThingExtension ext = db.ThingExtensions.Find(id);
+                db.ThingExtensions.Remove(ext);
                 db.SaveChanges();
                 return ResultInfo.GenerateOKResult("Deleted", ext.ID);
             }

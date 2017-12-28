@@ -56,7 +56,7 @@ namespace DynThings.WebAPI.Repositories
         public List<APIThing> GetThings(int pageNumber, int pageSize, bool loadParents, bool loadChilds, string searchFor, long locationID)
         {
             List<APIThing> result = new List<APIThing>();
-            List<Thing> thingsLst = db.Things.Include("ThingCategory").Include("LinkThingsLocations").Include("ThingExtenstionValues")
+            List<Thing> thingsLst = db.Things.Include("ThingCategory").Include("LinkThingsLocations").Include("ThingExtensionValues")
                         .Where(e => 
                         ((searchFor == null || searchFor =="") || e.Title.Contains(searchFor))
                         && ((locationID==null || locationID == 0) || (e.LinkThingsLocations.Any(l => l.LocationID == locationID)))

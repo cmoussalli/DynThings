@@ -135,7 +135,7 @@
           <Property Name="AppID" Type="bigint" Nullable="false" />
           <Property Name="IconGUID" Type="uniqueidentifier" Nullable="false" />
         </EntityType>
-        <EntityType Name="AppThingExtenstions">
+        <EntityType Name="AppThingExtensions">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
@@ -482,7 +482,7 @@
           <Property Name="LastIOTimeStamp" Type="datetime" />
           <Property Name="LastIOTimeStampUTC" Type="datetime" />
         </EntityType>
-        <EntityType Name="ThingExtenstions">
+        <EntityType Name="ThingExtensions">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
@@ -494,12 +494,12 @@
           <Property Name="DataTypeID" Type="int" Nullable="false" />
           <Property Name="IsList" Type="bit" Nullable="false" />
         </EntityType>
-        <EntityType Name="ThingExtenstionValues">
+        <EntityType Name="ThingExtensionValues">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="ThingExtenstionID" Type="bigint" Nullable="false" />
+          <Property Name="ThingExtensionID" Type="bigint" Nullable="false" />
           <Property Name="ThingID" Type="bigint" />
           <Property Name="Valu" Type="nvarchar" MaxLength="128" Nullable="false" />
         </EntityType>
@@ -707,24 +707,24 @@
         </Association>
         <Association Name="FK__AppThingE__AppID__1960B67E">
           <End Role="Apps" Type="Self.Apps" Multiplicity="1" />
-          <End Role="AppThingExtenstions" Type="Self.AppThingExtenstions" Multiplicity="*" />
+          <End Role="AppThingExtensions" Type="Self.AppThingExtensions" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Apps">
               <PropertyRef Name="ID" />
             </Principal>
-            <Dependent Role="AppThingExtenstions">
+            <Dependent Role="AppThingExtensions">
               <PropertyRef Name="AppID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__AppThingE__DataT__25C68D63">
           <End Role="DataTypes" Type="Self.DataTypes" Multiplicity="1" />
-          <End Role="AppThingExtenstions" Type="Self.AppThingExtenstions" Multiplicity="*" />
+          <End Role="AppThingExtensions" Type="Self.AppThingExtensions" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="DataTypes">
               <PropertyRef Name="ID" />
             </Principal>
-            <Dependent Role="AppThingExtenstions">
+            <Dependent Role="AppThingExtensions">
               <PropertyRef Name="DataTypeID" />
             </Dependent>
           </ReferentialConstraint>
@@ -1203,48 +1203,48 @@
         </Association>
         <Association Name="FK__ThingExte__DataT__5C8CB268">
           <End Role="DataTypes" Type="Self.DataTypes" Multiplicity="1" />
-          <End Role="ThingExtenstions" Type="Self.ThingExtenstions" Multiplicity="*" />
+          <End Role="ThingExtensions" Type="Self.ThingExtensions" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="DataTypes">
               <PropertyRef Name="ID" />
             </Principal>
-            <Dependent Role="ThingExtenstions">
+            <Dependent Role="ThingExtensions">
               <PropertyRef Name="DataTypeID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__ThingExte__Thing__5D80D6A1">
-          <End Role="ThingExtenstions" Type="Self.ThingExtenstions" Multiplicity="1" />
-          <End Role="ThingExtenstionValues" Type="Self.ThingExtenstionValues" Multiplicity="*" />
+          <End Role="ThingExtensions" Type="Self.ThingExtensions" Multiplicity="1" />
+          <End Role="ThingExtensionValues" Type="Self.ThingExtensionValues" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="ThingExtenstions">
+            <Principal Role="ThingExtensions">
               <PropertyRef Name="ID" />
             </Principal>
-            <Dependent Role="ThingExtenstionValues">
-              <PropertyRef Name="ThingExtenstionID" />
+            <Dependent Role="ThingExtensionValues">
+              <PropertyRef Name="ThingExtensionID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__ThingExte__Thing__6339AFF7">
           <End Role="ThingCategorys" Type="Self.ThingCategorys" Multiplicity="1" />
-          <End Role="ThingExtenstions" Type="Self.ThingExtenstions" Multiplicity="*" />
+          <End Role="ThingExtensions" Type="Self.ThingExtensions" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="ThingCategorys">
               <PropertyRef Name="ID" />
             </Principal>
-            <Dependent Role="ThingExtenstions">
+            <Dependent Role="ThingExtensions">
               <PropertyRef Name="ThingCategoryID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__ThingExte__Thing__670A40DB">
           <End Role="Things" Type="Self.Things" Multiplicity="0..1" />
-          <End Role="ThingExtenstionValues" Type="Self.ThingExtenstionValues" Multiplicity="*" />
+          <End Role="ThingExtensionValues" Type="Self.ThingExtensionValues" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Things">
               <PropertyRef Name="ID" />
             </Principal>
-            <Dependent Role="ThingExtenstionValues">
+            <Dependent Role="ThingExtensionValues">
               <PropertyRef Name="ThingID" />
             </Dependent>
           </ReferentialConstraint>
@@ -1336,9 +1336,12 @@
           <Parameter Name="EndPointID" Type="bigint" Mode="In" />
           <Parameter Name="EndPointTypeID" Type="bigint" Mode="In" />
         </Function>
-        <Function Name="GetThingExtenstions" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+        <Function Name="GetThingExtensions" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="ThingID" Type="bigint" Mode="In" />
           <Parameter Name="SearchFor" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="PublishApp" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="AppID" Type="bigint" Mode="In" />
         </Function>
         <Function Name="Rpt_EndPoint_IOs_Days" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="EPID" Type="bigint" Mode="In" />
@@ -1372,6 +1375,10 @@
           <Parameter Name="TypeID" Type="bigint" Mode="In" />
           <Parameter Name="Year" Type="bigint" Mode="In" />
         </Function>
+        <Function Name="SetThingProperty" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ThingID" Type="bigint" Mode="In" />
+          <Parameter Name="ThingExtensionID" Type="bigint" Mode="In" />
+        </Function>
         <Function Name="SubmitEndpointCommand" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="CommandID" Type="bigint" Mode="In" />
           <Parameter Name="Value" Type="nvarchar" Mode="In" />
@@ -1394,15 +1401,21 @@
         </Function>
         <Function Name="ThingPropertyValueAdd" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="ThingID" Type="bigint" Mode="In" />
-          <Parameter Name="ThingExtenstionID" Type="bigint" Mode="In" />
+          <Parameter Name="ThingExtensionID" Type="bigint" Mode="In" />
           <Parameter Name="Value" Type="nvarchar" Mode="In" />
         </Function>
         <Function Name="ThingPropertyValueDelete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="ValueID" Type="bigint" Mode="In" />
         </Function>
+        <Function Name="ThingPropertyValueDeleteAll" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ThingID" Type="bigint" Mode="In" />
+        </Function>
         <Function Name="ThingPropertyValueEdit" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="ValueID" Type="bigint" Mode="In" />
           <Parameter Name="NewValue" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="UnPublishApp" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="AppID" Type="bigint" Mode="In" />
         </Function>
         <EntityContainer Name="DynThingsModelStoreContainer">
           <EntitySet Name="AlertConditions" EntityType="Self.AlertConditions" Schema="dbo" store:Type="Tables" />
@@ -1417,7 +1430,7 @@
           <EntitySet Name="Apps" EntityType="Self.Apps" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AppStatuss" EntityType="Self.AppStatuss" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AppThingCategorys" EntityType="Self.AppThingCategorys" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="AppThingExtenstions" EntityType="Self.AppThingExtenstions" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AppThingExtensions" EntityType="Self.AppThingExtensions" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AppUserTokens" EntityType="Self.AppUserTokens" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRoles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaims" Schema="dbo" store:Type="Tables" />
@@ -1448,8 +1461,8 @@
           <EntitySet Name="SystemEntitys" EntityType="Self.SystemEntitys" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ThingCategorys" EntityType="Self.ThingCategorys" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ThingEnds" EntityType="Self.ThingEnds" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="ThingExtenstions" EntityType="Self.ThingExtenstions" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="ThingExtenstionValues" EntityType="Self.ThingExtenstionValues" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ThingExtensions" EntityType="Self.ThingExtensions" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ThingExtensionValues" EntityType="Self.ThingExtensionValues" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Things" EntityType="Self.Things" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserNotifications" EntityType="Self.UserNotifications" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserNotificationTypes" EntityType="Self.UserNotificationTypes" Schema="dbo" store:Type="Tables" />
@@ -1511,11 +1524,11 @@
           </AssociationSet>
           <AssociationSet Name="FK__AppThingE__AppID__1960B67E" Association="Self.FK__AppThingE__AppID__1960B67E">
             <End Role="Apps" EntitySet="Apps" />
-            <End Role="AppThingExtenstions" EntitySet="AppThingExtenstions" />
+            <End Role="AppThingExtensions" EntitySet="AppThingExtensions" />
           </AssociationSet>
           <AssociationSet Name="FK__AppThingE__DataT__25C68D63" Association="Self.FK__AppThingE__DataT__25C68D63">
             <End Role="DataTypes" EntitySet="DataTypes" />
-            <End Role="AppThingExtenstions" EntitySet="AppThingExtenstions" />
+            <End Role="AppThingExtensions" EntitySet="AppThingExtensions" />
           </AssociationSet>
           <AssociationSet Name="FK__AppUserTo__AppID__338A9CD5" Association="Self.FK__AppUserTo__AppID__338A9CD5">
             <End Role="Apps" EntitySet="Apps" />
@@ -1667,19 +1680,19 @@
           </AssociationSet>
           <AssociationSet Name="FK__ThingExte__DataT__5C8CB268" Association="Self.FK__ThingExte__DataT__5C8CB268">
             <End Role="DataTypes" EntitySet="DataTypes" />
-            <End Role="ThingExtenstions" EntitySet="ThingExtenstions" />
+            <End Role="ThingExtensions" EntitySet="ThingExtensions" />
           </AssociationSet>
           <AssociationSet Name="FK__ThingExte__Thing__5D80D6A1" Association="Self.FK__ThingExte__Thing__5D80D6A1">
-            <End Role="ThingExtenstions" EntitySet="ThingExtenstions" />
-            <End Role="ThingExtenstionValues" EntitySet="ThingExtenstionValues" />
+            <End Role="ThingExtensions" EntitySet="ThingExtensions" />
+            <End Role="ThingExtensionValues" EntitySet="ThingExtensionValues" />
           </AssociationSet>
           <AssociationSet Name="FK__ThingExte__Thing__6339AFF7" Association="Self.FK__ThingExte__Thing__6339AFF7">
             <End Role="ThingCategorys" EntitySet="ThingCategorys" />
-            <End Role="ThingExtenstions" EntitySet="ThingExtenstions" />
+            <End Role="ThingExtensions" EntitySet="ThingExtensions" />
           </AssociationSet>
           <AssociationSet Name="FK__ThingExte__Thing__670A40DB" Association="Self.FK__ThingExte__Thing__670A40DB">
             <End Role="Things" EntitySet="Things" />
-            <End Role="ThingExtenstionValues" EntitySet="ThingExtenstionValues" />
+            <End Role="ThingExtensionValues" EntitySet="ThingExtensionValues" />
           </AssociationSet>
           <AssociationSet Name="FK__Things__Category__662B2B3B" Association="Self.FK__Things__Category__662B2B3B">
             <End Role="ThingCategorys" EntitySet="ThingCategorys" />
@@ -1741,13 +1754,6 @@
             <Parameter Name="TypeID" Mode="In" Type="Int64" />
             <Parameter Name="Year" Mode="In" Type="Int64" />
           </FunctionImport>
-          <FunctionImport Name="GetThingEnds" ReturnType="Collection(DynThingsModel.GetThingEnds_Result)">
-            <Parameter Name="LocationID" Mode="In" Type="Int64" />
-            <Parameter Name="ThingID" Mode="In" Type="Int64" />
-            <Parameter Name="ThingCategoryID" Mode="In" Type="Int64" />
-            <Parameter Name="EndPointID" Mode="In" Type="Int64" />
-            <Parameter Name="EndPointTypeID" Mode="In" Type="Int64" />
-          </FunctionImport>
           <FunctionImport Name="Rpt_EndPointAndDevices_IOsCount_Minutes" ReturnType="Collection(DynThingsModel.Rpt_EndPointAndDevices_IOsCount_Minutes_Result)" />
           <FunctionImport Name="Rpt_LastHoursConnections" ReturnType="Collection(DynThingsModel.Rpt_LastHoursConnections_Result)" />
           <FunctionImport Name="SubmitEndPointInput">
@@ -1758,6 +1764,16 @@
           <FunctionImport Name="SubmitEndPointLog">
             <Parameter Name="PassKey" Mode="In" Type="Guid" />
             <Parameter Name="Value" Mode="In" Type="String" />
+            <Parameter Name="ExecTimeStamp" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="SubmitEndpointCommand">
+            <Parameter Name="CommandID" Mode="In" Type="Int64" />
+            <Parameter Name="Value" Mode="In" Type="String" />
+            <Parameter Name="ScheduleTimeStamp" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="SubmitEndpointCommandExecuted">
+            <Parameter Name="CommandID" Mode="In" Type="Int64" />
+            <Parameter Name="EndPointKeyPass" Mode="In" Type="Guid" />
             <Parameter Name="ExecTimeStamp" Mode="In" Type="DateTime" />
           </FunctionImport>
           <EntitySet Name="AlertConditions" EntityType="DynThingsModel.AlertCondition" />
@@ -1772,7 +1788,7 @@
           <EntitySet Name="Apps" EntityType="DynThingsModel.App" />
           <EntitySet Name="AppStatusses" EntityType="DynThingsModel.AppStatuss" />
           <EntitySet Name="AppThingCategorys" EntityType="DynThingsModel.AppThingCategory" />
-          <EntitySet Name="AppThingExtenstions" EntityType="DynThingsModel.AppThingExtenstion" />
+          <EntitySet Name="AppThingExtensions" EntityType="DynThingsModel.AppThingExtension" />
           <EntitySet Name="AppUserTokens" EntityType="DynThingsModel.AppUserToken" />
           <EntitySet Name="AspNetRoles" EntityType="DynThingsModel.AspNetRole" />
           <EntitySet Name="AspNetUserClaims" EntityType="DynThingsModel.AspNetUserClaim" />
@@ -1802,8 +1818,8 @@
           <EntitySet Name="SystemEntitys" EntityType="DynThingsModel.SystemEntity" />
           <EntitySet Name="ThingCategorys" EntityType="DynThingsModel.ThingCategory" />
           <EntitySet Name="ThingEnds" EntityType="DynThingsModel.ThingEnd" />
-          <EntitySet Name="ThingExtenstions" EntityType="DynThingsModel.ThingExtenstion" />
-          <EntitySet Name="ThingExtenstionValues" EntityType="DynThingsModel.ThingExtenstionValue" />
+          <EntitySet Name="ThingExtensions" EntityType="DynThingsModel.ThingExtension" />
+          <EntitySet Name="ThingExtensionValues" EntityType="DynThingsModel.ThingExtensionValue" />
           <EntitySet Name="Things" EntityType="DynThingsModel.Thing" />
           <EntitySet Name="UserNotifications" EntityType="DynThingsModel.UserNotification" />
           <EntitySet Name="UserNotificationTypes" EntityType="DynThingsModel.UserNotificationType" />
@@ -1869,7 +1885,7 @@
           </AssociationSet>
           <AssociationSet Name="FK__AppThingE__AppID__1960B67E" Association="DynThingsModel.FK__AppThingE__AppID__1960B67E">
             <End Role="App" EntitySet="Apps" />
-            <End Role="AppThingExtenstion" EntitySet="AppThingExtenstions" />
+            <End Role="AppThingExtension" EntitySet="AppThingExtensions" />
           </AssociationSet>
           <AssociationSet Name="FK__AppUserTo__AppID__338A9CD5" Association="DynThingsModel.FK__AppUserTo__AppID__338A9CD5">
             <End Role="App" EntitySet="Apps" />
@@ -1877,7 +1893,7 @@
           </AssociationSet>
           <AssociationSet Name="FK__AppThingE__DataT__25C68D63" Association="DynThingsModel.FK__AppThingE__DataT__25C68D63">
             <End Role="DataType" EntitySet="DataTypes" />
-            <End Role="AppThingExtenstion" EntitySet="AppThingExtenstions" />
+            <End Role="AppThingExtension" EntitySet="AppThingExtensions" />
           </AssociationSet>
           <AssociationSet Name="FK__AppUserTo__AspNe__347EC10E" Association="DynThingsModel.FK__AppUserTo__AspNe__347EC10E">
             <End Role="AspNetUser" EntitySet="AspNetUsers" />
@@ -1921,7 +1937,7 @@
           </AssociationSet>
           <AssociationSet Name="FK__ThingExte__DataT__5C8CB268" Association="DynThingsModel.FK__ThingExte__DataT__5C8CB268">
             <End Role="DataType" EntitySet="DataTypes" />
-            <End Role="ThingExtenstion" EntitySet="ThingExtenstions" />
+            <End Role="ThingExtension" EntitySet="ThingExtensions" />
           </AssociationSet>
           <AssociationSet Name="FK__Commands__Device__4D94879B" Association="DynThingsModel.FK__Commands__Device__4D94879B">
             <End Role="Device" EntitySet="Devices" />
@@ -1971,7 +1987,7 @@
             <End Role="Thing" EntitySet="Things" />
             <End Role="EndPointIO" EntitySet="EndPointIOs" />
           </AssociationSet>
-          <AssociationSet Name="FK__ThingEnds__LastI__186C9245" Association="DynThingsModel.FK__ThingEnds__LastI__186C9245">
+          <AssociationSet Name="FK__ThingEnds__LastI__002AF460" Association="DynThingsModel.FK__ThingEnds__LastI__002AF460">
             <End Role="EndPointIO" EntitySet="EndPointIOs" />
             <End Role="ThingEnd" EntitySet="ThingEnds" />
           </AssociationSet>
@@ -1991,7 +2007,7 @@
             <End Role="EndPointTypeCategory" EntitySet="EndPointTypeCategorys" />
             <End Role="EndPointType" EntitySet="EndPointTypes" />
           </AssociationSet>
-          <AssociationSet Name="FK__ThingEnds__EndPo__5E3FF0B0" Association="DynThingsModel.FK__ThingEnds__EndPo__5E3FF0B0">
+          <AssociationSet Name="FK__ThingEnds__EndPo__7F36D027" Association="DynThingsModel.FK__ThingEnds__EndPo__7F36D027">
             <End Role="EndPointType" EntitySet="EndPointTypes" />
             <End Role="ThingEnd" EntitySet="ThingEnds" />
           </AssociationSet>
@@ -2033,53 +2049,63 @@
           </AssociationSet>
           <AssociationSet Name="FK__ThingExte__Thing__6339AFF7" Association="DynThingsModel.FK__ThingExte__Thing__6339AFF7">
             <End Role="ThingCategory" EntitySet="ThingCategorys" />
-            <End Role="ThingExtenstion" EntitySet="ThingExtenstions" />
+            <End Role="ThingExtension" EntitySet="ThingExtensions" />
           </AssociationSet>
           <AssociationSet Name="FK__Things__Category__662B2B3B" Association="DynThingsModel.FK__Things__Category__662B2B3B">
             <End Role="ThingCategory" EntitySet="ThingCategorys" />
             <End Role="Thing" EntitySet="Things" />
           </AssociationSet>
-          <AssociationSet Name="FK__ThingEnds__Thing__4C214075" Association="DynThingsModel.FK__ThingEnds__Thing__4C214075">
+          <AssociationSet Name="FK__ThingEnds__Thing__7E42ABEE" Association="DynThingsModel.FK__ThingEnds__Thing__7E42ABEE">
             <End Role="Thing" EntitySet="Things" />
             <End Role="ThingEnd" EntitySet="ThingEnds" />
           </AssociationSet>
           <AssociationSet Name="FK__ThingExte__Thing__5D80D6A1" Association="DynThingsModel.FK__ThingExte__Thing__5D80D6A1">
-            <End Role="ThingExtenstion" EntitySet="ThingExtenstions" />
-            <End Role="ThingExtenstionValue" EntitySet="ThingExtenstionValues" />
+            <End Role="ThingExtension" EntitySet="ThingExtensions" />
+            <End Role="ThingExtensionValue" EntitySet="ThingExtensionValues" />
           </AssociationSet>
           <AssociationSet Name="FK__ThingExte__Thing__670A40DB" Association="DynThingsModel.FK__ThingExte__Thing__670A40DB">
             <End Role="Thing" EntitySet="Things" />
-            <End Role="ThingExtenstionValue" EntitySet="ThingExtenstionValues" />
+            <End Role="ThingExtensionValue" EntitySet="ThingExtensionValues" />
           </AssociationSet>
           <AssociationSet Name="AspNetUserRoles" Association="DynThingsModel.AspNetUserRoles">
             <End Role="AspNetRole" EntitySet="AspNetRoles" />
             <End Role="AspNetUser" EntitySet="AspNetUsers" />
           </AssociationSet>
+          <FunctionImport Name="GetThingEnds" ReturnType="Collection(DynThingsModel.GetThingEnds_Result1)">
+            <Parameter Name="LocationID" Mode="In" Type="Int64" />
+            <Parameter Name="ThingID" Mode="In" Type="Int64" />
+            <Parameter Name="ThingCategoryID" Mode="In" Type="Int64" />
+            <Parameter Name="EndPointID" Mode="In" Type="Int64" />
+            <Parameter Name="EndPointTypeID" Mode="In" Type="Int64" />
+          </FunctionImport>
+          <FunctionImport Name="GetThingExtensions" ReturnType="Collection(DynThingsModel.GetThingExtensions_Result)">
+            <Parameter Name="ThingID" Mode="In" Type="Int64" />
+            <Parameter Name="SearchFor" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="PublishApp">
+            <Parameter Name="AppID" Mode="In" Type="Int64" />
+          </FunctionImport>
+          <FunctionImport Name="SetThingProperty">
+            <Parameter Name="ThingID" Mode="In" Type="Int64" />
+            <Parameter Name="ThingExtensionID" Mode="In" Type="Int64" />
+          </FunctionImport>
           <FunctionImport Name="ThingPropertyValueAdd">
             <Parameter Name="ThingID" Mode="In" Type="Int64" />
-            <Parameter Name="ThingExtenstionID" Mode="In" Type="Int64" />
+            <Parameter Name="ThingExtensionID" Mode="In" Type="Int64" />
             <Parameter Name="Value" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="ThingPropertyValueDelete">
+            <Parameter Name="ValueID" Mode="In" Type="Int64" />
+          </FunctionImport>
+          <FunctionImport Name="ThingPropertyValueDeleteAll">
+            <Parameter Name="ThingID" Mode="In" Type="Int64" />
           </FunctionImport>
           <FunctionImport Name="ThingPropertyValueEdit">
             <Parameter Name="ValueID" Mode="In" Type="Int64" />
             <Parameter Name="NewValue" Mode="In" Type="String" />
           </FunctionImport>
-          <FunctionImport Name="ThingPropertyValueDelete">
-          <Parameter Name="ValueID" Mode="In" Type="Int64" />
-          </FunctionImport>
-          <FunctionImport Name="GetThingExtenstions" ReturnType="Collection(DynThingsModel.GetThingExtenstions_Result)">
-            <Parameter Name="ThingID" Mode="In" Type="Int64" />
-            <Parameter Name="SearchFor" Mode="In" Type="String" />
-          </FunctionImport>
-          <FunctionImport Name="SubmitEndpointCommand">
-            <Parameter Name="CommandID" Mode="In" Type="Int64" />
-            <Parameter Name="Value" Mode="In" Type="String" />
-            <Parameter Name="ScheduleTimeStamp" Mode="In" Type="DateTime" />
-          </FunctionImport>
-          <FunctionImport Name="SubmitEndpointCommandExecuted">
-            <Parameter Name="CommandID" Mode="In" Type="Int64" />
-            <Parameter Name="EndPointKeyPass" Mode="In" Type="Guid" />
-            <Parameter Name="ExecTimeStamp" Mode="In" Type="DateTime" />
+          <FunctionImport Name="UnPublishApp" ReturnType="Collection(String)">
+            <Parameter Name="AppID" Mode="In" Type="Int64" />
           </FunctionImport>
           </EntityContainer>
         <ComplexType Name="Rpt_EndPoint_IOs_Months_Result">
@@ -2593,7 +2619,7 @@
           <NavigationProperty Name="AppMediaFiles" Relationship="DynThingsModel.FK__AppMediaF__AppID__2E5BD364" FromRole="App" ToRole="AppMediaFile" />
           <NavigationProperty Name="AppStatuss" Relationship="DynThingsModel.FK__Apps__StatusID__4F9CCB9E" FromRole="App" ToRole="AppStatuss" />
           <NavigationProperty Name="AppThingCategorys" Relationship="DynThingsModel.FK__AppThingC__AppID__1A54DAB7" FromRole="App" ToRole="AppThingCategory" />
-          <NavigationProperty Name="AppThingExtenstions" Relationship="DynThingsModel.FK__AppThingE__AppID__1960B67E" FromRole="App" ToRole="AppThingExtenstion" />
+          <NavigationProperty Name="AppThingExtensions" Relationship="DynThingsModel.FK__AppThingE__AppID__1960B67E" FromRole="App" ToRole="AppThingExtension" />
           <NavigationProperty Name="AppUserTokens" Relationship="DynThingsModel.FK__AppUserTo__AppID__338A9CD5" FromRole="App" ToRole="AppUserToken" />
         </EntityType>
         <EntityType Name="AppStatuss">
@@ -2616,7 +2642,7 @@
           <Property Name="IconGUID" Type="Guid" Nullable="false" />
           <NavigationProperty Name="App" Relationship="DynThingsModel.FK__AppThingC__AppID__1A54DAB7" FromRole="AppThingCategory" ToRole="App" />
         </EntityType>
-        <EntityType Name="AppThingExtenstion">
+        <EntityType Name="AppThingExtension">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
@@ -2628,8 +2654,8 @@
           <Property Name="Title" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
           <Property Name="DataTypeID" Type="Int32" Nullable="false" />
           <Property Name="IsList" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="App" Relationship="DynThingsModel.FK__AppThingE__AppID__1960B67E" FromRole="AppThingExtenstion" ToRole="App" />
-          <NavigationProperty Name="DataType" Relationship="DynThingsModel.FK__AppThingE__DataT__25C68D63" FromRole="AppThingExtenstion" ToRole="DataType" />
+          <NavigationProperty Name="App" Relationship="DynThingsModel.FK__AppThingE__AppID__1960B67E" FromRole="AppThingExtension" ToRole="App" />
+          <NavigationProperty Name="DataType" Relationship="DynThingsModel.FK__AppThingE__DataT__25C68D63" FromRole="AppThingExtension" ToRole="DataType" />
         </EntityType>
         <EntityType Name="AppUserToken">
           <Key>
@@ -2709,8 +2735,8 @@
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Title" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="AppThingExtenstions" Relationship="DynThingsModel.FK__AppThingE__DataT__25C68D63" FromRole="DataType" ToRole="AppThingExtenstion" />
-          <NavigationProperty Name="ThingExtenstions" Relationship="DynThingsModel.FK__ThingExte__DataT__5C8CB268" FromRole="DataType" ToRole="ThingExtenstion" />
+          <NavigationProperty Name="AppThingExtensions" Relationship="DynThingsModel.FK__AppThingE__DataT__25C68D63" FromRole="DataType" ToRole="AppThingExtension" />
+          <NavigationProperty Name="ThingExtensions" Relationship="DynThingsModel.FK__ThingExte__DataT__5C8CB268" FromRole="DataType" ToRole="ThingExtension" />
         </EntityType>
         <EntityType Name="DeviceCommand">
           <Key>
@@ -2824,7 +2850,7 @@
           <NavigationProperty Name="Endpoint" Relationship="DynThingsModel.FK__EndPointI__EndPo__149C0161" FromRole="EndPointIO" ToRole="Endpoint" />
           <NavigationProperty Name="IOType" Relationship="DynThingsModel.FK__EndPointI__IOTyp__440B1D61" FromRole="EndPointIO" ToRole="IOType" />
           <NavigationProperty Name="Thing" Relationship="DynThingsModel.FK__EndPointI__Thing__7E02B4CC" FromRole="EndPointIO" ToRole="Thing" />
-          <NavigationProperty Name="ThingEnds" Relationship="DynThingsModel.FK__ThingEnds__LastI__186C9245" FromRole="EndPointIO" ToRole="ThingEnd" />
+          <NavigationProperty Name="ThingEnds" Relationship="DynThingsModel.FK__ThingEnds__LastI__002AF460" FromRole="EndPointIO" ToRole="ThingEnd" />
         </EntityType>
         <EntityType Name="Endpoint">
           <Key>
@@ -2844,16 +2870,16 @@
           <Property Name="LowRange" Type="Single" />
           <Property Name="HighRange" Type="Single" />
           <Property Name="LastIOID" Type="Int64" />
+          <Property Name="LastIONumericValue" Type="Single" />
           <Property Name="LastIOValue" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="LastIOTimeStamp" Type="DateTime" Precision="3" />
           <Property Name="LastIOTimeStampUTC" Type="DateTime" Precision="3" />
+          <Property Name="ObjectStatusID" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Device" Relationship="DynThingsModel.FK__Endpoints__Devic__00DF2177" FromRole="Endpoint" ToRole="Device" />
           <NavigationProperty Name="EndPointCommands" Relationship="DynThingsModel.FK__EndPointC__EndPo__4222D4EF" FromRole="Endpoint" ToRole="EndPointCommand" />
           <NavigationProperty Name="EndPointIOs" Relationship="DynThingsModel.FK__EndPointI__EndPo__149C0161" FromRole="Endpoint" ToRole="EndPointIO" />
           <NavigationProperty Name="Thing" Relationship="DynThingsModel.FK__Endpoints__Thing__7EF6D905" FromRole="Endpoint" ToRole="Thing" />
           <NavigationProperty Name="EndPointType" Relationship="DynThingsModel.FK__Endpoints__TypeI__45F365D3" FromRole="Endpoint" ToRole="EndPointType" />
-          <Property Name="LastIONumericValue" Type="Single" />
-          <Property Name="ObjectStatusID" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="EndPointTypeCategory">
           <Key>
@@ -2880,7 +2906,7 @@
           <NavigationProperty Name="Endpoints" Relationship="DynThingsModel.FK__Endpoints__TypeI__45F365D3" FromRole="EndPointType" ToRole="Endpoint" />
           <NavigationProperty Name="EndPointTypeCategory" Relationship="DynThingsModel.FK__EndPointT__TypeC__2A363CC5" FromRole="EndPointType" ToRole="EndPointTypeCategory" />
           <NavigationProperty Name="EndPointTypeCategory1" Relationship="DynThingsModel.FK__EndPointT__TypeC__47DBAE45" FromRole="EndPointType" ToRole="EndPointTypeCategory" />
-          <NavigationProperty Name="ThingEnds" Relationship="DynThingsModel.FK__ThingEnds__EndPo__5E3FF0B0" FromRole="EndPointType" ToRole="ThingEnd" />
+          <NavigationProperty Name="ThingEnds" Relationship="DynThingsModel.FK__ThingEnds__EndPo__7F36D027" FromRole="EndPointType" ToRole="ThingEnd" />
         </EntityType>
         <EntityType Name="IOType">
           <Key>
@@ -3023,7 +3049,7 @@
           <Property Name="Code" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="MediaFile" Relationship="DynThingsModel.FK__ThingCate__IconI__25DB9BFC" FromRole="ThingCategory" ToRole="MediaFile" />
           <NavigationProperty Name="MediaFile1" Relationship="DynThingsModel.FK__ThingCate__IconI__2EFAF1E2" FromRole="ThingCategory" ToRole="MediaFile" />
-          <NavigationProperty Name="ThingExtenstions" Relationship="DynThingsModel.FK__ThingExte__Thing__6339AFF7" FromRole="ThingCategory" ToRole="ThingExtenstion" />
+          <NavigationProperty Name="ThingExtensions" Relationship="DynThingsModel.FK__ThingExte__Thing__6339AFF7" FromRole="ThingCategory" ToRole="ThingExtension" />
           <NavigationProperty Name="Things" Relationship="DynThingsModel.FK__Things__Category__662B2B3B" FromRole="ThingCategory" ToRole="Thing" />
         </EntityType>
         <EntityType Name="ThingEnd">
@@ -3037,11 +3063,11 @@
           <Property Name="LastIOID" Type="Int64" />
           <Property Name="LastIOTimeStamp" Type="DateTime" Precision="3" />
           <Property Name="LastIOTimeStampUTC" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="EndPointIO" Relationship="DynThingsModel.FK__ThingEnds__LastI__186C9245" FromRole="ThingEnd" ToRole="EndPointIO" />
-          <NavigationProperty Name="EndPointType" Relationship="DynThingsModel.FK__ThingEnds__EndPo__5E3FF0B0" FromRole="ThingEnd" ToRole="EndPointType" />
-          <NavigationProperty Name="Thing" Relationship="DynThingsModel.FK__ThingEnds__Thing__4C214075" FromRole="ThingEnd" ToRole="Thing" />
+          <NavigationProperty Name="EndPointIO" Relationship="DynThingsModel.FK__ThingEnds__LastI__002AF460" FromRole="ThingEnd" ToRole="EndPointIO" />
+          <NavigationProperty Name="EndPointType" Relationship="DynThingsModel.FK__ThingEnds__EndPo__7F36D027" FromRole="ThingEnd" ToRole="EndPointType" />
+          <NavigationProperty Name="Thing" Relationship="DynThingsModel.FK__ThingEnds__Thing__7E42ABEE" FromRole="ThingEnd" ToRole="Thing" />
         </EntityType>
-        <EntityType Name="ThingExtenstion">
+        <EntityType Name="ThingExtension">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
@@ -3052,20 +3078,20 @@
           <Property Name="Title" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
           <Property Name="DataTypeID" Type="Int32" Nullable="false" />
           <Property Name="IsList" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="DataType" Relationship="DynThingsModel.FK__ThingExte__DataT__5C8CB268" FromRole="ThingExtenstion" ToRole="DataType" />
-          <NavigationProperty Name="ThingCategory" Relationship="DynThingsModel.FK__ThingExte__Thing__6339AFF7" FromRole="ThingExtenstion" ToRole="ThingCategory" />
-          <NavigationProperty Name="ThingExtenstionValues" Relationship="DynThingsModel.FK__ThingExte__Thing__5D80D6A1" FromRole="ThingExtenstion" ToRole="ThingExtenstionValue" />
+          <NavigationProperty Name="DataType" Relationship="DynThingsModel.FK__ThingExte__DataT__5C8CB268" FromRole="ThingExtension" ToRole="DataType" />
+          <NavigationProperty Name="ThingCategory" Relationship="DynThingsModel.FK__ThingExte__Thing__6339AFF7" FromRole="ThingExtension" ToRole="ThingCategory" />
+          <NavigationProperty Name="ThingExtensionValues" Relationship="DynThingsModel.FK__ThingExte__Thing__5D80D6A1" FromRole="ThingExtension" ToRole="ThingExtensionValue" />
         </EntityType>
-        <EntityType Name="ThingExtenstionValue">
+        <EntityType Name="ThingExtensionValue">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="ThingExtenstionID" Type="Int64" Nullable="false" />
+          <Property Name="ThingExtensionID" Type="Int64" Nullable="false" />
           <Property Name="ThingID" Type="Int64" />
           <Property Name="Valu" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="ThingExtenstion" Relationship="DynThingsModel.FK__ThingExte__Thing__5D80D6A1" FromRole="ThingExtenstionValue" ToRole="ThingExtenstion" />
-          <NavigationProperty Name="Thing" Relationship="DynThingsModel.FK__ThingExte__Thing__670A40DB" FromRole="ThingExtenstionValue" ToRole="Thing" />
+          <NavigationProperty Name="ThingExtension" Relationship="DynThingsModel.FK__ThingExte__Thing__5D80D6A1" FromRole="ThingExtensionValue" ToRole="ThingExtension" />
+          <NavigationProperty Name="Thing" Relationship="DynThingsModel.FK__ThingExte__Thing__670A40DB" FromRole="ThingExtensionValue" ToRole="Thing" />
         </EntityType>
         <EntityType Name="Thing">
           <Key>
@@ -3077,14 +3103,14 @@
           <Property Name="CreateByUser" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="CreateTimeStamp" Type="DateTime" Precision="3" />
           <Property Name="UTC_Diff" Type="Int32" Nullable="false" />
+          <Property Name="ObjectStatusID" Type="Int32" Nullable="false" />
           <NavigationProperty Name="AlertConditions" Relationship="DynThingsModel.FK__AlertCond__Thing__762C88DA" FromRole="Thing" ToRole="AlertCondition" />
           <NavigationProperty Name="EndPointIOs" Relationship="DynThingsModel.FK__EndPointI__Thing__7E02B4CC" FromRole="Thing" ToRole="EndPointIO" />
           <NavigationProperty Name="Endpoints" Relationship="DynThingsModel.FK__Endpoints__Thing__7EF6D905" FromRole="Thing" ToRole="Endpoint" />
           <NavigationProperty Name="LinkThingsLocations" Relationship="DynThingsModel.FK__LinkThing__Thing__0697FACD" FromRole="Thing" ToRole="LinkThingsLocation" />
           <NavigationProperty Name="ThingCategory" Relationship="DynThingsModel.FK__Things__Category__662B2B3B" FromRole="Thing" ToRole="ThingCategory" />
-          <NavigationProperty Name="ThingEnds" Relationship="DynThingsModel.FK__ThingEnds__Thing__4C214075" FromRole="Thing" ToRole="ThingEnd" />
-          <NavigationProperty Name="ThingExtenstionValues" Relationship="DynThingsModel.FK__ThingExte__Thing__670A40DB" FromRole="Thing" ToRole="ThingExtenstionValue" />
-          <Property Name="ObjectStatusID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="ThingEnds" Relationship="DynThingsModel.FK__ThingEnds__Thing__7E42ABEE" FromRole="Thing" ToRole="ThingEnd" />
+          <NavigationProperty Name="ThingExtensionValues" Relationship="DynThingsModel.FK__ThingExte__Thing__670A40DB" FromRole="Thing" ToRole="ThingExtensionValue" />
         </EntityType>
         <EntityType Name="UserNotification">
           <Key>
@@ -3291,12 +3317,12 @@
         </Association>
         <Association Name="FK__AppThingE__AppID__1960B67E">
           <End Type="DynThingsModel.App" Role="App" Multiplicity="1" />
-          <End Type="DynThingsModel.AppThingExtenstion" Role="AppThingExtenstion" Multiplicity="*" />
+          <End Type="DynThingsModel.AppThingExtension" Role="AppThingExtension" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="App">
               <PropertyRef Name="ID" />
             </Principal>
-            <Dependent Role="AppThingExtenstion">
+            <Dependent Role="AppThingExtension">
               <PropertyRef Name="AppID" />
             </Dependent>
           </ReferentialConstraint>
@@ -3315,12 +3341,12 @@
         </Association>
         <Association Name="FK__AppThingE__DataT__25C68D63">
           <End Type="DynThingsModel.DataType" Role="DataType" Multiplicity="1" />
-          <End Type="DynThingsModel.AppThingExtenstion" Role="AppThingExtenstion" Multiplicity="*" />
+          <End Type="DynThingsModel.AppThingExtension" Role="AppThingExtension" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="DataType">
               <PropertyRef Name="ID" />
             </Principal>
-            <Dependent Role="AppThingExtenstion">
+            <Dependent Role="AppThingExtension">
               <PropertyRef Name="DataTypeID" />
             </Dependent>
           </ReferentialConstraint>
@@ -3451,12 +3477,12 @@
         </Association>
         <Association Name="FK__ThingExte__DataT__5C8CB268">
           <End Type="DynThingsModel.DataType" Role="DataType" Multiplicity="1" />
-          <End Type="DynThingsModel.ThingExtenstion" Role="ThingExtenstion" Multiplicity="*" />
+          <End Type="DynThingsModel.ThingExtension" Role="ThingExtension" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="DataType">
               <PropertyRef Name="ID" />
             </Principal>
-            <Dependent Role="ThingExtenstion">
+            <Dependent Role="ThingExtension">
               <PropertyRef Name="DataTypeID" />
             </Dependent>
           </ReferentialConstraint>
@@ -3619,7 +3645,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__ThingEnds__LastI__186C9245">
+        <Association Name="FK__ThingEnds__LastI__002AF460">
           <End Type="DynThingsModel.EndPointIO" Role="EndPointIO" Multiplicity="0..1" />
           <End Type="DynThingsModel.ThingEnd" Role="ThingEnd" Multiplicity="*" />
           <ReferentialConstraint>
@@ -3681,8 +3707,10 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__ThingEnds__EndPo__5E3FF0B0">
-          <End Type="DynThingsModel.EndPointType" Role="EndPointType" Multiplicity="0..1" />
+        <Association Name="FK__ThingEnds__EndPo__7F36D027">
+          <End Type="DynThingsModel.EndPointType" Role="EndPointType" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Type="DynThingsModel.ThingEnd" Role="ThingEnd" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="EndPointType">
@@ -3811,12 +3839,12 @@
         </Association>
         <Association Name="FK__ThingExte__Thing__6339AFF7">
           <End Type="DynThingsModel.ThingCategory" Role="ThingCategory" Multiplicity="1" />
-          <End Type="DynThingsModel.ThingExtenstion" Role="ThingExtenstion" Multiplicity="*" />
+          <End Type="DynThingsModel.ThingExtension" Role="ThingExtension" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="ThingCategory">
               <PropertyRef Name="ID" />
             </Principal>
-            <Dependent Role="ThingExtenstion">
+            <Dependent Role="ThingExtension">
               <PropertyRef Name="ThingCategoryID" />
             </Dependent>
           </ReferentialConstraint>
@@ -3833,8 +3861,10 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__ThingEnds__Thing__4C214075">
-          <End Type="DynThingsModel.Thing" Role="Thing" Multiplicity="0..1" />
+        <Association Name="FK__ThingEnds__Thing__7E42ABEE">
+          <End Type="DynThingsModel.Thing" Role="Thing" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Type="DynThingsModel.ThingEnd" Role="ThingEnd" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Thing">
@@ -3846,25 +3876,25 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__ThingExte__Thing__5D80D6A1">
-          <End Type="DynThingsModel.ThingExtenstion" Role="ThingExtenstion" Multiplicity="1" />
-          <End Type="DynThingsModel.ThingExtenstionValue" Role="ThingExtenstionValue" Multiplicity="*" />
+          <End Type="DynThingsModel.ThingExtension" Role="ThingExtension" Multiplicity="1" />
+          <End Type="DynThingsModel.ThingExtensionValue" Role="ThingExtensionValue" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="ThingExtenstion">
+            <Principal Role="ThingExtension">
               <PropertyRef Name="ID" />
             </Principal>
-            <Dependent Role="ThingExtenstionValue">
-              <PropertyRef Name="ThingExtenstionID" />
+            <Dependent Role="ThingExtensionValue">
+              <PropertyRef Name="ThingExtensionID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__ThingExte__Thing__670A40DB">
           <End Type="DynThingsModel.Thing" Role="Thing" Multiplicity="0..1" />
-          <End Type="DynThingsModel.ThingExtenstionValue" Role="ThingExtenstionValue" Multiplicity="*" />
+          <End Type="DynThingsModel.ThingExtensionValue" Role="ThingExtensionValue" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Thing">
               <PropertyRef Name="ID" />
             </Principal>
-            <Dependent Role="ThingExtenstionValue">
+            <Dependent Role="ThingExtensionValue">
               <PropertyRef Name="ThingID" />
             </Dependent>
           </ReferentialConstraint>
@@ -3873,15 +3903,33 @@
           <End Type="DynThingsModel.AspNetRole" Role="AspNetRole" Multiplicity="*" />
           <End Type="DynThingsModel.AspNetUser" Role="AspNetUser" Multiplicity="*" />
         </Association>
-        <ComplexType Name="GetThingExtenstions_Result">
+        <ComplexType Name="GetThingEnds_Result1">
+          <Property Type="Int64" Name="LocationID" Nullable="false" />
+          <Property Type="String" Name="LocationTitle" Nullable="false" MaxLength="50" />
+          <Property Type="Int64" Name="ThingID" Nullable="false" />
+          <Property Type="String" Name="ThingTitle" Nullable="false" MaxLength="128" />
+          <Property Type="Int64" Name="ThingCategoryID" Nullable="false" />
+          <Property Type="String" Name="ThingCategoryTitle" Nullable="true" MaxLength="50" />
+          <Property Type="Int64" Name="EndPointTypeID" Nullable="false" />
+          <Property Type="String" Name="EndPointTypeTitle" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="EndPointMeasurement" Nullable="true" MaxLength="50" />
+          <Property Type="Int64" Name="IconID" Nullable="true" />
+          <Property Type="Int64" Name="DeviceID" Nullable="false" />
+          <Property Type="String" Name="DeviceTitle" Nullable="true" MaxLength="50" />
+          <Property Type="Boolean" Name="IsConnected" Nullable="true" />
+          <Property Type="Int64" Name="LastIOID" Nullable="true" />
+          <Property Type="String" Name="LastIOValue" Nullable="true" MaxLength="50" />
+          <Property Type="DateTime" Name="LastIOTimeStamp" Nullable="true" Precision="23" />
+        </ComplexType>
+        <ComplexType Name="GetThingExtensions_Result">
           <Property Type="Int64" Name="ThingID" Nullable="false" />
           <Property Type="String" Name="ThingTitle" Nullable="false" MaxLength="128" />
           <Property Type="Int64" Name="CategoryID" Nullable="false" />
           <Property Type="String" Name="ThingCategoryTitle" Nullable="true" MaxLength="50" />
-          <Property Type="Int64" Name="ThingExtenstionID" Nullable="false" />
-          <Property Type="Guid" Name="ThingExtenstionGUID" Nullable="false" />
-          <Property Type="String" Name="ThingExtenstionCode" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="ThingExtenstionTitle" Nullable="false" MaxLength="128" />
+          <Property Type="Int64" Name="ThingExtensionID" Nullable="false" />
+          <Property Type="Guid" Name="ThingExtensionGUID" Nullable="false" />
+          <Property Type="String" Name="ThingExtensionCode" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="ThingExtensionTitle" Nullable="false" MaxLength="128" />
           <Property Type="Int32" Name="DataTypeID" Nullable="false" />
           <Property Type="String" Name="DataTypeTitle" Nullable="false" MaxLength="50" />
           <Property Type="Boolean" Name="IsList" Nullable="false" />
@@ -4218,28 +4266,6 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="GetThingEnds" FunctionName="DynThingsModel.Store.GetThingEnds">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="DynThingsModel.GetThingEnds_Result">
-                <ScalarProperty Name="LocationID" ColumnName="LocationID" />
-                <ScalarProperty Name="LocationTitle" ColumnName="LocationTitle" />
-                <ScalarProperty Name="ThingID" ColumnName="ThingID" />
-                <ScalarProperty Name="ThingTitle" ColumnName="ThingTitle" />
-                <ScalarProperty Name="ThingCategoryID" ColumnName="ThingCategoryID" />
-                <ScalarProperty Name="ThingCategoryTitle" ColumnName="ThingCategoryTitle" />
-                <ScalarProperty Name="EndPointTypeID" ColumnName="EndPointTypeID" />
-                <ScalarProperty Name="EndPointTypeTitle" ColumnName="EndPointTypeTitle" />
-                <ScalarProperty Name="EndPointMeasurement" ColumnName="EndPointMeasurement" />
-                <ScalarProperty Name="IconID" ColumnName="IconID" />
-                <ScalarProperty Name="DeviceID" ColumnName="DeviceID" />
-                <ScalarProperty Name="DeviceTitle" ColumnName="DeviceTitle" />
-                <ScalarProperty Name="IsConnected" ColumnName="IsConnected" />
-                <ScalarProperty Name="LastIOID" ColumnName="LastIOID" />
-                <ScalarProperty Name="LastIOValue" ColumnName="LastIOValue" />
-                <ScalarProperty Name="LastIOTimeStamp" ColumnName="LastIOTimeStamp" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="Rpt_EndPointAndDevices_IOsCount_Minutes" FunctionName="DynThingsModel.Store.Rpt_EndPointAndDevices_IOsCount_Minutes">
             <ResultMapping>
               <ComplexTypeMapping TypeName="DynThingsModel.Rpt_EndPointAndDevices_IOsCount_Minutes_Result">
@@ -4319,6 +4345,8 @@
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="SubmitEndPointInput" FunctionName="DynThingsModel.Store.SubmitEndPointInput" />
           <FunctionImportMapping FunctionImportName="SubmitEndPointLog" FunctionName="DynThingsModel.Store.SubmitEndPointLog" />
+          <FunctionImportMapping FunctionImportName="SubmitEndpointCommand" FunctionName="DynThingsModel.Store.SubmitEndpointCommand" />
+          <FunctionImportMapping FunctionImportName="SubmitEndpointCommandExecuted" FunctionName="DynThingsModel.Store.SubmitEndpointCommandExecuted" />
           <EntitySetMapping Name="AlertConditions">
             <EntityTypeMapping TypeName="DynThingsModel.AlertCondition">
               <MappingFragment StoreEntitySet="AlertConditions">
@@ -4461,9 +4489,9 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="AppThingExtenstions">
-            <EntityTypeMapping TypeName="DynThingsModel.AppThingExtenstion">
-              <MappingFragment StoreEntitySet="AppThingExtenstions">
+          <EntitySetMapping Name="AppThingExtensions">
+            <EntityTypeMapping TypeName="DynThingsModel.AppThingExtension">
+              <MappingFragment StoreEntitySet="AppThingExtensions">
                 <ScalarProperty Name="IsList" ColumnName="IsList" />
                 <ScalarProperty Name="DataTypeID" ColumnName="DataTypeID" />
                 <ScalarProperty Name="Title" ColumnName="Title" />
@@ -4651,10 +4679,10 @@
             <EntityTypeMapping TypeName="DynThingsModel.Endpoint">
               <MappingFragment StoreEntitySet="Endpoints">
                 <ScalarProperty Name="ObjectStatusID" ColumnName="ObjectStatusID" />
-                <ScalarProperty Name="LastIONumericValue" ColumnName="LastIONumericValue" />
                 <ScalarProperty Name="LastIOTimeStampUTC" ColumnName="LastIOTimeStampUTC" />
                 <ScalarProperty Name="LastIOTimeStamp" ColumnName="LastIOTimeStamp" />
                 <ScalarProperty Name="LastIOValue" ColumnName="LastIOValue" />
+                <ScalarProperty Name="LastIONumericValue" ColumnName="LastIONumericValue" />
                 <ScalarProperty Name="LastIOID" ColumnName="LastIOID" />
                 <ScalarProperty Name="HighRange" ColumnName="HighRange" />
                 <ScalarProperty Name="LowRange" ColumnName="LowRange" />
@@ -4828,9 +4856,9 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="ThingExtenstions">
-            <EntityTypeMapping TypeName="DynThingsModel.ThingExtenstion">
-              <MappingFragment StoreEntitySet="ThingExtenstions">
+          <EntitySetMapping Name="ThingExtensions">
+            <EntityTypeMapping TypeName="DynThingsModel.ThingExtension">
+              <MappingFragment StoreEntitySet="ThingExtensions">
                 <ScalarProperty Name="IsList" ColumnName="IsList" />
                 <ScalarProperty Name="DataTypeID" ColumnName="DataTypeID" />
                 <ScalarProperty Name="Title" ColumnName="Title" />
@@ -4841,12 +4869,12 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="ThingExtenstionValues">
-            <EntityTypeMapping TypeName="DynThingsModel.ThingExtenstionValue">
-              <MappingFragment StoreEntitySet="ThingExtenstionValues">
+          <EntitySetMapping Name="ThingExtensionValues">
+            <EntityTypeMapping TypeName="DynThingsModel.ThingExtensionValue">
+              <MappingFragment StoreEntitySet="ThingExtensionValues">
                 <ScalarProperty Name="Valu" ColumnName="Valu" />
                 <ScalarProperty Name="ThingID" ColumnName="ThingID" />
-                <ScalarProperty Name="ThingExtenstionID" ColumnName="ThingExtenstionID" />
+                <ScalarProperty Name="ThingExtensionID" ColumnName="ThingExtensionID" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -4894,20 +4922,39 @@
               <ScalarProperty Name="Id" ColumnName="RoleId" />
             </EndProperty>
           </AssociationSetMapping>
-          <FunctionImportMapping FunctionImportName="ThingPropertyValueAdd" FunctionName="DynThingsModel.Store.ThingPropertyValueAdd" />
-          <FunctionImportMapping FunctionImportName="ThingPropertyValueEdit" FunctionName="DynThingsModel.Store.ThingPropertyValueEdit" />
-          <FunctionImportMapping FunctionImportName="ThingPropertyValueDelete" FunctionName="DynThingsModel.Store.ThingPropertyValueDelete" />
-          <FunctionImportMapping FunctionImportName="GetThingExtenstions" FunctionName="DynThingsModel.Store.GetThingExtenstions">
+          <FunctionImportMapping FunctionImportName="GetThingEnds" FunctionName="DynThingsModel.Store.GetThingEnds">
             <ResultMapping>
-              <ComplexTypeMapping TypeName="DynThingsModel.GetThingExtenstions_Result">
+              <ComplexTypeMapping TypeName="DynThingsModel.GetThingEnds_Result1">
+                <ScalarProperty Name="LocationID" ColumnName="LocationID" />
+                <ScalarProperty Name="LocationTitle" ColumnName="LocationTitle" />
+                <ScalarProperty Name="ThingID" ColumnName="ThingID" />
+                <ScalarProperty Name="ThingTitle" ColumnName="ThingTitle" />
+                <ScalarProperty Name="ThingCategoryID" ColumnName="ThingCategoryID" />
+                <ScalarProperty Name="ThingCategoryTitle" ColumnName="ThingCategoryTitle" />
+                <ScalarProperty Name="EndPointTypeID" ColumnName="EndPointTypeID" />
+                <ScalarProperty Name="EndPointTypeTitle" ColumnName="EndPointTypeTitle" />
+                <ScalarProperty Name="EndPointMeasurement" ColumnName="EndPointMeasurement" />
+                <ScalarProperty Name="IconID" ColumnName="IconID" />
+                <ScalarProperty Name="DeviceID" ColumnName="DeviceID" />
+                <ScalarProperty Name="DeviceTitle" ColumnName="DeviceTitle" />
+                <ScalarProperty Name="IsConnected" ColumnName="IsConnected" />
+                <ScalarProperty Name="LastIOID" ColumnName="LastIOID" />
+                <ScalarProperty Name="LastIOValue" ColumnName="LastIOValue" />
+                <ScalarProperty Name="LastIOTimeStamp" ColumnName="LastIOTimeStamp" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetThingExtensions" FunctionName="DynThingsModel.Store.GetThingExtensions">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DynThingsModel.GetThingExtensions_Result">
                 <ScalarProperty Name="ThingID" ColumnName="ThingID" />
                 <ScalarProperty Name="ThingTitle" ColumnName="ThingTitle" />
                 <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
                 <ScalarProperty Name="ThingCategoryTitle" ColumnName="ThingCategoryTitle" />
-                <ScalarProperty Name="ThingExtenstionID" ColumnName="ThingExtenstionID" />
-                <ScalarProperty Name="ThingExtenstionGUID" ColumnName="ThingExtenstionGUID" />
-                <ScalarProperty Name="ThingExtenstionCode" ColumnName="ThingExtenstionCode" />
-                <ScalarProperty Name="ThingExtenstionTitle" ColumnName="ThingExtenstionTitle" />
+                <ScalarProperty Name="ThingExtensionID" ColumnName="ThingExtensionID" />
+                <ScalarProperty Name="ThingExtensionGUID" ColumnName="ThingExtensionGUID" />
+                <ScalarProperty Name="ThingExtensionCode" ColumnName="ThingExtensionCode" />
+                <ScalarProperty Name="ThingExtensionTitle" ColumnName="ThingExtensionTitle" />
                 <ScalarProperty Name="DataTypeID" ColumnName="DataTypeID" />
                 <ScalarProperty Name="DataTypeTitle" ColumnName="DataTypeTitle" />
                 <ScalarProperty Name="IsList" ColumnName="IsList" />
@@ -4916,8 +4963,13 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="SubmitEndpointCommand" FunctionName="DynThingsModel.Store.SubmitEndpointCommand" />
-          <FunctionImportMapping FunctionImportName="SubmitEndpointCommandExecuted" FunctionName="DynThingsModel.Store.SubmitEndpointCommandExecuted" />
+          <FunctionImportMapping FunctionImportName="PublishApp" FunctionName="DynThingsModel.Store.PublishApp" />
+          <FunctionImportMapping FunctionImportName="SetThingProperty" FunctionName="DynThingsModel.Store.SetThingProperty" />
+          <FunctionImportMapping FunctionImportName="ThingPropertyValueAdd" FunctionName="DynThingsModel.Store.ThingPropertyValueAdd" />
+          <FunctionImportMapping FunctionImportName="ThingPropertyValueDelete" FunctionName="DynThingsModel.Store.ThingPropertyValueDelete" />
+          <FunctionImportMapping FunctionImportName="ThingPropertyValueDeleteAll" FunctionName="DynThingsModel.Store.ThingPropertyValueDeleteAll" />
+          <FunctionImportMapping FunctionImportName="ThingPropertyValueEdit" FunctionName="DynThingsModel.Store.ThingPropertyValueEdit" />
+          <FunctionImportMapping FunctionImportName="UnPublishApp" FunctionName="DynThingsModel.Store.UnPublishApp" />
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

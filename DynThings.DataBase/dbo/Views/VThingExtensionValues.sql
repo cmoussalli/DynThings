@@ -2,8 +2,8 @@
 AS
 SELECT        v.ID, tc.ID AS ThingCategoryID, tc.Title AS ThingCategoryTitle, t.ID AS ThingID, t.Title AS ThingTitle, e.Title AS ValueTitle, e.DataTypeID, dt.Title AS DataTypeTitle, e.IsList, v.Valu AS Value
 FROM            dbo.ThingCategorys AS tc INNER JOIN
-                         dbo.ThingExtenstionValues AS v INNER JOIN
-                         dbo.ThingExtenstions AS e ON v.ThingExtenstionID = e.ID INNER JOIN
+                         dbo.ThingExtensionValues AS v INNER JOIN
+                         dbo.ThingExtensions AS e ON v.ThingExtensionID = e.ID INNER JOIN
                          dbo.Things AS t ON v.ThingID = t.ID INNER JOIN
                          dbo.DataTypes AS dt ON e.DataTypeID = dt.ID ON tc.ID = e.ThingCategoryID AND tc.ID = t.CategoryID
 

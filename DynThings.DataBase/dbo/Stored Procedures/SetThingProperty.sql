@@ -2,12 +2,12 @@
 
 CREATE procedure SetThingProperty
 @ThingID bigint,
-@ThingExtenstionID bigint
+@ThingExtensionID bigint
 as
 begin
 	
 	declare @IsList bit
-	select @IsList = islist from ThingExtenstions where ID = @ThingExtenstionID
+	select @IsList = islist from ThingExtensions where ID = @ThingExtensionID
 
 	if (@IsList = 1)
 	begin

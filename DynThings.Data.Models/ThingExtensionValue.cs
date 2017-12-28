@@ -15,30 +15,22 @@ namespace DynThings.Data.Models
 using System;
     using System.Collections.Generic;
     
-public partial class AppThingExtenstion
+public partial class ThingExtensionValue
 {
 
     public long ID { get; set; }
 
-    public System.Guid GUID { get; set; }
+    public long ThingExtensionID { get; set; }
 
-    public string Code { get; set; }
+    public Nullable<long> ThingID { get; set; }
 
-    public long AppID { get; set; }
-
-    public string AppThingCategoryCode { get; set; }
-
-    public string Title { get; set; }
-
-    public int DataTypeID { get; set; }
-
-    public bool IsList { get; set; }
+    public string Valu { get; set; }
 
 
 
-    public virtual App App { get; set; }
+    public virtual ThingExtension ThingExtension { get; set; }
 
-    public virtual DataType DataType { get; set; }
+    public virtual Thing Thing { get; set; }
 
 }
 

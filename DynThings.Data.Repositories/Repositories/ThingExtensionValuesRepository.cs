@@ -25,10 +25,10 @@ namespace DynThings.Data.Repositories
 
 
         #region GetList
-        public List<ThingExtenstionValue> GetList(long thingExtensionID, long thingID)
+        public List<ThingExtensionValue> GetList(long thingExtensionID, long thingID)
         {
-            List<ThingExtenstionValue> vs = db.ThingExtenstionValues.Where(v =>
-           v.ThingExtenstionID == thingExtensionID &&
+            List<ThingExtensionValue> vs = db.ThingExtensionValues.Where(v =>
+           v.ThingExtensionID == thingExtensionID &&
            v.ThingID == thingID
             ).ToList();
             return vs;
@@ -39,9 +39,9 @@ namespace DynThings.Data.Repositories
         #region Get PagedList
         public IPagedList GetPagedList(long thingExtensionID, long thingID, int pageNumber, int recordsPerPage)
         {
-            IPagedList vs = db.ThingExtenstionValues
+            IPagedList vs = db.ThingExtensionValues
               .Where(v =>
-                v.ThingExtenstionID == thingExtensionID &&
+                v.ThingExtensionID == thingExtensionID &&
                 v.ThingID == thingID
                 )
               .OrderBy(v => v.Valu)
@@ -53,10 +53,10 @@ namespace DynThings.Data.Repositories
 
 
         #region Find
-        public ThingExtenstionValue Find(long id)
+        public ThingExtensionValue Find(long id)
         {
-            ThingExtenstionValue prp = new ThingExtenstionValue();
-            List<ThingExtenstionValue> prps = db.ThingExtenstionValues.Where(p => p.ID == id).ToList();
+            ThingExtensionValue prp = new ThingExtensionValue();
+            List<ThingExtensionValue> prps = db.ThingExtensionValues.Where(p => p.ID == id).ToList();
             if (prps.Count == 1)
             {
                 prp = prps[0];
@@ -69,14 +69,14 @@ namespace DynThings.Data.Repositories
         }
 
         /// <summary>
-        /// Get a specific Thing Extenstion Definition.
+        /// Get a specific Thing Extension Definition.
         /// </summary>
         /// <param name="code">The requested defeinition code.</param>
-        /// <returns>Thing Extenstion definition.</returns>
-        public ThingExtenstion Find(string code)
+        /// <returns>Thing Extension definition.</returns>
+        public ThingExtension Find(string code)
         {
-            ThingExtenstion ext = new ThingExtenstion();
-            List<ThingExtenstion> exts = db.ThingExtenstions.Include("DataType").Include("ThingCategory").Include("ThingExtenstionValues").Where(l => l.Code == code).ToList();
+            ThingExtension ext = new ThingExtension();
+            List<ThingExtension> exts = db.ThingExtensions.Include("DataType").Include("ThingCategory").Include("ThingExtensionValues").Where(l => l.Code == code).ToList();
             if (exts.Count == 1)
             {
                 ext = exts[0];
@@ -89,14 +89,14 @@ namespace DynThings.Data.Repositories
         }
 
         /// <summary>
-        /// Get a specific Thing Extenstion Definition.
+        /// Get a specific Thing Extension Definition.
         /// </summary>
         /// <param name="guid">The requested defeinition Guid.</param>
-        /// <returns>Thing Extenstion definition.</returns>
-        public ThingExtenstion Find(Guid guid)
+        /// <returns>Thing Extension definition.</returns>
+        public ThingExtension Find(Guid guid)
         {
-            ThingExtenstion ext = new ThingExtenstion();
-            List<ThingExtenstion> exts = db.ThingExtenstions.Include("DataType").Include("ThingCategory").Include("ThingExtenstionValues").Where(l => l.GUID == guid).ToList();
+            ThingExtension ext = new ThingExtension();
+            List<ThingExtension> exts = db.ThingExtensions.Include("DataType").Include("ThingCategory").Include("ThingExtensionValues").Where(l => l.GUID == guid).ToList();
             if (exts.Count == 1)
             {
                 ext = exts[0];

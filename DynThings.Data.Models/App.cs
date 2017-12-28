@@ -30,7 +30,7 @@ public partial class App
 
         this.AppThingCategorys = new HashSet<AppThingCategory>();
 
-        this.AppThingExtenstions = new HashSet<AppThingExtenstion>();
+        this.AppThingExtensions = new HashSet<AppThingExtension>();
 
         this.AppUserTokens = new HashSet<AppUserToken>();
 
@@ -83,7 +83,7 @@ public partial class App
 
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
 
-    public virtual ICollection<AppThingExtenstion> AppThingExtenstions { get; set; }
+    public virtual ICollection<AppThingExtension> AppThingExtensions { get; set; }
 
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
 

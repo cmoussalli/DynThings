@@ -57,13 +57,13 @@ public partial class Endpoint
 
     public Nullable<long> LastIOID { get; set; }
 
+    public Nullable<float> LastIONumericValue { get; set; }
+
     public string LastIOValue { get; set; }
 
     public Nullable<System.DateTime> LastIOTimeStamp { get; set; }
 
     public Nullable<System.DateTime> LastIOTimeStampUTC { get; set; }
-
-    public Nullable<float> LastIONumericValue { get; set; }
 
     public int ObjectStatusID { get; set; }
 

@@ -93,7 +93,7 @@
     <Compile Include="AppThingCategory.cs">
       <DependentUpon>DynThingsModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="AppThingExtenstion.cs">
+    <Compile Include="AppThingExtension.cs">
       <DependentUpon>DynThingsModel.tt</DependentUpon>
     </Compile>
     <Compile Include="AppUserToken.cs">
@@ -163,7 +163,10 @@
     <Compile Include="GetThingEnds_Result.cs">
       <DependentUpon>DynThingsModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="GetThingExtenstions_Result.cs">
+    <Compile Include="GetThingEnds_Result1.cs">
+      <DependentUpon>DynThingsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GetThingExtensions_Result.cs">
       <DependentUpon>DynThingsModel.tt</DependentUpon>
     </Compile>
     <Compile Include="IOType.cs">
@@ -239,10 +242,10 @@
     <Compile Include="ThingEnd.cs">
       <DependentUpon>DynThingsModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="ThingExtenstion.cs">
+    <Compile Include="ThingExtension.cs">
       <DependentUpon>DynThingsModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="ThingExtenstionValue.cs">
+    <Compile Include="ThingExtensionValue.cs">
       <DependentUpon>DynThingsModel.tt</DependentUpon>
     </Compile>
     <Compile Include="UserNotification.cs">

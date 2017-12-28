@@ -41,19 +41,19 @@ update ThingCategorys set
 		inner join MediaFiles as mf on mf.GUID = appThnCat.IconGUID 
 		where appThnCat.AppID = @AppID
 
---Insert new ThingExtenstions
-insert into ThingExtenstions (GUID,ThingCategoryID,Title,DataTypeID,IsList)
+--Insert new ThingExtensions
+insert into ThingExtensions (GUID,ThingCategoryID,Title,DataTypeID,IsList)
 	(select appThnExt.GUID,  thnCat.ID    , appThnExt.Title,appThnExt.DataTypeID,appThnExt.IsList
-		from AppThingExtenstions appThnExt, ThingCategorys thnCat
-		where appThnExt.Code not in (select code from ThingExtenstions)
+		from AppThingExtensions appThnExt, ThingCategorys thnCat
+		where appThnExt.Code not in (select code from ThingExtensions)
 		 and appThnExt.AppID = @AppID
 		 and appThnExt.AppThingCategoryCode = thnCat.Code
 	)
---Update existing ThingExtenstions	
-update ThingExtenstions set
+--Update existing ThingExtensions	
+update ThingExtensions set
 	ThingCategoryID = thnCat.ID , Title = appThnExt.Title , DataTypeID = appThnExt.DataTypeID, IsList = appThnExt.IsList 
 	from ThingCategorys thnExt
-		inner join AppThingExtenstions as appThnExt on appThnExt.Code = thnExt.Code
+		inner join AppThingExtensions as appThnExt on appThnExt.Code = thnExt.Code
 		inner join ThingCategorys as thnCat on thnCat.Code = appThnExt.AppThingCategoryCode
 		where appThnExt.AppID = @AppID
 

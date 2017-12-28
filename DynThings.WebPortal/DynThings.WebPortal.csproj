@@ -731,10 +731,10 @@
     <Content Include="Views\Endpoints\_Details_Connectivity.cshtml" />
     <Content Include="Views\LocationViews\_Locations.cshtml" />
     <Content Include="Views\Things\_Details_PropertiesList.cshtml" />
-    <Content Include="Views\Things\_Add_ThingExtenstionProperty.cshtml" />
+    <Content Include="Views\Things\_Add_ThingExtensionProperty.cshtml" />
     <Content Include="Views\Things\_Details_Properties.cshtml" />
-    <Content Include="Views\Things\_Delete_ThingExtenstionProperty.cshtml" />
-    <Content Include="Views\Things\_Edit_ThingExtenstionProperty.cshtml" />
+    <Content Include="Views\Things\_Delete_ThingExtensionProperty.cshtml" />
+    <Content Include="Views\Things\_Edit_ThingExtensionProperty.cshtml" />
     <Content Include="Views\DynUsers\_Add_Role.cshtml" />
     <Content Include="Views\Apps\_App_ThingTypesContainer.cshtml" />
     <Content Include="Views\Apps\_App_ThingTypesList.cshtml" />

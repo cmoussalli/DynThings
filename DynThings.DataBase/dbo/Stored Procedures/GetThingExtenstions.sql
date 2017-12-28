@@ -1,5 +1,5 @@
 ﻿
-CREATE procedure [dbo].[GetThingExtenstions]
+CREATE procedure [dbo].[GetThingExtensions]
 @ThingID bigint,
 @SearchFor nvarchar(50)
 as
@@ -13,10 +13,10 @@ begin
 		t.Title as 'ThingTitle' ,
 		t.CategoryID,
 		tc.Title as 'ThingCategoryTitle',
-		te.ID as 'ThingExtenstionID',
-		te.GUID as 'ThingExtenstionGUID',
-		te.Code as 'ThingExtenstionCode',
-		te.Title as 'ThingExtenstionTitle',
+		te.ID as 'ThingExtensionID',
+		te.GUID as 'ThingExtensionGUID',
+		te.Code as 'ThingExtensionCode',
+		te.Title as 'ThingExtensionTitle',
 		te.DataTypeID,
 		dt.Title as 'DataTypeTitle',
 		te.IsList as 'IsList',
@@ -24,14 +24,14 @@ begin
 		v.Valu as 'Value'
 	from 
 		Things t,
-		ThingExtenstions te,
-		ThingExtenstionValues v,
+		ThingExtensions te,
+		ThingExtensionValues v,
 		DataTypes dt,
 		ThingCategorys tc
 
 	where 
 		t.CategoryID = te.ThingCategoryID
-		and te.ID = v.ThingExtenstionID
+		and te.ID = v.ThingExtensionID
 		and t.CategoryID = tc.ID
 		and t.ID = v.ThingID
 		and t.ID = @ThingID
@@ -43,14 +43,14 @@ begin
 	from 
 		ThingCategorys tc,
 		Things t,
-		ThingExtenstions te,
+		ThingExtensions te,
 		DataTypes dt
 
 	where 
 		t.CategoryID = te.ThingCategoryID
 		and t.CategoryID = tc.ID
 		and te.DataTypeID = dt.ID
-		and te.ID not in (select ThingExtenstionID from ThingExtenstionValues where ThingID = @ThingID)
+		and te.ID not in (select ThingExtensionID from ThingExtensionValues where ThingID = @ThingID)
 		and t.ID = @ThingID		
 		and ( (te.Title like '%' + @SearchFor +'%') or (te.Code like '%' + @SearchFor +'%') )	
 		)

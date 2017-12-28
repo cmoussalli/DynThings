@@ -41,7 +41,7 @@ namespace DynThings.Data.Models.ViewModels
         public long IconID { get; set; }
     }
 
-    public class VMThingExtenstion
+    public class VMThingExtension
     {
         public long ID { get; set; }
         public Guid GUID { get; set; }

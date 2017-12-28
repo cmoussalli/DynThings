@@ -15,17 +15,8 @@ namespace DynThings.Data.Models
 using System;
     using System.Collections.Generic;
     
-public partial class ThingExtenstion
+public partial class AppThingExtension
 {
-
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-    public ThingExtenstion()
-    {
-
-        this.ThingExtenstionValues = new HashSet<ThingExtenstionValue>();
-
-    }
-
 
     public long ID { get; set; }
 
@@ -33,7 +24,9 @@ public partial class ThingExtenstion
 
     public string Code { get; set; }
 
-    public long ThingCategoryID { get; set; }
+    public long AppID { get; set; }
+
+    public string AppThingCategoryCode { get; set; }
 
     public string Title { get; set; }
 
@@ -43,13 +36,9 @@ public partial class ThingExtenstion
 
 
 
+    public virtual App App { get; set; }
+
     public virtual DataType DataType { get; set; }
-
-    public virtual ThingCategory ThingCategory { get; set; }
-
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-
-    public virtual ICollection<ThingExtenstionValue> ThingExtenstionValues { get; set; }
 
 }
 

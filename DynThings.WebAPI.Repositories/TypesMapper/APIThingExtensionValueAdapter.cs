@@ -14,11 +14,11 @@ namespace DynThings.WebAPI.TypesMapper
     {
         static DynThingsEntities db = new DynThingsEntities();
 
-        public static APIThingExtensionValue fromThingExtensionValue(ThingExtenstionValue sourceThingExtenstionValue, bool loadParents,bool loadChilds)
+        public static APIThingExtensionValue fromThingExtensionValue(ThingExtensionValue sourceThingExtensionValue, bool loadParents,bool loadChilds)
         {
             APIThingExtensionValue result = new APIThingExtensionValue();
-            result.ID = sourceThingExtenstionValue.ID;
-            result.Value = sourceThingExtenstionValue.Valu;
+            result.ID = sourceThingExtensionValue.ID;
+            result.Value = sourceThingExtensionValue.Valu;
 
             #region Load Master Types
            
@@ -28,11 +28,11 @@ namespace DynThings.WebAPI.TypesMapper
             if (loadParents)
             {
                 #region ThingExtension
-                result.ThingExtension = TypesMapper.APIThingExtensionAdapter.fromThingExtension(sourceThingExtenstionValue.ThingExtenstion,true,false);
+                result.ThingExtension = TypesMapper.APIThingExtensionAdapter.fromThingExtension(sourceThingExtensionValue.ThingExtension,true,false);
                 #endregion
 
                 #region Thing
-                result.Thing = TypesMapper.APIThingAdapter.fromThing(sourceThingExtenstionValue.Thing, false, false);
+                result.Thing = TypesMapper.APIThingAdapter.fromThing(sourceThingExtensionValue.Thing, false, false);
                 #endregion
             }
 

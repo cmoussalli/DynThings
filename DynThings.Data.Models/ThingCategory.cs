@@ -22,7 +22,7 @@ public partial class ThingCategory
     public ThingCategory()
     {
 
-        this.ThingExtenstions = new HashSet<ThingExtenstion>();
+        this.ThingExtensions = new HashSet<ThingExtension>();
 
         this.Things = new HashSet<Thing>();
 
@@ -45,7 +45,7 @@ public partial class ThingCategory
 
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
 
-    public virtual ICollection<ThingExtenstion> ThingExtenstions { get; set; }
+    public virtual ICollection<ThingExtension> ThingExtensions { get; set; }
 
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
 

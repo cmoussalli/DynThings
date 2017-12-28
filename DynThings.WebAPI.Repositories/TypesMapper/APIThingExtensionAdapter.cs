@@ -14,7 +14,7 @@ namespace DynThings.WebAPI.TypesMapper
     {
         static DynThingsEntities db = new DynThingsEntities();
 
-        public static APIThingExtension fromThingExtension(ThingExtenstion sourceThingExtension, bool loadParents,bool loadChilds)
+        public static APIThingExtension fromThingExtension(ThingExtension sourceThingExtension, bool loadParents,bool loadChilds)
         {
             APIThingExtension result = new APIThingExtension();
             result.ID = sourceThingExtension.ID;
@@ -37,9 +37,9 @@ namespace DynThings.WebAPI.TypesMapper
             {
                 #region ThingExtensionValues
                 List<APIThingExtensionValue> apiThingExtensionValues = new List<APIThingExtensionValue>();
-                foreach (ThingExtenstionValue thingExtenstionValue in sourceThingExtension.ThingExtenstionValues)
+                foreach (ThingExtensionValue thingExtensionValue in sourceThingExtension.ThingExtensionValues)
                 {
-                    APIThingExtensionValue apiThingExtensionValue = TypesMapper.APIThingExtensionValueAdapter.fromThingExtensionValue(thingExtenstionValue, false, false);
+                    APIThingExtensionValue apiThingExtensionValue = TypesMapper.APIThingExtensionValueAdapter.fromThingExtensionValue(thingExtensionValue, false, false);
                     apiThingExtensionValues.Add(apiThingExtensionValue);
                 }
                 result.APIThingExtensionValues = apiThingExtensionValues;

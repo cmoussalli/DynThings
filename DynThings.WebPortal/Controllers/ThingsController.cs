@@ -221,14 +221,14 @@ namespace DynThings.WebPortal.Controllers
 
         #region Add Property
         [HttpGet]
-        public PartialViewResult AddPVThingExtenstionProperty(long thingExtensionID, long thingID)
+        public PartialViewResult AddPVThingExtensionProperty(long thingExtensionID, long thingID)
         {
-            ThingExtenstion ext = uof_repos.repoThingExtensions.Find(thingExtensionID);
-            return PartialView("_Add_ThingExtenstionProperty", ext);
+            ThingExtension ext = uof_repos.repoThingExtensions.Find(thingExtensionID);
+            return PartialView("_Add_ThingExtensionProperty", ext);
         }
 
         [HttpPost]
-        public ActionResult AddThingExtenstionProperty(long thingID, long thingExtensionID, string newValue)
+        public ActionResult AddThingExtensionProperty(long thingID, long thingExtensionID, string newValue)
         {
             ResultInfo.Result res = uof_repos.repoThingExtensionValues.Add(thingID, thingExtensionID, newValue, currentUser.Id);
             return Json(res);
@@ -237,14 +237,14 @@ namespace DynThings.WebPortal.Controllers
 
         #region Edit Property
         [HttpGet]
-        public PartialViewResult EditPVThingExtenstionProperty(long valueID)
+        public PartialViewResult EditPVThingExtensionProperty(long valueID)
         {
-            ThingExtenstionValue ext = uof_repos.repoThingExtensionValues.Find(valueID);
-            return PartialView("_Edit_ThingExtenstionProperty", ext);
+            ThingExtensionValue ext = uof_repos.repoThingExtensionValues.Find(valueID);
+            return PartialView("_Edit_ThingExtensionProperty", ext);
         }
 
         [HttpPost]
-        public ActionResult EditThingExtenstionProperty(long valueID, string newValue)
+        public ActionResult EditThingExtensionProperty(long valueID, string newValue)
         {
             ResultInfo.Result res = uof_repos.repoThingExtensionValues.Edit(valueID, newValue, currentUser.Id);
             return Json(res);
@@ -253,14 +253,14 @@ namespace DynThings.WebPortal.Controllers
 
         #region Delete Property
         [HttpGet]
-        public PartialViewResult DeletePVThingExtenstionProperty(long valueID)
+        public PartialViewResult DeletePVThingExtensionProperty(long valueID)
         {
-            ThingExtenstionValue v = uof_repos.repoThingExtensionValues.Find(valueID);
-            return PartialView("_Delete_ThingExtenstionProperty", v);
+            ThingExtensionValue v = uof_repos.repoThingExtensionValues.Find(valueID);
+            return PartialView("_Delete_ThingExtensionProperty", v);
         }
 
         [HttpPost]
-        public ActionResult DeleteThingExtenstionProperty(long valueID)
+        public ActionResult DeleteThingExtensionProperty(long valueID)
         {
             ResultInfo.Result res = uof_repos.repoThingExtensionValues.Delete(valueID,currentUser.Id);
             return Json(res);

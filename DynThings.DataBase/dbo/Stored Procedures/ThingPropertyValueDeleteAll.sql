@@ -4,7 +4,7 @@ create procedure ThingPropertyValueDeleteAll
 as
 begin
 
-	delete from ThingExtenstionValues where ThingID = @ThingID 
+	delete from ThingExtensionValues where ThingID = @ThingID 
 
 
 end

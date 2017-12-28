@@ -173,14 +173,14 @@ namespace DynThings.Data.Repositories
 
         #region Properties
         #region Get Properties
-        public List<ThingExtenstionProperty> GetProperties(long thingID, string searchFor)
+        public List<ThingExtensionProperty> GetProperties(long thingID, string searchFor)
         {
-            List<ThingExtenstionProperty> props = new List<ThingExtenstionProperty>();
-            List<GetThingExtenstions_Result> dbRes = db.GetThingExtenstions(thingID, searchFor).ToList();
-            foreach (GetThingExtenstions_Result res in dbRes)
+            List<ThingExtensionProperty> props = new List<ThingExtensionProperty>();
+            List<GetThingExtensions_Result> dbRes = db.GetThingExtensions(thingID, searchFor).ToList();
+            foreach (GetThingExtensions_Result res in dbRes)
             {
-                ThingExtenstionProperty prop0 = new ThingExtenstionProperty();
-                prop0.ConvertFromQuery_GetThingExtenstionsList(res);
+                ThingExtensionProperty prop0 = new ThingExtensionProperty();
+                prop0.ConvertFromQuery_GetThingExtensionsList(res);
                 props.Add(prop0);
             }
             return props;
@@ -193,33 +193,33 @@ namespace DynThings.Data.Repositories
         }
         #endregion
 
-        //#region Find Extenstion
-        //public List<ThingExtenstionProperty> FindProperty(long valueID)
+        //#region Find Extension
+        //public List<ThingExtensionProperty> FindProperty(long valueID)
         //{
-        //    List<ThingExtenstionProperty> props = new List<ThingExtenstionProperty>();
-        //    List<GetThingExtenstions_Result> dbRes = db.GetThingExtenstions(thingID).ToList();
-        //    foreach (GetThingExtenstions_Result res in dbRes)
+        //    List<ThingExtensionProperty> props = new List<ThingExtensionProperty>();
+        //    List<GetThingExtensions_Result> dbRes = db.GetThingExtensions(thingID).ToList();
+        //    foreach (GetThingExtensions_Result res in dbRes)
         //    {
-        //        ThingExtenstionProperty prop0 = new ThingExtenstionProperty();
-        //        prop0.ConvertFromQuery_GetThingExtenstionsList(res);
+        //        ThingExtensionProperty prop0 = new ThingExtensionProperty();
+        //        prop0.ConvertFromQuery_GetThingExtensionsList(res);
         //        props.Add(prop0);
         //    }
         //    return props;
         //}
 
-        //public IPagedList GetExtenstionsPagedList(long thingID, int pageNumber, int recordsPerPage)
+        //public IPagedList GetExtensionsPagedList(long thingID, int pageNumber, int recordsPerPage)
         //{
-        //    IPagedList props = GetExtenstions(thingID).ToPagedList(pageNumber, recordsPerPage);
+        //    IPagedList props = GetExtensions(thingID).ToPagedList(pageNumber, recordsPerPage);
         //    return props;
         //}
         //#endregion
 
         //#region Add Property
-        //public ResultInfo.Result AddProperty(long thingID, long thingExtenstionID,string value)
+        //public ResultInfo.Result AddProperty(long thingID, long thingExtensionID,string value)
         //{
         //    try
         //    {
-        //        db.ThingPropertyValueAdd(thingID, thingExtenstionID, value);
+        //        db.ThingPropertyValueAdd(thingID, thingExtensionID, value);
         //        return ResultInfo.GenerateOKResult("Saved");
         //    }
         //    catch

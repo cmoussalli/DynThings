@@ -68,9 +68,9 @@ namespace DynThings.WebAPI.TypesMapper
 
                 #region APIThingExtensionValues
                 List<APIThingExtensionValue> apiThingExtensionValues = new List<APIThingExtensionValue>();
-                foreach (ThingExtenstionValue thingExtenstionValue in sourceThing.ThingExtenstionValues)
+                foreach (ThingExtensionValue thingExtensionValue in sourceThing.ThingExtensionValues)
                 {
-                    APIThingExtensionValue apiThingExtensionValue = TypesMapper.APIThingExtensionValueAdapter.fromThingExtensionValue(thingExtenstionValue, true, false);
+                    APIThingExtensionValue apiThingExtensionValue = TypesMapper.APIThingExtensionValueAdapter.fromThingExtensionValue(thingExtensionValue, true, false);
                     apiThingExtensionValues.Add(apiThingExtensionValue);
                 }
                 result.APIThingExtensionValues = apiThingExtensionValues;

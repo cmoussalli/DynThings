@@ -59,7 +59,7 @@ public partial class DynThingsEntities : DbContext
 
     public virtual DbSet<AppThingCategory> AppThingCategorys { get; set; }
 
-    public virtual DbSet<AppThingExtenstion> AppThingExtenstions { get; set; }
+    public virtual DbSet<AppThingExtension> AppThingExtensions { get; set; }
 
     public virtual DbSet<AppUserToken> AppUserTokens { get; set; }
 
@@ -119,9 +119,9 @@ public partial class DynThingsEntities : DbContext
 
     public virtual DbSet<ThingEnd> ThingEnds { get; set; }
 
-    public virtual DbSet<ThingExtenstion> ThingExtenstions { get; set; }
+    public virtual DbSet<ThingExtension> ThingExtensions { get; set; }
 
-    public virtual DbSet<ThingExtenstionValue> ThingExtenstionValues { get; set; }
+    public virtual DbSet<ThingExtensionValue> ThingExtensionValues { get; set; }
 
     public virtual DbSet<Thing> Things { get; set; }
 
@@ -256,38 +256,6 @@ public partial class DynThingsEntities : DbContext
     }
 
 
-    public virtual ObjectResult<GetThingEnds_Result> GetThingEnds(Nullable<long> locationID, Nullable<long> thingID, Nullable<long> thingCategoryID, Nullable<long> endPointID, Nullable<long> endPointTypeID)
-    {
-
-        var locationIDParameter = locationID.HasValue ?
-            new ObjectParameter("LocationID", locationID) :
-            new ObjectParameter("LocationID", typeof(long));
-
-
-        var thingIDParameter = thingID.HasValue ?
-            new ObjectParameter("ThingID", thingID) :
-            new ObjectParameter("ThingID", typeof(long));
-
-
-        var thingCategoryIDParameter = thingCategoryID.HasValue ?
-            new ObjectParameter("ThingCategoryID", thingCategoryID) :
-            new ObjectParameter("ThingCategoryID", typeof(long));
-
-
-        var endPointIDParameter = endPointID.HasValue ?
-            new ObjectParameter("EndPointID", endPointID) :
-            new ObjectParameter("EndPointID", typeof(long));
-
-
-        var endPointTypeIDParameter = endPointTypeID.HasValue ?
-            new ObjectParameter("EndPointTypeID", endPointTypeID) :
-            new ObjectParameter("EndPointTypeID", typeof(long));
-
-
-        return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetThingEnds_Result>("GetThingEnds", locationIDParameter, thingIDParameter, thingCategoryIDParameter, endPointIDParameter, endPointTypeIDParameter);
-    }
-
-
     public virtual ObjectResult<Rpt_EndPointAndDevices_IOsCount_Minutes_Result> Rpt_EndPointAndDevices_IOsCount_Minutes()
     {
 
@@ -346,74 +314,6 @@ public partial class DynThingsEntities : DbContext
     }
 
 
-    public virtual int ThingPropertyValueAdd(Nullable<long> thingID, Nullable<long> thingExtenstionID, string value)
-    {
-
-        var thingIDParameter = thingID.HasValue ?
-            new ObjectParameter("ThingID", thingID) :
-            new ObjectParameter("ThingID", typeof(long));
-
-
-        var thingExtenstionIDParameter = thingExtenstionID.HasValue ?
-            new ObjectParameter("ThingExtenstionID", thingExtenstionID) :
-            new ObjectParameter("ThingExtenstionID", typeof(long));
-
-
-        var valueParameter = value != null ?
-            new ObjectParameter("Value", value) :
-            new ObjectParameter("Value", typeof(string));
-
-
-        return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("ThingPropertyValueAdd", thingIDParameter, thingExtenstionIDParameter, valueParameter);
-    }
-
-
-    public virtual int ThingPropertyValueEdit(Nullable<long> valueID, string newValue)
-    {
-
-        var valueIDParameter = valueID.HasValue ?
-            new ObjectParameter("ValueID", valueID) :
-            new ObjectParameter("ValueID", typeof(long));
-
-
-        var newValueParameter = newValue != null ?
-            new ObjectParameter("NewValue", newValue) :
-            new ObjectParameter("NewValue", typeof(string));
-
-
-        return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("ThingPropertyValueEdit", valueIDParameter, newValueParameter);
-    }
-
-
-    public virtual int ThingPropertyValueDelete(Nullable<long> valueID)
-    {
-
-        var valueIDParameter = valueID.HasValue ?
-            new ObjectParameter("ValueID", valueID) :
-            new ObjectParameter("ValueID", typeof(long));
-
-
-        return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("ThingPropertyValueDelete", valueIDParameter);
-    }
-
-
-    public virtual ObjectResult<GetThingExtenstions_Result> GetThingExtenstions(Nullable<long> thingID, string searchFor)
-    {
-
-        var thingIDParameter = thingID.HasValue ?
-            new ObjectParameter("ThingID", thingID) :
-            new ObjectParameter("ThingID", typeof(long));
-
-
-        var searchForParameter = searchFor != null ?
-            new ObjectParameter("SearchFor", searchFor) :
-            new ObjectParameter("SearchFor", typeof(string));
-
-
-        return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetThingExtenstions_Result>("GetThingExtenstions", thingIDParameter, searchForParameter);
-    }
-
-
     public virtual int SubmitEndpointCommand(Nullable<long> commandID, string value, Nullable<System.DateTime> scheduleTimeStamp)
     {
 
@@ -455,6 +355,159 @@ public partial class DynThingsEntities : DbContext
 
 
         return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SubmitEndpointCommandExecuted", commandIDParameter, endPointKeyPassParameter, execTimeStampParameter);
+    }
+
+
+    public virtual ObjectResult<GetThingEnds_Result1> GetThingEnds(Nullable<long> locationID, Nullable<long> thingID, Nullable<long> thingCategoryID, Nullable<long> endPointID, Nullable<long> endPointTypeID)
+    {
+
+        var locationIDParameter = locationID.HasValue ?
+            new ObjectParameter("LocationID", locationID) :
+            new ObjectParameter("LocationID", typeof(long));
+
+
+        var thingIDParameter = thingID.HasValue ?
+            new ObjectParameter("ThingID", thingID) :
+            new ObjectParameter("ThingID", typeof(long));
+
+
+        var thingCategoryIDParameter = thingCategoryID.HasValue ?
+            new ObjectParameter("ThingCategoryID", thingCategoryID) :
+            new ObjectParameter("ThingCategoryID", typeof(long));
+
+
+        var endPointIDParameter = endPointID.HasValue ?
+            new ObjectParameter("EndPointID", endPointID) :
+            new ObjectParameter("EndPointID", typeof(long));
+
+
+        var endPointTypeIDParameter = endPointTypeID.HasValue ?
+            new ObjectParameter("EndPointTypeID", endPointTypeID) :
+            new ObjectParameter("EndPointTypeID", typeof(long));
+
+
+        return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetThingEnds_Result1>("GetThingEnds", locationIDParameter, thingIDParameter, thingCategoryIDParameter, endPointIDParameter, endPointTypeIDParameter);
+    }
+
+
+    public virtual ObjectResult<GetThingExtensions_Result> GetThingExtensions(Nullable<long> thingID, string searchFor)
+    {
+
+        var thingIDParameter = thingID.HasValue ?
+            new ObjectParameter("ThingID", thingID) :
+            new ObjectParameter("ThingID", typeof(long));
+
+
+        var searchForParameter = searchFor != null ?
+            new ObjectParameter("SearchFor", searchFor) :
+            new ObjectParameter("SearchFor", typeof(string));
+
+
+        return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetThingExtensions_Result>("GetThingExtensions", thingIDParameter, searchForParameter);
+    }
+
+
+    public virtual int PublishApp(Nullable<long> appID)
+    {
+
+        var appIDParameter = appID.HasValue ?
+            new ObjectParameter("AppID", appID) :
+            new ObjectParameter("AppID", typeof(long));
+
+
+        return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("PublishApp", appIDParameter);
+    }
+
+
+    public virtual int SetThingProperty(Nullable<long> thingID, Nullable<long> thingExtensionID)
+    {
+
+        var thingIDParameter = thingID.HasValue ?
+            new ObjectParameter("ThingID", thingID) :
+            new ObjectParameter("ThingID", typeof(long));
+
+
+        var thingExtensionIDParameter = thingExtensionID.HasValue ?
+            new ObjectParameter("ThingExtensionID", thingExtensionID) :
+            new ObjectParameter("ThingExtensionID", typeof(long));
+
+
+        return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SetThingProperty", thingIDParameter, thingExtensionIDParameter);
+    }
+
+
+    public virtual int ThingPropertyValueAdd(Nullable<long> thingID, Nullable<long> thingExtensionID, string value)
+    {
+
+        var thingIDParameter = thingID.HasValue ?
+            new ObjectParameter("ThingID", thingID) :
+            new ObjectParameter("ThingID", typeof(long));
+
+
+        var thingExtensionIDParameter = thingExtensionID.HasValue ?
+            new ObjectParameter("ThingExtensionID", thingExtensionID) :
+            new ObjectParameter("ThingExtensionID", typeof(long));
+
+
+        var valueParameter = value != null ?
+            new ObjectParameter("Value", value) :
+            new ObjectParameter("Value", typeof(string));
+
+
+        return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("ThingPropertyValueAdd", thingIDParameter, thingExtensionIDParameter, valueParameter);
+    }
+
+
+    public virtual int ThingPropertyValueDelete(Nullable<long> valueID)
+    {
+
+        var valueIDParameter = valueID.HasValue ?
+            new ObjectParameter("ValueID", valueID) :
+            new ObjectParameter("ValueID", typeof(long));
+
+
+        return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("ThingPropertyValueDelete", valueIDParameter);
+    }
+
+
+    public virtual int ThingPropertyValueDeleteAll(Nullable<long> thingID)
+    {
+
+        var thingIDParameter = thingID.HasValue ?
+            new ObjectParameter("ThingID", thingID) :
+            new ObjectParameter("ThingID", typeof(long));
+
+
+        return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("ThingPropertyValueDeleteAll", thingIDParameter);
+    }
+
+
+    public virtual int ThingPropertyValueEdit(Nullable<long> valueID, string newValue)
+    {
+
+        var valueIDParameter = valueID.HasValue ?
+            new ObjectParameter("ValueID", valueID) :
+            new ObjectParameter("ValueID", typeof(long));
+
+
+        var newValueParameter = newValue != null ?
+            new ObjectParameter("NewValue", newValue) :
+            new ObjectParameter("NewValue", typeof(string));
+
+
+        return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("ThingPropertyValueEdit", valueIDParameter, newValueParameter);
+    }
+
+
+    public virtual ObjectResult<string> UnPublishApp(Nullable<long> appID)
+    {
+
+        var appIDParameter = appID.HasValue ?
+            new ObjectParameter("AppID", appID) :
+            new ObjectParameter("AppID", typeof(long));
+
+
+        return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UnPublishApp", appIDParameter);
     }
 
 }
