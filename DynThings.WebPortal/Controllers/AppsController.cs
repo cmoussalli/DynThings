@@ -141,7 +141,7 @@ namespace DynThings.WebPortal.Controllers
         [HttpGet]
         public PartialViewResult AppApiEntitysListGridPV(string searchfor = null, long appID = 0, int page = 1, int recordsperpage = 25)
         {
-            IPagedList views = uof_repos.repoApps.GetAppAPIEntitysPagedList(searchfor, appID, page, Helpers.Configs.validateRecordsPerMaster(recordsperpage));
+            IPagedList views = uof_repos.repoAppAPIEntitys.GetAppAPIEntitysPagedList(searchfor, appID, page, Helpers.Configs.validateRecordsPerMaster(recordsperpage));
             return PartialView("_ApiEntitysList", views);
         }
         #endregion
@@ -167,7 +167,7 @@ namespace DynThings.WebPortal.Controllers
         [HttpGet]
         public PartialViewResult AppApiEntityDeattachPV(long appID, long systemEntityID)
         {
-            AppAPIEntity appApiEntity = uof_repos.repoApps.FindAppApiEntity(appID, systemEntityID);
+            AppAPIEntity appApiEntity = uof_repos.repoAppAPIEntitys.FindAppApiEntity(appID, systemEntityID);
             return PartialView("_ApiEntityDeAttach", appApiEntity);
         }
 

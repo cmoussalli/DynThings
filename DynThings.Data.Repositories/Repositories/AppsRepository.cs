@@ -157,34 +157,7 @@ namespace DynThings.Data.Repositories
         #endregion
 
 
-        #region Get AppAPIEntitys PagedList
-        public IPagedList GetAppAPIEntitysPagedList(string search, long appID, int pageNumber, int recordsPerPage)
-        {
-            IPagedList appAPIEntitys = db.AppAPIEntitys
-              .Where(e => search == null || e.SystemEntity.Title.Contains(search) && e.AppID == appID)
 
-              .OrderByDescending(e => e.SystemEntity.Title).ToList()
-              .ToPagedList(pageNumber, recordsPerPage);
-            return appAPIEntitys;
-        }
-        #endregion
-        #region Find AppApiEntity
-        public AppAPIEntity FindAppApiEntity(long appID,long appAPIEntity)
-        {
-            AppAPIEntity ent;
-            List<AppAPIEntity> ents = db.AppAPIEntitys.Include("SystemEntity").Include("App").Where(l => l.AppID == appID && l.SystemEntityID == appAPIEntity ).ToList();
-            if (ents.Count == 1)
-            {
-                ent = ents[0];
-            }
-            else
-            {
-                throw new Exception("Not Found");
-            }
-            return ent;
-        }
-
-        #endregion
         #region Attach AppAPIEntity
         public ResultInfo.Result AttachAppAPIEntity(long appID, long EntityID)
         {
