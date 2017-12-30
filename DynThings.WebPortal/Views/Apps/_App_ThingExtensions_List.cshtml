@@ -1,0 +1,46 @@
+﻿@model IPagedList<DynThings.Data.Models.AppThingExtension>
+
+<table class="table striped hovered border bordered">
+    <thead>
+        <tr>
+            <th>Title</th>
+            <th>Code</th>
+            <th>GUID</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Title)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Code)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.GUID)
+                </td>
+                <td>
+                    <button class="btn btn-warning" onclick="LoadPart_DialogAppThingExtensionEdit(@item.ID);" data-toggle="modal" data-target="#mdl">Edit</button>
+                    <button class="btn btn-danger" onclick="LoadPart_DialogAppThingExtensionDelete(@item.ID);" data-toggle="modal" data-target="#mdl">Delete</button>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@if (Model.PageCount > 1)
+{
+    <div id="AppThingExtensionsListPager">
+        <input id="AppThingExtensionCurrentPage" value="@Model.PageNumber.ToString()" hidden />
+        @Html.PagedListPager(Model, page => Url.Action("ThingExtensionsByAppIDListPV", "Apps", new { page }) + "&appID=" + ViewBag.appID + "&searchFor=" + ViewBag.searchFor)
+    </div>
+}
+
+<script>
+    //function EventSelectLocation() {
+    //    AttachLocationToLocationView(selectedLocation);
+    //}
+</script>

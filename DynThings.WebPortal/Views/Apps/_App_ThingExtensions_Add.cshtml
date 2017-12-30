@@ -1,0 +1,50 @@
+﻿@model DynThings.Data.Models.AppThingExtension
+<div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+    <h4 class="modal-title" id="myModalLabel">Thing Extension Editor</h4>
+</div>
+@using (Html.BeginForm("AddAppThingExtensionPV", "Apps", FormMethod.Post, new { id = "AppThingExtensionAddForm" }))
+{
+<div class="modal-body">
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @Html.HiddenFor(model => model.ID)
+    @Html.HiddenFor(model => model.AppID)
+
+    <span>Code</span>
+    @Html.EditorFor(model => model.Code, new { htmlAttributes = new { @class = "form-control" } })
+    @Html.ValidationMessageFor(model => model.Code, "", new { @class = "text-danger" })
+    <br />
+
+    <span>Title</span>
+    @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control" } })
+    @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
+    <br />
+
+    <span>Thing Type</span>
+    @Html.DropDownList("AppThingCategoryCode", null, htmlAttributes: new { @class = "form-control" })
+    @Html.ValidationMessageFor(model => model.AppThingCategoryCode, "", new { @class = "text-danger" })
+    <br />
+
+    <span>Data Type</span>
+    @Html.DropDownList("DataTypeID", null, htmlAttributes: new { @class = "form-control" })
+    @Html.ValidationMessageFor(model => model.DataTypeID, "", new { @class = "text-danger" })
+    <br />
+
+    <span>Is List</span>
+    @Html.EditorFor(model => model.IsList, new { htmlAttributes = new { @class = "" } })
+    @Html.ValidationMessageFor(model => model.IsList, "", new { @class = "text-danger" })
+    <br />
+
+</div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary">Save changes</button>
+    </div>
+}
+<script>
+    $(document).ready(function () {
+        AttachEventAppThingExtensionAddForm();
+    });
+
+</script>

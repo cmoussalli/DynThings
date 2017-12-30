@@ -30,104 +30,114 @@ namespace DynThings.Data.Repositories
             List<AppThingExtension> appThingExtensions = db.AppThingExtensions.ToList();
             return appThingExtensions;
         }
+        public List<AppThingExtension> GetList(long appId)
+        {
+            List<AppThingExtension> appThingExtensions = db.AppThingExtensions.Where
+                (
+                    e => e.AppID == appId
+                ).ToList();
+            return appThingExtensions;
+        }
         #endregion
 
-        //#region Get PagedList
-        //public IPagedList GetPagedList(string search,int appID, int pageNumber, int recordsPerPage)
-        //{
-        //    IPagedList apps = db.Apps
-        //      .Where(a => 
-        //      (search == null || a.Title.Contains(search))
-        //      && (appID == 0 || appID == null || appID == a.ID)
-        //      && (a.)
-        //      )
-        //      .OrderBy(a => a.Title).ToList()
-        //      .ToPagedList(pageNumber, recordsPerPage);
-        //    return apps;
-        //}
-        //#endregion
+        #region Get PagedList
+        public IPagedList GetPagedList(string search, long appID, int pageNumber, int recordsPerPage)
+        {
+            IPagedList appThingExtensions = db.AppThingExtensions
+              .Where(e =>
+              (search == null || search == "" || e.Title.Contains(search))
+              && (appID == 0 || appID == null || appID == e.AppID)
+              )
+              .OrderBy(e => e.Title).ToList()
+              .ToPagedList(pageNumber, recordsPerPage);
+            return appThingExtensions;
+        }
+        #endregion
 
-        //#region Find
-        //public AppThingExtension Find(long id)
-        //{
-        //    AppThingExtension appThingExtension = new AppThingExtension();
-        //    List<AppThingExtension> appThingExtensions = db.AppThingExtensions
-        //        //.Include("AppAPIEntitys").Include("AppStatuss")
-        //        .Where(l => l.ID == id).ToList();
-        //    if (appThingExtensions.Count == 1)
-        //    {
-        //        appThingExtension = appThingExtensions[0];
-        //    }
-        //    else
-        //    {
-        //        throw new Exception("Not Found");
-        //    }
-        //    return appThingExtension;
-        //}
+        #region Find
+        public AppThingExtension Find(long id)
+        {
+            AppThingExtension appThingExtension = new AppThingExtension();
+            List<AppThingExtension> appThingExtensions = db.AppThingExtensions
+                //.Include("AppAPIEntitys").Include("AppStatuss")
+                .Where(l => l.ID == id).ToList();
+            if (appThingExtensions.Count == 1)
+            {
+                appThingExtension = appThingExtensions[0];
+            }
+            else
+            {
+                throw new Exception("Not Found");
+            }
+            return appThingExtension;
+        }
 
-        //#endregion
+        #endregion
 
-        //#region Add
-        //public ResultInfo.Result Add(string title,string code , Guid guid,Guid iconGuid,long appID,string userID)
-        //{
-        //    AppThingExtension appThingExtension = new AppThingExtension();
-        //    //Save new app in database 
-        //    try
-        //    {
-        //        appThingExtension.AppID = appID;
-        //        appThingExtension.Title = title;
-        //        appThingExtension.Code = code;
-        //        appThingExtension.GUID = guid;
-        //        appThingExtension.IconGUID = iconGuid;
-        //        db.AppThingExtensions.Add(appThingExtension);
-        //        db.SaveChanges();
-        //        return ResultInfo.GenerateOKResult("Saved", appThingExtension.ID);
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        return ResultInfo.GenerateErrorResult("Error",ex.Message);
-        //    }
-        //}
+        #region Add
+        public ResultInfo.Result Add(Guid guid, string code, string title, string thingCategoryCode, int dataTypeId, bool isList, long appID, string userID)
+        {
+            AppThingExtension appThingExtension = new AppThingExtension();
+            //Save new app in database 
+            try
+            {
+                appThingExtension.GUID = guid;
+                appThingExtension.Code = code;
+                appThingExtension.AppID = appID;
+                appThingExtension.AppThingCategoryCode = thingCategoryCode;
+                appThingExtension.Title = title;
+                appThingExtension.DataTypeID = dataTypeId;
+                appThingExtension.IsList = isList;
+                db.AppThingExtensions.Add(appThingExtension);
+                db.SaveChanges();
+                return ResultInfo.GenerateOKResult("Saved", appThingExtension.ID);
+            }
+            catch (Exception ex)
+            {
+                return ResultInfo.GenerateErrorResult("Error", ex.Message);
+            }
+        }
 
-        //#endregion
+        #endregion
 
-        //#region Edit
-        //public ResultInfo.Result Edit(long id, string title, Guid iconGuid, string userID)
-        //{
-        //    try
-        //    {
-        //        AppThingExtension appThingExtension = db.AppThingExtensions.Find(id);
-        //        appThingExtension.Title = title;
-        //        appThingExtension.IconGUID = iconGuid;
-        //        db.SaveChanges();
-        //        return ResultInfo.GenerateOKResult("Saved", appThingExtension.ID);
-        //    }
-        //    catch
-        //    {
-        //        return ResultInfo.GetResultByID(1);
-        //    }
-        //}
+        #region Edit
+        public ResultInfo.Result Edit(long id, string title, int dataTypeId, bool isList, string userID)
+        {
+            try
+            {
+                AppThingExtension appThingExtension = db.AppThingExtensions.Find(id);
+                appThingExtension.Title = title;
+                appThingExtension.DataTypeID = dataTypeId;
+                appThingExtension.IsList = isList;
+                db.SaveChanges();
+                return ResultInfo.GenerateOKResult("Saved", appThingExtension.ID);
+            }
+            catch
+            {
+                return ResultInfo.GetResultByID(1);
+            }
+        }
 
-        //#endregion
 
-        //#region Delete
-        //public ResultInfo.Result Delete(long id,string userID)
-        //{
-        //    try
-        //    {
-        //        AppThingExtension appThingExtension = db.AppThingExtensions.Find(id);
-        //        db.AppThingExtensions.Remove(appThingExtension);
-        //        db.SaveChanges();
-        //        return ResultInfo.GenerateOKResult("Deleted", appThingExtension.ID);
-        //    }
-        //    catch
-        //    {
-        //        return ResultInfo.GetResultByID(1);
-        //    }
-        //}
+        #endregion
 
-        //#endregion
+        #region Delete
+        public ResultInfo.Result Delete(long id, string userID)
+        {
+            try
+            {
+                AppThingExtension appThingExtension = db.AppThingExtensions.Find(id);
+                db.AppThingExtensions.Remove(appThingExtension);
+                db.SaveChanges();
+                return ResultInfo.GenerateOKResult("Deleted", appThingExtension.ID);
+            }
+            catch
+            {
+                return ResultInfo.GetResultByID(1);
+            }
+        }
 
+        #endregion
 
 
     }

@@ -240,9 +240,6 @@ function LoadPart_DialogAppApiEntityAttach() {
         $("#modal").html(partialViewResult);
     });
 }
-
-
-
 //Post Attach ApiEntitys
 function AttachEventAppApiEntityAttachForm() {
     $("#AppApiEntityAttachForm").on("submit", function (event) {
@@ -267,7 +264,6 @@ function AttachEventAppApiEntityAttachForm() {
         $('#mdl').modal('hide');
     });
 };
-
 //Get DeAttach ApiEntitys
 function LoadPart_DialogAppApiEntityDeAttach(appID, systemEntityID) {
     var loadingpart = LoadDivLoading();
@@ -280,7 +276,6 @@ function LoadPart_DialogAppApiEntityDeAttach(appID, systemEntityID) {
         $("#modal").html(partialViewResult);
     });
 }
-
 //Post DeAttach ApiEntitys
 function DeAttachEventAppApiEntityAttachForm() {
     $("#AppApiEntityDeAttachForm").on("submit", function (event) {
@@ -309,7 +304,7 @@ function DeAttachEventAppApiEntityAttachForm() {
 
 
 //Get App ThingTypes Container Div
-function LoadPart_AppThingTypesContaierDiv() {
+function LoadPart_AppThingTypesContainerDiv() {
     var loadingpart = LoadDivLoading();
     $("#divPageDetails").html(loadingpart);
     $.ajax({
@@ -466,6 +461,172 @@ function AttachEventAppThingCategoryDeleteForm() {
             error: function () {
                 ServerResponse(resp);
                 LoadPart_AppThingTypesListDiv();
+            }
+        })
+        $('#mdl').modal('hide');
+    });
+};
+
+
+
+//Get App ThingExtensions Container Div
+function LoadPart_AppThingExtensionsContainerDiv() {
+    var loadingpart = LoadDivLoading();
+    $("#divPageDetails").html(loadingpart);
+    $.ajax({
+        url: getRootURL() + '/Apps/ThingExtensionsContainerPV',
+        type: "GET",
+    })
+        .success(function (partialViewResult) {
+            $("#divPageDetails").html(partialViewResult);
+        });
+}
+//Get App ThingExtensions List
+function LoadPart_AppThingExtensionsListDiv() {
+    var loadingpart = LoadDivLoading();
+    $("#divAppThingExtensionsList").html(loadingpart);
+    $.ajax({
+        url: getRootURL() + '/apps/ThingExtensionsByAppIDListPV?searchfor=' + $(txtAppThingExtensionsSearch).val() + '&appID=' + selectedAppID + '&recordsperpage=0',
+        type: "GET",
+    })
+        .done(function (partialViewResult) {
+            $("#divAppThingExtensionsList").html(partialViewResult);
+            AttachEventAppThingExtensionsListPager();
+        });
+    return false;
+};
+//Attach : Pager
+function AttachEventAppThingExtensionsListPager() {
+    $(document).on("click", "#AppThingExtensionsListPager a[href]", function () {
+        var loadingpart = LoadDivLoading();
+        $("#divAppThingExtensionsList").html(loadingpart);
+        $.ajax({
+            url: $(this).attr("href") + "&searchfor=" + $(txtAppThingExtensionsSearch).val() + '&appID=' + selectedAppID + '&recordsperpage=0',
+            type: 'GET',
+            cache: false,
+            success: function (result) {
+                $("#divAppThingExtensionsList").html(result);
+                return false;
+            }
+        });
+        return false;
+    });
+}
+//Get Add
+function LoadPart_DialogAppThingExtensionAdd() {
+    var loadingpart = LoadDivLoading();
+    $("#modal").html(loadingpart);
+    $.ajax({
+        url: getRootURL() + '/apps/AddAppThingExtensionPV?appID=' + selectedAppID,
+        //page=" + $("#DynConfigCurrentPage").html,
+        type: "GET",
+    })
+        .success(function (partialViewResult) {
+            $("#modal").html(partialViewResult);
+        });
+}
+//Attach : Add Form Submit
+function AttachEventAppThingExtensionAddForm() {
+    $("#AppThingExtensionAddForm").on("submit", function (event) {
+        event.preventDefault();
+        var url = $(this).attr("action");
+        var formData = $(this).serialize();
+        $.ajax({
+            url: url,
+            type: "POST",
+            data: formData,
+            dataType: "json",
+            success: function (resp) {
+                ServerResponse(resp);
+                LoadPart_AppThingExtensionsListDiv();
+            },
+            done: function (resp) {
+                ServerResponse(resp);
+                LoadPart_AppThingExtensionsListDiv();
+            },
+            error: function () {
+                ServerResponse(resp);
+                LoadPart_AppThingExtensionsListDiv();
+            }
+        })
+        $('#mdl').modal('hide');
+    });
+};
+//Get Edit
+function LoadPart_DialogAppThingExtensionEdit(appThingExtensionID) {
+    var loadingpart = LoadDivLoading();
+    $("#modal").html(loadingpart);
+    $.ajax({
+        url: getRootURL() + '/apps/EditAppThingExtensionPV?appThingExtensionID=' + appThingExtensionID,
+        //page=" + $("#DynConfigCurrentPage").html,
+        type: "GET",
+    })
+        .success(function (partialViewResult) {
+            $("#modal").html(partialViewResult);
+        });
+}
+//Attach : Edit Form Submit
+function AttachEventAppThingExtensionEditForm() {
+    $("#AppThingExtensionEditForm").on("submit", function (event) {
+        event.preventDefault();
+        var url = $(this).attr("action");
+        var formData = $(this).serialize();
+        $.ajax({
+            url: url,
+            type: "POST",
+            data: formData,
+            dataType: "json",
+            success: function (resp) {
+                ServerResponse(resp);
+                LoadPart_AppThingExtensionsListDiv();
+            },
+            done: function (resp) {
+                ServerResponse(resp);
+                LoadPart_AppThingExtensionsListDiv();
+            },
+            error: function () {
+                ServerResponse(resp);
+                LoadPart_AppThingExtensionsListDiv();
+            }
+        })
+        $('#mdl').modal('hide');
+    });
+};
+//Get Delete
+function LoadPart_DialogAppThingExtensionDelete(appThingExtensionID) {
+    var loadingpart = LoadDivLoading();
+    $("#modal").html(loadingpart);
+    $.ajax({
+        url: getRootURL() + '/apps/DeleteAppThingExtensionPV?appThingExtensionID=' + appThingExtensionID,
+        //page=" + $("#DynConfigCurrentPage").html,
+        type: "GET",
+    })
+        .success(function (partialViewResult) {
+            $("#modal").html(partialViewResult);
+        });
+}
+//Attach : Delete Form Submit
+function AttachEventAppThingExtensionDeleteForm() {
+    $("#AppThingExtensionDeleteForm").on("submit", function (event) {
+        event.preventDefault();
+        var url = $(this).attr("action");
+        var formData = $(this).serialize();
+        $.ajax({
+            url: url,
+            type: "POST",
+            data: formData,
+            dataType: "json",
+            success: function (resp) {
+                ServerResponse(resp);
+                LoadPart_AppThingExtensionsListDiv();
+            },
+            done: function (resp) {
+                ServerResponse(resp);
+                LoadPart_AppThingExtensionsListDiv();
+            },
+            error: function () {
+                ServerResponse(resp);
+                LoadPart_AppThingExtensionsListDiv();
             }
         })
         $('#mdl').modal('hide');

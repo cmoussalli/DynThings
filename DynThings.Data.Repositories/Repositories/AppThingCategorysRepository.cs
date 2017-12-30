@@ -30,6 +30,12 @@ namespace DynThings.Data.Repositories
             List<AppThingCategory> appThingCategorys = db.AppThingCategorys.ToList();
             return appThingCategorys;
         }
+        public List<AppThingCategory> GetList(long appId)
+        {
+            List<AppThingCategory> appThingCategorys = db.AppThingCategorys
+                .Where(c => c.AppID == appId).ToList();
+            return appThingCategorys;
+        }
         #endregion
 
         #region Get PagedList

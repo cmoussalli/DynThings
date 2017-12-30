@@ -189,7 +189,7 @@ namespace DynThings.WebPortal.Controllers
         [HttpGet]
         public PartialViewResult ThingTypesContainerPV()
         {
-            return PartialView("_APP_ThingTypesContainer");
+            return PartialView("_APP_ThingTypes_Container");
         }
         #endregion
         #region AppThingTypes ListPV
@@ -199,7 +199,7 @@ namespace DynThings.WebPortal.Controllers
             IPagedList appThingTypes = uof_repos.repoApps.GetAppThingTypesPagedList(searchfor, appID, page, Helpers.Configs.validateRecordsPerMaster(recordsperpage));
             ViewBag.appID = appID;
             ViewBag.searchFor = searchfor;
-            return PartialView("_APP_ThingTypesList", appThingTypes);
+            return PartialView("_APP_ThingTypes_List", appThingTypes);
         }
         #endregion
         #region AppThingTypes AddPV
@@ -209,7 +209,7 @@ namespace DynThings.WebPortal.Controllers
             AppThingCategory model = new AppThingCategory();
             ViewBag.IconGUID = new SelectList(uof_repos.repoMediaFiles.GetList(), "GUID", "Title", uof_repos.repoMediaFiles.GetList()[0].GUID);
             model.AppID = appID;
-            return PartialView("_App_ThingTypesAdd", model);
+            return PartialView("_App_ThingTypes_Add", model);
         }
 
         [HttpPost]
@@ -231,7 +231,7 @@ namespace DynThings.WebPortal.Controllers
         {
             AppThingCategory model = uof_repos.repoAppThingCategorys.Find(appThingTypeID);
             ViewBag.IconGUID = new SelectList(uof_repos.repoMediaFiles.GetList(), "GUID", "Title", uof_repos.repoMediaFiles.GetList()[0].GUID);
-            return PartialView("_App_ThingTypesEdit", model);
+            return PartialView("_App_ThingTypes_Edit", model);
         }
 
         [HttpPost]
@@ -252,7 +252,7 @@ namespace DynThings.WebPortal.Controllers
         public PartialViewResult DeleteAppThingTypePV(int appThingTypeID)
         {
             AppThingCategory model = uof_repos.repoAppThingCategorys.Find(appThingTypeID);
-            return PartialView("_App_ThingTypesDelete", model);
+            return PartialView("_App_ThingTypes_Delete", model);
         }
 
         [HttpPost]
@@ -270,6 +270,93 @@ namespace DynThings.WebPortal.Controllers
         #endregion
 
 
+        #region AppThingExtensions ContainerPV
+        [HttpGet]
+        public PartialViewResult ThingExtensionsContainerPV()
+        {
+            return PartialView("_APP_ThingExtensions_Container");
+        }
+        #endregion
+        #region AppThingExtensions ListPV
+        [HttpGet]
+        public PartialViewResult ThingExtensionsByAppIDListPV(string searchfor = null, long appID = 0, int page = 1, int recordsperpage = 0)
+        {
+            IPagedList appThingExtensions = uof_repos.repoAppThingExtensions.GetPagedList(searchfor, appID, page, Helpers.Configs.validateRecordsPerMaster(recordsperpage));
+            ViewBag.appID = appID;
+            ViewBag.searchFor = searchfor;
+            return PartialView("_APP_ThingExtensions_List", appThingExtensions);
+        }
+        #endregion
+        #region AppThingExtensions AddPV
+        [HttpGet]
+        public PartialViewResult AddAppThingExtensionPV(int appID)
+        {
+            AppThingExtension model = new AppThingExtension();
+            List<AppThingCategory> thingCategorys = uof_repos.repoAppThingCategorys.GetList(appID);
+            List<DataType> dataTypes = uof_repos.repoDataTypes.GetList();
+            ViewBag.AppThingCategoryCode = new SelectList(thingCategorys, "Code", "Title", thingCategorys[0].Code);
+            ViewBag.DataTypeID = new SelectList(dataTypes, "ID", "Title", dataTypes[0].ID);
+            model.AppID = appID;
+            return PartialView("_App_ThingExtensions_Add", model);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult AddAppThingExtensionPV(AppThingExtension model)
+        {
+            ResultInfo.Result res = ResultInfo.GetResultByID(1);
+            if (ModelState.IsValid)
+            {
+                res = uof_repos.repoAppThingExtensions.Add(Guid.NewGuid(),model.Code,model.Title,model.AppThingCategoryCode,model.DataTypeID,model.IsList,model.AppID, currentUser.Id);
+                return Json(res);
+            }
+            return Json(res);
+        }
+        #endregion
+        #region AppThingExtensions EditPV
+        [HttpGet]
+        public PartialViewResult EditAppThingExtensionPV(int appThingExtensionID)
+        {
+            List<DataType> dataTypes = uof_repos.repoDataTypes.GetList();
+            ViewBag.DataTypeID = new SelectList(dataTypes, "ID", "Title", dataTypes[0].ID);
+            AppThingExtension model = uof_repos.repoAppThingExtensions.Find(appThingExtensionID);
+            return PartialView("_App_ThingExtensions_Edit", model);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult EditAppThingExtensionPV(AppThingExtension model)
+        {
+            ResultInfo.Result res = ResultInfo.GetResultByID(1);
+            if (ModelState.IsValid)
+            {
+                res = uof_repos.repoAppThingExtensions.Edit(model.ID, model.Title,model.DataTypeID,model.IsList, currentUser.Id);
+                return Json(res);
+            }
+            return Json(res);
+        }
+        #endregion
+        #region AppThingExtensions DeletePV
+        [HttpGet]
+        public PartialViewResult DeleteAppThingExtensionPV(int appThingExtensionID)
+        {
+            AppThingExtension model = uof_repos.repoAppThingExtensions.Find(appThingExtensionID);
+            return PartialView("_App_ThingExtensions_Delete", model);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteAppThingExtensionPV(AppThingExtension model)
+        {
+            ResultInfo.Result res = ResultInfo.GetResultByID(1);
+            if (ModelState.IsValid)
+            {
+                res = uof_repos.repoAppThingExtensions.Delete(model.ID, currentUser.Id);
+                return Json(res);
+            }
+            return Json(res);
+        }
+        #endregion
 
         #endregion
 

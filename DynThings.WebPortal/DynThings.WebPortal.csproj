@@ -31,7 +31,7 @@
     <SccProvider>
     </SccProvider>
     <TargetFrameworkProfile />
-    <TypeScriptToolsVersion>2.1</TypeScriptToolsVersion>
+    <TypeScriptToolsVersion>2.5</TypeScriptToolsVersion>
     <ApplicationInsightsResourceId>/subscriptions/1ebfca6e-efcb-4343-9ca1-6fe72d0b1e17/resourcegroups/Default-ApplicationInsights-CentralUS/providers/microsoft.insights/components/DynThings.WebPortal</ApplicationInsightsResourceId>
     <ApplicationInsightsAnnotationResourceId>/subscriptions/1ebfca6e-efcb-4343-9ca1-6fe72d0b1e17/resourcegroups/Default-ApplicationInsights-CentralUS/providers/microsoft.insights/components/DynThings.WebPortal</ApplicationInsightsAnnotationResourceId>
     <Use64BitIISExpress />
@@ -736,14 +736,19 @@
     <Content Include="Views\Things\_Delete_ThingExtensionProperty.cshtml" />
     <Content Include="Views\Things\_Edit_ThingExtensionProperty.cshtml" />
     <Content Include="Views\DynUsers\_Add_Role.cshtml" />
-    <Content Include="Views\Apps\_App_ThingTypesContainer.cshtml" />
-    <Content Include="Views\Apps\_App_ThingTypesList.cshtml" />
-    <Content Include="Views\Apps\_App_ThingTypesAdd.cshtml" />
-    <Content Include="Views\Apps\_App_ThingTypesEdit.cshtml" />
-    <Content Include="Views\Apps\_App_ThingTypesDelete.cshtml" />
+    <Content Include="Views\Apps\_App_ThingTypes_Container.cshtml" />
+    <Content Include="Views\Apps\_App_ThingTypes_List.cshtml" />
+    <Content Include="Views\Apps\_App_ThingTypes_Add.cshtml" />
+    <Content Include="Views\Apps\_App_ThingTypes_Edit.cshtml" />
+    <Content Include="Views\Apps\_App_ThingTypes_Delete.cshtml" />
     <Content Include="Views\Locations\_Details_Devices_Container.cshtml" />
     <Content Include="Views\Locations\_Details_Things_Container.cshtml" />
     <Content Include="Views\Locations\_Details_Things_List.cshtml" />
+    <Content Include="Views\Apps\_App_ThingExtensions_Add.cshtml" />
+    <Content Include="Views\Apps\_App_ThingExtensions_Container.cshtml" />
+    <Content Include="Views\Apps\_App_ThingExtensions_Delete.cshtml" />
+    <Content Include="Views\Apps\_App_ThingExtensions_Edit.cshtml" />
+    <Content Include="Views\Apps\_App_ThingExtensions_List.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Assets\Imgs\Wizard.png" />

@@ -105,6 +105,12 @@ namespace DynThings.Data.Repositories
         public AppAPIEntitysRepository repoAppAPIEntitys
         { get { return new AppAPIEntitysRepository(dynDB); } }
 
+        public AppThingExtensionsRepository repoAppThingExtensions
+        { get { return new AppThingExtensionsRepository(dynDB); } }
+
+        public DataTypesRepository repoDataTypes
+        { get { return new DataTypesRepository(dynDB); } }
+
 
 
         #endregion
