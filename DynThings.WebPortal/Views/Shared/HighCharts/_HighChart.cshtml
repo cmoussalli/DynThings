@@ -1,0 +1,10 @@
+﻿@model DynHighCharts.Chart
+
+<div id="@Model.chartID" style="height: 400px; margin: 0 auto; width:100%"></div>
+
+
+<script>
+    $(document).ready(function () {
+        $('#@Model.chartID').highcharts(@Html.Raw( @Model.JsonOutput(Model)))
+    });
+</script>

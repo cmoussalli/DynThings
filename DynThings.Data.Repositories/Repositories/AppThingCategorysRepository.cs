@@ -39,16 +39,15 @@ namespace DynThings.Data.Repositories
         #endregion
 
         #region Get PagedList
-        public IPagedList GetPagedList(string search,int appID, int pageNumber, int recordsPerPage)
+        public IPagedList GetPagedList(string search,long appID, int pageNumber, int recordsPerPage)
         {
-            IPagedList apps = db.Apps
-              .Where(a => 
-              (search == null || a.Title.Contains(search))
-              && (appID == 0 || appID == null || appID == a.ID)
-              )
-              .OrderBy(a => a.Title).ToList()
-              .ToPagedList(pageNumber, recordsPerPage);
-            return apps;
+            IPagedList appThingTypes = db.AppThingCategorys
+               .Where(e => search == null || (e.Title.Contains(search) || e.Code.Contains(search))
+               && e.AppID == appID)
+
+               .OrderBy(e => e.Title).ToList()
+               .ToPagedList(pageNumber, recordsPerPage);
+            return appThingTypes;
         }
         #endregion
 
@@ -132,7 +131,6 @@ namespace DynThings.Data.Repositories
         }
 
         #endregion
-
 
 
     }

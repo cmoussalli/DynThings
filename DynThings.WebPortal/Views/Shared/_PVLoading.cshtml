@@ -1,9 +1,22 @@
 ﻿
 <div id="divLoading" style="text-align:center;">
-    <img src="~/Assets/Imgs/spinner-md.gif" />
+        <img src="~/Assets/Imgs/spinner-md.gif" />
+
 </div>
+
+<div id="divProgressBar" style="text-align:center;">
+    <div class="progress progress-striped active">
+        <div style="width: 100%;" class="progress-bar progress-bar-primary"></div>
+    </div>
+</div>
+
 <script>
     function LoadDivLoading() {
+        $('#divloading1').hide()
         return document.getElementById('divLoading').outerHTML;
+    }
+
+    function LoadDivProgressBar() {
+        return document.getElementById('divProgressBar').outerHTML;
     }
 </script>

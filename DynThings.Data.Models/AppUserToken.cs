@@ -32,9 +32,9 @@ public partial class AppUserToken
 
 
 
-    public virtual App App { get; set; }
-
     public virtual AspNetUser AspNetUser { get; set; }
+
+    public virtual App App { get; set; }
 
 }
 

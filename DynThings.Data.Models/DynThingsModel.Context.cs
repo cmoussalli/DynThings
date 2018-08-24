@@ -53,8 +53,6 @@ public partial class DynThingsEntities : DbContext
 
     public virtual DbSet<AppMediaFile> AppMediaFiles { get; set; }
 
-    public virtual DbSet<App> Apps { get; set; }
-
     public virtual DbSet<AppStatuss> AppStatusses { get; set; }
 
     public virtual DbSet<AppThingCategory> AppThingCategorys { get; set; }
@@ -128,6 +126,8 @@ public partial class DynThingsEntities : DbContext
     public virtual DbSet<UserNotification> UserNotifications { get; set; }
 
     public virtual DbSet<UserNotificationType> UserNotificationTypes { get; set; }
+
+    public virtual DbSet<App> Apps { get; set; }
 
 
     public virtual ObjectResult<Rpt_EndPoint_IOs_Months_Result> Rpt_EndPoint_IOs_Months(Nullable<long> ePID, string year)
@@ -508,6 +508,25 @@ public partial class DynThingsEntities : DbContext
 
 
         return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UnPublishApp", appIDParameter);
+    }
+
+
+    public virtual int AppDelete(Nullable<long> appID)
+    {
+
+        var appIDParameter = appID.HasValue ?
+            new ObjectParameter("AppID", appID) :
+            new ObjectParameter("AppID", typeof(long));
+
+
+        return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("AppDelete", appIDParameter);
+    }
+
+
+    public virtual int ResetDB()
+    {
+
+        return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("ResetDB");
     }
 
 }

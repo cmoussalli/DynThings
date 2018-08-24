@@ -1,0 +1,219 @@
+INSERT [dbo].[AspNetRoles] ([Id], [Name]) VALUES (N'1', N'Administrator')
+GO
+INSERT [dbo].[AspNetRoles] ([Id], [Name]) VALUES (N'2', N'Monitor & Control')
+GO
+INSERT [dbo].[AspNetRoles] ([Id], [Name]) VALUES (N'3', N'Monitor Only')
+GO
+
+
+
+
+SET IDENTITY_INSERT [dbo].[AlertConditionTypes] ON 
+GO
+INSERT [dbo].[AlertConditionTypes] ([ID], [Title]) VALUES (1, N'equal to')
+GO
+INSERT [dbo].[AlertConditionTypes] ([ID], [Title]) VALUES (2, N'not equal to')
+GO
+INSERT [dbo].[AlertConditionTypes] ([ID], [Title]) VALUES (3, N'greater than')
+GO
+INSERT [dbo].[AlertConditionTypes] ([ID], [Title]) VALUES (4, N'less than')
+GO
+SET IDENTITY_INSERT [dbo].[AlertConditionTypes] OFF
+GO
+SET IDENTITY_INSERT [dbo].[AlertLevels] ON 
+
+GO
+INSERT [dbo].[AlertLevels] ([ID], [Title]) VALUES (1, N'Low')
+GO
+INSERT [dbo].[AlertLevels] ([ID], [Title]) VALUES (2, N'Medium')
+GO
+INSERT [dbo].[AlertLevels] ([ID], [Title]) VALUES (3, N'High')
+GO
+INSERT [dbo].[AlertLevels] ([ID], [Title]) VALUES (4, N'Critical')
+GO
+SET IDENTITY_INSERT [dbo].[AlertLevels] OFF
+GO
+
+SET IDENTITY_INSERT [dbo].[APIMethods] ON 
+GO
+INSERT [dbo].[APIMethods] ([ID], [MethodName], [Controller]) VALUES (1, N'GetLocationViews', N'LocationViews')
+GO
+INSERT [dbo].[APIMethods] ([ID], [MethodName], [Controller]) VALUES (2, N'GetLocations', N'Locations')
+GO
+INSERT [dbo].[APIMethods] ([ID], [MethodName], [Controller]) VALUES (3, N'GetTokenInfo', N'Tokens')
+GO
+INSERT [dbo].[APIMethods] ([ID], [MethodName], [Controller]) VALUES (4, N'ValidateToken', N'Tokens')
+GO
+INSERT [dbo].[APIMethods] ([ID], [MethodName], [Controller]) VALUES (5, N'ValidateTokenEntityPermission', N'Tokens')
+GO
+INSERT [dbo].[APIMethods] ([ID], [MethodName], [Controller]) VALUES (6, N'GetNewToken', N'Tokens')
+GO
+INSERT [dbo].[APIMethods] ([ID], [MethodName], [Controller]) VALUES (7, N'GetInfo', N'Apps')
+GO
+INSERT [dbo].[APIMethods] ([ID], [MethodName], [Controller]) VALUES (8, N'GetDevices', N'Devices')
+GO
+INSERT [dbo].[APIMethods] ([ID], [MethodName], [Controller]) VALUES (9, N'GetThingEnds', N'ThingEnds')
+GO
+INSERT [dbo].[APIMethods] ([ID], [MethodName], [Controller]) VALUES (10, N'GetThings', N'Things')
+GO
+INSERT [dbo].[APIMethods] ([ID], [MethodName], [Controller]) VALUES (11, N'GetEndPoints', N'EndPoints')
+GO
+INSERT [dbo].[APIMethods] ([ID], [MethodName], [Controller]) VALUES (12, N'GetDeviceCommands', N'DeviceCommands')
+GO
+INSERT [dbo].[APIMethods] ([ID], [MethodName], [Controller]) VALUES (13, N'GetEndPointCommands', N'EndPointCommands')
+GO
+INSERT [dbo].[APIMethods] ([ID], [MethodName], [Controller]) VALUES (14, N'GetEndpointsWithWarnings', N'EndPoints')
+GO
+INSERT [dbo].[APIMethods] ([ID], [MethodName], [Controller]) VALUES (15, N'GetLocationsWithWarnings', N'Locations')
+GO
+INSERT [dbo].[APIMethods] ([ID], [MethodName], [Controller]) VALUES (16, N'GetWarnings', N'IOWarnings')
+GO
+INSERT [dbo].[APIMethods] ([ID], [MethodName], [Controller]) VALUES (17, N'GetLocationViewsWithWarnings', N'LocationViews')
+GO
+INSERT [dbo].[APIMethods] ([ID], [MethodName], [Controller]) VALUES (18, N'GetThingsWithWarnings', N'Things')
+GO
+SET IDENTITY_INSERT [dbo].[APIMethods] OFF
+GO
+
+INSERT [dbo].[AppStatuss] ([ID], [Title]) VALUES (1, N'New')
+GO
+INSERT [dbo].[AppStatuss] ([ID], [Title]) VALUES (2, N'Under Development')
+GO
+INSERT [dbo].[AppStatuss] ([ID], [Title]) VALUES (3, N'Published')
+GO
+INSERT [dbo].[AppStatuss] ([ID], [Title]) VALUES (4, N'UnPublished')
+GO
+INSERT [dbo].[AppStatuss] ([ID], [Title]) VALUES (5, N'Published - Changes')
+GO
+
+INSERT [dbo].[AspNetRoles] ([Id], [Name]) VALUES (N'1', N'Admin')
+GO
+INSERT [dbo].[AspNetRoles] ([Id], [Name]) VALUES (N'2', N'Monitor & Control')
+GO
+INSERT [dbo].[AspNetRoles] ([Id], [Name]) VALUES (N'3', N'Monitor Only')
+GO
+
+SET IDENTITY_INSERT [dbo].[DataTypes] ON 
+GO
+INSERT [dbo].[DataTypes] ([ID], [Title]) VALUES (1, N'Text')
+GO
+INSERT [dbo].[DataTypes] ([ID], [Title]) VALUES (2, N'Number (no decimals)')
+GO
+INSERT [dbo].[DataTypes] ([ID], [Title]) VALUES (3, N'Number (with decimals)')
+GO
+INSERT [dbo].[DataTypes] ([ID], [Title]) VALUES (4, N'Date')
+GO
+INSERT [dbo].[DataTypes] ([ID], [Title]) VALUES (5, N'Time')
+GO
+INSERT [dbo].[DataTypes] ([ID], [Title]) VALUES (6, N'IP Address')
+GO
+INSERT [dbo].[DataTypes] ([ID], [Title]) VALUES (7, N'Boolean')
+GO
+INSERT [dbo].[DataTypes] ([ID], [Title]) VALUES (8, N'Geo Location')
+GO
+SET IDENTITY_INSERT [dbo].[DataTypes] OFF
+GO
+
+SET IDENTITY_INSERT [dbo].[DeviceStatus] ON 
+GO
+INSERT [dbo].[DeviceStatus] ([ID], [Title]) VALUES (1, N'New')
+GO
+INSERT [dbo].[DeviceStatus] ([ID], [Title]) VALUES (2, N'Connected')
+GO
+INSERT [dbo].[DeviceStatus] ([ID], [Title]) VALUES (3, N'Disonnected')
+GO
+INSERT [dbo].[DeviceStatus] ([ID], [Title]) VALUES (4, N'Deleted')
+GO
+SET IDENTITY_INSERT [dbo].[DeviceStatus] OFF
+GO
+SET IDENTITY_INSERT [dbo].[DynSettings] ON 
+
+GO
+INSERT [dbo].[DynSettings] ([ID], [DBVersion], [DevelopmentMode], [DefaultRecordsPerMaster], [DefaultRecordsPerChild], [PlatformKey], [PublicAccess], [PublicSignUP], [EnableSystemLogger], [App_TimeZone], [PlatformTitle], [LastCentralSync], [DeploymentTimeStamp], [NotifcationMail], [SMTPAddress], [SMTPPort]) VALUES (1, 1.1, 1, 25, 5, newID(), 0, 1, 1, 4, N'', getDate(), GetDate(), N'', N'', 25)
+GO
+SET IDENTITY_INSERT [dbo].[DynSettings] OFF
+GO
+
+SET IDENTITY_INSERT [dbo].[EndPointTypeCategorys] ON 
+
+GO
+INSERT [dbo].[EndPointTypeCategorys] ([ID], [Title]) VALUES (1, N'Input Only')
+GO
+INSERT [dbo].[EndPointTypeCategorys] ([ID], [Title]) VALUES (2, N'Output Only')
+GO
+INSERT [dbo].[EndPointTypeCategorys] ([ID], [Title]) VALUES (3, N'Complex')
+GO
+SET IDENTITY_INSERT [dbo].[EndPointTypeCategorys] OFF
+GO
+
+INSERT [dbo].[IOTypes] ([ID], [IO], [Title]) VALUES (1, N'I', N'Input')
+GO
+INSERT [dbo].[IOTypes] ([ID], [IO], [Title]) VALUES (2, N'C', N'Command')
+GO
+INSERT [dbo].[IOTypes] ([ID], [IO], [Title]) VALUES (3, N'L', N'Log')
+GO
+
+SET IDENTITY_INSERT [dbo].[LocationViewTypes] ON
+GO
+INSERT [dbo].[LocationViewTypes] ([ID], [Title]) VALUES (1, N'Single Location')
+GO
+INSERT [dbo].[LocationViewTypes] ([ID], [Title]) VALUES (2, N'Thumbnails')
+GO
+INSERT [dbo].[LocationViewTypes] ([ID], [Title]) VALUES (3, N'Map')
+GO
+INSERT [dbo].[LocationViewTypes] ([ID], [Title]) VALUES (4, N'List')
+GO
+INSERT [dbo].[LocationViewTypes] ([ID], [Title]) VALUES (5, N'List & Map (Mobile: List only)')
+GO
+INSERT [dbo].[LocationViewTypes] ([ID], [Title]) VALUES (6, N'List & Map (Mobile: Map only)')
+GO
+SET IDENTITY_INSERT [dbo].[LocationViewTypes] OFF
+GO
+SET IDENTITY_INSERT [dbo].[MediaFiles] ON 
+
+GO
+INSERT [dbo].[MediaFiles] ([ID], [GUID], [Title]) VALUES (1, N'd7527c05-abdd-4f8c-a734-89a67462a3ba', N'Sensor')
+GO
+INSERT [dbo].[MediaFiles] ([ID], [GUID], [Title]) VALUES (2, N'643fef15-2ef5-448a-9611-b02e1cc17746', N'Actuator')
+GO
+SET IDENTITY_INSERT [dbo].[MediaFiles] OFF
+GO
+
+INSERT [dbo].[ResultMessages] ([ID], [Message], [IsError]) VALUES (0, N'Ok', 0)
+GO
+INSERT [dbo].[ResultMessages] ([ID], [Message], [IsError]) VALUES (1, N'Generic Error', 1)
+GO
+INSERT [dbo].[ResultMessages] ([ID], [Message], [IsError]) VALUES (2, N'Device GUID not found', 1)
+GO
+INSERT [dbo].[ResultMessages] ([ID], [Message], [IsError]) VALUES (3, N'EndPoint GUID not Found', 1)
+GO
+INSERT [dbo].[ResultMessages] ([ID], [Message], [IsError]) VALUES (4, N'The selected LocationView is already attached to this record', 1)
+GO
+INSERT [dbo].[ResultMessages] ([ID], [Message], [IsError]) VALUES (5, N'The selected Location is already attached to this record', 1)
+GO
+INSERT [dbo].[SystemEntitys] ([ID], [Title]) VALUES (1, N'EndPoints')
+GO
+INSERT [dbo].[SystemEntitys] ([ID], [Title]) VALUES (2, N'EndPoints Commands')
+GO
+INSERT [dbo].[SystemEntitys] ([ID], [Title]) VALUES (3, N'EndPoints IOs')
+GO
+INSERT [dbo].[SystemEntitys] ([ID], [Title]) VALUES (4, N'Devices')
+GO
+INSERT [dbo].[SystemEntitys] ([ID], [Title]) VALUES (5, N'Devices Commands')
+GO
+INSERT [dbo].[SystemEntitys] ([ID], [Title]) VALUES (6, N'Devices IOs')
+GO
+INSERT [dbo].[SystemEntitys] ([ID], [Title]) VALUES (7, N'Locations')
+GO
+INSERT [dbo].[SystemEntitys] ([ID], [Title]) VALUES (8, N'Views')
+GO
+INSERT [dbo].[SystemEntitys] ([ID], [Title]) VALUES (9, N'Alerts')
+GO
+INSERT [dbo].[SystemEntitys] ([ID], [Title]) VALUES (10, N'Users')
+GO
+INSERT [dbo].[SystemEntitys] ([ID], [Title]) VALUES (11, N'Things')
+GO
+INSERT [dbo].[SystemEntitys] ([ID], [Title]) VALUES (12, N'ThingEnds')
+GO
+INSERT [dbo].[SystemEntitys] ([ID], [Title]) VALUES (13, N'IO Warnings')
+GO

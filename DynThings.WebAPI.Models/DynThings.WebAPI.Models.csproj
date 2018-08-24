@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard1.0</TargetFramework>
+    <TargetFramework>netstandard2.0</TargetFramework>
     <Authors>Caesar Moussalli</Authors>
     <Company>DynThings</Company>
     <Description>This package includes all the requierd models to communicate with DynThings API.</Description>
@@ -11,7 +11,7 @@
     <AssemblyVersion>1.0.0.0</AssemblyVersion>
     <FileVersion>1.0.0.0</FileVersion>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-    <Version>1.0.7</Version>
+    <Version>1.0.9</Version>
   </PropertyGroup>
 
   <Target Name="CopyPackage" AfterTargets="Pack">

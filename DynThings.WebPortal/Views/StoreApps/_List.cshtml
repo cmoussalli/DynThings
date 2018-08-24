@@ -1,0 +1,74 @@
+﻿@using DynThingsCentral.WebAPI.Models;
+
+@model DynThingsCentral.WebAPI.ResponseModels.APIAppResponseModels.GetAppsList
+
+
+
+<div class="panel">
+    <div class="panel-body">
+        <div class="row">
+            @foreach (APIApp app in Model.Apps)
+            {
+                <div class="col-lg-3">
+                    <div class="panel">
+                        <div class="panel-body text-center">
+                            <div class="widget-header">
+                                <img alt="Profile Picture" width="100%" class="img-responsive" src="~/Imgs/Apps/0.jpg">
+
+                            </div>
+                            <p class="text-lg text-semibold mar-no text-main">@app.Title</p>
+
+                            @if (app.DevelopedBy.Company != null)
+                            {
+                                <p class="text-muted">by @app.DevelopedBy.Company</p>
+                            }
+                            else
+                            {
+                                <p class="text-muted">by @app.DevelopedBy.FullName</p>
+                            }
+
+
+
+                            @if (app.Description.Length <= 100)
+                            {
+                                <p class="text-sm"> @app.Description</p>
+                            }
+                            else
+                            {
+                                <p class="text-sm"> @app.Description.Substring(0, 100) ...</p>
+                            }
+                            <button class="btn btn-primary mar-ver" onclick="LoadPart_CentralAppSideInfoPV('@app.GUID')"><i class="demo-pli-male icon-fw"></i>More ...</button>
+                            @*<ul class="list-unstyled text-center bord-top pad-top mar-no row">
+            <li class="col-xs-4">
+                <span class="text-lg text-semibold text-main">1,345</span>
+                <p class="text-muted mar-no">Following</p>
+            </li>
+            <li class="col-xs-4">
+                <span class="text-lg text-semibold text-main">23K</span>
+                <p class="text-muted mar-no">Followers</p>
+            </li>
+            <li class="col-xs-4">
+                <span class="text-lg text-semibold text-main">278</span>
+                <p class="text-muted mar-no">Post</p>
+            </li>
+        </ul>*@
+                        </div>
+                    </div>
+                </div>
+            }
+
+        </div>
+
+
+
+    </div>
+</div>
+
+<script>
+            //$(document).ready(function () {
+            //    lblSearchTitle.innerHTML = $('#txtCentralAppsSearch').val();
+            //});
+
+
+
+</script>

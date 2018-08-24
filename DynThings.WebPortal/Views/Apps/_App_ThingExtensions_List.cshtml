@@ -5,6 +5,8 @@
         <tr>
             <th>Title</th>
             <th>Code</th>
+            <th>Data Type</th>
+            <th>Thing Type</th>
             <th>GUID</th>
             <th></th>
         </tr>
@@ -12,21 +14,27 @@
     <tbody>
         @foreach (var item in Model)
         {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Title)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Code)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.GUID)
-                </td>
-                <td>
-                    <button class="btn btn-warning" onclick="LoadPart_DialogAppThingExtensionEdit(@item.ID);" data-toggle="modal" data-target="#mdl">Edit</button>
-                    <button class="btn btn-danger" onclick="LoadPart_DialogAppThingExtensionDelete(@item.ID);" data-toggle="modal" data-target="#mdl">Delete</button>
-                </td>
-            </tr>
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Code)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DataType.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AppThingCategoryCode)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.GUID)
+            </td>
+            <td>
+                <button class="btn btn-warning" onclick="LoadPart_DialogAppThingExtensionEdit(@item.ID);" data-toggle="modal" data-target="#mdl">Edit</button>
+                <button class="btn btn-danger" onclick="LoadPart_DialogAppThingExtensionDelete(@item.ID);" data-toggle="modal" data-target="#mdl">Delete</button>
+            </td>
+        </tr>
         }
     </tbody>
 </table>

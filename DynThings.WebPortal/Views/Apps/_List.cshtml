@@ -1,39 +1,79 @@
 ﻿@model PagedList.IPagedList<DynThings.Data.Models.App>
 
 
-<div class="row">
-    @foreach (var item in Model)
-    {
-        <div class="col-lg-3">
-            <div class="panel">
-                <div class="panel-body text-center">
-                    <img src="~/Imgs/Apps/0.jpg" style="height:100%;width:100%" />
-                    <p class="text-lg text-semibold mar-no text-main">@item.Title</p>
-                    <p class="text-muted">by @item.DevelopedByName</p>
-                    <p class="text-sm">@item.Description</p>
-                    <a class="btn btn-info" href="~/Apps/Details?ID=@item.ID">Manage</a>
-                    <br />
-                    <br />
-                    <ul class="list-unstyled text-center bord-top pad-top mar-no row">
-                        <li class="col-xs-4">
-                            <span class="text-lg text-semibold text-main">@item.Version</span>
-                            <p class="text-muted mar-no">Version</p>
-                        </li>
-                        <li class="col-xs-4">
-                            <span class="text-lg text-semibold text-main">23.6 K</span>
-                            <p class="text-muted mar-no">CpH</p>
-                        </li>
-                        <li class="col-xs-4">
-                            <span class="text-lg text-semibold text-main">@item.AppStatuss.Title</span>
-                            <p class="text-muted mar-no">Status</p>
-                        </li>
-                    </ul>
+@foreach (var item in Model)
+{
+    <div class="row">
+        <a href="~/Apps/Details?ID=@item.ID">
+
+            <div class="panel panel-bordered-primary">
+                <div class="panel-body">
+                    <table>
+                        <tr>
+                            <td>
+                                <img src="~/Imgs/Apps/0.jpg" style="height:100%;width:100%" />
+                            </td>
+                            <td width="15"></td>
+                            <td>
+                                <h3>@item.Title</h3>
+                                <p>@item.Description</p>
+                                <br />
+                                <p>Version: @item.Version </p>
+                                <p>by @item.DevelopedByName</p>
+                                @if (item.IsStoreApp)
+                                {
+                                    <p><span class="label label-success">Store App</span></p>
+                                }
+                                else
+                                {
+                                    <p><span class="label label-info">Local App</span></p>
+
+                                }
+                            </td>
+                        </tr>
+                    </table>
                 </div>
             </div>
-        </div>
+        </a>
+    </div>
+}
 
-    }
-</div>
+
+
+
+@*<div class="row">
+        @foreach (var item in Model)
+        {
+            <div class="col-lg-3">
+                <div class="panel">
+                    <div class="panel-body text-center">
+                        <img src="~/Imgs/Apps/0.jpg" style="height:100%;width:100%" />
+                        <p class="text-lg text-semibold mar-no text-main">@item.Title</p>
+                        <p class="text-muted">by @item.DevelopedByName</p>
+                        <p class="text-sm">@item.Description</p>
+                        <a class="btn btn-info" href="~/Apps/Details?ID=@item.ID">Manage</a>
+                        <br />
+                        <br />
+                        <ul class="list-unstyled text-center bord-top pad-top mar-no row">
+                            <li class="col-xs-4">
+                                <span class="text-lg text-semibold text-main">@item.Version</span>
+                                <p class="text-muted mar-no">Version</p>
+                            </li>
+                            <li class="col-xs-4">
+                                <span class="text-lg text-semibold text-main">23.6 K</span>
+                                <p class="text-muted mar-no">CpH</p>
+                            </li>
+                            <li class="col-xs-4">
+                                <span class="text-lg text-semibold text-main">@item.AppStatuss.Title</span>
+                                <p class="text-muted mar-no">Status</p>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+        }
+    </div>*@
 @if (Model.PageCount > 1)
 {
     <br />

@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="DynThingsCentral.Core" Version="1.0.3" />
+    <PackageReference Include="DynThingsCentral.WebAPI.Client" Version="1.0.3" />
+    <PackageReference Include="DynThingsCentral.WebAPI.Models" Version="1.0.3" />
+    <PackageReference Include="EntityFramework" Version="6.2.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\DynThings.Data.Models\DynThings.Data.Models.csproj" />
+    <ProjectReference Include="..\DynThings.Data.Repositories\DynThings.Data.Repositories.csproj" />
+  </ItemGroup>
+
+</Project>

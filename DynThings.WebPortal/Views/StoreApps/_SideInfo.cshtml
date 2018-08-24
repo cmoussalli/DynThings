@@ -1,0 +1,175 @@
+﻿@using DynThingsCentral.WebAPI.Models
+@model DynThingsCentral.WebAPI.ResponseModels.APIAppResponseModels.GetAppByGUID
+
+<div>
+
+    <div class="row">
+        <div class="col-lg-6">
+            <img width="100%" src="~/Imgs/Apps/0.jpg" alt="Image">
+        </div>
+        <div class="col-lg-6">
+            <h4 class="mar-no text-main">@Model.App.Title</h4>
+            <p class="text-muted mar-no">@Model.App.Description</p>
+            <br />
+            <p>Current Version : @Model.App.LatestVersion.ToString()</p>
+            <p>Latest Update  : @Model.App.LastUpdate.ToLongDateString()</p>
+            <br />
+
+            <h5>Developed by:</h5>
+            <p>@Model.App.DevelopedBy.FullName</p>
+            <p>@Model.App.DevelopedBy.Company</p>
+            <br />
+
+            <div style="height:60px">
+                <div id="divStoreAppActions"></div>
+            </div>
+        </div>
+
+    </div>
+
+    <h3>Components: </h3>
+    <div class="panel-group accordion" id="demo-acc-info-outline">
+
+        @if (Model.App.AllowedEntities.Count > 0)
+        {
+            <div class="panel panel-bordered panel-info">
+                <!--Accordion title-->
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a data-parent="#demo-acc-info-outline" data-toggle="collapse" href="#demo-acd-info-outline-1">API Access</a>
+                    </h4>
+                </div>
+                <!--Accordion content-->
+                <div class="panel-collapse collapse in" id="demo-acd-info-outline-1">
+                    <div class="panel-body">
+                        <p>This app will have an access to the following objects:</p>
+                        <ul>
+                            @foreach (APISystemEntity item in Model.App.AllowedEntities)
+                            {
+                                <li>@item.Title</li>
+                            }
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        }
+
+        @if (Model.App.AppThingTypes.Count > 0)
+        {
+            <div class="panel panel-bordered panel-info">
+                <!--Accordion title-->
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a data-parent="#demo-acc-info-outline" data-toggle="collapse" href="#demo-acd-info-outline-2">Thing's Types</a>
+                    </h4>
+                </div>
+                <!--Accordion content-->
+                <div class="panel-collapse collapse" id="demo-acd-info-outline-2">
+                    <div class="panel-body">
+
+                        <p>This app will add the following Thing's Types:</p>
+                        <ul>
+                            @foreach (APIAppThingType item in Model.App.AppThingTypes)
+                            {
+                                <li>
+                                    <span>@item.Title</span>
+                                </li>
+                            }
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        }
+
+        @if (Model.App.AppThingExtensions.Count > 0)
+        {
+            <div class="panel panel-bordered panel-info">
+                <!--Accordion title-->
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a data-parent="#demo-acc-info-outline" data-toggle="collapse" href="#demo-acd-info-outline-3">Thing Type's Extensions</a>
+                    </h4>
+                </div>
+                <!--Accordion content-->
+                <div class="panel-collapse collapse" id="demo-acd-info-outline-3">
+                    <div class="panel-body">
+
+                        <p>This app will add the following Thing Type's Extensions:</p>
+                        <ul>
+                            @foreach (APIAppThingExtension item in Model.App.AppThingExtensions)
+                            {
+                                <li>
+                                    <span>@item.Title</span>
+                                </li>
+                            }
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        }
+
+        @if (Model.App.AppEndpointTypes.Count > 0)
+        {
+            <div class="panel panel-bordered panel-info">
+                <!--Accordion title-->
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a data-parent="#demo-acc-info-outline" data-toggle="collapse" href="#demo-acd-info-outline-4">Endpoint's Types</a>
+                    </h4>
+                </div>
+                <!--Accordion content-->
+                <div class="panel-collapse collapse" id="demo-acd-info-outline-4">
+                    <div class="panel-body">
+
+                        <p>This app will add the following Endpoint Type:</p>
+                        <ul>
+                            @foreach (APIAppEndpointType item in Model.App.AppEndpointTypes)
+                            {
+                                <li>
+                                    <span> @item.Title (@item.Measurement)</span>
+                                </li>
+                            }
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        }
+
+        @if (Model.App.AppMediaFiles.Count > 0)
+        {
+            <div class="panel panel-bordered panel-info">
+                <!--Accordion title-->
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a data-parent="#demo-acc-info-outline" data-toggle="collapse" href="#demo-acd-info-outline-5">Media File</a>
+                    </h4>
+                </div>
+                <!--Accordion content-->
+                <div class="panel-collapse collapse" id="demo-acd-info-outline-5">
+                    <div class="panel-body">
+
+                        <p>This app will add the following Media Files :</p>
+                        <ul>
+                            @foreach (APIAppMediaFile item in Model.App.AppMediaFiles)
+                            {
+                                <li>
+                                    <span>@item.Title</span>
+                                </li>
+                            }
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        }
+
+
+    </div>
+
+</div>
+
+<script>
+    $(document).ready(function () {
+        LoadPart_CentralAppActionsPV('@Model.App.GUID.ToString()');
+    });
+
+</script>

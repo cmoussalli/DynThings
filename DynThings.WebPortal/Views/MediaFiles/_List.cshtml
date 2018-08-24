@@ -44,9 +44,12 @@
                     </div>
                 </td>
                 <td>
-                    <button class="btn btn-danger pull-right" onclick="LoadPart_DialogMediaFileDelete(@item.ID)" data-toggle="modal" data-target="#mdl">Delete</button>
-                    <button class="btn btn-info pull-right" onclick="LoadPart_DialogMediaFileEdit(@item.ID)" data-toggle="modal" data-target="#mdl">Edit</button>
-                    <button class="btn btn-info pull-right" onclick="LoadPart_DialogMediaFileEditUpload(@item.ID)">Change Icon</button>
+                    @if (item.IsSystem == false)
+                    {
+                        <button class="btn btn-danger pull-right" onclick="LoadPart_DialogMediaFileDelete(@item.ID)" data-toggle="modal" data-target="#mdl">Delete</button>
+                        <button class="btn btn-info pull-right" onclick="LoadPart_DialogMediaFileEdit(@item.ID)" data-toggle="modal" data-target="#mdl">Edit</button>
+                        <button class="btn btn-info pull-right" onclick="LoadPart_DialogMediaFileEditUpload(@item.ID)">Change Icon</button>
+                    }
                 </td>
             </tr>
             <script>
@@ -65,10 +68,10 @@
 
 <script>
     function LoadPart_DialogMediaFileEditUpload(id) {
-        $('#divMediaFileUpload'+id).show();
+        $('#divMediaFileUpload' + id).show();
     };
 
     function LoadPart_DialogMediaFileEditUpload0(id) {
-        $('#divMediaFileUpload'+id).hide();
+        $('#divMediaFileUpload' + id).hide();
     };
 </script>

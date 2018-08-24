@@ -43,57 +43,67 @@
             // 
             // txtServer
             // 
-            this.txtServer.Location = new System.Drawing.Point(134, 43);
+            this.txtServer.Location = new System.Drawing.Point(179, 53);
+            this.txtServer.Margin = new System.Windows.Forms.Padding(4);
             this.txtServer.Name = "txtServer";
-            this.txtServer.Size = new System.Drawing.Size(214, 20);
+            this.txtServer.Size = new System.Drawing.Size(284, 22);
             this.txtServer.TabIndex = 0;
+            this.txtServer.Text = "cmserver";
             // 
             // txtUser
             // 
-            this.txtUser.Location = new System.Drawing.Point(134, 80);
+            this.txtUser.Location = new System.Drawing.Point(179, 98);
+            this.txtUser.Margin = new System.Windows.Forms.Padding(4);
             this.txtUser.Name = "txtUser";
-            this.txtUser.Size = new System.Drawing.Size(214, 20);
+            this.txtUser.Size = new System.Drawing.Size(284, 22);
             this.txtUser.TabIndex = 1;
+            this.txtUser.Text = "sa";
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(28, 46);
+            this.label1.Location = new System.Drawing.Point(37, 57);
+            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(39, 13);
+            this.label1.Size = new System.Drawing.Size(50, 17);
             this.label1.TabIndex = 2;
             this.label1.Text = "Server";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(28, 83);
+            this.label2.Location = new System.Drawing.Point(37, 102);
+            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(51, 13);
+            this.label2.Size = new System.Drawing.Size(70, 17);
             this.label2.TabIndex = 3;
             this.label2.Text = "SQL User";
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(28, 120);
+            this.label3.Location = new System.Drawing.Point(37, 148);
+            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(75, 13);
+            this.label3.Size = new System.Drawing.Size(101, 17);
             this.label3.TabIndex = 4;
             this.label3.Text = "SQL Password";
             // 
             // txtPassword
             // 
-            this.txtPassword.Location = new System.Drawing.Point(134, 117);
+            this.txtPassword.Location = new System.Drawing.Point(179, 144);
+            this.txtPassword.Margin = new System.Windows.Forms.Padding(4);
             this.txtPassword.Name = "txtPassword";
-            this.txtPassword.Size = new System.Drawing.Size(214, 20);
+            this.txtPassword.Size = new System.Drawing.Size(284, 22);
             this.txtPassword.TabIndex = 2;
+            this.txtPassword.Text = "P@ssw0rd";
             // 
             // btnConnect
             // 
-            this.btnConnect.Location = new System.Drawing.Point(246, 16);
+            this.btnConnect.Location = new System.Drawing.Point(328, 20);
+            this.btnConnect.Margin = new System.Windows.Forms.Padding(4);
             this.btnConnect.Name = "btnConnect";
-            this.btnConnect.Size = new System.Drawing.Size(110, 31);
+            this.btnConnect.Size = new System.Drawing.Size(147, 38);
             this.btnConnect.TabIndex = 4;
             this.btnConnect.Text = "Connect";
             this.btnConnect.UseVisualStyleBackColor = true;
@@ -102,33 +112,38 @@
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.btnConnect);
-            this.groupBox1.Location = new System.Drawing.Point(-9, 190);
+            this.groupBox1.Location = new System.Drawing.Point(-12, 234);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(508, 100);
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(4);
+            this.groupBox1.Size = new System.Drawing.Size(677, 123);
             this.groupBox1.TabIndex = 7;
             this.groupBox1.TabStop = false;
             // 
             // txtDataBase
             // 
-            this.txtDataBase.Location = new System.Drawing.Point(134, 154);
+            this.txtDataBase.Location = new System.Drawing.Point(179, 190);
+            this.txtDataBase.Margin = new System.Windows.Forms.Padding(4);
             this.txtDataBase.Name = "txtDataBase";
-            this.txtDataBase.Size = new System.Drawing.Size(214, 20);
+            this.txtDataBase.Size = new System.Drawing.Size(284, 22);
             this.txtDataBase.TabIndex = 3;
+            this.txtDataBase.Text = "emptytest1";
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(28, 157);
+            this.label4.Location = new System.Drawing.Point(37, 193);
+            this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(53, 13);
+            this.label4.Size = new System.Drawing.Size(69, 17);
             this.label4.TabIndex = 8;
             this.label4.Text = "Database";
             // 
             // FrmConnect
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(376, 250);
+            this.ClientSize = new System.Drawing.Size(501, 308);
             this.Controls.Add(this.txtDataBase);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.groupBox1);
@@ -139,6 +154,7 @@
             this.Controls.Add(this.txtUser);
             this.Controls.Add(this.txtServer);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "FrmConnect";
@@ -146,6 +162,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Connect";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FrmConnect_FormClosing);
+            this.Load += new System.EventHandler(this.FrmConnect_Load);
             this.groupBox1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();

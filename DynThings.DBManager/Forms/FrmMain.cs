@@ -21,7 +21,7 @@ namespace DynThings.DBManager
         private void FrmMain_FormClosing(object sender, FormClosingEventArgs e)
         {
             e.Cancel = true;
-            Application.Exit();
+            Environment.Exit(0);
         }
 
         public void LoadUI()
@@ -57,6 +57,16 @@ namespace DynThings.DBManager
         private void FrmMain_Load(object sender, EventArgs e)
         {
 
+        }
+
+        private void label3_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnBackup_Click(object sender, EventArgs e)
+        {
+            string sql = "";
         }
     }
 }

@@ -1,15 +1,15 @@
-/*! RowReorder 1.0.0
- * 2015 SpryMedia Ltd - datatables.net/license
+/*! RowReorder 1.2.0
+ * 2015-2016 SpryMedia Ltd - datatables.net/license
  */
 
 /**
  * @summary     RowReorder
  * @description Row reordering extension for DataTables
- * @version     1.0.0
+ * @version     1.2.0
  * @file        dataTables.rowReorder.js
  * @author      SpryMedia Ltd (www.sprymedia.co.uk)
  * @contact     www.sprymedia.co.uk/contact
- * @copyright   Copyright 2015 SpryMedia Ltd.
+ * @copyright   Copyright 2015-2016 SpryMedia Ltd.
  *
  * This source file is free software, available under the following license:
  *   MIT license - http://datatables.net/license/mit
@@ -21,11 +21,35 @@
  * For details please refer to: http://www.datatables.net
  */
 
-(function(window, document, undefined) {
+(function( factory ){
+	if ( typeof define === 'function' && define.amd ) {
+		// AMD
+		define( ['jquery', 'datatables.net'], function ( $ ) {
+			return factory( $, window, document );
+		} );
+	}
+	else if ( typeof exports === 'object' ) {
+		// CommonJS
+		module.exports = function (root, $) {
+			if ( ! root ) {
+				root = window;
+			}
 
+			if ( ! $ || ! $.fn.dataTable ) {
+				$ = require('datatables.net')(root, $).$;
+			}
 
-var factory = function( $, DataTable ) {
-"use strict";
+			return factory( $, root, root.document );
+		};
+	}
+	else {
+		// Browser
+		factory( jQuery, window, document );
+	}
+}(function( $, window, document, undefined ) {
+'use strict';
+var DataTable = $.fn.dataTable;
+
 
 /**
  * RowReorder provides the ability in DataTables to click and drag rows to
@@ -75,6 +99,12 @@ var RowReorder = function ( dt, opts ) {
 		/** @type {array} Pixel positions for row insertion calculation */
 		middles: null,
 
+		/** @type {Object} Cached dimension information for use in the mouse move event handler */
+		scroll: {},
+
+		/** @type {integer} Interval object used for smooth scrolling */
+		scrollInterval: null,
+
 		/** @type {function} Data set function */
 		setDataFn: DataTable.ext.oApi._fnSetObjectDataFn( this.c.dataSrc ),
 
@@ -94,7 +124,10 @@ var RowReorder = function ( dt, opts ) {
 	// DOM items
 	this.dom = {
 		/** @type {jQuery} Cloned row being moved around */
-		clone: null
+		clone: null,
+
+		/** @type {jQuery} DataTables scrolling container */
+		dtScroll: $('div.dataTables_scrollBody', this.s.dt.table().container())
 	};
 
 	// Check if row reorder has already been initialised on this table
@@ -109,7 +142,7 @@ var RowReorder = function ( dt, opts ) {
 };
 
 
-RowReorder.prototype = {
+$.extend( RowReorder.prototype, {
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
 	 * Constructor
 	 */
@@ -133,8 +166,14 @@ RowReorder.prototype = {
 		// listen for mouse down on the target column - we have to implement
 		// this rather than using HTML5 drag and drop as drag and drop doesn't
 		// appear to work on table rows at this time. Also mobile browsers are
-		// not supported
-		$( table ).on( 'mousedown.rowReorder touchstart.rowReorder', this.c.selector, function (e) {
+		// not supported.
+		// Use `table().container()` rather than just the table node for IE8 -
+		// otherwise it only works once...
+		$(dt.table().container()).on( 'mousedown.rowReorder touchstart.rowReorder', this.c.selector, function (e) {
+			if ( ! that.c.enabled ) {
+				return;
+			}
+
 			var tr = $(this).closest('tr');
 
 			// Double check that it is a DataTable row
@@ -144,8 +183,9 @@ RowReorder.prototype = {
 			}
 		} );
 
-		dt.on( 'destroy', function () {
-			table.off( 'mousedown.rowReorder' );
+		dt.on( 'destroy.rowReorder', function () {
+			$(dt.table().container()).off( '.rowReorder' );
+			dt.off( '.rowReorder' );
 		} );
 	},
 
@@ -330,6 +370,19 @@ RowReorder.prototype = {
 		if ( $(window).width() === $(document).width() ) {
 			$(document.body).addClass( 'dt-rowReorder-noOverflow' );
 		}
+
+		// Cache scrolling information so mouse move doesn't need to read.
+		// This assumes that the window and DT scroller will not change size
+		// during an row drag, which I think is a fair assumption
+		var scrollWrapper = this.dom.dtScroll;
+		this.s.scroll = {
+			windowHeight: $(window).height(),
+			windowWidth:  $(window).width(),
+			dtTop:        scrollWrapper.length ? scrollWrapper.offset().top : null,
+			dtLeft:       scrollWrapper.length ? scrollWrapper.offset().left : null,
+			dtHeight:     scrollWrapper.length ? scrollWrapper.outerHeight() : null,
+			dtWidth:      scrollWrapper.length ? scrollWrapper.outerWidth() : null
+		};
 	},
 
 
@@ -373,10 +426,10 @@ RowReorder.prototype = {
 				var nodes = $.unique( dt.rows( { page: 'current' } ).nodes().toArray() );
 
 				if ( insertPoint > this.s.lastInsert ) {
-					this.dom.target.before( nodes[ insertPoint-1 ] );
+					this.dom.target.insertAfter( nodes[ insertPoint-1 ] );
 				}
 				else {
-					this.dom.target.after( nodes[ insertPoint ] );
+					this.dom.target.insertBefore( nodes[ insertPoint ] );
 				}
 			}
 
@@ -385,28 +438,7 @@ RowReorder.prototype = {
 			this.s.lastInsert = insertPoint;
 		}
 
-		// scroll window up and down when reaching the edges
-		var windowY = this._eventToPage( e, 'Y' ) - document.body.scrollTop;
-		var scrollInterval = this.s.scrollInterval;
-
-		if ( windowY < 65 ) {
-			if ( ! scrollInterval ) {
-				this.s.scrollInterval = setInterval( function () {
-					document.body.scrollTop -= 5;
-				}, 15 );
-			}
-		}
-		else if ( this.s.windowHeight - windowY < 65 ) {
-			if ( ! scrollInterval ) {
-				this.s.scrollInterval = setInterval( function () {
-					document.body.scrollTop += 5;
-				}, 15 );
-			}
-		}
-		else {
-			clearInterval( scrollInterval );
-			this.s.scrollInterval = null;
-		}
+		this._shiftScroll( e );
 	},
 
 
@@ -419,8 +451,10 @@ RowReorder.prototype = {
 	 */
 	_mouseUp: function ( e )
 	{
+		var that = this;
 		var dt = this.s.dt;
 		var i, ien;
+		var dataSrc = this.c.dataSrc;
 
 		this.dom.clone.remove();
 		this.dom.clone = null;
@@ -430,6 +464,9 @@ RowReorder.prototype = {
 
 		$(document).off( '.rowReorder' );
 		$(document.body).removeClass( 'dt-rowReorder-noOverflow' );
+
+		clearInterval( this.s.scrollInterval );
+		this.s.scrollInterval = null;
 
 		// Calculate the difference
 		var startNodes = this.s.start.nodes;
@@ -462,20 +499,32 @@ RowReorder.prototype = {
 			}
 		}
 		
+		// Create event args
+		var eventArgs = [ fullDiff, {
+			dataSrc:    dataSrc,
+			nodes:      diffNodes,
+			values:     idDiff,
+			triggerRow: dt.row( this.dom.target )
+		} ];
+		
 		// Emit event
-		this._emitEvent( 'row-reorder', [ fullDiff, {
-			dataSrc: this.c.dataSrc,
-			nodes:   diffNodes,
-			values:  idDiff
-		} ] );
+		this._emitEvent( 'row-reorder', eventArgs );
 
 		// Editor interface
 		if ( this.c.editor ) {
+			// Disable user interaction while Editor is submitting
+			this.c.enabled = false;
+
 			this.c.editor
-				.edit( diffNodes, false, {
-					submit: 'changed'
+				.edit(
+					diffNodes,
+					false,
+					$.extend( {submit: 'changed'}, this.c.formOptions )
+				)
+				.multiSet( dataSrc, idDiff )
+				.one( 'submitComplete', function () {
+					that.c.enabled = true;
 				} )
-				.multiSet( this.c.dataSrc, idDiff )
 				.submit();
 		}
 
@@ -487,13 +536,104 @@ RowReorder.prototype = {
 
 				setDataFn( rowData, fullDiff[i].newData );
 
-				row.invalidate( 'data' );
+				// Invalidate the cell that has the same data source as the dataSrc
+				dt.columns().every( function () {
+					if ( this.dataSrc() === dataSrc ) {
+						dt.cell( fullDiff[i].node, this.index() ).invalidate( 'data' );
+					}
+				} );
 			}
+			
+			// Trigger row reordered event
+			this._emitEvent( 'row-reordered', eventArgs );
 
 			dt.draw( false );
 		}
+	},
+
+
+	/**
+	 * Move the window and DataTables scrolling during a drag to scroll new
+	 * content into view.
+	 *
+	 * This matches the `_shiftScroll` method used in AutoFill, but only
+	 * horizontal scrolling is considered here.
+	 *
+	 * @param  {object} e Mouse move event object
+	 * @private
+	 */
+	_shiftScroll: function ( e )
+	{
+		var that = this;
+		var dt = this.s.dt;
+		var scroll = this.s.scroll;
+		var runInterval = false;
+		var scrollSpeed = 5;
+		var buffer = 65;
+		var
+			windowY = e.pageY - document.body.scrollTop,
+			windowVert,
+			dtVert;
+
+		// Window calculations - based on the mouse position in the window,
+		// regardless of scrolling
+		if ( windowY < buffer ) {
+			windowVert = scrollSpeed * -1;
+		}
+		else if ( windowY > scroll.windowHeight - buffer ) {
+			windowVert = scrollSpeed;
+		}
+
+		// DataTables scrolling calculations - based on the table's position in
+		// the document and the mouse position on the page
+		if ( scroll.dtTop !== null && e.pageY < scroll.dtTop + buffer ) {
+			dtVert = scrollSpeed * -1;
+		}
+		else if ( scroll.dtTop !== null && e.pageY > scroll.dtTop + scroll.dtHeight - buffer ) {
+			dtVert = scrollSpeed;
+		}
+
+		// This is where it gets interesting. We want to continue scrolling
+		// without requiring a mouse move, so we need an interval to be
+		// triggered. The interval should continue until it is no longer needed,
+		// but it must also use the latest scroll commands (for example consider
+		// that the mouse might move from scrolling up to scrolling left, all
+		// with the same interval running. We use the `scroll` object to "pass"
+		// this information to the interval. Can't use local variables as they
+		// wouldn't be the ones that are used by an already existing interval!
+		if ( windowVert || dtVert ) {
+			scroll.windowVert = windowVert;
+			scroll.dtVert = dtVert;
+			runInterval = true;
+		}
+		else if ( this.s.scrollInterval ) {
+			// Don't need to scroll - remove any existing timer
+			clearInterval( this.s.scrollInterval );
+			this.s.scrollInterval = null;
+		}
+
+		// If we need to run the interval to scroll and there is no existing
+		// interval (if there is an existing one, it will continue to run)
+		if ( ! this.s.scrollInterval && runInterval ) {
+			this.s.scrollInterval = setInterval( function () {
+				// Don't need to worry about setting scroll <0 or beyond the
+				// scroll bound as the browser will just reject that.
+				if ( scroll.windowVert ) {
+					document.body.scrollTop += scroll.windowVert;
+				}
+
+				// DataTables scrolling
+				if ( scroll.dtVert ) {
+					var scroller = that.dom.dtScroll[0];
+
+					if ( scroll.dtVert ) {
+						scroller.scrollTop += scroll.dtVert;
+					}
+				}
+			}, 20 );
+		}
 	}
-};
+} );
 
 
 
@@ -521,6 +661,20 @@ RowReorder.defaults = {
 	editor: null,
 
 	/**
+	 * Enable / disable RowReorder's user interaction
+	 * @type {Boolean}
+	 */
+	enabled: true,
+
+	/**
+	 * Form options to pass to Editor when submitting a change in the row order.
+	 * See the Editor `from-options` object for details of the options
+	 * available.
+	 * @type {Object}
+	 */
+	formOptions: {},
+
+	/**
 	 * Drag handle selector. This defines the element that when dragged will
 	 * reorder a row.
 	 *
@@ -546,13 +700,44 @@ RowReorder.defaults = {
 };
 
 
+/*
+ * API
+ */
+var Api = $.fn.dataTable.Api;
+
+// Doesn't do anything - work around for a bug in DT... Not documented
+Api.register( 'rowReorder()', function () {
+	return this;
+} );
+
+Api.register( 'rowReorder.enable()', function ( toggle ) {
+	if ( toggle === undefined ) {
+		toggle = true;
+	}
+
+	return this.iterator( 'table', function ( ctx ) {
+		if ( ctx.rowreorder ) {
+			ctx.rowreorder.c.enabled = toggle;
+		}
+	} );
+} );
+
+Api.register( 'rowReorder.disable()', function () {
+	return this.iterator( 'table', function ( ctx ) {
+		if ( ctx.rowreorder ) {
+			ctx.rowreorder.c.enabled = false;
+		}
+	} );
+} );
+
+
 /**
  * Version information
  *
  * @name RowReorder.version
  * @static
  */
-RowReorder.version = '1.0.0';
+RowReorder.version = '1.2.0';
 
 
 $.fn.dataTable.RowReorder = RowReorder;
@@ -577,22 +762,6 @@ $(document).on( 'init.dt.dtr', function (e, settings, json) {
 	}
 } );
 
+
 return RowReorder;
-}; // /factory
-
-
-// Define as an AMD module if possible
-if ( typeof define === 'function' && define.amd ) {
-	define( ['jquery', 'datatables'], factory );
-}
-else if ( typeof exports === 'object' ) {
-    // Node/CommonJS
-    factory( require('jquery'), require('datatables') );
-}
-else if ( jQuery && !jQuery.fn.dataTable.RowReorder ) {
-	// Otherwise simply initialise as normal, stopping multiple evaluation
-	factory( jQuery, jQuery.fn.dataTable );
-}
-
-
-})(window, document);
+}));

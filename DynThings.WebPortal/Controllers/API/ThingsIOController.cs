@@ -424,6 +424,16 @@ namespace DynThings.WebAPI.Controllers
             submission.ExectionTimeStamp = execTimeStamp;
             return CoreSetEndPointPendingCommandAsExecuted(submission);
         }
+
+        [HttpGet]
+        public ApiResponse SetEndPointCommandAsExecuted0(long commandIOID,string keypass)
+        {
+            SubmissionEndPointCommandExecuted submission = new SubmissionEndPointCommandExecuted();
+            submission.EndPointKeyPass = Guid.Parse(keypass);
+            submission.EndPointCommandIOID = commandIOID;
+            submission.ExectionTimeStamp = DateTime.Now;
+            return CoreSetEndPointPendingCommandAsExecuted(submission);
+        }
         #endregion
         #endregion
 

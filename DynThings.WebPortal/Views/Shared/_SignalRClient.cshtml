@@ -1,7 +1,7 @@
 ﻿@using Microsoft.AspNet.Identity
 
 
-<div class="container" hidden>
+<div class="container" hidden >
     <input type="text" id="message" />
     <input type="button" id="sendmessage" value="Send to All" />
     <input type="text" id="displayname" />
@@ -13,7 +13,7 @@
 
 
 <script>
-        $(function () {
+    $(function () {
             // Reference the auto-generated proxy for the hub.
             var chat = $.connection.signalrhub;
             // Create a function that the hub can call back to display messages.
@@ -21,11 +21,14 @@
                 // Add the message to the page.
                 $('#discussion').append('<li><strong>' + htmlEncode(name)
                     + '</strong>: ' + htmlEncode(message) + '</li>');
+                alert('Sent');
                 try {
                     signalRReceive(htmlEncode(name), htmlEncode(message));
-                }catch(err){}
+                } catch (err) {
+                    alert('ERROR r');
+
+                }
                 //if (connectionid == $('#displayname').val()) {
-                //    alert('Ok');
                 //};
             };
             // Get the user name and store it to prepend to messages.
@@ -48,6 +51,7 @@
                     chat.server.send($('#displayname').val(), $('#message').val(), $('#txtsendTo').val());//$('#connection').val() ---- $.connection.hub.id
                     // Clear text box and reset focus for next comment.
                     $('#message').val('').focus();
+                    
                 });
 
             });

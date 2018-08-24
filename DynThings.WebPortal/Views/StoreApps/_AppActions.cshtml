@@ -1,0 +1,19 @@
+﻿@model DynThings.Data.Models.ViewModels.StoreAppAction
+
+@if (Model.IsInstalled == false)
+{
+    <button id="btnGetApp" class="btn btn-success" onclick="Act_InstallOrUpdateAppByGUIDPV('@Model.AppGuid');">Get this App</button>
+
+}
+else if (Model.IsInstalled == true && Model.IsLatestVersion == false)
+{
+    <button id="btnGetApp" class="btn btn-warning" onclick="Act_InstallOrUpdateAppByGUIDPV('@Model.AppGuid');">Update to Version @Model.LatestVersion.ToString()</button>
+}
+else
+{
+    <div style="display:flex">
+
+        <img alt="Installed" width="32" height="32" src="~/Assets/Imgs/CheckTrue.png">
+        <p>This app is up-to date.</p>
+    </div>
+}

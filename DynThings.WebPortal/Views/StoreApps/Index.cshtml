@@ -1,0 +1,75 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+<div id="page-title">
+    <div class="row pad-ver bg-trans-dark">
+        <div class="col-lg-9">
+            <table>
+                <tr>
+                    <td rowspan="2" width="150">
+                        <img src="~/Assets/Imgs/Store.png" />
+
+                    </td>
+                    <td valign="bottom">
+                        <h2 class="page-header text-overflow">Store Apps</h2>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td valign="top">
+                        <h5 class="">from DynThings Central</h5>
+                        <a href="~/apps">
+                            <button class="btn btn-purple">Back to Local Apps List</button>
+
+                        </a>
+                    </td>
+                </tr>
+            </table>
+
+        </div>
+        <div class="col-lg-3">
+            <div class="input-group mar-btm">
+                <input type="text" id="txtCentralAppsSearch" onkeydown="if (event.keyCode == 13) { LoadPart_CentralAppsListPV(); return false; }" placeholder="Search" class="form-control">
+                <span class="input-group-btn">
+                    <button class="btn btn-mint" onclick="LoadPart_CentralAppsListPV();" type="button">Search</button>
+                </span>
+            </div>
+        </div>
+
+
+    </div>
+
+
+</div>
+<div id="page-content">
+    <div class="row">
+        <div id="divStoreAppsList" class="col-lg-8">
+
+
+
+
+        </div>
+        <div class="col-lg-4">
+            <div id="divStoreAppDetails"></div>
+
+        </div>
+
+
+
+    </div>
+</div>
+
+@section scriptfiles{
+    <script src="~/Assets/Scripts/DynScripts/StoreApps.js"></script>
+
+}
+
+<script>
+    $(document).ready(function () {
+        LoadPart_CentralAppsListPV();
+    });
+
+</script>
+

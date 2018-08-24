@@ -30,7 +30,12 @@ namespace DynThings.WebAPI.TypesMapper
             if (loadParents)
             {
                 result.Thing = TypesMapper.APIThingAdapter.fromThing(sourceThingEnd.Thing, false, false);
+                try
+                {
                 result.LastIOEndPoint = TypesMapper.APIEndPointAdapter.fromEndpoint(sourceThingEnd.EndPointIO.Endpoint, false, false);
+
+                }
+                catch (Exception ex) { }
             }
 
             #endregion

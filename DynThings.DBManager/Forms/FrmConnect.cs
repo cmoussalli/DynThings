@@ -20,8 +20,11 @@ namespace DynThings.DBManager
 
         private void FrmConnect_FormClosing(object sender, FormClosingEventArgs e)
         {
-            e.Cancel = true;
-            this.Dispose();
+            if (e.CloseReason == CloseReason.UserClosing)
+            {
+                e.Cancel = true;
+                Environment.Exit(0);
+            }
         }
 
         private void btnConnect_Click(object sender, EventArgs e)
@@ -51,11 +54,42 @@ namespace DynThings.DBManager
             }
             catch (Exception ex)
             {
+                if (ex.Message == "Error: Empty Database")
+                {
+                    DialogResult dialogResult = MessageBox.Show("Database is Empty, do you want to deploy the latest DynThings database on '" + txtDataBase.Text + "' datbase?", "Error", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                    if (dialogResult == DialogResult.Yes)
+                    {
+                        DeployNewDynThingsDB(txtServer.Text, txtUser.Text, txtPassword.Text, txtDataBase.Text);
+
+                    }
+                    else
+                    {
+
+                    }
+
+                    return;
+                }
                 MessageBox.Show("Error: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
                 FormUnlock();
             }
         }
 
+        public void DeployNewDynThingsDB(string server, string user, string password, string database)
+        {
+            sc.SQLServer = server;
+            sc.SQLDatabase = database;
+            sc.SQLUser = user;
+            sc.SQLPassword = password;
+
+            sc.Jobs.Clear();
+
+            sc.Jobs.Add(new Job { title = "Create new database", jobType = JobType.CreateDatabase });
+
+            FrmSQLExec sqlExec = new FrmSQLExec();
+            sqlExec.ShowDialog();
+
+        }
 
         public void FormLock()
         {
@@ -74,5 +108,12 @@ namespace DynThings.DBManager
             txtDataBase.Enabled = true;
             txtServer.Enabled = true;
         }
+
+        private void FrmConnect_Load(object sender, EventArgs e)
+        {
+
+        }
+
+
     }
 }

@@ -14,15 +14,23 @@ namespace DynThings.WebAPI.TypesMapper
         public static APIApp fromApp(App sourceApp)
         {
             APIApp result = new APIApp();
-            result.CreateDate = sourceApp.CreateDate;
-            result.CreatedByID = sourceApp.CreatedByID;
-            result.Description = sourceApp.Description;
-            result.DevelopedByName = sourceApp.DevelopedByName;
             result.GUID = sourceApp.GUID;
-            result.IsStoreApp = sourceApp.IsStoreApp;
-            result.StatusID = sourceApp.StatusID;
             result.Title = sourceApp.Title;
+            result.Description = sourceApp.Description;
+            result.CreateDate = sourceApp.CreateDate;
             result.Version = sourceApp.Version;
+            result.StatusID = sourceApp.StatusID;
+            result.IsStoreApp = sourceApp.IsStoreApp;
+
+            CentralDynAccount dynAccount = new CentralDynAccount();
+            dynAccount.FullName = sourceApp.DevelopedByName;
+            //TODO: Add the remining dynAccount info 
+
+            result.DevelopedBy = dynAccount;
+
+
+
+
             List<AppAPIEntity> ents = sourceApp.AppAPIEntitys.ToList();
             List<APISystemEntity> apiSystemEntities = new List<APISystemEntity>();
             foreach (AppAPIEntity ent in ents)

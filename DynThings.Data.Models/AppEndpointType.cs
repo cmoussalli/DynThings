@@ -36,9 +36,9 @@ public partial class AppEndpointType
 
 
 
-    public virtual App App { get; set; }
-
     public virtual EndPointTypeCategory EndPointTypeCategory { get; set; }
+
+    public virtual App App { get; set; }
 
 }
 

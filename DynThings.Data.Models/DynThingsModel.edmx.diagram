@@ -14,7 +14,6 @@
         <EntityTypeShape EntityType="DynThingsModel.AppAPIEntity" Width="1.5" PointX="11" PointY="5.375" />
         <EntityTypeShape EntityType="DynThingsModel.AppEndpointType" Width="1.5" PointX="15.25" PointY="0.75" />
         <EntityTypeShape EntityType="DynThingsModel.AppMediaFile" Width="1.5" PointX="5.25" PointY="37.75" />
-        <EntityTypeShape EntityType="DynThingsModel.App" Width="1.5" PointX="3" PointY="6.875" />
         <EntityTypeShape EntityType="DynThingsModel.AppStatuss" Width="1.5" PointX="0.75" PointY="8.375" />
         <EntityTypeShape EntityType="DynThingsModel.AppThingCategory" Width="1.5" PointX="5.25" PointY="34.625" />
         <EntityTypeShape EntityType="DynThingsModel.AppThingExtension" Width="1.5" PointX="20.25" PointY="9.5" />
@@ -60,15 +59,8 @@
         <AssociationConnector Association="DynThingsModel.FK__LinkUsers__Alert__7EC1CEDB" />
         <AssociationConnector Association="DynThingsModel.FK__APIUtilis__Metho__4B622666" />
         <AssociationConnector Association="DynThingsModel.FK__AppAPIEnt__Syste__284DF453" />
-        <AssociationConnector Association="DynThingsModel.FK__AppEntity__AppID__5EDF0F2E" />
         <AssociationConnector Association="DynThingsModel.FK__AppEntity__Entit__5FD33367" />
-        <AssociationConnector Association="DynThingsModel.FK__AppEndpoi__AppID__2101D846" />
         <AssociationConnector Association="DynThingsModel.FK__AppEndpoi__TypeC__2F4FF79D" />
-        <AssociationConnector Association="DynThingsModel.FK__AppMediaF__AppID__2E5BD364" />
-        <AssociationConnector Association="DynThingsModel.FK__Apps__StatusID__4F9CCB9E" />
-        <AssociationConnector Association="DynThingsModel.FK__AppThingC__AppID__1A54DAB7" />
-        <AssociationConnector Association="DynThingsModel.FK__AppThingE__AppID__1960B67E" />
-        <AssociationConnector Association="DynThingsModel.FK__AppUserTo__AppID__338A9CD5" />
         <AssociationConnector Association="DynThingsModel.FK__AppThingE__DataT__25C68D63" />
         <AssociationConnector Association="DynThingsModel.FK__AppUserTo__AspNe__347EC10E" />
         <AssociationConnector Association="DynThingsModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" />
@@ -114,6 +106,14 @@
         <AssociationConnector Association="DynThingsModel.FK__ThingExte__Thing__5D80D6A1" />
         <AssociationConnector Association="DynThingsModel.FK__ThingExte__Thing__670A40DB" />
         <AssociationConnector Association="DynThingsModel.AspNetUserRoles" />
+        <EntityTypeShape EntityType="DynThingsModel.App" Width="2" PointX="3" PointY="4.375" />
+        <AssociationConnector Association="DynThingsModel.FK__AppEntity__AppID__5EDF0F2E" />
+        <AssociationConnector Association="DynThingsModel.FK__AppEndpoi__AppID__2101D846" />
+        <AssociationConnector Association="DynThingsModel.FK__AppMediaF__AppID__2E5BD364" />
+        <AssociationConnector Association="DynThingsModel.FK__Apps__StatusID__4F9CCB9E" />
+        <AssociationConnector Association="DynThingsModel.FK__AppThingC__AppID__1A54DAB7" />
+        <AssociationConnector Association="DynThingsModel.FK__AppThingE__AppID__1960B67E" />
+        <AssociationConnector Association="DynThingsModel.FK__AppUserTo__AppID__338A9CD5" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

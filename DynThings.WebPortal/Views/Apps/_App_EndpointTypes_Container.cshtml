@@ -1,0 +1,43 @@
+﻿<div class="panel">
+    <div class="panel-heading">
+        <div class="panel-control">
+            <button class="btn btn-default" onclick="LoadPart_AppEndpointTypesListDiv();">
+                <i class="demo-psi-repeat-2 icon-fw"></i> Refresh
+            </button>
+        </div>
+        <h3 class="panel-title">Endpoint Types</h3>
+    </div>
+
+    <div class="panel-body">
+        <div class="pad-btm form-inline">
+            <div class="row">
+                <div class="col-sm-6 table-toolbar-left">
+                    <button class="btn btn-purple" onclick="LoadPart_DialogAppEndpointTypeAdd();" data-toggle="modal" data-target="#mdl"><i class="demo-pli-add icon-fw"></i>Add</button>
+                    @*<button class="btn btn-default"><i class="demo-pli-printer"></i></button>
+                        <div class="btn-group">
+                            <button class="btn btn-default"><i class="demo-pli-information"></i></button>
+                            <button class="btn btn-default"><i class="demo-pli-recycling"></i></button>
+                        </div>*@
+                </div>
+                <div class="col-sm-6 table-toolbar-right">
+                    <div class="form-group">
+                        <input type="text" id="txtAppEndpointTypesSearch" autocomplete="off" class="form-control" placeholder="Search" onkeydown="if (event.keyCode == 13) { LoadPart_AppEndpointTypesListDiv(); return false; }">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+       <div id="divAppEndpointTypesList"></div>
+
+
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        LoadPart_AppEndpointTypesListDiv();
+    });
+</script>
+
+

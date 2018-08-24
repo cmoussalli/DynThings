@@ -35,6 +35,8 @@ public partial class MediaFile
 
     public string Title { get; set; }
 
+    public bool IsSystem { get; set; }
+
 
 
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

@@ -113,7 +113,9 @@
           <Property Name="CreateDate" Type="datetime" Nullable="false" />
           <Property Name="StatusID" Type="int" Nullable="false" />
           <Property Name="IsStoreApp" Type="bit" Nullable="false" />
+          <Property Name="DevelopedById" Type="nvarchar" MaxLength="128" />
           <Property Name="DevelopedByName" Type="nvarchar" MaxLength="128" />
+          <Property Name="DevelopedByCompany" Type="nvarchar" MaxLength="128" />
           <Property Name="StoreAppLastUpdate" Type="datetime" />
           <Property Name="Version" Type="float" Nullable="false" />
         </EntityType>
@@ -445,6 +447,7 @@
           <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="GUID" Type="uniqueidentifier" />
           <Property Name="Title" Type="nvarchar" MaxLength="50" />
+          <Property Name="IsSystem" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="ResultMessages">
           <Key>
@@ -608,6 +611,30 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__AppAPIEnt__Syste__284DF453">
+          <End Role="SystemEntitys" Type="Self.SystemEntitys" Multiplicity="1" />
+          <End Role="AppAPIEntitys" Type="Self.AppAPIEntitys" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SystemEntitys">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="AppAPIEntitys">
+              <PropertyRef Name="SystemEntityID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__AppAPIEnt__Syste__6CE315C2">
+          <End Role="SystemEntitys" Type="Self.SystemEntitys" Multiplicity="1" />
+          <End Role="AppAPIEntitys" Type="Self.AppAPIEntitys" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SystemEntitys">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="AppAPIEntitys">
+              <PropertyRef Name="SystemEntityID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__AppAPIEnt__Syste__6DD739FB">
           <End Role="SystemEntitys" Type="Self.SystemEntitys" Multiplicity="1" />
           <End Role="AppAPIEntitys" Type="Self.AppAPIEntitys" Multiplicity="*" />
           <ReferentialConstraint>
@@ -1329,6 +1356,9 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="AppDelete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="AppID" Type="bigint" Mode="In" />
+        </Function>
         <Function Name="GetThingEnds" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="LocationID" Type="bigint" Mode="In" />
           <Parameter Name="ThingID" Type="bigint" Mode="In" />
@@ -1343,6 +1373,7 @@
         <Function Name="PublishApp" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="AppID" Type="bigint" Mode="In" />
         </Function>
+        <Function Name="ResetDB" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="Rpt_EndPoint_IOs_Days" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="EPID" Type="bigint" Mode="In" />
         </Function>
@@ -1491,6 +1522,14 @@
             <End Role="APIUtilisations" EntitySet="APIUtilisations" />
           </AssociationSet>
           <AssociationSet Name="FK__AppAPIEnt__Syste__284DF453" Association="Self.FK__AppAPIEnt__Syste__284DF453">
+            <End Role="SystemEntitys" EntitySet="SystemEntitys" />
+            <End Role="AppAPIEntitys" EntitySet="AppAPIEntitys" />
+          </AssociationSet>
+          <AssociationSet Name="FK__AppAPIEnt__Syste__6CE315C2" Association="Self.FK__AppAPIEnt__Syste__6CE315C2">
+            <End Role="SystemEntitys" EntitySet="SystemEntitys" />
+            <End Role="AppAPIEntitys" EntitySet="AppAPIEntitys" />
+          </AssociationSet>
+          <AssociationSet Name="FK__AppAPIEnt__Syste__6DD739FB" Association="Self.FK__AppAPIEnt__Syste__6DD739FB">
             <End Role="SystemEntitys" EntitySet="SystemEntitys" />
             <End Role="AppAPIEntitys" EntitySet="AppAPIEntitys" />
           </AssociationSet>
@@ -1785,7 +1824,6 @@
           <EntitySet Name="AppAPIEntitys" EntityType="DynThingsModel.AppAPIEntity" />
           <EntitySet Name="AppEndpointTypes" EntityType="DynThingsModel.AppEndpointType" />
           <EntitySet Name="AppMediaFiles" EntityType="DynThingsModel.AppMediaFile" />
-          <EntitySet Name="Apps" EntityType="DynThingsModel.App" />
           <EntitySet Name="AppStatusses" EntityType="DynThingsModel.AppStatuss" />
           <EntitySet Name="AppThingCategorys" EntityType="DynThingsModel.AppThingCategory" />
           <EntitySet Name="AppThingExtensions" EntityType="DynThingsModel.AppThingExtension" />
@@ -1855,41 +1893,13 @@
             <End Role="SystemEntity" EntitySet="SystemEntitys" />
             <End Role="AppAPIEntity" EntitySet="AppAPIEntitys" />
           </AssociationSet>
-          <AssociationSet Name="FK__AppEntity__AppID__5EDF0F2E" Association="DynThingsModel.FK__AppEntity__AppID__5EDF0F2E">
-            <End Role="App" EntitySet="Apps" />
-            <End Role="AppAPIEntity" EntitySet="AppAPIEntitys" />
-          </AssociationSet>
           <AssociationSet Name="FK__AppEntity__Entit__5FD33367" Association="DynThingsModel.FK__AppEntity__Entit__5FD33367">
             <End Role="SystemEntity" EntitySet="SystemEntitys" />
             <End Role="AppAPIEntity" EntitySet="AppAPIEntitys" />
           </AssociationSet>
-          <AssociationSet Name="FK__AppEndpoi__AppID__2101D846" Association="DynThingsModel.FK__AppEndpoi__AppID__2101D846">
-            <End Role="App" EntitySet="Apps" />
-            <End Role="AppEndpointType" EntitySet="AppEndpointTypes" />
-          </AssociationSet>
           <AssociationSet Name="FK__AppEndpoi__TypeC__2F4FF79D" Association="DynThingsModel.FK__AppEndpoi__TypeC__2F4FF79D">
             <End Role="EndPointTypeCategory" EntitySet="EndPointTypeCategorys" />
             <End Role="AppEndpointType" EntitySet="AppEndpointTypes" />
-          </AssociationSet>
-          <AssociationSet Name="FK__AppMediaF__AppID__2E5BD364" Association="DynThingsModel.FK__AppMediaF__AppID__2E5BD364">
-            <End Role="App" EntitySet="Apps" />
-            <End Role="AppMediaFile" EntitySet="AppMediaFiles" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Apps__StatusID__4F9CCB9E" Association="DynThingsModel.FK__Apps__StatusID__4F9CCB9E">
-            <End Role="AppStatuss" EntitySet="AppStatusses" />
-            <End Role="App" EntitySet="Apps" />
-          </AssociationSet>
-          <AssociationSet Name="FK__AppThingC__AppID__1A54DAB7" Association="DynThingsModel.FK__AppThingC__AppID__1A54DAB7">
-            <End Role="App" EntitySet="Apps" />
-            <End Role="AppThingCategory" EntitySet="AppThingCategorys" />
-          </AssociationSet>
-          <AssociationSet Name="FK__AppThingE__AppID__1960B67E" Association="DynThingsModel.FK__AppThingE__AppID__1960B67E">
-            <End Role="App" EntitySet="Apps" />
-            <End Role="AppThingExtension" EntitySet="AppThingExtensions" />
-          </AssociationSet>
-          <AssociationSet Name="FK__AppUserTo__AppID__338A9CD5" Association="DynThingsModel.FK__AppUserTo__AppID__338A9CD5">
-            <End Role="App" EntitySet="Apps" />
-            <End Role="AppUserToken" EntitySet="AppUserTokens" />
           </AssociationSet>
           <AssociationSet Name="FK__AppThingE__DataT__25C68D63" Association="DynThingsModel.FK__AppThingE__DataT__25C68D63">
             <End Role="DataType" EntitySet="DataTypes" />
@@ -2083,7 +2093,7 @@
             <Parameter Name="SearchFor" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="PublishApp">
-            <Parameter Name="AppID" Mode="In" Type="Int64" />
+          <Parameter Name="AppID" Mode="In" Type="Int64" />
           </FunctionImport>
           <FunctionImport Name="SetThingProperty">
             <Parameter Name="ThingID" Mode="In" Type="Int64" />
@@ -2095,18 +2105,51 @@
             <Parameter Name="Value" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="ThingPropertyValueDelete">
-            <Parameter Name="ValueID" Mode="In" Type="Int64" />
+          <Parameter Name="ValueID" Mode="In" Type="Int64" />
           </FunctionImport>
           <FunctionImport Name="ThingPropertyValueDeleteAll">
-            <Parameter Name="ThingID" Mode="In" Type="Int64" />
+          <Parameter Name="ThingID" Mode="In" Type="Int64" />
           </FunctionImport>
           <FunctionImport Name="ThingPropertyValueEdit">
             <Parameter Name="ValueID" Mode="In" Type="Int64" />
             <Parameter Name="NewValue" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="UnPublishApp" ReturnType="Collection(String)">
+          <Parameter Name="AppID" Mode="In" Type="Int64" />
+          </FunctionImport>
+          <EntitySet Name="Apps" EntityType="DynThingsModel.App" />
+          <AssociationSet Name="FK__AppEntity__AppID__5EDF0F2E" Association="DynThingsModel.FK__AppEntity__AppID__5EDF0F2E">
+            <End Role="App" EntitySet="Apps" />
+            <End Role="AppAPIEntity" EntitySet="AppAPIEntitys" />
+          </AssociationSet>
+          <AssociationSet Name="FK__AppEndpoi__AppID__2101D846" Association="DynThingsModel.FK__AppEndpoi__AppID__2101D846">
+            <End Role="App" EntitySet="Apps" />
+            <End Role="AppEndpointType" EntitySet="AppEndpointTypes" />
+          </AssociationSet>
+          <AssociationSet Name="FK__AppMediaF__AppID__2E5BD364" Association="DynThingsModel.FK__AppMediaF__AppID__2E5BD364">
+            <End Role="App" EntitySet="Apps" />
+            <End Role="AppMediaFile" EntitySet="AppMediaFiles" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Apps__StatusID__4F9CCB9E" Association="DynThingsModel.FK__Apps__StatusID__4F9CCB9E">
+            <End Role="AppStatuss" EntitySet="AppStatusses" />
+            <End Role="App" EntitySet="Apps" />
+          </AssociationSet>
+          <AssociationSet Name="FK__AppThingC__AppID__1A54DAB7" Association="DynThingsModel.FK__AppThingC__AppID__1A54DAB7">
+            <End Role="App" EntitySet="Apps" />
+            <End Role="AppThingCategory" EntitySet="AppThingCategorys" />
+          </AssociationSet>
+          <AssociationSet Name="FK__AppThingE__AppID__1960B67E" Association="DynThingsModel.FK__AppThingE__AppID__1960B67E">
+            <End Role="App" EntitySet="Apps" />
+            <End Role="AppThingExtension" EntitySet="AppThingExtensions" />
+          </AssociationSet>
+          <AssociationSet Name="FK__AppUserTo__AppID__338A9CD5" Association="DynThingsModel.FK__AppUserTo__AppID__338A9CD5">
+            <End Role="App" EntitySet="Apps" />
+            <End Role="AppUserToken" EntitySet="AppUserTokens" />
+          </AssociationSet>
+          <FunctionImport Name="AppDelete">
             <Parameter Name="AppID" Mode="In" Type="Int64" />
           </FunctionImport>
+          <FunctionImport Name="ResetDB" />
           </EntityContainer>
         <ComplexType Name="Rpt_EndPoint_IOs_Months_Result">
           <Property Type="Int64" Name="ID" Nullable="false" />
@@ -2570,8 +2613,8 @@
           <Property Name="AppID" Type="Int64" Nullable="false" />
           <Property Name="SystemEntityID" Type="Int64" Nullable="false" />
           <NavigationProperty Name="SystemEntity" Relationship="DynThingsModel.FK__AppAPIEnt__Syste__284DF453" FromRole="AppAPIEntity" ToRole="SystemEntity" />
-          <NavigationProperty Name="App" Relationship="DynThingsModel.FK__AppEntity__AppID__5EDF0F2E" FromRole="AppAPIEntity" ToRole="App" />
           <NavigationProperty Name="SystemEntity1" Relationship="DynThingsModel.FK__AppEntity__Entit__5FD33367" FromRole="AppAPIEntity" ToRole="SystemEntity" />
+          <NavigationProperty Name="App" Relationship="DynThingsModel.FK__AppEntity__AppID__5EDF0F2E" FromRole="AppAPIEntity" ToRole="App" />
         </EntityType>
         <EntityType Name="AppEndpointType">
           <Key>
@@ -2585,8 +2628,8 @@
           <Property Name="Measurement" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="TypeCategoryID" Type="Int64" Nullable="false" />
           <Property Name="IconGUID" Type="Guid" Nullable="false" />
-          <NavigationProperty Name="App" Relationship="DynThingsModel.FK__AppEndpoi__AppID__2101D846" FromRole="AppEndpointType" ToRole="App" />
           <NavigationProperty Name="EndPointTypeCategory" Relationship="DynThingsModel.FK__AppEndpoi__TypeC__2F4FF79D" FromRole="AppEndpointType" ToRole="EndPointTypeCategory" />
+          <NavigationProperty Name="App" Relationship="DynThingsModel.FK__AppEndpoi__AppID__2101D846" FromRole="AppEndpointType" ToRole="App" />
         </EntityType>
         <EntityType Name="AppMediaFile">
           <Key>
@@ -2597,30 +2640,6 @@
           <Property Name="AppID" Type="Int64" Nullable="false" />
           <Property Name="Title" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="App" Relationship="DynThingsModel.FK__AppMediaF__AppID__2E5BD364" FromRole="AppMediaFile" ToRole="App" />
-        </EntityType>
-        <EntityType Name="App">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="GUID" Type="Guid" Nullable="false" />
-          <Property Name="Key" Type="Guid" Nullable="false" />
-          <Property Name="Title" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="Description" Type="String" Nullable="false" MaxLength="2000" FixedLength="false" Unicode="true" />
-          <Property Name="CreatedByID" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="StatusID" Type="Int32" Nullable="false" />
-          <Property Name="IsStoreApp" Type="Boolean" Nullable="false" />
-          <Property Name="DevelopedByName" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="StoreAppLastUpdate" Type="DateTime" Precision="3" />
-          <Property Name="Version" Type="Double" Nullable="false" />
-          <NavigationProperty Name="AppAPIEntitys" Relationship="DynThingsModel.FK__AppEntity__AppID__5EDF0F2E" FromRole="App" ToRole="AppAPIEntity" />
-          <NavigationProperty Name="AppEndpointTypes" Relationship="DynThingsModel.FK__AppEndpoi__AppID__2101D846" FromRole="App" ToRole="AppEndpointType" />
-          <NavigationProperty Name="AppMediaFiles" Relationship="DynThingsModel.FK__AppMediaF__AppID__2E5BD364" FromRole="App" ToRole="AppMediaFile" />
-          <NavigationProperty Name="AppStatuss" Relationship="DynThingsModel.FK__Apps__StatusID__4F9CCB9E" FromRole="App" ToRole="AppStatuss" />
-          <NavigationProperty Name="AppThingCategorys" Relationship="DynThingsModel.FK__AppThingC__AppID__1A54DAB7" FromRole="App" ToRole="AppThingCategory" />
-          <NavigationProperty Name="AppThingExtensions" Relationship="DynThingsModel.FK__AppThingE__AppID__1960B67E" FromRole="App" ToRole="AppThingExtension" />
-          <NavigationProperty Name="AppUserTokens" Relationship="DynThingsModel.FK__AppUserTo__AppID__338A9CD5" FromRole="App" ToRole="AppUserToken" />
         </EntityType>
         <EntityType Name="AppStatuss">
           <Key>
@@ -2654,8 +2673,8 @@
           <Property Name="Title" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
           <Property Name="DataTypeID" Type="Int32" Nullable="false" />
           <Property Name="IsList" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="App" Relationship="DynThingsModel.FK__AppThingE__AppID__1960B67E" FromRole="AppThingExtension" ToRole="App" />
           <NavigationProperty Name="DataType" Relationship="DynThingsModel.FK__AppThingE__DataT__25C68D63" FromRole="AppThingExtension" ToRole="DataType" />
+          <NavigationProperty Name="App" Relationship="DynThingsModel.FK__AppThingE__AppID__1960B67E" FromRole="AppThingExtension" ToRole="App" />
         </EntityType>
         <EntityType Name="AppUserToken">
           <Key>
@@ -2667,8 +2686,8 @@
           <Property Name="Token" Type="Guid" />
           <Property Name="ExpireDate" Type="DateTime" Precision="0" />
           <Property Name="CreateDate" Type="DateTime" Precision="0" />
-          <NavigationProperty Name="App" Relationship="DynThingsModel.FK__AppUserTo__AppID__338A9CD5" FromRole="AppUserToken" ToRole="App" />
           <NavigationProperty Name="AspNetUser" Relationship="DynThingsModel.FK__AppUserTo__AspNe__347EC10E" FromRole="AppUserToken" ToRole="AspNetUser" />
+          <NavigationProperty Name="App" Relationship="DynThingsModel.FK__AppUserTo__AppID__338A9CD5" FromRole="AppUserToken" ToRole="App" />
         </EntityType>
         <EntityType Name="AspNetRole">
           <Key>
@@ -3021,6 +3040,7 @@
           <Property Name="Title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="ThingCategorys" Relationship="DynThingsModel.FK__ThingCate__IconI__25DB9BFC" FromRole="MediaFile" ToRole="ThingCategory" />
           <NavigationProperty Name="ThingCategorys1" Relationship="DynThingsModel.FK__ThingCate__IconI__2EFAF1E2" FromRole="MediaFile" ToRole="ThingCategory" />
+          <Property Name="IsSystem" Type="Boolean" Nullable="false" />
         </EntityType>
         <EntityType Name="ResultMessage">
           <Key>
@@ -3229,20 +3249,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__AppEntity__AppID__5EDF0F2E">
-          <End Type="DynThingsModel.App" Role="App" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Type="DynThingsModel.AppAPIEntity" Role="AppAPIEntity" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="App">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="AppAPIEntity">
-              <PropertyRef Name="AppID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK__AppEntity__Entit__5FD33367">
           <End Type="DynThingsModel.SystemEntity" Role="SystemEntity" Multiplicity="1" />
           <End Type="DynThingsModel.AppAPIEntity" Role="AppAPIEntity" Multiplicity="*" />
@@ -3255,18 +3261,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__AppEndpoi__AppID__2101D846">
-          <End Type="DynThingsModel.App" Role="App" Multiplicity="1" />
-          <End Type="DynThingsModel.AppEndpointType" Role="AppEndpointType" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="App">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="AppEndpointType">
-              <PropertyRef Name="AppID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK__AppEndpoi__TypeC__2F4FF79D">
           <End Type="DynThingsModel.EndPointTypeCategory" Role="EndPointTypeCategory" Multiplicity="1" />
           <End Type="DynThingsModel.AppEndpointType" Role="AppEndpointType" Multiplicity="*" />
@@ -3276,66 +3270,6 @@
             </Principal>
             <Dependent Role="AppEndpointType">
               <PropertyRef Name="TypeCategoryID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__AppMediaF__AppID__2E5BD364">
-          <End Type="DynThingsModel.App" Role="App" Multiplicity="1" />
-          <End Type="DynThingsModel.AppMediaFile" Role="AppMediaFile" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="App">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="AppMediaFile">
-              <PropertyRef Name="AppID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__Apps__StatusID__4F9CCB9E">
-          <End Type="DynThingsModel.AppStatuss" Role="AppStatuss" Multiplicity="1" />
-          <End Type="DynThingsModel.App" Role="App" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="AppStatuss">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="App">
-              <PropertyRef Name="StatusID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__AppThingC__AppID__1A54DAB7">
-          <End Type="DynThingsModel.App" Role="App" Multiplicity="1" />
-          <End Type="DynThingsModel.AppThingCategory" Role="AppThingCategory" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="App">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="AppThingCategory">
-              <PropertyRef Name="AppID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__AppThingE__AppID__1960B67E">
-          <End Type="DynThingsModel.App" Role="App" Multiplicity="1" />
-          <End Type="DynThingsModel.AppThingExtension" Role="AppThingExtension" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="App">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="AppThingExtension">
-              <PropertyRef Name="AppID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__AppUserTo__AppID__338A9CD5">
-          <End Type="DynThingsModel.App" Role="App" Multiplicity="0..1" />
-          <End Type="DynThingsModel.AppUserToken" Role="AppUserToken" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="App">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="AppUserToken">
-              <PropertyRef Name="AppID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -3936,6 +3870,118 @@
           <Property Type="Int64" Name="ValueID" Nullable="false" />
           <Property Type="String" Name="Value" Nullable="false" MaxLength="128" />
         </ComplexType>
+        <EntityType Name="App">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="GUID" Type="Guid" Nullable="false" />
+          <Property Name="Key" Type="Guid" Nullable="false" />
+          <Property Name="Title" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="2000" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedByID" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="StatusID" Type="Int32" Nullable="false" />
+          <Property Name="IsStoreApp" Type="Boolean" Nullable="false" />
+          <Property Name="DevelopedById" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="DevelopedByName" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="DevelopedByCompany" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="StoreAppLastUpdate" Type="DateTime" Precision="3" />
+          <Property Name="Version" Type="Double" Nullable="false" />
+          <NavigationProperty Name="AppAPIEntitys" Relationship="DynThingsModel.FK__AppEntity__AppID__5EDF0F2E" FromRole="App" ToRole="AppAPIEntity" />
+          <NavigationProperty Name="AppEndpointTypes" Relationship="DynThingsModel.FK__AppEndpoi__AppID__2101D846" FromRole="App" ToRole="AppEndpointType" />
+          <NavigationProperty Name="AppMediaFiles" Relationship="DynThingsModel.FK__AppMediaF__AppID__2E5BD364" FromRole="App" ToRole="AppMediaFile" />
+          <NavigationProperty Name="AppStatuss" Relationship="DynThingsModel.FK__Apps__StatusID__4F9CCB9E" FromRole="App" ToRole="AppStatuss" />
+          <NavigationProperty Name="AppThingCategorys" Relationship="DynThingsModel.FK__AppThingC__AppID__1A54DAB7" FromRole="App" ToRole="AppThingCategory" />
+          <NavigationProperty Name="AppThingExtensions" Relationship="DynThingsModel.FK__AppThingE__AppID__1960B67E" FromRole="App" ToRole="AppThingExtension" />
+          <NavigationProperty Name="AppUserTokens" Relationship="DynThingsModel.FK__AppUserTo__AppID__338A9CD5" FromRole="App" ToRole="AppUserToken" />
+        </EntityType>
+        <Association Name="FK__AppEntity__AppID__5EDF0F2E">
+          <End Type="DynThingsModel.App" Role="App" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="DynThingsModel.AppAPIEntity" Role="AppAPIEntity" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="App">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="AppAPIEntity">
+              <PropertyRef Name="AppID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__AppEndpoi__AppID__2101D846">
+          <End Type="DynThingsModel.App" Role="App" Multiplicity="1" />
+          <End Type="DynThingsModel.AppEndpointType" Role="AppEndpointType" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="App">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="AppEndpointType">
+              <PropertyRef Name="AppID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__AppMediaF__AppID__2E5BD364">
+          <End Type="DynThingsModel.App" Role="App" Multiplicity="1" />
+          <End Type="DynThingsModel.AppMediaFile" Role="AppMediaFile" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="App">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="AppMediaFile">
+              <PropertyRef Name="AppID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Apps__StatusID__4F9CCB9E">
+          <End Type="DynThingsModel.AppStatuss" Role="AppStatuss" Multiplicity="1" />
+          <End Type="DynThingsModel.App" Role="App" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AppStatuss">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="App">
+              <PropertyRef Name="StatusID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__AppThingC__AppID__1A54DAB7">
+          <End Type="DynThingsModel.App" Role="App" Multiplicity="1" />
+          <End Type="DynThingsModel.AppThingCategory" Role="AppThingCategory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="App">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="AppThingCategory">
+              <PropertyRef Name="AppID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__AppThingE__AppID__1960B67E">
+          <End Type="DynThingsModel.App" Role="App" Multiplicity="1" />
+          <End Type="DynThingsModel.AppThingExtension" Role="AppThingExtension" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="App">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="AppThingExtension">
+              <PropertyRef Name="AppID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__AppUserTo__AppID__338A9CD5">
+          <End Type="DynThingsModel.App" Role="App" Multiplicity="0..1" />
+          <End Type="DynThingsModel.AppUserToken" Role="AppUserToken" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="App">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="AppUserToken">
+              <PropertyRef Name="AppID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -4451,24 +4497,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Apps">
-            <EntityTypeMapping TypeName="DynThingsModel.App">
-              <MappingFragment StoreEntitySet="Apps">
-                <ScalarProperty Name="Version" ColumnName="Version" />
-                <ScalarProperty Name="StoreAppLastUpdate" ColumnName="StoreAppLastUpdate" />
-                <ScalarProperty Name="DevelopedByName" ColumnName="DevelopedByName" />
-                <ScalarProperty Name="IsStoreApp" ColumnName="IsStoreApp" />
-                <ScalarProperty Name="StatusID" ColumnName="StatusID" />
-                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
-                <ScalarProperty Name="CreatedByID" ColumnName="CreatedByID" />
-                <ScalarProperty Name="Description" ColumnName="Description" />
-                <ScalarProperty Name="Title" ColumnName="Title" />
-                <ScalarProperty Name="Key" ColumnName="Key" />
-                <ScalarProperty Name="GUID" ColumnName="GUID" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="AppStatusses">
             <EntityTypeMapping TypeName="DynThingsModel.AppStatuss">
               <MappingFragment StoreEntitySet="AppStatuss">
@@ -4810,6 +4838,7 @@
           <EntitySetMapping Name="MediaFiles">
             <EntityTypeMapping TypeName="DynThingsModel.MediaFile">
               <MappingFragment StoreEntitySet="MediaFiles">
+                <ScalarProperty Name="IsSystem" ColumnName="IsSystem" />
                 <ScalarProperty Name="Title" ColumnName="Title" />
                 <ScalarProperty Name="GUID" ColumnName="GUID" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
@@ -4970,6 +4999,28 @@
           <FunctionImportMapping FunctionImportName="ThingPropertyValueDeleteAll" FunctionName="DynThingsModel.Store.ThingPropertyValueDeleteAll" />
           <FunctionImportMapping FunctionImportName="ThingPropertyValueEdit" FunctionName="DynThingsModel.Store.ThingPropertyValueEdit" />
           <FunctionImportMapping FunctionImportName="UnPublishApp" FunctionName="DynThingsModel.Store.UnPublishApp" />
+          <EntitySetMapping Name="Apps">
+            <EntityTypeMapping TypeName="DynThingsModel.App">
+              <MappingFragment StoreEntitySet="Apps">
+                <ScalarProperty Name="Version" ColumnName="Version" />
+                <ScalarProperty Name="StoreAppLastUpdate" ColumnName="StoreAppLastUpdate" />
+                <ScalarProperty Name="DevelopedByCompany" ColumnName="DevelopedByCompany" />
+                <ScalarProperty Name="DevelopedByName" ColumnName="DevelopedByName" />
+                <ScalarProperty Name="DevelopedById" ColumnName="DevelopedById" />
+                <ScalarProperty Name="IsStoreApp" ColumnName="IsStoreApp" />
+                <ScalarProperty Name="StatusID" ColumnName="StatusID" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="CreatedByID" ColumnName="CreatedByID" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Key" ColumnName="Key" />
+                <ScalarProperty Name="GUID" ColumnName="GUID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="AppDelete" FunctionName="DynThingsModel.Store.AppDelete" />
+          <FunctionImportMapping FunctionImportName="ResetDB" FunctionName="DynThingsModel.Store.ResetDB" />
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

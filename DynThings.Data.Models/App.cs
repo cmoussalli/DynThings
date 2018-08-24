@@ -55,7 +55,11 @@ public partial class App
 
     public bool IsStoreApp { get; set; }
 
+    public string DevelopedById { get; set; }
+
     public string DevelopedByName { get; set; }
+
+    public string DevelopedByCompany { get; set; }
 
     public Nullable<System.DateTime> StoreAppLastUpdate { get; set; }
 

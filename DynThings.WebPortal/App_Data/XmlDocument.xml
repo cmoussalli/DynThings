@@ -516,5 +516,14 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="M:DynThings.WebPortal.Controllers.StoreAppsController.ListPV(System.String,System.Int32,System.Int32)">
+            <summary>
+            Return list of apps in partial view
+            </summary>
+            <param name="searchfor">Search content</param>
+            <param name="page">Page Number</param>
+            <param name="recordsperpage">Apps records per page</param>
+            <returns></returns>
+        </member>
     </members>
 </doc>

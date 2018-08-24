@@ -130,6 +130,7 @@ namespace DynThings.Data.Repositories
 
                 //Execute Delete and return result
                 ThingCategory cat = db.ThingCategorys.Find(ID);
+                db.ThingExtensions.RemoveRange(cat.ThingExtensions);
                 db.ThingCategorys.Remove(cat);
                 db.SaveChanges();
                 return ResultInfo.GenerateOKResult("Deleted", cat.ID);

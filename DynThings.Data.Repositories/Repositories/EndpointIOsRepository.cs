@@ -179,7 +179,8 @@ namespace DynThings.Data.Repositories
                 db.SubmitEndpointCommandExecuted(endPointCommandID,endPointKeyPass,execTime);
                 result = ResultInfo.GenerateOKResult();
             }
-            catch { }
+            catch(Exception ex)
+            { result.Message = ex.Message + " -- " + ex.InnerException; }
             return result;
         }
         #endregion

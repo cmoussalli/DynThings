@@ -9,8 +9,27 @@ using DynThings.DBManager.Models;
 
 namespace DynThings.DBManager
 {
+
+    public enum JobType
+    {
+        CreateDatabase = 0,
+        UpdateDatabase = 1,
+        BackupDatabase = 2,
+        ShrinkDatabase = 3
+    }
+    public class Job
+    {
+        public string title;
+        public JobType jobType; 
+
+    }
+
     public static class sc
     {
+        #region Jobs
+        public static List<Job> Jobs = new List<Job>();
+        #endregion
+
         #region Forms
         public static FrmMain frmMain = new FrmMain();
 
@@ -56,7 +75,7 @@ namespace DynThings.DBManager
                     result = true;
                 }
             }
-            catch
+            catch(Exception ex)
             {
             }
             return result;
@@ -137,6 +156,8 @@ namespace DynThings.DBManager
             }
 
         }
+
+        
 
         #endregion
     }

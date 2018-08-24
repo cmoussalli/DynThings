@@ -36,9 +36,9 @@ public partial class AppThingExtension
 
 
 
-    public virtual App App { get; set; }
-
     public virtual DataType DataType { get; set; }
+
+    public virtual App App { get; set; }
 
 }
 

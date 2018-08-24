@@ -21,7 +21,16 @@ namespace DynThings.WebPortal.Controllers
 
         public PartialViewResult GetUnread(long lastRecievedID)
         {
-            List<UserNotification> notis = uof_repos.repoUserNotification.GetUnreadNotifications(currentUser.Id, lastRecievedID);
+            List<UserNotification> notis = new List<UserNotification>();
+            try
+            {
+             notis = uof_repos.repoUserNotification.GetUnreadNotifications(currentUser.Id, lastRecievedID);
+
+            }
+            catch (Exception ex)
+            {
+                notis = new List<UserNotification>();
+            }
             return PartialView("_List", notis);
         }
 

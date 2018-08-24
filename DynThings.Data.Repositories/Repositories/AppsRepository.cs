@@ -59,10 +59,25 @@ namespace DynThings.Data.Repositories
             return app;
         }
 
+        public App Find(Guid guid)
+        {
+            App app = new App();
+            List<App> apps = db.Apps.Include("AppAPIEntitys").Include("AppStatuss").Where(l => l.GUID == guid).ToList();
+            if (apps.Count == 1)
+            {
+                app = apps[0];
+            }
+            else
+            {
+                throw new Exception("Not Found");
+            }
+            return app;
+        }
+
         #endregion
 
         #region Add
-        public ResultInfo.Result Add(string title,string description , string createdBy )
+        public ResultInfo.Result Add(string title, string description, string createdBy)
         {
             App app = new App();
             //Validate UserID
@@ -90,14 +105,14 @@ namespace DynThings.Data.Repositories
             }
             catch (Exception ex)
             {
-                return ResultInfo.GenerateErrorResult("Error",ex.Message);
+                return ResultInfo.GenerateErrorResult("Error", ex.Message);
             }
         }
 
         #endregion
 
         #region Edit
-        public ResultInfo.Result EditMain(long id, string title, string description, int statusID,double version )
+        public ResultInfo.Result EditMain(long id, string title, string description, int statusID, double version)
         {
             try
             {
@@ -115,7 +130,7 @@ namespace DynThings.Data.Repositories
             }
         }
 
-        public ResultInfo.Result EditMain(long id, string title, string description, int statusID, double version,bool isStoreApp, string developedByName,DateTime storeAppLastUpdate )
+        public ResultInfo.Result EditMain(long id, string title, string description, int statusID, double version, bool isStoreApp, string developedByName, DateTime storeAppLastUpdate)
         {
             try
             {
@@ -143,15 +158,32 @@ namespace DynThings.Data.Repositories
         {
             try
             {
-                App app = db.Apps.Find(id);
-                db.Apps.Remove(app);
-                db.SaveChanges();
-                return ResultInfo.GenerateOKResult("Deleted", app.ID);
+                db.AppDelete(id);
+                return ResultInfo.GenerateOKResult("Deleted", id);
             }
             catch
             {
                 return ResultInfo.GetResultByID(1);
             }
+        }
+
+        #endregion
+
+        #region Publish
+        public ResultInfo.Result Publish(long id)
+        {
+            db.PublishApp(id);
+            return ResultInfo.GenerateOKResult("Published", id);
+        }
+
+        #endregion
+
+        #region UnPublish
+        public ResultInfo.Result UnPublish(long id)
+        {
+            db.UnPublishApp(id);
+            return ResultInfo.GenerateOKResult("UnPublished", id);
+
         }
 
         #endregion
@@ -190,7 +222,7 @@ namespace DynThings.Data.Repositories
             try
             {
                 List<AppAPIEntity> lnks = db.AppAPIEntitys.Where(l => l.AppID == appID && l.SystemEntityID == systemEntityID).ToList();
-                if (lnks.Count ==0)
+                if (lnks.Count == 0)
                 {
                     return ResultInfo.GetResultByID(1);
                 }
@@ -206,18 +238,11 @@ namespace DynThings.Data.Repositories
         #endregion
 
 
-        #region Get AppThingTypes PagedList
-        public IPagedList GetAppThingTypesPagedList(string search, long appID, int pageNumber, int recordsPerPage)
-        {
-            IPagedList appThingTypes = db.AppThingCategorys
-              .Where(e => search == null || (e.Title.Contains(search) || e.Code.Contains(search))
-              && e.AppID == appID)
 
-              .OrderBy(e => e.Title).ToList()
-              .ToPagedList(pageNumber, recordsPerPage);
-            return appThingTypes;
-        }
-        #endregion
+
+
+
+
 
 
     }

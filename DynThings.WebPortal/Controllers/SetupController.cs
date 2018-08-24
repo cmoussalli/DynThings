@@ -8,14 +8,16 @@ using System.Data.SqlClient;
 using System.Configuration;
 using System.Reflection;
 using System.Web.Configuration;
-using DynThingsCentral.WebAPI.Client;
 using DynThings.Data.Repositories;
 using DynThings.WebPortal;
+using DynThingsCentral.WebAPI.Client;
 
 namespace DynThings.WebPortal.Controllers
 {
     public class SetupController : Controller
     {
+
+        CentralClient client = new CentralClient();
 
         // GET: Setup
         public ActionResult Index()
@@ -26,7 +28,7 @@ namespace DynThings.WebPortal.Controllers
                 if (Config.PlatformTitle != "")
                 {
                     string url = FullyQualifiedApplicationPath();
-                    CentralClient.Statistics.SubmitStatistics(Config.PlatformKey
+                    client.Statistics.SubmitStatistics(Config.PlatformKey
                                 , Config.PlatformTitle
                                 , Config.DeploymentTimeStamp
                                 , ""

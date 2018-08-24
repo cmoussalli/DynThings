@@ -1,39 +1,81 @@
 /*!
  * Print button for Buttons and DataTables.
- * 2015 SpryMedia Ltd - datatables.net/license
+ * 2016 SpryMedia Ltd - datatables.net/license
  */
 
-(function($, DataTable) {
-"use strict";
+(function( factory ){
+	if ( typeof define === 'function' && define.amd ) {
+		// AMD
+		define( ['jquery', 'datatables.net', 'datatables.net-buttons'], function ( $ ) {
+			return factory( $, window, document );
+		} );
+	}
+	else if ( typeof exports === 'object' ) {
+		// CommonJS
+		module.exports = function (root, $) {
+			if ( ! root ) {
+				root = window;
+			}
+
+			if ( ! $ || ! $.fn.dataTable ) {
+				$ = require('datatables.net')(root, $).$;
+			}
+
+			if ( ! $.fn.dataTable.Buttons ) {
+				require('datatables.net-buttons')(root, $);
+			}
+
+			return factory( $, root, root.document );
+		};
+	}
+	else {
+		// Browser
+		factory( jQuery, window, document );
+	}
+}(function( $, window, document, undefined ) {
+'use strict';
+var DataTable = $.fn.dataTable;
 
 
 var _link = document.createElement( 'a' );
 
 /**
- * Convert a `link` tag's URL from a relative to an absolute address so it will
- * work correctly in the popup window which has no base URL.
+ * Clone link and style tags, taking into account the need to change the source
+ * path.
  *
  * @param  {node}     el Element to convert
  */
-var _relToAbs = function( el ) {
+var _styleToAbs = function( el ) {
 	var url;
 	var clone = $(el).clone()[0];
 	var linkHost;
 
 	if ( clone.nodeName.toLowerCase() === 'link' ) {
-		_link.href = clone.href;
-		linkHost = _link.host;
-
-		// IE doesn't have a trailing slash on the host
-		// Chrome has it on the pathname
-		if ( linkHost.indexOf('/') === -1 && _link.pathname.indexOf('/') !== 0) {
-			linkHost += '/';
-		}
-
-		clone.href = _link.protocol+"//"+linkHost+_link.pathname+_link.search;
+		clone.href = _relToAbs( clone.href );
 	}
 
 	return clone.outerHTML;
+};
+
+/**
+ * Convert a URL from a relative to an absolute address so it will work
+ * correctly in the popup window which has no base URL.
+ *
+ * @param  {string} href URL
+ */
+var _relToAbs = function( href ) {
+	// Assign to a link on the original page so the browser will do all the
+	// hard work of figuring out where the file actually is
+	_link.href = href;
+	var linkHost = _link.host;
+
+	// IE doesn't have a trailing slash on the host
+	// Chrome has it on the pathname
+	if ( linkHost.indexOf('/') === -1 && _link.pathname.indexOf('/') !== 0) {
+		linkHost += '/';
+	}
+
+	return _link.protocol+"//"+linkHost+_link.pathname+_link.search;
 };
 
 
@@ -69,13 +111,21 @@ DataTable.ext.buttons.print = {
 		}
 		html += '</tbody>';
 
-		if ( config.footer ) {
-			html += '<thead>'+ addRow( data.footer, 'th' ) +'</thead>';
+		if ( config.footer && data.footer ) {
+			html += '<tfoot>'+ addRow( data.footer, 'th' ) +'</tfoot>';
 		}
 
 		// Open a new window for the printable table
 		var win = window.open( '', '' );
-		var title = config.title.replace( '*', $('title').text() );
+		var title = config.title;
+
+		if ( typeof title === 'function' ) {
+			title = title();
+		}
+
+		if ( title.indexOf( '*' ) !== -1 ) {
+			title= title.replace( '*', $('title').text() );
+		}
 
 		win.document.close();
 
@@ -85,17 +135,32 @@ DataTable.ext.buttons.print = {
 		// in the host document and then appended to the new window.
 		var head = '<title>'+title+'</title>';
 		$('style, link').each( function () {
-			head += _relToAbs( this );
+			head += _styleToAbs( this );
 		} );
 
-		$(win.document.head).html( head );
+		try {
+			win.document.head.innerHTML = head; // Work around for Edge
+		}
+		catch (e) {
+			$(win.document.head).html( head ); // Old IE
+		}
 
 		// Inject the table and other surrounding information
-		$(win.document.body).html(
+		win.document.body.innerHTML =
 			'<h1>'+title+'</h1>'+
-			'<div>'+config.message+'</div>'+
-			html
-		);
+			'<div>'+
+				(typeof config.message === 'function' ?
+					config.message( dt, button, config ) :
+					config.message
+				)+
+			'</div>'+
+			html;
+
+		$(win.document.body).addClass('dt-print-view');
+
+		$('img', win.document.body).each( function ( i, img ) {
+			img.setAttribute( 'src', _relToAbs( img.getAttribute('src') ) );
+		} );
 
 		if ( config.customize ) {
 			config.customize( win );
@@ -125,4 +190,5 @@ DataTable.ext.buttons.print = {
 };
 
 
-})(jQuery, jQuery.fn.dataTable);
+return DataTable.Buttons;
+}));
