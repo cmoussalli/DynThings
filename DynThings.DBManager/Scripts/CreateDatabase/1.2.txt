@@ -474,6 +474,7 @@ CREATE TABLE [dbo].[DynSettings] (
 		[SMTPAddress]                 [nvarchar](50) NULL,
 		[SMTPPort]                    [int] NULL,
 		[MapKey]                      [nvarchar](255) NULL,
+		[GogoleAnalytics]             [nvarchar](255) NULL,
 		CONSTRAINT [PK_DynSettings]
 		PRIMARY KEY
 		CLUSTERED
@@ -8228,7 +8229,7 @@ GO
 SET IDENTITY_INSERT [dbo].[DynSettings] ON 
 
 GO
-INSERT [dbo].[DynSettings] ([ID], [DBVersion], [DevelopmentMode], [DefaultRecordsPerMaster], [DefaultRecordsPerChild], [PlatformKey], [PublicAccess], [PublicSignUP], [EnableSystemLogger], [App_TimeZone], [PlatformTitle], [LastCentralSync], [DeploymentTimeStamp], [NotifcationMail], [SMTPAddress], [SMTPPort]) VALUES (1, 1.2, 1, 25, 5, newID(), 0, 1, 1, 4, N'', getDate(), GetDate(), N'', N'', 25)
+INSERT [dbo].[DynSettings] ([ID], [DBVersion], [DevelopmentMode], [DefaultRecordsPerMaster], [DefaultRecordsPerChild], [PlatformKey], [PublicAccess], [PublicSignUP], [EnableSystemLogger], [App_TimeZone], [PlatformTitle], [LastCentralSync], [DeploymentTimeStamp], [NotifcationMail], [SMTPAddress], [SMTPPort],[MapKey],[GoogleAnalytics]) VALUES (1, 1.2, 1, 25, 5, newID(), 0, 1, 1, 4, N'', getDate(), GetDate(), N'', N'', 25,N'',N'')
 GO
 SET IDENTITY_INSERT [dbo].[DynSettings] OFF
 GO

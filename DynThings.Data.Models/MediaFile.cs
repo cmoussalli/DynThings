@@ -26,6 +26,8 @@ public partial class MediaFile
 
         this.ThingCategorys1 = new HashSet<ThingCategory>();
 
+        this.EndPointTypes = new HashSet<EndPointType>();
+
     }
 
 
@@ -46,6 +48,10 @@ public partial class MediaFile
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
 
     public virtual ICollection<ThingCategory> ThingCategorys1 { get; set; }
+
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+
+    public virtual ICollection<EndPointType> EndPointTypes { get; set; }
 
 }
 

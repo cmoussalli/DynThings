@@ -92,10 +92,10 @@ namespace DynThings.WebAPI.Controllers
                             oApiResponse = ApiResponseAdapter.fromResult(result);
                             return oApiResponse;
                         }
-
+                        
                         //Submit Data to Database
                         ResultInfo.Result repoResult = uof_repos.repoEndpointIOs.SubmitInput(endPointKeyPass, oEndPointInput.Value.ToString(), execTime);
-
+                        signalrhub.static_sendtoall("thingendInput", oEndpoint.ThingID.ToString() + "_" + oEndpoint.EndPointType.ID.ToString());
                         oApiResponse = ApiResponseAdapter.fromResult(repoResult);
                     }
                 }
@@ -157,7 +157,7 @@ namespace DynThings.WebAPI.Controllers
                         //Submit Data to Database
                         ResultInfo.Result repoResult = uof_repos.repoEndpointIOs.SubmitLog(endPointKeyPass, oEndPointLog.Value.ToString(), execTime);
                         oApiResponse = ApiResponseAdapter.fromResult(repoResult);
-
+                        
                     }
                 }
                 else

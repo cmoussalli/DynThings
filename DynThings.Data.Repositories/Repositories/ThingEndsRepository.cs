@@ -47,6 +47,7 @@ namespace DynThings.Data.Repositories
                  && ((q.Thing.LinkThingsLocations.Any(l => l.LocationID == locationID)) || locationID == null)
                  && ((q.EndPointTypeID == endpointTypeID) || endpointTypeID == null)
                  && (q.Thing.ObjectStatusID == 1)
+                 && (q.EndPointType.EndPointTypeCategory.ID != 2)
             );
           
             return query.ToList().ToPagedList(pageNumber, recordsPerPage);

@@ -111,6 +111,9 @@
     <Compile Include="DataType.cs">
       <DependentUpon>DynThingsModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="DBChanx.cs">
+      <DependentUpon>DynThingsModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Device.cs">
       <DependentUpon>DynThingsModel.tt</DependentUpon>
     </Compile>

@@ -221,6 +221,19 @@
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Title" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DynThings.dbo.DBChanges' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="DBChanges">
+          <Key>
+            <PropertyRef Name="ChangeSN" />
+            <PropertyRef Name="ChangeCode" />
+            <PropertyRef Name="TimeStamp" />
+          </Key>
+          <Property Name="ID" Type="bigint" />
+          <Property Name="ChangeSN" Type="bigint" Nullable="false" />
+          <Property Name="ChangeCode" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="TimeStamp" Type="datetime" Nullable="false" />
+        </EntityType>
         <EntityType Name="DeviceCommands">
           <Key>
             <PropertyRef Name="ID" />
@@ -290,6 +303,7 @@
           <Property Name="SMTPAddress" Type="nvarchar" MaxLength="50" />
           <Property Name="SMTPPort" Type="int" />
           <Property Name="MapKey" Type="nvarchar" MaxLength="255" />
+          <Property Name="GoogleAnalytics" Type="nvarchar" MaxLength="255" />
         </EntityType>
         <EntityType Name="EndPointCommands">
           <Key>
@@ -950,19 +964,19 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__EndPointT__TypeC__2A363CC5">
-          <End Role="EndPointTypeCategorys" Type="Self.EndPointTypeCategorys" Multiplicity="0..1" />
+        <Association Name="FK__EndPointT__IconI__25276EE5">
+          <End Role="MediaFiles" Type="Self.MediaFiles" Multiplicity="0..1" />
           <End Role="EndPointTypes" Type="Self.EndPointTypes" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="EndPointTypeCategorys">
+            <Principal Role="MediaFiles">
               <PropertyRef Name="ID" />
             </Principal>
             <Dependent Role="EndPointTypes">
-              <PropertyRef Name="TypeCategoryID" />
+              <PropertyRef Name="IconID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__EndPointT__TypeC__47DBAE45">
+        <Association Name="FK__EndPointT__TypeC__2A363CC5">
           <End Role="EndPointTypeCategorys" Type="Self.EndPointTypeCategorys" Multiplicity="0..1" />
           <End Role="EndPointTypes" Type="Self.EndPointTypes" Multiplicity="*" />
           <ReferentialConstraint>
@@ -1497,6 +1511,14 @@
           <EntitySet Name="Things" EntityType="Self.Things" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserNotifications" EntityType="Self.UserNotifications" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserNotificationTypes" EntityType="Self.UserNotificationTypes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DBChanges" EntityType="Self.DBChanges" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [DBChanges].[ID] AS [ID], 
+    [DBChanges].[ChangeSN] AS [ChangeSN], 
+    [DBChanges].[ChangeCode] AS [ChangeCode], 
+    [DBChanges].[TimeStamp] AS [TimeStamp]
+    FROM [dbo].[DBChanges] AS [DBChanges]</DefiningQuery>
+          </EntitySet>
           <AssociationSet Name="FK__AlertCond__Alert__7720AD13" Association="Self.FK__AlertCond__Alert__7720AD13">
             <End Role="Alerts" EntitySet="Alerts" />
             <End Role="AlertConditions" EntitySet="AlertConditions" />
@@ -1629,11 +1651,11 @@
             <End Role="EndPointTypes" EntitySet="EndPointTypes" />
             <End Role="Endpoints" EntitySet="Endpoints" />
           </AssociationSet>
-          <AssociationSet Name="FK__EndPointT__TypeC__2A363CC5" Association="Self.FK__EndPointT__TypeC__2A363CC5">
-            <End Role="EndPointTypeCategorys" EntitySet="EndPointTypeCategorys" />
+          <AssociationSet Name="FK__EndPointT__IconI__25276EE5" Association="Self.FK__EndPointT__IconI__25276EE5">
+            <End Role="MediaFiles" EntitySet="MediaFiles" />
             <End Role="EndPointTypes" EntitySet="EndPointTypes" />
           </AssociationSet>
-          <AssociationSet Name="FK__EndPointT__TypeC__47DBAE45" Association="Self.FK__EndPointT__TypeC__47DBAE45">
+          <AssociationSet Name="FK__EndPointT__TypeC__2A363CC5" Association="Self.FK__EndPointT__TypeC__2A363CC5">
             <End Role="EndPointTypeCategorys" EntitySet="EndPointTypeCategorys" />
             <End Role="EndPointTypes" EntitySet="EndPointTypes" />
           </AssociationSet>
@@ -1837,12 +1859,10 @@
           <EntitySet Name="DeviceIOs" EntityType="DynThingsModel.DeviceIO" />
           <EntitySet Name="Devices" EntityType="DynThingsModel.Device" />
           <EntitySet Name="DeviceStatus" EntityType="DynThingsModel.DeviceStatu" />
-          <EntitySet Name="DynSettings" EntityType="DynThingsModel.DynSetting" />
           <EntitySet Name="EndPointCommands" EntityType="DynThingsModel.EndPointCommand" />
           <EntitySet Name="EndPointIOs" EntityType="DynThingsModel.EndPointIO" />
           <EntitySet Name="Endpoints" EntityType="DynThingsModel.Endpoint" />
           <EntitySet Name="EndPointTypeCategorys" EntityType="DynThingsModel.EndPointTypeCategory" />
-          <EntitySet Name="EndPointTypes" EntityType="DynThingsModel.EndPointType" />
           <EntitySet Name="IOTypes" EntityType="DynThingsModel.IOType" />
           <EntitySet Name="LinkDevicesLocations" EntityType="DynThingsModel.LinkDevicesLocation" />
           <EntitySet Name="LinkLocationsLocationViews" EntityType="DynThingsModel.LinkLocationsLocationView" />
@@ -1867,10 +1887,6 @@
           </AssociationSet>
           <AssociationSet Name="FK__AlertCond__Condi__74444068" Association="DynThingsModel.FK__AlertCond__Condi__74444068">
             <End Role="AlertConditionType" EntitySet="AlertConditionTypes" />
-            <End Role="AlertCondition" EntitySet="AlertConditions" />
-          </AssociationSet>
-          <AssociationSet Name="FK__AlertCond__EndPo__0662F0A3" Association="DynThingsModel.FK__AlertCond__EndPo__0662F0A3">
-            <End Role="EndPointType" EntitySet="EndPointTypes" />
             <End Role="AlertCondition" EntitySet="AlertConditions" />
           </AssociationSet>
           <AssociationSet Name="FK__AlertCond__IOTyp__056ECC6A" Association="DynThingsModel.FK__AlertCond__IOTyp__056ECC6A">
@@ -1981,10 +1997,6 @@
             <End Role="Endpoint" EntitySet="Endpoints" />
             <End Role="EndPointCommand" EntitySet="EndPointCommands" />
           </AssociationSet>
-          <AssociationSet Name="FK__EndPointI__EndPo__0E391C95" Association="DynThingsModel.FK__EndPointI__EndPo__0E391C95">
-            <End Role="EndPointType" EntitySet="EndPointTypes" />
-            <End Role="EndPointIO" EntitySet="EndPointIOs" />
-          </AssociationSet>
           <AssociationSet Name="FK__EndPointI__EndPo__149C0161" Association="DynThingsModel.FK__EndPointI__EndPo__149C0161">
             <End Role="Endpoint" EntitySet="Endpoints" />
             <End Role="EndPointIO" EntitySet="EndPointIOs" />
@@ -2004,22 +2016,6 @@
           <AssociationSet Name="FK__Endpoints__Thing__7EF6D905" Association="DynThingsModel.FK__Endpoints__Thing__7EF6D905">
             <End Role="Thing" EntitySet="Things" />
             <End Role="Endpoint" EntitySet="Endpoints" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Endpoints__TypeI__45F365D3" Association="DynThingsModel.FK__Endpoints__TypeI__45F365D3">
-            <End Role="EndPointType" EntitySet="EndPointTypes" />
-            <End Role="Endpoint" EntitySet="Endpoints" />
-          </AssociationSet>
-          <AssociationSet Name="FK__EndPointT__TypeC__2A363CC5" Association="DynThingsModel.FK__EndPointT__TypeC__2A363CC5">
-            <End Role="EndPointTypeCategory" EntitySet="EndPointTypeCategorys" />
-            <End Role="EndPointType" EntitySet="EndPointTypes" />
-          </AssociationSet>
-          <AssociationSet Name="FK__EndPointT__TypeC__47DBAE45" Association="DynThingsModel.FK__EndPointT__TypeC__47DBAE45">
-            <End Role="EndPointTypeCategory" EntitySet="EndPointTypeCategorys" />
-            <End Role="EndPointType" EntitySet="EndPointTypes" />
-          </AssociationSet>
-          <AssociationSet Name="FK__ThingEnds__EndPo__7F36D027" Association="DynThingsModel.FK__ThingEnds__EndPo__7F36D027">
-            <End Role="EndPointType" EntitySet="EndPointTypes" />
-            <End Role="ThingEnd" EntitySet="ThingEnds" />
           </AssociationSet>
           <AssociationSet Name="FK__LinkDevic__Locat__49C3F6B7" Association="DynThingsModel.FK__LinkDevic__Locat__49C3F6B7">
             <End Role="Location" EntitySet="Locations" />
@@ -2147,9 +2143,36 @@
             <End Role="AppUserToken" EntitySet="AppUserTokens" />
           </AssociationSet>
           <FunctionImport Name="AppDelete">
-            <Parameter Name="AppID" Mode="In" Type="Int64" />
+          <Parameter Name="AppID" Mode="In" Type="Int64" />
           </FunctionImport>
           <FunctionImport Name="ResetDB" />
+          <EntitySet Name="EndPointTypes" EntityType="DynThingsModel.EndPointType" />
+          <AssociationSet Name="FK__AlertCond__EndPo__0662F0A3" Association="DynThingsModel.FK__AlertCond__EndPo__0662F0A3">
+            <End Role="EndPointType" EntitySet="EndPointTypes" />
+            <End Role="AlertCondition" EntitySet="AlertConditions" />
+          </AssociationSet>
+          <AssociationSet Name="FK__EndPointI__EndPo__0E391C95" Association="DynThingsModel.FK__EndPointI__EndPo__0E391C95">
+            <End Role="EndPointType" EntitySet="EndPointTypes" />
+            <End Role="EndPointIO" EntitySet="EndPointIOs" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Endpoints__TypeI__45F365D3" Association="DynThingsModel.FK__Endpoints__TypeI__45F365D3">
+            <End Role="EndPointType" EntitySet="EndPointTypes" />
+            <End Role="Endpoint" EntitySet="Endpoints" />
+          </AssociationSet>
+          <AssociationSet Name="FK__EndPointT__TypeC__2A363CC5" Association="DynThingsModel.FK__EndPointT__TypeC__2A363CC5">
+            <End Role="EndPointTypeCategory" EntitySet="EndPointTypeCategorys" />
+            <End Role="EndPointType" EntitySet="EndPointTypes" />
+          </AssociationSet>
+          <AssociationSet Name="FK__EndPointT__IconI__25276EE5" Association="DynThingsModel.FK__EndPointT__IconI__25276EE5">
+            <End Role="MediaFile" EntitySet="MediaFiles" />
+            <End Role="EndPointType" EntitySet="EndPointTypes" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ThingEnds__EndPo__7F36D027" Association="DynThingsModel.FK__ThingEnds__EndPo__7F36D027">
+            <End Role="EndPointType" EntitySet="EndPointTypes" />
+            <End Role="ThingEnd" EntitySet="ThingEnds" />
+          </AssociationSet>
+          <EntitySet Name="DynSettings" EntityType="DynThingsModel.DynSetting" />
+          <EntitySet Name="DBChanges" EntityType="DynThingsModel.DBChanx" />
           </EntityContainer>
         <ComplexType Name="Rpt_EndPoint_IOs_Months_Result">
           <Property Type="Int64" Name="ID" Nullable="false" />
@@ -2544,9 +2567,9 @@
           <Property Name="IsMust" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="Alert" Relationship="DynThingsModel.FK__AlertCond__Alert__7720AD13" FromRole="AlertCondition" ToRole="Alert" />
           <NavigationProperty Name="AlertConditionType" Relationship="DynThingsModel.FK__AlertCond__Condi__74444068" FromRole="AlertCondition" ToRole="AlertConditionType" />
-          <NavigationProperty Name="EndPointType" Relationship="DynThingsModel.FK__AlertCond__EndPo__0662F0A3" FromRole="AlertCondition" ToRole="EndPointType" />
           <NavigationProperty Name="IOType" Relationship="DynThingsModel.FK__AlertCond__IOTyp__056ECC6A" FromRole="AlertCondition" ToRole="IOType" />
           <NavigationProperty Name="Thing" Relationship="DynThingsModel.FK__AlertCond__Thing__762C88DA" FromRole="AlertCondition" ToRole="Thing" />
+          <NavigationProperty Name="EndPointType" Relationship="DynThingsModel.FK__AlertCond__EndPo__0662F0A3" FromRole="AlertCondition" ToRole="EndPointType" />
         </EntityType>
         <EntityType Name="AlertConditionType">
           <Key>
@@ -2815,28 +2838,6 @@
           <Property Name="Title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Devices" Relationship="DynThingsModel.FK__Devices__StatusI__01D345B0" FromRole="DeviceStatu" ToRole="Device" />
         </EntityType>
-        <EntityType Name="DynSetting">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="DBVersion" Type="Single" Nullable="false" />
-          <Property Name="DevelopmentMode" Type="Boolean" Nullable="false" />
-          <Property Name="DefaultRecordsPerMaster" Type="Int32" Nullable="false" />
-          <Property Name="DefaultRecordsPerChild" Type="Int32" Nullable="false" />
-          <Property Name="PlatformKey" Type="Guid" Nullable="false" />
-          <Property Name="PublicAccess" Type="Boolean" Nullable="false" />
-          <Property Name="PublicSignUP" Type="Boolean" Nullable="false" />
-          <Property Name="EnableSystemLogger" Type="Boolean" Nullable="false" />
-          <Property Name="App_TimeZone" Type="Int32" Nullable="false" />
-          <Property Name="PlatformTitle" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="LastCentralSync" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="DeploymentTimeStamp" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="NotifcationMail" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="SMTPAddress" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="SMTPPort" Type="Int32" />
-          <Property Name="MapKey" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-        </EntityType>
         <EntityType Name="EndPointCommand">
           <Key>
             <PropertyRef Name="ID" />
@@ -2865,11 +2866,11 @@
           <Property Name="ExecTimeStamp_UTC" Type="DateTime" Precision="3" />
           <Property Name="ScheduleTimeStamp_UTC" Type="DateTime" Precision="3" />
           <Property Name="ThingID" Type="Int64" Nullable="false" />
-          <NavigationProperty Name="EndPointType" Relationship="DynThingsModel.FK__EndPointI__EndPo__0E391C95" FromRole="EndPointIO" ToRole="EndPointType" />
           <NavigationProperty Name="Endpoint" Relationship="DynThingsModel.FK__EndPointI__EndPo__149C0161" FromRole="EndPointIO" ToRole="Endpoint" />
           <NavigationProperty Name="IOType" Relationship="DynThingsModel.FK__EndPointI__IOTyp__440B1D61" FromRole="EndPointIO" ToRole="IOType" />
           <NavigationProperty Name="Thing" Relationship="DynThingsModel.FK__EndPointI__Thing__7E02B4CC" FromRole="EndPointIO" ToRole="Thing" />
           <NavigationProperty Name="ThingEnds" Relationship="DynThingsModel.FK__ThingEnds__LastI__002AF460" FromRole="EndPointIO" ToRole="ThingEnd" />
+          <NavigationProperty Name="EndPointType" Relationship="DynThingsModel.FK__EndPointI__EndPo__0E391C95" FromRole="EndPointIO" ToRole="EndPointType" />
         </EntityType>
         <EntityType Name="Endpoint">
           <Key>
@@ -2908,25 +2909,7 @@
           <Property Name="Title" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="AppEndpointTypes" Relationship="DynThingsModel.FK__AppEndpoi__TypeC__2F4FF79D" FromRole="EndPointTypeCategory" ToRole="AppEndpointType" />
           <NavigationProperty Name="EndPointTypes" Relationship="DynThingsModel.FK__EndPointT__TypeC__2A363CC5" FromRole="EndPointTypeCategory" ToRole="EndPointType" />
-          <NavigationProperty Name="EndPointTypes1" Relationship="DynThingsModel.FK__EndPointT__TypeC__47DBAE45" FromRole="EndPointTypeCategory" ToRole="EndPointType" />
-        </EntityType>
-        <EntityType Name="EndPointType">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Code" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="measurement" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="TypeCategoryID" Type="Int64" />
-          <Property Name="IconID" Type="Int64" />
-          <NavigationProperty Name="AlertConditions" Relationship="DynThingsModel.FK__AlertCond__EndPo__0662F0A3" FromRole="EndPointType" ToRole="AlertCondition" />
-          <NavigationProperty Name="EndPointIOs" Relationship="DynThingsModel.FK__EndPointI__EndPo__0E391C95" FromRole="EndPointType" ToRole="EndPointIO" />
-          <NavigationProperty Name="Endpoints" Relationship="DynThingsModel.FK__Endpoints__TypeI__45F365D3" FromRole="EndPointType" ToRole="Endpoint" />
-          <NavigationProperty Name="EndPointTypeCategory" Relationship="DynThingsModel.FK__EndPointT__TypeC__2A363CC5" FromRole="EndPointType" ToRole="EndPointTypeCategory" />
-          <NavigationProperty Name="EndPointTypeCategory1" Relationship="DynThingsModel.FK__EndPointT__TypeC__47DBAE45" FromRole="EndPointType" ToRole="EndPointTypeCategory" />
-          <NavigationProperty Name="ThingEnds" Relationship="DynThingsModel.FK__ThingEnds__EndPo__7F36D027" FromRole="EndPointType" ToRole="ThingEnd" />
-        </EntityType>
+          </EntityType>
         <EntityType Name="IOType">
           <Key>
             <PropertyRef Name="ID" />
@@ -3041,6 +3024,7 @@
           <NavigationProperty Name="ThingCategorys" Relationship="DynThingsModel.FK__ThingCate__IconI__25DB9BFC" FromRole="MediaFile" ToRole="ThingCategory" />
           <NavigationProperty Name="ThingCategorys1" Relationship="DynThingsModel.FK__ThingCate__IconI__2EFAF1E2" FromRole="MediaFile" ToRole="ThingCategory" />
           <Property Name="IsSystem" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="EndPointTypes" Relationship="DynThingsModel.FK__EndPointT__IconI__25276EE5" FromRole="MediaFile" ToRole="EndPointType" />
         </EntityType>
         <EntityType Name="ResultMessage">
           <Key>
@@ -3084,8 +3068,8 @@
           <Property Name="LastIOTimeStamp" Type="DateTime" Precision="3" />
           <Property Name="LastIOTimeStampUTC" Type="DateTime" Precision="3" />
           <NavigationProperty Name="EndPointIO" Relationship="DynThingsModel.FK__ThingEnds__LastI__002AF460" FromRole="ThingEnd" ToRole="EndPointIO" />
-          <NavigationProperty Name="EndPointType" Relationship="DynThingsModel.FK__ThingEnds__EndPo__7F36D027" FromRole="ThingEnd" ToRole="EndPointType" />
           <NavigationProperty Name="Thing" Relationship="DynThingsModel.FK__ThingEnds__Thing__7E42ABEE" FromRole="ThingEnd" ToRole="Thing" />
+          <NavigationProperty Name="EndPointType" Relationship="DynThingsModel.FK__ThingEnds__EndPo__7F36D027" FromRole="ThingEnd" ToRole="EndPointType" />
         </EntityType>
         <EntityType Name="ThingExtension">
           <Key>
@@ -3174,18 +3158,6 @@
             </Principal>
             <Dependent Role="AlertCondition">
               <PropertyRef Name="ConditionTypeID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__AlertCond__EndPo__0662F0A3">
-          <End Type="DynThingsModel.EndPointType" Role="EndPointType" Multiplicity="1" />
-          <End Type="DynThingsModel.AlertCondition" Role="AlertCondition" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="EndPointType">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="AlertCondition">
-              <PropertyRef Name="EndPointTypeID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -3529,18 +3501,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__EndPointI__EndPo__0E391C95">
-          <End Type="DynThingsModel.EndPointType" Role="EndPointType" Multiplicity="1" />
-          <End Type="DynThingsModel.EndPointIO" Role="EndPointIO" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="EndPointType">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="EndPointIO">
-              <PropertyRef Name="EndPointTypeID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK__EndPointI__EndPo__149C0161">
           <End Type="DynThingsModel.Endpoint" Role="Endpoint" Multiplicity="1" />
           <End Type="DynThingsModel.EndPointIO" Role="EndPointIO" Multiplicity="*" />
@@ -3600,58 +3560,6 @@
             </Principal>
             <Dependent Role="Endpoint">
               <PropertyRef Name="ThingID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__Endpoints__TypeI__45F365D3">
-          <End Type="DynThingsModel.EndPointType" Role="EndPointType" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Type="DynThingsModel.Endpoint" Role="Endpoint" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="EndPointType">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="Endpoint">
-              <PropertyRef Name="TypeID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__EndPointT__TypeC__2A363CC5">
-          <End Type="DynThingsModel.EndPointTypeCategory" Role="EndPointTypeCategory" Multiplicity="0..1" />
-          <End Type="DynThingsModel.EndPointType" Role="EndPointType" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="EndPointTypeCategory">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="EndPointType">
-              <PropertyRef Name="TypeCategoryID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__EndPointT__TypeC__47DBAE45">
-          <End Type="DynThingsModel.EndPointTypeCategory" Role="EndPointTypeCategory" Multiplicity="0..1" />
-          <End Type="DynThingsModel.EndPointType" Role="EndPointType" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="EndPointTypeCategory">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="EndPointType">
-              <PropertyRef Name="TypeCategoryID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__ThingEnds__EndPo__7F36D027">
-          <End Type="DynThingsModel.EndPointType" Role="EndPointType" Multiplicity="0..1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Type="DynThingsModel.ThingEnd" Role="ThingEnd" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="EndPointType">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="ThingEnd">
-              <PropertyRef Name="EndPointTypeID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -3982,6 +3890,133 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="EndPointType">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Code" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="measurement" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TypeCategoryID" Type="Int64" />
+          <Property Name="IconID" Type="Int64" />
+          <NavigationProperty Name="AlertConditions" Relationship="DynThingsModel.FK__AlertCond__EndPo__0662F0A3" FromRole="EndPointType" ToRole="AlertCondition" />
+          <NavigationProperty Name="EndPointIOs" Relationship="DynThingsModel.FK__EndPointI__EndPo__0E391C95" FromRole="EndPointType" ToRole="EndPointIO" />
+          <NavigationProperty Name="Endpoints" Relationship="DynThingsModel.FK__Endpoints__TypeI__45F365D3" FromRole="EndPointType" ToRole="Endpoint" />
+          <NavigationProperty Name="EndPointTypeCategory" Relationship="DynThingsModel.FK__EndPointT__TypeC__2A363CC5" FromRole="EndPointType" ToRole="EndPointTypeCategory" />
+          <NavigationProperty Name="MediaFile" Relationship="DynThingsModel.FK__EndPointT__IconI__25276EE5" FromRole="EndPointType" ToRole="MediaFile" />
+          <NavigationProperty Name="ThingEnds" Relationship="DynThingsModel.FK__ThingEnds__EndPo__7F36D027" FromRole="EndPointType" ToRole="ThingEnd" />
+        </EntityType>
+        <Association Name="FK__AlertCond__EndPo__0662F0A3">
+          <End Type="DynThingsModel.EndPointType" Role="EndPointType" Multiplicity="1" />
+          <End Type="DynThingsModel.AlertCondition" Role="AlertCondition" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EndPointType">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="AlertCondition">
+              <PropertyRef Name="EndPointTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__EndPointI__EndPo__0E391C95">
+          <End Type="DynThingsModel.EndPointType" Role="EndPointType" Multiplicity="1" />
+          <End Type="DynThingsModel.EndPointIO" Role="EndPointIO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EndPointType">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="EndPointIO">
+              <PropertyRef Name="EndPointTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Endpoints__TypeI__45F365D3">
+          <End Type="DynThingsModel.EndPointType" Role="EndPointType" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="DynThingsModel.Endpoint" Role="Endpoint" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EndPointType">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Endpoint">
+              <PropertyRef Name="TypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__EndPointT__TypeC__2A363CC5">
+          <End Type="DynThingsModel.EndPointTypeCategory" Role="EndPointTypeCategory" Multiplicity="0..1" />
+          <End Type="DynThingsModel.EndPointType" Role="EndPointType" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EndPointTypeCategory">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="EndPointType">
+              <PropertyRef Name="TypeCategoryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__EndPointT__IconI__25276EE5">
+          <End Type="DynThingsModel.MediaFile" Role="MediaFile" Multiplicity="0..1" />
+          <End Type="DynThingsModel.EndPointType" Role="EndPointType" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MediaFile">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="EndPointType">
+              <PropertyRef Name="IconID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ThingEnds__EndPo__7F36D027">
+          <End Type="DynThingsModel.EndPointType" Role="EndPointType" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="DynThingsModel.ThingEnd" Role="ThingEnd" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EndPointType">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ThingEnd">
+              <PropertyRef Name="EndPointTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="DynSetting">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DBVersion" Type="Single" Nullable="false" />
+          <Property Name="DevelopmentMode" Type="Boolean" Nullable="false" />
+          <Property Name="DefaultRecordsPerMaster" Type="Int32" Nullable="false" />
+          <Property Name="DefaultRecordsPerChild" Type="Int32" Nullable="false" />
+          <Property Name="PlatformKey" Type="Guid" Nullable="false" />
+          <Property Name="PublicAccess" Type="Boolean" Nullable="false" />
+          <Property Name="PublicSignUP" Type="Boolean" Nullable="false" />
+          <Property Name="EnableSystemLogger" Type="Boolean" Nullable="false" />
+          <Property Name="App_TimeZone" Type="Int32" Nullable="false" />
+          <Property Name="PlatformTitle" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="LastCentralSync" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="DeploymentTimeStamp" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="NotifcationMail" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SMTPAddress" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SMTPPort" Type="Int32" />
+          <Property Name="MapKey" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="GoogleAnalytics" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="DBChanx">
+          <Key>
+            <PropertyRef Name="ChangeSN" />
+            <PropertyRef Name="ChangeCode" />
+            <PropertyRef Name="TimeStamp" />
+          </Key>
+          <Property Name="ID" Type="Int64" />
+          <Property Name="ChangeSN" Type="Int64" Nullable="false" />
+          <Property Name="ChangeCode" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TimeStamp" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -4650,29 +4685,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="DynSettings">
-            <EntityTypeMapping TypeName="DynThingsModel.DynSetting">
-              <MappingFragment StoreEntitySet="DynSettings">
-                <ScalarProperty Name="MapKey" ColumnName="MapKey" />
-                <ScalarProperty Name="SMTPPort" ColumnName="SMTPPort" />
-                <ScalarProperty Name="SMTPAddress" ColumnName="SMTPAddress" />
-                <ScalarProperty Name="NotifcationMail" ColumnName="NotifcationMail" />
-                <ScalarProperty Name="DeploymentTimeStamp" ColumnName="DeploymentTimeStamp" />
-                <ScalarProperty Name="LastCentralSync" ColumnName="LastCentralSync" />
-                <ScalarProperty Name="PlatformTitle" ColumnName="PlatformTitle" />
-                <ScalarProperty Name="App_TimeZone" ColumnName="App_TimeZone" />
-                <ScalarProperty Name="EnableSystemLogger" ColumnName="EnableSystemLogger" />
-                <ScalarProperty Name="PublicSignUP" ColumnName="PublicSignUP" />
-                <ScalarProperty Name="PublicAccess" ColumnName="PublicAccess" />
-                <ScalarProperty Name="PlatformKey" ColumnName="PlatformKey" />
-                <ScalarProperty Name="DefaultRecordsPerChild" ColumnName="DefaultRecordsPerChild" />
-                <ScalarProperty Name="DefaultRecordsPerMaster" ColumnName="DefaultRecordsPerMaster" />
-                <ScalarProperty Name="DevelopmentMode" ColumnName="DevelopmentMode" />
-                <ScalarProperty Name="DBVersion" ColumnName="DBVersion" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="EndPointCommands">
             <EntityTypeMapping TypeName="DynThingsModel.EndPointCommand">
               <MappingFragment StoreEntitySet="EndPointCommands">
@@ -4732,18 +4744,6 @@
             <EntityTypeMapping TypeName="DynThingsModel.EndPointTypeCategory">
               <MappingFragment StoreEntitySet="EndPointTypeCategorys">
                 <ScalarProperty Name="Title" ColumnName="Title" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="EndPointTypes">
-            <EntityTypeMapping TypeName="DynThingsModel.EndPointType">
-              <MappingFragment StoreEntitySet="EndPointTypes">
-                <ScalarProperty Name="IconID" ColumnName="IconID" />
-                <ScalarProperty Name="TypeCategoryID" ColumnName="TypeCategoryID" />
-                <ScalarProperty Name="measurement" ColumnName="measurement" />
-                <ScalarProperty Name="Title" ColumnName="Title" />
-                <ScalarProperty Name="Code" ColumnName="Code" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -5021,6 +5021,52 @@
           </EntitySetMapping>
           <FunctionImportMapping FunctionImportName="AppDelete" FunctionName="DynThingsModel.Store.AppDelete" />
           <FunctionImportMapping FunctionImportName="ResetDB" FunctionName="DynThingsModel.Store.ResetDB" />
+          <EntitySetMapping Name="EndPointTypes">
+            <EntityTypeMapping TypeName="DynThingsModel.EndPointType">
+              <MappingFragment StoreEntitySet="EndPointTypes">
+                <ScalarProperty Name="IconID" ColumnName="IconID" />
+                <ScalarProperty Name="TypeCategoryID" ColumnName="TypeCategoryID" />
+                <ScalarProperty Name="measurement" ColumnName="measurement" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DynSettings">
+            <EntityTypeMapping TypeName="DynThingsModel.DynSetting">
+              <MappingFragment StoreEntitySet="DynSettings">
+                <ScalarProperty Name="GoogleAnalytics" ColumnName="GoogleAnalytics" />
+                <ScalarProperty Name="MapKey" ColumnName="MapKey" />
+                <ScalarProperty Name="SMTPPort" ColumnName="SMTPPort" />
+                <ScalarProperty Name="SMTPAddress" ColumnName="SMTPAddress" />
+                <ScalarProperty Name="NotifcationMail" ColumnName="NotifcationMail" />
+                <ScalarProperty Name="DeploymentTimeStamp" ColumnName="DeploymentTimeStamp" />
+                <ScalarProperty Name="LastCentralSync" ColumnName="LastCentralSync" />
+                <ScalarProperty Name="PlatformTitle" ColumnName="PlatformTitle" />
+                <ScalarProperty Name="App_TimeZone" ColumnName="App_TimeZone" />
+                <ScalarProperty Name="EnableSystemLogger" ColumnName="EnableSystemLogger" />
+                <ScalarProperty Name="PublicSignUP" ColumnName="PublicSignUP" />
+                <ScalarProperty Name="PublicAccess" ColumnName="PublicAccess" />
+                <ScalarProperty Name="PlatformKey" ColumnName="PlatformKey" />
+                <ScalarProperty Name="DefaultRecordsPerChild" ColumnName="DefaultRecordsPerChild" />
+                <ScalarProperty Name="DefaultRecordsPerMaster" ColumnName="DefaultRecordsPerMaster" />
+                <ScalarProperty Name="DevelopmentMode" ColumnName="DevelopmentMode" />
+                <ScalarProperty Name="DBVersion" ColumnName="DBVersion" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DBChanges">
+            <EntityTypeMapping TypeName="DynThingsModel.DBChanx">
+              <MappingFragment StoreEntitySet="DBChanges">
+                <ScalarProperty Name="TimeStamp" ColumnName="TimeStamp" />
+                <ScalarProperty Name="ChangeCode" ColumnName="ChangeCode" />
+                <ScalarProperty Name="ChangeSN" ColumnName="ChangeSN" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

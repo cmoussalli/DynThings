@@ -53,8 +53,6 @@ public partial class EndPointIO
 
 
 
-    public virtual EndPointType EndPointType { get; set; }
-
     public virtual Endpoint Endpoint { get; set; }
 
     public virtual IOType IOType { get; set; }
@@ -64,6 +62,8 @@ public partial class EndPointIO
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
 
     public virtual ICollection<ThingEnd> ThingEnds { get; set; }
+
+    public virtual EndPointType EndPointType { get; set; }
 
 }
 

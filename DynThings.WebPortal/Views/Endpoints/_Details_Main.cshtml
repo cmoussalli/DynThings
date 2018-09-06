@@ -29,13 +29,13 @@
         <strong>Title</strong><br>
         @Model.Title<br><br>
         <strong>Type</strong><br>
-        <img src="~/Imgs/@(Model.EndPointType.IconID.ToString() + ".png")" />
+        <img src="~/Imgs/@(Model.EndPointType.MediaFile.GUID.ToString() + ".png")" />
         @Model.EndPointType.Title<br><br>
         <strong>Device</strong><br>
         <a href="~/devices/details?id=@Model.DeviceID">@Model.Device.Title</a><br>
         <br>
         <strong>Thing</strong><br>
-        <img src="~/Imgs/@(Model.Thing.ThingCategory.IconID.ToString() + ".png")" />
+        <img src="~/Imgs/@(Model.Thing.ThingCategory.MediaFile.GUID.ToString() + ".png")" />
         <a href="~/things/details?id=@Model.ThingID">@Model.Thing.Title</a><br>
         <br>
     </div>

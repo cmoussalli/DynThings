@@ -48,7 +48,7 @@
                     label:"@item.EndPointType.measurement"
                 });
 
-                $('#imgThingEndImage_@item.Thing.ID.ToString()_@item.EndPointTypeID.ToString()').attr('src',getRootURL() + "/imgs/@(item.EndPointType.IconID.ToString() + ".png")" );
+                $('#imgThingEndImage_@item.Thing.ID.ToString()_@item.EndPointTypeID.ToString()').attr('src',getRootURL() + "/imgs/@(item.EndPointType.MediaFile.GUID.ToString() + ".png")" );
                 </script>
             }
         }

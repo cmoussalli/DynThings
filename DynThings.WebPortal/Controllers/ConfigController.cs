@@ -34,7 +34,7 @@ namespace DynThings.WebPortal.Controllers
         public PartialViewResult GridsPV()
         {
             DynSetting config = uof_repos.repoDynSettings.GetConfig();
-            ViewBag.DefaultRecordsPerMaster = new SelectList(StaticMenus.GetGridRowsCount(),config.DefaultRecordsPerMaster.ToString());
+            ViewBag.DefaultRecordsPerMaster = new SelectList(StaticMenus.GetGridRowsCount(), config.DefaultRecordsPerMaster.ToString());
             ViewBag.DefaultRecordsPerChild = new SelectList(StaticMenus.GetGridRowsCount(), config.DefaultRecordsPerChild.ToString());
             return PartialView("_Grids", config);
         }
@@ -46,7 +46,7 @@ namespace DynThings.WebPortal.Controllers
             ResultInfo.Result res = ResultInfo.GetResultByID(1);
             if (ModelState.IsValid)
             {
-                res =  uof_repos.repoDynSettings.SetGridRowsCount(config.DefaultRecordsPerMaster, config.DefaultRecordsPerChild);
+                res = uof_repos.repoDynSettings.SetGridRowsCount(config.DefaultRecordsPerMaster, config.DefaultRecordsPerChild);
                 return Json(res);
             }
             return Json(res);
@@ -63,14 +63,10 @@ namespace DynThings.WebPortal.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult DevModePV([Bind(Include = "DevelopmentMode,MapKey")] DynSetting config)
+        public ActionResult DevModePV(DynSetting config)
         {
             ResultInfo.Result res = ResultInfo.GetResultByID(1);
-            if (ModelState.IsValid)
-            {
-                res = uof_repos.repoDynSettings.SetDevelopmentMode(config.DevelopmentMode,config.MapKey);
-                return Json(res);
-            }
+            res = uof_repos.repoDynSettings.SetDevelopmentMode(config.DevelopmentMode, config.MapKey, config.GoogleAnalytics);
             return Json(res);
         }
         #endregion

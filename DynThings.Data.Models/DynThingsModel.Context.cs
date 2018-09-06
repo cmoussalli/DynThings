@@ -79,8 +79,6 @@ public partial class DynThingsEntities : DbContext
 
     public virtual DbSet<DeviceStatu> DeviceStatus { get; set; }
 
-    public virtual DbSet<DynSetting> DynSettings { get; set; }
-
     public virtual DbSet<EndPointCommand> EndPointCommands { get; set; }
 
     public virtual DbSet<EndPointIO> EndPointIOs { get; set; }
@@ -88,8 +86,6 @@ public partial class DynThingsEntities : DbContext
     public virtual DbSet<Endpoint> Endpoints { get; set; }
 
     public virtual DbSet<EndPointTypeCategory> EndPointTypeCategorys { get; set; }
-
-    public virtual DbSet<EndPointType> EndPointTypes { get; set; }
 
     public virtual DbSet<IOType> IOTypes { get; set; }
 
@@ -128,6 +124,12 @@ public partial class DynThingsEntities : DbContext
     public virtual DbSet<UserNotificationType> UserNotificationTypes { get; set; }
 
     public virtual DbSet<App> Apps { get; set; }
+
+    public virtual DbSet<EndPointType> EndPointTypes { get; set; }
+
+    public virtual DbSet<DynSetting> DynSettings { get; set; }
+
+    public virtual DbSet<DBChanx> DBChanges { get; set; }
 
 
     public virtual ObjectResult<Rpt_EndPoint_IOs_Months_Result> Rpt_EndPoint_IOs_Months(Nullable<long> ePID, string year)

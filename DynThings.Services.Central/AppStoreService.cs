@@ -88,7 +88,7 @@ namespace DynThings.Services.Central
 
 
         #region InstallStoreApp
-        public async Task<string> InstallOrUpdateStoreApp(Guid guid)
+        public async Task<App> InstallOrUpdateStoreApp(Guid guid)
         {
             APIAppResponseModels.GetAppByGUID model = await GetAppByGUIDAsync(guid);
 
@@ -378,7 +378,7 @@ namespace DynThings.Services.Central
                 #endregion
             }
 
-            return "Ok";
+            return db.Apps.Where(a => a.GUID == model.App.GUID).ToList()[0];
         }
 
 

@@ -8,13 +8,13 @@
             <h5><span>@Model.Thing.ThingCategory.Title</span></h5>
 
             @*@if (@Model.eDevice.IsConnected == true)
-            {
-                <h5><span class="label label-success">Connected</span></h5>
-            }
-            else
-            {
-                <h5><span class="label label-danger">Disconnected</span></h5>
-            }*@
+                {
+                    <h5><span class="label label-success">Connected</span></h5>
+                }
+                else
+                {
+                    <h5><span class="label label-danger">Disconnected</span></h5>
+                }*@
 
         </div>
 
@@ -33,14 +33,14 @@
 <script>
     var g = new JustGage({
         id: "gauge_@Model.Thing.ID.ToString()_@Model.EndPointTypeID.ToString()",
-        value: '@Model.LastIOTimeStamp',
+        value: '@Model.LastIOValue',
         min: @Model.EndPointIO.Endpoint.MinValue,
         max: @Model.EndPointIO.Endpoint.MaxValue,
         title: "@Model.EndPointType.Title",
         label:"@Model.EndPointType.measurement"
 
     });
-    @*$('#imgThingEndImage_@Model.Thing.ID.ToString()_@Model.EndPointTypeID.ToString()').attr('src',getRootURL() + "/imgs/@(Model.EndPoint.IconID.ToString() + ".png")" );*@
+    $('#imgThingEndImage_@Model.Thing.ID.ToString()_@Model.EndPointTypeID.ToString()').attr('src', getRootURL() + "/imgs/@(Model.EndPointType.MediaFile.GUID.ToString() + ".png")");
 </script>
 
 

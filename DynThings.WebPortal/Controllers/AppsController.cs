@@ -146,6 +146,7 @@ namespace DynThings.WebPortal.Controllers
         {
             ResultInfo.Result res = ResultInfo.GetResultByID(1);
             res = uof_repos.repoApps.Publish(app.ID);
+
             return Json(res);
         }
         #endregion

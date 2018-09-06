@@ -52,6 +52,8 @@ public partial class DynSetting
 
     public string MapKey { get; set; }
 
+    public string GoogleAnalytics { get; set; }
+
 }
 
 }

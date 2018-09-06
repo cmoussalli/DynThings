@@ -27,12 +27,10 @@
         <EntityTypeShape EntityType="DynThingsModel.DeviceIO" Width="1.5" PointX="20.5" PointY="14.125" />
         <EntityTypeShape EntityType="DynThingsModel.Device" Width="1.5" PointX="3" PointY="23.25" />
         <EntityTypeShape EntityType="DynThingsModel.DeviceStatu" Width="1.5" PointX="0.75" PointY="24.5" />
-        <EntityTypeShape EntityType="DynThingsModel.DynSetting" Width="1.5" PointX="9.75" PointY="9" />
         <EntityTypeShape EntityType="DynThingsModel.EndPointCommand" Width="1.5" PointX="19.75" PointY="24.875" />
         <EntityTypeShape EntityType="DynThingsModel.EndPointIO" Width="1.5" PointX="20.5" PointY="18.625" />
         <EntityTypeShape EntityType="DynThingsModel.Endpoint" Width="1.5" PointX="17.5" PointY="23.25" />
         <EntityTypeShape EntityType="DynThingsModel.EndPointTypeCategory" Width="1.5" PointX="13" PointY="9.25" />
-        <EntityTypeShape EntityType="DynThingsModel.EndPointType" Width="1.5" PointX="15.25" PointY="8.625" />
         <EntityTypeShape EntityType="DynThingsModel.IOType" Width="1.5" PointX="15.25" PointY="4.625" />
         <EntityTypeShape EntityType="DynThingsModel.LinkDevicesLocation" Width="1.5" PointX="5.25" PointY="13.5" />
         <EntityTypeShape EntityType="DynThingsModel.LinkLocationsLocationView" Width="1.5" PointX="23.25" PointY="12.875" />
@@ -53,7 +51,6 @@
         <EntityTypeShape EntityType="DynThingsModel.UserNotificationType" Width="1.5" PointX="7.75" PointY="18" />
         <AssociationConnector Association="DynThingsModel.FK__AlertCond__Alert__7720AD13" />
         <AssociationConnector Association="DynThingsModel.FK__AlertCond__Condi__74444068" />
-        <AssociationConnector Association="DynThingsModel.FK__AlertCond__EndPo__0662F0A3" />
         <AssociationConnector Association="DynThingsModel.FK__AlertCond__IOTyp__056ECC6A" />
         <AssociationConnector Association="DynThingsModel.FK__AlertCond__Thing__762C88DA" />
         <AssociationConnector Association="DynThingsModel.FK__LinkUsers__Alert__7EC1CEDB" />
@@ -81,16 +78,11 @@
         <AssociationConnector Association="DynThingsModel.FK__Endpoints__Devic__00DF2177" />
         <AssociationConnector Association="DynThingsModel.FK__LinkDevic__Devic__48CFD27E" />
         <AssociationConnector Association="DynThingsModel.FK__EndPointC__EndPo__4222D4EF" />
-        <AssociationConnector Association="DynThingsModel.FK__EndPointI__EndPo__0E391C95" />
         <AssociationConnector Association="DynThingsModel.FK__EndPointI__EndPo__149C0161" />
         <AssociationConnector Association="DynThingsModel.FK__EndPointI__IOTyp__440B1D61" />
         <AssociationConnector Association="DynThingsModel.FK__EndPointI__Thing__7E02B4CC" />
         <AssociationConnector Association="DynThingsModel.FK__ThingEnds__LastI__002AF460" />
         <AssociationConnector Association="DynThingsModel.FK__Endpoints__Thing__7EF6D905" />
-        <AssociationConnector Association="DynThingsModel.FK__Endpoints__TypeI__45F365D3" />
-        <AssociationConnector Association="DynThingsModel.FK__EndPointT__TypeC__2A363CC5" />
-        <AssociationConnector Association="DynThingsModel.FK__EndPointT__TypeC__47DBAE45" />
-        <AssociationConnector Association="DynThingsModel.FK__ThingEnds__EndPo__7F36D027" />
         <AssociationConnector Association="DynThingsModel.FK__LinkDevic__Locat__49C3F6B7" />
         <AssociationConnector Association="DynThingsModel.FK__LinkLocat__Locat__35BCFE0A" />
         <AssociationConnector Association="DynThingsModel.FK__LinkLocat__Locat__36B12243" />
@@ -114,6 +106,15 @@
         <AssociationConnector Association="DynThingsModel.FK__AppThingC__AppID__1A54DAB7" />
         <AssociationConnector Association="DynThingsModel.FK__AppThingE__AppID__1960B67E" />
         <AssociationConnector Association="DynThingsModel.FK__AppUserTo__AppID__338A9CD5" />
+        <EntityTypeShape EntityType="DynThingsModel.EndPointType" Width="1.5" PointX="15.25" PointY="10.25" />
+        <AssociationConnector Association="DynThingsModel.FK__AlertCond__EndPo__0662F0A3" />
+        <AssociationConnector Association="DynThingsModel.FK__EndPointI__EndPo__0E391C95" />
+        <AssociationConnector Association="DynThingsModel.FK__Endpoints__TypeI__45F365D3" />
+        <AssociationConnector Association="DynThingsModel.FK__EndPointT__TypeC__2A363CC5" />
+        <AssociationConnector Association="DynThingsModel.FK__EndPointT__IconI__25276EE5" />
+        <AssociationConnector Association="DynThingsModel.FK__ThingEnds__EndPo__7F36D027" />
+        <EntityTypeShape EntityType="DynThingsModel.DynSetting" Width="1.5" PointX="12.75" PointY="19.75" />
+        <EntityTypeShape EntityType="DynThingsModel.DBChanx" Width="1.5" PointX="0.75" PointY="0.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -14,6 +14,10 @@
     <Version>1.0.9</Version>
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DocumentationFile>bin\Debug\netstandard2.0\DynThings.WebAPI.Models.xml</DocumentationFile>
+  </PropertyGroup>
+
   <Target Name="CopyPackage" AfterTargets="Pack">
     <Copy SourceFiles="$(ProjectDir)\Bin\Debug\$(PackageId).$(PackageVersion).nupkg" DestinationFolder="D:\OneDrive\Projects\_Libraries\_Nuget" />
 

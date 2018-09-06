@@ -106,6 +106,11 @@ namespace DynThings.WebPortal.Controllers
                 var fileName = Path.GetFileName(fileNumber + ".png");
                 var path = Path.Combine(Server.MapPath("~/imgs"), fileName);
                 file.SaveAs(path);
+                System.Drawing.Image img = System.Drawing.Image.FromFile(path);
+                if (img.Height> 48 || img.Width > 48)
+                {
+                    System.IO.File.Delete(path);
+                }
             }
 
             return RedirectToAction("Index");

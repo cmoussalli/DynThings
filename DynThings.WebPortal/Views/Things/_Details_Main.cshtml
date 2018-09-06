@@ -27,7 +27,7 @@
         <strong>Title</strong><br>
         @Model.Title<br><br>
         <strong>Type</strong><br>
-        <img src="~/Imgs/@(Model.ThingCategory.IconID.ToString() + ".png")" />
+        <img src="~/Imgs/@(Model.ThingCategory.MediaFile.GUID.ToString() + ".png")" />
         @Model.ThingCategory.Title<br><br>
         <strong>Regional Time Zone</strong><br>
         @Model.UTC_Diff<br><br>

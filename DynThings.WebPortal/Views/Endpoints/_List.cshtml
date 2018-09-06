@@ -18,7 +18,7 @@
                 @Html.DisplayFor(modelItem => item.Title)
             </td>
             <td>
-                <img src="~/Imgs/@(item.EndPointType.IconID.ToString() + ".png")" />
+                <img src="~/Imgs/@(item.EndPointType.MediaFile.GUID.ToString() + ".png")" />
                 @Html.DisplayFor(modelItem => item.EndPointType.Title)
             </td>
             <td>

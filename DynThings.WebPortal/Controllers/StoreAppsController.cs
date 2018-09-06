@@ -6,9 +6,6 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
-
-
-
 using DynThings.Core;
 using DynThings.Data.Models;
 using DynThings.Data.Repositories;
@@ -102,14 +99,19 @@ namespace DynThings.WebPortal.Controllers
         [HttpGet]
         public async Task<PartialViewResult> InstallOrUpdateAppByGUIDPV(Guid guid)
         {
-             await uow_CentralService.appStoreService.InstallOrUpdateStoreApp(guid);
+             App newApp =  await uow_CentralService.appStoreService.InstallOrUpdateStoreApp(guid);
+
+            foreach(AppMediaFile item in newApp.AppMediaFiles)
+            {
+                GetMediaFile(item.GUID.ToString());
+            }
 
             return PartialView("_InstallResult");
         }
         #endregion
 
         [HttpGet]
-        public ResultInfo.Result GetMediaFile(string guid,string fileName)
+        public ResultInfo.Result GetMediaFile(string guid)
         {
             ResultInfo.Result result = ResultInfo.GenerateErrorResult();
             string localFile = Path.Combine(System.Web.HttpContext.Current.Server.MapPath("~/imgs"), guid + ".png");

@@ -61,7 +61,7 @@ public partial class EndPointType
 
     public virtual EndPointTypeCategory EndPointTypeCategory { get; set; }
 
-    public virtual EndPointTypeCategory EndPointTypeCategory1 { get; set; }
+    public virtual MediaFile MediaFile { get; set; }
 
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
 

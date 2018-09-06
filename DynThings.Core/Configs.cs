@@ -141,6 +141,14 @@ namespace DynThings.Core
                 return db.DynSettings.First().MapKey;
             }
         }
+        public static string GoogleAnalytics
+        {
+            get
+            {
+                DynThingsEntities db = new DynThingsEntities();
+                return db.DynSettings.First().GoogleAnalytics;
+            }
+        }
         public static DateTime LastCentralSync
         {
             get
@@ -241,6 +249,13 @@ namespace DynThings.Core
             DynThingsEntities db = new DynThingsEntities();
             DynSetting dset = db.DynSettings.First();
             dset.MapKey = mapKey;
+            db.SaveChanges();
+        }
+        public static void SetGogoleAnalytics(string googleAnalytics)
+        {
+            DynThingsEntities db = new DynThingsEntities();
+            DynSetting dset = db.DynSettings.First();
+            dset.GoogleAnalytics = googleAnalytics;
             db.SaveChanges();
         }
 

@@ -21,11 +21,9 @@
                 // Add the message to the page.
                 $('#discussion').append('<li><strong>' + htmlEncode(name)
                     + '</strong>: ' + htmlEncode(message) + '</li>');
-                alert('Sent');
                 try {
                     signalRReceive(htmlEncode(name), htmlEncode(message));
                 } catch (err) {
-                    alert('ERROR r');
 
                 }
                 //if (connectionid == $('#displayname').val()) {

@@ -89,14 +89,14 @@ namespace DynThings.Data.Repositories
         #endregion
 
         #region Update: Development
-        public ResultInfo.Result SetDevelopmentMode(bool DevelopmentMode,string mapKey)
+        public ResultInfo.Result SetDevelopmentMode(bool DevelopmentMode,string mapKey,string googleAnalytics)
         {
             List<DynSetting> cons = db.DynSettings.Where(l => l.ID == 1).ToList();
             if (cons.Count == 1)
             {
-                
                 cons[0].DevelopmentMode = DevelopmentMode;
                 cons[0].MapKey = mapKey;
+                cons[0].GoogleAnalytics = googleAnalytics;
                 db.SaveChanges();
                 Core.Config.Refresh();
             }
