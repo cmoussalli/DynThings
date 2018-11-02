@@ -4,14 +4,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using DynThings.Core;
-using DynThings.Data.Models;
-using DynThings.WebAPI.Models;
-using DynThings.WebAPI.Repositories;
 using PagedList;
 using System.Collections;
 using System.Net.Http;
 using System.Net;
+using DynThings.Data.Models;
+using DynThings.Data.Repositories;
 using DynThings.Data.Models.ViewModels;
+using DynThings.WebAPI.Models;
+using DynThings.WebAPI.Models.ResponseModels;
+using DynThings.WebAPI.Repositories;
 
 namespace DynThings.WebAPI.Repositories
 {
@@ -36,6 +38,8 @@ namespace DynThings.WebAPI.Repositories
                 return result;
             }
         }
+
+        public UnitOfWork_Repositories uow_Repositories = new UnitOfWork_Repositories();
         #endregion
 
 
@@ -52,25 +56,28 @@ namespace DynThings.WebAPI.Repositories
         /// <param name="ThingID">Filter by Thing ID. You can keep it null or empty to ignore this filter.</param>
         /// <param name="EndPointID">Filter by EndPoint ID. You can keep it null or empty to ignore this filter.</param>
         /// <returns></returns>
-        public List<APIEndPointCommand> GetEndpointCommands(int pageNumber, int pageSize, bool loadParents, bool loadChilds,string searchFor, long locationID, long ThingID, long EndPointID)
+        public APIEndpointCommandResponseModels.GetEndpointCommandsList GetEndpointCommands(string searchFor, long EndPointID, long ThingID, long locationID, bool loadEndpoint , int pageNumber, int pageSize)
         {
-            List<APIEndPointCommand> result = new List<APIEndPointCommand>();
-            List<EndPointCommand> cmds = db.EndPointCommands
-              .Where(e =>
-              (e.Title.Contains(searchFor) || (searchFor == null || searchFor == ""))//Filter by Search "Title"
-              && ((e.Endpoint.Thing.LinkThingsLocations.Any(l => l.LocationID == locationID)) || (locationID == null || locationID == 0))//Filter by locationID
-              && ((e.Endpoint.ThingID == ThingID) || (ThingID == null || ThingID == 0)) //Filter by ThingID
-              ).OrderBy(e => e.Title)
-              .Skip(pageSize * (pageNumber - 1))
-              .Take(pageSize)
-              .ToList();
+            APIEndpointCommandResponseModels.GetEndpointCommandsList result = new APIEndpointCommandResponseModels.GetEndpointCommandsList();
 
-            foreach (EndPointCommand cmd in cmds)
+            IPagedList<EndPointCommand> endpointCommandsPL = uow_Repositories.repoEndPointCommands.GetPagedList(searchFor,EndPointID,ThingID,locationID, pageNumber, pageSize);
+            List<EndPointCommand> endpointCommands = endpointCommandsPL.ToList();
+
+            List<APIEndPointCommand> listAPIEndpointCommands = new List<APIEndPointCommand>();
+            foreach (EndPointCommand cmd in endpointCommands)
             {
-                APIEndPointCommand apiCmd = new APIEndPointCommand();
-                apiCmd = TypesMapper.APIEndPointCommandAdapter.fromEndpointCommand(cmd, loadParents, loadChilds);
-                result.Add(apiCmd);
+                APIEndPointCommand apiCMD = TypesMapper.APIEndPointCommandAdapter.fromEndpointCommand(cmd,loadEndpoint);
+                listAPIEndpointCommands.Add(apiCMD);
             }
+            result.EndpointCommands = listAPIEndpointCommands;
+
+
+            PagingInfoResponseModel pagingInfo = new PagingInfoResponseModel();
+            pagingInfo.CurrentPage = endpointCommandsPL.PageNumber;
+            pagingInfo.ItemsPerPage = endpointCommandsPL.PageSize;
+            pagingInfo.ItemsCount = endpointCommandsPL.TotalItemCount;
+            pagingInfo.PagesCount = endpointCommandsPL.PageCount;
+            result.PagingInfo = pagingInfo;
             return result;
         }
 

@@ -38,17 +38,18 @@ namespace DynThings.Data.Repositories
         #endregion        
         
 
-        public IPagedList GetThingEndsList(string searchFor = "", long? locationID = null, long? thingID = null, long? thingCategoryID = null, long? endpointTypeID = null, long? endPointID = null, int pageNumber = 1, int recordsPerPage = 0)
+        public IPagedList<ThingEnd> GetPagedList(string searchFor = "", long? locationID = null, long? thingID = null, long? thingCategoryID = null, long? endpointTypeID = null, long? endPointID = null, int pageNumber = 1, int recordsPerPage = 0)
         {
             IQueryable<ThingEnd> query = db.ThingEnds.Include("Thing").Where(q=>
                  ((q.Thing.Title.Contains(searchFor)) || (searchFor == null))
-                 && ((q.ThingID == thingID && thingID != null)||(thingID == null))
-                 && ((q.Thing.CategoryID == thingCategoryID) || thingCategoryID == null )
-                 && ((q.Thing.LinkThingsLocations.Any(l => l.LocationID == locationID)) || locationID == null)
+                 && ((q.ThingID == thingID && thingID != null)||(thingID == null) || (thingID == 0))
+                 && ((q.Thing.CategoryID == thingCategoryID) || thingCategoryID == null || thingCategoryID == 0 )
+                 && ((q.Thing.LinkThingsLocations.Any(l => l.LocationID == locationID)) || locationID == null || locationID == 0 )
                  && ((q.EndPointTypeID == endpointTypeID) || endpointTypeID == null)
                  && (q.Thing.ObjectStatusID == 1)
                  && (q.EndPointType.EndPointTypeCategory.ID != 2)
-            );
+                 
+            ).OrderBy(q => q.ThingID).ThenBy(q => q.EndPointTypeID);
           
             return query.ToList().ToPagedList(pageNumber, recordsPerPage);
         }

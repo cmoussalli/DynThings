@@ -9,6 +9,7 @@ using DynThings.WebAPI.Models;
 using DynThings.WebAPI.Repositories;
 using PagedList;
 using System.Security.Cryptography;
+using ResultInfo;
 
 namespace DynThings.WebAPI.Repositories
 {
@@ -32,7 +33,7 @@ namespace DynThings.WebAPI.Repositories
         #region Add
         public void AddSuccess(long appID,Guid token,long methodID,string notes)
         {
-            ResultInfo.Result result = ResultInfo.GenerateErrorResult();
+            Result result = Result.GenerateFailedResult();
             APIUtilisation ut = new APIUtilisation();
             ut.AppID = appID;
             ut.MethodID = methodID;
@@ -46,7 +47,7 @@ namespace DynThings.WebAPI.Repositories
 
         public void AddFailed(Guid token, long methodID,string notes)
         {
-            ResultInfo.Result result = ResultInfo.GenerateErrorResult();
+            Result result = Result.GenerateFailedResult();
             APIUtilisation ut = new APIUtilisation();
             ut.MethodID = methodID;
             ut.StatusID = 1;
@@ -59,7 +60,7 @@ namespace DynThings.WebAPI.Repositories
 
         public void AddUnAuthorized(Guid token, long methodID,string notes)
         {
-            ResultInfo.Result result = ResultInfo.GenerateErrorResult();
+            Result result = Result.GenerateFailedResult();
             APIUtilisation ut = new APIUtilisation();
             ut.MethodID = methodID;
             ut.StatusID = 1;

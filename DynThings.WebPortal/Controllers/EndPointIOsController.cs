@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using DynThings.Data.Models;
 using DynThings.Data.Repositories;
 using DynThings.Core;
+using ResultInfo;
 
 namespace DynThings.WebPortal.Controllers
 {

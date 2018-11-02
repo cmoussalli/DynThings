@@ -6,8 +6,7 @@ using System.Threading.Tasks;
 using DynThings.Core;
 using DynThings.Data.Models;
 using DynThings.Data.Repositories;
-
-
+using ResultInfo;
 
 namespace DynThings.Service
 {
@@ -39,7 +38,7 @@ namespace DynThings.Service
 
         public ResultInfo.Result SendPendingEmails(int maxPendingMailsCount)
         {
-            ResultInfo.Result result = ResultInfo.GenerateErrorResult();
+            Result result = Result.GenerateFailedResult();
             try
             {
                 mailConfig = GetMailConfigs();

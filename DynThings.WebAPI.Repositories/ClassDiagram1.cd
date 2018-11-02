@@ -1,0 +1,105 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="DynThings.WebAPI.Repositories.APIAppRepository">
+    <Position X="8.75" Y="3.75" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAgQAAAAAAAAAAAAAAAAAAAAAAAAAAACAAA=</HashCode>
+      <FileName>Repositories\APIAppRepository.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DynThings.WebAPI.Repositories.APIDeviceCommandsRepository">
+    <Position X="6" Y="12.75" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAQAAAAAAAQAAAAgAAAAAAAAAAAAAAAAAAAAAACAAA=</HashCode>
+      <FileName>Repositories\APIDeviceCommandsRepository.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DynThings.WebAPI.Repositories.APIDevicesRepository">
+    <Position X="6" Y="9.5" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAQAAAEgAAAAAAAAABAAAAAAAAAAAACACA=</HashCode>
+      <FileName>Repositories\APIDevicesRepository.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DynThings.WebAPI.Repositories.APIEndPointCommandsRepository">
+    <Position X="8.75" Y="12.75" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAABAAAAQAAAAgAAAAAAAAAAAAAAAAAAAAAACAAA=</HashCode>
+      <FileName>Repositories\APIEndPointCommandsRepository.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DynThings.WebAPI.Repositories.APIEndPointsRepository">
+    <Position X="8.75" Y="9.5" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAQAAAEgAAAAAAAAAAAAAAAAAAAQBACAgA=</HashCode>
+      <FileName>Repositories\APIEndPointsRepository.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DynThings.WebAPI.Repositories.APIIOWarningsRepository">
+    <Position X="14" Y="12.75" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAQAAAEggAAAAAAAAAAAAQAAAAAAAAAAAA=</HashCode>
+      <FileName>Repositories\APIIOWarningsRepository.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DynThings.WebAPI.Repositories.APILocationsRepository">
+    <Position X="8.75" Y="6.25" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAQAAAAgEAAAAAAAAAAAAAAAAAAEAACAAA=</HashCode>
+      <FileName>Repositories\APILocationsRepository.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DynThings.WebAPI.Repositories.APILocationViewsRepository">
+    <Position X="6" Y="6.25" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAQAAAEgAAAAAAAgAAAAAAAIAAAAAACAAA=</HashCode>
+      <FileName>Repositories\APILocationViewsRepository.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DynThings.WebAPI.Repositories.APIThingEndsRepository">
+    <Position X="14" Y="6.25" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAQAAAAgAAAAAAAAAEAAAAAAAAAAAACAAA=</HashCode>
+      <FileName>Repositories\APIThingEndsRepository.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DynThings.WebAPI.Repositories.APIThingsRepository">
+    <Position X="11.5" Y="6.25" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAQAQAEgAAAAAAAAAAAAAAAAAAAAAACAEA=</HashCode>
+      <FileName>Repositories\APIThingsRepository.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DynThings.WebAPI.Repositories.APIUserAppTokensRepository">
+    <Position X="11.5" Y="3.75" Width="2.25" />
+    <Compartments>
+      <Compartment Name="Methods" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAQAAAEAAAAAAGAAAAAACAAAAAAAAAAQAg=</HashCode>
+      <FileName>Repositories\APIUserAppTokensRepository.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DynThings.WebAPI.Repositories.APIUtilizationsRepository">
+    <Position X="14" Y="3.75" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAQIAAAgAAAAAAAAAAAAAAAAAAAABAAAAA=</HashCode>
+      <FileName>Repositories\APIUtilizationsRepository.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DynThings.WebAPI.Repositories.UnitOfWork_WebAPI" Collapsed="true">
+    <Position X="6" Y="3.75" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAICgIAAAAAEAAAgCAAAAAAAAAQCAACAAAAAAiA=</HashCode>
+      <FileName>UnitOfWork_WebAPI.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DynThings.WebAPI.Repositories.VersionControl" Collapsed="true">
+    <Position X="6" Y="4.5" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>VersionControl.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

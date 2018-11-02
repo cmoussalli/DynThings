@@ -12,12 +12,17 @@ using DynThings.WebAPI.Models;
 using DynThings.Core.Languages;
 using System.IO;
 using System.Web;
+using DynThings.Services.Central;
+using System.Threading.Tasks;
+using ResultInfo;
 
 namespace DynThings.WebPortal.Controllers.API
 {
     public class SystemController : ApiController
     {
-        UnitOfWork_Repositories uow_data = new UnitOfWork_Repositories(); 
+        UnitOfWork_Repositories uow_data = new UnitOfWork_Repositories();
+        UnitOfWork_CentralServices uow_CentralService = new UnitOfWork_CentralServices();
+
 
         [HttpGet]
         public APISystemInfo Info()
@@ -49,16 +54,34 @@ namespace DynThings.WebPortal.Controllers.API
         }
 
         [HttpGet]
-        public ResultInfo.Result GetUpdate()
+        public Result GetUpdate()
         {
-            ResultInfo.Result result = ResultInfo.GenerateErrorResult();
+            Result result = Result.GenerateFailedResult();
             string localFile = Path.Combine(HttpContext.Current.Server.MapPath("~/imgs"), "100.png");
             WebClient client = new WebClient();
 
             client.DownloadFile("http://dynthings.com/mediafiles/7.png", localFile);
-
-            result = ResultInfo.GenerateOKResult();
+            
+            result = Result.GenerateOKResult();
             return result;
         }
+
+        [HttpGet]
+        public async Task<Result> InstallDBChangesUpdates()
+        {
+            Result result = Result.GenerateFailedResult();
+            try
+            {
+                await uow_CentralService.dbChangesService.InstallDBChanges();
+            }
+            catch (Exception ex)
+            {
+
+            }
+            return result;
+        }
+
+
+
     }
 }

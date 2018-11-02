@@ -116,6 +116,13 @@ namespace DynThings.Data.Repositories
 
 
 
+
+
+
+        public DBInfoRepository repoDBInfo
+        { get { return new DBInfoRepository(dynDB); } }
+
+
         #endregion
 
 

@@ -28,7 +28,7 @@ using System.Net.Http;
 using System.Web.Http;
 using DynThings.WebPortal.Helpers;
 using System.Net.Mail;
-
+using ResultInfo;
 
 namespace DynThings.WebAPI.Controllers
 {
@@ -64,7 +64,7 @@ namespace DynThings.WebAPI.Controllers
                 //Validate KeyPass
                 if (string.IsNullOrEmpty(oEndPointInput.KeyPass))
                 {
-                    ResultInfo.Result result = ResultInfo.GenerateErrorResult("Keypass is missing");
+                    Result result = Result.GenerateFailedResult("Keypass is missing");
                     oApiResponse = ApiResponseAdapter.fromResult(result);
                     return oApiResponse;
                 }
@@ -88,20 +88,20 @@ namespace DynThings.WebAPI.Controllers
                         }
                         else
                         {//DateTime Parse Failed
-                            ResultInfo.Result result = ResultInfo.GenerateErrorResult("DateTime is not in correct format");
+                            Result result = Result.GenerateFailedResult("DateTime is not in correct format");
                             oApiResponse = ApiResponseAdapter.fromResult(result);
                             return oApiResponse;
                         }
                         
                         //Submit Data to Database
-                        ResultInfo.Result repoResult = uof_repos.repoEndpointIOs.SubmitInput(endPointKeyPass, oEndPointInput.Value.ToString(), execTime);
+                        Result repoResult = uof_repos.repoEndpointIOs.SubmitInput(endPointKeyPass, oEndPointInput.Value.ToString(), execTime);
                         signalrhub.static_sendtoall("thingendInput", oEndpoint.ThingID.ToString() + "_" + oEndpoint.EndPointType.ID.ToString());
                         oApiResponse = ApiResponseAdapter.fromResult(repoResult);
                     }
                 }
                 else
                 {// KeyPass Parse Failed
-                    ResultInfo.Result result = ResultInfo.GenerateErrorResult("Keypass is not valid");
+                    Result result = Result.GenerateFailedResult("Keypass is not valid");
                     oApiResponse = ApiResponseAdapter.fromResult(result);
                     return oApiResponse;
                 }
@@ -109,7 +109,7 @@ namespace DynThings.WebAPI.Controllers
             }
             catch (Exception ex)
             {
-                ResultInfo.Result result = ResultInfo.GetResultByID(1);
+                Result result = Result.GenerateFailedResult();
                 oApiResponse = ApiResponseAdapter.fromResult(result);
             }
             return oApiResponse;
@@ -125,7 +125,7 @@ namespace DynThings.WebAPI.Controllers
             {
                 if (string.IsNullOrEmpty(oEndPointLog.KeyPass))
                 {
-                    ResultInfo.Result result = ResultInfo.GetResultByID(1);
+                    Result result = Result.GenerateFailedResult();
                     oApiResponse = ApiResponseAdapter.fromResult(result);
                     return oApiResponse;
                 }
@@ -149,20 +149,20 @@ namespace DynThings.WebAPI.Controllers
                         }
                         else
                         {//DateTime Parse Failed
-                            ResultInfo.Result result = ResultInfo.GetResultByID(1);
+                            Result result = Result.GenerateFailedResult();
                             oApiResponse = ApiResponseAdapter.fromResult(result);
                             return oApiResponse;
                         }
 
                         //Submit Data to Database
-                        ResultInfo.Result repoResult = uof_repos.repoEndpointIOs.SubmitLog(endPointKeyPass, oEndPointLog.Value.ToString(), execTime);
+                        Result repoResult = uof_repos.repoEndpointIOs.SubmitLog(endPointKeyPass, oEndPointLog.Value.ToString(), execTime);
                         oApiResponse = ApiResponseAdapter.fromResult(repoResult);
                         
                     }
                 }
                 else
                 {// KeyPass Parse Failed
-                    ResultInfo.Result result = ResultInfo.GetResultByID(1);
+                    Result result = Result.GenerateFailedResult();
                     oApiResponse = ApiResponseAdapter.fromResult(result);
                     return oApiResponse;
                 }
@@ -170,7 +170,7 @@ namespace DynThings.WebAPI.Controllers
             }
             catch (Exception ex)
             {
-                ResultInfo.Result result = ResultInfo.GetResultByID(1);
+                Result result = Result.GenerateFailedResult();
                 oApiResponse = ApiResponseAdapter.fromResult(result);
             }
             return oApiResponse;
@@ -180,7 +180,7 @@ namespace DynThings.WebAPI.Controllers
         #region Command Executed
         private ApiResponse CoreSetEndPointPendingCommandAsExecuted(SubmissionEndPointCommandExecuted submission)
         {
-            ApiResponse oApiResponse = ApiResponseAdapter.fromResult(ResultInfo.GenerateErrorResult());
+            ApiResponse oApiResponse = ApiResponseAdapter.fromResult(Result.GenerateFailedResult());
             try
             {
                 return ApiResponseAdapter.fromResult(uof_repos.repoEndpointIOs.SetCommandAsExecuted(submission.EndPointCommandIOID,submission.EndPointKeyPass, submission.ExectionTimeStamp));
@@ -206,7 +206,7 @@ namespace DynThings.WebAPI.Controllers
             {
                 if (string.IsNullOrEmpty(deviceInput.KeyPass))
                 {
-                    ResultInfo.Result result = ResultInfo.GetResultByID(1);
+                    Result result = Result.GenerateFailedResult();
                     oApiResponse = ApiResponseAdapter.fromResult(result);
 
                     return oApiResponse;
@@ -226,24 +226,24 @@ namespace DynThings.WebAPI.Controllers
                         { }
                         else
                         {//DateTime Parse Failed
-                            ResultInfo.Result result = ResultInfo.GetResultByID(1);
+                            Result result = Result.GenerateFailedResult();
                             oApiResponse = ApiResponseAdapter.fromResult(result);
                             return oApiResponse;
                         }
 
                         //Submit Data to Database
-                        ResultInfo.Result repoResult = uof_repos.repoDeviceIOs.Add(device.ID, deviceInput.Value.ToString(), DeviceIOsRepository.deviceIOType.Input, execTime);
+                        Result repoResult = uof_repos.repoDeviceIOs.Add(device.ID, deviceInput.Value.ToString(), DeviceIOsRepository.deviceIOType.Input, execTime);
 
                         //Validate Result
-                        if (repoResult.ResultType == ResultInfo.ResultType.Ok)
+                        if (repoResult.ResultType == Result.Result_Type.Ok)
                         {//Submited
-                            ResultInfo.Result result = ResultInfo.GenerateOKResult();
+                            Result result = Result.GenerateOKResult();
                             oApiResponse = ApiResponseAdapter.fromResult(result);
                             return oApiResponse;
                         }
                         else
                         {//Submition Failed
-                            ResultInfo.Result result = ResultInfo.GetResultByID(1);
+                            Result result = Result.GenerateFailedResult();
                             oApiResponse = ApiResponseAdapter.fromResult(result);
                             return oApiResponse;
                         }
@@ -251,7 +251,7 @@ namespace DynThings.WebAPI.Controllers
                 }
                 else
                 {// KeyPass Parse Failed
-                    ResultInfo.Result result = ResultInfo.GetResultByID(1);
+                    Result result = Result.GenerateFailedResult();
                     oApiResponse = ApiResponseAdapter.fromResult(result);
                     return oApiResponse;
                 }
@@ -259,7 +259,7 @@ namespace DynThings.WebAPI.Controllers
             }
             catch (Exception)
             {
-                ResultInfo.Result result = ResultInfo.GetResultByID(1);
+                Result result = Result.GenerateFailedResult();
                 oApiResponse = ApiResponseAdapter.fromResult(result);
             }
             return oApiResponse;
@@ -276,7 +276,7 @@ namespace DynThings.WebAPI.Controllers
             {
                 if (string.IsNullOrEmpty(deviceInput.KeyPass))
                 {
-                    ResultInfo.Result result = ResultInfo.GetResultByID(1);
+                    Result result = Result.GenerateFailedResult();
                     oApiResponse = ApiResponseAdapter.fromResult(result);
 
                     return oApiResponse;
@@ -296,24 +296,24 @@ namespace DynThings.WebAPI.Controllers
                         { }
                         else
                         {//DateTime Parse Failed
-                            ResultInfo.Result result = ResultInfo.GetResultByID(1);
+                            Result result = Result.GenerateFailedResult();
                             oApiResponse = ApiResponseAdapter.fromResult(result);
                             return oApiResponse;
                         }
 
                         //Submit Data to Database
-                        ResultInfo.Result repoResult = uof_repos.repoDeviceIOs.Add(device.ID, deviceInput.Value.ToString(), DeviceIOsRepository.deviceIOType.Log, execTime);
+                        Result repoResult = uof_repos.repoDeviceIOs.Add(device.ID, deviceInput.Value.ToString(), DeviceIOsRepository.deviceIOType.Log, execTime);
 
                         //Validate Result
-                        if (repoResult.ResultType == ResultInfo.ResultType.Ok)
+                        if (repoResult.ResultType == Result.Result_Type.Ok)
                         {//Submited
-                            ResultInfo.Result result = ResultInfo.GenerateOKResult();
+                            Result result = Result.GenerateOKResult();
                             oApiResponse = ApiResponseAdapter.fromResult(result);
                             return oApiResponse;
                         }
                         else
                         {//Submition Failed
-                            ResultInfo.Result result = ResultInfo.GetResultByID(1);
+                            Result result = Result.GenerateFailedResult();
                             oApiResponse = ApiResponseAdapter.fromResult(result);
                             return oApiResponse;
                         }
@@ -321,7 +321,7 @@ namespace DynThings.WebAPI.Controllers
                 }
                 else
                 {// KeyPass Parse Failed
-                    ResultInfo.Result result = ResultInfo.GetResultByID(1);
+                    Result result = Result.GenerateFailedResult();
                     oApiResponse = ApiResponseAdapter.fromResult(result);
                     return oApiResponse;
                 }
@@ -329,7 +329,7 @@ namespace DynThings.WebAPI.Controllers
             }
             catch (Exception)
             {
-                ResultInfo.Result result = ResultInfo.GetResultByID(1);
+                Result result = Result.GenerateFailedResult();
                 oApiResponse = ApiResponseAdapter.fromResult(result);
             }
             return oApiResponse;
@@ -409,6 +409,10 @@ namespace DynThings.WebAPI.Controllers
         }
         #endregion
 
+
+
+
+
         #region :: Set endpoint pending Command as Executed ::
         [HttpPost]
         public ApiResponse SetEndPointCommandAsExecuted(SubmissionEndPointCommandExecuted submission)
@@ -417,23 +421,25 @@ namespace DynThings.WebAPI.Controllers
         }
 
         [HttpGet]
-        public ApiResponse SetEndPointCommandAsExecuted(long commandIOID, DateTime? execTimeStamp)
+        public ApiResponse SetEndPointCommandAsExecuted(long commandIOID, string keypass)
         {
             SubmissionEndPointCommandExecuted submission = new SubmissionEndPointCommandExecuted();
             submission.EndPointCommandIOID = commandIOID;
-            submission.ExectionTimeStamp = execTimeStamp;
+            //if (execTimeStamp != null)
+            //{
+            //submission.ExectionTimeStamp = execTimeStamp;
+            //}
+            //else
+            //{
+            //    submission.ExectionTimeStamp = DateTime.Now;
+            //}
+
+            submission.ExectionTimeStamp = DateTime.Now;
+            submission.EndPointKeyPass = Guid.Parse(keypass);
             return CoreSetEndPointPendingCommandAsExecuted(submission);
         }
 
-        [HttpGet]
-        public ApiResponse SetEndPointCommandAsExecuted0(long commandIOID,string keypass)
-        {
-            SubmissionEndPointCommandExecuted submission = new SubmissionEndPointCommandExecuted();
-            submission.EndPointKeyPass = Guid.Parse(keypass);
-            submission.EndPointCommandIOID = commandIOID;
-            submission.ExectionTimeStamp = DateTime.Now;
-            return CoreSetEndPointPendingCommandAsExecuted(submission);
-        }
+       
         #endregion
         #endregion
 

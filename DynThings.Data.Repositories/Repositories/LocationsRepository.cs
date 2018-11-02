@@ -12,6 +12,7 @@ using System.Threading.Tasks;
 using DynThings.Data.Models;
 using PagedList;
 using DynThings.Core;
+using ResultInfo;
 
 namespace DynThings.Data.Repositories
 {
@@ -57,26 +58,54 @@ namespace DynThings.Data.Repositories
         #endregion
 
         #region Get PagedList
-        public IPagedList GetPagedList(string search, int pageNumber, int recordsPerPage)
+        public IPagedList<Location> GetPagedList(string search, int pageNumber, int recordsPerPage)
         {
-            IPagedList locs = db.Locations
+            IPagedList<Location> locs = db.Locations
               .Where(e => search == null || e.Title.Contains(search))
               .OrderBy(e => e.Title).ToList()
               .ToPagedList(pageNumber, recordsPerPage);
             return locs;
         }
 
-        public IPagedList GetPagedList(string search, long locationViewID, int pageNumber, int recordsPerPage)
+        public IPagedList<Location> GetPagedList(string search, long? viewID, int pageNumber, int recordsPerPage)
         {
-            IPagedList locs = db.Locations
-              .Where(e => search == null || e.Title.Contains(search)
-              && e.LinkLocationsLocationViews.Any(l => l.LocationViewID.Equals(locationViewID))
-              )
+            IPagedList<Location> locs = db.Locations
+                 .Where(v =>
+                    ((search == null || search == "") || v.Title.Contains(search))
+                    && ((viewID == null || viewID == 0) || (v.LinkLocationsLocationViews.Any(a => a.LocationViewID == viewID)))
+                )
+
               .OrderBy(e => e.Title).ToList()
               .ToPagedList(pageNumber, recordsPerPage);
             return locs;
         }
+
+
         #endregion
+
+        #region Get Locations with warnings Only PagedList
+        public IPagedList<Location> GetLocationsWithWarningsPagedList(string search, long? viewID, int pageNumber, int recordsPerPage)
+        {
+            IPagedList<Location> locs = db.Locations
+                .Where(l =>
+                     ((viewID == null || viewID == 0) || (l.LinkLocationsLocationViews.Any(a => a.LocationViewID == viewID)))
+                     && (
+                        l.LinkThingsLocations.Any(
+                                        lt => lt.Thing.Endpoints.Any(
+                                                             e => e.IsNumericOnly == true
+                                                            && (e.LastIONumericValue >= e.HighRange || e.LastIONumericValue <= e.LowRange)
+                                            )
+                            )
+                     )
+                )
+              .OrderBy(e => e.Title).ToList()
+              .ToPagedList(pageNumber, recordsPerPage);
+            return locs;
+        }
+
+
+        #endregion
+
 
         #region Find
         /// <summary>
@@ -115,11 +144,11 @@ namespace DynThings.Data.Repositories
                 loc.LongitudeY = "0";
                 db.Locations.Add(loc);
                 db.SaveChanges();
-                return ResultInfo.GenerateOKResult("Saved", loc.ID);
+                return Result.GenerateOKResult("Saved", loc.ID.ToString());
             }
             catch
             {
-                return ResultInfo.GetResultByID(1);
+                return Result.GenerateFailedResult();
             }
         }
 
@@ -138,11 +167,11 @@ namespace DynThings.Data.Repositories
                 loc.Status = status;
                 loc.IconID = iconID;
                 db.SaveChanges();
-                return ResultInfo.GenerateOKResult("Saved", loc.ID);
+                return Result.GenerateOKResult("Saved", loc.ID.ToString());
             }
             catch
             {
-                return ResultInfo.GetResultByID(1);
+                return Result.GenerateFailedResult();
             }
         }
 
@@ -154,11 +183,11 @@ namespace DynThings.Data.Repositories
                 loc.Title = title;
                 loc.isActive = isActive;
                 db.SaveChanges();
-                return ResultInfo.GenerateOKResult("Saved", loc.ID);
+                return Result.GenerateOKResult("Saved", loc.ID.ToString());
             }
             catch
             {
-                return ResultInfo.GetResultByID(1);
+                return Result.GenerateFailedResult();
             }
         }
 
@@ -170,11 +199,11 @@ namespace DynThings.Data.Repositories
                 loc.LongitudeY = longitudeY;
                 loc.LatitudeX = latitudeX;
                 db.SaveChanges();
-                return ResultInfo.GenerateOKResult("Saved", loc.ID);
+                return Result.GenerateOKResult("Saved", loc.ID.ToString());
             }
             catch
             {
-                return ResultInfo.GetResultByID(1);
+                return Result.GenerateFailedResult();
             }
         }
 
@@ -188,11 +217,11 @@ namespace DynThings.Data.Repositories
                 Location loc = db.Locations.Find(id);
                 db.Locations.Remove(loc);
                 db.SaveChanges();
-                return ResultInfo.GenerateOKResult("Deleted", loc.ID);
+                return Result.GenerateOKResult("Deleted", loc.ID.ToString());
             }
             catch
             {
-                return ResultInfo.GetResultByID(1);
+                return Result.GenerateFailedResult();
             }
         }
 
@@ -229,11 +258,11 @@ namespace DynThings.Data.Repositories
                 lnk.EndTimeStamp = enddate;
                 db.LinkDevicesLocations.Add(lnk);
                 db.SaveChanges();
-                return ResultInfo.GenerateOKResult("Saved");
+                return Result.GenerateOKResult("Saved");
             }
             catch (Exception ex)
             {
-                return ResultInfo.GenerateErrorResult(ex.Message);
+                return Result.GenerateFailedResult(ex.Message);
             }
         }
         #endregion
@@ -246,18 +275,18 @@ namespace DynThings.Data.Repositories
                 List<LinkDevicesLocation> lnks = db.LinkDevicesLocations.Where(l => l.ID == lnkID).ToList();
                 if (lnks.Count != 1)
                 {
-                    return ResultInfo.GetResultByID(1);
+                    return Result.GenerateFailedResult();
                 }
                 LinkDevicesLocation lnk = lnks[0];
                 Device dev = db.Devices.Find(lnk.DeviceID);
                 lnk.EndByUser = userID;
                 lnk.EndTimeStamp = DateTime.UtcNow.AddHours(dev.UTC_Diff);
                 db.SaveChanges();
-                return ResultInfo.GenerateOKResult("Saved");
+                return Result.GenerateOKResult("Saved");
             }
             catch
             {
-                return ResultInfo.GetResultByID(1);
+                return Result.GenerateFailedResult();
             }
         }
         #endregion
@@ -292,11 +321,11 @@ namespace DynThings.Data.Repositories
                 db.LinkThingsLocations.Add(lnk);
 
                 db.SaveChanges();
-                return ResultInfo.GenerateOKResult("Saved");
+                return Result.GenerateOKResult("Saved");
             }
             catch (Exception ex)
             {
-                return ResultInfo.GenerateErrorResult(ex.Message);
+                return Result.GenerateFailedResult(ex.Message);
             }
         }
         #endregion
@@ -309,16 +338,16 @@ namespace DynThings.Data.Repositories
                 List<LinkThingsLocation> lnks = db.LinkThingsLocations.Where(l => l.ID == lnkID).ToList();
                 if (lnks.Count != 1)
                 {
-                    return ResultInfo.GetResultByID(1);
+                    return Result.GenerateFailedResult();
                 }
                 LinkThingsLocation lnk = lnks[0];
                 db.LinkThingsLocations.Remove(lnk);
                 db.SaveChanges();
-                return ResultInfo.GenerateOKResult("Saved");
+                return Result.GenerateOKResult("Saved");
             }
             catch
             {
-                return ResultInfo.GetResultByID(1);
+                return Result.GenerateFailedResult();
             }
         }
         #endregion

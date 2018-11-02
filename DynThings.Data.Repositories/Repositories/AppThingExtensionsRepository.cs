@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using DynThings.Core;
 using DynThings.Data.Models;
 using PagedList;
+using ResultInfo;
 
 namespace DynThings.Data.Repositories
 {
@@ -90,11 +91,11 @@ namespace DynThings.Data.Repositories
                 appThingExtension.IsList = isList;
                 db.AppThingExtensions.Add(appThingExtension);
                 db.SaveChanges();
-                return ResultInfo.GenerateOKResult("Saved", appThingExtension.ID);
+                return Result.GenerateOKResult("Saved", appThingExtension.ID.ToString());
             }
             catch (Exception ex)
             {
-                return ResultInfo.GenerateErrorResult("Error", ex.Message);
+                return Result.GenerateFailedResult("Error", ex.Message);
             }
         }
 
@@ -110,11 +111,11 @@ namespace DynThings.Data.Repositories
                 appThingExtension.DataTypeID = dataTypeId;
                 appThingExtension.IsList = isList;
                 db.SaveChanges();
-                return ResultInfo.GenerateOKResult("Saved", appThingExtension.ID);
+                return Result.GenerateOKResult("Saved", appThingExtension.ID.ToString());
             }
             catch
             {
-                return ResultInfo.GetResultByID(1);
+                return Result.GenerateFailedResult();
             }
         }
 
@@ -129,11 +130,11 @@ namespace DynThings.Data.Repositories
                 AppThingExtension appThingExtension = db.AppThingExtensions.Find(id);
                 db.AppThingExtensions.Remove(appThingExtension);
                 db.SaveChanges();
-                return ResultInfo.GenerateOKResult("Deleted", appThingExtension.ID);
+                return Result.GenerateOKResult("Deleted", appThingExtension.ID.ToString());
             }
             catch
             {
-                return ResultInfo.GetResultByID(1);
+                return Result.GenerateFailedResult();
             }
         }
 

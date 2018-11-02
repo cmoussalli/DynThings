@@ -12,6 +12,7 @@ using DynThings.Data.Models;
 using DynThings.Data.Repositories;
 using DynThings.Data.Reports;
 using DynHighCharts;
+using ResultInfo;
 
 namespace DynThings.WebPortal.Controllers
 {
@@ -72,7 +73,7 @@ namespace DynThings.WebPortal.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult AddPV([Bind(Include = "Title,TypeID,DeviceID,ThingID,IsNumericOnly,MinValue,MaxValue,LowRange,HighRange")] Endpoint endpoint)
         {
-            ResultInfo.Result res = ResultInfo.GetResultByID(1);
+            Result res = Result.GenerateFailedResult();
             if (ModelState.IsValid)
             {
                 res = uof_repos.repoEndpoints.Add(endpoint.Title, endpoint.TypeID, endpoint.DeviceID,endpoint.ThingID, endpoint.IsNumericOnly, endpoint.MinValue, endpoint.MaxValue, endpoint.LowRange, endpoint.HighRange);
@@ -97,7 +98,7 @@ namespace DynThings.WebPortal.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult EditPV([Bind(Include = "ID,Title,TypeID,DeviceID,ThingID,IsNumericOnly,MinValue,MaxValue,LowRange,HighRange")] Endpoint endpoint)
         {
-            ResultInfo.Result res = ResultInfo.GetResultByID(1);
+            Result res = Result.GenerateFailedResult();
             if (ModelState.IsValid)
             {
                 res = uof_repos.repoEndpoints.Edit(endpoint.ID, endpoint.Title, endpoint.TypeID,endpoint.ThingID,endpoint.IsNumericOnly,endpoint.MinValue,endpoint.MaxValue,endpoint.LowRange,endpoint.HighRange);
@@ -113,7 +114,7 @@ namespace DynThings.WebPortal.Controllers
         {
             if (!User.IsInRole("Admin"))
             {
-                ResultInfo.Result rm = Core.ResultInfo.GetResultByID(1);
+                Result rm = Result.GenerateFailedResult();
                 return PartialView("_PVResult",rm);
             }
             Endpoint endpoint = uof_repos.repoEndpoints.Find(id);
@@ -125,7 +126,7 @@ namespace DynThings.WebPortal.Controllers
         [Authorize(Roles = "Admin")]
         public ActionResult DeletePV([Bind(Include = "ID,Title")] Endpoint endpoint)
         {
-            ResultInfo.Result res = ResultInfo.GetResultByID(1);
+            Result res = Result.GenerateFailedResult();
             if (ModelState.IsValid)
             {
                 res = uof_repos.repoEndpoints.Delete(endpoint.ID);
@@ -194,7 +195,7 @@ namespace DynThings.WebPortal.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult EditDevKeysPV([Bind(Include = "ID,GUID,KeyPass")] Endpoint endpoint)
         {
-            ResultInfo.Result res = ResultInfo.GetResultByID(1);
+            Result res = Result.GenerateFailedResult();
             if (ModelState.IsValid)
             {
                 res = uof_repos.repoEndpoints.EditDevKeys(endpoint.ID, endpoint.GUID, endpoint.KeyPass);

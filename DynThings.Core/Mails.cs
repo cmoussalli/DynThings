@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ResultInfo;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Mail;
@@ -11,7 +12,7 @@ namespace DynThings.Core
     {
         public static ResultInfo.Result SendMail(MailsConfig mailsConfig, string to, string subject, string body)
         {
-            ResultInfo.Result result = ResultInfo.GenerateErrorResult("");
+            ResultInfo.Result result = Result.GenerateFailedResult("");
             try
             {
                 MailMessage mail = new MailMessage(mailsConfig.Sender, to);
@@ -24,11 +25,11 @@ namespace DynThings.Core
                 mail.Subject = subject;
                 mail.Body = body;
                 client.Send(mail);
-                result = ResultInfo.GenerateOKResult();
+                result = Result.GenerateOKResult();
             }
             catch (Exception ex)
             {
-                result = ResultInfo.GenerateErrorResult("Mail send Failed", ex.Message);
+                result = Result.GenerateFailedResult("Mail send Failed", ex.Message);
             }
             return result;
         }

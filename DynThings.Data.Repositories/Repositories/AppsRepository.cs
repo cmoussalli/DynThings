@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using DynThings.Core;
 using DynThings.Data.Models;
 using PagedList;
+using ResultInfo;
 
 namespace DynThings.Data.Repositories
 {
@@ -84,7 +85,7 @@ namespace DynThings.Data.Repositories
             List<AspNetUser> usrs = db.AspNetUsers.Where(u => u.Id == createdBy).ToList();
             if (usrs.Count != 1)
             {
-                return ResultInfo.GetResultByID(1);
+                return Result.GenerateFailedResult();
             }
             //Save new app in database 
             try
@@ -101,11 +102,11 @@ namespace DynThings.Data.Repositories
                 app.Version = 0;
                 db.Apps.Add(app);
                 db.SaveChanges();
-                return ResultInfo.GenerateOKResult("Saved", app.ID);
+                return Result.GenerateOKResult("Saved", app.ID.ToString());
             }
             catch (Exception ex)
             {
-                return ResultInfo.GenerateErrorResult("Error", ex.Message);
+                return Result.GenerateFailedResult("Error", ex.Message);
             }
         }
 
@@ -122,11 +123,11 @@ namespace DynThings.Data.Repositories
                 app.StatusID = statusID;
                 app.Version = version;
                 db.SaveChanges();
-                return ResultInfo.GenerateOKResult("Saved", app.ID);
+                return Result.GenerateOKResult("Saved", app.ID.ToString());
             }
             catch
             {
-                return ResultInfo.GetResultByID(1);
+                return Result.GenerateFailedResult();
             }
         }
 
@@ -143,11 +144,11 @@ namespace DynThings.Data.Repositories
                 app.DevelopedByName = developedByName;
                 app.StoreAppLastUpdate = storeAppLastUpdate;
                 db.SaveChanges();
-                return ResultInfo.GenerateOKResult("Saved", app.ID);
+                return Result.GenerateOKResult("Saved", app.ID.ToString());
             }
             catch
             {
-                return ResultInfo.GetResultByID(1);
+                return Result.GenerateFailedResult();
             }
         }
 
@@ -159,11 +160,11 @@ namespace DynThings.Data.Repositories
             try
             {
                 db.AppDelete(id);
-                return ResultInfo.GenerateOKResult("Deleted", id);
+                return Result.GenerateOKResult("Deleted", id.ToString());
             }
             catch
             {
-                return ResultInfo.GetResultByID(1);
+                return Result.GenerateFailedResult();
             }
         }
 
@@ -173,7 +174,7 @@ namespace DynThings.Data.Repositories
         public ResultInfo.Result Publish(long id)
         {
             db.PublishApp(id);
-            return ResultInfo.GenerateOKResult("Published", id);
+            return Result.GenerateOKResult("Published", id.ToString());
         }
 
         #endregion
@@ -182,7 +183,7 @@ namespace DynThings.Data.Repositories
         public ResultInfo.Result UnPublish(long id)
         {
             db.UnPublishApp(id);
-            return ResultInfo.GenerateOKResult("UnPublished", id);
+            return Result.GenerateOKResult("UnPublished", id.ToString());
 
         }
 
@@ -199,7 +200,7 @@ namespace DynThings.Data.Repositories
                 List<AppAPIEntity> appAPIEntitys = db.AppAPIEntitys.Where(a => a.AppID == appID && a.SystemEntityID == EntityID).ToList();
                 if (appAPIEntitys.Count > 0)
                 {
-                    return ResultInfo.GetResultByID(1);
+                    return Result.GenerateFailedResult();
                 }
 
                 //Add Link to Database
@@ -208,11 +209,11 @@ namespace DynThings.Data.Repositories
                 lnk.SystemEntityID = EntityID;
                 db.AppAPIEntitys.Add(lnk);
                 db.SaveChanges();
-                return ResultInfo.GenerateOKResult("Saved");
+                return Result.GenerateOKResult("Saved");
             }
             catch (Exception ex)
             {
-                return ResultInfo.GenerateErrorResult(ex.Message);
+                return Result.GenerateFailedResult(ex.Message);
             }
         }
         #endregion
@@ -224,15 +225,15 @@ namespace DynThings.Data.Repositories
                 List<AppAPIEntity> lnks = db.AppAPIEntitys.Where(l => l.AppID == appID && l.SystemEntityID == systemEntityID).ToList();
                 if (lnks.Count == 0)
                 {
-                    return ResultInfo.GetResultByID(1);
+                    return Result.GenerateFailedResult();
                 }
                 db.AppAPIEntitys.Remove(lnks[0]);
                 db.SaveChanges();
-                return ResultInfo.GenerateOKResult("Saved");
+                return Result.GenerateOKResult("Saved");
             }
             catch
             {
-                return ResultInfo.GetResultByID(1);
+                return Result.GenerateFailedResult();
             }
         }
         #endregion

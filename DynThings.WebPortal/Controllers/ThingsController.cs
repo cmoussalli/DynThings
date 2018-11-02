@@ -14,6 +14,7 @@ using DynThings.Data.Repositories;
 using DynThings.Data.Reports;
 //using DynThings.Data.Models.ReportsModels;
 using DynHighCharts;
+using ResultInfo;
 
 namespace DynThings.WebPortal.Controllers
 {
@@ -86,7 +87,7 @@ namespace DynThings.WebPortal.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult AddPV([Bind(Include = "Title,CategoryID,UTC_Diff")] Thing Thing)
         {
-            ResultInfo.Result res = ResultInfo.GetResultByID(1);
+            Result res = Result.GenerateFailedResult();
             if (ModelState.IsValid)
             {
                 res = uof_repos.repoThings.Add(Thing.Title, Thing.CategoryID, Thing.UTC_Diff, currentUser.Id);
@@ -110,7 +111,7 @@ namespace DynThings.WebPortal.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult EditPV([Bind(Include = "ID,Title,CategoryID,UTC_Diff")] Thing Thing)
         {
-            ResultInfo.Result res = ResultInfo.GetResultByID(1);
+            Result res = Result.GenerateFailedResult();
             if (ModelState.IsValid)
             {
                 res = uof_repos.repoThings.Edit(Thing.ID, Thing.Title, Thing.CategoryID, Thing.UTC_Diff);
@@ -126,7 +127,7 @@ namespace DynThings.WebPortal.Controllers
         {
             if (!User.IsInRole("Admin"))
             {
-                ResultInfo.Result rm = Core.ResultInfo.GetResultByID(1);
+                Result rm = Result.GenerateFailedResult();
                 return PartialView("_PVResult", rm);
             }
             Thing Thing = uof_repos.repoThings.Find(id);
@@ -138,7 +139,7 @@ namespace DynThings.WebPortal.Controllers
         [Authorize(Roles = "Admin")]
         public ActionResult DeletePV([Bind(Include = "ID,Title")] Thing Thing)
         {
-            ResultInfo.Result res = ResultInfo.GetResultByID(1);
+            Result res = Result.GenerateFailedResult();
             if (ModelState.IsValid)
             {
                 res = uof_repos.repoThings.Delete(Thing.ID);
@@ -230,7 +231,7 @@ namespace DynThings.WebPortal.Controllers
         [HttpPost]
         public ActionResult AddThingExtensionProperty(long thingID, long thingExtensionID, string newValue)
         {
-            ResultInfo.Result res = uof_repos.repoThingExtensionValues.Add(thingID, thingExtensionID, newValue, currentUser.Id);
+            Result res = uof_repos.repoThingExtensionValues.Add(thingID, thingExtensionID, newValue, currentUser.Id);
             return Json(res);
         }
         #endregion
@@ -246,7 +247,7 @@ namespace DynThings.WebPortal.Controllers
         [HttpPost]
         public ActionResult EditThingExtensionProperty(long valueID, string newValue)
         {
-            ResultInfo.Result res = uof_repos.repoThingExtensionValues.Edit(valueID, newValue, currentUser.Id);
+            Result res = uof_repos.repoThingExtensionValues.Edit(valueID, newValue, currentUser.Id);
             return Json(res);
         }
         #endregion
@@ -262,7 +263,7 @@ namespace DynThings.WebPortal.Controllers
         [HttpPost]
         public ActionResult DeleteThingExtensionProperty(long valueID)
         {
-            ResultInfo.Result res = uof_repos.repoThingExtensionValues.Delete(valueID,currentUser.Id);
+            Result res = uof_repos.repoThingExtensionValues.Delete(valueID,currentUser.Id);
             return Json(res);
         }
         #endregion

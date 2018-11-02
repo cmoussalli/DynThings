@@ -13,6 +13,7 @@ using System.Threading.Tasks;
 using DynThings.Data.Models;
 using DynThings.Core;
 using PagedList;
+using ResultInfo;
 
 namespace DynThings.Data.Repositories
 {
@@ -89,11 +90,11 @@ namespace DynThings.Data.Repositories
                 epType.IconID = IconID;
                 db.EndPointTypes.Add(epType);
                 db.SaveChanges();
-                return ResultInfo.GenerateOKResult("Saved", epType.ID);
+                return Result.GenerateOKResult("Saved", epType.ID.ToString());
             }
             catch
             {
-                return ResultInfo.GetResultByID(1);
+                return Result.GenerateFailedResult();
             }
         }
 
@@ -112,16 +113,16 @@ namespace DynThings.Data.Repositories
                     endTypes[0].TypeCategoryID = TypeCategoryID;
                     endTypes[0].IconID = IconID;
                     db.SaveChanges();
-                    return ResultInfo.GenerateOKResult("Saved", endTypes[0].ID);
+                    return Result.GenerateOKResult("Saved", endTypes[0].ID.ToString());
                 }
                 else
                 {
-                    return ResultInfo.GetResultByID(1);
+                    return Result.GenerateFailedResult();
                 }
             }
             catch
             {
-                return ResultInfo.GetResultByID(1);
+                return Result.GenerateFailedResult();
             }
         }
 
@@ -137,16 +138,16 @@ namespace DynThings.Data.Repositories
                 {
                     db.EndPointTypes.Remove(endTypes[0]);
                     db.SaveChanges();
-                    return ResultInfo.GenerateOKResult("Deleted", endTypes[0].ID);
+                    return Result.GenerateOKResult("Deleted", endTypes[0].ID.ToString());
                 }
                 else
                 {
-                    return ResultInfo.GetResultByID(1);
+                    return Result.GenerateFailedResult();
                 }
             }
             catch
             {
-                return ResultInfo.GetResultByID(1);
+                return Result.GenerateFailedResult();
             }
         }
 

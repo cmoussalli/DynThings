@@ -16,7 +16,7 @@ using System.Threading.Tasks;
 using DynThings.Data.Models.ViewModels;
 using PagedList;
 using System.IO;
-
+using ResultInfo;
 
 namespace DynThings.WebPortal.Controllers
 {
@@ -111,15 +111,15 @@ namespace DynThings.WebPortal.Controllers
         #endregion
 
         [HttpGet]
-        public ResultInfo.Result GetMediaFile(string guid)
+        public Result GetMediaFile(string guid)
         {
-            ResultInfo.Result result = ResultInfo.GenerateErrorResult();
+            Result result = Result.GenerateFailedResult();
             string localFile = Path.Combine(System.Web.HttpContext.Current.Server.MapPath("~/imgs"), guid + ".png");
             WebClient client = new WebClient();
 
             client.DownloadFile("http://dynthings.com/mediafiles/" + guid + ".png", localFile);
 
-            result = ResultInfo.GenerateOKResult();
+            result = Result.GenerateOKResult();
             return result;
         }
 

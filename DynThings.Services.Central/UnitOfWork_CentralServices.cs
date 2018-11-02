@@ -28,7 +28,8 @@ namespace DynThings.Services.Central
 
 
         public AppStoreService appStoreService { get { return new AppStoreService(CentralURL); } }
-
+        public DBChangesService dbChangesService  { get { return new DBChangesService(CentralURL); } }
+        public HostStatisticsService hostStatisticsService { get { return new HostStatisticsService(CentralURL); } }
 
 
 

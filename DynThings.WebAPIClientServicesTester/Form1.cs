@@ -9,7 +9,8 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using DynThings.WebAPI.Models;
 using DynThings.WebAPI.ClientServices;
-
+using DynThings.WebAPI.Models.RequestModels;
+using DynThings.WebAPI.Models.ResponseModels;
 
 
 namespace DynThings.WebAPIClientServicesTester
@@ -19,7 +20,6 @@ namespace DynThings.WebAPIClientServicesTester
         UnitOfWork uow;
         HostConfig conf = new HostConfig();
         Guid appGUID;
-        Guid token;
 
 
         public Form1()
@@ -44,16 +44,16 @@ namespace DynThings.WebAPIClientServicesTester
 
         private async void button1_ClickAsync(object sender, EventArgs e)
         {
-            Initialize();
-            ApiResponse resp = await uow.TokenService.Validate();
-            MessageBox.Show(resp.StatusTitle);
+           // Initialize();
+            APIAppUserTokenResponseModels.ValidateToken resp = await uow.TokenService.ValidateToken();
+            MessageBox.Show(resp.Response.StatusTitle);
         }
 
         private async void btnGetTokenInfo_ClickAsync(object sender, EventArgs e)
         {
-            Initialize();
-            APIAppUserToken token = await uow.TokenService.GetTokenInfo();
-            MessageBox.Show("Expire Date: " + token.ExpireDate.ToShortDateString());
+           // Initialize();
+            APIAppUserTokenResponseModels.GetTokenInfo resp = await uow.TokenService.GetTokenInfo();
+            MessageBox.Show("Expire Date: " + resp.AppUserToken.ExpireDate.ToShortDateString());
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -64,22 +64,44 @@ namespace DynThings.WebAPIClientServicesTester
         private async void btnGetLocationViews_Click(object sender, EventArgs e)
         {
             Initialize();
-            List<APILocationView> views = await uow.LocationViewsService.GetListAsync(1, 10, "", true, true);
-            gv1.DataSource = views;
+
+            APILocationViewRequestModels.GetLocationViewsList model = new APILocationViewRequestModels.GetLocationViewsList();
+            model.LoadLocations = true;
+            model.PageNumber = 1; model.PageSize = 1; model.Token = Guid.Parse(txtToken.Text);
+
+            APILocationViewResponseModels.GetLocationViewsList views = await uow.LocationViewsService.GetListAsync(model);
+            gv1.DataSource = views.Views;
         }
 
         private async void btnGetLocation_Click(object sender, EventArgs e)
         {
             Initialize();
-            List<APILocation> locs = await uow.LocationsService.GetListAsync(1, 25, true, true, "", 0);
-            gv1.DataSource = locs;
+
+            APILocationRequestModels.GetLocationsList model = new APILocationRequestModels.GetLocationsList();
+            model.LoadThings = true;
+            model.LoadViews = true;
+            
+            model.PageNumber = 1; model.PageSize = 1; model.Token = Guid.Parse(txtToken.Text);
+
+            APILocationResponseModels.GetLocationsList locations = await uow.LocationsService.GetListAsync(model);
+            gv1.DataSource = locations.Locations;
         }
 
         private async void btnThings_Click(object sender, EventArgs e)
         {
             Initialize();
-            List<APIThing> things = await uow.ThingsService.GetListAsync(1, 100, true, true, "", 0);
-            gv1.DataSource = things;
+
+            APIThingRequestModels.GetThingsList model = new APIThingRequestModels.GetThingsList();
+            model.LoadEndPoints = true;
+            model.LoadLocation = true;
+            model.LoadThingEnds = true;
+            model.LoadThingExtensionValues = true;
+
+            model.PageNumber = 1; model.PageSize = 1; model.Token = Guid.Parse(txtToken.Text);
+
+            APIThingResponseModels.GetThingsList things = await uow.ThingsService.GetThingsListAsync(model);
+            gv1.DataSource = things.Things;
+
         }
 
         private async void btnSubmitEndPointInput_Click(object sender, EventArgs e)
@@ -91,36 +113,61 @@ namespace DynThings.WebAPIClientServicesTester
         private async void btnGetEndPointsWarnings_Click(object sender, EventArgs e)
         {
             Initialize();
-            List<APIEndPoint> ends = await uow.EndPointsService.GetEndpointsWithWarnings(1, 100, true, true, "", 0, 0);
-            gv1.DataSource = ends;
+            APIEndpointResponseModels.GetEndpointsList ends = await uow.EndPointsService.GetEndpointsWithWarningsList(new APIEndpointRequestModels.GetEndpointsList { Token = Guid.Parse( conf.Token) });
+            gv1.DataSource = ends.Endpoints;
         }
 
         private async void btnGetEndPoints_Click(object sender, EventArgs e)
         {
             Initialize();
-            List<APIEndPoint> ends = await uow.EndPointsService.GetListAsync(1, 100, true, true, "", 0);
-            gv1.DataSource = ends;
+
+            APIEndpointRequestModels.GetEndpointsList model = new APIEndpointRequestModels.GetEndpointsList();
+            model.DeviceID = 0;model.PageNumber = 1;model.PageSize = 1;model.Token = Guid.Parse (txtToken.Text) ;
+
+            APIEndpointResponseModels.GetEndpointsList ends = await uow.EndPointsService.GetEndpointsListAsync(model);
+            gv1.DataSource = ends.Endpoints;
         }
 
         private async void btnGetThingsWarnings_Click(object sender, EventArgs e)
         {
             Initialize();
-            List<APIThing> things = await uow.ThingsService.GetThingsWithWarnings(1, 100, true, true, 0);
-            gv1.DataSource = things;
+
+            APIThingRequestModels.GetThingsList model = new APIThingRequestModels.GetThingsList();
+            model.LoadEndPoints = true;
+            model.LoadLocation = true;
+            model.LoadThingEnds = true;
+            model.LoadThingExtensionValues = true;
+
+            model.PageNumber = 1; model.PageSize = 1; model.Token = Guid.Parse(txtToken.Text);
+
+            APIThingResponseModels.GetThingsList things = await uow.ThingsService.GetThingsWithWarningsListAsync(model);
+            gv1.DataSource = things.Things;
         }
 
         private async void btnGetLocationsWarnings_Click(object sender, EventArgs e)
         {
             Initialize();
-            List<APILocation> locs = await uow.LocationsService.GetLocationsWithWarnings(1, 25, true, true, "", 0);
-            gv1.DataSource = locs;
+
+            APILocationRequestModels.GetLocationsList model = new APILocationRequestModels.GetLocationsList();
+            model.LoadThings = true;
+            model.LoadViews = true;
+
+            model.PageNumber = 1; model.PageSize = 1; model.Token = Guid.Parse(txtToken.Text);
+
+            APILocationResponseModels.GetLocationsList locations = await uow.LocationsService.GetLocationsWithWarningsListAsync(model);
+            gv1.DataSource = locations.Locations;
         }
 
         private async void btnGetViewsWarnings_Click(object sender, EventArgs e)
         {
             Initialize();
-            List<APILocationView> views = await uow.LocationViewsService.GetLocationViewsWithWarnings(1, 25, true, true);
-            gv1.DataSource = views;
+
+            APILocationViewRequestModels.GetLocationViewsList model = new APILocationViewRequestModels.GetLocationViewsList();
+            model.LoadLocations = true;
+            model.PageNumber = 1; model.PageSize = 1; model.Token = Guid.Parse(txtToken.Text);
+
+            APILocationViewResponseModels.GetLocationViewsList views = await uow.LocationViewsService.GetLocationViewsWithWarningsListAsync(model);
+            gv1.DataSource = views.Views;
         }
 
         private async void btnSubmitEndPointLog_Click(object sender, EventArgs e)
@@ -162,16 +209,16 @@ namespace DynThings.WebAPIClientServicesTester
             uow = new UnitOfWork(conf);
             try
             {
-                APIAppUserToken token = await uow.TokenService.GetNewToken();
+                APIAppUserTokenResponseModels.GetNewToken resp = await uow.TokenService.GetNewToken();
 
                 conf.URL = txtURL.Text;
                 conf.UserName = txtUser.Text;
                 conf.Password = txtPassword.Text;
                 conf.AppGUID = txtAppID.Text;
-                conf.Token = token.Token.ToString();
+                conf.Token = resp.AppUserToken.Token.ToString();
                 uow = new UnitOfWork(conf);
 
-                txtToken.Text = token.Token.ToString();
+                txtToken.Text = resp.AppUserToken.Token.ToString();
             }
             catch (Exception ex)
             {
@@ -179,6 +226,65 @@ namespace DynThings.WebAPIClientServicesTester
             }
 
 
+        }
+
+        private void txtAppID_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private async void btnGetDevices_ClickAsync(object sender, EventArgs e)
+        {
+            Initialize();
+
+            APIDeviceRequestModels.GetDevicesList model = new APIDeviceRequestModels.GetDevicesList();
+            model.LoadDeviceCommands = true;
+            model.LoadEndpoints = true;
+
+            model.PageNumber = 1; model.PageSize = 1; model.Token = Guid.Parse(txtToken.Text);
+
+            APIDeviceResponseModels.GetDevicesList devs = await uow.DevicesService.GetDevicesListAsync(model);
+            gv1.DataSource = devs.Devices;
+        }
+
+        private async void btnGetEnpointsCommands_ClickAsync(object sender, EventArgs e)
+        {
+            Initialize();
+
+            APIEndpointCommandRequestModels.GetEndpointCommandsList model = new APIEndpointCommandRequestModels.GetEndpointCommandsList();
+            model.LoadEndpoint = true;
+
+            model.PageNumber = 1; model.PageSize = 1; model.Token = Guid.Parse(txtToken.Text);
+
+            APIEndpointCommandResponseModels.GetEndpointCommandsList cmds = await uow.EndPointCommandsService.GetEndPointsListAsync(model);
+            gv1.DataSource = cmds.EndpointCommands;
+        }
+
+        private async void btnGetDeviceCommands_ClickAsync(object sender, EventArgs e)
+        {
+            Initialize();
+
+            APIDeviceCommandRequestModels.GetDeviceCommandsList model = new APIDeviceCommandRequestModels.GetDeviceCommandsList();
+            model.LoadDevice = true;
+
+            model.PageNumber = 1; model.PageSize = 1; model.Token = Guid.Parse(txtToken.Text);
+
+            APIDeviceCommandResponseModels.GetDeviceCommandsList cmds = await uow.DeviceCommandsService.GetDevicesListAsync(model);
+            gv1.DataSource = cmds.DeviceCommands;
+        }
+
+        private async void btnGetThingEnds_ClickAsync(object sender, EventArgs e)
+        {
+            Initialize();
+
+            APIThingEndRequestModels.GetThingEndsList model = new APIThingEndRequestModels.GetThingEndsList();
+            model.LoadEndpoint = true;
+            model.LoadThing = true;
+
+            model.PageNumber = 1; model.PageSize = 1; model.Token = Guid.Parse(txtToken.Text);
+
+            APIThingEndResponseModels.GetThingEndsList thingEnds = await uow.ThingEndsService.GetThingEndsListAsync(model);
+            gv1.DataSource = thingEnds.ThingEnds;
         }
     }
 }

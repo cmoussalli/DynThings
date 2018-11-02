@@ -11,6 +11,7 @@ using DynThings.Core;
 using DynThings.Data.Models;
 using DynThings.Data.Repositories;
 using DynThings.Data.Reports;
+using ResultInfo;
 
 namespace DynThings.WebPortal.Controllers
 {
@@ -78,7 +79,7 @@ namespace DynThings.WebPortal.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult AddPV([Bind(Include = "Title")] Alert Alert)
         {
-            ResultInfo.Result res = ResultInfo.GetResultByID(1);
+            Result res = Result.GenerateFailedResult();
             res = uof_repos.repoAlerts.Add(Alert.Title);
             return Json(res);
         }
@@ -96,7 +97,7 @@ namespace DynThings.WebPortal.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult EditMainPV([Bind(Include = "ID,Title,Message,IsActive")] Alert alert)
         {
-            ResultInfo.Result res = ResultInfo.GetResultByID(1);
+            Result res = Result.GenerateFailedResult();
             if (ModelState.IsValid)
             {
                 res = uof_repos.repoAlerts.EditMain(alert.ID, alert.Title, alert.Message, (bool)alert.IsActive);
@@ -118,7 +119,7 @@ namespace DynThings.WebPortal.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult EditSchedulePV([Bind(Include = "ID,Sunday,Monday,Tuesday,Wednesday,Thursday,Friday,Saturday,StartTime,EndTime")] Alert alert)
         {
-            ResultInfo.Result res = ResultInfo.GetResultByID(1);
+            Result res = Result.GenerateFailedResult();
             if (ModelState.IsValid)
             {
                 res = uof_repos.repoAlerts.EditSchedule(alert.ID, alert.Sunday, alert.Monday, alert.Tuesday, alert.Wednesday, alert.Thursday, alert.Friday, alert.Saturday, alert.StartTime, alert.EndTime);
@@ -134,7 +135,7 @@ namespace DynThings.WebPortal.Controllers
         {
             if (!User.IsInRole("Admin"))
             {
-                ResultInfo.Result rm = Core.ResultInfo.GetResultByID(1);
+                Result rm = Result.GenerateFailedResult();
                 return PartialView("_PVResult", rm);
             }
             Alert Alert = uof_repos.repoAlerts.Find(id);
@@ -146,7 +147,7 @@ namespace DynThings.WebPortal.Controllers
         [Authorize(Roles = "Admin")]
         public ActionResult DeletePV([Bind(Include = "ID,Title")] Alert Alert)
         {
-            ResultInfo.Result res = ResultInfo.GetResultByID(1);
+            Result res = Result.GenerateFailedResult();
             if (ModelState.IsValid)
             {
                 res = uof_repos.repoAlerts.Delete(Alert.ID);
@@ -182,7 +183,7 @@ namespace DynThings.WebPortal.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult AlertConditionAddPV([Bind(Include = "AlertID,ThingID,IOTypeID,EndPointTypeID,ConditionTypeID,ConditionValue,IsMust")] AlertCondition alertCondition)
         {
-            ResultInfo.Result res = ResultInfo.GetResultByID(1);
+            Result res = Result.GenerateFailedResult();
             if (ModelState.IsValid)
             {
                 res = uof_repos.repoAlerts.AddCondition(alertCondition.AlertID
@@ -214,7 +215,7 @@ namespace DynThings.WebPortal.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult AlertConditionEditPV([Bind(Include = "ID,AlertID,ThingID,IOTypeID,EndPointTypeID,ConditionTypeID,ConditionValue,IsMust")] AlertCondition alertCondition)
         {
-            ResultInfo.Result res = ResultInfo.GetResultByID(1);
+            Result res = Result.GenerateFailedResult();
             if (ModelState.IsValid)
             {
                 res = uof_repos.repoAlerts.EditCondition(alertCondition.ID
@@ -236,7 +237,7 @@ namespace DynThings.WebPortal.Controllers
         {
             if (!User.IsInRole("Admin"))
             {
-                ResultInfo.Result rm = Core.ResultInfo.GetResultByID(1);
+                Result rm = Result.GenerateFailedResult();
                 return PartialView("_PVResult", rm);
             }
             AlertCondition con = uof_repos.repoAlerts.FindCondition(id);
@@ -248,7 +249,7 @@ namespace DynThings.WebPortal.Controllers
         [Authorize(Roles = "Admin")]
         public ActionResult AlertConditionDeletePV([Bind(Include = "ID")] AlertCondition alertCondition)
         {
-            ResultInfo.Result res = ResultInfo.GetResultByID(1);
+            Result res = Result.GenerateFailedResult();
             if (ModelState.IsValid)
             {
                 res = uof_repos.repoAlerts.DeleteCondition(alertCondition.ID);
@@ -276,7 +277,7 @@ namespace DynThings.WebPortal.Controllers
         [Authorize(Roles = "Admin")]
         public ActionResult AlertUserDetach(long alertID, string userID)
         {
-            ResultInfo.Result res = ResultInfo.GetResultByID(1);
+            Result res = Result.GenerateFailedResult();
             res = uof_repos.repoAlerts.DeattachUser(alertID, userID);
 
             return Json(res);
@@ -289,7 +290,7 @@ namespace DynThings.WebPortal.Controllers
         [Authorize(Roles = "Admin")]
         public ActionResult AlertUserAttach(long alertID, string userID)
         {
-            ResultInfo.Result res = ResultInfo.GetResultByID(1);
+            Result res = Result.GenerateFailedResult();
             res = uof_repos.repoAlerts.AttachUser(alertID, userID);
 
             return Json(res);

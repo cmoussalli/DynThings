@@ -3,15 +3,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using DynThings.Core;
-using DynThings.Data.Models;
-using DynThings.WebAPI.Models;
 using DynThings.WebAPI.Repositories;
 using PagedList;
 using System.Collections;
 using System.Net.Http;
 using System.Net;
-
+using DynThings.Core;
+using DynThings.Data.Models;
+using DynThings.WebAPI.Models;
+using DynThings.WebAPI.Models.ResponseModels;
+using DynThings.Data.Repositories;
 
 namespace DynThings.WebAPI.Repositories
 {
@@ -28,7 +29,7 @@ namespace DynThings.WebAPI.Repositories
         #region props
         private DynThingsEntities db;
         public long EntityID = 11;
-      
+
         private APIUtilizationsRepository repoAPIUtilizations
         {
             get
@@ -37,6 +38,8 @@ namespace DynThings.WebAPI.Repositories
                 return result;
             }
         }
+
+        public UnitOfWork_Repositories uof_Repositories = new UnitOfWork_Repositories();
         #endregion
 
 
@@ -46,68 +49,76 @@ namespace DynThings.WebAPI.Repositories
         /// <summary>
         /// Get List of Things.
         /// </summary>
-        /// <param name="pageNumber">Page Number.</param>
-        /// <param name="pageSize">Items count per page.</param>
-        /// <param name="loadParents">Enable or Disable loading the Parents objects.</param>
-        /// <param name="loadChilds">Enable or Disable loading the Childs objects.</param>
         /// <param name="searchFor">Search text as per the 'Title' field.</param>
         /// <param name="locationID">Filter by Location ID. You can keep it null or empty to ignore this filter.</param>
-        /// <returns></returns>
-        public List<APIThing> GetThings(int pageNumber, int pageSize, bool loadParents, bool loadChilds, string searchFor, long locationID)
-        {
-            List<APIThing> result = new List<APIThing>();
-            List<Thing> thingsLst = db.Things.Include("ThingCategory").Include("LinkThingsLocations").Include("ThingExtensionValues")
-                        .Where(e => 
-                        ((searchFor == null || searchFor =="") || e.Title.Contains(searchFor))
-                        && ((locationID==null || locationID == 0) || (e.LinkThingsLocations.Any(l => l.LocationID == locationID)))
-                        && e.ID > 0
-                        )
-                        .OrderBy(e => e.Title).Skip(pageSize * (pageNumber - 1))
-                        .Skip(pageSize *(pageNumber -1))
-                        .Take(pageSize)
-                        .ToList();
-            foreach(Thing thing in thingsLst)
-            {
-                result.Add(TypesMapper.APIThingAdapter.fromThing(thing,loadParents,loadChilds));
-            }
-            return result;
-        }
-
-        #endregion
-
-        #region Get Things with warnings Only
-        /// <summary>
-        /// Get Things list that have warnings Only.
-        /// </summary>
         /// <param name="pageNumber">Page Number.</param>
         /// <param name="pageSize">Items count per page.</param>
         /// <param name="loadParents">Enable or Disable loading the Parents objects.</param>
         /// <param name="loadChilds">Enable or Disable loading the Childs objects.</param>
-        /// <param name="locationID">The requested Location to validate it's own things for a warnings</param>
-        /// <returns>List of Locations that have one warning or more.</returns>
-        public List<APIThing> GetThingsWithWarnings(int pageNumber, int pageSize, bool loadParents, bool loadChilds, long locationID)
+        /// <returns></returns>
+        public APIThingResponseModels.GetThingsList GetThingsList(string searchFor, long? locationID, bool loadThingEnds, bool loadEndpoints,bool loadLocation, bool loadThingExtensionValues, int pageNumber, int pageSize)
         {
-            List<APIThing> apiThings = new List<APIThing>();
-            List<Thing> things = db.Things
-                .Where(t =>
-                       t.LinkThingsLocations.Any(
-                                        lt =>
-                                            (lt.LocationID == locationID || (locationID == null || locationID == 0  )  )
-                                            && lt.Thing.Endpoints.Any(
-                                                             e => e.IsNumericOnly == true
-                                                            && (e.LastIONumericValue >= e.HighRange || e.LastIONumericValue <= e.LowRange)
-                                                                        )
-                                            )
-                )
-                .OrderBy(o => o.Title)
-                .Skip((pageNumber - 1) * pageSize)
-                .Take(pageSize).ToList();
-            foreach (Thing item in things)
+            APIThingResponseModels.GetThingsList result = new APIThingResponseModels.GetThingsList();
+
+            IPagedList<Thing> thingsPL = uof_Repositories.repoThings.GetPagedList(searchFor, locationID, pageNumber, pageSize);
+
+            List<Thing> things = thingsPL.ToList();
+
+            List<APIThing> listAPIThings = new List<APIThing>();
+            foreach (Thing thing in things)
             {
-                APIThing apiThing = TypesMapper.APIThingAdapter.fromThing(item, loadParents, loadChilds);
-                apiThings.Add(apiThing);
+                APIThing apiThing = TypesMapper.APIThingAdapter.fromThing(thing,loadLocation,loadThingEnds,loadThingEnds, loadThingExtensionValues);
+                listAPIThings.Add(apiThing);
             }
-            return apiThings;
+            result.Things = listAPIThings;
+
+
+            PagingInfoResponseModel pagingInfo = new PagingInfoResponseModel();
+            pagingInfo.CurrentPage = thingsPL.PageNumber;
+            pagingInfo.ItemsPerPage = thingsPL.PageSize;
+            pagingInfo.ItemsCount = thingsPL.TotalItemCount;
+            pagingInfo.PagesCount = thingsPL.PageCount;
+            result.PagingInfo = pagingInfo;
+            return result;
+        }
+        #endregion
+
+
+        #region Get Things With Warnings
+        /// <summary>
+        /// Get List of Things.
+        /// </summary>
+        /// <param name="searchFor">Search text as per the 'Title' field.</param>
+        /// <param name="locationID">Filter by Location ID. You can keep it null or empty to ignore this filter.</param>
+        /// <param name="pageNumber">Page Number.</param>
+        /// <param name="pageSize">Items count per page.</param>
+        /// <param name="loadParents">Enable or Disable loading the Parents objects.</param>
+        /// <param name="loadChilds">Enable or Disable loading the Childs objects.</param>
+        /// <returns></returns>
+        public APIThingResponseModels.GetThingsList GetThingsWithWarningsList(string searchFor, long? locationID, bool loadThingEnds, bool loadEndpoints, bool loadLocation, bool loadThingExtensionValues, int pageNumber, int pageSize)
+        {
+            APIThingResponseModels.GetThingsList result = new APIThingResponseModels.GetThingsList();
+
+            IPagedList<Thing> thingsPL = uof_Repositories.repoThings.GetThingsWithWarningsPagedList(searchFor, locationID, pageNumber, pageSize);
+
+            List<Thing> things = thingsPL.ToList();
+
+            List<APIThing> listAPIThings = new List<APIThing>();
+            foreach (Thing thing in things)
+            {
+                APIThing apiThing = TypesMapper.APIThingAdapter.fromThing(thing, loadLocation, loadThingEnds, loadThingEnds, loadThingExtensionValues);
+                listAPIThings.Add(apiThing);
+            }
+            result.Things = listAPIThings;
+
+
+            PagingInfoResponseModel pagingInfo = new PagingInfoResponseModel();
+            pagingInfo.CurrentPage = thingsPL.PageNumber;
+            pagingInfo.ItemsPerPage = thingsPL.PageSize;
+            pagingInfo.ItemsCount = thingsPL.TotalItemCount;
+            pagingInfo.PagesCount = thingsPL.PageCount;
+            result.PagingInfo = pagingInfo;
+            return result;
         }
         #endregion
 

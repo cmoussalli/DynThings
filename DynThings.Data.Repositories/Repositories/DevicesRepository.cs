@@ -12,6 +12,7 @@ using System.Threading.Tasks;
 using DynThings.Data.Models;
 using PagedList;
 using DynThings.Core;
+using ResultInfo;
 
 namespace DynThings.Data.Repositories
 {
@@ -150,9 +151,9 @@ namespace DynThings.Data.Repositories
             }
             catch(Exception ex)
             {
-                return ResultInfo.GenerateErrorResult(ex.InnerException.ToString());
+                return Result.GenerateFailedResult(ex.InnerException.ToString());
             }
-            return ResultInfo.GenerateOKResult("Saved", dev.ID);
+            return Result.GenerateOKResult("Saved", dev.ID.ToString());
         }
         #endregion
 
@@ -172,11 +173,11 @@ namespace DynThings.Data.Repositories
                 dev.UTC_Diff = utc_Diff;
                 dev.IsConnectedDelay = IsConnectedDelay;
                 db.SaveChanges();
-                return ResultInfo.GenerateOKResult("Saved", dev.ID);
+                return Result.GenerateOKResult("Saved", dev.ID.ToString());
             }
             catch
             {
-                return ResultInfo.GetResultByID(1);
+                return Result.GenerateFailedResult();
             }
         }
 
@@ -191,11 +192,11 @@ namespace DynThings.Data.Repositories
                 
                 db.Devices.Remove(dev);
                 db.SaveChanges();
-                return ResultInfo.GenerateOKResult("Deleted", dev.ID);
+                return Result.GenerateOKResult("Deleted", dev.ID.ToString());
             }
             catch(Exception ex)
             {
-                return ResultInfo.GenerateErrorResult(ex.Message + " -- " + ex.InnerException);
+                return Result.GenerateFailedResult(ex.Message + " -- " + ex.InnerException);
             }
         }
 
@@ -214,11 +215,11 @@ namespace DynThings.Data.Repositories
                 Device dev = db.Devices.Find(deviceID);
                 dev.GUID = Guid.NewGuid();
                 db.SaveChanges();
-                return ResultInfo.GenerateOKResult("Saved", dev.ID);
+                return Result.GenerateOKResult("Saved", dev.ID.ToString());
             }
             catch
             {
-                return ResultInfo.GetResultByID(1);
+                return Result.GenerateFailedResult();
             }
         }
 

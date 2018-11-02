@@ -13,6 +13,7 @@ using DynThings.Data.Models;
 using DynThings.Data.Models.ViewModels;
 using PagedList;
 using DynThings.Core;
+using ResultInfo;
 
 namespace DynThings.Data.Repositories
 {
@@ -38,11 +39,11 @@ namespace DynThings.Data.Repositories
                 UserNotification noti = db.UserNotifications.Find(id);
                 noti.IsEmailSent = true;
                 db.SaveChanges();
-                return ResultInfo.GenerateOKResult("Saved",noti.ID);
+                return Result.GenerateOKResult("Saved",noti.ID.ToString());
             }
             catch
             {
-                return ResultInfo.GetResultByID(1);
+                return Result.GenerateFailedResult();
             }
         }
 
@@ -81,17 +82,17 @@ namespace DynThings.Data.Repositories
 
         public ResultInfo.Result SetNotificationAsRead(long notificationID)
         {
-            ResultInfo.Result res = ResultInfo.GenerateErrorResult("Error");
+            ResultInfo.Result res = Result.GenerateFailedResult("Error");
             try
             {
                 UserNotification noti = db.UserNotifications.Find(notificationID);
                 noti.IsRead = 2;
                 db.SaveChanges();
-                res = ResultInfo.GenerateOKResult();
+                res = Result.GenerateOKResult();
             }
             catch (Exception ex)
             {
-                res = ResultInfo.GenerateErrorResult(ex.Message);
+                res = Result.GenerateFailedResult(ex.Message);
             }
             return res;
         }

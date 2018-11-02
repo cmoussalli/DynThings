@@ -14,6 +14,7 @@ using DynThings.Data.Reports;
 
 using DynHighCharts;
 using System.IO;
+using ResultInfo;
 
 namespace DynThings.WebPortal.Controllers
 {
@@ -76,7 +77,7 @@ namespace DynThings.WebPortal.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult AddPV([Bind(Include = "Title,IconID")] ThingCategory thingCategory)
         {
-            ResultInfo.Result res = ResultInfo.GetResultByID(1);
+            Result res = Result.GenerateFailedResult();
             if (ModelState.IsValid)
             {
                 res = uof_repos.repoThingCategorys.Add(thingCategory.Title, (long)thingCategory.IconID);
@@ -99,7 +100,7 @@ namespace DynThings.WebPortal.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult EditPV([Bind(Include = "ID,Title,IconID")] ThingCategory thingCategory)
         {
-            ResultInfo.Result res = ResultInfo.GetResultByID(1);
+            Result res = Result.GenerateFailedResult();
             if (ModelState.IsValid)
             {
                 res = uof_repos.repoThingCategorys.Edit(thingCategory.ID, thingCategory.Title, (long)thingCategory.IconID);
@@ -115,7 +116,7 @@ namespace DynThings.WebPortal.Controllers
         {
             if (!User.IsInRole("Admin"))
             {
-                ResultInfo.Result rm = Core.ResultInfo.GetResultByID(1);
+                Result rm = Result.GenerateFailedResult();
                 return PartialView("_PVResult", rm);
             }
             ThingCategory thingCategory = uof_repos.repoThingCategorys.Find(id);
@@ -127,7 +128,7 @@ namespace DynThings.WebPortal.Controllers
         [Authorize(Roles = "Admin")]
         public ActionResult DeletePV([Bind(Include = "ID")] ThingCategory thingCategory)
         {
-            ResultInfo.Result res = ResultInfo.GetResultByID(1);
+            Result res = Result.GenerateFailedResult();
             if (ModelState.IsValid)
             {
                 res = uof_repos.repoThingCategorys.Delete(thingCategory.ID);

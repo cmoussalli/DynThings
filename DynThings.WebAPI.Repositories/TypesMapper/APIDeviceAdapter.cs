@@ -11,7 +11,7 @@ namespace DynThings.WebAPI.TypesMapper
 
     public static class APIDeviceAdapter
     {
-        public static APIDevice fromDevice(Device sourceDevice, bool loadParents, bool loadChilds)
+        public static APIDevice fromDevice(Device sourceDevice, bool loadEndPoints, bool loadDeviceCommands)
         {
             APIDevice result = new APIDevice();
             result.ID = sourceDevice.ID;
@@ -31,9 +31,9 @@ namespace DynThings.WebAPI.TypesMapper
 
             #endregion
 
-
             #region Load Childs
-            if (loadChilds)
+            #region Load Endpoints
+            if (loadEndPoints)
             {
 
                 #region EndPoints
@@ -45,20 +45,24 @@ namespace DynThings.WebAPI.TypesMapper
                 }
                 result.EndPoints = ens;
                 #endregion
+            }
+            #endregion
 
+            #region Load DeviceCommands
+            if (loadDeviceCommands)
+            {
                 #region Device Commands
                 List<APIDeviceCommand> cmds = new List<APIDeviceCommand>();
                 foreach (DeviceCommand cmd in sourceDevice.DeviceCommands)
                 {
-                    APIDeviceCommand apiCmd = APIDeviceCommandAdapter.fromDeviceCommand(cmd,false,false);
+                    APIDeviceCommand apiCmd = APIDeviceCommandAdapter.fromDeviceCommand(cmd, false);
                     cmds.Add(apiCmd);
                 }
                 result.DeviceCommands = cmds;
                 #endregion
-
-                #endregion
             }
-
+            #endregion
+            #endregion
 
 
             return result;

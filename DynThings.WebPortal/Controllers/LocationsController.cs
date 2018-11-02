@@ -18,6 +18,7 @@ using DynThings.Data.Models;
 using DynThings.Data.Repositories;
 using PagedList;
 using Microsoft.AspNet.Identity;
+using ResultInfo;
 
 namespace DynThings.WebPortal.Controllers
 {
@@ -69,7 +70,7 @@ namespace DynThings.WebPortal.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult AddPV([Bind(Include = "Title")] Location location)
         {
-            ResultInfo.Result res = ResultInfo.GetResultByID(1);
+            Result res = Result.GenerateFailedResult();
             if (ModelState.IsValid)
             {
                 res = uof_repos.repoLocations.Add(location.Title);
@@ -92,7 +93,7 @@ namespace DynThings.WebPortal.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DetailsMainPV([Bind(Include = "ID,Title,IsActive")] Location location)
         {
-            ResultInfo.Result res = ResultInfo.GetResultByID(1);
+            Result res = Result.GenerateFailedResult();
             if (ModelState.IsValid)
             {
                 res = uof_repos.repoLocations.EditMain(location.ID, location.Title, location.isActive);
@@ -114,7 +115,7 @@ namespace DynThings.WebPortal.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DetailsGeoLocationPV([Bind(Include = "ID,LongitudeY,LatitudeX")] Location location)
         {
-            ResultInfo.Result res = ResultInfo.GetResultByID(1);
+            Result res = Result.GenerateFailedResult();
             if (ModelState.IsValid)
             {
                 res = uof_repos.repoLocations.EditGeoLocation(location.ID, location.LongitudeY, location.LatitudeX);
@@ -151,7 +152,7 @@ namespace DynThings.WebPortal.Controllers
         [HttpPost]
         public ActionResult AttachDevice(long LocationID, long DeviceID)
         {
-            ResultInfo.Result res = ResultInfo.GetResultByID(1);
+            Result res = Result.GenerateFailedResult();
             if (ModelState.IsValid)
             {
                 res = uof_repos.repoLocations.AttachDevice(LocationID, DeviceID, User.Identity.GetUserId());
@@ -165,7 +166,7 @@ namespace DynThings.WebPortal.Controllers
         [HttpPost]
         public ActionResult DeAttachDevice(long linkID)
         {
-            ResultInfo.Result res = ResultInfo.GetResultByID(1);
+            Result res = Result.GenerateFailedResult();
             if (ModelState.IsValid)
             {
                 res = uof_repos.repoLocations.DeattachDevice(linkID, currentUser.Id);
@@ -200,7 +201,7 @@ namespace DynThings.WebPortal.Controllers
         [HttpPost]
         public ActionResult AttachThing(long LocationID, long ThingID)
         {
-            ResultInfo.Result res = ResultInfo.GetResultByID(1);
+            Result res = Result.GenerateFailedResult();
             if (ModelState.IsValid)
             {
                 res = uof_repos.repoLocations.AttachThing(LocationID, ThingID, User.Identity.GetUserId());
@@ -214,7 +215,7 @@ namespace DynThings.WebPortal.Controllers
         [HttpPost]
         public ActionResult DeAttachThing(long linkID)
         {
-            ResultInfo.Result res = ResultInfo.GetResultByID(1);
+            Result res = Result.GenerateFailedResult();
             if (ModelState.IsValid)
             {
                 res = uof_repos.repoLocations.DeattachThing(linkID, currentUser.Id);
@@ -238,7 +239,7 @@ namespace DynThings.WebPortal.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeletePV([Bind(Include = "ID,Title,IsActive")] Location location)
         {
-            ResultInfo.Result res = ResultInfo.GetResultByID(1);
+            Result res = Result.GenerateFailedResult();
             if (ModelState.IsValid)
             {
                 res = uof_repos.repoLocations.Delete(location.ID);

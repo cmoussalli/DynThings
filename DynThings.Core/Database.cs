@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Web.Configuration;
 using System.Data.SqlClient;
+using ResultInfo;
 
 namespace DynThings.Core
 {
@@ -37,11 +38,11 @@ namespace DynThings.Core
                 string con2 = "metadata=res://*/;provider=System.Data.SqlClient;provider connection string='data source=" + dbModel.Server + ";initial catalog=" + dbModel.DatabaseName + ";user id=" + dbModel.User + ";password=" + dbModel.Password + ";multipleactiveresultsets=True;application name=EntityFramework'";
                 section.ConnectionStrings["DynThingsEntities"].ConnectionString = con2;
                 configuration.Save();
-                return ResultInfo.GenerateOKResult("Saved");
+                return Result.GenerateOKResult("Saved");
             }
             catch (Exception ex)
             {
-                return ResultInfo.GenerateErrorResult(ex.Message);
+                return Result.GenerateFailedResult(ex.Message);
             }
         }
 
@@ -54,11 +55,11 @@ namespace DynThings.Core
                 SqlCommand command = new SqlCommand("select * from DynSettings", con);
                 command.ExecuteScalar();
                 con.Close();
-                return ResultInfo.GenerateOKResult();
+                return Result.GenerateOKResult();
             }
             catch (Exception ex)
             {
-                return ResultInfo.GenerateErrorResult(ex.Message);
+                return Result.GenerateFailedResult(ex.Message);
             }
         }
     }

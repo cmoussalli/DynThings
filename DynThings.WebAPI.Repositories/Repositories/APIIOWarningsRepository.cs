@@ -76,7 +76,7 @@ namespace DynThings.WebAPI.Repositories
             {
                 APIEndPointIOWarning w = new APIEndPointIOWarning();
                 w.SourceEndPoint = TypesMapper.APIEndPointAdapter.fromEndpoint(endpoint, false, false);
-                w.SourceThing = TypesMapper.APIThingAdapter.fromThing(endpoint.Thing, false, false);
+                w.SourceThing = TypesMapper.APIThingAdapter.fromThing(endpoint.Thing,false,false,false,false);
 
                 List<APILocation> wl = new List<APILocation>();
                 foreach(LinkThingsLocation l in endpoint.Thing.LinkThingsLocations)

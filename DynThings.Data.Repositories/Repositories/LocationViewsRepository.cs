@@ -12,6 +12,7 @@ using System.Threading.Tasks;
 using DynThings.Data.Models;
 using PagedList;
 using DynThings.Core;
+using ResultInfo;
 
 namespace DynThings.Data.Repositories
 {
@@ -37,13 +38,37 @@ namespace DynThings.Data.Repositories
         #endregion
 
         #region Get PagedList
-        public IPagedList GetPagedList(string search, int pageNumber, int recordsPerPage)
+        public IPagedList<LocationView> GetPagedList(string search, int pageNumber, int recordsPerPage)
         {
-            IPagedList views = db.LocationViews
+            IPagedList<LocationView> views = db.LocationViews
                 .Include("LocationViewType")
-                .Where(
-                l => search == null || l.Title.Contains(search))
-                              .OrderBy(l => l.Title).ToList()
+                  .Where(v =>
+                (search == null || search == "" || v.Title.Contains(search))
+                )
+                .OrderBy(o => o.Title)
+              .ToPagedList(pageNumber, recordsPerPage);
+            return views;
+        }
+        #endregion
+
+        #region Get Views with Warnings PagedList
+        public IPagedList<LocationView> GetLocationViewsWithWarningPagedList(string search, int pageNumber, int recordsPerPage)
+        {
+            IPagedList<LocationView> views = db.LocationViews
+                .Include("LocationViewType")
+                  .Where(v =>
+                 v.LinkLocationsLocationViews.Any(ll =>
+                           ll.Location.LinkThingsLocations.Any(lt =>
+                              lt.Thing.Endpoints.Any(
+                                  e => e.IsNumericOnly == true
+                                      && (e.LastIONumericValue >= e.HighRange || e.LastIONumericValue <= e.LowRange)
+
+                                  )
+
+                               )
+                       )
+                )
+                .OrderBy(o => o.Title)
               .ToPagedList(pageNumber, recordsPerPage);
             return views;
         }
@@ -86,11 +111,11 @@ namespace DynThings.Data.Repositories
                 loc.Z = "1";
                 db.LocationViews.Add(loc);
                 db.SaveChanges();
-                return ResultInfo.GenerateOKResult("Saved", loc.ID);
+                return Result.GenerateOKResult("Saved", loc.ID.ToString());
             }
             catch
             {
-                return ResultInfo.GetResultByID(1);
+                return Result.GenerateFailedResult();
             }
         }
         #endregion
@@ -112,11 +137,11 @@ namespace DynThings.Data.Repositories
                 loc.LocationViewTypeID = TypeID;
                 loc.IsActive = false;
                 db.SaveChanges();
-                return ResultInfo.GenerateOKResult("Saved", loc.ID);
+                return Result.GenerateOKResult("Saved", loc.ID.ToString());
             }
             catch
             {
-                return ResultInfo.GetResultByID(1);
+                return Result.GenerateFailedResult();
             }
         }
         #endregion
@@ -139,11 +164,11 @@ namespace DynThings.Data.Repositories
                 loc.Y = y;
                 loc.Z = z;
                 db.SaveChanges();
-                return ResultInfo.GenerateOKResult("Saved", loc.ID);
+                return Result.GenerateOKResult("Saved", loc.ID.ToString());
             }
             catch
             {
-                return ResultInfo.GetResultByID(1);
+                return Result.GenerateFailedResult();
             }
         }
         #endregion
@@ -161,11 +186,11 @@ namespace DynThings.Data.Repositories
                 LocationView loc = db.LocationViews.Find(locationViewID);
                 loc.IsActive = isActive;
                 db.SaveChanges();
-                return ResultInfo.GenerateOKResult("Saved", loc.ID);
+                return Result.GenerateOKResult("Saved", loc.ID.ToString());
             }
             catch
             {
-                return ResultInfo.GetResultByID(1);
+                return Result.GenerateFailedResult();
             }
         }
         #endregion
@@ -178,11 +203,11 @@ namespace DynThings.Data.Repositories
                 LocationView locView = db.LocationViews.Find(id);
                 db.LocationViews.Remove(locView);
                 db.SaveChanges();
-                return ResultInfo.GenerateOKResult("Deleted", locView.ID);
+                return Result.GenerateOKResult("Deleted", locView.ID.ToString());
             }
             catch
             {
-                return ResultInfo.GetResultByID(1);
+                return Result.GenerateFailedResult();
             }
         }
 
@@ -197,13 +222,13 @@ namespace DynThings.Data.Repositories
             List<LinkLocationsLocationView> lnks = db.LinkLocationsLocationViews.Where(l => l.LocationID == locationID && l.LocationViewID == locationViewID).ToList();
             if (lnks.Count > 0)
             {
-                return ResultInfo.GetResultByID(1);
+                return Result.GenerateFailedResult();
             }
             lnk.LocationID = locationID;
             lnk.LocationViewID = locationViewID;
             db.LinkLocationsLocationViews.Add(lnk);
             db.SaveChanges();
-            return ResultInfo.GenerateOKResult();
+            return Result.GenerateOKResult();
         }
         #endregion
         #region DeAttachLocation
@@ -212,12 +237,12 @@ namespace DynThings.Data.Repositories
             List<LinkLocationsLocationView> lnks = db.LinkLocationsLocationViews.Where(l => l.LocationID == locationID && l.LocationViewID == locationViewID).ToList();
             if (lnks.Count != 1)
             {
-                return ResultInfo.GetResultByID(1);
+                return Result.GenerateFailedResult();
             }
             LinkLocationsLocationView lnk = lnks[0];
             db.LinkLocationsLocationViews.Remove(lnk);
             db.SaveChanges();
-            return ResultInfo.GenerateOKResult();
+            return Result.GenerateOKResult();
         }
         #endregion
     }

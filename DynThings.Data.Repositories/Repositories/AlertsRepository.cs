@@ -1,6 +1,7 @@
 ﻿using DynThings.Core;
 using DynThings.Data.Models;
 using PagedList;
+using ResultInfo;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -83,11 +84,11 @@ namespace DynThings.Data.Repositories
 
                 db.Alerts.Add(alrt);
                 db.SaveChanges();
-                return ResultInfo.GenerateOKResult("Saved", alrt.ID);
+                return Result.GenerateOKResult("Saved", alrt.ID.ToString());
             }
             catch
             {
-                return ResultInfo.GetResultByID(1);
+                return Result.GenerateFailedResult();
             }
         }
 
@@ -103,11 +104,11 @@ namespace DynThings.Data.Repositories
                 alrt.IsActive = isActive;
                 alrt.Message = message;
                 db.SaveChanges();
-                return ResultInfo.GenerateOKResult("Saved", alrt.ID);
+                return Result.GenerateOKResult("Saved", alrt.ID.ToString());
             }
             catch
             {
-                return ResultInfo.GetResultByID(1);
+                return Result.GenerateFailedResult();
             }
 
         }
@@ -122,11 +123,11 @@ namespace DynThings.Data.Repositories
                 Alert alrt = db.Alerts.Find(id);
                 alrt.Message = message;
                 db.SaveChanges();
-                return ResultInfo.GenerateOKResult("Saved", alrt.ID);
+                return Result.GenerateOKResult("Saved", alrt.ID.ToString());
             }
             catch
             {
-                return ResultInfo.GetResultByID(1);
+                return Result.GenerateFailedResult();
             }
 
         }
@@ -149,11 +150,11 @@ namespace DynThings.Data.Repositories
                 alrt.StartTime = StartTime;
                 alrt.EndTime = EndTime;
                 db.SaveChanges();
-                return ResultInfo.GenerateOKResult("Saved", alrt.ID);
+                return Result.GenerateOKResult("Saved", alrt.ID.ToString());
             }
             catch
             {
-                return ResultInfo.GetResultByID(1);
+                return Result.GenerateFailedResult();
             }
 
         }
@@ -168,11 +169,11 @@ namespace DynThings.Data.Repositories
                 Alert alrt = db.Alerts.Find(id);
                 db.Alerts.Remove(alrt);
                 db.SaveChanges();
-                return ResultInfo.GenerateOKResult("Deleted", alrt.ID);
+                return Result.GenerateOKResult("Deleted", alrt.ID.ToString());
             }
             catch
             {
-                return ResultInfo.GetResultByID(1);
+                return Result.GenerateFailedResult();
             }
         }
 
@@ -227,11 +228,11 @@ namespace DynThings.Data.Repositories
 
                 db.AlertConditions.Add(con);
                 db.SaveChanges();
-                return ResultInfo.GenerateOKResult("Saved", con.ID);
+                return Result.GenerateOKResult("Saved", con.ID.ToString());
             }
             catch
             {
-                return ResultInfo.GetResultByID(1);
+                return Result.GenerateFailedResult();
             }
         }
 
@@ -251,11 +252,11 @@ namespace DynThings.Data.Repositories
                 con.IsMust = IsMust;
 
                 db.SaveChanges();
-                return ResultInfo.GenerateOKResult("Saved", con.ID);
+                return Result.GenerateOKResult("Saved", con.ID.ToString());
             }
             catch
             {
-                return ResultInfo.GetResultByID(1);
+                return Result.GenerateFailedResult();
             }
         }
 
@@ -269,11 +270,11 @@ namespace DynThings.Data.Repositories
                 AlertCondition con = db.AlertConditions.Find(id);
                 db.AlertConditions.Remove(con);
                 db.SaveChanges();
-                return ResultInfo.GenerateOKResult("Deleted", con.ID);
+                return Result.GenerateOKResult("Deleted", con.ID.ToString());
             }
             catch
             {
-                return ResultInfo.GetResultByID(1);
+                return Result.GenerateFailedResult();
             }
         }
 
@@ -310,11 +311,11 @@ namespace DynThings.Data.Repositories
 
                 db.LinkUsersAlerts.Add(lnk);
                 db.SaveChanges();
-                return ResultInfo.GenerateOKResult("Saved", lnk.ID);
+                return Result.GenerateOKResult("Saved", lnk.ID.ToString());
             }
             catch
             {
-                return ResultInfo.GetResultByID(1);
+                return Result.GenerateFailedResult();
             }
         }
         #endregion
@@ -331,11 +332,11 @@ namespace DynThings.Data.Repositories
                     db.LinkUsersAlerts.Remove(lnk);
                 }
                 db.SaveChanges();
-                return ResultInfo.GenerateOKResult("Deleted");
+                return Result.GenerateOKResult("Deleted");
             }
             catch
             {
-                return ResultInfo.GetResultByID(1);
+                return Result.GenerateFailedResult();
             }
         }
         #endregion

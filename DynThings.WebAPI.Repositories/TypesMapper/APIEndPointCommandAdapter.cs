@@ -11,7 +11,7 @@ namespace DynThings.WebAPI.TypesMapper
 
     public static class APIEndPointCommandAdapter
     {
-        public static APIEndPointCommand fromEndpointCommand(EndPointCommand sourceEndpointCommand,bool loadParents,bool loadChilds)
+        public static APIEndPointCommand fromEndpointCommand(EndPointCommand sourceEndpointCommand,bool loadEndpoint)
         {
             APIEndPointCommand result = new APIEndPointCommand();
             result.ID = sourceEndpointCommand.ID;
@@ -20,7 +20,7 @@ namespace DynThings.WebAPI.TypesMapper
             result.CommandCode = sourceEndpointCommand.CommandCode;
 
             #region Load Parents
-            if (loadParents)
+            if (loadEndpoint)
             {
                 #region EndPoint
                 result.EndPoint = TypesMapper.APIEndPointAdapter.fromEndpoint(sourceEndpointCommand.Endpoint,false,false);

@@ -20,6 +20,7 @@ using DynThings.Core;
 using Microsoft.AspNet.SignalR;
 using Microsoft.AspNet.SignalR.Hubs;
 using DynThings.WebPortal;
+using ResultInfo;
 
 namespace DynThings.WebPortal.Controllers
 {
@@ -91,7 +92,7 @@ namespace DynThings.WebPortal.Controllers
         {
             if (ValidateUserPermissions(true, false) == false)
             {
-                ResultInfo.Result result = ResultInfo.GenerateNotAuthorizedResult("Not Authorized", "Your account don't have the required security permission");
+                Result result = new Result(0,Result.Result_Type.NotAuthorized,"Not Authorized", "Your account don't have the required security permission");
                 return PartialView("_PVResult",result);
             }
             ViewBag.LocationViewTypeID = new SelectList(uof_repos.repoLocationViewTypes.GetList(), "ID", "Title", 1);
@@ -102,7 +103,7 @@ namespace DynThings.WebPortal.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult AddPV([Bind(Include = "Title,LocationViewTypeID")] LocationView locationView)
         {
-            ResultInfo.Result res = ResultInfo.GetResultByID(1);
+            Result res = Result.GenerateFailedResult();
             if (ModelState.IsValid)
             {
                 res = uof_repos.repoLocationViews.Add(locationView.Title, locationView.LocationViewTypeID, "1");
@@ -124,7 +125,7 @@ namespace DynThings.WebPortal.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult EditMainPV([Bind(Include = "ID,Title,LocationViewTypeID")] LocationView locationView)
         {
-            ResultInfo.Result res = ResultInfo.GetResultByID(1);
+            Result res = Result.GenerateFailedResult();
             if (ModelState.IsValid)
             {
                 res = uof_repos.repoLocationViews.Edit(locationView.ID, locationView.Title, locationView.LocationViewTypeID);
@@ -145,7 +146,7 @@ namespace DynThings.WebPortal.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult EditMapPV([Bind(Include = "ID,X,Y,Z")] LocationView locationView)
         {
-            ResultInfo.Result res = ResultInfo.GenerateErrorResult();
+            Result res = Result.GenerateFailedResult();
             if (ModelState.IsValid)
             {
                 res = uof_repos.repoLocationViews.Edit(locationView.ID, locationView.X, locationView.Y, locationView.Z, currentUser.Id);
@@ -176,7 +177,7 @@ namespace DynThings.WebPortal.Controllers
         [HttpPost]
         public ActionResult AttachLocation(long locationViewID, long locationID, string userID)
         {
-            ResultInfo.Result res = ResultInfo.GetResultByID(1);
+            Result res = Result.GenerateFailedResult();
             if (ModelState.IsValid)
             {
                 res = uof_repos.repoLocationViews.AttachLocation(locationViewID, locationID, userID);
@@ -189,7 +190,7 @@ namespace DynThings.WebPortal.Controllers
         [HttpPost]
         public ActionResult DeAttachLocation(long locationViewID, long locationID, string userID)
         {
-            ResultInfo.Result res = ResultInfo.GetResultByID(1);
+            Result res = Result.GenerateFailedResult();
             if (ModelState.IsValid)
             {
                 res = uof_repos.repoLocationViews.DeattachLocation(locationViewID, locationID, userID);
@@ -213,7 +214,7 @@ namespace DynThings.WebPortal.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeletePV([Bind(Include = "ID,Title")] LocationView locationView)
         {
-            ResultInfo.Result res = ResultInfo.GetResultByID(1);
+            Result res = Result.GenerateFailedResult();
             if (ModelState.IsValid)
             {
                 res = uof_repos.repoLocationViews.Delete(locationView.ID);
@@ -272,7 +273,7 @@ namespace DynThings.WebPortal.Controllers
         [HttpGet]
         public PartialViewResult GetLocationThingEndsListPV(string searchfor = "", long? locationID = null, long? thingID = null, long? thingTypeID = null, long? endpointTypeID = null, long? endpointID = null, int page = 1, int recordsperpage = 0)
         {
-            IPagedList things = uof_repos.repoThingEnds.GetThingEndsList(searchfor, locationID, thingID, null, null, null, page, Helpers.Configs.validateRecordsPerMaster(recordsperpage));
+            IPagedList<ThingEnd> things = uof_repos.repoThingEnds.GetPagedList(searchfor, locationID, thingID, null, null, null, page, Helpers.Configs.validateRecordsPerMaster(recordsperpage));
             return PartialView("_ThingEnds_List", things);
         }
 

@@ -3,14 +3,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using DynThings.Core;
-using DynThings.Data.Models;
-using DynThings.WebAPI.Models;
-using DynThings.WebAPI.Repositories;
 using PagedList;
 using System.Collections;
 using System.Net.Http;
 using System.Net;
+using DynThings.Core;
+using DynThings.Data.Models;
+using DynThings.Data.Repositories;
+using DynThings.WebAPI.Models;
+using DynThings.WebAPI.Models.RequestModels;
+using DynThings.WebAPI.Models.ResponseModels;
 
 namespace DynThings.WebAPI.Repositories
 {
@@ -35,6 +37,7 @@ namespace DynThings.WebAPI.Repositories
                 return result;
             }
         }
+        public UnitOfWork_Repositories uof_Repositories = new UnitOfWork_Repositories();
         #endregion
 
 
@@ -52,25 +55,27 @@ namespace DynThings.WebAPI.Repositories
         /// <param name="thingCategoryID">Filter by ThingCategory ID. You can keep it null or empty to ignore this filter.</param>
         /// <param name="endpointTypeID">Filter by EndPointType ID. You can keep it null or empty to ignore this filter.</param>
         /// <returns></returns>
-        public List<APIThingEnd> GetThingEnds(int pageNumber , int pageSize, bool loadParents, bool loadChilds ,string searchFor, long locationID , long thingID , long thingCategoryID , long endpointTypeID )
+        public APIThingEndResponseModels.GetThingEndsList GetThingEndsList(string searchFor, long? locationID , long? thingID , long? thingCategoryID , long? endpointTypeID, bool loadThing, bool loadEndpoint,int pageNumber , int pageSize )
         {
-            List<APIThingEnd> result = new List<APIThingEnd>();
-            List<ThingEnd> thingEnds = db.ThingEnds.Where(e =>
+            APIThingEndResponseModels.GetThingEndsList result = new APIThingEndResponseModels.GetThingEndsList();
 
-            ((e.Thing.Title.Contains(searchFor) || (searchFor == null || searchFor == ""))
-            && ((e.ThingID == thingID) || (thingID == null || thingID == 0))
-            && ((e.EndPointTypeID == endpointTypeID) || (endpointTypeID == null || endpointTypeID == 0))
-            && ((e.Thing.CategoryID == thingCategoryID) || (thingCategoryID == null || thingCategoryID == 0))
-            && ((e.Thing.LinkThingsLocations.Any(l => l.LocationID == locationID)) || (locationID == null || locationID == 0))
-            )).OrderBy(o => o.ThingID).ThenBy(o => o.EndPointTypeID)
-            .Skip(pageSize * (pageNumber - 1)).Take(pageSize).ToList();
+            IPagedList<ThingEnd> thingEndsPL = uof_Repositories.repoThingEnds.GetPagedList(searchFor, locationID, thingID, thingCategoryID, endpointTypeID, endpointTypeID, pageNumber, pageSize);
+            List<ThingEnd> thingEnds = thingEndsPL.ToList();
 
-            foreach (ThingEnd te in thingEnds)
+            List<APIThingEnd> listAPIThingEnds = new List<APIThingEnd>();
+            foreach(ThingEnd te in thingEnds)
             {
-                APIThingEnd apiThingEnd = new APIThingEnd();
-                apiThingEnd = TypesMapper.APIThingEndAdapter.fromThingEnd(te, loadParents,loadChilds);
-                result.Add(apiThingEnd);
+                APIThingEnd apiThingEnd = TypesMapper.APIThingEndAdapter.fromThingEnd(te, loadThing, loadThing);
+                listAPIThingEnds.Add(apiThingEnd);
             }
+            result.ThingEnds = listAPIThingEnds;
+
+            PagingInfoResponseModel pagingInfo = new PagingInfoResponseModel();
+            pagingInfo.CurrentPage = thingEndsPL.PageNumber;
+            pagingInfo.ItemsPerPage = thingEndsPL.PageSize;
+            pagingInfo.ItemsCount = thingEndsPL.TotalItemCount;
+            pagingInfo.PagesCount = thingEndsPL.PageCount;
+            result.PagingInfo = pagingInfo;
 
             return result;
         }

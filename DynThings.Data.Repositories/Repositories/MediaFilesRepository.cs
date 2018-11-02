@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using DynThings.Data.Models;
 using DynThings.Core;
 using PagedList;
+using ResultInfo;
 
 namespace DynThings.Data.Repositories
 {
@@ -80,11 +81,11 @@ namespace DynThings.Data.Repositories
                 cat.Title = Title;
                 db.MediaFiles.Add(cat);
                 db.SaveChanges();
-                return ResultInfo.GenerateOKResult("Saved", cat.ID);
+                return Result.GenerateOKResult("Saved", cat.ID.ToString());
             }
             catch
             {
-                return ResultInfo.GetResultByID(1);
+                return Result.GenerateFailedResult();
             }
         }
 
@@ -98,11 +99,11 @@ namespace DynThings.Data.Repositories
                 MediaFile cat = db.MediaFiles.Find(ID);
                 cat.Title = Title;
                 db.SaveChanges();
-                return ResultInfo.GenerateOKResult("Saved", cat.ID);
+                return Result.GenerateOKResult("Saved", cat.ID.ToString());
             }
             catch
             {
-                return ResultInfo.GetResultByID(1);
+                return Result.GenerateFailedResult();
             }
         }
 
@@ -119,18 +120,18 @@ namespace DynThings.Data.Repositories
 
                 if (thingCategorys.Count + endPointTypes.Count > 0)
                 {// Used
-                    return ResultInfo.GetResultByID(1);
+                    return Result.GenerateFailedResult();
                 }
 
                 //Execute Delete and return result
                 MediaFile media = db.MediaFiles.Find(ID);
                 db.MediaFiles.Remove(media);
                 db.SaveChanges();
-                return ResultInfo.GenerateOKResult("Saved", media.ID);
+                return Result.GenerateOKResult("Saved", media.ID.ToString());
             }
             catch
             {
-                return ResultInfo.GetResultByID(1);
+                return Result.GenerateFailedResult();
             }
         }
 

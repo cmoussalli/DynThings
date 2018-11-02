@@ -17,7 +17,7 @@ using PagedList;
 using DynThings.Data.Models;
 using DynThings.Data.Repositories;
 using DynThings.Core;
-
+using ResultInfo;
 
 namespace DynThings.WebPortal.Controllers
 {
@@ -79,7 +79,7 @@ namespace DynThings.WebPortal.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult AddPV([Bind(Include = "Title,UTC_Diff,IsConnectedDelay")] Device device)
         {
-            ResultInfo.Result res = ResultInfo.GetResultByID(1);
+            Result res = Result.GenerateFailedResult();
             if (ModelState.IsValid)
             {
                 res = uof_repos.repoDevices.Add(device.Title,device.UTC_Diff, device.IsConnectedDelay);
@@ -102,7 +102,7 @@ namespace DynThings.WebPortal.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult EditPV([Bind(Include = "ID,Title,UTC_Diff,IsConnectedDelay")] Device device)
         {
-            ResultInfo.Result res = ResultInfo.GetResultByID(1);
+            Result res = Result.GenerateFailedResult();
             if (ModelState.IsValid)
             {
                 res = uof_repos.repoDevices.Edit(device.ID, device.Title,int.Parse(device.UTC_Diff.ToString()), device.IsConnectedDelay);
@@ -124,7 +124,7 @@ namespace DynThings.WebPortal.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeletePV([Bind(Include = "ID,Title")] Device device)
         {
-            ResultInfo.Result res = ResultInfo.GetResultByID(1);
+            Result res = Result.GenerateFailedResult();
             if (ModelState.IsValid)
             {
                 res = uof_repos.repoDevices.Delete(device.ID);

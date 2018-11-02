@@ -115,6 +115,7 @@
         <AssociationConnector Association="DynThingsModel.FK__ThingEnds__EndPo__7F36D027" />
         <EntityTypeShape EntityType="DynThingsModel.DynSetting" Width="1.5" PointX="12.75" PointY="19.75" />
         <EntityTypeShape EntityType="DynThingsModel.DBChanx" Width="1.5" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="DynThingsModel.TestTable" Width="1.5" PointX="2.75" PointY="0.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -11,14 +11,16 @@ using System.Web.Http.Description;
 using DynThings.Data.Models;
 using DynThings.Core;
 using DynThings.WebAPI.Models;
+using DynThings.WebAPI.Models.RequestModels;
+using DynThings.WebAPI.Models.ResponseModels;
 using DynThings.WebAPI.Repositories;
+using ResultInfo;
 
 namespace DynThings.WebPortal.Controllers.API
 {
-    public class EndPointCommandsController : ApiController
+    public class EndPointCommandsController : BaseAPIController
     {
         #region Props
-        UnitOfWork_WebAPI uow_APIs = new UnitOfWork_WebAPI();
         long entityID ;
 
         #endregion
@@ -26,21 +28,33 @@ namespace DynThings.WebPortal.Controllers.API
         #region Constructors
         public EndPointCommandsController()
         {
-            entityID = uow_APIs.repoAPIEndPointCommands.EntityID;
+            entityID = unitOfWork_WebAPI.repoAPIEndPointCommands.EntityID;
         }
         #endregion
 
-
-        public List<APIEndPointCommand> GetEndpointCommands(Guid token, int pageNumber, int pageSize, bool loadParents = false, bool loadChilds = false, string searchFor = "",long locationID =0,long thingID =0,long endPointID =0)
+        [HttpPost]
+        [ResponseType(typeof(APIEndpointCommandResponseModels.GetEndpointCommandsList))]
+        public HttpResponseMessage GetEndpointCommandsList(APIEndpointCommandRequestModels.GetEndpointCommandsList model)
         {
             int methodID = 13;
-            ResultInfo.Result tokenValidation = uow_APIs.repoAPIUserAppTokens.ValidateTokenEntityPermission(token, entityID,methodID);
-            if (tokenValidation.ResultType != ResultInfo.ResultType.Ok)
+            ApiResponse tokenValidation = unitOfWork_WebAPI.repoAPIUserAppTokens.ValidateTokenEntityPermission(model.Token, entityID, methodID);
+            if (tokenValidation.ResultType != ResultType.Ok)
             {
                 var msg = new HttpResponseMessage(HttpStatusCode.Unauthorized) { ReasonPhrase = tokenValidation.Message };
                 throw new HttpResponseException(new HttpResponseMessage(HttpStatusCode.Forbidden));
             }
-            return uow_APIs.repoAPIEndPointCommands.GetEndpointCommands(pageNumber,pageSize,loadParents,loadChilds,searchFor,locationID,thingID,endPointID);
+
+            try
+            {
+                APIEndpointCommandResponseModels.GetEndpointCommandsList result = unitOfWork_WebAPI.repoAPIEndPointCommands.GetEndpointCommands(model.SearchFor,model.EndpointID,model.ThingID,model.LocationID,model.LoadEndpoint, model.PageNumber, model.PageSize);
+                return Request.CreateResponse(HttpStatusCode.OK, result);
+            }
+            catch (Exception ex)
+            {
+                return RaiseError(ex.Message);
+            }
+
+            
         }
 
 

@@ -4,13 +4,17 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using DynThings.Core;
-using DynThings.Data.Models;
-using DynThings.WebAPI.Models;
-using DynThings.WebAPI.Repositories;
-using PagedList;
 using System.Collections;
 using System.Net.Http;
 using System.Net;
+
+using DynThings.Data.Models;
+using DynThings.Data.Repositories;
+using DynThings.WebAPI.Models;
+using DynThings.WebAPI.Models.RequestModels;
+using DynThings.WebAPI.Models.ResponseModels;
+
+using PagedList;
 
 
 namespace DynThings.WebAPI.Repositories
@@ -44,6 +48,8 @@ namespace DynThings.WebAPI.Repositories
                 return result;
             }
         }
+
+        public UnitOfWork_Repositories uof_Repositories = new UnitOfWork_Repositories();
         #endregion
 
 
@@ -60,61 +66,66 @@ namespace DynThings.WebAPI.Repositories
         /// <param name="searchFor">Search text as per the 'Title' field.</param>
         /// <param name="DeviceID">Filter by Device ID. You can keep it null or empty to ignore this filter.</param>
         /// <returns>List of EndPoints.</returns>
-        public List<APIEndPoint> GetEndPoints(int pageNumber, int pageSize,bool loadParents, bool loadChilds,string searchFor,long deviceID)
+        public APIEndpointResponseModels.GetEndpointsList GetEndPoints(string searchFor, long? deviceID,long? thingID, long? locationID, long? viewID, bool loadDevice, bool loadThing, int pageNumber, int pageSize)
         {
-            List <APIEndPoint> apiEndPoints = new List<APIEndPoint>();
-            List<Endpoint> endPoints = db.Endpoints.Include("EndPointCommands")
-                .Where(v => 
-                (searchFor == null || v.Title.Contains(searchFor))
-                && ((deviceID == null || deviceID == 0) || deviceID == v.DeviceID)
-                )
-                .OrderBy(o => o.Title)
-                .Skip(pageSize * (pageNumber - 1))
-                .Take(pageSize).ToList();
-                foreach (Endpoint item in endPoints)
+            APIEndpointResponseModels.GetEndpointsList result = new APIEndpointResponseModels.GetEndpointsList();
+
+            IPagedList<Endpoint> endpointsPL = uof_Repositories.repoEndpoints.GetPagedList(searchFor, deviceID, thingID, locationID, viewID, pageNumber, pageSize);
+            List<Endpoint> endpoints = endpointsPL.ToList();
+
+            List<APIEndPoint> listAPIEndpoints = new List<APIEndPoint>();
+            foreach(Endpoint end in endpoints)
             {
-                APIEndPoint apiEndPoint = TypesMapper.APIEndPointAdapter.fromEndpoint(item,loadParents,loadChilds);
-                apiEndPoints.Add(apiEndPoint);
+                APIEndPoint apiEnd = TypesMapper.APIEndPointAdapter.fromEndpoint(end, loadDevice, loadThing);
+                listAPIEndpoints.Add(apiEnd);
             }
+            result.Endpoints = listAPIEndpoints;
             
-            return apiEndPoints;
-        }
-
-        #endregion
-
-        #region Get Warnings
-        /// <summary>
-        /// Get list of EndPoints.
-        /// </summary>
-        /// <param name="pageNumber">Page Number.</param>
-        /// <param name="pageSize">Items count per page.</param>
-        /// <param name="loadParents">Enable or Disable loading the Parents objects.</param>
-        /// <param name="loadChilds">Enable or Disable loading the Childs objects.</param>
-        /// <param name="locationID">Filter by location ID. You can keep it null or empty to ignore this filter.</param>
-        /// <param name="viewID">Filter by View ID. You can keep it null or empty to ignore this filter.</param>
-        /// <returns>List of EndPoints that have one warning or more.</returns>
-        public List<APIEndPoint> GetEndPointsWithWarnings(int pageNumber, int pageSize, bool loadParents, bool loadChilds,long locationID, long viewID)
-        {
-            List<APIEndPoint> result = new List<APIEndPoint>();
-            List<Endpoint> endpointsLst = db.Endpoints.Include("Thing")
-                        .Where(e =>
-                        ((viewID == null || viewID == 0) || (e.Thing.LinkThingsLocations.Any(l => l.Location.LinkLocationsLocationViews.Any(v => v.LocationViewID == viewID))))
-                        && ((locationID == null || locationID == 0) || (e.Thing.LinkThingsLocations.Any(l => l.LocationID == locationID)))
-                        && (e.IsNumericOnly == true)
-                        &&( (e.LastIONumericValue <= e.LowRange) || (e.LastIONumericValue >= e.HighRange))
-                        )
-                        .OrderByDescending(e => e.LastIOTimeStamp).Skip(pageSize * (pageNumber - 1))
-                        .Skip(pageSize * (pageNumber - 1))
-                        .Take(pageSize)
-                        .ToList();
-            foreach (Endpoint endpoint in endpointsLst)
-            {
-                result.Add(TypesMapper.APIEndPointAdapter.fromEndpoint(endpoint, loadParents, loadChilds));
-            }
+            
+            PagingInfoResponseModel pagingInfo = new PagingInfoResponseModel();
+            pagingInfo.CurrentPage = endpointsPL.PageNumber;
+            pagingInfo.ItemsPerPage = endpointsPL.PageSize;
+            pagingInfo.ItemsCount = endpointsPL.TotalItemCount;
+            pagingInfo.PagesCount = endpointsPL.PageCount;
+            result.PagingInfo = pagingInfo;
             return result;
         }
 
         #endregion
+
+        #region GetEndPointsWithWarnings
+        public APIEndpointResponseModels.GetEndpointsList GetEndPointsWithWarnings(string searchFor, long? deviceID, long? thingID, long? locationID, long? viewID, bool loadDevice, bool loadThing, int pageNumber, int pageSize)
+        {
+            APIEndpointResponseModels.GetEndpointsList result = new APIEndpointResponseModels.GetEndpointsList();
+
+            IPagedList<Endpoint> endpointsPL = uof_Repositories.repoEndpoints.GetEndpointsWithWarningsPagedList(searchFor, deviceID, thingID, locationID, viewID, pageNumber, pageSize);
+            List<Endpoint> endpoints = endpointsPL.ToList();
+
+            List<APIEndPoint> listAPIEndpoints = new List<APIEndPoint>();
+            foreach (Endpoint end in endpoints)
+            {
+                APIEndPoint apiEnd = TypesMapper.APIEndPointAdapter.fromEndpoint(end, loadDevice, loadThing);
+                listAPIEndpoints.Add(apiEnd);
+            }
+            result.Endpoints = listAPIEndpoints;
+
+
+            PagingInfoResponseModel pagingInfo = new PagingInfoResponseModel();
+            pagingInfo.CurrentPage = endpointsPL.PageNumber;
+            pagingInfo.ItemsPerPage = endpointsPL.PageSize;
+            pagingInfo.ItemsCount = endpointsPL.TotalItemCount;
+            pagingInfo.PagesCount = endpointsPL.PageCount;
+            result.PagingInfo = pagingInfo;
+            return result;
+        }
+
+        #endregion
+
+
+
+        
+
+        
 
 
 

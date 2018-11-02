@@ -14,7 +14,7 @@ namespace DynThings.WebAPI.TypesMapper
     {
         static DynThingsEntities db = new DynThingsEntities();
 
-        public static APIThing fromThing(Thing sourceThing,bool loadParents,bool loadChilds)
+        public static APIThing fromThing(Thing sourceThing,bool loadLocations,bool loadEndpoints,bool loadThingEnds, bool loadThingExtensionValues)
         {
             APIThing result = new APIThing();
             result.ID = sourceThing.ID;
@@ -27,7 +27,7 @@ namespace DynThings.WebAPI.TypesMapper
             #endregion
 
             #region Parents
-            if (loadParents)
+            if (loadLocations)
             {
             #region Locations
                 List<APILocation> apiLocations = new List<APILocation>();
@@ -44,7 +44,7 @@ namespace DynThings.WebAPI.TypesMapper
             #endregion
 
             #region Load Childs
-            if (loadChilds)
+            if (loadEndpoints)
             {
                 #region EndPoints
                 List<APIEndPoint> apiEndPoints = new List<APIEndPoint>();
@@ -55,7 +55,9 @@ namespace DynThings.WebAPI.TypesMapper
                 }
                 result.EndPoints = apiEndPoints;
                 #endregion
-
+            }
+            if (loadThingEnds)
+            {
                 #region ThingEnds
                 List<APIThingEnd> apiThingEnds = new List<APIThingEnd>();
                 foreach (ThingEnd thingEnd in sourceThing.ThingEnds)
@@ -65,7 +67,9 @@ namespace DynThings.WebAPI.TypesMapper
                 }
                 result.ThingEnds = apiThingEnds;
                 #endregion
-
+            }
+            if (loadThingExtensionValues)
+            {
                 #region APIThingExtensionValues
                 List<APIThingExtensionValue> apiThingExtensionValues = new List<APIThingExtensionValue>();
                 foreach (ThingExtensionValue thingExtensionValue in sourceThing.ThingExtensionValues)
@@ -81,15 +85,6 @@ namespace DynThings.WebAPI.TypesMapper
             result.ThingEndsCount = sourceThing.ThingEnds.Count;
             #endregion
 
-
-            List<APIEndPoint> apiEnds = new List<APIEndPoint>();
-            //foreach(Endpoint end in sourceThing.Endpoints)
-            //{
-            //    APIEndPoint apiEnd = new APIEndPoint();
-            //    apiEnd = TypesMapper.APIEndPointAdapter.fromEndpoint(end);
-            //    apiEnds.Add(apiEnd);
-            //}
-            //result.EndPoints = apiEnds;
 
             return result;
         }

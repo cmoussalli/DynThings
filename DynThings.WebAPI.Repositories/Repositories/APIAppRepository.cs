@@ -10,6 +10,7 @@ using DynThings.WebAPI.TypesMapper;
 using DynThings.WebAPI.Repositories;
 using PagedList;
 using System.Security.Cryptography;
+using DynThings.Data.Repositories;
 
 namespace DynThings.WebAPI.Repositories
 {
@@ -25,9 +26,10 @@ namespace DynThings.WebAPI.Repositories
 
         #region props
         private DynThingsEntities db;
+        public UnitOfWork_Repositories uof_Repositories = new UnitOfWork_Repositories();
         #endregion
 
-        
+
 
         #region Methods
         #region Get App Info
@@ -36,15 +38,8 @@ namespace DynThings.WebAPI.Repositories
             APIApp result = new APIApp();
             try
             {
-            List<App> apps = db.Apps.Where(a => a.GUID == appGuid).ToList();
-                if (apps.Count == 0)
-                {//App Not Exist
-                    throw new Exception("Wrong App GUID");
-                }
-                else
-                {//App is Exist
-                    result = TypesMapper. APIAppAdapter.fromApp(apps[0]);
-                }
+                App app = uof_Repositories.repoApps.Find(appGuid);
+                result = TypesMapper.APIAppAdapter.fromApp(app);
             }
             catch (Exception ex)
             {

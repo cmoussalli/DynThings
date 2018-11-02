@@ -1,54 +1,41 @@
-﻿using DynThings.WebAPI.Models;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
+using DynThings.WebAPI.Models.RequestModels;
+using DynThings.WebAPI.Models.ResponseModels;
 
 namespace DynThings.WebAPI.ClientServices
 {
-    public class LocationViewsServices
+    public class LocationViewsServices:BaseClass
     {
         internal HostConfig hostconfig { get; set; }
         public LocationViewsServices(HostConfig hostConf)
         {
             hostconfig = hostConf;
+            BaseURI = hostconfig.URL;
         }
 
 
-        public async Task<List<APILocationView>> GetListAsync(int pageNumber, int pageSize, string searchFor = "", bool loadParents = false, bool loadChilds = false)
+        public async Task<APILocationViewResponseModels.GetLocationViewsList> GetListAsync(APILocationViewRequestModels.GetLocationViewsList rm)
         {
-            List<APILocationView> result = new List<APILocationView>();
-            HttpClient client = new HttpClient();
-            string getStringTask = await client.GetStringAsync(hostconfig.URL + "/api/LocationViews/GetLocationViews?token=" + hostconfig.Token
-                + "&pageNumber=" + pageNumber.ToString()
-                + "&pagesize=" + pageSize.ToString()
-                + "&searchfor=" + searchFor.ToString()
-                + "&loadParents=" + loadParents.ToString()
-                + "&loadChilds=" + loadChilds.ToString()
-                );
-            string resultstring = getStringTask;
-            result = JsonConvert.DeserializeObject<List<APILocationView>>(resultstring);
-
+            string strResult = await HttpPost("/api/LocationViews/GetLocationViewsList", JsonConvert.SerializeObject(rm));
+            APILocationViewResponseModels.GetLocationViewsList result = (APILocationViewResponseModels.GetLocationViewsList)JsonConvert.DeserializeObject(strResult, typeof(APILocationViewResponseModels.GetLocationViewsList));
             return result;
+
         }
 
-        public async Task<List<APILocationView>> GetLocationViewsWithWarnings(int pageNumber, int pageSize, bool loadParents = false, bool loadChilds = false)
+        public async Task<APILocationViewResponseModels.GetLocationViewsList> GetLocationViewsWithWarningsListAsync(APILocationViewRequestModels.GetLocationViewsList rm)
         {
-            List<APILocationView> result = new List<APILocationView>();
-            HttpClient client = new HttpClient();
-            string getStringTask = await client.GetStringAsync(hostconfig.URL + "/api/LocationViews/GetLocationViewsWithWarnings?token=" + hostconfig.Token
-                + "&pageNumber=" + pageNumber.ToString()
-                + "&pagesize=" + pageSize.ToString()
-                + "&loadParents=" + loadParents.ToString()
-                + "&loadChilds=" + loadChilds.ToString()
-                );
-            string resultstring = getStringTask;
-            result = JsonConvert.DeserializeObject<List<APILocationView>>(resultstring);
-
+            string strResult = await HttpPost("/api/LocationViews/GetLocationViewsWithWarningsList", JsonConvert.SerializeObject(rm));
+            APILocationViewResponseModels.GetLocationViewsList result = (APILocationViewResponseModels.GetLocationViewsList)JsonConvert.DeserializeObject(strResult, typeof(APILocationViewResponseModels.GetLocationViewsList));
             return result;
+
         }
+
+        
 
     }
 }

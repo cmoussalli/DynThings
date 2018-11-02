@@ -6,7 +6,7 @@ using System.Web.Mvc;
 using DynThings.Data.Models;
 using DynThings.Data.Repositories;
 using DynThings.Core;
-
+using ResultInfo;
 
 namespace DynThings.WebPortal.Controllers
 {
@@ -57,9 +57,9 @@ namespace DynThings.WebPortal.Controllers
 
         //Get List by DeviceID
         [HttpGet]
-        public PartialViewResult ListByDeviceIDPV(string searchfor = null, long deviceID = 0, int page = 1, int recordsperpage = 0)
+        public PartialViewResult ListByDeviceIDPV(string searchfor = null,long locationID = 0, long deviceID = 0, int page = 1, int recordsperpage = 0)
         {
-            PagedList.IPagedList cmds = uof_repos.repoDeviceCommands.GetPagedListByDeviceID(searchfor, deviceID, page, Helpers.Configs.validateRecordsPerMaster(recordsperpage));
+            PagedList.IPagedList cmds = uof_repos.repoDeviceCommands.GetPagedList(searchfor, deviceID,locationID, page, Helpers.Configs.validateRecordsPerMaster(recordsperpage));
             return PartialView("_List", cmds);
         }
         #endregion
@@ -76,7 +76,7 @@ namespace DynThings.WebPortal.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult AddPV([Bind(Include = "Title,DeviceID,Description,CommandCode")] DeviceCommand command)
         {
-            ResultInfo.Result res = ResultInfo.GetResultByID(1);
+            Result res = Result.GenerateFailedResult();
             if (ModelState.IsValid)
             {
                 long cmd = long.Parse(command.DeviceID.ToString());
@@ -99,7 +99,7 @@ namespace DynThings.WebPortal.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult EditPV([Bind(Include = "ID,Title,Description,DeviceID,CommandCode")] DeviceCommand Command)
         {
-            ResultInfo.Result res = ResultInfo.GetResultByID(1);
+            Result res = Result.GenerateFailedResult();
             if (ModelState.IsValid)
             {
                 res = uof_repos.repoDeviceCommands.Edit(Command.ID, Command.Title, Command.Description, long.Parse(Command.DeviceID.ToString()), Command.CommandCode);
@@ -122,7 +122,7 @@ namespace DynThings.WebPortal.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeletePV([Bind(Include = "ID,Title,Description,DeviceID")] DeviceCommand Command)
         {
-            ResultInfo.Result res = ResultInfo.GetResultByID(1);
+            Result res = Result.GenerateFailedResult();
             if (ModelState.IsValid)
             {
                 res = uof_repos.repoDeviceCommands.Detele(Command.ID);
@@ -146,7 +146,7 @@ namespace DynThings.WebPortal.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult ExecutePV([Bind(Include = "ID,DeviceID")] DeviceCommand Command)
         {
-            ResultInfo.Result res = ResultInfo.GetResultByID(1);
+            Result res = Result.GenerateFailedResult();
             if (ModelState.IsValid)
             {
                 Device dev = uof_repos.repoDevices.Find((long)Command.DeviceID);

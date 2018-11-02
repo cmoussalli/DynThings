@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using DynThings.Core;
 using DynThings.Data.Models;
 using PagedList;
+using ResultInfo;
 
 namespace DynThings.Data.Repositories
 {
@@ -87,11 +88,11 @@ namespace DynThings.Data.Repositories
                 AppEndpointType.TypeCategoryID = typeCategoryID;
                 db.AppEndpointTypes.Add(AppEndpointType);
                 db.SaveChanges();
-                return ResultInfo.GenerateOKResult("Saved", AppEndpointType.ID);
+                return Result.GenerateOKResult("Saved", AppEndpointType.ID.ToString());
             }
             catch (Exception ex)
             {
-                return ResultInfo.GenerateErrorResult("Error",ex.Message);
+                return Result.GenerateFailedResult("Error",ex.Message);
             }
         }
 
@@ -108,11 +109,11 @@ namespace DynThings.Data.Repositories
                 AppEndpointType.Measurement = measurement;
                 AppEndpointType.TypeCategoryID = typeCategoryID;
                 db.SaveChanges();
-                return ResultInfo.GenerateOKResult("Saved", AppEndpointType.ID);
+                return Result.GenerateOKResult("Saved", AppEndpointType.ID.ToString());
             }
             catch
             {
-                return ResultInfo.GetResultByID(1);
+                return Result.GenerateFailedResult();
             }
         }
 
@@ -126,11 +127,11 @@ namespace DynThings.Data.Repositories
                 AppEndpointType AppEndpointType = db.AppEndpointTypes.Find(id);
                 db.AppEndpointTypes.Remove(AppEndpointType);
                 db.SaveChanges();
-                return ResultInfo.GenerateOKResult("Deleted", AppEndpointType.ID);
+                return Result.GenerateOKResult("Deleted", AppEndpointType.ID.ToString());
             }
             catch
             {
-                return ResultInfo.GetResultByID(1);
+                return Result.GenerateFailedResult();
             }
         }
 

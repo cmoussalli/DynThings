@@ -12,6 +12,7 @@ using System.Threading.Tasks;
 using DynThings.Data.Models;
 using PagedList;
 using DynThings.Core;
+using ResultInfo;
 
 namespace DynThings.Data.Repositories
 {
@@ -130,7 +131,7 @@ namespace DynThings.Data.Repositories
         #region Submit Input
         public ResultInfo.Result SubmitInput(Guid endPointKeyPass,string value , DateTime? execTime)
         {
-            ResultInfo.Result result = ResultInfo.GenerateErrorResult();
+            ResultInfo.Result result = Result.GenerateFailedResult();
             try
             {
                 //if (!execTime.HasValue)
@@ -142,11 +143,11 @@ namespace DynThings.Data.Repositories
                 //    }
                 //    else
                 //    {//endPointKeyPass not Exist
-                //        result = ResultInfo.GenerateErrorResult("EndPoint KeyPass not Exist");
+                //        result = Result.GenerateFailedResult("EndPoint KeyPass not Exist");
                 //    }
                 //}
                 db.SubmitEndPointInput(endPointKeyPass,value,execTime);
-                result = ResultInfo.GenerateOKResult();
+                result = Result.GenerateOKResult();
             }
             catch(Exception ex)
             {
@@ -159,11 +160,11 @@ namespace DynThings.Data.Repositories
         #region Submit Log
         public ResultInfo.Result SubmitLog(Guid endPointKeyPass, string value, DateTime? execTime)
         {
-            ResultInfo.Result result = ResultInfo.GenerateErrorResult();
+            ResultInfo.Result result = Result.GenerateFailedResult();
             try
             {
                 db.SubmitEndPointLog(endPointKeyPass, value, execTime);
-                result = ResultInfo.GenerateOKResult();
+                result = Result.GenerateOKResult();
             }
             catch { }
             return result;
@@ -173,11 +174,11 @@ namespace DynThings.Data.Repositories
         #region Set Command as Executed
         public ResultInfo.Result SetCommandAsExecuted(long endPointCommandID,Guid endPointKeyPass, DateTime? execTime)
         {
-            ResultInfo.Result result = ResultInfo.GenerateErrorResult();
+            ResultInfo.Result result = Result.GenerateFailedResult();
             try
             {
                 db.SubmitEndpointCommandExecuted(endPointCommandID,endPointKeyPass,execTime);
-                result = ResultInfo.GenerateOKResult();
+                result = Result.GenerateOKResult();
             }
             catch(Exception ex)
             { result.Message = ex.Message + " -- " + ex.InnerException; }

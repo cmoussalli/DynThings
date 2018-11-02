@@ -1,0 +1,12 @@
+﻿@using DynThingsCentral.WebAPI.ResponseModels
+@using DynThings.WebAPI.Models
+@model APIDBChangesResponseModels.GetDBChangesList
+
+<ul>
+
+@foreach (DynThingsCentral.WebAPI.Models.APIDBChange item in Model.DBChanges)
+{
+    <li>@item.ID - @item.Code</li>
+}
+
+</ul>

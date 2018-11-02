@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using DynThings.Core;
 using DynThings.Data.Models;
 using PagedList;
+using ResultInfo;
 
 namespace DynThings.Data.Repositories
 {
@@ -165,7 +166,7 @@ namespace DynThings.Data.Repositories
             //Validate data before insert int odatabase
             if (code.Contains(" "))
             {
-                return ResultInfo.GenerateErrorResult("Code field should not includes empty spaces");
+                return Result.GenerateFailedResult("Code field should not includes empty spaces");
             }
             List<ThingExtension> exts = db.ThingExtensions.Where(u => 
             u.Title == title
@@ -173,7 +174,7 @@ namespace DynThings.Data.Repositories
             ).ToList();
             if (exts.Count != 0)
             {
-                return ResultInfo.GenerateErrorResult("Record not found");
+                return Result.GenerateFailedResult("Record not found");
             }
             //Save new ThingExtension to database 
             try
@@ -185,11 +186,11 @@ namespace DynThings.Data.Repositories
                 ext.IsList = isList;
                 db.ThingExtensions.Add(ext);
                 db.SaveChanges();
-                return ResultInfo.GenerateOKResult("Saved", ext.ID);
+                return Result.GenerateOKResult("Saved", ext.ID.ToString());
             }
             catch
             {
-                return ResultInfo.GetResultByID(1);
+                return Result.GenerateFailedResult();
             }
         }
 
@@ -213,7 +214,7 @@ namespace DynThings.Data.Repositories
             //Validate data before insert into database
             if (code.Contains(" "))
             {
-                return ResultInfo.GenerateErrorResult("Code field should not includes empty spaces");
+                return Result.GenerateFailedResult("Code field should not includes empty spaces");
             }
             List<ThingExtension> exts = db.ThingExtensions.Where(u =>
             u.Title == title
@@ -221,7 +222,7 @@ namespace DynThings.Data.Repositories
             ).ToList();
             if (exts.Count != 0)
             {
-                return ResultInfo.GenerateErrorResult("Record not found");
+                return Result.GenerateFailedResult("Record not found");
             }
             //Save new ThingExtension to database 
             try
@@ -234,11 +235,11 @@ namespace DynThings.Data.Repositories
                 ext.IsList = isList;
                 db.ThingExtensions.Add(ext);
                 db.SaveChanges();
-                return ResultInfo.GenerateOKResult("Saved", ext.ID);
+                return Result.GenerateOKResult("Saved", ext.ID.ToString());
             }
             catch
             {
-                return ResultInfo.GetResultByID(1);
+                return Result.GenerateFailedResult();
             }
         }
 
@@ -257,11 +258,11 @@ namespace DynThings.Data.Repositories
                 ThingExtension ext = db.ThingExtensions.Find(id);
                 db.ThingExtensions.Remove(ext);
                 db.SaveChanges();
-                return ResultInfo.GenerateOKResult("Deleted", ext.ID);
+                return Result.GenerateOKResult("Deleted", ext.ID.ToString());
             }
             catch
             {
-                return ResultInfo.GetResultByID(1);
+                return Result.GenerateFailedResult();
             }
         }
 

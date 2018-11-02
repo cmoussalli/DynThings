@@ -1,51 +1,36 @@
-﻿using DynThings.WebAPI.Models;
+﻿
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
+using DynThings.WebAPI.Models;
+using DynThings.WebAPI.Models.RequestModels;
+using DynThings.WebAPI.Models.ResponseModels;
 
 namespace DynThings.WebAPI.ClientServices
 {
-    public class ThingsServices
+    public class ThingsServices: BaseClass
     {
         internal HostConfig hostconfig { get; set; }
         public ThingsServices(HostConfig hostConf)
         {
             hostconfig = hostConf;
+            BaseURI = hostconfig.URL;
         }
 
-        public async Task<List<APIThing>> GetListAsync(int pageNumber, int pageSize, bool loadParents = false, bool loadChilds = false, string searchFor = "", int locationID = 0)
+        public async Task<APIThingResponseModels.GetThingsList> GetThingsListAsync(APIThingRequestModels.GetThingsList rm)
         {
-            List<APIThing> result = new List<APIThing>();
-            HttpClient client = new HttpClient();
-            string getStringTask = await client.GetStringAsync(hostconfig.URL + "/api/Things/GetThings?token=" + hostconfig.Token
-                + "&pageNumber=" + pageNumber.ToString()
-                + "&pagesize=" + pageSize.ToString()
-                + "&searchfor=" + searchFor.ToString()
-                + "&loadParents=" + loadParents.ToString()
-                + "&loadChilds=" + loadChilds.ToString()
-                + "&locationID=" + locationID.ToString()
-                );
-            string resultstring = getStringTask;
-            result = JsonConvert.DeserializeObject<List<APIThing>>(resultstring);
+            string strResult = await HttpPost("/api/Things/GetThingsList", JsonConvert.SerializeObject(rm));
+            APIThingResponseModels.GetThingsList result = (APIThingResponseModels.GetThingsList)JsonConvert.DeserializeObject(strResult, typeof(APIThingResponseModels.GetThingsList));
             return result;
         }
 
-        public async Task<List<APIThing>> GetThingsWithWarnings(int pageNumber, int pageSize, bool loadParents = false, bool loadChilds = false, int locationID = 0)
+        public async Task<APIThingResponseModels.GetThingsList> GetThingsWithWarningsListAsync(APIThingRequestModels.GetThingsList rm)
         {
-            List<APIThing> result = new List<APIThing>();
-            HttpClient client = new HttpClient();
-            string getStringTask = await client.GetStringAsync(hostconfig.URL + "/api/Things/GetThingsWithWarnings?token=" + hostconfig.Token
-                + "&pageNumber=" + pageNumber.ToString()
-                + "&pagesize=" + pageSize.ToString()
-                + "&loadParents=" + loadParents.ToString()
-                + "&loadChilds=" + loadChilds.ToString()
-                + "&locationID=" + locationID.ToString()
-                );
-            string resultstring = getStringTask;
-            result = JsonConvert.DeserializeObject<List<APIThing>>(resultstring);
+            string strResult = await HttpPost("/api/Things/GetThingsWithWarningsList", JsonConvert.SerializeObject(rm));
+            APIThingResponseModels.GetThingsList result = (APIThingResponseModels.GetThingsList)JsonConvert.DeserializeObject(strResult, typeof(APIThingResponseModels.GetThingsList));
             return result;
         }
 

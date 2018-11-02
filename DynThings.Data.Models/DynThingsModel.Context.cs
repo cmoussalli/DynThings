@@ -131,6 +131,8 @@ public partial class DynThingsEntities : DbContext
 
     public virtual DbSet<DBChanx> DBChanges { get; set; }
 
+    public virtual DbSet<TestTable> TestTables { get; set; }
+
 
     public virtual ObjectResult<Rpt_EndPoint_IOs_Months_Result> Rpt_EndPoint_IOs_Months(Nullable<long> ePID, string year)
     {
@@ -529,6 +531,13 @@ public partial class DynThingsEntities : DbContext
     {
 
         return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("ResetDB");
+    }
+
+
+    public virtual ObjectResult<INFO_Server_Result> INFO_Server()
+    {
+
+        return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<INFO_Server_Result>("INFO_Server");
     }
 
 }

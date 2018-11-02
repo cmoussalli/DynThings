@@ -14,6 +14,7 @@ using DynThings.Data.Models;
 using DynThings.Data.Models.ViewModels;
 using PagedList;
 using DynThings.Core;
+using ResultInfo;
 
 namespace DynThings.Data.Repositories
 {
@@ -55,28 +56,53 @@ namespace DynThings.Data.Repositories
         #endregion
 
         #region Get PagedList
-        public IPagedList GetPagedList(string search, int pageNumber, int recordsPerPage)
+        public IPagedList<Thing> GetPagedList(string search, int pageNumber, int recordsPerPage)
         {
-            IPagedList devs = db.Things
+            IPagedList<Thing> things = db.Things
               .Where(e => (search == null || e.Title.Contains(search) && e.ID > 0)
                && e.ObjectStatusID != 2
               )
               .OrderBy(e => e.Title).ToList()
               .ToPagedList(pageNumber, recordsPerPage);
-            return devs;
+            return things;
         }
 
-        public IPagedList GetPagedList(string search, long locationID, int pageNumber, int recordsPerPage)
+        public IPagedList<Thing> GetPagedList(string search, long? locationID, int pageNumber, int recordsPerPage)
         {
-            IPagedList devs = db.Things
-              .Where(e => search == null || e.Title.Contains(search)
-              && e.LinkThingsLocations.Any(l => l.LocationID == locationID)
-              && e.ID > 0
-              && e.ObjectStatusID != 2
+            IPagedList<Thing> things = db.Things
+              .Where(t =>
+                  ((search == null || search == "") || t.Title.Contains(search))
+                  && ((locationID == null || locationID == 0) || (t.LinkThingsLocations.Any(l => l.LocationID == locationID)))
+                  && t.ID > 0
+                  && t.ObjectStatusID != 2
+              )
+              .OrderBy(t => t.Title).ToList()
+              .ToPagedList(pageNumber, recordsPerPage);
+            return things;
+        }
+
+        public IPagedList<Thing> GetThingsWithWarningsPagedList(string search, long? locationID, int pageNumber, int recordsPerPage)
+        {
+            IPagedList<Thing> things = db.Things
+              .Where(t =>
+                  ((search == null || search == "") || t.Title.Contains(search))
+                  && ((locationID == null || locationID == 0) || (t.LinkThingsLocations.Any(l => l.LocationID == locationID)))
+                  && t.ID > 0
+                  && t.ObjectStatusID != 2
+                  && (
+                   t.LinkThingsLocations.Any(
+                                              lt =>
+                                                  (lt.LocationID == locationID || (locationID == null || locationID == 0))
+                                                  && lt.Thing.Endpoints.Any(
+                                                                   e => e.IsNumericOnly == true
+                                                                  && (e.LastIONumericValue >= e.HighRange || e.LastIONumericValue <= e.LowRange)
+                                                                              )
+                                                  )
+                 )
               )
               .OrderBy(e => e.Title).ToList()
               .ToPagedList(pageNumber, recordsPerPage);
-            return devs;
+            return things;
         }
 
         #endregion
@@ -120,9 +146,9 @@ namespace DynThings.Data.Repositories
             }
             catch (Exception ex)
             {
-                return ResultInfo.GenerateErrorResult(ex.InnerException.ToString());
+                return Result.GenerateFailedResult(ex.InnerException.ToString());
             }
-            return ResultInfo.GenerateOKResult("Saved", thing.ID);
+            return Result.GenerateOKResult("Saved", thing.ID.ToString());
         }
         #endregion
 
@@ -136,11 +162,11 @@ namespace DynThings.Data.Repositories
                 thing.CategoryID = categoryID;
                 thing.UTC_Diff = utc_Diff;
                 db.SaveChanges();
-                return ResultInfo.GenerateOKResult("Saved", thing.ID);
+                return Result.GenerateOKResult("Saved", thing.ID.ToString());
             }
             catch
             {
-                return ResultInfo.GetResultByID(1);
+                return Result.GenerateFailedResult();
             }
         }
 
@@ -158,11 +184,11 @@ namespace DynThings.Data.Repositories
                 ends.ForEach(e => e.ThingID = 0);
 
                 db.SaveChanges();
-                return ResultInfo.GenerateOKResult("Deleted", thing.ID);
+                return Result.GenerateOKResult("Deleted", thing.ID.ToString());
             }
             catch (Exception ex)
             {
-                return ResultInfo.GenerateErrorResult(ex.Message + " -- " + ex.InnerException);
+                return Result.GenerateFailedResult(ex.Message + " -- " + ex.InnerException);
             }
         }
 
@@ -220,11 +246,11 @@ namespace DynThings.Data.Repositories
         //    try
         //    {
         //        db.ThingPropertyValueAdd(thingID, thingExtensionID, value);
-        //        return ResultInfo.GenerateOKResult("Saved");
+        //        return Result.GenerateOKResult("Saved");
         //    }
         //    catch
         //    {
-        //        return ResultInfo.GetResultByID(1);
+        //        return Result.GenerateFailedResult();
         //    }
         //}
         //#endregion
@@ -235,11 +261,11 @@ namespace DynThings.Data.Repositories
         //    try
         //    {
         //        db.ThingPropertyValueEdit(valueID, newValue);
-        //        return ResultInfo.GenerateOKResult("Saved");
+        //        return Result.GenerateOKResult("Saved");
         //    }
         //    catch
         //    {
-        //        return ResultInfo.GetResultByID(1);
+        //        return Result.GenerateFailedResult();
         //    }
         //}
         //#endregion
@@ -251,11 +277,11 @@ namespace DynThings.Data.Repositories
 
         //    {
         //        db.ThingPropertyValueDelete(valueID);
-        //        return ResultInfo.GenerateOKResult("Saved");
+        //        return Result.GenerateOKResult("Saved");
         //    }
         //    catch
         //    {
-        //        return ResultInfo.GetResultByID(1);
+        //        return Result.GenerateFailedResult();
         //    }
         //}
         //#endregion

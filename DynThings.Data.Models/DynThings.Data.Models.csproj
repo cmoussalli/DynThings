@@ -169,6 +169,9 @@
     <Compile Include="GetThingExtensions_Result.cs">
       <DependentUpon>DynThingsModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="INFO_Server_Result.cs">
+      <DependentUpon>DynThingsModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="IOType.cs">
       <DependentUpon>DynThingsModel.tt</DependentUpon>
     </Compile>
@@ -197,6 +200,7 @@
       <DependentUpon>DynThingsModel.tt</DependentUpon>
     </Compile>
     <Compile Include="ModelsExtensions\Thing.cs" />
+    <Compile Include="ProcedureModels\DBServerInfo.cs" />
     <Compile Include="ResultMessage.cs">
       <DependentUpon>DynThingsModel.tt</DependentUpon>
     </Compile>
@@ -231,6 +235,9 @@
       <DependentUpon>DynThingsModel.tt</DependentUpon>
     </Compile>
     <Compile Include="SystemEntity.cs">
+      <DependentUpon>DynThingsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TestTable.cs">
       <DependentUpon>DynThingsModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Thing.cs">

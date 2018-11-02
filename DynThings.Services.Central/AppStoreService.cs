@@ -49,6 +49,7 @@ namespace DynThings.Services.Central
             requestModel.RecordsPerPage = itemsPerPage;
             APIAppResponseModels.GetAppsList responseModel = await client.Apps.GetAppListAsync(requestModel);
 
+
             return responseModel;
         }
 
@@ -385,13 +386,13 @@ namespace DynThings.Services.Central
 
         //public ResultInfo.Result GetMediaFile(string guid, string fileName)
         //{
-        //    ResultInfo.Result result = ResultInfo.GenerateErrorResult();
+        //    ResultInfo.Result result = Result.GenerateFailedResult();
         //    string localFile = Path.Combine(System.Web.HttpContext.Current.Server.MapPath("~/imgs"), guid + ".png");
         //    WebClient client = new WebClient();
 
         //    client.DownloadFile("http://dynthings.com/mediafiles/" + guid + ".png", localFile);
 
-        //    result = ResultInfo.GenerateOKResult();
+        //    result = Result.GenerateOKResult();
         //    return result;
         //}
 

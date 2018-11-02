@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using DynThings.Core;
 using DynThings.Data.Models;
 using DynThings.Data.Repositories;
+using ResultInfo;
 
 namespace DynThings.WebPortal.Controllers
 {
@@ -38,7 +39,7 @@ namespace DynThings.WebPortal.Controllers
         [HttpPost]
         public ActionResult SetNotificationAsRead(long id)
         {
-            ResultInfo.Result res = ResultInfo.GetResultByID(1);
+            Result res = Result.GenerateFailedResult();
             if (ModelState.IsValid)
             {
                 res = uof_repos.repoUserNotification.SetNotificationAsRead(id);

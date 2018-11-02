@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using DynThings.Data.Models;
 using PagedList;
 using DynThings.Core;
+using ResultInfo;
 
 namespace DynThings.Data.Repositories
 {
@@ -66,11 +67,11 @@ namespace DynThings.Data.Repositories
                 AspNetUser usr = db.AspNetUsers.Find(id);
                 usr.FullName = fullName;
                 db.SaveChanges();
-                return ResultInfo.GenerateOKResult("Saved", long.Parse(usr.Id));
+                return Result.GenerateOKResult("Saved",usr.Id.ToString());
             }
             catch (Exception ex)
             {
-                return ResultInfo.GenerateErrorResult(ex.Message);
+                return Result.GenerateFailedResult(ex.Message);
             }
 
         }
@@ -85,11 +86,11 @@ namespace DynThings.Data.Repositories
                 AspNetUser usr = db.AspNetUsers.Find(id);
                 db.AspNetUsers.Remove(usr);
                 db.SaveChanges();
-                return ResultInfo.GenerateOKResult("Deleted", long.Parse(usr.Id));
+                return Result.GenerateOKResult("Deleted", usr.Id.ToString());
             }
             catch
             {
-                return ResultInfo.GetResultByID(1);
+                return Result.GenerateFailedResult();
             }
         }
 
@@ -131,7 +132,7 @@ namespace DynThings.Data.Repositories
             List<AspNetRole> usrRole = usr.AspNetRoles.Where(r => r.Id == roleID).ToList();
             if (usrRole.Count>0)
             {//Role already Exist
-                return ResultInfo.GetResultByID(1);
+                return Result.GenerateFailedResult();
             }
             else
             {//Role not exist, must attach role to user
@@ -139,7 +140,7 @@ namespace DynThings.Data.Repositories
                 usr.AspNetRoles.Add(rol);
                 db.SaveChanges();
             }
-            return ResultInfo.GenerateOKResult("Saved");
+            return Result.GenerateOKResult("Saved");
         }
         #endregion
 
@@ -156,9 +157,9 @@ namespace DynThings.Data.Repositories
             }
             else
             {//Role not exist, ERROR
-                return ResultInfo.GetResultByID(1);
+                return Result.GenerateFailedResult();
             }
-            return ResultInfo.GenerateOKResult("Saved");
+            return Result.GenerateOKResult("Saved");
         }
         #endregion
 

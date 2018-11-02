@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using DynThings.Data.Models;
 using DynThings.Data.Repositories;
 using DynThings.Core;
+using ResultInfo;
 
 namespace DynThings.WebPortal.Controllers
 {
@@ -75,7 +76,7 @@ namespace DynThings.WebPortal.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult AddPV([Bind(Include = "Title,EndPointID,Description,CommandCode")] EndPointCommand command)
         {
-            ResultInfo.Result res = ResultInfo.GetResultByID(1);
+            Result res = Result.GenerateFailedResult();
             if (ModelState.IsValid)
             {
                 long cmd = long.Parse(command.EndPointID.ToString());
@@ -99,7 +100,7 @@ namespace DynThings.WebPortal.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult EditPV([Bind(Include = "ID,Title,Description,EndPointID,CommandCode")] EndPointCommand Command)
         {
-            ResultInfo.Result res = ResultInfo.GetResultByID(1);
+            Result res = Result.GenerateFailedResult();
             if (ModelState.IsValid)
             {
                 res = uof_repos.repoEndPointCommands.Edit(Command.ID, Command.Title, Command.Description, long.Parse(Command.EndPointID.ToString()), Command.CommandCode);
@@ -122,7 +123,7 @@ namespace DynThings.WebPortal.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeletePV([Bind(Include = "ID,Title,Description,EndPointID")] EndPointCommand Command)
         {
-            ResultInfo.Result res = ResultInfo.GetResultByID(1);
+            Result res = Result.GenerateFailedResult();
             if (ModelState.IsValid)
             {
                 res = uof_repos.repoEndPointCommands.Detele(Command.ID);
@@ -144,7 +145,7 @@ namespace DynThings.WebPortal.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult ExecutePV([Bind(Include = "ID,EndPointID,CommandCode")] EndPointCommand Command)
         {
-            ResultInfo.Result res = ResultInfo.GetResultByID(1);
+            Result res = Result.GenerateFailedResult();
             if (ModelState.IsValid)
             {
                 res = uof_repos.repoEndPointCommands.Execute(Command.ID,Command.CommandCode, User.Identity.ToString());

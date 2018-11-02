@@ -5,9 +5,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="DynThingsCentral.Core" Version="1.0.3" />
-    <PackageReference Include="DynThingsCentral.WebAPI.Client" Version="1.0.3" />
-    <PackageReference Include="DynThingsCentral.WebAPI.Models" Version="1.0.3" />
+    <PackageReference Include="DynThingsCentral.Core" Version="1.0.7" />
+    <PackageReference Include="DynThingsCentral.WebAPI.Client" Version="1.0.7" />
+    <PackageReference Include="DynThingsCentral.WebAPI.Models" Version="1.0.7" />
     <PackageReference Include="EntityFramework" Version="6.2.0" />
     <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
   </ItemGroup>

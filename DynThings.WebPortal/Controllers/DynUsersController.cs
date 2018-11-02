@@ -10,6 +10,7 @@ using DynThings.Data.Models;
 using DynThings.Data.Repositories;
 using PagedList;
 using DynThings.Core;
+using ResultInfo;
 
 namespace DynThings.WebPortal.Controllers
 {
@@ -78,7 +79,7 @@ namespace DynThings.WebPortal.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult EditPV([Bind(Include = "Id,FullName")] AspNetUser aspNetUser)
         {
-            ResultInfo.Result res = ResultInfo.GetResultByID(1);
+            Result res = Result.GenerateFailedResult();
             if (ModelState.IsValid)
             {
                 res = uof_repos.repoDynUsers.Edit(aspNetUser.Id,aspNetUser.UserName, aspNetUser.FullName);
@@ -100,7 +101,7 @@ namespace DynThings.WebPortal.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeletePV([Bind(Include = "Id,FullName")] AspNetUser aspNetUser)
         {
-            ResultInfo.Result res = ResultInfo.GetResultByID(1);
+            Result res = Result.GenerateFailedResult();
             if (ModelState.IsValid)
             {
                 res = uof_repos.repoDynUsers.Delete(aspNetUser.Id);
@@ -135,7 +136,7 @@ namespace DynThings.WebPortal.Controllers
         [HttpPost]
         public ActionResult AttachRole(string userID,string roleID)
         {
-            ResultInfo.Result res = ResultInfo.GetResultByID(1);
+            Result res = Result.GenerateFailedResult();
             if (ModelState.IsValid)
             {
                 res = uof_repos.repoDynUsers.AttachRole(userID,roleID);
@@ -150,7 +151,7 @@ namespace DynThings.WebPortal.Controllers
         [HttpPost]
         public ActionResult DeAttachRole(string userID, string roleID)
         {
-            ResultInfo.Result res = ResultInfo.GetResultByID(1);
+            Result res = Result.GenerateFailedResult();
             if (ModelState.IsValid)
             {
                 res = uof_repos.repoDynUsers.DeAttachRole(userID, roleID);

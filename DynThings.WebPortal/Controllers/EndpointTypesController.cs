@@ -7,6 +7,7 @@ using DynThings.Data.Models;
 using DynThings.Data.Repositories;
 using DynThings.Core;
 using System.IO;
+using ResultInfo;
 
 namespace DynThings.WebPortal.Controllers
 {
@@ -70,7 +71,7 @@ namespace DynThings.WebPortal.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult AddPV([Bind(Include = "Title,Measurement,TypeCategoryID,IconID")] EndPointType endPointType)
         {
-            ResultInfo.Result res = ResultInfo.GetResultByID(1);
+            Result res = Result.GenerateFailedResult();
             if (ModelState.IsValid)
             {
                 res = uof_repos.repoEndpointTypes.Add(endPointType.Title, endPointType.measurement, (long)endPointType.TypeCategoryID, (long)endPointType.IconID);
@@ -94,7 +95,7 @@ namespace DynThings.WebPortal.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult EditPV([Bind(Include = "ID,Title,Measurement,TypeCategoryID,IconID")] EndPointType endPointType)
         {
-            ResultInfo.Result res = ResultInfo.GetResultByID(1);
+            Result res = Result.GenerateFailedResult();
             if (ModelState.IsValid)
             {
                 res = uof_repos.repoEndpointTypes.Edit(endPointType.ID, endPointType.Title, endPointType.measurement, (long)endPointType.TypeCategoryID,(long)endPointType.IconID);
@@ -110,7 +111,7 @@ namespace DynThings.WebPortal.Controllers
         {
             if (!User.IsInRole("Admin"))
             {
-                ResultInfo.Result rm = Core.ResultInfo.GetResultByID(1);
+                Result rm = Result.GenerateFailedResult();
                 return PartialView("_PVResult", rm);
             }
             EndPointType EndPointType = uof_repos.repoEndpointTypes.Find(id);
@@ -122,7 +123,7 @@ namespace DynThings.WebPortal.Controllers
         [Authorize(Roles = "Admin")]
         public ActionResult DeletePV([Bind(Include = "ID")] EndPointType EndPointType)
         {
-            ResultInfo.Result res = ResultInfo.GetResultByID(1);
+            Result res = Result.GenerateFailedResult();
             if (ModelState.IsValid)
             {
                 res = uof_repos.repoEndpointTypes.Delete(EndPointType.ID);

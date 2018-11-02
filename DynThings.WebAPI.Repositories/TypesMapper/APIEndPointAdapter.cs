@@ -11,7 +11,7 @@ namespace DynThings.WebAPI.TypesMapper
 
     public static class APIEndPointAdapter
     {
-        public static APIEndPoint fromEndpoint(Endpoint sourceEndpoint, bool loadParents, bool loadChilds)
+        public static APIEndPoint fromEndpoint(Endpoint sourceEndpoint, bool loadDevice, bool loadThing)
         {
             APIEndPoint result = new APIEndPoint();
             result.ID = sourceEndpoint.ID;
@@ -35,19 +35,23 @@ namespace DynThings.WebAPI.TypesMapper
             #endregion
 
             #region Load Parents
-            if (loadParents)
+            if (loadDevice)
             {
                 #region Device
                 result.Device = TypesMapper.APIDeviceAdapter.fromDevice(sourceEndpoint.Device, false, false);
 
                 #endregion
-
+              
+            }
+            if (loadThing)
+            {
                 #region Thing
-                result.Thing = TypesMapper.APIThingAdapter.fromThing(sourceEndpoint.Thing, false, false);
+                result.Thing = TypesMapper.APIThingAdapter.fromThing(sourceEndpoint.Thing, false, false,false,false);
 
                 #endregion
 
             }
+
             #endregion
 
             return result;

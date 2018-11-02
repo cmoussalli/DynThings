@@ -11,6 +11,8 @@ using System.Web.Configuration;
 using DynThings.Data.Repositories;
 using DynThings.WebPortal;
 using DynThingsCentral.WebAPI.Client;
+using DynThingsCentral.WebAPI.Models;
+using ResultInfo;
 
 namespace DynThings.WebPortal.Controllers
 {
@@ -27,24 +29,24 @@ namespace DynThings.WebPortal.Controllers
                 UnitOfWork_Repositories uof_repos = new UnitOfWork_Repositories();
                 if (Config.PlatformTitle != "")
                 {
-                    string url = FullyQualifiedApplicationPath();
-                    client.Statistics.SubmitStatistics(Config.PlatformKey
-                                , Config.PlatformTitle
-                                , Config.DeploymentTimeStamp
-                                , ""
-                                , float.Parse("0.01")
-                                , url
-                                , uof_repos.repoLocationViews.GetCount()
-                                , uof_repos.repoLocations.GetCount()
-                                , uof_repos.repoThings.GetCount()
-                                , uof_repos.repoDevices.GetCount()
-                                , uof_repos.repoEndpoints.GetCount()
-                                , uof_repos.repoDynUsers.GetCount()
-                                , Server.MachineName
-                                , ""
-                                , ""
-                                , 0
-                                );
+                    //string url = FullyQualifiedApplicationPath();
+                    //APIHostStatistics apiHostStatistics = new APIHostStatistics();
+                    //apiHostStatistics.DeploymentDate = Config.DeploymentTimeStamp.ToShortTimeString();
+                    //apiHostStatistics.DevicesCount = uof_repos.repoDevices.GetCount();
+                    //apiHostStatistics.EndpointsCount = uof_repos.repoEndpoints.GetCount();
+                    //apiHostStatistics.LocationsCount = uof_repos.repoLocations.GetCount();
+                    //apiHostStatistics.MotherboardSN = "";
+                    //apiHostStatistics.PlatformIdentifier = Config.PlatformKey;
+                    //apiHostStatistics.Release = float.Parse("0.01");
+                    //apiHostStatistics.ServerMachineName = Server.MachineName;
+                    //apiHostStatistics.ThingsCount = uof_repos.repoThings.GetCount();
+                    //apiHostStatistics.Title = Config.PlatformTitle;
+                    //apiHostStatistics.URL = Url.ToString();
+                    //apiHostStatistics.UsersCount = uof_repos.repoDynUsers.GetCount();
+                    //apiHostStatistics.ViewsCount = uof_repos.repoLocationViews.GetCount();
+
+
+                    //await client.Statistics.SubmitHostStatistics(apiHostStatistics);
 
                     return View("complete");
                 }
@@ -117,7 +119,7 @@ namespace DynThings.WebPortal.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DatabaseConfigPV([Bind(Include = "Server,DatabaseName,User,Password")] Core.SetupModels.DatabaseSetup dbSetup)
         {
-            ResultInfo.Result res = ResultInfo.GenerateErrorResult("Binding Error");
+            Result res = Result.GenerateFailedResult("Binding Error");
             if (ModelState.IsValid)
             {
                 res = Core.Database.SetDatabaseConnection(dbSetup);
@@ -130,7 +132,7 @@ namespace DynThings.WebPortal.Controllers
         //[ValidateAntiForgeryToken]
         public ActionResult DatabaseConfigTest([Bind(Include = "Server,DatabaseName,User,Password")] Core.SetupModels.DatabaseSetup dbSetup)
         {
-            ResultInfo.Result res = ResultInfo.GenerateErrorResult("Binding Error");
+            Result res = Result.GenerateFailedResult("Binding Error");
             if (ModelState.IsValid)
             {
                 res = Core.Database.TestDatabaseConnection(dbSetup);
@@ -163,11 +165,11 @@ namespace DynThings.WebPortal.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult PlatformConfigPV([Bind(Include = "Title,DevelopmentMode,PublicAccess,PublicSignUp,TimeZone")] Core.SetupModels.PlatformConfig config)
         {
-            ResultInfo.Result res = ResultInfo.GenerateErrorResult("Binding Error");
+            Result res = Result.GenerateFailedResult("Binding Error");
             if (ModelState.IsValid)
             {
                 Core.Config.Setup(config.Title, config.PublicAccess, config.PublicSignUp, config.TimeZone, config.DevelopmentMode);
-                res = ResultInfo.GenerateOKResult("Saved");
+                res = Result.GenerateOKResult("Saved");
                 return Json(res);
             }
             return Json(res);

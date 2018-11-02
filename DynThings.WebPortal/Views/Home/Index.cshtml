@@ -1,4 +1,9 @@
-﻿@{
+﻿@using Microsoft.AspNet.Identity
+@using DynThings.Data.Repositories;
+@{
+    UnitOfWork_Repositories uof_repos = new UnitOfWork_Repositories();
+}
+@{
     ViewBag.Title = "Home Page";
 }
 
@@ -106,23 +111,23 @@
         <div class="col-lg-3">
             <div class="row">
                 @*<div class="col-sm-12 col-lg-12">
-                    <div class="panel panel-success panel-colorful">
-                        <div class="pad-all">
-                            <p class="text-lg text-semibold"><i class="demo-pli-data-storage icon-fw"></i> Last Hour</p>
-                            <p class="mar-no">
-                                <span class="pull-right text-bold">400 CpH</span>
-                                Connection per Hour
-                            </p>
-                            <p class="mar-no">
-                                <span class="pull-right text-bold">280 CpH</span>
-                                Used space
-                            </p>
+                        <div class="panel panel-success panel-colorful">
+                            <div class="pad-all">
+                                <p class="text-lg text-semibold"><i class="demo-pli-data-storage icon-fw"></i> Last Hour</p>
+                                <p class="mar-no">
+                                    <span class="pull-right text-bold">400 CpH</span>
+                                    Connection per Hour
+                                </p>
+                                <p class="mar-no">
+                                    <span class="pull-right text-bold">280 CpH</span>
+                                    Used space
+                                </p>
+                            </div>
+                            <div class="pad-all text-center">
+                                <div id="demo-sparkline-area"></div>
+                            </div>
                         </div>
-                        <div class="pad-all text-center">
-                            <div id="demo-sparkline-area"></div>
-                        </div>
-                    </div>
-                </div>*@
+                    </div>*@
 
 
                 <div class="col-sm-12 col-lg-12">
@@ -225,6 +230,11 @@
     $(document).ready(function () {
         LoadChart_Connectivity_LastHourPerMinutes();
         setInterval(DashboardTimer, 30000);
+        @if (User.Identity.IsAuthenticated == true && User.IsInRole("Admin"))
+        {
+
+            WriteLiteral("SubmitHostStatistics();");
+        }
     });
 
     function DashboardTimer() {
@@ -241,6 +251,17 @@
         })
             .success(function (partialViewResult) {
                 $("#EndPointChartDiv").html(partialViewResult);
+            });
+        return false;
+    }
+
+    function SubmitHostStatistics() {
+        $.ajax({
+            url: getRootURL() + '/system/SubmitHostStatistics',
+            type: "GET",
+        })
+            .success(function (partialViewResult) {
+              
             });
         return false;
     }

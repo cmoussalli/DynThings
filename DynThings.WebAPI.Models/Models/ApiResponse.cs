@@ -7,30 +7,38 @@ namespace DynThings.WebAPI.Models
     public enum ResultType
     {
         Ok = 0,
-        Failed = 1
+        Failed = 10,
+        Failed_DevelopmentMode = 11,
+        Failed_ProductionMode = 12,
+        NotAuthorized = 20,
+        Info = 30,
+        Unknown = 99
     }
     #endregion
 
     #region APIResponse
     public class ApiResponse
     {
-        #region :: Public Properites ::
+        #region :: Public Properties ::
         public long ResultID { get; set; }
-        public long StatusID { get; set; }
-        public string StatusTitle { get; set; }
         public string Message { get; set; }
-        public long Reference { get; set; }
+        public string Reference { get; set; }
+        public ResultType ResultType { get; set; }
 
+
+
+
+        public int StatusID { get { return ResultType.GetHashCode(); } }
+        public string StatusTitle { get { return ResultType.ToString(); } }
         #endregion
 
         #region :: Constructor ::
         public ApiResponse()
         {
-            this.ResultID = 99;
-            this.StatusID = 0;
-            this.StatusTitle = "";
+            this.ResultID = 0;
+            this.ResultType = ResultType.Unknown;
             this.Message = "";
-            this.Reference = 0;
+            this.Reference ="";
         }
         #endregion
 

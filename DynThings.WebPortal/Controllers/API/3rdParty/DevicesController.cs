@@ -11,14 +11,16 @@ using System.Web.Http.Description;
 using DynThings.Data.Models;
 using DynThings.Core;
 using DynThings.WebAPI.Models;
+using DynThings.WebAPI.Models.RequestModels;
+using DynThings.WebAPI.Models.ResponseModels;
 using DynThings.WebAPI.Repositories;
+using ResultInfo;
 
 namespace DynThings.WebPortal.Controllers.API
 {
-    public class DevicesController : ApiController
+    public class DevicesController : BaseAPIController
     {
         #region Props
-        UnitOfWork_WebAPI uow_APIs = new UnitOfWork_WebAPI();
         long entityID;
 
         #endregion
@@ -26,21 +28,32 @@ namespace DynThings.WebPortal.Controllers.API
         #region Constructors
         public DevicesController()
         {
-            entityID = uow_APIs.repoAPIDevices.EntityID;
+            entityID = unitOfWork_WebAPI.repoAPIDevices.EntityID;
         }
         #endregion
 
-        //GET: api/LocationViews/GetLocationViews
-        public List<APIDevice> GetDevices(Guid token, int pageNumber, int pageSize, bool loadParents = false, bool loadChilds = false, string searchFor = "")
+        [HttpPost]
+        [ResponseType(typeof(APIDeviceResponseModels.GetDevicesList))]
+        public HttpResponseMessage GetDevicesList(APIDeviceRequestModels.GetDevicesList model)
         {
             int methodID = 8;
-            ResultInfo.Result tokenValidation = uow_APIs.repoAPIUserAppTokens.ValidateTokenEntityPermission(token, entityID, methodID);
-            if (tokenValidation.ResultType != ResultInfo.ResultType.Ok)
+            ApiResponse tokenValidation = unitOfWork_WebAPI.repoAPIUserAppTokens.ValidateTokenEntityPermission(model.Token, entityID, methodID);
+            if (tokenValidation.ResultType != ResultType.Ok)
             {
                 var msg = new HttpResponseMessage(HttpStatusCode.Unauthorized) { ReasonPhrase = tokenValidation.Message };
                 throw new HttpResponseException(new HttpResponseMessage(HttpStatusCode.Forbidden));
             }
-            return uow_APIs.repoAPIDevices.GetDevices(pageNumber, pageSize, loadParents, loadChilds, searchFor);
+
+            try
+            {
+                APIDeviceResponseModels.GetDevicesList result = unitOfWork_WebAPI.repoAPIDevices.GetDevices(model.SearchFor,model.LocationID,model.LoadEndpoints,model.LoadDeviceCommands,model.PageNumber,model.PageSize);
+                return Request.CreateResponse(HttpStatusCode.OK, result);
+            }
+            catch (Exception ex)
+            {
+                return RaiseError(ex.Message);
+            }
+
         }
 
 

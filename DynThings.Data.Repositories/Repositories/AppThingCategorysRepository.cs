@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using DynThings.Core;
 using DynThings.Data.Models;
 using PagedList;
+using ResultInfo;
 
 namespace DynThings.Data.Repositories
 {
@@ -85,11 +86,11 @@ namespace DynThings.Data.Repositories
                 appThingCategory.IconGUID = iconGuid;
                 db.AppThingCategorys.Add(appThingCategory);
                 db.SaveChanges();
-                return ResultInfo.GenerateOKResult("Saved", appThingCategory.ID);
+                return Result.GenerateOKResult("Saved", appThingCategory.ID.ToString());
             }
             catch (Exception ex)
             {
-                return ResultInfo.GenerateErrorResult("Error",ex.Message);
+                return Result.GenerateFailedResult("Error",ex.Message);
             }
         }
 
@@ -104,11 +105,11 @@ namespace DynThings.Data.Repositories
                 appThingCategory.Title = title;
                 appThingCategory.IconGUID = iconGuid;
                 db.SaveChanges();
-                return ResultInfo.GenerateOKResult("Saved", appThingCategory.ID);
+                return Result.GenerateOKResult("Saved", appThingCategory.ID.ToString());
             }
             catch
             {
-                return ResultInfo.GetResultByID(1);
+                return Result.GenerateFailedResult();
             }
         }
 
@@ -122,11 +123,11 @@ namespace DynThings.Data.Repositories
                 AppThingCategory appThingCategory = db.AppThingCategorys.Find(id);
                 db.AppThingCategorys.Remove(appThingCategory);
                 db.SaveChanges();
-                return ResultInfo.GenerateOKResult("Deleted", appThingCategory.ID);
+                return Result.GenerateOKResult("Deleted", appThingCategory.ID.ToString());
             }
             catch
             {
-                return ResultInfo.GetResultByID(1);
+                return Result.GenerateFailedResult();
             }
         }
 

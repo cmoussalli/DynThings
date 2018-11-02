@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using DynThings.Core;
 using DynThings.Data.Models;
 using PagedList;
+using ResultInfo;
 
 namespace DynThings.Data.Repositories
 {
@@ -111,17 +112,17 @@ namespace DynThings.Data.Repositories
         #endregion
 
         #region Add
-        public ResultInfo.Result Add(long thingID, long thingExtensionID, string newValue, string createdBy)
+        public Result Add(long thingID, long thingExtensionID, string newValue, string createdBy)
         {
-            ResultInfo.Result result = ResultInfo.GenerateErrorResult();
+            Result result = Result.GenerateFailedResult();
             try
             {
                 db.ThingPropertyValueAdd(thingID, thingExtensionID, newValue);
-                result = ResultInfo.GenerateOKResult("Saved");
+                result = Result.GenerateOKResult("Saved");
             }
             catch (Exception ex)
             {
-                 result = ResultInfo.GenerateErrorResult(ex.Message);
+                 result = Result.GenerateFailedResult(ex.Message);
             }
             return result;
         }
@@ -129,17 +130,17 @@ namespace DynThings.Data.Repositories
         #endregion
 
         #region Edit
-        public ResultInfo.Result Edit(long valueID, string newValue, string createdBy)
+        public Result Edit(long valueID, string newValue, string createdBy)
         {
-            ResultInfo.Result result = ResultInfo.GenerateErrorResult();
+            Result result = Result.GenerateFailedResult();
             try
             {
                 db.ThingPropertyValueEdit(valueID,newValue);
-                result = ResultInfo.GenerateOKResult("Saved");
+                result = Result.GenerateOKResult("Saved");
             }
             catch (Exception ex)
             {
-                result = ResultInfo.GenerateErrorResult(ex.Message);
+                result = Result.GenerateFailedResult(ex.Message);
             }
             return result;
         }
@@ -147,17 +148,17 @@ namespace DynThings.Data.Repositories
         #endregion
 
         #region Delete
-        public ResultInfo.Result Delete(long valueID,string createdBy)
+        public Result Delete(long valueID,string createdBy)
         {
-            ResultInfo.Result result = ResultInfo.GenerateErrorResult();
+            Result result = Result.GenerateFailedResult();
             try
             {
                 db.ThingPropertyValueDelete(valueID);
-                result = ResultInfo.GenerateOKResult("Deleted");
+                result = Result.GenerateOKResult("Deleted");
             }
             catch (Exception ex)
             {
-                result = ResultInfo.GenerateErrorResult(ex.Message);
+                result = Result.GenerateFailedResult(ex.Message);
             }
             return result;
         }

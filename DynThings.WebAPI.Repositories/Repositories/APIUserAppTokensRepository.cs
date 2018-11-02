@@ -4,11 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using DynThings.Core;
-using DynThings.Data.Models;
-using DynThings.WebAPI.Models;
-using DynThings.WebAPI.Repositories;
 using PagedList;
 using System.Security.Cryptography;
+using DynThings.Data.Models;
+using DynThings.WebAPI.Models;
+using DynThings.WebAPI.Models.ResponseModels;
+using DynThings.WebAPI.Repositories;
+using ResultInfo;
 
 namespace DynThings.WebAPI.Repositories
 {
@@ -117,7 +119,7 @@ namespace DynThings.WebAPI.Repositories
         #region Validate Token
         public ApiResponse ValidateToken(Guid token)
         {
-            ResultInfo.Result result = ResultInfo.GenerateErrorResult();
+            Result result = Result.GenerateFailedResult();
 
             try
             {
@@ -126,22 +128,22 @@ namespace DynThings.WebAPI.Repositories
                 {//Token is Exist
                     if (appUserToken.ExpireDate < DateTime.Now)
                     {//Token is Expired
-                        result = ResultInfo.GenerateErrorResult("Token is Expired");
+                        result = Result.GenerateFailedResult("Token is Expired");
                     }
                     else
                     {//Token is Valid
 
-                        result = result = ResultInfo.GenerateOKResult("Token is active");
+                        result = result = Result.GenerateOKResult("Token is active");
                     }
                 }
                 else
                 {//Token is not Exist
-                    result = ResultInfo.GenerateErrorResult("Token is not exist");
+                    result = Result.GenerateFailedResult("Token is not exist");
                 }
             }
             catch (Exception ex)
             {
-                result = ResultInfo.GenerateErrorResult("Token is not exist");
+                result = Result.GenerateFailedResult("Token is not exist");
             }
             ApiResponse apiResponse =  TypesMapper.ApiResponseAdapter.fromResult(result);
             return apiResponse;
@@ -181,9 +183,10 @@ namespace DynThings.WebAPI.Repositories
         #endregion
 
         #region Validate Token Entity Permission
-        public ResultInfo.Result ValidateTokenEntityPermission(Guid token, long entityID,int methodID)
+        public ApiResponse ValidateTokenEntityPermission(Guid token, long entityID,long methodID)
         {
-            ResultInfo.Result result = ResultInfo.GenerateErrorResult();
+            Result res = Result.GenerateFailedResult();
+            ApiResponse result = new ApiResponse();
             try
             {
                 AppUserToken appUserToken = db.AppUserTokens.First(t => t.Token == token);
@@ -191,7 +194,7 @@ namespace DynThings.WebAPI.Repositories
                 {//Token is not Exist
                     string message = "Token is not exist";
                     repoAPIUtilizations.AddUnAuthorized(token, methodID, message);
-                    result = ResultInfo.GenerateErrorResult(message);
+                    res = Result.GenerateFailedResult(message);
                 }
                 else
                 {//Token is Exist
@@ -199,7 +202,7 @@ namespace DynThings.WebAPI.Repositories
                     {//Token is Expired
                         string message = "Token is Expired";
                         repoAPIUtilizations.AddUnAuthorized(token, methodID, message);
-                        result = ResultInfo.GenerateErrorResult(message);
+                        res = Result.GenerateFailedResult(message);
                     }
                     else
                     {//Token is Valid
@@ -208,13 +211,13 @@ namespace DynThings.WebAPI.Repositories
                         {//Token don't have access to Entity
                             string message = "Token is not allowed to access the requested entity";
                             repoAPIUtilizations.AddUnAuthorized(token, methodID, message);
-                            result = ResultInfo.GenerateNotAuthorizedResult(message);
+                            res = Result.GenerateNotAuthorizedResult();
                         }
                         else
                         {//Token is allowed to access the Entity
                             string message = "Token is active and have access to " + tokEntities[0].SystemEntity.Title + " entity";
                             repoAPIUtilizations.AddSuccess((long)appUserToken.AppID, token, methodID, message);
-                            result = result = ResultInfo.GenerateOKResult(message);
+                            res = Result.GenerateOKResult(message);
                         }
                     }
                 }
@@ -224,9 +227,10 @@ namespace DynThings.WebAPI.Repositories
             {
                 string message = "Token is not exist";
                 repoAPIUtilizations.AddUnAuthorized( token, methodID, message);
-                result = ResultInfo.GenerateErrorResult(message);
+                res = Result.GenerateFailedResult(message);
             }
-            return result;
+            ApiResponse apiResponse = TypesMapper.ApiResponseAdapter.fromResult(res);
+            return apiResponse;
         }
         #endregion
 

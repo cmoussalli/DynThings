@@ -18,9 +18,9 @@ using System;
 public partial class DBChanx
 {
 
-    public Nullable<long> ID { get; set; }
+    public long ID { get; set; }
 
-    public long ChangeSN { get; set; }
+    public long CentralChangeID { get; set; }
 
     public string ChangeCode { get; set; }
 

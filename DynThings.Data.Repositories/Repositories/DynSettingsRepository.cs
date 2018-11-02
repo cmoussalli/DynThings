@@ -12,6 +12,7 @@ using System.Threading.Tasks;
 using DynThings.Data.Models;
 using PagedList;
 using DynThings.Core;
+using ResultInfo;
 
 namespace DynThings.Data.Repositories
 {
@@ -82,9 +83,9 @@ namespace DynThings.Data.Repositories
             }
             else
             {
-              return  ResultInfo.GetResultByID(1);
+              return  Result.GenerateFailedResult();
             }
-            return ResultInfo.GenerateOKResult("Saved");
+            return Result.GenerateOKResult("Saved");
         }
         #endregion
 
@@ -102,9 +103,9 @@ namespace DynThings.Data.Repositories
             }
             else
             {
-                return ResultInfo.GetResultByID(1);
+                return Result.GenerateFailedResult();
             }
-            return ResultInfo.GenerateOKResult("Saved");
+            return Result.GenerateOKResult("Saved");
         }
         #endregion
 
@@ -122,9 +123,9 @@ namespace DynThings.Data.Repositories
             }
             else
             {
-                return ResultInfo.GetResultByID(1);
+                return Result.GenerateFailedResult();
             }
-            return ResultInfo.GenerateOKResult("Reset Ok");
+            return Result.GenerateOKResult("Reset Ok");
         }
         #endregion
     }

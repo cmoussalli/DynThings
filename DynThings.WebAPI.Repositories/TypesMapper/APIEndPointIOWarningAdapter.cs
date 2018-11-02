@@ -15,7 +15,7 @@ namespace DynThings.WebAPI.TypesMapper
         {
             APIEndPointIOWarning result = new APIEndPointIOWarning();
             result.SourceEndPoint = APIEndPointAdapter.fromEndpoint(sourceEndPoint,false,false);
-            result.SourceThing = APIThingAdapter.fromThing(sourceThing,false,false);
+            result.SourceThing = APIThingAdapter.fromThing(sourceThing,false,false,false,false);
 
             List<APILocation> apiLocations = new List<APILocation>();
             foreach (Location l in affectedLocations)

@@ -11,7 +11,7 @@ namespace DynThings.WebAPI.TypesMapper
 
     public static class APILocationViewAdapter
     {
-        public static APILocationView fromLocationView(LocationView sourceLocationView, bool loadChilds)
+        public static APILocationView fromLocationView(LocationView sourceLocationView, bool loadLocations)
         {
             APILocationView result = new APILocationView();
             result.ID = sourceLocationView.ID;
@@ -33,7 +33,7 @@ namespace DynThings.WebAPI.TypesMapper
             #endregion
 
             #region Load Childs
-            if (loadChilds)
+            if (loadLocations)
             {
                 #region Locations
                 List<Location> locs = sourceLocationView.Locations;

@@ -55,14 +55,19 @@
             this.btnSetEndpointCommandAsExecuted = new System.Windows.Forms.Button();
             this.btnGetIOsWarnings = new System.Windows.Forms.Button();
             this.btnGenerateNewToken = new System.Windows.Forms.Button();
+            this.btnGetDevices = new System.Windows.Forms.Button();
+            this.btnGetEnpointsCommands = new System.Windows.Forms.Button();
+            this.btnGetDeviceCommands = new System.Windows.Forms.Button();
+            this.btnGetThingEnds = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.gv1)).BeginInit();
             this.SuspendLayout();
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(704, 83);
+            this.button1.Location = new System.Drawing.Point(1257, 103);
+            this.button1.Margin = new System.Windows.Forms.Padding(4);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(154, 23);
+            this.button1.Size = new System.Drawing.Size(205, 28);
             this.button1.TabIndex = 0;
             this.button1.Text = "Validate Token";
             this.button1.UseVisualStyleBackColor = true;
@@ -70,99 +75,115 @@
             // 
             // txtURL
             // 
-            this.txtURL.Location = new System.Drawing.Point(96, 12);
+            this.txtURL.Location = new System.Drawing.Point(128, 15);
+            this.txtURL.Margin = new System.Windows.Forms.Padding(4);
             this.txtURL.Name = "txtURL";
-            this.txtURL.Size = new System.Drawing.Size(426, 20);
+            this.txtURL.Size = new System.Drawing.Size(567, 22);
             this.txtURL.TabIndex = 1;
-            this.txtURL.Text = "http://localhost/Dynthings.webportal";
+            this.txtURL.Text = "http://localhost/Dynthings.webportal/";
             // 
             // txtAppID
             // 
-            this.txtAppID.Location = new System.Drawing.Point(96, 38);
+            this.txtAppID.Location = new System.Drawing.Point(128, 47);
+            this.txtAppID.Margin = new System.Windows.Forms.Padding(4);
             this.txtAppID.Name = "txtAppID";
-            this.txtAppID.Size = new System.Drawing.Size(426, 20);
+            this.txtAppID.Size = new System.Drawing.Size(567, 22);
             this.txtAppID.TabIndex = 2;
-            this.txtAppID.Text = "71852022-0E2E-48B9-A480-A6EFC97AE293";
+            this.txtAppID.Text = "8dbb7927-5564-45ff-928c-3627d5d163ef";
+            this.txtAppID.TextChanged += new System.EventHandler(this.txtAppID_TextChanged);
             // 
             // gv1
             // 
             this.gv1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.gv1.Location = new System.Drawing.Point(12, 142);
+            this.gv1.Location = new System.Drawing.Point(16, 175);
+            this.gv1.Margin = new System.Windows.Forms.Padding(4);
             this.gv1.Name = "gv1";
-            this.gv1.Size = new System.Drawing.Size(847, 415);
+            this.gv1.Size = new System.Drawing.Size(1448, 511);
             this.gv1.TabIndex = 3;
             // 
             // txtUser
             // 
-            this.txtUser.Location = new System.Drawing.Point(96, 64);
+            this.txtUser.Location = new System.Drawing.Point(128, 79);
+            this.txtUser.Margin = new System.Windows.Forms.Padding(4);
             this.txtUser.Name = "txtUser";
-            this.txtUser.Size = new System.Drawing.Size(188, 20);
+            this.txtUser.Size = new System.Drawing.Size(249, 22);
             this.txtUser.TabIndex = 4;
+            this.txtUser.Text = "cmoussalli@gmail.com";
             // 
             // txtPassword
             // 
-            this.txtPassword.Location = new System.Drawing.Point(96, 90);
+            this.txtPassword.Location = new System.Drawing.Point(128, 111);
+            this.txtPassword.Margin = new System.Windows.Forms.Padding(4);
             this.txtPassword.Name = "txtPassword";
-            this.txtPassword.Size = new System.Drawing.Size(188, 20);
+            this.txtPassword.Size = new System.Drawing.Size(249, 22);
             this.txtPassword.TabIndex = 5;
+            this.txtPassword.Text = "Medi@22222";
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(15, 15);
+            this.label1.Location = new System.Drawing.Point(20, 18);
+            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(29, 13);
+            this.label1.Size = new System.Drawing.Size(36, 17);
             this.label1.TabIndex = 6;
             this.label1.Text = "URL";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(15, 41);
+            this.label2.Location = new System.Drawing.Point(20, 50);
+            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(53, 13);
+            this.label2.Size = new System.Drawing.Size(69, 17);
             this.label2.TabIndex = 7;
             this.label2.Text = "APP Guid";
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(15, 69);
+            this.label3.Location = new System.Drawing.Point(20, 85);
+            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(29, 13);
+            this.label3.Size = new System.Drawing.Size(38, 17);
             this.label3.TabIndex = 7;
             this.label3.Text = "User";
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(15, 93);
+            this.label4.Location = new System.Drawing.Point(20, 114);
+            this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(53, 13);
+            this.label4.Size = new System.Drawing.Size(69, 17);
             this.label4.TabIndex = 7;
             this.label4.Text = "Password";
             // 
             // txtToken
             // 
-            this.txtToken.Location = new System.Drawing.Point(96, 116);
+            this.txtToken.Location = new System.Drawing.Point(128, 143);
+            this.txtToken.Margin = new System.Windows.Forms.Padding(4);
             this.txtToken.Name = "txtToken";
-            this.txtToken.Size = new System.Drawing.Size(426, 20);
+            this.txtToken.Size = new System.Drawing.Size(567, 22);
             this.txtToken.TabIndex = 8;
+            this.txtToken.Text = "0271f1da-7414-40f0-bedc-d2ab71da4d59";
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(15, 119);
+            this.label5.Location = new System.Drawing.Point(20, 146);
+            this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(75, 13);
+            this.label5.Size = new System.Drawing.Size(99, 17);
             this.label5.TabIndex = 9;
             this.label5.Text = "Current Token";
             // 
             // btnGetTokenInfo
             // 
-            this.btnGetTokenInfo.Location = new System.Drawing.Point(704, 111);
+            this.btnGetTokenInfo.Location = new System.Drawing.Point(1257, 138);
+            this.btnGetTokenInfo.Margin = new System.Windows.Forms.Padding(4);
             this.btnGetTokenInfo.Name = "btnGetTokenInfo";
-            this.btnGetTokenInfo.Size = new System.Drawing.Size(154, 23);
+            this.btnGetTokenInfo.Size = new System.Drawing.Size(205, 28);
             this.btnGetTokenInfo.TabIndex = 11;
             this.btnGetTokenInfo.Text = "Get Token Info";
             this.btnGetTokenInfo.UseVisualStyleBackColor = true;
@@ -170,9 +191,10 @@
             // 
             // btnGetLocationViews
             // 
-            this.btnGetLocationViews.Location = new System.Drawing.Point(12, 583);
+            this.btnGetLocationViews.Location = new System.Drawing.Point(16, 718);
+            this.btnGetLocationViews.Margin = new System.Windows.Forms.Padding(4);
             this.btnGetLocationViews.Name = "btnGetLocationViews";
-            this.btnGetLocationViews.Size = new System.Drawing.Size(154, 23);
+            this.btnGetLocationViews.Size = new System.Drawing.Size(205, 28);
             this.btnGetLocationViews.TabIndex = 12;
             this.btnGetLocationViews.Text = "Get LocationViews";
             this.btnGetLocationViews.UseVisualStyleBackColor = true;
@@ -180,9 +202,10 @@
             // 
             // btnGetLocation
             // 
-            this.btnGetLocation.Location = new System.Drawing.Point(172, 583);
+            this.btnGetLocation.Location = new System.Drawing.Point(229, 718);
+            this.btnGetLocation.Margin = new System.Windows.Forms.Padding(4);
             this.btnGetLocation.Name = "btnGetLocation";
-            this.btnGetLocation.Size = new System.Drawing.Size(154, 23);
+            this.btnGetLocation.Size = new System.Drawing.Size(205, 28);
             this.btnGetLocation.TabIndex = 13;
             this.btnGetLocation.Text = "Get Locations";
             this.btnGetLocation.UseVisualStyleBackColor = true;
@@ -190,9 +213,10 @@
             // 
             // btnThings
             // 
-            this.btnThings.Location = new System.Drawing.Point(332, 583);
+            this.btnThings.Location = new System.Drawing.Point(443, 718);
+            this.btnThings.Margin = new System.Windows.Forms.Padding(4);
             this.btnThings.Name = "btnThings";
-            this.btnThings.Size = new System.Drawing.Size(154, 23);
+            this.btnThings.Size = new System.Drawing.Size(205, 28);
             this.btnThings.TabIndex = 14;
             this.btnThings.Text = "Get Things";
             this.btnThings.UseVisualStyleBackColor = true;
@@ -200,9 +224,10 @@
             // 
             // btnSubmitEndPointInput
             // 
-            this.btnSubmitEndPointInput.Location = new System.Drawing.Point(682, 583);
+            this.btnSubmitEndPointInput.Location = new System.Drawing.Point(1227, 718);
+            this.btnSubmitEndPointInput.Margin = new System.Windows.Forms.Padding(4);
             this.btnSubmitEndPointInput.Name = "btnSubmitEndPointInput";
-            this.btnSubmitEndPointInput.Size = new System.Drawing.Size(176, 23);
+            this.btnSubmitEndPointInput.Size = new System.Drawing.Size(235, 28);
             this.btnSubmitEndPointInput.TabIndex = 15;
             this.btnSubmitEndPointInput.Text = "Submit EndPoint Input";
             this.btnSubmitEndPointInput.UseVisualStyleBackColor = true;
@@ -210,9 +235,10 @@
             // 
             // btnGetEndPointsWarnings
             // 
-            this.btnGetEndPointsWarnings.Location = new System.Drawing.Point(492, 612);
+            this.btnGetEndPointsWarnings.Location = new System.Drawing.Point(656, 753);
+            this.btnGetEndPointsWarnings.Margin = new System.Windows.Forms.Padding(4);
             this.btnGetEndPointsWarnings.Name = "btnGetEndPointsWarnings";
-            this.btnGetEndPointsWarnings.Size = new System.Drawing.Size(154, 23);
+            this.btnGetEndPointsWarnings.Size = new System.Drawing.Size(205, 28);
             this.btnGetEndPointsWarnings.TabIndex = 16;
             this.btnGetEndPointsWarnings.Text = "Get EndPoints with Warnings";
             this.btnGetEndPointsWarnings.UseVisualStyleBackColor = true;
@@ -220,9 +246,10 @@
             // 
             // btnGetEndPoints
             // 
-            this.btnGetEndPoints.Location = new System.Drawing.Point(492, 583);
+            this.btnGetEndPoints.Location = new System.Drawing.Point(656, 718);
+            this.btnGetEndPoints.Margin = new System.Windows.Forms.Padding(4);
             this.btnGetEndPoints.Name = "btnGetEndPoints";
-            this.btnGetEndPoints.Size = new System.Drawing.Size(154, 23);
+            this.btnGetEndPoints.Size = new System.Drawing.Size(205, 28);
             this.btnGetEndPoints.TabIndex = 17;
             this.btnGetEndPoints.Text = "Get EndPoints";
             this.btnGetEndPoints.UseVisualStyleBackColor = true;
@@ -230,9 +257,10 @@
             // 
             // btnGetThingsWarnings
             // 
-            this.btnGetThingsWarnings.Location = new System.Drawing.Point(332, 612);
+            this.btnGetThingsWarnings.Location = new System.Drawing.Point(443, 753);
+            this.btnGetThingsWarnings.Margin = new System.Windows.Forms.Padding(4);
             this.btnGetThingsWarnings.Name = "btnGetThingsWarnings";
-            this.btnGetThingsWarnings.Size = new System.Drawing.Size(154, 23);
+            this.btnGetThingsWarnings.Size = new System.Drawing.Size(205, 28);
             this.btnGetThingsWarnings.TabIndex = 18;
             this.btnGetThingsWarnings.Text = "Get Things with Warnings";
             this.btnGetThingsWarnings.UseVisualStyleBackColor = true;
@@ -240,9 +268,10 @@
             // 
             // btnGetLocationsWarnings
             // 
-            this.btnGetLocationsWarnings.Location = new System.Drawing.Point(172, 612);
+            this.btnGetLocationsWarnings.Location = new System.Drawing.Point(229, 753);
+            this.btnGetLocationsWarnings.Margin = new System.Windows.Forms.Padding(4);
             this.btnGetLocationsWarnings.Name = "btnGetLocationsWarnings";
-            this.btnGetLocationsWarnings.Size = new System.Drawing.Size(154, 23);
+            this.btnGetLocationsWarnings.Size = new System.Drawing.Size(205, 28);
             this.btnGetLocationsWarnings.TabIndex = 19;
             this.btnGetLocationsWarnings.Text = "Get Locations Warnings";
             this.btnGetLocationsWarnings.UseVisualStyleBackColor = true;
@@ -250,9 +279,10 @@
             // 
             // btnGetViewsWarnings
             // 
-            this.btnGetViewsWarnings.Location = new System.Drawing.Point(12, 612);
+            this.btnGetViewsWarnings.Location = new System.Drawing.Point(16, 753);
+            this.btnGetViewsWarnings.Margin = new System.Windows.Forms.Padding(4);
             this.btnGetViewsWarnings.Name = "btnGetViewsWarnings";
-            this.btnGetViewsWarnings.Size = new System.Drawing.Size(154, 23);
+            this.btnGetViewsWarnings.Size = new System.Drawing.Size(205, 28);
             this.btnGetViewsWarnings.TabIndex = 20;
             this.btnGetViewsWarnings.Text = "Get Views Warnings";
             this.btnGetViewsWarnings.UseVisualStyleBackColor = true;
@@ -260,9 +290,10 @@
             // 
             // btnSubmitEndPointLog
             // 
-            this.btnSubmitEndPointLog.Location = new System.Drawing.Point(683, 612);
+            this.btnSubmitEndPointLog.Location = new System.Drawing.Point(1229, 753);
+            this.btnSubmitEndPointLog.Margin = new System.Windows.Forms.Padding(4);
             this.btnSubmitEndPointLog.Name = "btnSubmitEndPointLog";
-            this.btnSubmitEndPointLog.Size = new System.Drawing.Size(175, 23);
+            this.btnSubmitEndPointLog.Size = new System.Drawing.Size(233, 28);
             this.btnSubmitEndPointLog.TabIndex = 21;
             this.btnSubmitEndPointLog.Text = "Submit EndPoint Log";
             this.btnSubmitEndPointLog.UseVisualStyleBackColor = true;
@@ -270,9 +301,10 @@
             // 
             // btnGetEndPointPendingCommands
             // 
-            this.btnGetEndPointPendingCommands.Location = new System.Drawing.Point(683, 641);
+            this.btnGetEndPointPendingCommands.Location = new System.Drawing.Point(1229, 789);
+            this.btnGetEndPointPendingCommands.Margin = new System.Windows.Forms.Padding(4);
             this.btnGetEndPointPendingCommands.Name = "btnGetEndPointPendingCommands";
-            this.btnGetEndPointPendingCommands.Size = new System.Drawing.Size(175, 23);
+            this.btnGetEndPointPendingCommands.Size = new System.Drawing.Size(233, 28);
             this.btnGetEndPointPendingCommands.TabIndex = 22;
             this.btnGetEndPointPendingCommands.Text = "Get EndPoint Pending Commands";
             this.btnGetEndPointPendingCommands.UseVisualStyleBackColor = true;
@@ -280,9 +312,10 @@
             // 
             // btnSetEndpointCommandAsExecuted
             // 
-            this.btnSetEndpointCommandAsExecuted.Location = new System.Drawing.Point(683, 670);
+            this.btnSetEndpointCommandAsExecuted.Location = new System.Drawing.Point(1229, 825);
+            this.btnSetEndpointCommandAsExecuted.Margin = new System.Windows.Forms.Padding(4);
             this.btnSetEndpointCommandAsExecuted.Name = "btnSetEndpointCommandAsExecuted";
-            this.btnSetEndpointCommandAsExecuted.Size = new System.Drawing.Size(176, 23);
+            this.btnSetEndpointCommandAsExecuted.Size = new System.Drawing.Size(235, 28);
             this.btnSetEndpointCommandAsExecuted.TabIndex = 23;
             this.btnSetEndpointCommandAsExecuted.Text = "Set Command as Executed";
             this.btnSetEndpointCommandAsExecuted.UseVisualStyleBackColor = true;
@@ -290,9 +323,10 @@
             // 
             // btnGetIOsWarnings
             // 
-            this.btnGetIOsWarnings.Location = new System.Drawing.Point(12, 671);
+            this.btnGetIOsWarnings.Location = new System.Drawing.Point(16, 950);
+            this.btnGetIOsWarnings.Margin = new System.Windows.Forms.Padding(4);
             this.btnGetIOsWarnings.Name = "btnGetIOsWarnings";
-            this.btnGetIOsWarnings.Size = new System.Drawing.Size(634, 23);
+            this.btnGetIOsWarnings.Size = new System.Drawing.Size(1448, 28);
             this.btnGetIOsWarnings.TabIndex = 24;
             this.btnGetIOsWarnings.Text = "Get IO Warnings";
             this.btnGetIOsWarnings.UseVisualStyleBackColor = true;
@@ -300,19 +334,64 @@
             // 
             // btnGenerateNewToken
             // 
-            this.btnGenerateNewToken.Location = new System.Drawing.Point(704, 9);
+            this.btnGenerateNewToken.Location = new System.Drawing.Point(1257, 12);
+            this.btnGenerateNewToken.Margin = new System.Windows.Forms.Padding(4);
             this.btnGenerateNewToken.Name = "btnGenerateNewToken";
-            this.btnGenerateNewToken.Size = new System.Drawing.Size(154, 23);
+            this.btnGenerateNewToken.Size = new System.Drawing.Size(205, 28);
             this.btnGenerateNewToken.TabIndex = 25;
             this.btnGenerateNewToken.Text = "Generate New Token";
             this.btnGenerateNewToken.UseVisualStyleBackColor = true;
             this.btnGenerateNewToken.Click += new System.EventHandler(this.btnGenerateNewToken_Click);
             // 
+            // btnGetDevices
+            // 
+            this.btnGetDevices.Location = new System.Drawing.Point(869, 718);
+            this.btnGetDevices.Margin = new System.Windows.Forms.Padding(4);
+            this.btnGetDevices.Name = "btnGetDevices";
+            this.btnGetDevices.Size = new System.Drawing.Size(205, 28);
+            this.btnGetDevices.TabIndex = 17;
+            this.btnGetDevices.Text = "Get Devices";
+            this.btnGetDevices.UseVisualStyleBackColor = true;
+            this.btnGetDevices.Click += new System.EventHandler(this.btnGetDevices_ClickAsync);
+            // 
+            // btnGetEnpointsCommands
+            // 
+            this.btnGetEnpointsCommands.Location = new System.Drawing.Point(658, 789);
+            this.btnGetEnpointsCommands.Name = "btnGetEnpointsCommands";
+            this.btnGetEnpointsCommands.Size = new System.Drawing.Size(205, 28);
+            this.btnGetEnpointsCommands.TabIndex = 26;
+            this.btnGetEnpointsCommands.Text = "Get Enpoints Commands";
+            this.btnGetEnpointsCommands.UseVisualStyleBackColor = true;
+            this.btnGetEnpointsCommands.Click += new System.EventHandler(this.btnGetEnpointsCommands_ClickAsync);
+            // 
+            // btnGetDeviceCommands
+            // 
+            this.btnGetDeviceCommands.Location = new System.Drawing.Point(869, 789);
+            this.btnGetDeviceCommands.Name = "btnGetDeviceCommands";
+            this.btnGetDeviceCommands.Size = new System.Drawing.Size(205, 28);
+            this.btnGetDeviceCommands.TabIndex = 27;
+            this.btnGetDeviceCommands.Text = "Get Device Commands";
+            this.btnGetDeviceCommands.UseVisualStyleBackColor = true;
+            this.btnGetDeviceCommands.Click += new System.EventHandler(this.btnGetDeviceCommands_ClickAsync);
+            // 
+            // btnGetThingEnds
+            // 
+            this.btnGetThingEnds.Location = new System.Drawing.Point(443, 850);
+            this.btnGetThingEnds.Name = "btnGetThingEnds";
+            this.btnGetThingEnds.Size = new System.Drawing.Size(418, 28);
+            this.btnGetThingEnds.TabIndex = 28;
+            this.btnGetThingEnds.Text = "Get ThingEnds";
+            this.btnGetThingEnds.UseVisualStyleBackColor = true;
+            this.btnGetThingEnds.Click += new System.EventHandler(this.btnGetThingEnds_ClickAsync);
+            // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(870, 706);
+            this.ClientSize = new System.Drawing.Size(1475, 991);
+            this.Controls.Add(this.btnGetThingEnds);
+            this.Controls.Add(this.btnGetDeviceCommands);
+            this.Controls.Add(this.btnGetEnpointsCommands);
             this.Controls.Add(this.btnGenerateNewToken);
             this.Controls.Add(this.btnGetIOsWarnings);
             this.Controls.Add(this.btnSetEndpointCommandAsExecuted);
@@ -321,6 +400,7 @@
             this.Controls.Add(this.btnGetViewsWarnings);
             this.Controls.Add(this.btnGetLocationsWarnings);
             this.Controls.Add(this.btnGetThingsWarnings);
+            this.Controls.Add(this.btnGetDevices);
             this.Controls.Add(this.btnGetEndPoints);
             this.Controls.Add(this.btnGetEndPointsWarnings);
             this.Controls.Add(this.btnSubmitEndPointInput);
@@ -340,6 +420,7 @@
             this.Controls.Add(this.txtAppID);
             this.Controls.Add(this.txtURL);
             this.Controls.Add(this.button1);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Form1";
@@ -379,6 +460,10 @@
         private System.Windows.Forms.Button btnSetEndpointCommandAsExecuted;
         private System.Windows.Forms.Button btnGetIOsWarnings;
         private System.Windows.Forms.Button btnGenerateNewToken;
+        private System.Windows.Forms.Button btnGetDevices;
+        private System.Windows.Forms.Button btnGetEnpointsCommands;
+        private System.Windows.Forms.Button btnGetDeviceCommands;
+        private System.Windows.Forms.Button btnGetThingEnds;
     }
 }
 

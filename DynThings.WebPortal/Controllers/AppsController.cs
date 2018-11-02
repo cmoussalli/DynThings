@@ -7,6 +7,7 @@ using DynThings.Core;
 using DynThings.Data.Models;
 using DynThings.Data.Repositories;
 using PagedList;
+using ResultInfo;
 
 namespace DynThings.WebPortal.Controllers
 {
@@ -78,11 +79,11 @@ namespace DynThings.WebPortal.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult AddPV([Bind(Include = "Title,Description")] App app)
         {
-            ResultInfo.Result res = ResultInfo.GetResultByID(1);
+            Result res = Result.GenerateFailedResult();
             if (ModelState.IsValid)
             {
                 res = uof_repos.repoApps.Add(app.Title, app.Description, currentUser.Id);
-                App addedApp = uof_repos.repoApps.Find(res.Reference);
+                App addedApp = uof_repos.repoApps.Find(long.Parse(res.Reference));
                 System.IO.Directory.CreateDirectory(Request.PhysicalApplicationPath + "Imgs/Apps/" + addedApp.GUID.ToString());
                 System.IO.Directory.CreateDirectory(Request.PhysicalApplicationPath + "Imgs/Apps/" + addedApp.GUID.ToString() + "/MediaFiles");
                 System.IO.File.Copy(Request.PhysicalApplicationPath + "Imgs/Apps/default.jpg", Request.PhysicalApplicationPath + "Imgs/Apps/" + addedApp.GUID.ToString() + "/logo.jpg");
@@ -104,7 +105,7 @@ namespace DynThings.WebPortal.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult EditPV([Bind(Include = "ID,Title,Description,StatusID,Version")] App app)
         {
-            ResultInfo.Result res = ResultInfo.GetResultByID(1);
+            Result res = Result.GenerateFailedResult();
             if (ModelState.IsValid)
             {
                 res = uof_repos.repoApps.EditMain(app.ID, app.Title, app.Description, app.StatusID, app.Version);
@@ -126,7 +127,7 @@ namespace DynThings.WebPortal.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeletePV([Bind(Include = "ID")] App app)
         {
-            ResultInfo.Result res = ResultInfo.GetResultByID(1);
+            Result res = Result.GenerateFailedResult();
             res = uof_repos.repoApps.Delete(app.ID);
             return Json(res);
         }
@@ -144,7 +145,7 @@ namespace DynThings.WebPortal.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult PublishPV([Bind(Include = "ID")] App app)
         {
-            ResultInfo.Result res = ResultInfo.GetResultByID(1);
+            Result res = Result.GenerateFailedResult();
             res = uof_repos.repoApps.Publish(app.ID);
 
             return Json(res);
@@ -173,7 +174,7 @@ namespace DynThings.WebPortal.Controllers
         [HttpPost]
         public ActionResult AppApiEntityAttachPV([Bind(Include = "AppID,SystemEntityID")] AppAPIEntity appAPIEntity)
         {
-            ResultInfo.Result res = ResultInfo.GetResultByID(1);
+            Result res = Result.GenerateFailedResult();
             res = uof_repos.repoApps.AttachAppAPIEntity(appAPIEntity.AppID, appAPIEntity.SystemEntityID);
             return Json(res);
         }
@@ -189,7 +190,7 @@ namespace DynThings.WebPortal.Controllers
         [HttpPost]
         public ActionResult AppApiEntityDeattachPV([Bind(Include = "AppID,SystemEntityID")] AppAPIEntity appAPIEntity)
         {
-            ResultInfo.Result res = ResultInfo.GetResultByID(1);
+            Result res = Result.GenerateFailedResult();
             if (ModelState.IsValid)
             {
                 res = uof_repos.repoApps.DeAttachAppAPIEntity(appAPIEntity.AppID, appAPIEntity.SystemEntityID);
@@ -232,7 +233,7 @@ namespace DynThings.WebPortal.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult AddAppEndpointTypePV(AppEndpointType model)
         {
-            ResultInfo.Result res = ResultInfo.GetResultByID(1);
+            Result res = Result.GenerateFailedResult();
             if (ModelState.IsValid)
             {
                 res = uof_repos.repoAppEndpointTypes.Add(model.Title, model.Code, Guid.NewGuid(), model.IconGUID,model.Measurement,model.TypeCategoryID, model.AppID, currentUser.Id);
@@ -255,7 +256,7 @@ namespace DynThings.WebPortal.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult EditAppEndpointTypePV(AppEndpointType model)
         {
-            ResultInfo.Result res = ResultInfo.GetResultByID(1);
+            Result res = Result.GenerateFailedResult();
             if (ModelState.IsValid)
             {
                 res = uof_repos.repoAppEndpointTypes.Edit(model.ID, model.Title, model.IconGUID,model.Measurement,model.TypeCategoryID, currentUser.Id);
@@ -276,7 +277,7 @@ namespace DynThings.WebPortal.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteAppEndpointTypePV(AppEndpointType model)
         {
-            ResultInfo.Result res = ResultInfo.GetResultByID(1);
+            Result res = Result.GenerateFailedResult();
             if (ModelState.IsValid)
             {
                 res = uof_repos.repoAppEndpointTypes.Delete(model.ID, currentUser.Id);
@@ -318,7 +319,7 @@ namespace DynThings.WebPortal.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult AddAppThingTypePV(AppThingCategory model)
         {
-            ResultInfo.Result res = ResultInfo.GetResultByID(1);
+            Result res = Result.GenerateFailedResult();
             if (ModelState.IsValid)
             {
                 res = uof_repos.repoAppThingCategorys.Add(model.Title, model.Code, Guid.NewGuid(), model.IconGUID, model.AppID, currentUser.Id);
@@ -340,7 +341,7 @@ namespace DynThings.WebPortal.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult EditAppThingTypePV(AppThingCategory model)
         {
-            ResultInfo.Result res = ResultInfo.GetResultByID(1);
+            Result res = Result.GenerateFailedResult();
             if (ModelState.IsValid)
             {
                 res = uof_repos.repoAppThingCategorys.Edit(model.ID, model.Title, model.IconGUID, currentUser.Id);
@@ -361,7 +362,7 @@ namespace DynThings.WebPortal.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteAppThingTypePV(AppThingCategory model)
         {
-            ResultInfo.Result res = ResultInfo.GetResultByID(1);
+            Result res = Result.GenerateFailedResult();
             if (ModelState.IsValid)
             {
                 res = uof_repos.repoAppThingCategorys.Delete(model.ID, currentUser.Id);
@@ -406,7 +407,7 @@ namespace DynThings.WebPortal.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult AddAppThingExtensionPV(AppThingExtension model)
         {
-            ResultInfo.Result res = ResultInfo.GetResultByID(1);
+            Result res = Result.GenerateFailedResult();
             if (ModelState.IsValid)
             {
                 res = uof_repos.repoAppThingExtensions.Add(Guid.NewGuid(), model.Code, model.Title, model.AppThingCategoryCode, model.DataTypeID, model.IsList, model.AppID, currentUser.Id);
@@ -429,7 +430,7 @@ namespace DynThings.WebPortal.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult EditAppThingExtensionPV(AppThingExtension model)
         {
-            ResultInfo.Result res = ResultInfo.GetResultByID(1);
+            Result res = Result.GenerateFailedResult();
             if (ModelState.IsValid)
             {
                 res = uof_repos.repoAppThingExtensions.Edit(model.ID, model.Title, model.DataTypeID, model.IsList, currentUser.Id);
@@ -450,7 +451,7 @@ namespace DynThings.WebPortal.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteAppThingExtensionPV(AppThingExtension model)
         {
-            ResultInfo.Result res = ResultInfo.GetResultByID(1);
+            Result res = Result.GenerateFailedResult();
             if (ModelState.IsValid)
             {
                 res = uof_repos.repoAppThingExtensions.Delete(model.ID, currentUser.Id);

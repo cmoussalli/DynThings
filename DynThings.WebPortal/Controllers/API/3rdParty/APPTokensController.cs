@@ -6,12 +6,16 @@ using System.Net.Http;
 using System.Web.Http;
 using DynThings.Core;
 using DynThings.WebAPI.Models;
+using DynThings.WebAPI.Models.RequestModels;
+using DynThings.WebAPI.Models.ResponseModels;
 using DynThings.WebAPI.Repositories;
 using DynThings.Data.Models;
+using ResultInfo;
+using System.Web.Http.Description;
 
 namespace DynThings.WebPortal.Controllers.API
 {
-    public class APPTokensController : ApiController
+    public class APPTokensController : BaseAPIController
     {
 
         #region Props
@@ -19,49 +23,71 @@ namespace DynThings.WebPortal.Controllers.API
 
         #endregion
 
-        [HttpGet]
-        public APIAppUserToken GetTokenInfo(Guid token)
+        [HttpPost]
+        [ResponseType(typeof(APIAppUserTokenResponseModels.GetTokenInfo))]
+        public HttpResponseMessage GetTokenInfo(APIAppUserTokenRequestModels.GetTokenInfo model)
         {
+            APIAppUserTokenResponseModels.GetTokenInfo result = new APIAppUserTokenResponseModels.GetTokenInfo();
             try
             {
-                return uow_APIs.repoAPIUserAppTokens.GetTokenInfo(token);
+                APIAppUserToken apiAppUserToken =  uow_APIs.repoAPIUserAppTokens.GetTokenInfo(model.Token);
+                result.AppUserToken = apiAppUserToken;
+                return Request.CreateResponse(HttpStatusCode.OK, result);
             }
-            catch
+            catch (Exception ex)
             {
-                throw new HttpResponseException(HttpStatusCode.NotFound);
+                return RaiseError(ex.Message);
             }
         }
 
-        [HttpGet]
-        public ApiResponse ValidateToken(Guid token)
+        [HttpPost]
+        [ResponseType(typeof(APIAppUserTokenResponseModels.ValidateToken))]
+        public HttpResponseMessage ValidateToken(APIAppUserTokenRequestModels.ValidateToken model)
         {
+            APIAppUserTokenResponseModels.ValidateToken result = new APIAppUserTokenResponseModels.ValidateToken();
             try
             {
-                return uow_APIs.repoAPIUserAppTokens.ValidateToken(token);
+                ApiResponse apiResponse = uow_APIs.repoAPIUserAppTokens.ValidateToken(model.Token);
+                result.Response = apiResponse;
+                return Request.CreateResponse(HttpStatusCode.OK, result);
             }
-            catch
+            catch (Exception ex)
             {
-                throw new HttpResponseException(HttpStatusCode.NotFound);
+                return RaiseError(ex.Message);
             }
         }
 
-        [HttpGet]
-        public ResultInfo.Result ValidateTokenEntityPermission(Guid token,long entityID)
+        [HttpPost]
+        [ResponseType(typeof(APIAppUserTokenResponseModels.ValidateTokenEntityPermission))]
+        public HttpResponseMessage ValidateTokenEntityPermission(APIAppUserTokenRequestModels.ValidateTokenEntityPermission model)
         {
+            APIAppUserTokenResponseModels.ValidateTokenEntityPermission result = new APIAppUserTokenResponseModels.ValidateTokenEntityPermission();
             int methodID = 5;
             try
             {
-                return uow_APIs.repoAPIUserAppTokens.ValidateTokenEntityPermission(token,entityID,methodID);
+                result.Response = uow_APIs.repoAPIUserAppTokens.ValidateTokenEntityPermission(model.Token, model.EntityID, model.MethodID);
+                return Request.CreateResponse(HttpStatusCode.OK, result);
             }
-            catch
+            catch (Exception ex)
             {
-                throw new HttpResponseException(HttpStatusCode.NotFound);
+                return RaiseError(ex.Message);
             }
         }
 
-        public APIAppUserToken GetNewToken(Guid appGuid, string userName, string password)
+        [HttpPost]
+        [ResponseType(typeof(APIAppUserTokenResponseModels.GetNewToken))]
+        public HttpResponseMessage GetNewToken(APIAppUserTokenRequestModels.GetNewToken model)
         {
-            return uow_APIs.repoAPIUserAppTokens.GetNewToken(appGuid, userName, password);
+            APIAppUserTokenResponseModels.GetNewToken result = new APIAppUserTokenResponseModels.GetNewToken();
+            try
+            {
+                result.AppUserToken = uow_APIs.repoAPIUserAppTokens.GetNewToken(model.AppGuid, model.UserName, model.Password);
+                return Request.CreateResponse(HttpStatusCode.OK, result);
+            }
+            catch (Exception ex)
+            {
+                return RaiseError(ex.Message);
+            }
         }
     }
 }

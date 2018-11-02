@@ -42,7 +42,7 @@ namespace DynThings.WebAPI.Models
     public class ComponentInfo
     {
         public string Component { get; set; }
-        public float Version { get; set; }
+        public double Version { get; set; }
 
     }
 }

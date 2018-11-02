@@ -13,6 +13,7 @@ using DynThings.Data.Models;
 using PagedList;
 using DynThings.Data;
 using DynThings.Core;
+using ResultInfo;
 
 namespace DynThings.Data.Repositories
 {
@@ -43,21 +44,36 @@ namespace DynThings.Data.Repositories
         #endregion
 
         #region Get PagedList
-        public IPagedList GetPagedList(string search, int pageNumber, int recordsPerPage)
+        public IPagedList<DeviceCommand> GetPagedList(string search, int pageNumber, int recordsPerPage)
         {
-            IPagedList cmds = db.DeviceCommands
+            IPagedList<DeviceCommand> cmds = db.DeviceCommands
               .Where(e => search == null || e.Title.Contains(search))
               .OrderBy(e => e.Title).ToList()
               .ToPagedList(pageNumber, recordsPerPage);
             return cmds;
         }
 
-        public IPagedList GetPagedListByDeviceID(string search, long deviceID, int pageNumber, int recordsPerPage)
+        //public IPagedList<DeviceCommand> GetPagedListByDeviceID(string search, long? deviceID, int pageNumber, int recordsPerPage)
+        //{
+        //    IPagedList<DeviceCommand> cmds = db.DeviceCommands
+        //      .Where(e =>
+        //      (e.Title.Contains(search) || (search == null || search == ""))
+        //      && ((deviceID == null || deviceID == 0) || (e.DeviceID == deviceID))
+        //      )
+        //      .OrderBy(e => e.Title).ToList()
+        //      .ToPagedList(pageNumber, recordsPerPage);
+        //    return cmds;
+        //}
+
+        public IPagedList<DeviceCommand> GetPagedList(string search, long? deviceID,long? locationID, int pageNumber, int recordsPerPage)
         {
-            IPagedList cmds = db.DeviceCommands
-              .Where(e => search == null || e.Title.Contains(search) && e.DeviceID == deviceID)
-              .OrderBy(e => e.Title).ToList()
-              .ToPagedList(pageNumber, recordsPerPage);
+            IPagedList<DeviceCommand> cmds = db.DeviceCommands
+              .Where(e =>
+               (e.Title.Contains(search) || (search == null || search == ""))
+              && ((deviceID == null || deviceID == 0) || (e.DeviceID == deviceID))
+              && ((e.Device.LinkDevicesLocations.Any(l => l.LocationID == locationID)) || (locationID == null || locationID == 0))//Filter by locationID
+              ).OrderBy(e => e.Title)
+              .ToPagedList(pageNumber,recordsPerPage);
             return cmds;
         }
         #endregion
@@ -98,11 +114,11 @@ namespace DynThings.Data.Repositories
                 cmd.OwnerID = ownerID;
                 db.DeviceCommands.Add(cmd);
                 db.SaveChanges();
-                return ResultInfo.GenerateOKResult("Saved", cmd.ID);
+                return Result.GenerateOKResult("Saved", cmd.ID.ToString());
             }
             catch
             {
-                return ResultInfo.GetResultByID(1);
+                return Result.GenerateFailedResult();
             }
         }
 
@@ -119,11 +135,11 @@ namespace DynThings.Data.Repositories
                 cmd.CommandCode = commandCode;
                 cmd.DeviceID = deviceID;
                 db.SaveChanges();
-                return ResultInfo.GenerateOKResult("Saved", cmd.ID);
+                return Result.GenerateOKResult("Saved", cmd.ID.ToString());
             }
             catch
             {
-                return ResultInfo.GetResultByID(1);
+                return Result.GenerateFailedResult();
             }
         }
 
@@ -137,11 +153,11 @@ namespace DynThings.Data.Repositories
                 DeviceCommand cmd = db.DeviceCommands.Find(id);
                 db.DeviceCommands.Remove(cmd);
                 db.SaveChanges();
-                return ResultInfo.GenerateOKResult("Deleted", cmd.ID);
+                return Result.GenerateOKResult("Deleted", cmd.ID.ToString());
             }
             catch
             {
-                return ResultInfo.GetResultByID(1);
+                return Result.GenerateFailedResult();
             }
         }
 
@@ -159,12 +175,12 @@ namespace DynThings.Data.Repositories
                 }
                 else
                 {
-                    return ResultInfo.GetResultByID(1);
+                    return Result.GenerateFailedResult();
                 }
             }
             catch
             {
-                return ResultInfo.GetResultByID(1);
+                return Result.GenerateFailedResult();
             }
         }
         #endregion

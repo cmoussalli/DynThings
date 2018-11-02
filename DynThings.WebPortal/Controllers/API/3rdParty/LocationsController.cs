@@ -8,17 +8,17 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
-using DynThings.Data.Models;
-using DynThings.Core;
+using ResultInfo;
 using DynThings.WebAPI.Models;
+using DynThings.WebAPI.Models.RequestModels;
+using DynThings.WebAPI.Models.ResponseModels;
 using DynThings.WebAPI.Repositories;
 
 namespace DynThings.WebPortal.Controllers.API
 {
-    public class LocationsController : ApiController
+    public class LocationsController : BaseAPIController
     {
         #region Props
-        UnitOfWork_WebAPI uow_APIs = new UnitOfWork_WebAPI();
         long entityID ;
 
         #endregion
@@ -26,34 +26,61 @@ namespace DynThings.WebPortal.Controllers.API
         #region Constructors
         public LocationsController()
         {
-            entityID = uow_APIs.repoAPILocations.EntityID;
+            entityID = unitOfWork_WebAPI.repoAPILocations.EntityID;
         }
         #endregion
 
 
-        public List<APILocation> GetLocations(Guid token, int pageNumber, int pageSize, bool loadParents = false, bool loadChilds = false, string searchFor="", long viewID=0)
+
+        [HttpPost]
+        [ResponseType(typeof(APILocationResponseModels.GetLocationsList))]
+        public HttpResponseMessage GetLocationsList(APILocationRequestModels.GetLocationsList model)
         {
             int methodID = 2;
-            ResultInfo.Result tokenValidation = uow_APIs.repoAPIUserAppTokens.ValidateTokenEntityPermission(token, entityID,methodID);
-            if (tokenValidation.ResultType != ResultInfo.ResultType.Ok)
+            ApiResponse tokenValidation = unitOfWork_WebAPI.repoAPIUserAppTokens.ValidateTokenEntityPermission(model.Token, entityID, methodID);
+            if (tokenValidation.ResultType != ResultType.Ok)
             {
                 var msg = new HttpResponseMessage(HttpStatusCode.Unauthorized) { ReasonPhrase = tokenValidation.Message };
                 throw new HttpResponseException(new HttpResponseMessage(HttpStatusCode.Forbidden));
             }
-            return uow_APIs.repoAPILocations.GetLocations(pageNumber, pageSize,loadParents,loadChilds,searchFor,viewID);
+
+            try
+            {
+                APILocationResponseModels.GetLocationsList result = unitOfWork_WebAPI.repoAPILocations.GetLocationsList(model.SearchFor, model.ViewID, model.LoadViews, model.LoadThings, model.PageNumber, model.PageSize);
+                return Request.CreateResponse(HttpStatusCode.OK, result);
+            }
+            catch (Exception ex)
+            {
+                return RaiseError(ex.Message);
+            }
+
         }
 
-        public List<APILocation> GetLocationsWithWarnings(Guid token, int pageNumber, int pageSize, bool loadParents = false, bool loadChilds = false, string searchFor = "", long viewID = 0)
+        [HttpPost]
+        [ResponseType(typeof(APILocationResponseModels.GetLocationsList))]
+        public HttpResponseMessage GetLocationsWithWarningsList(APILocationRequestModels.GetLocationsList model)
         {
-            int methodID = 15;
-            ResultInfo.Result tokenValidation = uow_APIs.repoAPIUserAppTokens.ValidateTokenEntityPermission(token, entityID, methodID);
-            if (tokenValidation.ResultType != ResultInfo.ResultType.Ok)
+            int methodID = 2;
+            ApiResponse tokenValidation = unitOfWork_WebAPI.repoAPIUserAppTokens.ValidateTokenEntityPermission(model.Token, entityID, methodID);
+            if (tokenValidation.ResultType != ResultType.Ok)
             {
                 var msg = new HttpResponseMessage(HttpStatusCode.Unauthorized) { ReasonPhrase = tokenValidation.Message };
                 throw new HttpResponseException(new HttpResponseMessage(HttpStatusCode.Forbidden));
             }
-            return uow_APIs.repoAPILocations.GetLocationsWithWarnings(pageNumber, pageSize, loadParents, loadChilds, viewID);
+
+            try
+            {
+                APILocationResponseModels.GetLocationsList result = unitOfWork_WebAPI.repoAPILocations.GetLocationsWithWarningsList(model.SearchFor, model.ViewID, model.LoadViews, model.LoadThings, model.PageNumber, model.PageSize);
+                return Request.CreateResponse(HttpStatusCode.OK, result);
+            }
+            catch (Exception ex)
+            {
+                return RaiseError(ex.Message);
+            }
+
         }
+
+        
 
     }
 }

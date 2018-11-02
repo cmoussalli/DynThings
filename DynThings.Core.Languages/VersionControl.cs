@@ -6,9 +6,9 @@ namespace DynThings.Core.Languages
 {
     public class VersionControl
     {
-        public static float GetVersion()
+         public static double GetVersion()
         {
-            float version = 1;
+            double version = 1.4;
 
             return version;
         }

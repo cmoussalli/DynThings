@@ -12,13 +12,15 @@ using DynThings.Data.Models;
 using DynThings.Core;
 using DynThings.WebAPI.Models;
 using DynThings.WebAPI.Repositories;
+using DynThings.WebAPI.Models.RequestModels;
+using DynThings.WebAPI.Models.ResponseModels;
+using ResultInfo;
 
 namespace DynThings.WebPortal.Controllers.API
 {
-    public class ThingsController : ApiController
+    public class ThingsController : BaseAPIController
     {
         #region Props
-        UnitOfWork_WebAPI uow_APIs = new UnitOfWork_WebAPI();
         long entityID;
 
         #endregion
@@ -26,34 +28,58 @@ namespace DynThings.WebPortal.Controllers.API
         #region Constructors
         public ThingsController()
         {
-            entityID = uow_APIs.repoAPIThings.EntityID;
+            entityID = unitOfWork_WebAPI.repoAPIThings.EntityID;
         }
         #endregion
 
-        public List<APIThing> GetThings(Guid token, int pageNumber, int pageSize, bool loadParents = false, bool loadChilds = false, string searchFor="", int locationID=0)
+
+        [HttpPost]
+        [ResponseType(typeof(APIThingResponseModels.GetThingsList))]
+        public HttpResponseMessage GetThingsList(APIThingRequestModels.GetThingsList model)
         {
             int methodID = 10;
-            ResultInfo.Result tokenValidation = uow_APIs.repoAPIUserAppTokens.ValidateTokenEntityPermission(token, entityID, methodID);
-            if (tokenValidation.ResultType != ResultInfo.ResultType.Ok)
+            ApiResponse tokenValidation = unitOfWork_WebAPI.repoAPIUserAppTokens.ValidateTokenEntityPermission(model.Token, entityID, methodID);
+            if (tokenValidation.ResultType != ResultType.Ok)
             {
                 var msg = new HttpResponseMessage(HttpStatusCode.Unauthorized) { ReasonPhrase = tokenValidation.Message };
                 throw new HttpResponseException(new HttpResponseMessage(HttpStatusCode.Forbidden));
             }
-            return uow_APIs.repoAPIThings.GetThings(pageNumber, pageSize,loadParents,loadChilds,searchFor,locationID);
+
+            try
+            {
+                APIThingResponseModels.GetThingsList result = unitOfWork_WebAPI.repoAPIThings.GetThingsList(model.SearchFor,model.LocationID,model.LoadThingEnds,model.LoadEndPoints,model.LoadLocation,model.LoadThingExtensionValues, model.PageNumber, model.PageSize);
+                return Request.CreateResponse(HttpStatusCode.OK, result);
+            }
+            catch (Exception ex)
+            {
+                return RaiseError(ex.Message);
+            }
         }
 
-        public List<APIThing> GetThingsWithWarnings(Guid token, int pageNumber, int pageSize, bool loadParents = false, bool loadChilds = false, int locationID = 0)
+
+        [HttpPost]
+        [ResponseType(typeof(APIThingResponseModels.GetThingsList))]
+        public HttpResponseMessage GetThingsWithWarningsList(APIThingRequestModels.GetThingsList model)
         {
             int methodID = 18;
-            ResultInfo.Result tokenValidation = uow_APIs.repoAPIUserAppTokens.ValidateTokenEntityPermission(token, entityID, methodID);
-            if (tokenValidation.ResultType != ResultInfo.ResultType.Ok)
+            ApiResponse tokenValidation = unitOfWork_WebAPI.repoAPIUserAppTokens.ValidateTokenEntityPermission(model.Token, entityID, methodID);
+            if (tokenValidation.ResultType != ResultType.Ok)
             {
                 var msg = new HttpResponseMessage(HttpStatusCode.Unauthorized) { ReasonPhrase = tokenValidation.Message };
                 throw new HttpResponseException(new HttpResponseMessage(HttpStatusCode.Forbidden));
             }
-            return uow_APIs.repoAPIThings.GetThingsWithWarnings(pageNumber, pageSize, loadParents, loadChilds,locationID);
 
+            try
+            {
+                APIThingResponseModels.GetThingsList result = unitOfWork_WebAPI.repoAPIThings.GetThingsWithWarningsList(model.SearchFor, model.LocationID, model.LoadThingEnds, model.LoadEndPoints, model.LoadLocation, model.LoadThingExtensionValues, model.PageNumber, model.PageSize);
+                return Request.CreateResponse(HttpStatusCode.OK, result);
+            }
+            catch (Exception ex)
+            {
+                return RaiseError(ex.Message);
+            }
         }
+       
 
     }
 }

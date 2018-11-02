@@ -12,6 +12,7 @@ using System.Threading.Tasks;
 using DynThings.Data.Models;
 using PagedList;
 using DynThings.Core;
+using ResultInfo;
 
 namespace DynThings.Data.Repositories
 {
@@ -58,13 +59,46 @@ namespace DynThings.Data.Repositories
         #endregion
 
         #region Get PagedList
-        public IPagedList GetPagedList(string search, int pageNumber, int recordsPerPage)
+        public IPagedList<Endpoint> GetPagedList(string search, int pageNumber, int recordsPerPage)
         {
-            IPagedList ends = db.Endpoints
+            IPagedList<Endpoint> ends = db.Endpoints
               .Where(e => (search == null || e.Title.Contains(search))
                             && e.ObjectStatusID != 2)
               .OrderBy(e => e.Title).ToList()
               .ToPagedList(pageNumber, recordsPerPage);
+            return ends;
+        }
+
+        public IPagedList<Endpoint> GetPagedList(string searchFor, long? deviceID, long? thingID, long? locationID, long? viewID, int pageNumber, int pageSize)
+        {
+            IPagedList<Endpoint> ends = db.Endpoints.Include("EndPointCommands")
+                .Where(e =>
+                    (searchFor == null || e.Title.Contains(searchFor))
+                    && ((viewID == null || viewID == 0) || (e.Thing.LinkThingsLocations.Any(l => l.Location.LinkLocationsLocationViews.Any(v => v.LocationViewID == viewID))))
+                    && ((locationID == null || locationID == 0) || (e.Thing.LinkThingsLocations.Any(l => l.LocationID == locationID)))
+                    && ((deviceID == null || deviceID == 0) || deviceID == e.DeviceID)
+                    && ((thingID == null || thingID == 0) || thingID == e.ThingID)
+                )
+                .OrderBy(o => o.Title)
+                .ToPagedList(pageNumber,pageSize);
+            return ends;
+        }
+
+        public IPagedList<Endpoint> GetEndpointsWithWarningsPagedList(string searchFor, long? deviceID, long? thingID, long? locationID, long? viewID, int pageNumber, int pageSize)
+        {
+            IPagedList<Endpoint> ends = db.Endpoints.Include("EndPointCommands").Include("Thing")
+                .Where(e =>
+                    (searchFor == null || e.Title.Contains(searchFor))
+                    && ((viewID == null || viewID == 0) || (e.Thing.LinkThingsLocations.Any(l => l.Location.LinkLocationsLocationViews.Any(v => v.LocationViewID == viewID))))
+                    && ((locationID == null || locationID == 0) || (e.Thing.LinkThingsLocations.Any(l => l.LocationID == locationID)))
+                    && ((deviceID == null || deviceID == 0) || deviceID == e.DeviceID)
+                    && ((thingID == null || thingID == 0) || thingID == e.ThingID)
+
+                    && (e.IsNumericOnly == true)
+                    && ((e.LastIONumericValue <= e.LowRange) || (e.LastIONumericValue >= e.HighRange))
+                )
+                .OrderBy(o => o.Title)
+                .ToPagedList(pageNumber, pageSize);
             return ends;
         }
         #endregion
@@ -142,11 +176,11 @@ namespace DynThings.Data.Repositories
 
                 db.Endpoints.Add(end);
                 db.SaveChanges();
-                return ResultInfo.GenerateOKResult("Saved", end.ID);
+                return Result.GenerateOKResult("Saved", end.ID.ToString());
             }
             catch
             {
-                return ResultInfo.GetResultByID(1);
+                return Result.GenerateFailedResult();
             }
         }
 
@@ -167,11 +201,11 @@ namespace DynThings.Data.Repositories
                 end.LowRange = lowRange;
                 end.HighRange = highRange;
                 db.SaveChanges();
-                return ResultInfo.GenerateOKResult("Saved", end.ID);
+                return Result.GenerateOKResult("Saved", end.ID.ToString());
             }
             catch
             {
-                return ResultInfo.GetResultByID(1);
+                return Result.GenerateFailedResult();
             }
 
         }
@@ -186,11 +220,11 @@ namespace DynThings.Data.Repositories
                 Endpoint end = db.Endpoints.Find(id);
                 end.ObjectStatusID = 2;
                 db.SaveChanges();
-                return ResultInfo.GenerateOKResult("Deleted", end.ID);
+                return Result.GenerateOKResult("Deleted", end.ID.ToString());
             }
             catch
             {
-                return ResultInfo.GetResultByID(1);
+                return Result.GenerateFailedResult();
             }
         }
 
@@ -205,11 +239,11 @@ namespace DynThings.Data.Repositories
                 end.GUID = guid;
                 end.KeyPass = keyPass;
                 db.SaveChanges();
-                return ResultInfo.GenerateOKResult("Saved", end.ID);
+                return Result.GenerateOKResult("Saved", end.ID.ToString());
             }
             catch (Exception ex)
             {
-                return ResultInfo.GenerateErrorResult(ex.Message);
+                return Result.GenerateFailedResult(ex.Message);
             }
 
         }

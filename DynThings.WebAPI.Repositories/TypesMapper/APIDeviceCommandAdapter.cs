@@ -10,7 +10,7 @@ namespace DynThings.WebAPI.TypesMapper
 {
     public static class APIDeviceCommandAdapter
     {
-        public static APIDeviceCommand fromDeviceCommand(DeviceCommand sourceDeviceCommand,bool loadParents,bool loadChilds)
+        public static APIDeviceCommand fromDeviceCommand(DeviceCommand sourceDeviceCommand,bool loadDevice)
         {
             APIDeviceCommand apiCmd = new APIDeviceCommand();
             apiCmd.ID = sourceDeviceCommand.ID;
@@ -19,7 +19,7 @@ namespace DynThings.WebAPI.TypesMapper
             apiCmd.CommandCode = sourceDeviceCommand.CommandCode;
 
             #region Parents
-            if (loadParents)
+            if (loadDevice)
             {
                 #region Device
                 apiCmd.Device = TypesMapper.APIDeviceAdapter.fromDevice(sourceDeviceCommand.Device,false,false);

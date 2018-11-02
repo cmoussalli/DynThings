@@ -221,16 +221,12 @@
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Title" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'DynThings.dbo.DBChanges' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="DBChanges">
           <Key>
-            <PropertyRef Name="ChangeSN" />
-            <PropertyRef Name="ChangeCode" />
-            <PropertyRef Name="TimeStamp" />
+            <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="bigint" />
-          <Property Name="ChangeSN" Type="bigint" Nullable="false" />
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CentralChangeID" Type="bigint" Nullable="false" />
           <Property Name="ChangeCode" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="TimeStamp" Type="datetime" Nullable="false" />
         </EntityType>
@@ -477,6 +473,13 @@ warning 6002: The table/view 'DynThings.dbo.DBChanges' does not have a primary k
           </Key>
           <Property Name="ID" Type="bigint" Nullable="false" />
           <Property Name="Title" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="TestTable">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="v" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityType Name="ThingCategorys">
           <Key>
@@ -1384,6 +1387,7 @@ warning 6002: The table/view 'DynThings.dbo.DBChanges' does not have a primary k
           <Parameter Name="ThingID" Type="bigint" Mode="In" />
           <Parameter Name="SearchFor" Type="nvarchar" Mode="In" />
         </Function>
+        <Function Name="INFO_Server" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="PublishApp" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="AppID" Type="bigint" Mode="In" />
         </Function>
@@ -1483,6 +1487,7 @@ warning 6002: The table/view 'DynThings.dbo.DBChanges' does not have a primary k
           <EntitySet Name="AspNetUserRoles" EntityType="Self.AspNetUserRoles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DataTypes" EntityType="Self.DataTypes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DBChanges" EntityType="Self.DBChanges" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DeviceCommands" EntityType="Self.DeviceCommands" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DeviceIOs" EntityType="Self.DeviceIOs" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Devices" EntityType="Self.Devices" Schema="dbo" store:Type="Tables" />
@@ -1504,6 +1509,7 @@ warning 6002: The table/view 'DynThings.dbo.DBChanges' does not have a primary k
           <EntitySet Name="MediaFiles" EntityType="Self.MediaFiles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ResultMessages" EntityType="Self.ResultMessages" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SystemEntitys" EntityType="Self.SystemEntitys" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TestTable" EntityType="Self.TestTable" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ThingCategorys" EntityType="Self.ThingCategorys" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ThingEnds" EntityType="Self.ThingEnds" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ThingExtensions" EntityType="Self.ThingExtensions" Schema="dbo" store:Type="Tables" />
@@ -1511,14 +1517,6 @@ warning 6002: The table/view 'DynThings.dbo.DBChanges' does not have a primary k
           <EntitySet Name="Things" EntityType="Self.Things" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserNotifications" EntityType="Self.UserNotifications" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserNotificationTypes" EntityType="Self.UserNotificationTypes" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="DBChanges" EntityType="Self.DBChanges" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [DBChanges].[ID] AS [ID], 
-    [DBChanges].[ChangeSN] AS [ChangeSN], 
-    [DBChanges].[ChangeCode] AS [ChangeCode], 
-    [DBChanges].[TimeStamp] AS [TimeStamp]
-    FROM [dbo].[DBChanges] AS [DBChanges]</DefiningQuery>
-          </EntitySet>
           <AssociationSet Name="FK__AlertCond__Alert__7720AD13" Association="Self.FK__AlertCond__Alert__7720AD13">
             <End Role="Alerts" EntitySet="Alerts" />
             <End Role="AlertConditions" EntitySet="AlertConditions" />
@@ -2173,6 +2171,8 @@ warning 6002: The table/view 'DynThings.dbo.DBChanges' does not have a primary k
           </AssociationSet>
           <EntitySet Name="DynSettings" EntityType="DynThingsModel.DynSetting" />
           <EntitySet Name="DBChanges" EntityType="DynThingsModel.DBChanx" />
+          <EntitySet Name="TestTables" EntityType="DynThingsModel.TestTable" />
+          <FunctionImport Name="INFO_Server" ReturnType="Collection(DynThingsModel.INFO_Server_Result)" />
           </EntityContainer>
         <ComplexType Name="Rpt_EndPoint_IOs_Months_Result">
           <Property Type="Int64" Name="ID" Nullable="false" />
@@ -4008,15 +4008,32 @@ warning 6002: The table/view 'DynThings.dbo.DBChanges' does not have a primary k
         </EntityType>
         <EntityType Name="DBChanx">
           <Key>
-            <PropertyRef Name="ChangeSN" />
-            <PropertyRef Name="ChangeCode" />
-            <PropertyRef Name="TimeStamp" />
+            <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="Int64" />
-          <Property Name="ChangeSN" Type="Int64" Nullable="false" />
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CentralChangeID" Type="Int64" Nullable="false" />
           <Property Name="ChangeCode" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="TimeStamp" Type="DateTime" Nullable="false" Precision="3" />
         </EntityType>
+        <EntityType Name="TestTable">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="v" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <ComplexType Name="INFO_Server_Result">
+          <Property Type="String" Name="ServerName" Nullable="true" MaxLength="128" />
+          <Property Type="String" Name="Edition" Nullable="true" MaxLength="128" />
+          <Property Type="String" Name="EngineEdition" Nullable="true" MaxLength="128" />
+          <Property Type="String" Name="ProductLevel" Nullable="true" MaxLength="128" />
+          <Property Type="String" Name="MachineName" Nullable="true" MaxLength="128" />
+          <Property Type="String" Name="IsHadrEnabled" Nullable="true" MaxLength="128" />
+          <Property Type="String" Name="HadrManagerStatus" Nullable="true" MaxLength="128" />
+          <Property Type="String" Name="IsClustered" Nullable="true" MaxLength="128" />
+          <Property Type="String" Name="Version" Nullable="true" MaxLength="128" />
+          <Property Type="Int64" Name="Memory" Nullable="true" />
+        </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -5062,11 +5079,35 @@ warning 6002: The table/view 'DynThings.dbo.DBChanges' does not have a primary k
               <MappingFragment StoreEntitySet="DBChanges">
                 <ScalarProperty Name="TimeStamp" ColumnName="TimeStamp" />
                 <ScalarProperty Name="ChangeCode" ColumnName="ChangeCode" />
-                <ScalarProperty Name="ChangeSN" ColumnName="ChangeSN" />
+                <ScalarProperty Name="CentralChangeID" ColumnName="CentralChangeID" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="TestTables">
+            <EntityTypeMapping TypeName="DynThingsModel.TestTable">
+              <MappingFragment StoreEntitySet="TestTable">
+                <ScalarProperty Name="v" ColumnName="v" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="INFO_Server" FunctionName="DynThingsModel.Store.INFO_Server">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DynThingsModel.INFO_Server_Result">
+                <ScalarProperty Name="ServerName" ColumnName="ServerName" />
+                <ScalarProperty Name="Edition" ColumnName="Edition" />
+                <ScalarProperty Name="EngineEdition" ColumnName="EngineEdition" />
+                <ScalarProperty Name="ProductLevel" ColumnName="ProductLevel" />
+                <ScalarProperty Name="MachineName" ColumnName="MachineName" />
+                <ScalarProperty Name="IsHadrEnabled" ColumnName="IsHadrEnabled" />
+                <ScalarProperty Name="HadrManagerStatus" ColumnName="HadrManagerStatus" />
+                <ScalarProperty Name="IsClustered" ColumnName="IsClustered" />
+                <ScalarProperty Name="Version" ColumnName="Version" />
+                <ScalarProperty Name="Memory" ColumnName="Memory" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

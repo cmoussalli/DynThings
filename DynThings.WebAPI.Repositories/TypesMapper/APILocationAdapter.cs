@@ -11,7 +11,7 @@ namespace DynThings.WebAPI.TypesMapper
 
     public static class APILocationAdapter
     {
-        public static APILocation fromLocation(Location sourceLocation, bool loadParents, bool loadChilds)
+        public static APILocation fromLocation(Location sourceLocation, bool loadViews, bool loadThings)
         {
             APILocation result = new APILocation();
             result.GUID = sourceLocation.GUID;
@@ -24,9 +24,9 @@ namespace DynThings.WebAPI.TypesMapper
             result.Title = sourceLocation.Title;
 
             #region Parents
-            if (loadParents)
+            #region LocationViews
+            if (loadViews)
             {
-                #region LocationViews
                 List<APILocationView> apiLocationViews = new List<APILocationView>();
                 foreach (LocationView locationView in sourceLocation.locationViews)
                 {
@@ -34,26 +34,28 @@ namespace DynThings.WebAPI.TypesMapper
                     apiLocationViews.Add(apiLocationView);
                 }
                 result.LocationViews = apiLocationViews;
-                #endregion
             }
+            #endregion
 
 
             #endregion
 
             #region Childs
-            if (loadChilds)
+            if (loadThings)
             {
                 #region Things
                 List<APIThing> apiThings = new List<APIThing>();
                 foreach (Thing thing in sourceLocation.Things)
                 {
-                    APIThing apiThing = TypesMapper.APIThingAdapter.fromThing(thing, false, false);
+                    APIThing apiThing = TypesMapper.APIThingAdapter.fromThing(thing, false, false, false, false);
                     apiThings.Add(apiThing);
                 }
                 result.Things = apiThings;
                 #endregion
             }
             result.ThingsCount = sourceLocation.Things.Count;
+            
+
 
             #endregion
 

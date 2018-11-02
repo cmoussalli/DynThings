@@ -13,6 +13,7 @@ using DynThings.Data.Repositories;
 using DynThings.Data.Reports;
 using DynHighCharts;
 using System.IO;
+using ResultInfo;
 
 namespace DynThings.WebPortal.Controllers
 {
@@ -64,7 +65,7 @@ namespace DynThings.WebPortal.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult AddPV([Bind(Include = "Title")] MediaFile MediaFile)
         {
-            ResultInfo.Result res = ResultInfo.GetResultByID(1);
+            Result res = Result.GenerateFailedResult();
             if (ModelState.IsValid)
             {
                 res = uof_repos.repoMediaFiles.Add(MediaFile.Title);
@@ -86,7 +87,7 @@ namespace DynThings.WebPortal.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult EditPV([Bind(Include = "ID,Title")] MediaFile MediaFile)
         {
-            ResultInfo.Result res = ResultInfo.GetResultByID(1);
+            Result res = Result.GenerateFailedResult();
             if (ModelState.IsValid)
             {
                 res = uof_repos.repoMediaFiles.Edit(MediaFile.ID, MediaFile.Title);
@@ -124,7 +125,7 @@ namespace DynThings.WebPortal.Controllers
         {
             if (!User.IsInRole("Admin"))
             {
-                ResultInfo.Result rm = Core.ResultInfo.GetResultByID(1);
+                Result rm = Result.GenerateFailedResult();
                 return PartialView("_PVResult", rm);
             }
             MediaFile media = uof_repos.repoMediaFiles.Find(id);
@@ -136,7 +137,7 @@ namespace DynThings.WebPortal.Controllers
         [Authorize(Roles = "Admin")]
         public ActionResult DeletePV([Bind(Include = "ID")] MediaFile mediaFile)
         {
-            ResultInfo.Result res = ResultInfo.GetResultByID(1);
+            Result res = Result.GenerateFailedResult();
             if (ModelState.IsValid)
             {
                 res = uof_repos.repoMediaFiles.Delete(mediaFile.ID);

@@ -9,10 +9,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using DynThings.Data.Models;
 using PagedList;
 using DynThings.Core;
+using ResultInfo;
 
+using DynThings.Data.Models;
+using DynThings.Data.Repositories;
 
 namespace DynThings.Data.Repositories
 {
@@ -91,6 +93,20 @@ namespace DynThings.Data.Repositories
             return plCmds;
         }
 
+        public IPagedList<EndPointCommand> GetPagedList(string search, long EndPointID, long ThingID, long LocationID, int pageNumber, int recordsPerPage)
+        {
+            db = new DynThingsEntities();
+            IPagedList<EndPointCommand> cmds = db.EndPointCommands
+              .Where(e =>
+              (e.EndPointID == EndPointID || (search == null || search == ""))//Filter by EndpointID
+              && (e.Title.Contains(search) || (search == null || search == ""))//Filter by Search "Title"
+              && ((e.Endpoint.Thing.LinkThingsLocations.Any(l => l.LocationID == LocationID)) || (LocationID == null || LocationID == 0))//Filter by locationID
+              && ((e.Endpoint.ThingID == ThingID) || (ThingID == null || ThingID == 0)) //Filter by ThingID
+              ).OrderBy(e => e.Title)
+              .ToPagedList(pageNumber, recordsPerPage);
+            return cmds;
+        }
+
         #endregion
 
         #region Find
@@ -129,11 +145,11 @@ namespace DynThings.Data.Repositories
                 cmd.OwnerID = ownerID;
                 db.EndPointCommands.Add(cmd);
                 db.SaveChanges();
-                return ResultInfo.GenerateOKResult("Saved", cmd.ID);
+                return Result.GenerateOKResult("Saved", cmd.ID.ToString());
             }
             catch
             {
-                return ResultInfo.GetResultByID(1);
+                return Result.GenerateFailedResult();
             }
         }
 
@@ -147,11 +163,11 @@ namespace DynThings.Data.Repositories
                 EndPointCommand cmd = db.EndPointCommands.Find(id);
                 db.EndPointCommands.Remove(cmd);
                 db.SaveChanges();
-                return ResultInfo.GenerateOKResult("Deleted", cmd.ID);
+                return Result.GenerateOKResult("Deleted", cmd.ID.ToString());
             }
             catch
             {
-                return ResultInfo.GetResultByID(1);
+                return Result.GenerateFailedResult();
             }
         }
 
@@ -168,11 +184,11 @@ namespace DynThings.Data.Repositories
                 cmd.CommandCode = commandCode;
                 cmd.EndPointID = EndPointID;
                 db.SaveChanges();
-                return ResultInfo.GenerateOKResult("Saved", cmd.ID);
+                return Result.GenerateOKResult("Saved", cmd.ID.ToString());
             }
             catch
             {
-                return ResultInfo.GetResultByID(1);
+                return Result.GenerateFailedResult();
             }
         }
 
@@ -188,10 +204,10 @@ namespace DynThings.Data.Repositories
             }
             catch
             {
-                return ResultInfo.GetResultByID(1);
+                return Result.GenerateFailedResult();
             }
 
-            return ResultInfo.GenerateOKResult();
+            return Result.GenerateOKResult();
         }
         #endregion
 
