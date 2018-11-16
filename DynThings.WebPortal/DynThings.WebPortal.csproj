@@ -1134,6 +1134,7 @@
     <Content Include="Views\Apps\_App_EndpointTypes_List.cshtml" />
     <Content Include="Views\System\Index.cshtml" />
     <Content Include="Views\Config\_DBAvailableUpdate.cshtml" />
+    <Content Include="Views\Alerts\_Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Assets\Imgs\Wizard.png" />

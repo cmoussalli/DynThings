@@ -122,7 +122,7 @@ function LoadPart_AlertDetailsScheduleDiv(id) {
     $("#divAlertSchedule").html(loadingpart);
     $.ajax({
         url: getRootURL() + '/Alerts/DetailsSchedulePV?id=' + id,
-        type: "GET",
+        type: "GET"
     })
     .success(function (partialViewResult) {
         $("#divAlertSchedule").html(partialViewResult);
@@ -136,7 +136,7 @@ function LoadPart_DialogAlertAdd() {
     $.ajax({
         url: getRootURL() + '/Alerts/addpv',
         //page=" + $("#DynConfigCurrentPage").html,
-        type: "GET",
+        type: "GET"
     })
     .success(function (partialViewResult) {
         $("#modal").html(partialViewResult);
@@ -149,7 +149,7 @@ function LoadPart_DialogAlertMainEdit(id) {
     $("#modal").html(loadingpart);
     $.ajax({
         url: getRootURL() + '/Alerts/EditMainPV?id=' + id,
-        type: "GET",
+        type: "GET"
     })
     .success(function (partialViewResult) {
         $("#modal").html(partialViewResult);
@@ -162,7 +162,7 @@ function LoadPart_DialogAlertScheduleEdit(id) {
     $("#modal").html(loadingpart);
     $.ajax({
         url: getRootURL() + '/Alerts/EditSchedulePV?id=' + id,
-        type: "GET",
+        type: "GET"
     })
     .success(function (partialViewResult) {
         $("#modal").html(partialViewResult);

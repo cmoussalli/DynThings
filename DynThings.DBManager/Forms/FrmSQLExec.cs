@@ -85,7 +85,7 @@ namespace DynThings.DBManager
 
         public void CreateNewDatabase()
         {
-            string script = File.ReadAllText(AppDomain.CurrentDomain.BaseDirectory + @"\Scripts\CreateDatabase\1.2.txt");
+            string script = File.ReadAllText(AppDomain.CurrentDomain.BaseDirectory + @"\Scripts\CreateDatabase\1.4.txt");
             script = script.Replace("[DynThings]", "[" + sc.SQLDatabase + "]");
             
 

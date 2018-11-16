@@ -99,7 +99,7 @@ namespace DynThings.WebPortal.Controllers
 
         #region EditPV : Upload Image
         [HttpPost]
-        public ActionResult UploadMediaFile(HttpPostedFileBase file,string fileNumber)
+        public ActionResult UploadMediaFile(HttpPostedFileBase file, string fileNumber)
         {
 
             if (file.ContentLength > 0)
@@ -108,7 +108,7 @@ namespace DynThings.WebPortal.Controllers
                 var path = Path.Combine(Server.MapPath("~/imgs"), fileName);
                 file.SaveAs(path);
                 System.Drawing.Image img = System.Drawing.Image.FromFile(path);
-                if (img.Height> 48 || img.Width > 48)
+                if (img.Height > 48 || img.Width > 48)
                 {
                     System.IO.File.Delete(path);
                 }
@@ -134,15 +134,13 @@ namespace DynThings.WebPortal.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = "Admin")]
+        //[Authorize(Roles = "Admin")]
         public ActionResult DeletePV([Bind(Include = "ID")] MediaFile mediaFile)
         {
             Result res = Result.GenerateFailedResult();
-            if (ModelState.IsValid)
-            {
-                res = uof_repos.repoMediaFiles.Delete(mediaFile.ID);
-                return Json(res);
-            }
+
+            res = uof_repos.repoMediaFiles.Delete(mediaFile.ID);
+
             return Json(res);
         }
         #endregion

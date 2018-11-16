@@ -167,13 +167,22 @@ namespace DynThings.Data.Repositories
             try
             {
                 Alert alrt = db.Alerts.Find(id);
+                foreach(AlertCondition c in alrt.AlertConditions.ToList())
+                {
+                    db.AlertConditions.Remove(c);
+                }
+                foreach (LinkUsersAlert l in alrt.LinkUsersAlerts.ToList())
+                {
+                    db.LinkUsersAlerts.Remove(l);
+                }
+
                 db.Alerts.Remove(alrt);
                 db.SaveChanges();
                 return Result.GenerateOKResult("Deleted", alrt.ID.ToString());
             }
-            catch
+            catch (Exception ex)
             {
-                return Result.GenerateFailedResult();
+                return Result.GenerateFailedResult(ex.Message);
             }
         }
 

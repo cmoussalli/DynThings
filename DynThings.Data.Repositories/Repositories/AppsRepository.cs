@@ -99,7 +99,7 @@ namespace DynThings.Data.Repositories
                 app.CreateDate = DateTime.Now;
                 app.StatusID = 1;
                 app.IsStoreApp = false;
-                app.Version = 0;
+                app.Version = 1;
                 db.Apps.Add(app);
                 db.SaveChanges();
                 return Result.GenerateOKResult("Saved", app.ID.ToString());
@@ -113,15 +113,13 @@ namespace DynThings.Data.Repositories
         #endregion
 
         #region Edit
-        public ResultInfo.Result EditMain(long id, string title, string description, int statusID, double version)
+        public ResultInfo.Result EditMain(long id, string title, string description)
         {
             try
             {
                 App app = db.Apps.Find(id);
                 app.Title = title;
                 app.Description = description;
-                app.StatusID = statusID;
-                app.Version = version;
                 db.SaveChanges();
                 return Result.GenerateOKResult("Saved", app.ID.ToString());
             }

@@ -27,7 +27,7 @@ namespace DynThings.Service
                 new ServiceCore()
             };
             ServiceBase.Run(ServicesToRun);
-            System.IO.File.WriteAllText(@"C:\DynThingsService.txt", "Release");
+            //System.IO.File.WriteAllText(@"C:\DynThingsService.txt", "Release");
 #endif
         }
     }

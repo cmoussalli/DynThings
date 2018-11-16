@@ -27,42 +27,6 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_00970D1E49A4E3ACBC90A460AED26900"
-        "OwnerKey" = "8:_DC31E03A3134FD4DB2A567DB4363D766"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_00970D1E49A4E3ACBC90A460AED26900"
-        "OwnerKey" = "8:_B2F167E50CCEC0E6FB4E88329DD2846D"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_00970D1E49A4E3ACBC90A460AED26900"
-        "OwnerKey" = "8:_DE1291DD2648DC2175E34C2B23F6FF0B"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_00970D1E49A4E3ACBC90A460AED26900"
-        "OwnerKey" = "8:_A6F8AED9B205BA2B5D834734196FD644"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_00970D1E49A4E3ACBC90A460AED26900"
-        "OwnerKey" = "8:_D5F5FEDFED911DC36510598C62394986"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_00970D1E49A4E3ACBC90A460AED26900"
-        "OwnerKey" = "8:_EC9B60810D8D46068090690BE0F613AB"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_028EF923C6A76FA3C3A8EDBFF83CD73D"
         "OwnerKey" = "8:_EC9B60810D8D46068090690BE0F613AB"
         "MsmSig" = "8:_UNDEFINED"
@@ -225,13 +189,7 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_25FEC4F9E39525D9E5920CD7BE820E11"
-        "OwnerKey" = "8:_D5F5FEDFED911DC36510598C62394986"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_25FEC4F9E39525D9E5920CD7BE820E11"
+        "MsmKey" = "8:_2765028D1F8997483C77E7EEA851A97C"
         "OwnerKey" = "8:_EC9B60810D8D46068090690BE0F613AB"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -435,6 +393,12 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_42E36433FDAE2F13D4343CF98C961858"
+        "OwnerKey" = "8:_EC9B60810D8D46068090690BE0F613AB"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_44771BC6DEFB20AE86FCABF3BC0AB116"
         "OwnerKey" = "8:_EC9B60810D8D46068090690BE0F613AB"
         "MsmSig" = "8:_UNDEFINED"
@@ -520,13 +484,7 @@
         "Entry"
         {
         "MsmKey" = "8:_53664154591DF43C99D39F2AD626B993"
-        "OwnerKey" = "8:_DE1291DD2648DC2175E34C2B23F6FF0B"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_53AC66B50A22207F9772DEB9EECB3D24"
-        "OwnerKey" = "8:_EC9B60810D8D46068090690BE0F613AB"
+        "OwnerKey" = "8:_42E36433FDAE2F13D4343CF98C961858"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -807,6 +765,30 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_6DBF63EE14543FDC61AB7F17DEBAC357"
+        "OwnerKey" = "8:_E4E68089656A946B7E44C28459FF5EFC"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_6DBF63EE14543FDC61AB7F17DEBAC357"
+        "OwnerKey" = "8:_2765028D1F8997483C77E7EEA851A97C"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_6DBF63EE14543FDC61AB7F17DEBAC357"
+        "OwnerKey" = "8:_42E36433FDAE2F13D4343CF98C961858"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_6DBF63EE14543FDC61AB7F17DEBAC357"
+        "OwnerKey" = "8:_EC9B60810D8D46068090690BE0F613AB"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_6E4DDA84AD668B3D619E081A75523DDB"
         "OwnerKey" = "8:_EC9B60810D8D46068090690BE0F613AB"
         "MsmSig" = "8:_UNDEFINED"
@@ -886,7 +868,7 @@
         "Entry"
         {
         "MsmKey" = "8:_7E6F284575F67F47D7AB54948DF21615"
-        "OwnerKey" = "8:_DE1291DD2648DC2175E34C2B23F6FF0B"
+        "OwnerKey" = "8:_42E36433FDAE2F13D4343CF98C961858"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -981,6 +963,12 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_82A077ABCD3C9777D921B3AD86F66900"
+        "OwnerKey" = "8:_EC9B60810D8D46068090690BE0F613AB"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_82A0E55E1397789EF53132D8D3757978"
         "OwnerKey" = "8:_EC9B60810D8D46068090690BE0F613AB"
         "MsmSig" = "8:_UNDEFINED"
@@ -1000,6 +988,18 @@
         "Entry"
         {
         "MsmKey" = "8:_85783619F48572FE206CB8B0C5365D68"
+        "OwnerKey" = "8:_EC9B60810D8D46068090690BE0F613AB"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_870371B8435D673D0BB5C207BC195D78"
+        "OwnerKey" = "8:_E4E68089656A946B7E44C28459FF5EFC"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_870371B8435D673D0BB5C207BC195D78"
         "OwnerKey" = "8:_EC9B60810D8D46068090690BE0F613AB"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -1042,6 +1042,24 @@
         "Entry"
         {
         "MsmKey" = "8:_935F0C404F74F76A31D881D7629C463E"
+        "OwnerKey" = "8:_EC9B60810D8D46068090690BE0F613AB"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_95B1AB6143808A74AE6840D179013102"
+        "OwnerKey" = "8:_D9559D6B1915BD0CFB646BE86596DA6E"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_95B1AB6143808A74AE6840D179013102"
+        "OwnerKey" = "8:_2765028D1F8997483C77E7EEA851A97C"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_95B1AB6143808A74AE6840D179013102"
         "OwnerKey" = "8:_EC9B60810D8D46068090690BE0F613AB"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -1119,24 +1137,6 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_A08ECC7B3DB473D7937E371102E77925"
-        "OwnerKey" = "8:_53AC66B50A22207F9772DEB9EECB3D24"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_A08ECC7B3DB473D7937E371102E77925"
-        "OwnerKey" = "8:_B2F167E50CCEC0E6FB4E88329DD2846D"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_A08ECC7B3DB473D7937E371102E77925"
-        "OwnerKey" = "8:_EC9B60810D8D46068090690BE0F613AB"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_A180421F3C8973390E8346B3B723CC65"
         "OwnerKey" = "8:_EC9B60810D8D46068090690BE0F613AB"
         "MsmSig" = "8:_UNDEFINED"
@@ -1162,7 +1162,7 @@
         "Entry"
         {
         "MsmKey" = "8:_A34980EDFF27A6D1BBB51E15D97031D3"
-        "OwnerKey" = "8:_DC31E03A3134FD4DB2A567DB4363D766"
+        "OwnerKey" = "8:_D8734940B08CA600B2B7104AE6FA4E1D"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -1174,13 +1174,13 @@
         "Entry"
         {
         "MsmKey" = "8:_A34980EDFF27A6D1BBB51E15D97031D3"
-        "OwnerKey" = "8:_B2F167E50CCEC0E6FB4E88329DD2846D"
+        "OwnerKey" = "8:_2765028D1F8997483C77E7EEA851A97C"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_A34980EDFF27A6D1BBB51E15D97031D3"
-        "OwnerKey" = "8:_A6F8AED9B205BA2B5D834734196FD644"
+        "OwnerKey" = "8:_6DBF63EE14543FDC61AB7F17DEBAC357"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -1192,13 +1192,13 @@
         "Entry"
         {
         "MsmKey" = "8:_A4D83B6F06E75E42CA2F045629FF0F4D"
-        "OwnerKey" = "8:_A08ECC7B3DB473D7937E371102E77925"
+        "OwnerKey" = "8:_95B1AB6143808A74AE6840D179013102"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_A4D83B6F06E75E42CA2F045629FF0F4D"
-        "OwnerKey" = "8:_53AC66B50A22207F9772DEB9EECB3D24"
+        "OwnerKey" = "8:_D9559D6B1915BD0CFB646BE86596DA6E"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -1222,48 +1222,18 @@
         "Entry"
         {
         "MsmKey" = "8:_A4D83B6F06E75E42CA2F045629FF0F4D"
-        "OwnerKey" = "8:_DE1291DD2648DC2175E34C2B23F6FF0B"
+        "OwnerKey" = "8:_42E36433FDAE2F13D4343CF98C961858"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_A4D83B6F06E75E42CA2F045629FF0F4D"
-        "OwnerKey" = "8:_A537E6B68D000ECC51DD47E7FB401AF3"
+        "OwnerKey" = "8:_82A077ABCD3C9777D921B3AD86F66900"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_A51AEBC7A4A3D4A5233A776F40C89804"
-        "OwnerKey" = "8:_EC9B60810D8D46068090690BE0F613AB"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_A537E6B68D000ECC51DD47E7FB401AF3"
-        "OwnerKey" = "8:_EC9B60810D8D46068090690BE0F613AB"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_A6F8AED9B205BA2B5D834734196FD644"
-        "OwnerKey" = "8:_D5F5FEDFED911DC36510598C62394986"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_A6F8AED9B205BA2B5D834734196FD644"
-        "OwnerKey" = "8:_B2F167E50CCEC0E6FB4E88329DD2846D"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_A6F8AED9B205BA2B5D834734196FD644"
-        "OwnerKey" = "8:_DE1291DD2648DC2175E34C2B23F6FF0B"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_A6F8AED9B205BA2B5D834734196FD644"
         "OwnerKey" = "8:_EC9B60810D8D46068090690BE0F613AB"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -1335,12 +1305,6 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_B2F167E50CCEC0E6FB4E88329DD2846D"
-        "OwnerKey" = "8:_EC9B60810D8D46068090690BE0F613AB"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_B39BE341126AFBEE0DD9DA2E08188CB8"
         "OwnerKey" = "8:_EC9B60810D8D46068090690BE0F613AB"
         "MsmSig" = "8:_UNDEFINED"
@@ -1354,6 +1318,42 @@
         "Entry"
         {
         "MsmKey" = "8:_B82C71445A5CF2661788B3331A1C443A"
+        "OwnerKey" = "8:_EC9B60810D8D46068090690BE0F613AB"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_B84E076C266F0A8C21DBE278308D8437"
+        "OwnerKey" = "8:_D8734940B08CA600B2B7104AE6FA4E1D"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_B84E076C266F0A8C21DBE278308D8437"
+        "OwnerKey" = "8:_2765028D1F8997483C77E7EEA851A97C"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_B84E076C266F0A8C21DBE278308D8437"
+        "OwnerKey" = "8:_42E36433FDAE2F13D4343CF98C961858"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_B84E076C266F0A8C21DBE278308D8437"
+        "OwnerKey" = "8:_6DBF63EE14543FDC61AB7F17DEBAC357"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_B84E076C266F0A8C21DBE278308D8437"
+        "OwnerKey" = "8:_E4E68089656A946B7E44C28459FF5EFC"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_B84E076C266F0A8C21DBE278308D8437"
         "OwnerKey" = "8:_EC9B60810D8D46068090690BE0F613AB"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -1444,7 +1444,7 @@
         "Entry"
         {
         "MsmKey" = "8:_D0AB3C22C6BA11B420107974C5BEA783"
-        "OwnerKey" = "8:_00970D1E49A4E3ACBC90A460AED26900"
+        "OwnerKey" = "8:_B84E076C266F0A8C21DBE278308D8437"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -1468,31 +1468,31 @@
         "Entry"
         {
         "MsmKey" = "8:_D0AB3C22C6BA11B420107974C5BEA783"
-        "OwnerKey" = "8:_B2F167E50CCEC0E6FB4E88329DD2846D"
+        "OwnerKey" = "8:_2765028D1F8997483C77E7EEA851A97C"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_D0AB3C22C6BA11B420107974C5BEA783"
-        "OwnerKey" = "8:_DE1291DD2648DC2175E34C2B23F6FF0B"
+        "OwnerKey" = "8:_42E36433FDAE2F13D4343CF98C961858"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_D0AB3C22C6BA11B420107974C5BEA783"
-        "OwnerKey" = "8:_D5F5FEDFED911DC36510598C62394986"
+        "OwnerKey" = "8:_E4E68089656A946B7E44C28459FF5EFC"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_D0AB3C22C6BA11B420107974C5BEA783"
-        "OwnerKey" = "8:_A6F8AED9B205BA2B5D834734196FD644"
+        "OwnerKey" = "8:_6DBF63EE14543FDC61AB7F17DEBAC357"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_D0AB3C22C6BA11B420107974C5BEA783"
-        "OwnerKey" = "8:_DC31E03A3134FD4DB2A567DB4363D766"
+        "OwnerKey" = "8:_D8734940B08CA600B2B7104AE6FA4E1D"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -1533,12 +1533,6 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_D5F5FEDFED911DC36510598C62394986"
-        "OwnerKey" = "8:_EC9B60810D8D46068090690BE0F613AB"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_D63312B0BE117D004341B3D71C76851F"
         "OwnerKey" = "8:_EC9B60810D8D46068090690BE0F613AB"
         "MsmSig" = "8:_UNDEFINED"
@@ -1569,7 +1563,31 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_D8734940B08CA600B2B7104AE6FA4E1D"
+        "OwnerKey" = "8:_EC9B60810D8D46068090690BE0F613AB"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_D8734940B08CA600B2B7104AE6FA4E1D"
+        "OwnerKey" = "8:_42E36433FDAE2F13D4343CF98C961858"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_D8734940B08CA600B2B7104AE6FA4E1D"
+        "OwnerKey" = "8:_6DBF63EE14543FDC61AB7F17DEBAC357"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_D9529B95781A6E36CCA1E8626A0783C6"
+        "OwnerKey" = "8:_EC9B60810D8D46068090690BE0F613AB"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_D9559D6B1915BD0CFB646BE86596DA6E"
         "OwnerKey" = "8:_EC9B60810D8D46068090690BE0F613AB"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -1581,31 +1599,7 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_DC31E03A3134FD4DB2A567DB4363D766"
-        "OwnerKey" = "8:_EC9B60810D8D46068090690BE0F613AB"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_DC31E03A3134FD4DB2A567DB4363D766"
-        "OwnerKey" = "8:_DE1291DD2648DC2175E34C2B23F6FF0B"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_DC31E03A3134FD4DB2A567DB4363D766"
-        "OwnerKey" = "8:_A6F8AED9B205BA2B5D834734196FD644"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_DC6CFAC57DDF65EE7D1D52A551E74174"
-        "OwnerKey" = "8:_EC9B60810D8D46068090690BE0F613AB"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_DE1291DD2648DC2175E34C2B23F6FF0B"
         "OwnerKey" = "8:_EC9B60810D8D46068090690BE0F613AB"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -1671,6 +1665,12 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_E4E68089656A946B7E44C28459FF5EFC"
+        "OwnerKey" = "8:_EC9B60810D8D46068090690BE0F613AB"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_E5E1F75D6692AE5D386FA3BC17113A4C"
         "OwnerKey" = "8:_52A368EC55DF5E9C79A78B218E12C6FB"
         "MsmSig" = "8:_UNDEFINED"
@@ -1708,7 +1708,7 @@
         "Entry"
         {
         "MsmKey" = "8:_E5F88C36430889E19252D64034C10B3A"
-        "OwnerKey" = "8:_D5F5FEDFED911DC36510598C62394986"
+        "OwnerKey" = "8:_E4E68089656A946B7E44C28459FF5EFC"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -1732,7 +1732,7 @@
         "Entry"
         {
         "MsmKey" = "8:_E8AC12489C7B52C503D5A2E979469AC9"
-        "OwnerKey" = "8:_53AC66B50A22207F9772DEB9EECB3D24"
+        "OwnerKey" = "8:_D9559D6B1915BD0CFB646BE86596DA6E"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -1750,7 +1750,7 @@
         "Entry"
         {
         "MsmKey" = "8:_EA764B8438F96C53DD828C67D4227B94"
-        "OwnerKey" = "8:_A6F8AED9B205BA2B5D834734196FD644"
+        "OwnerKey" = "8:_6DBF63EE14543FDC61AB7F17DEBAC357"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -1768,7 +1768,7 @@
         "Entry"
         {
         "MsmKey" = "8:_EA764B8438F96C53DD828C67D4227B94"
-        "OwnerKey" = "8:_B2F167E50CCEC0E6FB4E88329DD2846D"
+        "OwnerKey" = "8:_2765028D1F8997483C77E7EEA851A97C"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -2140,7 +2140,7 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_B2F167E50CCEC0E6FB4E88329DD2846D"
+        "OwnerKey" = "8:_2765028D1F8997483C77E7EEA851A97C"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -2152,7 +2152,7 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_D5F5FEDFED911DC36510598C62394986"
+        "OwnerKey" = "8:_E4E68089656A946B7E44C28459FF5EFC"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -2164,13 +2164,13 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_25FEC4F9E39525D9E5920CD7BE820E11"
+        "OwnerKey" = "8:_870371B8435D673D0BB5C207BC195D78"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_A6F8AED9B205BA2B5D834734196FD644"
+        "OwnerKey" = "8:_6DBF63EE14543FDC61AB7F17DEBAC357"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -2182,7 +2182,7 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_DC31E03A3134FD4DB2A567DB4363D766"
+        "OwnerKey" = "8:_D8734940B08CA600B2B7104AE6FA4E1D"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -2194,7 +2194,7 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_00970D1E49A4E3ACBC90A460AED26900"
+        "OwnerKey" = "8:_B84E076C266F0A8C21DBE278308D8437"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -3017,10 +3017,10 @@
             "ComponentsUrl" = "8:"
                 "Items"
                 {
-                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:.NETFramework,Version=v4.5"
+                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:.NETFramework,Version=v4.7.1"
                     {
-                    "Name" = "8:Microsoft .NET Framework 4.5 (x86 and x64)"
-                    "ProductCode" = "8:.NETFramework,Version=v4.5"
+                    "Name" = "8:Microsoft .NET Framework 4.7.1 (x86 and x64)"
+                    "ProductCode" = "8:.NETFramework,Version=v4.7.1"
                     }
                 }
             }
@@ -3067,37 +3067,6 @@
                     }
                 }
             "SourcePath" = "8:System.Web.Http.dll"
-            "TargetName" = "8:"
-            "Tag" = "8:"
-            "Folder" = "8:_A81C50820694454E8CB973B2279ABA37"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:TRUE"
-            "IsolateTo" = "8:"
-            }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_00970D1E49A4E3ACBC90A460AED26900"
-            {
-            "AssemblyRegister" = "3:1"
-            "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:DynThings.Data.Models, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL"
-                "ScatterAssemblies"
-                {
-                    "_00970D1E49A4E3ACBC90A460AED26900"
-                    {
-                    "Name" = "8:DynThings.Data.Models.dll"
-                    "Attributes" = "3:512"
-                    }
-                }
-            "SourcePath" = "8:DynThings.Data.Models.dll"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_A81C50820694454E8CB973B2279ABA37"
@@ -3848,20 +3817,20 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_25FEC4F9E39525D9E5920CD7BE820E11"
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_2765028D1F8997483C77E7EEA851A97C"
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:DynThings.Data.WidgetModels, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL"
+            "AssemblyAsmDisplayName" = "8:DynThings.WebAPI.Repositories, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
-                    "_25FEC4F9E39525D9E5920CD7BE820E11"
+                    "_2765028D1F8997483C77E7EEA851A97C"
                     {
-                    "Name" = "8:DynThings.Data.WidgetModels.dll"
+                    "Name" = "8:DynThings.WebAPI.Repositories.dll"
                     "Attributes" = "3:512"
                     }
                 }
-            "SourcePath" = "8:DynThings.Data.WidgetModels.dll"
+            "SourcePath" = "8:DynThings.WebAPI.Repositories.dll"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_A81C50820694454E8CB973B2279ABA37"
@@ -4406,6 +4375,37 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_42E36433FDAE2F13D4343CF98C961858"
+            {
+            "AssemblyRegister" = "3:1"
+            "AssemblyIsInGAC" = "11:FALSE"
+            "AssemblyAsmDisplayName" = "8:DynThings.Services.Central, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL"
+                "ScatterAssemblies"
+                {
+                    "_42E36433FDAE2F13D4343CF98C961858"
+                    {
+                    "Name" = "8:DynThings.Services.Central.dll"
+                    "Attributes" = "3:512"
+                    }
+                }
+            "SourcePath" = "8:DynThings.Services.Central.dll"
+            "TargetName" = "8:"
+            "Tag" = "8:"
+            "Folder" = "8:_A81C50820694454E8CB973B2279ABA37"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_44771BC6DEFB20AE86FCABF3BC0AB116"
             {
             "AssemblyRegister" = "3:1"
@@ -4761,37 +4761,6 @@
                     }
                 }
             "SourcePath" = "8:DynThingsCentral.WebAPI.Models.dll"
-            "TargetName" = "8:"
-            "Tag" = "8:"
-            "Folder" = "8:_A81C50820694454E8CB973B2279ABA37"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:TRUE"
-            "IsolateTo" = "8:"
-            }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_53AC66B50A22207F9772DEB9EECB3D24"
-            {
-            "AssemblyRegister" = "3:1"
-            "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:DynThings.WebAPI.ClientServices, Version=1.0.9.0, Culture=neutral, processorArchitecture=MSIL"
-                "ScatterAssemblies"
-                {
-                    "_53AC66B50A22207F9772DEB9EECB3D24"
-                    {
-                    "Name" = "8:DynThings.WebAPI.ClientServices.dll"
-                    "Attributes" = "3:512"
-                    }
-                }
-            "SourcePath" = "8:DynThings.WebAPI.ClientServices.dll"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_A81C50820694454E8CB973B2279ABA37"
@@ -5319,6 +5288,37 @@
                     }
                 }
             "SourcePath" = "8:System.Net.WebSockets.Client.dll"
+            "TargetName" = "8:"
+            "Tag" = "8:"
+            "Folder" = "8:_A81C50820694454E8CB973B2279ABA37"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_6DBF63EE14543FDC61AB7F17DEBAC357"
+            {
+            "AssemblyRegister" = "3:1"
+            "AssemblyIsInGAC" = "11:FALSE"
+            "AssemblyAsmDisplayName" = "8:DynThings.Data.Repositories, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL"
+                "ScatterAssemblies"
+                {
+                    "_6DBF63EE14543FDC61AB7F17DEBAC357"
+                    {
+                    "Name" = "8:DynThings.Data.Repositories.dll"
+                    "Attributes" = "3:512"
+                    }
+                }
+            "SourcePath" = "8:DynThings.Data.Repositories.dll"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_A81C50820694454E8CB973B2279ABA37"
@@ -5956,6 +5956,37 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_82A077ABCD3C9777D921B3AD86F66900"
+            {
+            "AssemblyRegister" = "3:1"
+            "AssemblyIsInGAC" = "11:FALSE"
+            "AssemblyAsmDisplayName" = "8:DynThings.Core.Languages, Version=0.0.1.0, Culture=neutral, processorArchitecture=MSIL"
+                "ScatterAssemblies"
+                {
+                    "_82A077ABCD3C9777D921B3AD86F66900"
+                    {
+                    "Name" = "8:DynThings.Core.Languages.dll"
+                    "Attributes" = "3:512"
+                    }
+                }
+            "SourcePath" = "8:DynThings.Core.Languages.dll"
+            "TargetName" = "8:"
+            "Tag" = "8:"
+            "Folder" = "8:_A81C50820694454E8CB973B2279ABA37"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_82A0E55E1397789EF53132D8D3757978"
             {
             "AssemblyRegister" = "3:1"
@@ -6032,6 +6063,37 @@
                     }
                 }
             "SourcePath" = "8:System.IO.Compression.dll"
+            "TargetName" = "8:"
+            "Tag" = "8:"
+            "Folder" = "8:_A81C50820694454E8CB973B2279ABA37"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_870371B8435D673D0BB5C207BC195D78"
+            {
+            "AssemblyRegister" = "3:1"
+            "AssemblyIsInGAC" = "11:FALSE"
+            "AssemblyAsmDisplayName" = "8:DynThings.Data.WidgetModels, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL"
+                "ScatterAssemblies"
+                {
+                    "_870371B8435D673D0BB5C207BC195D78"
+                    {
+                    "Name" = "8:DynThings.Data.WidgetModels.dll"
+                    "Attributes" = "3:512"
+                    }
+                }
+            "SourcePath" = "8:DynThings.Data.WidgetModels.dll"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_A81C50820694454E8CB973B2279ABA37"
@@ -6218,6 +6280,37 @@
                     }
                 }
             "SourcePath" = "8:System.Web.Mvc.dll"
+            "TargetName" = "8:"
+            "Tag" = "8:"
+            "Folder" = "8:_A81C50820694454E8CB973B2279ABA37"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_95B1AB6143808A74AE6840D179013102"
+            {
+            "AssemblyRegister" = "3:1"
+            "AssemblyIsInGAC" = "11:FALSE"
+            "AssemblyAsmDisplayName" = "8:DynThings.WebAPI.Models, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL"
+                "ScatterAssemblies"
+                {
+                    "_95B1AB6143808A74AE6840D179013102"
+                    {
+                    "Name" = "8:DynThings.WebAPI.Models.dll"
+                    "Attributes" = "3:512"
+                    }
+                }
+            "SourcePath" = "8:DynThings.WebAPI.Models.dll"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_A81C50820694454E8CB973B2279ABA37"
@@ -6483,37 +6576,6 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_A08ECC7B3DB473D7937E371102E77925"
-            {
-            "AssemblyRegister" = "3:1"
-            "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:DynThings.WebAPI.Models, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL"
-                "ScatterAssemblies"
-                {
-                    "_A08ECC7B3DB473D7937E371102E77925"
-                    {
-                    "Name" = "8:DynThings.WebAPI.Models.dll"
-                    "Attributes" = "3:512"
-                    }
-                }
-            "SourcePath" = "8:DynThings.WebAPI.Models.dll"
-            "TargetName" = "8:"
-            "Tag" = "8:"
-            "Folder" = "8:_A81C50820694454E8CB973B2279ABA37"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:TRUE"
-            "IsolateTo" = "8:"
-            }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_A180421F3C8973390E8346B3B723CC65"
             {
             "AssemblyRegister" = "3:1"
@@ -6714,68 +6776,6 @@
                     }
                 }
             "SourcePath" = "8:System.Linq.Queryable.dll"
-            "TargetName" = "8:"
-            "Tag" = "8:"
-            "Folder" = "8:_A81C50820694454E8CB973B2279ABA37"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:TRUE"
-            "IsolateTo" = "8:"
-            }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_A537E6B68D000ECC51DD47E7FB401AF3"
-            {
-            "AssemblyRegister" = "3:1"
-            "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:DynThings.Core.Languages, Version=0.0.1.0, Culture=neutral, processorArchitecture=MSIL"
-                "ScatterAssemblies"
-                {
-                    "_A537E6B68D000ECC51DD47E7FB401AF3"
-                    {
-                    "Name" = "8:DynThings.Core.Languages.dll"
-                    "Attributes" = "3:512"
-                    }
-                }
-            "SourcePath" = "8:DynThings.Core.Languages.dll"
-            "TargetName" = "8:"
-            "Tag" = "8:"
-            "Folder" = "8:_A81C50820694454E8CB973B2279ABA37"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:TRUE"
-            "IsolateTo" = "8:"
-            }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_A6F8AED9B205BA2B5D834734196FD644"
-            {
-            "AssemblyRegister" = "3:1"
-            "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:DynThings.Data.Repositories, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL"
-                "ScatterAssemblies"
-                {
-                    "_A6F8AED9B205BA2B5D834734196FD644"
-                    {
-                    "Name" = "8:DynThings.Data.Repositories.dll"
-                    "Attributes" = "3:512"
-                    }
-                }
-            "SourcePath" = "8:DynThings.Data.Repositories.dll"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_A81C50820694454E8CB973B2279ABA37"
@@ -7041,37 +7041,6 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_B2F167E50CCEC0E6FB4E88329DD2846D"
-            {
-            "AssemblyRegister" = "3:1"
-            "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:DynThings.WebAPI.Repositories, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL"
-                "ScatterAssemblies"
-                {
-                    "_B2F167E50CCEC0E6FB4E88329DD2846D"
-                    {
-                    "Name" = "8:DynThings.WebAPI.Repositories.dll"
-                    "Attributes" = "3:512"
-                    }
-                }
-            "SourcePath" = "8:DynThings.WebAPI.Repositories.dll"
-            "TargetName" = "8:"
-            "Tag" = "8:"
-            "Folder" = "8:_A81C50820694454E8CB973B2279ABA37"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:TRUE"
-            "IsolateTo" = "8:"
-            }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_B39BE341126AFBEE0DD9DA2E08188CB8"
             {
             "AssemblyRegister" = "3:1"
@@ -7148,6 +7117,37 @@
                     }
                 }
             "SourcePath" = "8:System.Runtime.InteropServices.RuntimeInformation.dll"
+            "TargetName" = "8:"
+            "Tag" = "8:"
+            "Folder" = "8:_A81C50820694454E8CB973B2279ABA37"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_B84E076C266F0A8C21DBE278308D8437"
+            {
+            "AssemblyRegister" = "3:1"
+            "AssemblyIsInGAC" = "11:FALSE"
+            "AssemblyAsmDisplayName" = "8:DynThings.Data.Models, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL"
+                "ScatterAssemblies"
+                {
+                    "_B84E076C266F0A8C21DBE278308D8437"
+                    {
+                    "Name" = "8:DynThings.Data.Models.dll"
+                    "Attributes" = "3:512"
+                    }
+                }
+            "SourcePath" = "8:DynThings.Data.Models.dll"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_A81C50820694454E8CB973B2279ABA37"
@@ -7723,37 +7723,6 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_D5F5FEDFED911DC36510598C62394986"
-            {
-            "AssemblyRegister" = "3:1"
-            "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:DynThings.Data.Reports, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL"
-                "ScatterAssemblies"
-                {
-                    "_D5F5FEDFED911DC36510598C62394986"
-                    {
-                    "Name" = "8:DynThings.Data.Reports.dll"
-                    "Attributes" = "3:512"
-                    }
-                }
-            "SourcePath" = "8:DynThings.Data.Reports.dll"
-            "TargetName" = "8:"
-            "Tag" = "8:"
-            "Folder" = "8:_A81C50820694454E8CB973B2279ABA37"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:TRUE"
-            "IsolateTo" = "8:"
-            }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_D63312B0BE117D004341B3D71C76851F"
             {
             "AssemblyRegister" = "3:1"
@@ -7847,6 +7816,37 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_D8734940B08CA600B2B7104AE6FA4E1D"
+            {
+            "AssemblyRegister" = "3:1"
+            "AssemblyIsInGAC" = "11:FALSE"
+            "AssemblyAsmDisplayName" = "8:DynThings.Core, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL"
+                "ScatterAssemblies"
+                {
+                    "_D8734940B08CA600B2B7104AE6FA4E1D"
+                    {
+                    "Name" = "8:DynThings.Core.dll"
+                    "Attributes" = "3:512"
+                    }
+                }
+            "SourcePath" = "8:DynThings.Core.dll"
+            "TargetName" = "8:"
+            "Tag" = "8:"
+            "Folder" = "8:_A81C50820694454E8CB973B2279ABA37"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_D9529B95781A6E36CCA1E8626A0783C6"
             {
             "AssemblyRegister" = "3:1"
@@ -7861,6 +7861,37 @@
                     }
                 }
             "SourcePath" = "8:System.Linq.dll"
+            "TargetName" = "8:"
+            "Tag" = "8:"
+            "Folder" = "8:_A81C50820694454E8CB973B2279ABA37"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_D9559D6B1915BD0CFB646BE86596DA6E"
+            {
+            "AssemblyRegister" = "3:1"
+            "AssemblyIsInGAC" = "11:FALSE"
+            "AssemblyAsmDisplayName" = "8:DynThings.WebAPI.ClientServices, Version=1.0.9.0, Culture=neutral, processorArchitecture=MSIL"
+                "ScatterAssemblies"
+                {
+                    "_D9559D6B1915BD0CFB646BE86596DA6E"
+                    {
+                    "Name" = "8:DynThings.WebAPI.ClientServices.dll"
+                    "Attributes" = "3:512"
+                    }
+                }
+            "SourcePath" = "8:DynThings.WebAPI.ClientServices.dll"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_A81C50820694454E8CB973B2279ABA37"
@@ -7909,37 +7940,6 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_DC31E03A3134FD4DB2A567DB4363D766"
-            {
-            "AssemblyRegister" = "3:1"
-            "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:DynThings.Core, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL"
-                "ScatterAssemblies"
-                {
-                    "_DC31E03A3134FD4DB2A567DB4363D766"
-                    {
-                    "Name" = "8:DynThings.Core.dll"
-                    "Attributes" = "3:512"
-                    }
-                }
-            "SourcePath" = "8:DynThings.Core.dll"
-            "TargetName" = "8:"
-            "Tag" = "8:"
-            "Folder" = "8:_A81C50820694454E8CB973B2279ABA37"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:TRUE"
-            "IsolateTo" = "8:"
-            }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_DC6CFAC57DDF65EE7D1D52A551E74174"
             {
             "AssemblyRegister" = "3:1"
@@ -7954,37 +7954,6 @@
                     }
                 }
             "SourcePath" = "8:System.Diagnostics.Contracts.dll"
-            "TargetName" = "8:"
-            "Tag" = "8:"
-            "Folder" = "8:_A81C50820694454E8CB973B2279ABA37"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:TRUE"
-            "IsolateTo" = "8:"
-            }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_DE1291DD2648DC2175E34C2B23F6FF0B"
-            {
-            "AssemblyRegister" = "3:1"
-            "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:DynThings.Services.Central, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL"
-                "ScatterAssemblies"
-                {
-                    "_DE1291DD2648DC2175E34C2B23F6FF0B"
-                    {
-                    "Name" = "8:DynThings.Services.Central.dll"
-                    "Attributes" = "3:512"
-                    }
-                }
-            "SourcePath" = "8:DynThings.Services.Central.dll"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_A81C50820694454E8CB973B2279ABA37"
@@ -8202,6 +8171,37 @@
                     }
                 }
             "SourcePath" = "8:System.ComponentModel.EventBasedAsync.dll"
+            "TargetName" = "8:"
+            "Tag" = "8:"
+            "Folder" = "8:_A81C50820694454E8CB973B2279ABA37"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_E4E68089656A946B7E44C28459FF5EFC"
+            {
+            "AssemblyRegister" = "3:1"
+            "AssemblyIsInGAC" = "11:FALSE"
+            "AssemblyAsmDisplayName" = "8:DynThings.Data.Reports, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL"
+                "ScatterAssemblies"
+                {
+                    "_E4E68089656A946B7E44C28459FF5EFC"
+                    {
+                    "Name" = "8:DynThings.Data.Reports.dll"
+                    "Attributes" = "3:512"
+                    }
+                }
+            "SourcePath" = "8:DynThings.Data.Reports.dll"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_A81C50820694454E8CB973B2279ABA37"
@@ -9427,7 +9427,7 @@
             }
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_EC9B60810D8D46068090690BE0F613AB"
             {
-            "SourcePath" = "8:..\\DynThings.WebPortal\\obj\\Debug\\DynThings.WebPortal.dll"
+            "SourcePath" = "8:..\\DynThings.WebPortal\\obj\\Release\\DynThings.WebPortal.dll"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_7A93DBDC43C741FCBCF73EE40C942EB8"

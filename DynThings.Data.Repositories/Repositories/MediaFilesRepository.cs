@@ -79,6 +79,7 @@ namespace DynThings.Data.Repositories
             {
                 MediaFile cat = new MediaFile();
                 cat.Title = Title;
+                cat.GUID = Guid.NewGuid();
                 db.MediaFiles.Add(cat);
                 db.SaveChanges();
                 return Result.GenerateOKResult("Saved", cat.ID.ToString());

@@ -103,14 +103,12 @@ namespace DynThings.WebPortal.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult EditPV([Bind(Include = "ID,Title,Description,StatusID,Version")] App app)
+        public ActionResult EditPV( App app)
         {
             Result res = Result.GenerateFailedResult();
-            if (ModelState.IsValid)
-            {
-                res = uof_repos.repoApps.EditMain(app.ID, app.Title, app.Description, app.StatusID, app.Version);
-                return Json(res);
-            }
+
+                res = uof_repos.repoApps.EditMain(app.ID, app.Title, app.Description);
+
             return Json(res);
         }
         #endregion
@@ -128,6 +126,7 @@ namespace DynThings.WebPortal.Controllers
         public ActionResult DeletePV([Bind(Include = "ID")] App app)
         {
             Result res = Result.GenerateFailedResult();
+            
             res = uof_repos.repoApps.Delete(app.ID);
             return Json(res);
         }

@@ -72,11 +72,11 @@ namespace DynThings.WebPortal.Controllers.API
             Result result = Result.GenerateFailedResult();
             try
             {
-                await uow_CentralService.dbChangesService.InstallDBChanges();
+               result =  await uow_CentralService.dbChangesService.InstallDBChanges();
             }
             catch (Exception ex)
             {
-
+                result.Message = ex.Message;
             }
             return result;
         }

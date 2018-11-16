@@ -65,12 +65,12 @@ namespace DynThings.Services.Central
             int localDBChangesCount = db.DBChanges.Count();
             if (db.DBChanges.Count() > 0)
             {
-                lastCentralChangeID = db.DBChanges.ToList()[localDBChangesCount].CentralChangeID;
+                lastCentralChangeID = db.DBChanges.ToList()[localDBChangesCount -1].CentralChangeID;
             }
 
             APIDBChangesRequestModels.GetDBChangesList requestModel = new APIDBChangesRequestModels.GetDBChangesList();
             requestModel.SearchFor = "";
-            requestModel.StartFrom = lastCentralChangeID;
+            requestModel.StartFrom = lastCentralChangeID +1;
             requestModel.PageNumber = 1;
             requestModel.RecordsPerPage = 10;
             APIDBChangesResponseModels.GetDBChangesList responseModel = await client.DBChanges.GetDBChangesListAsync(requestModel);
@@ -88,7 +88,7 @@ namespace DynThings.Services.Central
                     db.SaveChanges();
                 }
             }
-
+            result = Result.GenerateOKResult();
 
             return result;
         }
