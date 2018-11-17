@@ -19,6 +19,7 @@ using ResultInfo;
 
 namespace DynThings.WebPortal.Controllers.API
 {
+    [ApiExplorerSettings(IgnoreApi = false)]
     public class DeviceCommandsController : BaseAPIController
     {
         #region Props

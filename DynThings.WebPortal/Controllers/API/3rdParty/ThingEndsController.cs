@@ -18,8 +18,10 @@ using DynThings.WebAPI.Models.RequestModels;
 
 namespace DynThings.WebPortal.Controllers.API
 {
+    [ApiExplorerSettings(IgnoreApi = false)]
     public class ThingEndsController : BaseAPIController
     {
+
         #region Props
         long entityID ;
 

@@ -18,6 +18,7 @@ using ResultInfo;
 
 namespace DynThings.WebPortal.Controllers.API
 {
+    [ApiExplorerSettings(IgnoreApi = false)]
     public class EndPointCommandsController : BaseAPIController
     {
         #region Props

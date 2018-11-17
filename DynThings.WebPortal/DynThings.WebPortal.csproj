@@ -343,6 +343,7 @@
   <ItemGroup>
     <Content Include="App_Data\XmlDocument.xml" />
     <Content Include="Areas\HelpPage\HelpPage.css" />
+    <Content Include="Areas\HelpPage\Views\Help\HelpPage.css" />
     <Content Include="Assets\Imgs\CheckTrue.png" />
     <Content Include="Assets\Imgs\LayoutSide.jpg" />
     <Content Include="Assets\Imgs\LoginPage.jpg" />

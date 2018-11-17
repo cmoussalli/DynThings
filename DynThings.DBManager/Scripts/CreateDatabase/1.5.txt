@@ -1,8 +1,8 @@
 /*=============================================================
 SCRIPT HEADER
 
-VERSION:   1.04.0001
-DATE:      02-11-2018 17:30:50
+VERSION:   1.05.0001
+DATE:      13-11-2018 17:30:50
 SERVER:    (local)
 
 DATABASE:	DynThings
@@ -8280,7 +8280,7 @@ GO
 SET IDENTITY_INSERT [dbo].[DynSettings] ON 
 
 GO
-INSERT [dbo].[DynSettings] ([ID], [DBVersion], [DevelopmentMode], [DefaultRecordsPerMaster], [DefaultRecordsPerChild], [PlatformKey], [PublicAccess], [PublicSignUP], [EnableSystemLogger], [App_TimeZone], [PlatformTitle], [LastCentralSync], [DeploymentTimeStamp], [NotifcationMail], [SMTPAddress], [SMTPPort],[MapKey],[GoogleAnalytics]) VALUES (1, 1.4, 1, 25, 5, newID(), 0, 1, 1, 4, N'', getDate(), GetDate(), N'', N'', 25,N'',N'')
+INSERT [dbo].[DynSettings] ([ID], [DBVersion], [DevelopmentMode], [DefaultRecordsPerMaster], [DefaultRecordsPerChild], [PlatformKey], [PublicAccess], [PublicSignUP], [EnableSystemLogger], [App_TimeZone], [PlatformTitle], [LastCentralSync], [DeploymentTimeStamp], [NotifcationMail], [SMTPAddress], [SMTPPort],[MapKey],[GoogleAnalytics]) VALUES (1, 1.5, 1, 25, 5, newID(), 0, 1, 1, 4, N'', getDate(), GetDate(), N'', N'', 25,N'',N'')
 GO
 SET IDENTITY_INSERT [dbo].[DynSettings] OFF
 GO
@@ -8367,4 +8367,47 @@ GO
 INSERT [dbo].[SystemEntitys] ([ID], [Title]) VALUES (12, N'ThingEnds')
 GO
 INSERT [dbo].[SystemEntitys] ([ID], [Title]) VALUES (13, N'IO Warnings')
+GO
+
+create procedure [dbo].[AppDelete]
+@AppID bigint
+as
+begin
+
+delete from AppUserTokens where AppID = @AppID
+delete from APIUtilisations where AppID = @AppID
+delete from AppAPIEntitys where AppID = @AppID
+delete from AppThingExtensions where AppID = @AppID
+delete from AppThingCategorys where AppID = @AppID
+delete from AppEndpointTypes where AppID = @AppID
+delete from AppMediaFiles where AppID = @AppID
+delete from apps where id = @AppID
+
+end
+
+GO
+
+CREATE TABLE [dbo].[DBChanges](
+	[ID] [bigint] IDENTITY(1,1) NOT NULL,
+	[CentralChangeID] [bigint] NOT NULL,
+	[ChangeCode] [nvarchar](50) NOT NULL,
+	[TimeStamp] [datetime] NOT NULL,
+ CONSTRAINT [PK_DBChanges] PRIMARY KEY CLUSTERED 
+(
+	[ID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+IF NOT EXISTS (
+  SELECT * 
+  FROM   sys.columns 
+  WHERE  object_id = OBJECT_ID(N'[dbo].[Apps]') 
+         AND name = 'IsStoreApp'
+)
+BEGIN
+	ALTER TABLE Apps
+    ADD [IsStoreApp] BIT NOT NULL
+END 
+
 GO

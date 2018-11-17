@@ -6280,15 +6280,15 @@
         {
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:DynThings BackgroundServices"
-        "ProductCode" = "8:{9FFF5EB7-64A6-4DB0-8E53-26BF59A17E07}"
-        "PackageCode" = "8:{89323BF2-F2B7-4B0C-A0E6-AE3CC7C6EA0C}"
+        "ProductCode" = "8:{D12EB5A6-DD80-4477-AD86-95E1BF7F86B5}"
+        "PackageCode" = "8:{33CCF797-A70B-4428-AE39-D53EF1C2E745}"
         "UpgradeCode" = "8:{743B3401-A688-4A7E-9845-93EFF16D8764}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:TRUE"
         "DetectNewerInstalledVersion" = "11:TRUE"
         "InstallAllUsers" = "11:FALSE"
-        "ProductVersion" = "8:1.0.1"
+        "ProductVersion" = "8:1.5"
         "Manufacturer" = "8:DynThings"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:"
@@ -6816,7 +6816,7 @@
         {
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_B6040E8797A242CA898C53BA40493B47"
             {
-            "SourcePath" = "8:..\\DynThings.ServiceConfigurationManager\\obj\\Release\\DynThings.ServiceConfigurationManager.exe"
+            "SourcePath" = "8:..\\DynThings.ServiceConfigurationManager\\obj\\Debug\\DynThings.ServiceConfigurationManager.exe"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_B5F6EB9DCA8342D49636977F2E592F14"
@@ -6844,7 +6844,7 @@
             }
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_C7AE74169E834BAE9F5ADCB3C08125B6"
             {
-            "SourcePath" = "8:..\\DynThings.Service\\obj\\Release\\DynThings.Service.exe"
+            "SourcePath" = "8:..\\DynThings.Service\\obj\\Debug\\DynThings.Service.exe"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_B5F6EB9DCA8342D49636977F2E592F14"

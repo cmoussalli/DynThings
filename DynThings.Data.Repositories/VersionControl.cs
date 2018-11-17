@@ -10,7 +10,7 @@ namespace DynThings.Data.Repositories
     {
          public static double GetVersion()
         {
-            double version = 1.4;
+            double version = 1.5;
 
             return version;
         }

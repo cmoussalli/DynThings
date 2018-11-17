@@ -11,10 +11,12 @@ using DynThings.WebAPI.Repositories;
 
 namespace DynThings.WebPortal.Controllers.API
 {
+    [ApiExplorerSettings(IgnoreApi = true)]
     public class BaseAPIController : ApiController
     {
         public UnitOfWork_WebAPI unitOfWork_WebAPI = new UnitOfWork_WebAPI();
 
+        [ApiExplorerSettings(IgnoreApi = true)]
         [HttpPost]
         [ResponseType(typeof(string))]
         public HttpResponseMessage RaiseError(string errorMessage)
@@ -22,6 +24,7 @@ namespace DynThings.WebPortal.Controllers.API
             return Request.CreateResponse(HttpStatusCode.BadRequest, errorMessage);
         }
 
+        [ApiExplorerSettings(IgnoreApi = true)]
         [HttpPost]
         [ResponseType(typeof(string))]
         public HttpResponseMessage SendResult(ResultInfo.Result result)

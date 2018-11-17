@@ -16,6 +16,7 @@ using ResultInfo;
 
 namespace DynThings.WebPortal.Controllers.API
 {
+    [ApiExplorerSettings(IgnoreApi = false)]
     public class IOWarningsController : BaseAPIController
     {
         #region Props

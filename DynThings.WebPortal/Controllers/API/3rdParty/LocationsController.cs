@@ -16,6 +16,7 @@ using DynThings.WebAPI.Repositories;
 
 namespace DynThings.WebPortal.Controllers.API
 {
+    [ApiExplorerSettings(IgnoreApi = false)]
     public class LocationsController : BaseAPIController
     {
         #region Props

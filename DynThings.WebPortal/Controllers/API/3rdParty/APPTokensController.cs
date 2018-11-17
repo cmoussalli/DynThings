@@ -15,6 +15,7 @@ using System.Web.Http.Description;
 
 namespace DynThings.WebPortal.Controllers.API
 {
+    [ApiExplorerSettings(IgnoreApi = false)]
     public class APPTokensController : BaseAPIController
     {
 
